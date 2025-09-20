@@ -74,7 +74,7 @@ const ServerCard = ({ server }) => {
             <SvgIcon name="globe" /> Map
           </span>
           {/* The map ID is not available in the API, so we link by map name for now */}
-          <Link href={`/map/${server.map}`} className={s.mapName}>
+          <Link href={`/map/${server.mapid}`} className={s.mapName}>
             {server.map}
           </Link>
         </div>
