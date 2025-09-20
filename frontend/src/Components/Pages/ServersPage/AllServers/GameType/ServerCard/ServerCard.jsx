@@ -85,7 +85,11 @@ const ServerCard = ({ server }) => {
         <div className={s.playersSection}>
           <div className={s.playersList}>
             {server.players.map((player, index) => (
-              <div key={index} className={s.playerItem}>
+              <Link
+                key={index}
+                href={`/player/${player.playerid}`}
+                className={s.playerItem}
+              >
                 <div className={s.playerName}>
                   {getColoredName(player.playername || "Unknown Player")}
                 </div>
@@ -101,7 +105,7 @@ const ServerCard = ({ server }) => {
                     </span>
                   )}
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

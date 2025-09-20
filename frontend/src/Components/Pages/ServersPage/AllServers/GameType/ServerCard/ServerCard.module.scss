@@ -195,10 +195,18 @@
   font-size: 0.95rem;
 }
 
+.playerItem:hover .playerName {
+  filter: brightness(2);
+}
+
 .playerInfo {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+.playerItem:hover .playerInfo {
+  filter: brightness(1.1);
 }
 
 .playerPing,
