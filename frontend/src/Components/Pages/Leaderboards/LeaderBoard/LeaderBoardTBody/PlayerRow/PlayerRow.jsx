@@ -23,7 +23,7 @@ const PlayerRow = ({ playerData, leaderboardData, lastPlayerRef, index }) => {
       <PlayerNameCell playerData={playerData} />
 
       <td className={s.rating} data-header="Rating">
-        {(+Rating * 0.1).toFixed(2)}
+        {(+Rating).toFixed(2)}
       </td>
 
       <td
