@@ -9,8 +9,18 @@
   &:hover {
     color: #fff;
   }
+}
 
-  svg {
-    display: block;
+.copyButton>svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+
+  &[data-type=stroke] {
+    stroke: #f6f6f6;
+  }
+
+  &:not([data-type=stroke]) {
+    fill: #f6f6f6;
   }
 }

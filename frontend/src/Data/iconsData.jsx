@@ -582,18 +582,13 @@ export const iconsData = [
     name: "copy",
     icon: (
       <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
         stroke="currentColor"
         strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        viewBox="0 0 24 24"
+        data-type="stroke"
       >
         <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-        <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2" />
+        <path d="m4 16-2-2V4l2-2h10l2 2" />
       </svg>
     ),
   },
@@ -633,10 +628,12 @@ export const iconsData = [
     ),
   },
 
-  // {
-  //   name: "",
-  //   icon: (
-
-  //   ),
-  // },
+  {
+    name: "checked",
+    icon: (
+      <svg viewBox="0 0 448 512">
+        <path d="M439 105c12 13 12 33 0 46L183 407a32 32 0 0 1-46 0L9 279a32 32 0 0 1 46-46l105 106 233-234c13-12 33-12 46 0z" />
+      </svg>
+    ),
+  },
 ];
