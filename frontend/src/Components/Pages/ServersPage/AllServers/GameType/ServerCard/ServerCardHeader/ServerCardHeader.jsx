@@ -23,7 +23,6 @@ const ServerCardHeader = ({ server }) => {
       </div>
 
       <ServerCardIp server={server} />
-
       <div className={s.serverStatusIndicator}>
         <span
           className={s.statusDot}
