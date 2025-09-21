@@ -16,27 +16,6 @@
   }
 }
 
-.serverStatusIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-
-  .statusDot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .statusText {
-    display: flex;
-    align-items: center;
-    color: #f6f6f6;
-    text-wrap: nowrap;
-  }
-}
-
 .serverHeader>*:not(.mapBackground) {
   position: relative;
   z-index: 2;

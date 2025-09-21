@@ -1,10 +1,10 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
-import { getCountryFlag, getServerStatusColor } from "@/Functions/utils";
+import { getCountryFlag } from "@/Functions/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./ServerCardHeader.module.scss";
+import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
 const ServerCardHeader = ({ server }) => {
@@ -23,18 +23,7 @@ const ServerCardHeader = ({ server }) => {
       </div>
 
       <ServerCardIp server={server} />
-      <div className={s.serverStatusIndicator}>
-        <span
-          className={s.statusDot}
-          style={{
-            backgroundColor: getServerStatusColor(server.online),
-          }}
-        />
-        <span className={s.statusText}>
-          <SvgIcon name="users" />
-          {server.online ? `${server.player_count || 0} Players` : "Offline"}
-        </span>
-      </div>
+      <ServerCardIndicator server={server} />
 
       <Image
         src={src}
