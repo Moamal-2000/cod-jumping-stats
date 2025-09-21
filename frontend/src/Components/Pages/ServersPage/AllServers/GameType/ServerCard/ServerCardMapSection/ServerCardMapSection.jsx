@@ -1,8 +1,10 @@
 import SvgIcon from "@/Components/Shared/SvgIcon";
-import s from "./ServerCard.module.scss";
 import Link from "next/link";
+import s from "./ServerCard.module.scss";
 
-const ServerCardMapSection = ({ server, isCod4 }) => {
+const ServerCardMapSection = ({ server }) => {
+  const isCod4 = server.game_type === "COD4";
+
   return (
     <div className={s.mapSection}>
       <div className={s.mapInfo}>
