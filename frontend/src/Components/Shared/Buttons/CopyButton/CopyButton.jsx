@@ -1,5 +1,6 @@
 "use client";
 
+import { COPY_BUTTON_DELAY_MS } from "@/Data/constants";
 import { useState } from "react";
 import SvgIcon from "../../SvgIcon";
 import s from "./CopyButton.module.scss";
@@ -8,13 +9,13 @@ const CopyButton = ({ copyText, title }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   async function handleClick() {
-    if (isCopied) return
+    if (isCopied) return;
 
     try {
       navigator.clipboard.writeText(copyText);
       setIsCopied(true);
 
-      setTimeout(() => setIsCopied(false), 2000);
+      setTimeout(() => setIsCopied(false), COPY_BUTTON_DELAY_MS);
     } catch (err) {
       console.error("Can't copy text:", err);
       setIsCopied(false);

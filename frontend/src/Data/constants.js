@@ -18,3 +18,4 @@ export const MONTHS = {
 };
 
 export const TOTAL_MAPS_PLACEHOLDER = 600;
+export const COPY_BUTTON_DELAY_MS = 2000;
