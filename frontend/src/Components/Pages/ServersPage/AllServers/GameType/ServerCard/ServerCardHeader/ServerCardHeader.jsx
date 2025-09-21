@@ -1,11 +1,11 @@
 "use client";
 
-import CopyButton from "@/Components/Shared/Buttons/CopyButton/CopyButton";
 import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getCountryFlag, getServerStatusColor } from "@/Functions/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./ServerCardHeader.module.scss";
+import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
 const ServerCardHeader = ({ server }) => {
   const [src, setSrc] = useState(`/maps/512/${server.map}.webp`);
@@ -22,21 +22,7 @@ const ServerCardHeader = ({ server }) => {
         />
       </div>
 
-      <div className={s.serverAddress}>
-        <div className={s.domainInfo}>
-          <span className={s.domain}>{server.domain}</span>
-        </div>
-
-        <div className={s.serverIpContainer}>
-          <p className={s.serverIp}>
-            {server.ip}:{server.port}
-          </p>
-          <CopyButton
-            title="Copy server address"
-            copyText={`${server.ip}:${server.port}`}
-          />
-        </div>
-      </div>
+      <ServerCardIp server={server} />
 
       <div className={s.serverStatusIndicator}>
         <span
