@@ -3,8 +3,8 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import { useEffect, useState } from "react";
 import AllServers from "./AllServers/AllServers";
-import s from "./ServersPage.module.scss";
 import ServersHeader from "./ServersHeader/ServersHeader";
+import s from "./ServersPage.module.scss";
 
 const ServersPage = () => {
   const [servers, setServers] = useState([]);
@@ -14,7 +14,9 @@ const ServersPage = () => {
   useEffect(() => {
     const fetchServers = async () => {
       try {
-        const response = await fetch(jhApis().player.getOnlinePlayers);
+        const response = await fetch(jhApis().player.getOnlinePlayers, {
+          cache: "no-cache",
+        });
         if (!response.ok) throw new Error("Failed to fetch server data");
         const data = await response.json();
         setServers(data.servers || []);
