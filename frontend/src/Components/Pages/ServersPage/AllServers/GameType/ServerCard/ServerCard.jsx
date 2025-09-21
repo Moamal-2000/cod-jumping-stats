@@ -10,6 +10,7 @@ import s from "./ServerCard.module.scss";
 
 const ServerCard = ({ server }) => {
   const [src, setSrc] = useState(`/maps/512/${server.map}.webp`);
+  const isCode4Map = server.game_type === "COD4";
 
   return (
     <div key={`${server.ip}-${server.port}`} className={s.serverCard}>
@@ -73,10 +74,14 @@ const ServerCard = ({ server }) => {
           <span className={s.mapLabel}>
             <SvgIcon name="globe" /> Map
           </span>
-          {/* The map ID is not available in the API, so we link by map name for now */}
-          <Link href={`/map/${server.mapid}`} className={s.mapName}>
-            {server.map}
-          </Link>
+
+          {isCode4Map && <span className={s.mapName}>{server.map}</span>}
+
+          {!isCode4Map && (
+            <Link href={`/map/${server.mapid}`} className={s.mapName}>
+              {server.map}
+            </Link>
+          )}
         </div>
       </div>
 

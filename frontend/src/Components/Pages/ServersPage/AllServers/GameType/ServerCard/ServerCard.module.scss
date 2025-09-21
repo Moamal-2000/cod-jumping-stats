@@ -145,17 +145,9 @@
   font-size: 1rem;
   text-decoration: none;
 
-  &:hover {
+  &:not(span):hover {
     text-decoration: underline;
   }
-}
-
-.cod2Card .mapName {
-  color: #facc15;
-}
-
-.cod4Card .mapName {
-  color: #4ade80;
 }
 
 .playersSection {
