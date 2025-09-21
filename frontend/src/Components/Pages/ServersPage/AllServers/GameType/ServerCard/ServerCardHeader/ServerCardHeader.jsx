@@ -25,6 +25,7 @@ const ServerCardHeader = ({ server }) => {
         <div className={s.domainInfo}>
           <span className={s.domain}>{server.domain}</span>
         </div>
+
         <div className={s.serverIpContainer}>
           <p className={s.serverIp}>
             {server.ip}:{server.port}
