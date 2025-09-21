@@ -10,6 +10,8 @@ import s from "./ServerCard.module.scss";
 
 const ServerCard = ({ server }) => {
   const [src, setSrc] = useState(`/maps/512/${server.map}.webp`);
+  const hasPlayers =
+    server.online && server.players && server.players.length > 0;
   const isCod4 = server.game_type === "COD4";
 
   return (
@@ -86,8 +88,8 @@ const ServerCard = ({ server }) => {
       </div>
 
       {/* Players Section */}
-      {server.online && server.players && server.players.length > 0 && (
-        <div className={s.playersSection}>
+      <div className={s.playersSection}>
+        {hasPlayers && (
           <div className={s.playersList}>
             {server.players.map((player, index) => (
               <Link
@@ -114,8 +116,12 @@ const ServerCard = ({ server }) => {
               </Link>
             ))}
           </div>
-        </div>
-      )}
+        )}
+
+        {!hasPlayers && (
+          <p className={s.noPlayersText}>This server is currently empty</p>
+        )}
+      </div>
     </div>
   );
 };
