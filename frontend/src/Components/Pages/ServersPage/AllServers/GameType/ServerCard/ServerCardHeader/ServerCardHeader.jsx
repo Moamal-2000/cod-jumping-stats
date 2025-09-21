@@ -1,5 +1,6 @@
 "use client";
 
+import CopyButton from "@/Components/Shared/Buttons/CopyButton/CopyButton";
 import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getCountryFlag, getServerStatusColor } from "@/Functions/utils";
 import Image from "next/image";
@@ -30,15 +31,10 @@ const ServerCardHeader = ({ server }) => {
           <p className={s.serverIp}>
             {server.ip}:{server.port}
           </p>
-          <button
-            className={s.copyButton}
-            onClick={() => {
-              navigator.clipboard.writeText(`${server.ip}:${server.port}`);
-            }}
+          <CopyButton
             title="Copy server address"
-          >
-            <SvgIcon name="copy" />
-          </button>
+            copyText={`${server.ip}:${server.port}`}
+          />
         </div>
       </div>
 

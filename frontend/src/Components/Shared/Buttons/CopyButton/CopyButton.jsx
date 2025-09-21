@@ -1,9 +1,19 @@
-import s from './CopyButton.module.scss'
+"use client";
 
-const CopyButton = () => {
+import SvgIcon from "../../SvgIcon";
+import s from "./CopyButton.module.scss";
+
+const CopyButton = ({ copyText, title }) => {
   return (
-    <div>CopyButton</div>
-  )
-}
+    <button
+      className={s.copyButton}
+      title={title}
+      type="button"
+      onClick={() => navigator.clipboard.writeText(copyText)}
+    >
+      <SvgIcon name="copy" />
+    </button>
+  );
+};
 
-export default CopyButton
+export default CopyButton;

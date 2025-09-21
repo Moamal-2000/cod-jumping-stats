@@ -37,23 +37,6 @@
   font-size: 0.875rem;
 }
 
-.copyButton {
-  background: none;
-  border: none;
-  color: #f6f6f6;
-  padding: 0;
-  cursor: pointer;
-  transition: color 0.2s;
-
-  &:hover {
-    color: #fff;
-  }
-
-  svg {
-    display: block;
-  }
-}
-
 .serverStatusIndicator {
   display: flex;
   align-items: center;
