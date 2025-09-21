@@ -5,6 +5,7 @@ import { getColoredName } from "@/Functions/components";
 import Link from "next/link";
 import s from "./ServerCard.module.scss";
 import ServerCardHeader from "./ServerCardHeader/ServerCardHeader";
+import ServerCardMapSection from "./ServerCardMapSection/ServerCardMapSection";
 
 const ServerCard = ({ server }) => {
   const hasPlayers =
@@ -14,23 +15,7 @@ const ServerCard = ({ server }) => {
   return (
     <div key={`${server.ip}-${server.port}`} className={s.serverCard}>
       <ServerCardHeader server={server} />
-
-      {/* Map Information */}
-      <div className={s.mapSection}>
-        <div className={s.mapInfo}>
-          <span className={s.mapLabel}>
-            <SvgIcon name="globe" /> Map
-          </span>
-
-          {isCod4 && <span className={s.mapName}>{server.map}</span>}
-
-          {!isCod4 && (
-            <Link href={`/map/${server.mapid}`} className={s.mapName}>
-              {server.map}
-            </Link>
-          )}
-        </div>
-      </div>
+      <ServerCardMapSection server={server} isCod4={isCod4} />
 
       {/* Players Section */}
       <div className={s.playersSection}>

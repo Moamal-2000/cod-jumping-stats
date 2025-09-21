@@ -1,0 +1,29 @@
+.mapSection {
+  padding: var(--padding);
+  position: relative;
+  z-index: 2;
+}
+
+.mapInfo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.mapLabel {
+  color: #f6f6f6;
+  font-size: .875rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.mapName {
+  font-weight: 600;
+  font-size: 1rem;
+  text-decoration: none;
+
+  &:not(span):hover {
+    text-decoration: underline;
+  }
+}
