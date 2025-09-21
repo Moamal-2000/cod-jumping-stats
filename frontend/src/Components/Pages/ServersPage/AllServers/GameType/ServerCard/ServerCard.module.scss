@@ -189,10 +189,15 @@
 .playerName {
   color: #e5e7eb;
   font-size: 0.95rem;
+  user-select: text;
 }
 
-.playerItem:hover .playerName {
+.playerItem:not(.cod4):hover .playerName {
   filter: brightness(2);
+}
+
+.playerItem.cod4 {
+  cursor: auto;
 }
 
 .playerInfo {
@@ -201,8 +206,8 @@
   gap: 1rem;
 }
 
-.playerItem:hover .playerInfo {
-  filter: brightness(1.1);
+.playerItem:not(.cod4):hover .playerInfo {
+  filter: brightness(1);
 }
 
 .playerPing,
@@ -212,6 +217,7 @@
   gap: 0.5rem;
   font-size: 0.9rem;
   font-weight: 600;
+  user-select: text;
 }
 
 .playerPing {
@@ -222,12 +228,4 @@
 .playerAdminLevel {
   color: #facc15;
   min-width: 46px;
-}
-
-.cod2Card .playerAdminLevel {
-  color: #facc15;
-}
-
-.cod4Card .playerAdminLevel {
-  color: #4ade80;
 }

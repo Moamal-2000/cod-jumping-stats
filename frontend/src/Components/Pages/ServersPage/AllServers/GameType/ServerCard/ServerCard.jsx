@@ -10,7 +10,7 @@ import s from "./ServerCard.module.scss";
 
 const ServerCard = ({ server }) => {
   const [src, setSrc] = useState(`/maps/512/${server.map}.webp`);
-  const isCode4Map = server.game_type === "COD4";
+  const isCod4 = server.game_type === "COD4";
 
   return (
     <div key={`${server.ip}-${server.port}`} className={s.serverCard}>
@@ -75,9 +75,9 @@ const ServerCard = ({ server }) => {
             <SvgIcon name="globe" /> Map
           </span>
 
-          {isCode4Map && <span className={s.mapName}>{server.map}</span>}
+          {isCod4 && <span className={s.mapName}>{server.map}</span>}
 
-          {!isCode4Map && (
+          {!isCod4 && (
             <Link href={`/map/${server.mapid}`} className={s.mapName}>
               {server.map}
             </Link>
@@ -93,7 +93,8 @@ const ServerCard = ({ server }) => {
               <Link
                 key={index}
                 href={`/player/${player.playerid}`}
-                className={s.playerItem}
+                className={`${s.playerItem} ${isCod4 ? s.cod4 : ""}`}
+                onClick={(event) => (isCod4 ? event.preventDefault() : "")}
               >
                 <div className={s.playerName}>
                   {getColoredName(player.playername || "Unknown Player")}
