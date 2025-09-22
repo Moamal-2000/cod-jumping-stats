@@ -1,22 +1,10 @@
 @use "@/Styles/mixins" as m;
 
-.gameSection {
-  margin-bottom: 3rem;
-}
-
-.gameTitle {
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: #f9fafb;
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 2px solid;
-}
-
 .serversGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.35%;
+  margin-bottom: 100px;
 }
 
 @include m.large {

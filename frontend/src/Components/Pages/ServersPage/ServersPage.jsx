@@ -29,12 +29,6 @@ const ServersPage = () => {
     fetchServers();
   }, []);
 
-  const getServerStatusText = (online, playerCount) => {
-    if (!online) return "Offline";
-    if (playerCount === 0) return "Empty";
-    return `${playerCount} player${playerCount !== 1 ? "s" : ""}`;
-  };
-
   return (
     <div>
       <ServersHeader />
