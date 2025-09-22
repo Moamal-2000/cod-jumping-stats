@@ -3,6 +3,7 @@ import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getColoredName } from "@/Functions/components";
 import Link from "next/link";
 import s from "./Player.module.scss";
+import PlayerStats from "./PlayerStats/PlayerStats";
 
 const PlayerCard = ({
   name,
@@ -24,31 +25,6 @@ const PlayerCard = ({
   xpSpeedrun,
   donated,
 }) => {
-  const formatDate = (dateString) => {
-    if (!dateString) return "Unknown";
-    try {
-      return new Date(dateString).toLocaleDateString();
-    } catch {
-      return dateString;
-    }
-  };
-
-  const formatLastSeen = (lastSeen) => {
-    if (!lastSeen) return "Unknown";
-    try {
-      const date = new Date(lastSeen);
-      const now = new Date();
-      const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
-
-      if (diffInHours < 1) return "Just now";
-      if (diffInHours < 24) return `${diffInHours}h ago`;
-      if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
-      return date.toLocaleDateString();
-    } catch {
-      return lastSeen;
-    }
-  };
-
   return (
     <div className={s.playerCard}>
       <div className={s.mainInfo}>
@@ -109,20 +85,7 @@ const PlayerCard = ({
           </div>
         </div>
 
-        <div className={s.statsGrid}>
-          <div className={s.statItem}>
-            <span className={s.statLabel}>
-              <SvgIcon name="footsteps" /> Visits:
-            </span>
-            <span className={s.statValue}>{visitCount.toLocaleString()}</span>
-          </div>
-          <div className={s.statItem}>
-            <span className={s.statLabel}>
-              <SvgIcon name="clock" /> Last seen:
-            </span>
-            <span className={s.statValue}>{formatLastSeen(lastSeen)}</span>
-          </div>
-        </div>
+        <PlayerStats lastSeen={lastSeen} visitCount={visitCount} />
       </div>
     </div>
   );
