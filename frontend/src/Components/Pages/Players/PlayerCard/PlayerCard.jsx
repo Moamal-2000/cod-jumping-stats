@@ -8,21 +8,12 @@ import PlayerStats from "./PlayerStats/PlayerStats";
 const PlayerCard = ({
   name,
   rank,
-  avatar,
-  totalPoints,
-  mapsCompleted,
-  bestTime,
   id,
   adminLevel,
   lastSeen,
   visitCount,
   country,
-  level,
-  joinDate,
   banned,
-  adminSpeedrun,
-  adminEmelie,
-  xpSpeedrun,
   donated,
 }) => {
   return (
