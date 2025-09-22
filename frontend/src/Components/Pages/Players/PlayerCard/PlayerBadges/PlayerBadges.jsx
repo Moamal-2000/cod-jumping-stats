@@ -2,44 +2,78 @@ import SvgIcon from "@/Components/Shared/SvgIcon";
 import s from "./PlayerBadges.module.scss";
 
 const PlayerBadges = ({ adminLevel, banned, donated, id, name }) => {
+  const playerBadgesData = getPlayerBadges({
+    cssModule: s,
+    adminLevel,
+    banned,
+    donated,
+    id,
+    name,
+  });
+
   return (
     <div className={s.badges}>
-      {adminLevel > 0 && (
-        <div className={s.adminBadge}>
-          <SvgIcon name="shield" />
-          <span>{adminLevel}</span>
-        </div>
-      )}
+      {playerBadgesData.map(
+        ({ id, displayCondition, classes, icon, label }) => {
+          if (!displayCondition) return null;
 
-      {banned && (
-        <div className={s.banned}>
-          <SvgIcon name="ban" />
-          <span>Banned</span>
-        </div>
-      )}
-
-      {donated && (
-        <div className={s.donator}>
-          <SvgIcon name="crown" />
-          <span>Donator</span>
-        </div>
-      )}
-
-      {id === 1 && name === "IzNoGoD" && (
-        <div className={s.owner}>
-          <SvgIcon name="diamond" />
-          <span>Owner</span>
-        </div>
-      )}
-
-      {adminLevel === 100 && (
-        <div className={`${s.adminBadge} ${s.highLevel}`}>
-          <SvgIcon name="star" />
-          <span>Admin</span>
-        </div>
+          return (
+            <div key={id} className={`${s.badge} ${classes}`}>
+              <SvgIcon name={icon} />
+              <span>{label}</span>
+            </div>
+          );
+        }
       )}
     </div>
   );
 };
 
 export default PlayerBadges;
+
+export function getPlayerBadges({
+  cssModule,
+  adminLevel,
+  banned,
+  donated,
+  id,
+  name,
+}) {
+  return [
+    {
+      displayCondition: adminLevel > 0,
+      classes: cssModule.adminBadge,
+      icon: "shield",
+      label: adminLevel,
+      id: 1,
+    },
+    {
+      displayCondition: banned,
+      classes: cssModule.banned,
+      icon: "ban",
+      label: "Banned",
+      id: 2,
+    },
+    {
+      displayCondition: donated,
+      classes: cssModule.donator,
+      icon: "crown",
+      label: "Donator",
+      id: 3,
+    },
+    {
+      displayCondition: id === 1 && name === "IzNoGoD",
+      classes: cssModule.owner,
+      icon: "diamond",
+      label: "Owner",
+      id: 4,
+    },
+    {
+      displayCondition: adminLevel === 100,
+      classes: `${cssModule.adminBadge} ${cssModule.highLevel}`,
+      icon: "star",
+      label: "Admin",
+      id: 5,
+    },
+  ];
+}

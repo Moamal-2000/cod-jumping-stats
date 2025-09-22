@@ -1,23 +1,31 @@
 .badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
+  gap: 12px;
   color: #9ca3af;
-  font-size: 0.875rem;
+  font-size: .875rem;
+}
+
+.badges .badge {
+  gap: 6px;
+  display: inline-flex;
+  align-items: center;
+  font-size: .875rem;
+  font-weight: 500;
+}
+
+.badges .badge>svg {
+  width: 16px;
+  height: 16px;
 }
 
 .adminBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
   color: #facc15;
-  font-size: 0.875rem;
-  font-weight: 500;
+  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
 
   svg {
-    width: 1rem;
-    height: 1rem;
-    color: #facc15;
+    color: #ffd700;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, .5));
   }
 
   &.highLevel {
@@ -25,75 +33,56 @@
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(159, 122, 234, 0.3);
+    text-shadow: 0 0 15px rgba(159, 122, 234, .3);
 
     svg {
-      width: 1.125rem;
-      height: 1.125rem;
+      width: 18px;
+      height: 18px;
       color: #ff6b6b;
-      filter: drop-shadow(0 0 3px rgba(255, 107, 107, 0.5));
+      filter: drop-shadow(0 0 3px rgba(255, 107, 107, .5));
     }
   }
 }
 
 .banned {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
   color: #ff4444;
-  font-size: 0.875rem;
-  font-weight: 500;
   background: linear-gradient(to right, #ff4444, #ff1a1a);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 68, 68, 0.3);
+  text-shadow: 0 0 15px rgba(255, 68, 68, .3);
 
   svg {
-    width: 1rem;
-    height: 1rem;
     color: #ff4444;
-    filter: drop-shadow(0 0 2px rgba(255, 68, 68, 0.5));
+    filter: drop-shadow(0 0 2px rgba(255, 68, 68, .5));
   }
 }
 
 .donator {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
   color: #ffd700;
-  font-size: 0.875rem;
-  font-weight: 500;
   background: linear-gradient(to right, #ffd700, #ffa500);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
+  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
 
   svg {
-    width: 1rem;
-    height: 1rem;
     color: #ffd700;
-    filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.5));
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, .5));
   }
 }
 
 .owner {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  font-size: 0.875rem;
-  font-weight: 500;
   background: linear-gradient(to right, #00ffff, #4169e1);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(65, 105, 225, 0.3);
+  text-shadow: 0 0 15px rgba(65, 105, 225, .3);
 
   svg {
-    width: 1.125rem;
-    height: 1.125rem;
+    width: 18px;
+    height: 18px;
     color: #00ffff;
-    filter: drop-shadow(0 0 3px rgba(0, 255, 255, 0.6));
+    filter: drop-shadow(0 0 3px rgba(0, 255, 255, .6));
   }
 }
