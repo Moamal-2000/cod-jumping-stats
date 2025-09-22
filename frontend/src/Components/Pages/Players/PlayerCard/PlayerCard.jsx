@@ -1,8 +1,7 @@
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
 import SvgIcon from "@/Components/Shared/SvgIcon";
-import { getColoredName } from "@/Functions/components";
-import Link from "next/link";
 import s from "./Player.module.scss";
+import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
 
 const PlayerCard = ({
@@ -44,12 +43,7 @@ const PlayerCard = ({
           </div>
 
           <div className={s.wrapper}>
-            <div className={s.primaryInfo}>
-              <Link href={`/player/${id || rank}`} className={s.playerName}>
-                {getColoredName(name)}
-              </Link>
-              <span className={s.playerId}>#{id}</span>
-            </div>
+            <PlayerPrimaryInfo name={name} rank={rank} id={id} />
             <div className={s.badges}>
               {adminLevel > 0 && (
                 <div className={s.adminBadge}>

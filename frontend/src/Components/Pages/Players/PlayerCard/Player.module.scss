@@ -77,44 +77,6 @@
   gap: 0.75rem;
 }
 
-.primaryInfo {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.playerName {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0;
-  line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.2);
-  text-underline-offset: 2px;
-  transition: text-decoration-color 0.2s ease;
-
-  &:hover {
-    text-decoration-color: currentColor;
-  }
-
-  &:focus-visible {
-    outline: 2px solid #facc15;
-    outline-offset: 2px;
-  }
-}
-
-.playerId {
-  color: #9ca3af;
-  font-size: 0.875rem;
-  font-weight: 500;
-  opacity: 0.9;
-  letter-spacing: 0.02em;
-}
-
 .badges {
   display: flex;
   flex-wrap: wrap;

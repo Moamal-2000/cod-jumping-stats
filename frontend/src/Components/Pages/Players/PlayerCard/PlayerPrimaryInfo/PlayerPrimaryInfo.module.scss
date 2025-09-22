@@ -1,0 +1,35 @@
+.primaryInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playerName {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: #42464d;
+  text-underline-offset: 2px;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+  }
+}
+
+.playerId {
+  color: #9ca3af;
+  font-size: .875rem;
+  font-weight: 500;
+  opacity: .9;
+  letter-spacing: .02em;
+}
