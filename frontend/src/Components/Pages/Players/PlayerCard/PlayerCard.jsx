@@ -50,47 +50,81 @@ const PlayerCard = ({
   };
 
   return (
-    <Link href={`/player/${id || rank}`} className={s.playerCard}>
+    <div className={s.playerCard}>
       <div className={s.mainInfo}>
-        <div className={s.avatar}>
-          {country ? (
-            <CountryImage
-              countryCode={country}
-              countryName={country}
-              size={40}
-            />
-          ) : (
-            <SvgIcon name="users" />
-          )}
-        </div>
-
-        <div className={s.wrapper}>
-          <h2>{getColoredName(name)}</h2>
-          <div className={s.playerMeta}>
-            <span className={s.playerId}>ID: {id}</span>
-            {adminLevel > 0 && (
-              <span className={s.adminLevel}>Admin Level {adminLevel}</span>
-            )}
-            {banned && <span className={s.banned}>BANNED</span>}
-            {donated && <span className={s.donator}>DONATOR</span>}
+        <div className={s.topSection}>
+          <div className={s.avatarSection}>
+            <div className={s.avatar}>
+              {country ? (
+                <CountryImage
+                  countryCode={country}
+                  countryName={country}
+                  size={40}
+                />
+              ) : (
+                <SvgIcon name="users" />
+              )}
+            </div>
           </div>
 
-          <div className={s.simpleStats}>
-            <span className={s.visitCount}>
-              Visits: {visitCount.toLocaleString()}
+          <div className={s.wrapper}>
+            <div className={s.primaryInfo}>
+              <Link href={`/player/${id || rank}`} className={s.playerName}>
+                {getColoredName(name)}
+              </Link>
+              <span className={s.playerId}>#{id}</span>
+            </div>
+            <div className={s.badges}>
+              {adminLevel > 0 && (
+                <div className={s.adminBadge}>
+                  <SvgIcon name={"shield"} />
+                  <span>{adminLevel}</span>
+                </div>
+              )}
+              {banned && (
+                <div className={s.banned}>
+                  <SvgIcon name="ban" />
+                  <span>Banned</span>
+                </div>
+              )}
+              {donated && (
+                <div className={s.donator}>
+                  <SvgIcon name="crown" />
+                  <span>Donator</span>
+                </div>
+              )}
+              {id === 1 && name === "IzNoGoD" && (
+                <div className={s.owner}>
+                  <SvgIcon name="diamond" />
+                  <span>Owner</span>
+                </div>
+              )}
+              {adminLevel === 100 && (
+                <div className={`${s.adminBadge} ${s.highLevel}`}>
+                  <SvgIcon name="star" />
+                  <span>Admin</span>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        <div className={s.statsGrid}>
+          <div className={s.statItem}>
+            <span className={s.statLabel}>
+              <SvgIcon name="footsteps" /> Visits:
             </span>
-            <span className={s.lastSeen}>
-              Last seen: {formatLastSeen(lastSeen)}
+            <span className={s.statValue}>{visitCount.toLocaleString()}</span>
+          </div>
+          <div className={s.statItem}>
+            <span className={s.statLabel}>
+              <SvgIcon name="clock" /> Last seen:
             </span>
+            <span className={s.statValue}>{formatLastSeen(lastSeen)}</span>
           </div>
         </div>
       </div>
-
-      <div className={s.clickHint}>
-        <SvgIcon name="arrow-right" />
-        <span>View Profile</span>
-      </div>
-    </Link>
+    </div>
   );
 };
 

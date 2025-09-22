@@ -196,7 +196,9 @@ const Players = () => {
       <div className={s.filtersSection}>
         <div className={s.filtersContainer}>
           <div className={s.filterGroup}>
-            <label className={s.filterLabel}>Search</label>
+            <label className={s.filterLabel} htmlFor="player-search">
+              Search
+            </label>
             <div className={s.searchContainer}>
               <input
                 ref={inputRef}
@@ -204,6 +206,7 @@ const Players = () => {
                 placeholder="Search players by name..."
                 onChange={handleSearchInput}
                 className={s.searchInput}
+                id="player-search"
               />
               {isSearching && (
                 <div className={s.searchLoadingIndicator}>
@@ -215,17 +218,20 @@ const Players = () => {
                 className={s.clearButton}
                 title="Clear search"
               >
-                ×
+                x
               </button>
             </div>
           </div>
 
           <div className={s.filterGroup}>
-            <label className={s.filterLabel}>Sort by</label>
+            <label className={s.filterLabel} htmlFor="player-sort">
+              Sort by
+            </label>
             <select
               value={sortBy}
               onChange={handleSortChange}
               className={s.sortSelect}
+              id="player-sort"
             >
               <option value="admin">Admin Level</option>
               <option value="last_seen">Last Seen</option>

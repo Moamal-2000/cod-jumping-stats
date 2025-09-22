@@ -96,6 +96,92 @@ export const iconsData = [
   },
 
   {
+    name: "heart",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
+      </svg>
+    ),
+  },
+
+  {
+    name: "x-circle",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="m15 9-6 6" />
+        <path d="m9 9 6 6" />
+      </svg>
+    ),
+  },
+
+  {
+    name: "crown",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
+      </svg>
+    ),
+  },
+
+  {
+    name: "ban",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <circle cx="12" cy="12" r="10" />
+        <path d="M4.93 4.93 19.07 19.07" />
+      </svg>
+    ),
+  },
+
+  {
+    name: "diamond",
+    icon: (
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      >
+        <path d="M2.7 10.3 12 21l9.3-10.7"></path>
+        <path d="M12 21 2.7 10.3h18.6L12 21Z"></path>
+        <path d="M2.7 10.3 12 3l9.3 7.3"></path>
+        <path d="m6.2 10.3 5.8-7.3 5.8 7.3"></path>
+      </svg>
+    ),
+  },
+
+  {
     name: "servers",
     icon: (
       <svg viewBox="0 0 1024 1024" fill="currentColor">
