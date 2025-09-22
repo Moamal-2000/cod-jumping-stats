@@ -1,6 +1,7 @@
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
 import SvgIcon from "@/Components/Shared/SvgIcon";
 import s from "./Player.module.scss";
+import PlayerBadges from "./PlayerBadges/PlayerBadges";
 import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
 
@@ -44,38 +45,13 @@ const PlayerCard = ({
 
           <div className={s.wrapper}>
             <PlayerPrimaryInfo name={name} rank={rank} id={id} />
-            <div className={s.badges}>
-              {adminLevel > 0 && (
-                <div className={s.adminBadge}>
-                  <SvgIcon name={"shield"} />
-                  <span>{adminLevel}</span>
-                </div>
-              )}
-              {banned && (
-                <div className={s.banned}>
-                  <SvgIcon name="ban" />
-                  <span>Banned</span>
-                </div>
-              )}
-              {donated && (
-                <div className={s.donator}>
-                  <SvgIcon name="crown" />
-                  <span>Donator</span>
-                </div>
-              )}
-              {id === 1 && name === "IzNoGoD" && (
-                <div className={s.owner}>
-                  <SvgIcon name="diamond" />
-                  <span>Owner</span>
-                </div>
-              )}
-              {adminLevel === 100 && (
-                <div className={`${s.adminBadge} ${s.highLevel}`}>
-                  <SvgIcon name="star" />
-                  <span>Admin</span>
-                </div>
-              )}
-            </div>
+            <PlayerBadges
+              adminLevel={adminLevel}
+              banned={banned}
+              donated={donated}
+              id={id}
+              name={name}
+            />
           </div>
         </div>
 
