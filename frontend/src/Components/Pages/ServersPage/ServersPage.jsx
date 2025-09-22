@@ -4,7 +4,6 @@ import { jhApis } from "@/Api/jumpersHeaven";
 import { useEffect, useState } from "react";
 import AllServers from "./AllServers/AllServers";
 import ServersHeader from "./ServersHeader/ServersHeader";
-import s from "./ServersPage.module.scss";
 
 const ServersPage = () => {
   const [servers, setServers] = useState([]);
@@ -37,7 +36,7 @@ const ServersPage = () => {
   };
 
   return (
-    <div className={s.serverDisplay}>
+    <div>
       <ServersHeader />
       <AllServers servers={servers} loading={loading} error={error} />
     </div>

@@ -13,3 +13,9 @@
     border-color: #3b434d;
   }
 }
+
+@media (max-width: 820px) {
+  .serverCard {
+    max-width: 383px;
+  }
+}

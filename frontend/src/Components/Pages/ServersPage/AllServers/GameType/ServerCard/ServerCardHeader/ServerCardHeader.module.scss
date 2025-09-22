@@ -1,15 +1,28 @@
+@use "@/Styles/mixins" as m;
+
 .serverHeader {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
   padding: var(--padding);
   position: relative;
+}
+
+@media (max-width: 420px) {
+  .serverHeader {
+    display: grid;
+    grid-template-areas:
+      'flag ip'
+      'indicator indicator';
+    grid-template-columns: 36px 1fr;
+  }
 }
 
 .countryFlag {
   width: 36px;
   height: 27px;
   flex-shrink: 0;
+  grid-area: flag;
 
   img {
     border-radius: 4px;
