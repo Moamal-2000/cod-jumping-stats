@@ -4,9 +4,9 @@ import ServerCard from "./ServerCard/ServerCard";
 const GameType = ({ gameType, groupedServers }) => {
   return (
     <div key={gameType} className={s.gameSection}>
-      <h2 className={s.gameTitle}>
+      {/* <h2 className={s.gameTitle}>
         {gameType === "COD2" ? "Call of Duty 2" : "Call of Duty 4"}
-      </h2>
+      </h2> */}
 
       <div className={s.serversGrid}>
         {groupedServers[gameType].map((server) => (
