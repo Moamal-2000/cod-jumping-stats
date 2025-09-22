@@ -1,6 +1,6 @@
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
 import SvgIcon from "@/Components/Shared/SvgIcon";
-import s from "./Player.module.scss";
+import s from "./PlayerCard.module.scss";
 import PlayerBadges from "./PlayerBadges/PlayerBadges";
 import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
