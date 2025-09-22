@@ -18,36 +18,32 @@ const PlayerCard = ({
 }) => {
   return (
     <div className={s.playerCard}>
-      <div className={s.mainInfo}>
-        <div className={s.topSection}>
-          <div className={s.avatarSection}>
-            <div className={s.avatar}>
-              {country ? (
-                <CountryImage
-                  countryCode={country}
-                  countryName={country}
-                  size={40}
-                />
-              ) : (
-                <SvgIcon name="users" />
-              )}
-            </div>
-          </div>
-
-          <div className={s.wrapper}>
-            <PlayerPrimaryInfo name={name} rank={rank} id={id} />
-            <PlayerBadges
-              adminLevel={adminLevel}
-              banned={banned}
-              donated={donated}
-              id={id}
-              name={name}
+      <div className={s.topSection}>
+        <div className={s.avatar}>
+          {country ? (
+            <CountryImage
+              countryCode={country}
+              countryName={country}
+              size={40}
             />
-          </div>
+          ) : (
+            <SvgIcon name="users" />
+          )}
         </div>
 
-        <PlayerStats lastSeen={lastSeen} visitCount={visitCount} />
+        <div className={s.wrapper}>
+          <PlayerPrimaryInfo name={name} rank={rank} id={id} />
+          <PlayerBadges
+            adminLevel={adminLevel}
+            banned={banned}
+            donated={donated}
+            id={id}
+            name={name}
+          />
+        </div>
       </div>
+
+      <PlayerStats lastSeen={lastSeen} visitCount={visitCount} />
     </div>
   );
 };
