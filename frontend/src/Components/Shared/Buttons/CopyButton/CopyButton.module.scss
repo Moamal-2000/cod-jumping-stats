@@ -5,22 +5,22 @@
   padding: 0;
   cursor: pointer;
   transition: color 0.2s;
+}
 
-  &:hover {
-    color: #fff;
-  }
+.copyButton:hover svg[data-type=stroke] {
+  stroke: #47ca4b;
 }
 
 .copyButton>svg {
   display: block;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
 
   &[data-type=stroke] {
     stroke: #f6f6f6;
   }
 
   &:not([data-type=stroke]) {
-    fill: #f6f6f6;
+    fill: #32f639;
   }
 }

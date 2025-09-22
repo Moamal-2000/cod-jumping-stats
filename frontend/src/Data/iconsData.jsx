@@ -584,6 +584,7 @@ export const iconsData = [
       <svg
         stroke="currentColor"
         strokeWidth="2"
+        fill="none"
         viewBox="0 0 24 24"
         data-type="stroke"
       >
