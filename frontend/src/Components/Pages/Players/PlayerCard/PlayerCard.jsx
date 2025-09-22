@@ -1,7 +1,6 @@
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
-import SvgIcon from "@/Components/Shared/SvgIcon";
-import s from "./PlayerCard.module.scss";
 import PlayerBadges from "./PlayerBadges/PlayerBadges";
+import s from "./PlayerCard.module.scss";
 import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
 
@@ -19,16 +18,13 @@ const PlayerCard = ({
   return (
     <div className={s.playerCard}>
       <div className={s.topSection}>
-        <div className={s.avatar}>
-          {country ? (
-            <CountryImage
-              countryCode={country}
-              countryName={country}
-              size={40}
-            />
-          ) : (
-            <SvgIcon name="users" />
-          )}
+        <div className={s.country}>
+          <CountryImage
+            countryCode={country}
+            countryName={country}
+            size={40}
+            colorPlaceholder={true}
+          />
         </div>
 
         <div className={s.wrapper}>
