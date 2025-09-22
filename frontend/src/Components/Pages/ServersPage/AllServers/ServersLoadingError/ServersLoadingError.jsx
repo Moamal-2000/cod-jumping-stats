@@ -4,11 +4,18 @@ import s from "./ServersLoadingError.module.scss";
 const ServersLoadingError = ({ loading, error }) => {
   if (loading) {
     return (
-      <div className={s.serversGrid}>
-        {[...Array(6)].map((_, i) => (
-          <SkeletonCard key={i} />
-        ))}
-      </div>
+      <>
+        <div className={s.serversGrid}>
+          {[...Array(10)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+        <div className={s.serversGrid}>
+          {[...Array(11)].map((_, i) => (
+            <SkeletonCard key={i} />
+          ))}
+        </div>
+      </>
     );
   }
 

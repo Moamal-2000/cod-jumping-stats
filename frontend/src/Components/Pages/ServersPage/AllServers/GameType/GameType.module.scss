@@ -11,11 +11,13 @@
   .serversGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
+    margin-bottom: 40px;
   }
 }
 
 @media (max-width: 820px) {
   .serversGrid {
     grid-template-columns: 1fr;
+    margin-bottom: 16px;
   }
 }
