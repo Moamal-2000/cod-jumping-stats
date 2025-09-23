@@ -41,7 +41,7 @@ export function getPlayerBadges({
 }) {
   return [
     {
-      displayCondition: adminLevel > 0,
+      displayCondition: true,
       classes: cssModule.adminBadge,
       icon: "shield",
       label: adminLevel,
@@ -62,17 +62,17 @@ export function getPlayerBadges({
       id: 3,
     },
     {
+      displayCondition: adminLevel >= 100,
+      classes: `${cssModule.adminBadge} ${cssModule.highLevel}`,
+      icon: "star",
+      label: "Admin",
+      id: 4,
+    },
+    {
       displayCondition: id === 1 && name === "IzNoGoD",
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",
-      id: 4,
-    },
-    {
-      displayCondition: adminLevel === 100,
-      classes: `${cssModule.adminBadge} ${cssModule.highLevel}`,
-      icon: "star",
-      label: "Admin",
       id: 5,
     },
   ];

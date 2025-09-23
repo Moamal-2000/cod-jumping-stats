@@ -17,13 +17,17 @@ const initialState = {
 // Helper function to transform player data
 const transformPlayerData = (apiResponse) => {
   if (!Array.isArray(apiResponse)) {
-    console.warn('Invalid API response format:', apiResponse);
+    console.warn("Invalid API response format:", apiResponse);
     return [];
   }
-  
+
   return apiResponse.map((player, index) => ({
     id: player.player_id,
-    name: player.pref_name || player.playername || player.force_name || `Player ${player.player_id}`,
+    name:
+      player.pref_name ||
+      player.playername ||
+      player.force_name ||
+      `Player ${player.player_id}`,
     avatar: null, // API doesn't provide avatar
     adminLevel: player.admin || 0,
     lastSeen: player.last_seen,
@@ -79,7 +83,10 @@ export const playersSlice = createSlice({
     },
     loadMorePlayersAction: (state) => {
       const newDisplayedCount = state.displayedCount + 200;
-      state.displayedCount = Math.min(newDisplayedCount, state.playersData.length);
+      state.displayedCount = Math.min(
+        newDisplayedCount,
+        state.playersData.length
+      );
       state.isLoadingMore = false;
       // Update hasMore based on whether we've shown all players
       state.hasMore = state.displayedCount < state.playersData.length;
@@ -94,7 +101,7 @@ export const playersSlice = createSlice({
       .addCase(fetchAllPlayers.fulfilled, (state, { payload }) => {
         const { playersData } = payload;
         const transformedPlayers = transformPlayerData(playersData);
-        
+
         // Store all players and reset pagination
         state.playersData = transformedPlayers;
         state.filteredPlayers = transformedPlayers;
@@ -117,7 +124,7 @@ export const playersSlice = createSlice({
       .addCase(searchPlayers.fulfilled, (state, { payload }) => {
         const { playersData } = payload;
         const transformedPlayers = transformPlayerData(playersData);
-        
+
         state.filteredPlayers = transformedPlayers;
         state.loading = false;
         state.error = false;
@@ -129,15 +136,15 @@ export const playersSlice = createSlice({
   },
 });
 
-export const { 
-  updatePlayersState, 
-  setSearchTerm, 
-  setSortBy, 
+export const {
+  updatePlayersState,
+  setSearchTerm,
+  setSortBy,
   clearSearch,
   setDisplayedCount,
   setHasMore,
   setIsLoadingMore,
   resetPagination,
-  loadMorePlayersAction
+  loadMorePlayersAction,
 } = playersSlice.actions;
 export default playersSlice.reducer;
