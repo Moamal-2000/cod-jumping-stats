@@ -35,6 +35,7 @@ const PlayerCard = ({
             donated={donated}
             id={id}
             name={name}
+            lastSeen={lastSeen}
           />
         </div>
       </div>

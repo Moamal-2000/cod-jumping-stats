@@ -212,3 +212,10 @@ export function getGameTypes(groupedServers) {
     (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")
   );
 }
+
+export function isActiveWithinWeek(lastSeen) {
+  const lastSeenDate = new Date(lastSeen);
+  const afterWeek = lastSeenDate.getTime() + 7 * 24 * 60 * 60 * 1000;
+  const afterWeekDate = new Date(afterWeek);
+  return afterWeekDate.getTime() > Date.now();
+}
