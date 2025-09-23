@@ -98,9 +98,121 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 15px rgba(6, 182, 212, .2);
+
   svg {
     color: #06b6d4;
     filter: drop-shadow(0 0 2px rgba(6, 182, 212, .4));
+  }
+}
+
+.veteran {
+  color: #FF7F50; /* Coral - unique color not used by other badges */
+  background: linear-gradient(to right, #FF7F50, #FF6347);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 127, 80, 0.3);
+  
+  svg {
+    color: #FF7F50;
+    filter: drop-shadow(0 0 4px rgba(255, 127, 80, 0.6));
+  }
+}
+
+.topScorer {
+  color: #ffd700;
+  background: linear-gradient(to right, #ffd700, #ffa500);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
+
+  svg {
+    color: #ffd700;
+    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
+  }
+}
+
+.newcomer {
+  color: #7fffd4;
+  background: linear-gradient(to right, #7fffd4, #20b2aa);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(127, 255, 212, 0.2);
+
+  svg {
+    color: #7fffd4;
+    filter: drop-shadow(0 0 3px rgba(127, 255, 212, 0.6));
+  }
+}
+
+.eventWinner {
+  color: #9370db;
+  background: linear-gradient(to right, #9370db, #8a2be2);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(147, 112, 219, 0.2);
+
+  svg {
+    color: #9370db;
+    filter: drop-shadow(0 0 3px rgba(147, 112, 219, 0.6));
+  }
+}
+
+.bugHunter {
+  color: #ff6b6b;
+  background: linear-gradient(to right, #ff6b6b, #ff0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 107, 107, 0.2);
+
+  svg {
+    color: #ff6b6b;
+    filter: drop-shadow(0 0 3px rgba(255, 107, 107, 0.6));
+  }
+}
+
+.communityHelper {
+  color: #ff69b4;
+  background: linear-gradient(to right, #ff69b4, #ff1493);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
+
+  svg {
+    color: #ff69b4;
+    filter: drop-shadow(0 0 3px rgba(255, 105, 180, 0.6));
+  }
+}
+
+.contentCreator {
+  color: #ff4d4d;
+  background: linear-gradient(135deg, #ff4d4d, #ff1a1a, #cc0000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+  animation: contentCreatorPulse 2s ease-in-out infinite;
+
+  svg {
+    color: #ff4d4d !important;
+    fill: #ff4d4d !important;
+    filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7));
+    animation: contentCreatorIconPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes contentCreatorPulse {
+    0%, 100% { text-shadow: 0 0 15px rgba(255, 77, 77, 0.3); }
+    50% { text-shadow: 0 0 20px rgba(255, 77, 77, 0.5); }
+  }
+
+  @keyframes contentCreatorIconPulse {
+    0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7)); }
+    50% { filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.9)); }
   }
 }
 

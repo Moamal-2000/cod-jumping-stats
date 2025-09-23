@@ -3,7 +3,18 @@ import { isActiveWithinWeek } from "@/Functions/utils";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 
-const PlayerBadges = ({ adminLevel, banned, donated, id, name, lastSeen }) => {
+const PlayerBadges = ({
+  adminLevel,
+  banned,
+  donated,
+  id,
+  name,
+  lastSeen,
+  playerSince,
+  score,
+  averageScore,
+  top10Ids,
+}) => {
   const playerBadgesData = getPlayerBadges({
     cssModule: s,
     adminLevel,
@@ -12,6 +23,10 @@ const PlayerBadges = ({ adminLevel, banned, donated, id, name, lastSeen }) => {
     id,
     name,
     lastSeen,
+    playerSince,
+    score,
+    averageScore,
+    top10Ids,
   });
 
   return (
@@ -43,7 +58,23 @@ export function getPlayerBadges({
   id,
   name,
   lastSeen,
+  playerSince,
+  score,
+  averageScore,
+  top10Ids,
 }) {
+  // Manual arrays for special badges
+  const eventWinnerIds = [125382];
+  const bugHunterIds = [108468];
+  const communityHelperIds = [108468, 1];
+  const contentCreatorIds = [46077];
+
+  const playerSince5Years =
+    playerSince <= Date.now() - 1000 * 60 * 60 * 24 * 365 * 5;
+
+  const newPlayerSinceMonth =
+    playerSince && playerSince >= Date.now() - 1000 * 60 * 60 * 24 * 30;
+
   return [
     {
       displayCondition: true,
@@ -80,6 +111,67 @@ export function getPlayerBadges({
       icon: "map",
       label: "Mapper",
       id: 7,
+    },
+    // Veteran: 5+ years and above average score
+    {
+      displayCondition: true,
+      classes: cssModule.veteran,
+      icon: "timer",
+      label: "Veteran",
+      tooltipText: "5+ years & above avg score",
+      id: 8,
+    },
+    // Top Scorer: Only top 10
+    {
+      displayCondition: Array.isArray(top10Ids) && top10Ids.includes(id),
+      classes: cssModule.topScorer,
+      icon: "trophy",
+      label: "Top Scorer",
+      tooltipText: "Top 10",
+      id: 9,
+    },
+    // Newcomer: Joined today or within a month
+    {
+      displayCondition: true,
+      classes: cssModule.newcomer,
+      icon: "star",
+      label: "Newcomer",
+      id: 10,
+    },
+    // Event Winner: Manual ids
+    {
+      displayCondition: eventWinnerIds.includes(id),
+      classes: cssModule.eventWinner,
+      icon: "trophy",
+      label: "Winner",
+      tooltipText: "Event winner",
+      id: 11,
+    },
+    // Bug Hunter: Manual ids
+    {
+      displayCondition: bugHunterIds.includes(id),
+      classes: cssModule.bugHunter,
+      icon: "exclamation-mark",
+      label: "Bug Hunter",
+      tooltipText: "Helped fix bugs",
+      id: 12,
+    },
+    // Community Helper: Manual ids
+    {
+      displayCondition: communityHelperIds.includes(id),
+      classes: cssModule.communityHelper,
+      icon: "heart",
+      label: "Helper",
+      tooltipText: "Helped community",
+      id: 13,
+    },
+    // Content Creator: Manual ids
+    {
+      displayCondition: contentCreatorIds.includes(id),
+      classes: cssModule.contentCreator,
+      icon: "youtube",
+      label: "Creator",
+      id: 14,
     },
     {
       displayCondition: adminLevel >= 100,
