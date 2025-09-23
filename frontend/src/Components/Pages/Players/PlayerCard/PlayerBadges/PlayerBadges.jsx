@@ -75,6 +75,13 @@ export function getPlayerBadges({
       id: 4,
     },
     {
+      displayCondition: id === 108468,
+      classes: cssModule.mapper,
+      icon: "map",
+      label: "Mapper",
+      id: 7,
+    },
+    {
       displayCondition: adminLevel >= 100,
       classes: `${cssModule.adminBadge} ${cssModule.highLevel}`,
       icon: "star",

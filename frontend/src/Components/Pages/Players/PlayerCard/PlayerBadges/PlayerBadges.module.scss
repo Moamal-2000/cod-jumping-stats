@@ -91,6 +91,19 @@
   }
 }
 
+.mapper {
+  color: #06b6d4;
+  background: linear-gradient(to right, #06b6d4, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(6, 182, 212, .2);
+  svg {
+    color: #06b6d4;
+    filter: drop-shadow(0 0 2px rgba(6, 182, 212, .4));
+  }
+}
+
 .owner {
   background: linear-gradient(to right, #00ffff, #4169e1);
   -webkit-background-clip: text;
