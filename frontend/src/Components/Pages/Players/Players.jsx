@@ -1,5 +1,6 @@
 "use client";
 
+import SvgIcon from "@/Components/Shared/SvgIcon";
 import { stripColorCodes } from "@/Functions/utils";
 import {
   loadMorePlayersAction,
@@ -218,7 +219,7 @@ const Players = () => {
                 className={s.clearButton}
                 title="Clear search"
               >
-                x
+                <SvgIcon name="xMark" />
               </button>
             </div>
           </div>
