@@ -77,13 +77,6 @@ export function getPlayerBadges({
 
   return [
     {
-      displayCondition: true,
-      classes: cssModule.adminBadge,
-      icon: "shield",
-      label: adminLevel,
-      id: 1,
-    },
-    {
       displayCondition: banned,
       classes: cssModule.banned,
       icon: "ban",
@@ -175,7 +168,7 @@ export function getPlayerBadges({
     },
     {
       displayCondition: adminLevel >= 100,
-      classes: `${cssModule.adminBadge} ${cssModule.highLevel}`,
+      classes: cssModule.highLevel,
       icon: "star",
       label: "Admin",
       id: 5,

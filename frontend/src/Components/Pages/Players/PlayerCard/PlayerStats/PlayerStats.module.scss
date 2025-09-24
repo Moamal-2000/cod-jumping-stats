@@ -1,9 +1,7 @@
 .statsGrid {
   display: flex;
   gap: 24px;
-  border-top: 1px solid #1e242e;
-  margin-top: 20px;
-  padding-top: 16px;
+  margin-top: 24px;
 }
 
 .statItem {
@@ -15,24 +13,20 @@
 }
 
 .statItem:first-child::after {
-  content: "";
+  content: ".";
   position: absolute;
-  right: -12px;
-  top: 50%;
-  translate: 0 -50%;
-  width: 3px;
+  right: -11px;
+  bottom: 14px;
   height: 3px;
-  background-color: #494f59;
-  border-radius: 50%;
+  width: 3px;
+  color: #494f59;
+  font-size: 1.8rem;
+  line-height: 0;
 }
 
 .statLabel {
   color: #9ca3af;
   font-size: .875rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
 }
 
 .statValue {

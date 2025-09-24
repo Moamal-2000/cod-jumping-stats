@@ -18,26 +18,32 @@ const PlayerCard = ({
   return (
     <div className={s.playerCard}>
       <div className={s.topSection}>
-        <div className={s.country}>
-          <CountryImage
-            countryCode={country}
-            countryName={country}
-            size={40}
-            colorPlaceholder={true}
+        <div className={s.wrapper}>
+          <div className={s.country}>
+            <CountryImage
+              countryCode={country}
+              countryName={country}
+              size={40}
+              colorPlaceholder={true}
+            />
+          </div>
+
+          <PlayerPrimaryInfo
+            name={name}
+            rank={rank}
+            adminLevel={adminLevel}
+            id={id}
           />
         </div>
 
-        <div className={s.wrapper}>
-          <PlayerPrimaryInfo name={name} rank={rank} id={id} />
-          <PlayerBadges
-            adminLevel={adminLevel}
-            banned={banned}
-            donated={donated}
-            id={id}
-            name={name}
-            lastSeen={lastSeen}
-          />
-        </div>
+        <PlayerBadges
+          adminLevel={adminLevel}
+          banned={banned}
+          donated={donated}
+          id={id}
+          name={name}
+          lastSeen={lastSeen}
+        />
       </div>
 
       <PlayerStats lastSeen={lastSeen} visitCount={visitCount} />

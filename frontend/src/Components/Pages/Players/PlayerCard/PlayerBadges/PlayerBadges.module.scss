@@ -1,7 +1,7 @@
 .badges {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px 15px;
   color: #9ca3af;
   font-size: .875rem;
 }
@@ -24,28 +24,18 @@
   height: 16px;
 }
 
-.adminBadge {
-  color: #facc15;
-  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
+.highLevel {
+  background: linear-gradient(to right, #ff6b6b, #9f7aea);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(159, 122, 234, .3);
 
   svg {
-    color: #ffd700;
-    filter: drop-shadow(0 0 2px rgba(255, 215, 0, .5));
-  }
-
-  &.highLevel {
-    background: linear-gradient(to right, #ff6b6b, #9f7aea);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-shadow: 0 0 15px rgba(159, 122, 234, .3);
-
-    svg {
-      width: 18px;
-      height: 18px;
-      color: #ff6b6b;
-      filter: drop-shadow(0 0 3px rgba(255, 107, 107, .5));
-    }
+    width: 18px;
+    height: 18px;
+    color: #ff6b6b;
+    filter: drop-shadow(0 0 3px rgba(255, 107, 107, .5));
   }
 }
 
@@ -106,13 +96,14 @@
 }
 
 .veteran {
-  color: #FF7F50; /* Coral - unique color not used by other badges */
+  color: #FF7F50;
+  /* Coral - unique color not used by other badges */
   background: linear-gradient(to right, #FF7F50, #FF6347);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 15px rgba(255, 127, 80, 0.3);
-  
+
   svg {
     color: #FF7F50;
     filter: drop-shadow(0 0 4px rgba(255, 127, 80, 0.6));
@@ -206,13 +197,27 @@
   }
 
   @keyframes contentCreatorPulse {
-    0%, 100% { text-shadow: 0 0 15px rgba(255, 77, 77, 0.3); }
-    50% { text-shadow: 0 0 20px rgba(255, 77, 77, 0.5); }
+
+    0%,
+    100% {
+      text-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
+    }
+
+    50% {
+      text-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
+    }
   }
 
   @keyframes contentCreatorIconPulse {
-    0%, 100% { filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7)); }
-    50% { filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.9)); }
+
+    0%,
+    100% {
+      filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7));
+    }
+
+    50% {
+      filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.9));
+    }
   }
 }
 
