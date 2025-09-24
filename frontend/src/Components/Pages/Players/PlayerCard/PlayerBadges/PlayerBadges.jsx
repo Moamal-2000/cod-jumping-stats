@@ -4,6 +4,7 @@ import {
   communityHelperIds,
   contentCreatorIds,
   eventWinnerIds,
+  mappersIds,
 } from "@/Data/manualBadges";
 import { isActiveWithinWeek } from "@/Functions/utils";
 import ToolTip from "../ToolTip";
@@ -99,7 +100,7 @@ export function getPlayerBadges({
       id: 4,
     },
     {
-      displayCondition: id === 108468,
+      displayCondition: mappersIds.includes(id),
       classes: cssModule.mapper,
       icon: "map",
       label: "Mapper",
