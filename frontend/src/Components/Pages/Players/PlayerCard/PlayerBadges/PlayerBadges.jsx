@@ -1,4 +1,10 @@
 import SvgIcon from "@/Components/Shared/SvgIcon";
+import {
+  bugHunterIds,
+  communityHelperIds,
+  contentCreatorIds,
+  eventWinnerIds,
+} from "@/Data/manualBadges";
 import { isActiveWithinWeek } from "@/Functions/utils";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
@@ -63,12 +69,6 @@ export function getPlayerBadges({
   averageScore,
   top10Ids,
 }) {
-  // Manual arrays for special badges
-  const eventWinnerIds = [125382];
-  const bugHunterIds = [108468];
-  const communityHelperIds = [108468, 1];
-  const contentCreatorIds = [46077];
-
   const playerSince5Years =
     playerSince <= Date.now() - 1000 * 60 * 60 * 24 * 365 * 5;
 
@@ -131,7 +131,6 @@ export function getPlayerBadges({
       label: "Newcomer",
       id: 10,
     },
-    // Event Winner: Manual ids
     {
       displayCondition: eventWinnerIds.includes(id),
       classes: cssModule.eventWinner,
@@ -140,7 +139,6 @@ export function getPlayerBadges({
       tooltipText: "Event winner",
       id: 11,
     },
-    // Bug Hunter: Manual ids
     {
       displayCondition: bugHunterIds.includes(id),
       classes: cssModule.bugHunter,
@@ -149,7 +147,6 @@ export function getPlayerBadges({
       tooltipText: "Helped fix bugs",
       id: 12,
     },
-    // Community Helper: Manual ids
     {
       displayCondition: communityHelperIds.includes(id),
       classes: cssModule.communityHelper,
@@ -158,7 +155,6 @@ export function getPlayerBadges({
       tooltipText: "Helped community",
       id: 13,
     },
-    // Content Creator: Manual ids
     {
       displayCondition: contentCreatorIds.includes(id),
       classes: cssModule.contentCreator,
