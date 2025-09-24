@@ -1,26 +1,22 @@
 .playersContainer {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  max-width: 1600px;
-  margin: 0 auto;
-  padding: 3rem 2rem;
-  width: 100%;
+  gap: 32px;
 }
 
 .playersHeader {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  gap: 24px;
+  margin-bottom: 32px;
   position: relative;
 }
 
 .titleSection {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .playersTitle {
@@ -30,6 +26,7 @@
   margin: 0;
   background: linear-gradient(135deg, #f9fafb 0%, #9ca3af 100%);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   letter-spacing: -0.02em;
 }
@@ -39,19 +36,19 @@
   font-size: 1rem;
   margin: 0;
   font-weight: 500;
-  letter-spacing: 0.01em;
+  letter-spacing: .01em;
 }
 
 .filtersSection {
   background-color: #0e1217;
   border: 1px solid #2a313a;
   border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 24px;
+  margin-bottom: 32px;
   position: relative;
   display: flex;
   align-items: center;
-  gap: 2rem;
+  gap: 32px;
   transition: border-color .2s ease;
 
   &:hover {
@@ -62,23 +59,23 @@
 .searchContainer {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
   position: relative;
 }
 
 .sortContainer {
   display: flex;
   align-items: center;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .searchInput {
   background: #1a1e24;
   border: 1px solid #2a313a;
   border-radius: 6px;
-  padding: 0.625rem 1rem;
+  padding: 10px 16px;
   color: #e5e7eb;
-  font-size: 0.875rem;
+  font-size: .875rem;
   width: 320px;
   transition: all 0.2s ease;
 
@@ -99,7 +96,7 @@
 
 .searchLoadingIndicator {
   position: absolute;
-  right: 3.5rem;
+  right: 56px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -118,13 +115,13 @@
 
 .clearButton {
   position: absolute;
-  right: 0.5rem;
+  right: 8px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
   border: none;
   cursor: pointer;
-  padding: 0.25rem;
+  padding: 4px;
   width: 24px;
   height: 24px;
   display: flex;
@@ -153,15 +150,15 @@
   background-color: #facc15;
   border: solid 1px #facc15;
   border-left: none;
-  border-radius: 0 0.5rem 0.5rem 0;
-  padding: 0.75rem 1rem;
+  border-radius: 0 8px 8px 0;
+  padding: 12px 16px;
   color: #000;
   font-weight: 600;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.2s, border-color 0.2s;
+  transition: background-color .2s, border-color .2s;
   min-width: 48px;
 
   &:hover:not(:disabled) {
@@ -187,13 +184,13 @@
 .sortContainer {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
   flex-shrink: 0;
 }
 
 .sortLabel {
   color: #e5e7eb;
-  font-size: 0.875rem;
+  font-size: .875rem;
   font-weight: 500;
   white-space: nowrap;
 }
@@ -202,17 +199,17 @@
   background: #1a1e24;
   border: 1px solid #2a313a;
   border-radius: 6px;
-  padding: 0.625rem 1rem;
+  padding: 10px 16px;
   color: #e5e7eb;
-  font-size: 0.875rem;
+  font-size: .875rem;
   cursor: pointer;
-  transition: all 0.2s ease;
   appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  padding-right: 2rem;
+  background-position: right 12px center;
+  padding-right: 32px;
   width: 200px;
+  transition: all .2s ease;
 
   &:hover {
     border-color: #374151;
@@ -234,9 +231,9 @@
 .playersSection {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-  gap: 1.25rem;
+  gap: 20px;
   padding-top: 4px;
-  margin: 0 auto 2rem;
+  margin: 0 auto 32px;
   max-width: 1600px;
   width: 100%;
 }
@@ -256,15 +253,15 @@
 @media (max-width: 768px) {
   .playersSection {
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
+    gap: 24px;
   }
 }
 
 @media (max-width: 480px) {
   .playersSection {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
-    padding: 0 0.5rem;
+    gap: 20px;
+    padding: 0 8px;
   }
 }
 
@@ -274,12 +271,12 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  gap: 1.5rem;
+  gap: 24px;
   text-align: center;
   background: #1a1e24;
   border: 1px solid #2a313a;
   border-radius: 12px;
-  padding: 3rem;
+  padding: 48px;
   grid-column: 1 / -1;
 }
 
@@ -300,11 +297,11 @@
   background-color: #facc15;
   color: #000;
   border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color .2s;
 
   &:hover {
     background-color: #eab308;
@@ -317,7 +314,7 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  gap: 1rem;
+  gap: 16px;
 }
 
 .loadingSpinner {
@@ -331,11 +328,11 @@
 
 @keyframes spin {
   0% {
-    transform: rotate(0deg);
+    rotate: 0deg;
   }
 
   100% {
-    transform: rotate(360deg);
+    rotate: 360deg;
   }
 }
 
@@ -345,19 +342,19 @@
   align-items: center;
   justify-content: center;
   min-height: 300px;
-  gap: 1rem;
+  gap: 16px;
   text-align: center;
 }
 
 .errorContainer h2 {
   color: #ef4444;
   font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 .errorContainer p {
   color: #9ca3af;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
   max-width: 500px;
 }
 
@@ -365,14 +362,14 @@
   background-color: #facc15;
   color: #000;
   border: none;
-  padding: 0.875rem 2rem;
+  padding: 14px 32px;
   border-radius: 8px;
   font-weight: 600;
   font-size: 1rem;
   cursor: pointer;
-  transition: all 0.2s ease;
   position: relative;
   z-index: 1;
+  transition: all .2s ease;
 
   &:hover {
     background-color: #3db341;
@@ -404,13 +401,13 @@
   .playersHeader {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 16px;
   }
 
   .filtersContainer {
     flex-direction: column;
     align-items: flex-start;
-    gap: 1.5rem;
+    gap: 24px;
   }
 
   .filterGroup {
@@ -424,13 +421,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
-  gap: 1rem;
+  padding: 32px;
+  gap: 16px;
 }
 
 .loadingMoreContainer p {
   color: #9ca3af;
-  font-size: 0.875rem;
+  font-size: .875rem;
   margin: 0;
 }
 
@@ -443,13 +440,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  padding: 32px;
   text-align: center;
 }
 
 .endOfResults p {
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: .875rem;
   margin: 0;
   font-style: italic;
 }
