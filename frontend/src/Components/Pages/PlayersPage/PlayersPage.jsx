@@ -14,9 +14,9 @@ import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerCard from "./PlayerCard/PlayerCard";
-import s from "./Players.module.scss";
+import s from "./PlayersPage.module.scss";
 
-const Players = () => {
+const PlayersPage = () => {
   const {
     playersData,
     filteredPlayers,
@@ -296,4 +296,4 @@ const Players = () => {
   );
 };
 
-export default Players;
+export default PlayersPage;

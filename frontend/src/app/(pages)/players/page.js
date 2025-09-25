@@ -1,13 +1,13 @@
-import Players from "@/Components/Pages/Players/Players";
+import PlayersPage from "@/Components/Pages/PlayersPage/PlayersPage";
 
-const PlayersPage = () => {
+const Page = () => {
   return (
     <div className="container">
       <main>
-        <Players />
+        <PlayersPage />
       </main>
     </div>
   );
 };
 
-export default PlayersPage;
+export default Page;

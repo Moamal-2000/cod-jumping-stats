@@ -377,10 +377,6 @@
   width: 100%;
 }
 
-@include m.small {
-  .filtersContainer {}
-}
-
 .filterGroup {
   display: flex;
   align-items: center;
