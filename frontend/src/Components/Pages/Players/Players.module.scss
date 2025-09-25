@@ -1,7 +1,15 @@
+@use "@/Styles/mixins" as m;
+
 .playersContainer {
   display: flex;
   flex-direction: column;
   gap: 32px;
+}
+
+@include m.small {
+  .playersContainer {
+    gap: 24px;
+  }
 }
 
 .playersHeader {
@@ -45,14 +53,21 @@
   border-radius: 12px;
   padding: 24px;
   margin-bottom: 32px;
-  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
   gap: 32px;
+  position: relative;
   transition: border-color .2s ease;
 
   &:hover {
     border-color: #374151;
+  }
+}
+
+@include m.small {
+  .filtersSection {
+    width: 100%;
   }
 }
 
@@ -61,6 +76,8 @@
   align-items: center;
   gap: 8px;
   position: relative;
+  max-width: 320px;
+  width: 100%;
 }
 
 .sortContainer {
@@ -76,7 +93,7 @@
   padding: 10px 16px;
   color: #e5e7eb;
   font-size: .875rem;
-  width: 320px;
+  width: 100%;
   transition: all 0.2s ease;
 
   &:hover {
@@ -96,7 +113,7 @@
 
 .searchLoadingIndicator {
   position: absolute;
-  right: 56px;
+  right: 48px;
   top: 50%;
   transform: translateY(-50%);
   display: flex;
@@ -181,20 +198,6 @@
   animation: spin 1s linear infinite;
 }
 
-.sortContainer {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  flex-shrink: 0;
-}
-
-.sortLabel {
-  color: #e5e7eb;
-  font-size: .875rem;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
 .sortSelect {
   background: #1a1e24;
   border: 1px solid #2a313a;
@@ -238,30 +241,16 @@
   width: 100%;
 }
 
-@media (max-width: 1600px) {
+@include m.large {
   .playersSection {
-    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
   }
 }
 
-@media (max-width: 1200px) {
-  .playersSection {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  }
-}
-
-@media (max-width: 768px) {
-  .playersSection {
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-  }
-}
-
-@media (max-width: 480px) {
+@include m.small {
   .playersSection {
     grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 0 8px;
+    gap: 12px;
   }
 }
 
@@ -385,34 +374,30 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
+}
+
+@include m.small {
+  .filtersContainer {}
 }
 
 .filterGroup {
   display: flex;
   align-items: center;
+  width: 100%;
+}
+
+@include m.small {
+  .filterGroup {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
 }
 
 .filterLabel {
   width: 64px;
   cursor: pointer;
-}
-
-@media (max-width: 768px) {
-  .playersHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 16px;
-  }
-
-  .filtersContainer {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 24px;
-  }
-
-  .filterGroup {
-    width: 100%;
-  }
 }
 
 // Infinite scroll loading styles

@@ -1,3 +1,5 @@
+@use "@/Styles/mixins" as m;
+
 .playerCard {
   background-color: #0e1217;
   border: 1px solid #2a313a;
@@ -15,10 +17,27 @@
   }
 }
 
+@include m.very-small {
+  .playerCard {
+    padding: 16px;
+  }
+}
+
 .topSection {
   display: flex;
   flex-direction: column;
   gap: 16px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+@include m.very-small {
+  .wrapper {
+    gap: 8px;
+  }
 }
 
 .country {
@@ -35,7 +54,9 @@
   flex-shrink: 0;
 }
 
-.wrapper {
-  display: flex;
-  gap: 16px;
+@include m.very-small {
+  .country {
+    width: 36px;
+    height: 36px;
+  }
 }

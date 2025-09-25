@@ -2,15 +2,15 @@
   display: flex;
   flex-direction: column;
   gap: 4px;
+  width: 100%;
 }
 
 .playerName {
+  display: flex;
+  flex-wrap: wrap;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
   color: inherit;
   text-decoration: underline;
   text-decoration-color: #42464d;
