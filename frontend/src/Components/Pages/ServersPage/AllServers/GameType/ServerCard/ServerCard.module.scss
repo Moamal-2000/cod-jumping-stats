@@ -6,8 +6,8 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 390px;
-  transition: border-color 0.2s;
+  min-height: 392px;
+  transition: border-color .2s;
 
   &:hover {
     border-color: #3b434d;
