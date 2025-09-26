@@ -114,58 +114,6 @@ export const iconsData = [
   },
 
   {
-    name: "crown",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="m2 4 3 12h14l3-12-6 7-4-7-4 7-6-7zm3 16h14" />
-      </svg>
-    ),
-  },
-
-  {
-    name: "ban",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <path d="M4.93 4.93 19.07 19.07" />
-      </svg>
-    ),
-  },
-
-  {
-    name: "diamond",
-    icon: (
-      <svg
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M2.7 10.3 12 21l9.3-10.7"></path>
-        <path d="M12 21 2.7 10.3h18.6L12 21Z"></path>
-        <path d="M2.7 10.3 12 3l9.3 7.3"></path>
-        <path d="m6.2 10.3 5.8-7.3 5.8 7.3"></path>
-      </svg>
-    ),
-  },
-
-  {
     name: "servers",
     icon: (
       <svg viewBox="0 0 1024 1024" fill="currentColor">
@@ -716,15 +664,6 @@ export const iconsData = [
     icon: (
       <svg viewBox="0 0 448 512">
         <path d="M439 105c12 13 12 33 0 46L183 407a32 32 0 0 1-46 0L9 279a32 32 0 0 1 46-46l105 106 233-234c13-12 33-12 46 0z" />
-      </svg>
-    ),
-  },
-
-  {
-    name: "activeStatus",
-    icon: (
-      <svg viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" fill="#22c55e" />
       </svg>
     ),
   },
