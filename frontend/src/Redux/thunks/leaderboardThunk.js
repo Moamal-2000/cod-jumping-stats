@@ -1,4 +1,8 @@
-import { decodeAsyncData, getLeaderboardUrl } from "@/Functions/utils";
+import {
+  decodeAsyncData,
+  fetchMsgPackResponse,
+  getLeaderboardUrl,
+} from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchLeaderboard = createAsyncThunk(
@@ -6,9 +10,7 @@ export const fetchLeaderboard = createAsyncThunk(
   async (paramsObject) => {
     try {
       const leaderboardUrl = getLeaderboardUrl(paramsObject);
-      const response = await fetch(leaderboardUrl, {
-        headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
-      });
+      const response = await fetchMsgPackResponse(leaderboardUrl);
       const leaderboardData = await decodeAsyncData(response);
 
       return { leaderboardData, paramsObject };

@@ -71,6 +71,12 @@ export function getIsLastPagination(data, paginationNumber) {
   return paginationNumber > lastPagination;
 }
 
+export function fetchMsgPackResponse(url) {
+  return fetch(url, {
+    headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
+  });
+}
+
 export async function decodeAsyncData(response) {
   try {
     if (!response || !response.ok) {

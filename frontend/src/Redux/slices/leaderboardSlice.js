@@ -20,6 +20,7 @@ export const leaderboardSlice = createSlice({
       state[payload.key] = payload.value;
     },
   },
+
   extraReducers: ({ addCase }) => {
     addCase(fetchLeaderboard.pending, (state) => {
       state.loading = true;
