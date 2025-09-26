@@ -1,6 +1,5 @@
 import {
   bugHunterIds,
-  communityHelperIds,
   contentCreatorIds,
   eventWinnerIds,
   mappersIds,
@@ -148,14 +147,6 @@ export function getPlayerBadges({
       label: "Bug Hunter",
       tooltipText: "Helped fix bugs",
       id: 12,
-    },
-    {
-      displayCondition: communityHelperIds.includes(id),
-      classes: cssModule.communityHelper,
-      icon: "heart",
-      label: "Helper",
-      tooltipText: "Helped community",
-      id: 13,
     },
     {
       displayCondition: contentCreatorIds.includes(id),

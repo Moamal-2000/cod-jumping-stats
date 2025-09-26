@@ -2,9 +2,6 @@ export const eventWinnerIds = [
   46, 125382, 127166, 136177, 123104, 135795, 128523,
 ];
 export const bugHunterIds = [1, 7, 108468, 127596];
-export const communityHelperIds = [
-  1, 2, 7, 46, 46077, 18359, 108468, 125382, 128567, 127596,
-];
 export const contentCreatorIds = [
   1, 2, 46, 50, 30216, 46077, 125382, 29950, 123104,
 ];

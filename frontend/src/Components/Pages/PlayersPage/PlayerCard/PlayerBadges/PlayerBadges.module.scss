@@ -166,20 +166,6 @@
   }
 }
 
-.communityHelper {
-  color: #ff69b4;
-  background: linear-gradient(to right, #ff69b4, #ff1493);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 105, 180, 0.2);
-
-  svg {
-    color: #ff69b4;
-    filter: drop-shadow(0 0 3px rgba(255, 105, 180, 0.6));
-  }
-}
-
 .contentCreator {
   color: #ff4d4d;
   background: linear-gradient(135deg, #ff4d4d, #ff1a1a, #cc0000);
