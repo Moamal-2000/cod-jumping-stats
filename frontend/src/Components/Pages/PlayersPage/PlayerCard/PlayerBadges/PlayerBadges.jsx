@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import {
   bugHunterIds,
   communityHelperIds,
@@ -45,7 +44,9 @@ const PlayerBadges = ({
           return (
             <div key={id} className={`${s.badge} ${classes}`}>
               {tooltipText && <ToolTip>{tooltipText}</ToolTip>}
-              <SvgIcon name={icon} />
+              <svg>
+                <use href={`/badgesIcons.svg#${icon}`}></use>
+              </svg>
               <span>{label}</span>
             </div>
           );
@@ -102,7 +103,7 @@ export function getPlayerBadges({
     {
       displayCondition: mappersIds.includes(id),
       classes: cssModule.mapper,
-      icon: "map",
+      icon: "special-mapper",
       label: "Mapper",
       id: 7,
     },
