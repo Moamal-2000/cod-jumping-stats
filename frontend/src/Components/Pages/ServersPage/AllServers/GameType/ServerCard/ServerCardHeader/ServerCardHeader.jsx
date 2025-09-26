@@ -8,13 +8,13 @@ import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
 const ServerCardHeader = ({ server }) => {
-  const [src, setSrc] = useState(`/maps/512/${server.map}.webp`);
+  const [src, setSrc] = useState(`/maps/512/${server.Map}.webp`);
 
   return (
     <header className={s.serverHeader}>
       <div className={s.countryFlag}>
         <Image
-          src={getCountryFlag(server.domain)}
+          src={getCountryFlag(server.Domain)}
           alt="Country flag"
           width="30"
           height="26"
@@ -27,7 +27,7 @@ const ServerCardHeader = ({ server }) => {
 
       <Image
         src={src}
-        alt={server.map}
+        alt={server.Map}
         fill={true}
         sizes="383px"
         className={s.mapBackground}

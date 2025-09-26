@@ -5,16 +5,16 @@ const ServerCardIp = ({ server }) => {
   return (
     <div className={s.serverAddress}>
       <div className={s.domainInfo}>
-        <span className={s.domain}>{server.domain}</span>
+        <span className={s.domain}>{server.Domain}</span>
       </div>
 
       <div className={s.serverIpContainer}>
         <p className={s.serverIp}>
-          {server.ip}:{server.port}
+          {server.IP}:{server.Port}
         </p>
         <CopyButton
           title="Copy server address"
-          copyText={`${server.ip}:${server.port}`}
+          copyText={`${server.IP}:${server.Port}`}
         />
       </div>
     </div>

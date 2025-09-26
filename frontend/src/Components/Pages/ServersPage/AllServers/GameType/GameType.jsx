@@ -6,7 +6,7 @@ const GameType = ({ gameType, groupedServers }) => {
     <div className={s.serversGrid} key={gameType}>
       {groupedServers[gameType].map((server) => (
         <ServerCard
-          key={`${server.domain}${server.ip}${server.port}`}
+          key={`${server.Domain}${server.IP}${server.Port}`}
           server={server}
         />
       ))}

@@ -7,7 +7,7 @@ import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlaye
 
 const ServerCard = ({ server }) => {
   return (
-    <div key={`${server.ip}-${server.port}`} className={s.serverCard}>
+    <div className={s.serverCard}>
       <ServerCardHeader server={server} />
       <ServerCardMapSection server={server} />
       <ServerCardPlayersSection server={server} />

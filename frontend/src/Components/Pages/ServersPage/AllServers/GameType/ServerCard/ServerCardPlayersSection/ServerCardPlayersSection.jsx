@@ -3,7 +3,7 @@ import s from "./ServerCard.module.scss";
 
 const ServerCardPlayersSection = ({ server }) => {
   const hasPlayers =
-    server.online && server.players && server.players.length > 0;
+    server.Online && server.Players && server.Players.length > 0;
 
   return (
     <div className={s.playersSection}>

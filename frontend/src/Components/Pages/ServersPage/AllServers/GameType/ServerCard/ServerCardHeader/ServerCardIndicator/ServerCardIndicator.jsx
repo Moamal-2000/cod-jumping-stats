@@ -8,12 +8,12 @@ const ServerCardIndicator = ({ server }) => {
       <span
         className={s.statusDot}
         style={{
-          backgroundColor: getServerStatusColor(server.online),
+          backgroundColor: getServerStatusColor(server.Online),
         }}
       />
       <span className={s.statusText}>
         <SvgIcon name="users" />
-        {server.online ? `${server.player_count || 0} Players` : "Offline"}
+        {server.Online ? `${server.PlayerCount || 0} Players` : "Offline"}
       </span>
     </div>
   );

@@ -2,7 +2,7 @@ import OnlinePlayerItem from "./OnlinePlayerItem/OnlinePlayerItem";
 import s from "./OnlinePlayersList.module.scss";
 
 const OnlinePlayersList = ({ server }) => {
-  const sortBAdminPlayers = server.players.sort((a, b) => b.admin - a.admin);
+  const sortBAdminPlayers = server.Players.sort((a, b) => b.Admin - a.Admin);
 
   return (
     <div className={s.playersList}>

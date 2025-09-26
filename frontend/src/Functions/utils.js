@@ -71,9 +71,10 @@ export function getIsLastPagination(data, paginationNumber) {
   return paginationNumber > lastPagination;
 }
 
-export function fetchMsgPackResponse(url) {
+export function fetchMsgPackResponse({ url, cache } = {}) {
   return fetch(url, {
     headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
+    cache,
   });
 }
 
@@ -89,14 +90,7 @@ export async function decodeAsyncData(response) {
     }
 
     const buffer = await response.arrayBuffer();
-    const uint8Array = new Uint8Array(buffer);
-
-    if (uint8Array.length === 0) {
-      console.warn("Empty buffer received in decodeAsyncData");
-      return null;
-    }
-
-    return decode(uint8Array);
+    return decode(buffer);
   } catch (error) {
     console.error("Error decoding data:", error);
     console.error("Buffer length:", uint8Array?.length || "unknown");
@@ -195,7 +189,7 @@ export function stripColorCodes(name) {
 
 export function getCodServers(servers) {
   return servers.reduce((groups, server) => {
-    const gameType = server.game_type;
+    const gameType = server.GameType;
     if (!groups[gameType]) groups[gameType] = [];
 
     groups[gameType].push(server);

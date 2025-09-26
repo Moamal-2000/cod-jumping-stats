@@ -3,7 +3,7 @@ import Link from "next/link";
 import s from "./ServerCard.module.scss";
 
 const ServerCardMapSection = ({ server }) => {
-  const isCod4 = server.game_type === "COD4";
+  const isCod4 = server.GameType === "COD4";
 
   return (
     <div className={s.mapSection}>
@@ -12,11 +12,11 @@ const ServerCardMapSection = ({ server }) => {
           <SvgIcon name="globe" /> Map
         </span>
 
-        {isCod4 && <span className={s.mapName}>{server.map}</span>}
+        {isCod4 && <span className={s.mapName}>{server.Map}</span>}
 
         {!isCod4 && (
-          <Link href={`/map/${server.mapid}`} className={s.mapName}>
-            {server.map}
+          <Link href={`/map/${server.MapID}`} className={s.mapName}>
+            {server.Map}
           </Link>
         )}
       </div>
