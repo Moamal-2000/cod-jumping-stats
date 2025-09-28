@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import PlayerCard from "./PlayerCard/PlayerCard";
+import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
 
 const PlayersPage = () => {
@@ -103,6 +104,8 @@ const PlayersPage = () => {
       }
     };
   }, []);
+
+  <PlayersLoadingError />;
 
   if (loading || playersData.length === 0) {
     return (
