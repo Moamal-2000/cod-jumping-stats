@@ -5,8 +5,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 20px 50px;
-  padding: 0 2px;
-  padding-block: 1.5rem;
+  padding: 24px 2px;
   position: sticky;
   top: 82px;
   left: 0;
@@ -17,10 +16,12 @@
 
 @media (max-width: 1300px) {
   .header {
-    margin: 10px 20px 30px;
-    padding: 1.5rem;
+    margin: 10px 20px 0;
+    padding: 24px;
     margin-inline: 0;
     background-color: #14171d;
+    width: calc(100% - 4px);
+    left: 18px;
   }
 }
 
@@ -47,6 +48,12 @@
 
 .header .wrapper>p {
   color: #9ca3af;
+}
+
+@include m.small {
+  .header .wrapper>p {
+    font-size: .9rem;
+  }
 }
 
 .header .wrapper>p>span {

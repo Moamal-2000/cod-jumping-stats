@@ -1,7 +1,22 @@
+@use "@/Styles/mixins" as m;
+
 .buttons {
   display: flex;
   align-items: center;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@include m.small {
+  .buttons {
+    width: min-content;
+  }
+}
+
+@media (max-width: 480px) {
+  .buttons {
+    width: 100%;
+  }
 }
 
 .buttons button {
