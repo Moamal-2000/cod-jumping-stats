@@ -51,9 +51,15 @@
   }
 }
 
-@media (max-width: 472px) {
+@include m.small {
   .leaderboardWrapper.collapse {
-    height: 160px;
+    height: 180px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leaderboardWrapper.collapse {
+    height: 220px;
   }
 }
 

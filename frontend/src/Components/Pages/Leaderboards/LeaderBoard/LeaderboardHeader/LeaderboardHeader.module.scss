@@ -56,6 +56,12 @@
   }
 }
 
+@media (max-width: 480px) {
+  .header .wrapper>p {
+    max-width: 166px;
+  }
+}
+
 .header .wrapper>p>span {
   color: #cdd4de;
   font-weight: 500;
