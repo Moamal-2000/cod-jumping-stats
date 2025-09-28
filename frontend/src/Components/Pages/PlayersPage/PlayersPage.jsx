@@ -15,6 +15,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import s from "./PlayersPage.module.scss";
+import FiltersSection from "../Leaderboards/FiltersSection/FiltersSection";
 
 const PlayersPage = () => {
   const {
@@ -193,6 +194,8 @@ const PlayersPage = () => {
           </p>
         </div>
       </div>
+
+      <FiltersSection />
 
       <div className={s.filtersSection}>
         <div className={s.filtersContainer}>
