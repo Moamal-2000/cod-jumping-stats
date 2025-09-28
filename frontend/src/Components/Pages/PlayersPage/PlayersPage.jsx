@@ -10,7 +10,6 @@ import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
-import PlayerCard from "./PlayerCard/PlayerCard";
 import PlayersCardsSection from "./PlayersCardsSection/PlayersCardsSection";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
@@ -43,6 +42,8 @@ const PlayersPage = () => {
   const observerRef = useRef(null);
   const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
+
+  const noResults = playersToDisplay.length === 0;
 
   useEffect(() => {
     // Reset pagination and fetch all players on initial load or sort change
@@ -139,10 +140,9 @@ const PlayersPage = () => {
         isSearching={isSearching}
         setIsSearching={setIsSearching}
       />
-      <PlayersCardsSection />
 
       <section className={s.playersSection}>
-        {playersToDisplay.length === 0 ? (
+        {noResults && (
           <div className={s.noResults}>
             <h3>No players found</h3>
             <p>
@@ -159,38 +159,18 @@ const PlayersPage = () => {
               </button>
             )}
           </div>
-        ) : (
-          <>
-            {playersToDisplay.map((playerData, index) => (
-              <PlayerCard
-                key={playerData.id}
-                rank={index + 1}
-                {...playerData}
-              />
-            ))}
-
-            {/* Loading indicator for infinite scroll */}
-            {isLoadingMore && (
-              <div className={s.loadingMoreContainer}>
-                <div className={s.loadingSpinner}></div>
-                <p>Loading more players...</p>
-              </div>
-            )}
-
-            {/* Intersection observer target - only show when not searching */}
-            {hasMore && !isLoadingMore && !searchTerm && (
-              <div ref={loadMoreRef} className={s.loadMoreTrigger} />
-            )}
-
-            {/* End of results message - only show when not searching */}
-            {!hasMore && playersToDisplay.length > 0 && !searchTerm && (
-              <div className={s.endOfResults}>
-                <p>You've reached the end of the players list!</p>
-              </div>
-            )}
-          </>
         )}
       </section>
+
+      {!noResults && (
+        <PlayersCardsSection
+          playersToDisplay={playersToDisplay}
+          hasMore={hasMore}
+          isLoadingMore={isLoadingMore}
+          loadMoreRef={loadMoreRef}
+          searchTerm={searchTerm}
+        />
+      )}
     </div>
   );
 };

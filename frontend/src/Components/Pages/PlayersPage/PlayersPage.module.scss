@@ -112,39 +112,3 @@
     background-color: #eab308;
   }
 }
-
-// Infinite scroll loading styles
-.loadingMoreContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 32px;
-  gap: 16px;
-}
-
-.loadingMoreContainer p {
-  color: #9ca3af;
-  font-size: .875rem;
-  margin: 0;
-}
-
-.loadMoreTrigger {
-  height: 20px;
-  width: 100%;
-}
-
-.endOfResults {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 32px;
-  text-align: center;
-}
-
-.endOfResults p {
-  color: #6b7280;
-  font-size: .875rem;
-  margin: 0;
-  font-style: italic;
-}
