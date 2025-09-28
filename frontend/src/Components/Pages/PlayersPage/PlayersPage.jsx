@@ -109,11 +109,7 @@ const PlayersPage = () => {
 
   if (loading || error || playersData.length === 0) {
     return (
-      <PlayersLoadingError
-        loading={loading}
-        sortBy={sortBy}
-        dispatch={dispatch}
-      />
+      <PlayersLoadingError sortBy={sortBy} error={error} dispatch={dispatch} />
     );
   }
 
