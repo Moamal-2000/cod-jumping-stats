@@ -1,21 +1,17 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
-import { stripColorCodes } from "@/Functions/utils";
 import {
   loadMorePlayersAction,
   resetPagination,
   setIsLoadingMore,
   setSearchTerm,
-  setSortBy,
-  updatePlayersState,
 } from "@/Redux/slices/playersSlice";
 import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import FiltersSection from "./FiltersSection/FiltersSection";
 import PlayerCard from "./PlayerCard/PlayerCard";
 import s from "./PlayersPage.module.scss";
-import FiltersSection from "../Leaderboards/FiltersSection/FiltersSection";
 
 const PlayersPage = () => {
   const {
@@ -28,7 +24,7 @@ const PlayersPage = () => {
     displayedCount,
     hasMore,
     isLoadingMore,
-  } = useSelector((state) => state.players);
+  } = useSelector((s) => s.players);
 
   // Calculate how many players to display based on client-side pagination
   const effectiveDisplayedCount = displayedCount || 200; // Fallback to 200 if undefined
@@ -41,7 +37,7 @@ const PlayersPage = () => {
 
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
-  const inputRef = useRef(null);
+  const searchInputRef = useRef(null);
   const observerRef = useRef(null);
   const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
@@ -52,52 +48,9 @@ const PlayersPage = () => {
     dispatch(fetchAllPlayers({ sort: sortBy }));
   }, [dispatch, sortBy]);
 
-  const performSearch = (searchValue) => {
-    if (!searchValue.trim()) {
-      dispatch(setSearchTerm(""));
-      setIsSearching(false);
-      return;
-    }
-
-    setIsSearching(true);
-
-    // Small delay to show loading state
-    setTimeout(() => {
-      const searchLower = searchValue.toLowerCase();
-      // Search through all loaded players using stripped names (without color codes)
-      const filtered = playersData.filter((player) =>
-        stripColorCodes(player.name)?.toLowerCase().includes(searchLower)
-      );
-      dispatch(updatePlayersState({ key: "filteredPlayers", value: filtered }));
-      dispatch(setSearchTerm(searchValue));
-      setIsSearching(false);
-    }, 100);
-  };
-
-  const handleSearchInput = (e) => {
-    const inputValue = e.target.value;
-
-    // Clear previous timeout
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
-
-    // Set new timeout for debounced search
-    searchTimeoutRef.current = setTimeout(() => {
-      performSearch(inputValue);
-    }, 300); // 300ms delay
-  };
-
-  const handleSortChange = (e) => {
-    const newSort = e.target.value;
-    dispatch(setSortBy(newSort));
-    dispatch(resetPagination());
-    dispatch(fetchAllPlayers({ sort: newSort }));
-  };
-
   const handleClearSearch = () => {
-    if (inputRef.current) {
-      inputRef.current.value = ""; // Clear input immediately
+    if (searchInputRef.current) {
+      searchInputRef.current.value = ""; // Clear input immediately
     }
 
     // Clear any pending search timeout
@@ -195,55 +148,12 @@ const PlayersPage = () => {
         </div>
       </div>
 
-      <FiltersSection />
-
-      <div className={s.filtersSection}>
-        <div className={s.filtersContainer}>
-          <div className={s.filterGroup}>
-            <label className={s.filterLabel} htmlFor="player-search">
-              Search
-            </label>
-            <div className={s.searchContainer}>
-              <input
-                ref={inputRef}
-                type="text"
-                placeholder="Search players by name..."
-                onChange={handleSearchInput}
-                className={s.searchInput}
-                id="player-search"
-              />
-              {isSearching && (
-                <div className={s.searchLoadingIndicator}>
-                  <div className={s.searchSpinner}></div>
-                </div>
-              )}
-              <button
-                onClick={handleClearSearch}
-                className={s.clearButton}
-                title="Clear search"
-              >
-                <SvgIcon name="xMark" />
-              </button>
-            </div>
-          </div>
-
-          <div className={s.filterGroup}>
-            <label className={s.filterLabel} htmlFor="player-sort">
-              Sort by
-            </label>
-            <select
-              value={sortBy}
-              onChange={handleSortChange}
-              className={s.sortSelect}
-              id="player-sort"
-            >
-              <option value="admin">Admin Level</option>
-              <option value="last_seen">Last Seen</option>
-              <option value="visits">Visit Count</option>
-            </select>
-          </div>
-        </div>
-      </div>
+      <FiltersSection
+        searchInputRef={searchInputRef}
+        handleClearSearch={handleClearSearch}
+        isSearching={isSearching}
+        setIsSearching={setIsSearching}
+      />
 
       <section className={s.playersSection}>
         {playersToDisplay.length === 0 ? (
