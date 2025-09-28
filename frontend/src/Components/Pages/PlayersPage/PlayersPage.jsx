@@ -11,6 +11,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import PlayerCard from "./PlayerCard/PlayerCard";
+import PlayersCardsSection from "./PlayersCardsSection/PlayersCardsSection";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
 
@@ -138,6 +139,7 @@ const PlayersPage = () => {
         isSearching={isSearching}
         setIsSearching={setIsSearching}
       />
+      <PlayersCardsSection />
 
       <section className={s.playersSection}>
         {playersToDisplay.length === 0 ? (
