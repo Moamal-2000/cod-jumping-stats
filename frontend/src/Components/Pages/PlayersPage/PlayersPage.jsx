@@ -105,32 +105,13 @@ const PlayersPage = () => {
     };
   }, []);
 
-  <PlayersLoadingError />;
-
-  if (loading || playersData.length === 0) {
+  if (loading || error || playersData.length === 0) {
     return (
-      <div className={s.loadingContainer}>
-        <div className={s.loadingSpinner}></div>
-        <p>Loading players...</p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className={s.errorContainer}>
-        <h2>Error Loading Players</h2>
-        <p>Unable to fetch players data. Please try again later.</p>
-        <button
-          onClick={() => {
-            dispatch(resetPagination());
-            dispatch(fetchAllPlayers({ sort: sortBy }));
-          }}
-          className={s.retryButton}
-        >
-          Retry
-        </button>
-      </div>
+      <PlayersLoadingError
+        loading={loading}
+        sortBy={sortBy}
+        dispatch={dispatch}
+      />
     );
   }
 
