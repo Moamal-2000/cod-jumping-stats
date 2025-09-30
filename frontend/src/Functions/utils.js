@@ -222,13 +222,7 @@ export function isActiveWithinWeek(lastSeen) {
 
 export async function generateMapMetadata({ cpid }) {
   try {
-    const response = await fetchMsgPackResponse({
-      url: jhApis().map.getAllMaps,
-      cache: "no-cache",
-    });
-    const data = await decodeAsyncData(response);
-    const map = data.find((map) => map.CpID === +cpid);
-
+    const map = await getMapByCpId(cpid);
     const mapTitle = map?.Name ? map.Name : `Map ID ${cpid}`;
 
     return {
@@ -241,4 +235,19 @@ export async function generateMapMetadata({ cpid }) {
       description: "Explore detailed map information on JumpersHeaven.",
     };
   }
+}
+
+export async function getMapByCpId(cpid) {
+  if (cpid === undefined) {
+    console.error("map cpid is undefined");
+    return null;
+  }
+
+  const response = await fetchMsgPackResponse({
+    url: jhApis().map.getAllMaps,
+    cache: "no-cache",
+  });
+  const maps = await decodeAsyncData(response);
+
+  return maps.find((map) => +map.CpID === +cpid);
 }
