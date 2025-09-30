@@ -240,9 +240,8 @@ export async function generateMapMetadata({ cpid }) {
 export async function generatePlayerMetadata({ playerId }) {
   try {
     const player = await getPlayerById({ playerId });
-    const playerTitle = player?.PlayerName
-      ? player.PlayerName
-      : `Player ID ${playerId}`;
+    const prefName = stripColorCodes(player?.PrefName);
+    const playerTitle = prefName ? prefName : `Player ID ${playerId}`;
 
     return {
       title: `${playerTitle} | JumpersHeaven`,
