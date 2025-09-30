@@ -10,6 +10,7 @@ import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
+import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
 import PlayersCardsSection from "./PlayersCardsSection/PlayersCardsSection";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
@@ -136,27 +137,11 @@ const PlayersPage = () => {
         isSearching={isSearching}
         setIsSearching={setIsSearching}
       />
-
-      <section className={s.playersSection}>
-        {noResults && (
-          <div className={s.noResults}>
-            <h3>No players found</h3>
-            <p>
-              {searchTerm
-                ? `No players match "${searchTerm}"`
-                : "No players available at the moment"}
-            </p>
-            {searchTerm && (
-              <button
-                onClick={handleClearSearch}
-                className={s.clearSearchButton}
-              >
-                Clear search
-              </button>
-            )}
-          </div>
-        )}
-      </section>
+      <NoPlayersFound
+        noResults={noResults}
+        searchTerm={searchTerm}
+        handleClearSearch={handleClearSearch}
+      />
 
       {!noResults && (
         <PlayersCardsSection
