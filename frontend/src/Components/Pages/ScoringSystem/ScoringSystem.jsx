@@ -1,51 +1,95 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import s from "./ScoringSystem.module.scss";
 
 const ScoringSystem = () => {
   const [activeTab, setActiveTab] = useState("route-completion");
+  const tabRefs = useRef({});
 
   const tabs = [
-    { id: "route-completion", label: "Route Completion", icon: "check-circle" },
-    { id: "speed", label: "Speedrun", icon: "timer" },
-    { id: "jump", label: "Skill Rating", icon: "star" },
-    { id: "difficulty", label: "Map Difficulty", icon: "star" },
-    { id: "overview", label: "Overview", icon: "list" },
+    { id: "route-completion", label: "Route Completion" },
+    { id: "speed", label: "Speedrun" },
+    { id: "jump", label: "Skill Rating" },
+    { id: "difficulty", label: "Map Difficulty" },
+    { id: "overview", label: "Overview" },
   ];
+
+  const handleTabChange = (tabId) => {
+    setActiveTab(tabId);
+  };
+
+  const handleKeyDown = (e, currentIndex) => {
+    let newIndex = currentIndex;
+
+    switch (e.key) {
+      case "ArrowLeft":
+        e.preventDefault();
+        newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
+        break;
+      case "ArrowRight":
+        e.preventDefault();
+        newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
+        break;
+      case "Home":
+        e.preventDefault();
+        newIndex = 0;
+        break;
+      case "End":
+        e.preventDefault();
+        newIndex = tabs.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    const newTab = tabs[newIndex];
+    setActiveTab(newTab.id);
+    tabRefs.current[newTab.id]?.focus();
+  };
 
   return (
     <div className={s.scoringSystem}>
       <div className={s.container}>
         <header className={s.header}>
-          <h1 className={s.title}>Leaderboard Scoring System Explained</h1>
+          <h1 className={s.title}>Leaderboard Scoring System</h1>
           <p className={s.subtitle}>
-            Hey there! Ever wondered how we determine who's the best player in
-            our community? Well, we've built a sophisticated scoring system
-            that's like having a team of expert judges analyzing every single
-            run. Let me break down how we calculate rankings across our three
-            main leaderboards.
+            Discover how we determine player rankings through our comprehensive scoring system.
+            Each leaderboard uses unique algorithms to ensure fair and accurate competition across different play styles.
           </p>
         </header>
 
-        <div className={s.tabNavigation}>
-          {tabs.map((tab) => (
+        <nav className={s.tabNavigation} role="tablist" aria-label="Scoring system categories">
+          {tabs.map((tab, index) => (
             <button
               key={tab.id}
+              ref={(el) => (tabRefs.current[tab.id] = el)}
+              role="tab"
+              id={`tab-${tab.id}`}
+              aria-selected={activeTab === tab.id}
+              aria-controls={`panel-${tab.id}`}
+              tabIndex={activeTab === tab.id ? 0 : -1}
               className={`${s.tabButton} ${
                 activeTab === tab.id ? s.active : ""
               }`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => handleTabChange(tab.id)}
+              onKeyDown={(e) => handleKeyDown(e, index)}
             >
-              <span>{tab.label}</span>
+              {tab.label}
             </button>
           ))}
-        </div>
+        </nav>
 
         <main className={s.content}>
           {/* Route Completion Leaderboard Section */}
           {activeTab === "route-completion" && (
-            <section className={s.section}>
+            <section 
+              id="panel-route-completion"
+              role="tabpanel"
+              aria-labelledby="tab-route-completion"
+              tabIndex={0}
+              className={s.section}
+            >
               <h2 className={s.sectionTitle}>Route Completion Leaderboard</h2>
               <p className={s.sectionIntro}>
                 The Route Completion leaderboard tracks how many different
@@ -97,7 +141,13 @@ const ScoringSystem = () => {
 
           {/* Speedrun Leaderboard Section */}
           {activeTab === "speed" && (
-            <section className={s.section}>
+            <section 
+              id="panel-speed"
+              role="tabpanel"
+              aria-labelledby="tab-speed"
+              tabIndex={0}
+              className={s.section}
+            >
               <h2 className={s.sectionTitle}>Speedrun Leaderboard</h2>
               <p className={s.sectionIntro}>
                 The Speedrun leaderboard rewards consistent performance across
@@ -190,7 +240,13 @@ const ScoringSystem = () => {
 
           {/* Skill Rating Leaderboard Section */}
           {activeTab === "jump" && (
-            <section className={s.section}>
+            <section 
+              id="panel-jump"
+              role="tabpanel"
+              aria-labelledby="tab-jump"
+              tabIndex={0}
+              className={s.section}
+            >
               <h2 className={s.sectionTitle}>Skill Rating Leaderboard</h2>
               <p className={s.sectionIntro}>
                 The Skill Rating leaderboard uses advanced scoring algorithms
@@ -407,7 +463,13 @@ const ScoringSystem = () => {
 
           {/* Map Difficulty Section */}
           {activeTab === "difficulty" && (
-            <section className={s.section}>
+            <section 
+              id="panel-difficulty"
+              role="tabpanel"
+              aria-labelledby="tab-difficulty"
+              tabIndex={0}
+              className={s.section}
+            >
               <h2 className={s.sectionTitle}>Map Difficulty System</h2>
               <p className={s.sectionIntro}>
                 Your map rating system automatically calculates difficulty
@@ -421,7 +483,6 @@ const ScoringSystem = () => {
 
                 <div className={s.stepsGrid}>
                   <div className={s.stepCard}>
-                    <div className={s.stepIcon}>📊</div>
                     <h4 className={s.stepTitle}>1. Data Collection</h4>
                     <p className={s.stepDescription}>
                       The system gathers comprehensive performance data from the
@@ -429,14 +490,12 @@ const ScoringSystem = () => {
                     </p>
                     <div className={s.stepFeatures}>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🎯</span>
                         <div className={s.featureContent}>
                           <strong>Top 100 Analysis</strong>
                           <span>Analyzes the top 100 runs for each map</span>
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>⚙️</span>
                         <div className={s.featureContent}>
                           <strong>FPS-Specific</strong>
                           <span>
@@ -446,7 +505,6 @@ const ScoringSystem = () => {
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🛡️</span>
                         <div className={s.featureContent}>
                           <strong>Quality Control</strong>
                           <span>
@@ -459,21 +517,18 @@ const ScoringSystem = () => {
                   </div>
 
                   <div className={s.stepCard}>
-                    <div className={s.stepIcon}>🔍</div>
                     <h4 className={s.stepTitle}>2. Performance Analysis</h4>
                     <p className={s.stepDescription}>
                       Advanced algorithms analyze 8 key performance indicators
                     </p>
                     <div className={s.stepFeatures}>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>⏱️</span>
                         <div className={s.featureContent}>
                           <strong>Time Gaps</strong>
                           <span>How much time separates top players</span>
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>💪</span>
                         <div className={s.featureContent}>
                           <strong>Struggle Metrics</strong>
                           <span>
@@ -482,14 +537,12 @@ const ScoringSystem = () => {
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🏁</span>
                         <div className={s.featureContent}>
                           <strong>Completion Times</strong>
                           <span>How long it takes to finish</span>
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>💎</span>
                         <div className={s.featureContent}>
                           <strong>Rarity Factor</strong>
                           <span>How few people have completed it</span>
@@ -499,14 +552,12 @@ const ScoringSystem = () => {
                   </div>
 
                   <div className={s.stepCard}>
-                    <div className={s.stepIcon}>⚖️</div>
                     <h4 className={s.stepTitle}>3. Smart Normalization</h4>
                     <p className={s.stepDescription}>
                       Mathematical processing ensures fair and balanced scoring
                     </p>
                     <div className={s.stepFeatures}>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>📈</span>
                         <div className={s.featureContent}>
                           <strong>Exponential Decay</strong>
                           <span>
@@ -515,14 +566,12 @@ const ScoringSystem = () => {
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🛡️</span>
                         <div className={s.featureContent}>
                           <strong>Outlier Protection</strong>
                           <span>Prevents extreme outliers from dominating</span>
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🎯</span>
                         <div className={s.featureContent}>
                           <strong>Balanced Distribution</strong>
                           <span>Creates balanced difficulty distribution</span>
@@ -532,7 +581,6 @@ const ScoringSystem = () => {
                   </div>
 
                   <div className={s.stepCard}>
-                    <div className={s.stepIcon}>🎯</div>
                     <h4 className={s.stepTitle}>4. Final Scoring</h4>
                     <p className={s.stepDescription}>
                       All metrics are combined to create the final difficulty
@@ -540,7 +588,6 @@ const ScoringSystem = () => {
                     </p>
                     <div className={s.stepFeatures}>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>🔗</span>
                         <div className={s.featureContent}>
                           <strong>Metric Combination</strong>
                           <span>
@@ -549,7 +596,6 @@ const ScoringSystem = () => {
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>⭐</span>
                         <div className={s.featureContent}>
                           <strong>Rarity Bonus</strong>
                           <span>
@@ -558,7 +604,6 @@ const ScoringSystem = () => {
                         </div>
                       </div>
                       <div className={s.stepFeature}>
-                        <span className={s.featureIcon}>📏</span>
                         <div className={s.featureContent}>
                           <strong>Final Scale</strong>
                           <span>Scales to 0-10 final score</span>
@@ -573,7 +618,6 @@ const ScoringSystem = () => {
                 <h3 className={s.subsectionTitle}>Key Features:</h3>
                 <div className={s.featuresGrid}>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>🎯</div>
                     <h4 className={s.featureCardTitle}>Adaptive Scaling</h4>
                     <p className={s.featureCardDescription}>
                       Each FPS setting has its own difficulty scale, ensuring
@@ -581,7 +625,6 @@ const ScoringSystem = () => {
                     </p>
                   </div>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>📊</div>
                     <h4 className={s.featureCardTitle}>
                       Multi-dimensional Analysis
                     </h4>
@@ -591,7 +634,6 @@ const ScoringSystem = () => {
                     </p>
                   </div>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>🛡️</div>
                     <h4 className={s.featureCardTitle}>Quality Control</h4>
                     <p className={s.featureCardDescription}>
                       Automatically filters out invalid runs and outliers to
@@ -599,7 +641,6 @@ const ScoringSystem = () => {
                     </p>
                   </div>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>⚡</div>
                     <h4 className={s.featureCardTitle}>Real-time Updates</h4>
                     <p className={s.featureCardDescription}>
                       Difficulty scores update instantly as new runs are
@@ -607,7 +648,6 @@ const ScoringSystem = () => {
                     </p>
                   </div>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>⚖️</div>
                     <h4 className={s.featureCardTitle}>Objective Fairness</h4>
                     <p className={s.featureCardDescription}>
                       Based entirely on actual player performance data, not
@@ -615,7 +655,6 @@ const ScoringSystem = () => {
                     </p>
                   </div>
                   <div className={s.featureCard}>
-                    <div className={s.featureIcon}>🔄</div>
                     <h4 className={s.featureCardTitle}>Self-Improving</h4>
                     <p className={s.featureCardDescription}>
                       The system learns and adapts as the community's skill
@@ -628,49 +667,43 @@ const ScoringSystem = () => {
               <div className={s.difficultyScale}>
                 <h3 className={s.subsectionTitle}>Difficulty Scale:</h3>
                 <p className={s.scaleDescription}>
-                  Maps are rated on a 0-10 scale based on actual player
-                  performance data. Higher scores indicate more challenging
-                  content that requires greater skill and dedication.
+                  Every map receives a difficulty rating from 0 to 10 based on real player performance data. 
+                  This dynamic system ensures ratings accurately reflect the true challenge level of each map.
                 </p>
                 <div className={s.scaleGrid}>
                   <div className={`${s.scaleItem} ${s.veryEasy}`}>
-                    <div className={s.scaleIcon}>🟢</div>
                     <span className={s.scaleRange}>0-2</span>
                     <span className={s.scaleLabel}>Very Easy</span>
                     <span className={s.scaleDescription}>
-                      Beginner-friendly, quick completions
+                      Beginner-friendly maps with quick completions
                     </span>
                   </div>
                   <div className={`${s.scaleItem} ${s.easy}`}>
-                    <div className={s.scaleIcon}>🟡</div>
-                    <span className={s.scaleRange}>2.1-4</span>
+                    <span className={s.scaleRange}>2-4</span>
                     <span className={s.scaleLabel}>Easy</span>
                     <span className={s.scaleDescription}>
-                      Low skill requirement, few struggles
+                      Low skill requirement with minimal struggle
                     </span>
                   </div>
                   <div className={`${s.scaleItem} ${s.medium}`}>
-                    <div className={s.scaleIcon}>🟠</div>
-                    <span className={s.scaleRange}>4.1-6</span>
+                    <span className={s.scaleRange}>4-6</span>
                     <span className={s.scaleLabel}>Medium</span>
                     <span className={s.scaleDescription}>
-                      Moderate challenge, some practice needed
+                      Moderate challenge requiring practice
                     </span>
                   </div>
                   <div className={`${s.scaleItem} ${s.hard}`}>
-                    <div className={s.scaleIcon}>🔴</div>
-                    <span className={s.scaleRange}>6.1-8</span>
+                    <span className={s.scaleRange}>6-8</span>
                     <span className={s.scaleLabel}>Hard</span>
                     <span className={s.scaleDescription}>
-                      High skill required, significant struggle
+                      High skill required with significant difficulty
                     </span>
                   </div>
                   <div className={`${s.scaleItem} ${s.veryHard}`}>
-                    <div className={s.scaleIcon}>🟣</div>
-                    <span className={s.scaleRange}>8.1-10</span>
+                    <span className={s.scaleRange}>8-10</span>
                     <span className={s.scaleLabel}>Very Hard</span>
                     <span className={s.scaleDescription}>
-                      Expert level, extreme dedication needed
+                      Expert level requiring extreme dedication
                     </span>
                   </div>
                 </div>
@@ -681,7 +714,6 @@ const ScoringSystem = () => {
 
                 <div className={s.effectivenessGrid}>
                   <div className={s.effectivenessCard}>
-                    <div className={s.effectivenessIcon}>📈</div>
                     <h4 className={s.effectivenessTitle}>
                       Data-Driven Accuracy
                     </h4>
@@ -693,7 +725,6 @@ const ScoringSystem = () => {
                   </div>
 
                   <div className={s.effectivenessCard}>
-                    <div className={s.effectivenessIcon}>🎯</div>
                     <h4 className={s.effectivenessTitle}>
                       Precise Measurement
                     </h4>
@@ -705,7 +736,6 @@ const ScoringSystem = () => {
                   </div>
 
                   <div className={s.effectivenessCard}>
-                    <div className={s.effectivenessIcon}>🔄</div>
                     <h4 className={s.effectivenessTitle}>Dynamic Adaptation</h4>
                     <p className={s.effectivenessDescription}>
                       Automatically adjusts as community skill evolves and new
@@ -730,8 +760,14 @@ const ScoringSystem = () => {
 
           {/* Overview Section */}
           {activeTab === "overview" && (
-            <section className={s.section}>
-              <h2 className={s.sectionTitle}>Overview</h2>
+            <section 
+              id="panel-overview"
+              role="tabpanel"
+              aria-labelledby="tab-overview"
+              tabIndex={0}
+              className={s.section}
+            >
+              <h2 className={s.sectionTitle}>System Overview</h2>
               <p className={s.sectionIntro}>
                 Our system creates a multi-dimensional competitive environment:
               </p>

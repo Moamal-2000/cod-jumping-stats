@@ -1,28 +1,41 @@
-@import '@/Styles/mixins';
+@use "@/Styles/mixins" as m;
 
+// Base Styles
 .scoringSystem {
   min-height: 100vh;
-  background-color: #0a0c10;
-  color: #f9fafb;
-  padding: 2rem 1rem;
-  padding-top: 6rem; 
+  padding: 80px 24px 40px;
+  
+  @include m.small {
+    padding: 70px 16px 30px;
+  }
 }
 
 .container {
-  max-width: 1200px;
+  max-width: 1400px;
   margin: 0 auto;
+  width: 100%;
 }
 
+// Header
 .header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 40px;
+  
+  @include m.small {
+    margin-bottom: 30px;
+  }
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: 700;
   color: #facc15;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
+  line-height: 1.2;
+  
+  @include m.small {
+    font-size: 2rem;
+  }
 }
 
 .subtitle {
@@ -31,116 +44,120 @@
   line-height: 1.7;
   max-width: 800px;
   margin: 0 auto;
+  
+  @include m.small {
+    font-size: 1rem;
+  }
 }
 
+// Tab Navigation
 .tabNavigation {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin-bottom: 3rem;
-  border-bottom: 1px solid #1f2937;
-  overflow-x: auto;
-  padding: 0 1rem;
+  gap: 8px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  
+  @include m.small {
+    gap: 6px;
+    margin-bottom: 24px;
+  }
 }
 
 .tabButton {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  background: transparent;
-  border: none;
+  padding: 12px 24px;
+  background: #0e1217;
+  border: 1px solid #1f2937;
+  border-radius: 8px;
   color: #9aa3b2;
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s;
   white-space: nowrap;
-  border-bottom: 3px solid transparent;
-  outline: none;
-
-  &:hover,
+  
+  @include m.small {
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  
   &:focus-visible {
-    color: #f9fafb;
-    background: rgba(250, 204, 21, 0.08);
-  }
-
-  &.active {
-    color: #facc15;
-    font-weight: 600;
-    border-bottom-color: #facc15;
-    background: rgba(250, 204, 21, 0.15);
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 3px #facc15aa;
-    z-index: 2;
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
   }
 }
 
-.scoringSystem :global(:focus-visible) {
-  outline: 2px solid #facc15;
-  outline-offset: 2px;
-}
-
-.scoringSystem :global(a) {
-  color: #facc15;
-  text-underline-offset: 3px;
-  transition: color 0.2s;
-}
-
-.scoringSystem :global(a:focus-visible),
-.scoringSystem :global(a:hover) {
-  color: #fffbe7;
+.tabButton.active {
   background: #facc15;
-  outline: none;
+  color: #0a0c10;
+  border-color: #facc15;
 }
-
-.scoringSystem {
-  color: #f9fafb;
-  background: #0a0c10;
-}
-
-
+// Content Section
 .content {
-  padding: 0 1rem;
+  width: 100%;
 }
 
 .section {
   background-color: #0e1217;
   border: 1px solid #1f2937;
-  border-radius: 8px;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  border-radius: 16px;
+  padding: 32px;
+  margin-bottom: 30px;
+  
+  @include m.small {
+    padding: 24px;
+    margin-bottom: 24px;
+  }
+  
+  &:focus {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+  }
 }
 
 .sectionTitle {
-  font-size: 2rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: #facc15;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #1f2937;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid #1f2937;
+  
+  @include m.small {
+    font-size: 1.5rem;
+  }
 }
 
 .sectionIntro {
   font-size: 1.125rem;
   color: #9aa3b2;
   line-height: 1.7;
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
+  
+  @include m.small {
+    font-size: 1rem;
+  }
 }
 
 .subsectionTitle {
   font-size: 1.5rem;
   font-weight: 600;
   color: #f9fafb;
-  margin-bottom: 1rem;
-  padding-left: 1rem;
-  border-left: 3px solid #facc15;
+  margin-bottom: 20px;
+  padding-left: 16px;
+  border-left: 4px solid #facc15;
+  
+  @include m.small {
+    font-size: 1.25rem;
+  }
 }
 
 .howItWorks {
-  margin-bottom: 2rem;
+  margin-bottom: 80px;
+  
+  @include m.small {
+    margin-bottom: 64px;
+  }
 }
 
 .featureList {
@@ -149,41 +166,46 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .featureItem {
-  padding: 1rem;
+  padding: 16px 16px 16px 48px;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   line-height: 1.6;
-  padding-left: 2.5rem;
   position: relative;
-
-  &::before {
-    content: '✓';
-    color: #facc15;
-    font-weight: bold;
-    position: absolute;
-    left: 1rem;
-    top: 1.1rem;
-  }
-
-  strong {
-    color: #facc15;
-    font-weight: 600;
+  
+  @include m.small {
+    padding: 14px 14px 14px 40px;
   }
 }
 
+.featureItem::before {
+  content: '✓';
+  color: #facc15;
+  font-weight: 700;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 1.125rem;
+}
+
+.featureItem strong {
+  color: #facc15;
+  font-weight: 600;
+}
+
+// Highlight Boxes
 .whyMatters {
   background: rgba(250, 204, 21, 0.05);
   border: 1px solid rgba(250, 204, 21, 0.2);
-  border-left: 3px solid #facc15;
+  border-left: 4px solid #facc15;
   border-radius: 0 8px 8px 0;
-  padding: 1.5rem;
-  margin-top: 2rem;
+  padding: 20px;
+  margin-top: 32px;
 }
 
 .whyMattersText {
@@ -191,65 +213,64 @@
   font-size: 1rem;
   line-height: 1.7;
   color: #d1d5db;
-
-  strong {
-    color: #facc15;
-    font-weight: 600;
-  }
 }
 
+.whyMattersText strong {
+  color: #facc15;
+  font-weight: 600;
+}
+
+// Speedrun Section
 .scoringBreakdown {
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
 }
 
 .pointsTitle {
   font-size: 1.25rem;
   font-weight: 600;
   color: #f9fafb;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .pointsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 12px;
+  margin-bottom: 24px;
+  
+  @include m.small {
+    grid-template-columns: 1fr;
+  }
 }
 
 .pointItem {
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
-  padding: 1rem;
+  border-radius: 8px;
+  padding: 16px;
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    transform: translateY(-2px);
-  }
 }
 
 .pointValue {
-  color: #1f2937;
+  color: #0a0c10;
   font-weight: 700;
   background-color: #facc15;
-  padding: 0.25rem 0.75rem;
+  padding: 4px 12px;
   border-radius: 4px;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
 }
 
 .multiplierSection,
 .strategySection {
   background: rgba(250, 204, 21, 0.05);
   border: 1px solid rgba(250, 204, 21, 0.2);
-  border-left: 3px solid #facc15;
+  border-left: 4px solid #facc15;
   border-radius: 0 8px 8px 0;
-  padding: 1.5rem;
-  margin-bottom: 2rem;
+  padding: 20px;
+  margin-bottom: 24px;
 }
 
 .multiplierText,
@@ -258,11 +279,12 @@
   font-size: 1rem;
   line-height: 1.7;
   color: #d1d5db;
+}
 
-  strong {
-    color: #facc15;
-    font-weight: 600;
-  }
+.multiplierText strong,
+.strategyText strong {
+  color: #facc15;
+  font-weight: 600;
 }
 
 .highlight {
@@ -271,7 +293,7 @@
 }
 
 .rulesSection {
-  margin-top: 2rem;
+  margin-top: 24px;
 }
 
 .rulesList {
@@ -280,120 +302,112 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
 .ruleItem {
-  padding: 1rem;
+  padding: 16px 16px 16px 48px;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   line-height: 1.6;
-  padding-left: 2.5rem;
   position: relative;
-
-  &::before {
-    content: '•';
-    color: #facc15;
-    font-weight: bold;
-    position: absolute;
-    left: 1rem;
-    top: 1.1rem;
-  }
 }
 
+.ruleItem::before {
+  content: '•';
+  color: #facc15;
+  font-weight: 700;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 1.25rem;
+}
+
+// Skill Rating Section
 .multiLayerSystem {
-  margin-bottom: 2rem;
+  margin-bottom: 32px;
+  counter-reset: layer-counter;
 }
 
 .layerSection {
-  margin-bottom: 2rem;
-  padding: 2rem;
+  margin-bottom: 24px;
+  padding: 24px;
   background-color: rgba(255, 255, 255, 0.02);
   border: 1px solid #1f2937;
-  border-radius: 8px;
+  border-radius: 12px;
+  
+  @include m.small {
+    padding: 20px;
+  }
 }
 
 .layerTitle {
   font-size: 1.375rem;
   font-weight: 600;
   color: #facc15;
-  margin-bottom: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-
-  &::before {
-    content: counter(step-counter);
-    counter-increment: step-counter;
-    background-color: #facc15;
-    color: #1f2937;
-    width: 2.5rem;
-    height: 2.5rem;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    font-weight: 700;
-    flex-shrink: 0;
+  margin-bottom: 16px;
+  
+  @include m.small {
+    font-size: 1.25rem;
   }
 }
 
 .layerDescription {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   line-height: 1.7;
-  margin-bottom: 1.5rem;
+  margin-bottom: 20px;
   color: #9aa3b2;
-  padding-left: 3.5rem;
+  
+  @include m.small {
+    font-size: 1rem;
+  }
 }
 
 .algorithmList {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-left: 3.5rem;
+  gap: 12px;
 }
 
 .algorithmItem {
-  padding: 1rem;
+  padding: 16px 16px 16px 48px;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   line-height: 1.6;
   position: relative;
-  padding-left: 2.5rem;
+}
 
-  &::before {
-    content: '→';
-    color: #facc15;
-    font-weight: bold;
-    position: absolute;
-    left: 1rem;
-    top: 1.1rem;
-  }
+.algorithmItem::before {
+  content: '→';
+  color: #facc15;
+  font-weight: 700;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 1.125rem;
 }
 
 .difficultyScoring {
-  margin-top: 2rem;
-  padding: 1.5rem;
+  margin-top: 24px;
+  padding: 20px;
   background: rgba(250, 204, 21, 0.05);
   border: 1px solid rgba(250, 204, 21, 0.2);
-  border-left: 3px solid #facc15;
+  border-left: 4px solid #facc15;
   border-radius: 0 8px 8px 0;
-  padding-left: 3.5rem;
 }
 
 .difficultyTitle {
   font-size: 1.25rem;
   font-weight: 600;
   color: #f9fafb;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .difficultyList {
@@ -402,65 +416,65 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .difficultyItem {
   font-size: 1rem;
   line-height: 1.6;
   position: relative;
-  padding-left: 1.5rem;
-
-  &::before {
-    content: '✓';
-    color: #facc15;
-    font-weight: bold;
-    position: absolute;
-    left: 0;
-  }
-
-  strong {
-    color: #facc15;
-    font-weight: 600;
-  }
+  padding-left: 24px;
 }
 
+.difficultyItem::before {
+  content: '✓';
+  color: #facc15;
+  font-weight: 700;
+  position: absolute;
+  left: 0;
+}
+
+.difficultyItem strong {
+  color: #facc15;
+  font-weight: 600;
+}
+
+// Penalty/Bonus Grid
 .penaltyBonusGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-top: 2rem;
-  padding-left: 3.5rem;
+  gap: 20px;
+  margin-top: 24px;
 
-  @media (max-width: 768px) {
+  @include m.small {
     grid-template-columns: 1fr;
-    gap: 1.5rem;
+    gap: 16px;
   }
 }
 
 .penaltySection,
 .bonusSection {
-  padding: 1.5rem;
+  padding: 20px;
   border-radius: 8px;
 }
 
 .penaltySection {
   background: rgba(239, 68, 68, 0.05);
   border: 1px solid rgba(239, 68, 68, 0.2);
-  border-left: 3px solid #ef4444;
+  border-left: 4px solid #ef4444;
 }
 
 .bonusSection {
   background: rgba(34, 197, 94, 0.05);
   border: 1px solid rgba(34, 197, 94, 0.2);
-  border-left: 3px solid #22c55e;
+  border-left: 4px solid #22c55e;
 }
 
 .penaltyTitle,
 .bonusTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .penaltyTitle {
@@ -478,7 +492,7 @@
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .penaltyItem,
@@ -486,7 +500,7 @@
   font-size: 1rem;
   line-height: 1.6;
   position: relative;
-  padding-left: 1.5rem;
+  padding-left: 24px;
 }
 
 .penaltyItem::before {
@@ -513,46 +527,51 @@
   font-weight: 600;
 }
 
+// Precision List
 .precisionList {
   list-style: none;
   padding: 0;
-  margin: 1.5rem 0;
+  margin: 20px 0;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  padding-left: 3.5rem;
+  gap: 12px;
 }
 
 .precisionItem {
-  padding: 1rem;
+  padding: 16px 16px 16px 48px;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 1rem;
   line-height: 1.6;
   position: relative;
-  padding-left: 2.5rem;
-
-  &::before {
-    content: '⚡';
-    color: #facc15;
-    position: absolute;
-    left: 1rem;
-    top: 1.1rem;
-  }
-
-  strong {
-    color: #facc15;
-    font-weight: 600;
-  }
 }
 
+.precisionItem::before {
+  content: '⚡';
+  color: #facc15;
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  font-size: 1.125rem;
+}
+
+.precisionItem strong {
+  color: #facc15;
+  font-weight: 600;
+}
+
+// Formula Section
 .formulaSection {
   background-color: #0e1217;
   border: 1px solid #1f2937;
-  border-radius: 8px;
-  padding: 2rem;
-  margin-top: 2rem;
+  border-radius: 12px;
+  padding: 24px;
+  margin-top: 32px;
+  
+  @include m.small {
+    padding: 20px;
+  }
 }
 
 .formulaBox {
@@ -560,32 +579,38 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin: 2rem 0;
-  padding: 2rem;
+  gap: 16px;
+  margin: 24px 0;
+  padding: 24px;
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   border: 1px solid #1f2937;
 
-  @media (max-width: 768px) {
+  @include m.small {
     flex-direction: column;
+    padding: 20px;
   }
 }
 
 .formulaStep {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 1.25rem;
+  gap: 12px;
+  padding: 12px 20px;
   background-color: rgba(255, 255, 255, 0.03);
   border: 1px solid #1f2937;
-  border-radius: 6px;
-  min-width: 200px;
+  border-radius: 8px;
+  min-width: 180px;
+  
+  @include m.small {
+    min-width: auto;
+    width: 100%;
+  }
 }
 
 .stepNumber {
   background-color: #facc15;
-  color: #1f2937;
+  color: #0a0c10;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
@@ -607,490 +632,393 @@
   font-size: 1.5rem;
   color: #facc15;
   font-weight: 700;
+  
+  @include m.small {
+    transform: rotate(90deg);
+  }
 }
 
 .exampleSection {
-  margin-top: 2rem;
+  margin-top: 24px;
 }
 
 .exampleTitle {
   font-size: 1.25rem;
   font-weight: 600;
   color: #f9fafb;
-  margin-bottom: 1rem;
+  margin-bottom: 16px;
 }
 
 .exampleSteps {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .exampleStep {
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  border-left: 3px solid #facc15;
+  border-radius: 8px;
+  border-left: 4px solid #facc15;
   font-size: 1rem;
   line-height: 1.6;
 }
 
+// Map Difficulty Section - Steps Grid
 .stepsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.stepCard {
-  padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid #1f2937;
-  border-radius: 8px;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.03);
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  margin-top: 48px;
+  
+  @include m.small {
+    gap: 64px;
   }
 }
 
-.stepIcon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  display: block;
-  color: #facc15;
+.stepCard {
+  padding: 0;
+  background: transparent;
+  border: none;
 }
 
 .stepTitle {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #f9fafb;
-  margin-bottom: 1rem;
+  margin-bottom: 20px;
+  
+  @include m.small {
+    font-size: 1.5rem;
+  }
 }
 
 .stepDescription {
-  font-size: 1rem;
-  color: #9aa3b2;
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
+  font-size: 1.125rem;
+  color: #d1d5db;
+  margin-bottom: 28px;
+  line-height: 1.8;
 }
 
 .stepFeatures {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.stepFeature {
-  display: flex;
-  align-items: flex-start;
-  gap: 1rem;
-  padding: 1rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
-  border: 1px solid #1f2937;
-}
-
-.featureIcon {
-  font-size: 1.25rem;
-  color: #facc15;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
-}
-
-.featureContent {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-
-  strong {
-    color: #f9fafb;
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  span {
-    color: #9aa3b2;
-    font-size: 0.9rem;
-    line-height: 1.5;
-  }
-}
-
-// Counter for step numbers
-.layerSection {
-  counter-reset: step-counter;
-}
-
-.layerSection .layerTitle {
-  counter-increment: step-counter;
-}
-
-// Map Difficulty Section Styles
-.stepsGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem; // Further reduced from 1.5rem to 1rem
-  margin-top: 0.5rem; // Further reduced from 1rem to 0.5rem
-}
-
-.stepCard {
-  padding: 0.75rem; // Further reduced from 1rem to 0.75rem
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.1) 100%);
-  border: 1px solid #4b5563;
-  border-radius: 12px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, #facc15, #eab308);
-    opacity: 0;
-    transition: opacity 0.3s ease;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+  margin-top: 8px;
+  
+  @include m.small {
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
-
-}
-
-.stepIcon {
-  font-size: 3rem;
-  margin-bottom: 1rem;
-  display: block;
-  text-align: center;
-}
-
-.stepTitle {
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: #facc15;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.stepDescription {
-  font-size: 1rem;
-  color: #9ca3af;
-  margin-bottom: 0.5rem; // Further reduced from 0.75rem to 0.5rem
-  line-height: 1.6;
-  text-align: center;
-}
-
-.stepFeatures {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem; // Further reduced from 0.5rem to 0.25rem
 }
 
 .stepFeature {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.75rem; // Reduced from 1rem to 0.75rem
-  padding: 0.75rem; // Reduced from 1rem to 0.75rem
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  transition: all 0.3s ease;
-
-}
-
-.stepFeature .featureIcon {
-  font-size: 1.5rem;
-  margin: 0;
-  flex-shrink: 0;
-  margin-top: 0.25rem;
+  padding: 0;
+  background: transparent;
+  border: none;
+  position: relative;
+  padding-left: 28px;
+  
+  &::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    color: #facc15;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
 }
 
 .featureContent {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  flex: 1;
-
-  strong {
-    color: #facc15;
-    font-weight: 600;
-    font-size: 0.95rem;
-  }
-
-  span {
-    color: #9ca3af;
-    font-size: 0.9rem;
-    line-height: 1.4;
-  }
+  gap: 6px;
 }
 
+.featureContent strong {
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 1.0625rem;
+}
+
+.featureContent span {
+  color: #9aa3b2;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+}
+
+// Features Grid
 .keyFeatures {
-  margin: 2rem 0;
+  margin: 48px 0 32px;
+  padding: 32px 0;
+  border-top: 2px solid #1f2937;
+  border-bottom: 2px solid #1f2937;
 }
 
 .featuresGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 48px;
+  margin-top: 28px;
+  
+  @include m.small {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
 }
 
 .featureCard {
-  padding: 2rem;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid #1f2937;
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-
-  &:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.03);
-  }
-
-  .featureIcon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    display: block;
-    color: #facc15;
-  }
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
 }
 
 .featureCardTitle {
   font-size: 1.25rem;
   font-weight: 600;
-  color: #f9fafb;
-  margin-bottom: 0.75rem;
+  color: #facc15;
+  margin-bottom: 10px;
+  
+  @include m.small {
+    font-size: 1.1875rem;
+  }
 }
 
 .featureCardDescription {
-  font-size: 1rem;
-  color: #9aa3b2;
-  line-height: 1.7;
+  font-size: 1.0625rem;
+  color: #d1d5db;
+  line-height: 1.75;
   margin: 0;
 }
 
+// Difficulty Scale
 .difficultyScale {
-  margin: 2rem 0;
+  margin: 80px 0 32px;
+  
+  @include m.small {
+    margin: 64px 0 32px;
+  }
 }
 
 .scaleDescription {
   font-size: 1.125rem;
-  color: #9aa3b2;
+  color: #d1d5db;
   line-height: 1.7;
-  margin-bottom: 2rem;
-  text-align: center;
+  margin-bottom: 28px;
+  
+  @include m.small {
+    font-size: 1.0625rem;
+  }
 }
 
 .scaleGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1.5rem;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 28px;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid #1f2937;
 }
 
 .scaleItem {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 100px 140px 1fr;
   align-items: center;
-  padding: 2rem 1rem;
-  background-color: rgba(255, 255, 255, 0.02);
-  border: 1px solid #1f2937;
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-  position: relative;
-
-  &:hover {
-    transform: translateY(-5px);
-    background-color: rgba(255, 255, 255, 0.03);
+  gap: 24px;
+  padding: 20px 24px;
+  border-left: 4px solid;
+  border-bottom: 1px solid #1f2937;
+  
+  @include m.small {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 20px;
   }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    border-radius: 8px 8px 0 0;
+  
+  &:last-child {
+    border-bottom: none;
   }
 }
 
-.veryEasy::before {
-  background: #22c55e;
+.veryEasy {
+  border-left-color: #22c55e;
 }
 
-.easy::before {
-  background: #eab308;
+.easy {
+  border-left-color: #eab308;
 }
 
-.medium::before {
-  background: #f97316;
+.medium {
+  border-left-color: #f97316;
 }
 
-.hard::before {
-  background: #ef4444;
+.hard {
+  border-left-color: #ef4444;
 }
 
-.veryHard::before {
-  background: #8b5cf6;
-}
-
-.scaleIcon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  display: block;
+.veryHard {
+  border-left-color: #8b5cf6;
 }
 
 .scaleRange {
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   font-weight: 700;
   color: #facc15;
-  margin-bottom: 0.5rem;
+  font-family: 'Courier New', monospace;
 }
 
 .scaleLabel {
-  font-size: 1.1rem;
+  font-size: 1.125rem;
   color: #f9fafb;
   font-weight: 600;
-  margin-bottom: 0.75rem;
 }
 
-.scaleDescriptionText {
-  font-size: 0.9rem;
+.scaleDescription {
+  font-size: 1rem;
   color: #9aa3b2;
-  line-height: 1.5;
+  line-height: 1.6;
   margin: 0;
 }
 
+// Why Effective Section
 .whyEffective {
-  margin-top: 2rem;
-  padding: 2rem;
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(250, 204, 21, 0.05) 100%);
-  border: 1px solid rgba(250, 204, 21, 0.3);
-  border-radius: 12px;
+  margin-top: 80px;
+  padding: 32px 0;
+  border-top: 2px solid #1f2937;
+  
+  @include m.small {
+    margin-top: 64px;
+  }
 }
 
 .effectivenessGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px 40px;
+  margin-bottom: 32px;
+  
+  @include m.small {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
 }
 
 .effectivenessCard {
-  padding: 1.5rem;
-  background: rgba(0, 0, 0, 0.2);
-  border: 1px solid #4b5563;
-  border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-
-}
-
-.effectivenessIcon {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-  display: block;
+  padding: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
 }
 
 .effectivenessTitle {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #facc15;
-  margin-bottom: 0.75rem;
+  margin-bottom: 12px;
 }
 
 .effectivenessDescription {
-  font-size: 0.95rem;
-  color: #9ca3af;
-  line-height: 1.5;
+  font-size: 1.0625rem;
+  color: #d1d5db;
+  line-height: 1.75;
   margin: 0;
 }
 
 .effectivenessSummary {
-  background: rgba(0, 0, 0, 0.3);
-  padding: 1.5rem;
+  background: rgba(250, 204, 21, 0.05);
+  padding: 24px;
   border-radius: 8px;
-  border: 1px solid #4b5563;
-  text-align: center;
+  border-left: 4px solid #facc15;
 }
 
 .summaryTitle {
   font-size: 1.25rem;
   font-weight: 600;
   color: #facc15;
-  margin-bottom: 1rem;
+  margin-bottom: 12px;
 }
 
 .summaryText {
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #f9fafb;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #d1d5db;
   margin: 0;
 }
 
+// Overview Section
 .bigPictureGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  margin: 2rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin: 32px 0;
 }
 
 .leaderboardCard {
-  padding: 2rem;
-  background: rgba(255,255,255,0.02);
-  border: 1px solid #1f2937;
+  padding: 24px 28px;
+  background: rgba(255, 255, 255, 0.02);
   border-radius: 8px;
-  text-align: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.04);
-  &:hover {
-    background: rgba(255,255,255,0.04);
-    transform: translateY(-4px);
-  }
+  border-left: 5px solid #facc15;
+  text-align: left;
 }
 
 .cardTitle {
   font-size: 1.5rem;
   font-weight: 700;
   color: #facc15;
-  margin-bottom: 1rem;
-  letter-spacing: 0.5px;
+  margin-bottom: 10px;
+  
+  @include m.small {
+    font-size: 1.375rem;
+  }
 }
 
 .cardDescription {
-  font-size: 1.05rem;
-  color: #9aa3b2;
+  font-size: 1.0625rem;
+  color: #d1d5db;
   line-height: 1.7;
-  margin: 0 auto;
-  max-width: 90%;
+  margin: 0;
 }
 
+// Conclusion Section
 .conclusion {
-  margin-top: 3rem;
-  padding: 2rem;
-  background: rgba(250, 204, 21, 0.08);
-  border: 1px solid rgba(250, 204, 21, 0.23);
+  margin-top: 56px;
+  padding: 32px;
+  background: rgba(250, 204, 21, 0.05);
   border-radius: 12px;
-  box-shadow: 0 2px 12px 0 rgba(0,0,0,0.03);
+  border: 2px solid rgba(250, 204, 21, 0.2);
+  
+  @include m.small {
+    padding: 24px;
+    margin-top: 48px;
+  }
 }
 
 .conclusionText {
-  font-size: 1.15rem;
+  font-size: 1.1875rem;
   line-height: 1.8;
   color: #f9fafb;
-  margin-bottom: 1.5rem;
-  text-align: center;
+  margin-bottom: 28px;
+  font-weight: 500;
+  
+  @include m.small {
+    font-size: 1.0625rem;
+  }
 }
 
 .finalText {
-  font-size: 1.08rem;
-  line-height: 1.7;
-  color: #9ca3af;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: #9aa3b2;
   margin: 0;
-  text-align: center;
-  font-style: italic;
+  padding-top: 24px;
+  border-top: 2px solid rgba(250, 204, 21, 0.2);
+  
+  @include m.small {
+    font-size: 1rem;
+    padding-top: 20px;
+  }
 }
