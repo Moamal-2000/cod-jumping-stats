@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useRef, useState } from "react";
 import s from "./ScoringSystem.module.scss";
 
 const ScoringSystem = () => {
@@ -54,12 +54,17 @@ const ScoringSystem = () => {
         <header className={s.header}>
           <h1 className={s.title}>Leaderboard Scoring System</h1>
           <p className={s.subtitle}>
-            Discover how we determine player rankings through our comprehensive scoring system.
-            Each leaderboard uses unique algorithms to ensure fair and accurate competition across different play styles.
+            Discover how we determine player rankings through our comprehensive
+            scoring system. Each leaderboard uses unique algorithms to ensure
+            fair and accurate competition across different play styles.
           </p>
         </header>
 
-        <nav className={s.tabNavigation} role="tablist" aria-label="Scoring system categories">
+        <nav
+          className={s.tabNavigation}
+          role="tablist"
+          aria-label="Scoring system categories"
+        >
           {tabs.map((tab, index) => (
             <button
               key={tab.id}
@@ -83,7 +88,7 @@ const ScoringSystem = () => {
         <main className={s.content}>
           {/* Route Completion Leaderboard Section */}
           {activeTab === "route-completion" && (
-            <section 
+            <section
               id="panel-route-completion"
               role="tabpanel"
               aria-labelledby="tab-route-completion"
@@ -141,7 +146,7 @@ const ScoringSystem = () => {
 
           {/* Speedrun Leaderboard Section */}
           {activeTab === "speed" && (
-            <section 
+            <section
               id="panel-speed"
               role="tabpanel"
               aria-labelledby="tab-speed"
@@ -240,7 +245,7 @@ const ScoringSystem = () => {
 
           {/* Skill Rating Leaderboard Section */}
           {activeTab === "jump" && (
-            <section 
+            <section
               id="panel-jump"
               role="tabpanel"
               aria-labelledby="tab-jump"
@@ -463,7 +468,7 @@ const ScoringSystem = () => {
 
           {/* Map Difficulty Section */}
           {activeTab === "difficulty" && (
-            <section 
+            <section
               id="panel-difficulty"
               role="tabpanel"
               aria-labelledby="tab-difficulty"
@@ -667,8 +672,10 @@ const ScoringSystem = () => {
               <div className={s.difficultyScale}>
                 <h3 className={s.subsectionTitle}>Difficulty Scale:</h3>
                 <p className={s.scaleDescription}>
-                  Every map receives a difficulty rating from 0 to 10 based on real player performance data. 
-                  This dynamic system ensures ratings accurately reflect the true challenge level of each map.
+                  Every map receives a difficulty rating from 0 to 10 based on
+                  real player performance data. This dynamic system ensures
+                  ratings accurately reflect the true challenge level of each
+                  map.
                 </p>
                 <div className={s.scaleGrid}>
                   <div className={`${s.scaleItem} ${s.veryEasy}`}>
@@ -760,7 +767,7 @@ const ScoringSystem = () => {
 
           {/* Overview Section */}
           {activeTab === "overview" && (
-            <section 
+            <section
               id="panel-overview"
               role="tabpanel"
               aria-labelledby="tab-overview"
