@@ -5,7 +5,7 @@ import useInfiniteScroll from "@/Hooks/App/useInfiniteScroll";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
 import { fetchLeaderboard } from "@/Redux/thunks/leaderboardThunk";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./LeaderBoard.module.scss";
 import LeaderboardHeader from "./LeaderboardHeader/LeaderboardHeader";
@@ -22,9 +22,9 @@ const LeaderBoard = () => {
     isLeaderboardExpanded,
     pageVisits,
   } = useSelector((s) => s.global);
+  const { searchPlayer } = useSelector((s) => s.search);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const [searchTerm, setSearchTerm] = useState("");
   const paramsObject = Object.fromEntries(searchParams.entries());
   const collapseClass = isLeaderboardExpanded ? "" : s.collapse;
 
@@ -47,7 +47,7 @@ const LeaderBoard = () => {
   }, [searchParams, tryFetchAgain]);
 
   useEffect(() => {
-    const searchHasValue = searchTerm.length > 0;
+    const searchHasValue = searchPlayer.length > 0;
 
     checkAndLoadMoreData({
       leaderboardData,
@@ -66,8 +66,6 @@ const LeaderBoard = () => {
       <LeaderboardHeader
         paginationNumber={paginationNumber}
         setPaginationNumber={setPaginationNumber}
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
       />
 
       <table className={leaderboardClasses}>

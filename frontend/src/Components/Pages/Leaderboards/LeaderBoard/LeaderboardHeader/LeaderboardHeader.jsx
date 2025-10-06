@@ -12,12 +12,7 @@ import s from "./LeaderboardHeader.module.scss";
 import LeaderboardHeaderBtns from "./LeaderboardHeaderBtns/LeaderboardHeaderBtns";
 import PlayersSearchInput from "./PlayersSearchInput/PlayersSearchInput";
 
-const LeaderboardHeader = ({
-  paginationNumber,
-  setPaginationNumber,
-  searchTerm,
-  setSearchTerm,
-}) => {
+const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
   const { leaderboardData, leaderboardScroll } = useSelector(
     (s) => s.leaderboard
   );
@@ -57,11 +52,7 @@ const LeaderboardHeader = ({
       <div className={s.mainWrapper}>
         <div className={s.wrapper}>
           <h3>{leaderboardTitle}</h3>
-          <PlayersSearchInput
-            searchTerm={searchTerm}
-            setSearchTerm={setSearchTerm}
-            setPaginationNumber={setPaginationNumber}
-          />
+          <PlayersSearchInput setPaginationNumber={setPaginationNumber} />
         </div>
 
         <p>

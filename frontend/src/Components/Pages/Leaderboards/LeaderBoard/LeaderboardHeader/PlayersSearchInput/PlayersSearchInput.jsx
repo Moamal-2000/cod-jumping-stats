@@ -2,36 +2,38 @@
 
 import { paginateData, stripColorCodes } from "@/Functions/utils";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
+import { updateSearchState } from "@/Redux/slices/searchSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayersSearchInput.module.scss";
 
-const PlayersSearchInput = ({
-  searchTerm,
-  setSearchTerm,
-  setPaginationNumber,
-}) => {
+const PlayersSearchInput = ({ setPaginationNumber }) => {
   const { leaderboardData } = useSelector((s) => s.leaderboard);
+  const { searchPlayer } = useSelector((s) => s.search);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     searchByPlayerName({
-      searchTerm,
+      searchPlayer,
       leaderboardData,
       setPaginationNumber,
       dispatch,
     });
-  }, [searchTerm, searchParams, leaderboardData]);
+  }, [searchPlayer, searchParams, leaderboardData]);
 
   return (
     <input
       type="text"
       role="search"
       className={s.searchInput}
-      value={searchTerm}
-      onChange={(e) => setSearchTerm(e.target.value)}
+      value={searchPlayer}
+      onChange={(event) =>
+        dispatch(
+          updateSearchState({ key: "searchPlayer", value: event.target.value })
+        )
+      }
     />
   );
 };
@@ -39,16 +41,16 @@ const PlayersSearchInput = ({
 export default PlayersSearchInput;
 
 function searchByPlayerName({
-  searchTerm,
+  searchPlayer,
   leaderboardData,
   setPaginationNumber,
   dispatch,
 } = {}) {
-  if (searchTerm.length > 0) {
+  if (searchPlayer.length > 0) {
     const filteredPlayers = leaderboardData.filter((player) => {
       const playerNameLowerCase = player.PlayerName.toLowerCase();
       const cleanPlayerName = stripColorCodes(playerNameLowerCase);
-      return cleanPlayerName.includes(searchTerm.toLowerCase());
+      return cleanPlayerName.includes(searchPlayer.toLowerCase());
     });
 
     dispatch(

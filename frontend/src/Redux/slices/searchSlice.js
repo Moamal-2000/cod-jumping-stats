@@ -4,7 +4,7 @@ const initialState = {
   searchPlayer: "",
 };
 
-export const searchSlice = createSlice({
+const searchSlice = createSlice({
   name: "searchSlice",
   initialState,
   reducers: {
@@ -13,3 +13,6 @@ export const searchSlice = createSlice({
     },
   },
 });
+
+export default searchSlice.reducer;
+export const { updateSearchState } = searchSlice.actions;
