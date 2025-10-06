@@ -1,5 +1,6 @@
 "use client";
 
+import SvgIcon from "@/Components/Shared/SvgIcon";
 import { paginateData, stripColorCodes } from "@/Functions/utils";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
 import { updateSearchState } from "@/Redux/slices/searchSlice";
@@ -18,6 +19,10 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
     dispatch(
       updateSearchState({ key: "searchPlayer", value: event.target.value })
     );
+  }
+
+  function handleClearSearch() {
+    dispatch(updateSearchState({ key: "searchPlayer", value: "" }));
   }
 
   useEffect(() => {
@@ -39,6 +44,14 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
         value={searchPlayer}
         onChange={handleChange}
       />
+
+      <button
+        onClick={handleClearSearch}
+        className={s.clearButton}
+        title="Clear search"
+      >
+        <SvgIcon name="xMark" />
+      </button>
     </div>
   );
 };
