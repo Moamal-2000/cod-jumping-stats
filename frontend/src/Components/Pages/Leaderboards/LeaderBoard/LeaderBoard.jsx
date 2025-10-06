@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  getIsLastPagination,
-  paginateData,
-  stripColorCodes,
-} from "@/Functions/utils";
+import { getIsLastPagination, paginateData } from "@/Functions/utils";
 import useInfiniteScroll from "@/Hooks/App/useInfiniteScroll";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
 import { fetchLeaderboard } from "@/Redux/thunks/leaderboardThunk";
@@ -53,8 +49,6 @@ const LeaderBoard = () => {
   useEffect(() => {
     const searchHasValue = searchTerm.length > 0;
 
-    searchByPlayerName({ searchTerm, leaderboardData, dispatch });
-
     checkAndLoadMoreData({
       leaderboardData,
       paginationNumber,
@@ -65,21 +59,15 @@ const LeaderBoard = () => {
       pageVisits,
       dispatch,
     });
-  }, [paginationNumber, searchTerm, searchParams, leaderboardData]);
+  }, [paginationNumber]);
 
   return (
     <div className={`${s.leaderboardWrapper} ${collapseClass}`}>
       <LeaderboardHeader
         paginationNumber={paginationNumber}
         setPaginationNumber={setPaginationNumber}
-      />
-
-      <input
-        type="text"
-        role="search"
-        className={s.searchInput}
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
       />
 
       <table className={leaderboardClasses}>
@@ -147,30 +135,4 @@ function addDataOnScroll({
   const value = leaderboardScroll.concat(paginationLeaderboardData);
 
   dispatch(updateLeaderboardState({ key: "leaderboardScroll", value }));
-}
-
-function searchByPlayerName({ searchTerm, leaderboardData, dispatch } = {}) {
-  if (searchTerm.length > 0) {
-    const filteredPlayers = leaderboardData.filter((player) => {
-      const playerNameLowerCase = player.PlayerName.toLowerCase();
-      const cleanPlayerName = stripColorCodes(playerNameLowerCase);
-      return cleanPlayerName.includes(searchTerm.toLowerCase());
-    });
-
-    dispatch(
-      updateLeaderboardState({
-        key: "leaderboardScroll",
-        value: filteredPlayers,
-      })
-    );
-
-    return;
-  }
-
-  dispatch(
-    updateLeaderboardState({
-      key: "leaderboardScroll",
-      value: leaderboardData,
-    })
-  );
 }

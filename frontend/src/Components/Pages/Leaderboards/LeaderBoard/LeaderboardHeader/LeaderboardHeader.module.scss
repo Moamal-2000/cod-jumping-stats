@@ -39,30 +39,30 @@
   }
 }
 
-.header .wrapper>h3 {
+.header .mainWrapper>h3 {
   font-size: 1.4rem;
   font-weight: 700;
   text-wrap: nowrap;
   margin-bottom: 10px;
 }
 
-.header .wrapper>p {
+.header .mainWrapper>p {
   color: #9ca3af;
 }
 
 @include m.small {
-  .header .wrapper>p {
+  .header .mainWrapper>p {
     font-size: .9rem;
   }
 }
 
 @media (max-width: 480px) {
-  .header .wrapper>p {
+  .header .mainWrapper>p {
     max-width: 166px;
   }
 }
 
-.header .wrapper>p>span {
+.header .mainWrapper>p>span {
   color: #cdd4de;
   font-weight: 500;
 }

@@ -10,8 +10,14 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./LeaderboardHeader.module.scss";
 import LeaderboardHeaderBtns from "./LeaderboardHeaderBtns/LeaderboardHeaderBtns";
+import PlayersSearchInput from "./PlayersSearchInput/PlayersSearchInput";
 
-const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
+const LeaderboardHeader = ({
+  paginationNumber,
+  setPaginationNumber,
+  searchTerm,
+  setSearchTerm,
+}) => {
   const { leaderboardData, leaderboardScroll } = useSelector(
     (s) => s.leaderboard
   );
@@ -48,8 +54,15 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
 
   return (
     <header className={s.header}>
-      <div className={s.wrapper}>
-        <h3>{leaderboardTitle}</h3>
+      <div className={s.mainWrapper}>
+        <div className={s.wrapper}>
+          <h3>{leaderboardTitle}</h3>
+          <PlayersSearchInput
+            searchTerm={searchTerm}
+            setSearchTerm={setSearchTerm}
+          />
+        </div>
+
         <p>
           Showing <span>{displayedPlayers}</span> of <span>{totalPlayers}</span>{" "}
           players • <span>{totalMaps}</span> total maps available
