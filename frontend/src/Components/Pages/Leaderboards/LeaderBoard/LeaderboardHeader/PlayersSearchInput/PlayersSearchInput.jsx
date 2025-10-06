@@ -14,6 +14,12 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
+  function handleChange(event) {
+    dispatch(
+      updateSearchState({ key: "searchPlayer", value: event.target.value })
+    );
+  }
+
   useEffect(() => {
     searchByPlayerName({
       searchPlayer,
@@ -29,11 +35,7 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
       role="search"
       className={s.searchInput}
       value={searchPlayer}
-      onChange={(event) =>
-        dispatch(
-          updateSearchState({ key: "searchPlayer", value: event.target.value })
-        )
-      }
+      onChange={handleChange}
     />
   );
 };
