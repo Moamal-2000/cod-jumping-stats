@@ -30,13 +30,16 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
   }, [searchPlayer, searchParams, leaderboardData]);
 
   return (
-    <input
-      type="text"
-      role="search"
-      className={s.searchInput}
-      value={searchPlayer}
-      onChange={handleChange}
-    />
+    <div className={s.searchContainer}>
+      <input
+        type="text"
+        role="search"
+        className={s.searchInput}
+        placeholder="Search by player name..."
+        value={searchPlayer}
+        onChange={handleChange}
+      />
+    </div>
   );
 };
 

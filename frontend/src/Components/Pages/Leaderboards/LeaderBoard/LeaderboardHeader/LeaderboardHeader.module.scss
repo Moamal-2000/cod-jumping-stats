@@ -39,11 +39,23 @@
   }
 }
 
-.header .mainWrapper>h3 {
+.header .mainWrapper {
+  max-width: 460px;
+  width: 100%;
+}
+
+.header .mainWrapper .wrapper {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 10px;
+}
+
+.header .mainWrapper .wrapper h3 {
   font-size: 1.4rem;
   font-weight: 700;
   text-wrap: nowrap;
-  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
 .header .mainWrapper>p {
