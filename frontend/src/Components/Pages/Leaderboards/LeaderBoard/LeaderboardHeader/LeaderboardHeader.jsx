@@ -60,6 +60,7 @@ const LeaderboardHeader = ({
           <PlayersSearchInput
             searchTerm={searchTerm}
             setSearchTerm={setSearchTerm}
+            setPaginationNumber={setPaginationNumber}
           />
         </div>
 

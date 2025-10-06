@@ -1,16 +1,18 @@
 "use client";
 
-import { stripColorCodes } from "@/Functions/utils";
+import { paginateData, stripColorCodes } from "@/Functions/utils";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayersSearchInput.module.scss";
 
-const PlayersSearchInput = ({ searchTerm, setSearchTerm }) => {
-  const { leaderboardData, leaderboardScroll } = useSelector(
-    (s) => s.leaderboard
-  );
+const PlayersSearchInput = ({
+  searchTerm,
+  setSearchTerm,
+  setPaginationNumber,
+}) => {
+  const { leaderboardData } = useSelector((s) => s.leaderboard);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
@@ -18,10 +20,11 @@ const PlayersSearchInput = ({ searchTerm, setSearchTerm }) => {
     searchByPlayerName({
       searchTerm,
       leaderboardData,
-      leaderboardScroll,
+      setPaginationNumber,
       dispatch,
     });
   }, [searchTerm, searchParams, leaderboardData]);
+
   return (
     <input
       type="text"
@@ -38,7 +41,7 @@ export default PlayersSearchInput;
 function searchByPlayerName({
   searchTerm,
   leaderboardData,
-  leaderboardScroll,
+  setPaginationNumber,
   dispatch,
 } = {}) {
   if (searchTerm.length > 0) {
@@ -55,13 +58,10 @@ function searchByPlayerName({
       })
     );
 
+    setPaginationNumber(1);
     return;
   }
 
-  dispatch(
-    updateLeaderboardState({
-      key: "leaderboardScroll",
-      value: leaderboardScroll,
-    })
-  );
+  const value = paginateData(leaderboardData, 1);
+  dispatch(updateLeaderboardState({ key: "leaderboardScroll", value }));
 }
