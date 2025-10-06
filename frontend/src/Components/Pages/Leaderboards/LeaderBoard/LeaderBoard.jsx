@@ -36,39 +36,6 @@ const LeaderBoard = () => {
   const [lastPlayerRef, paginationNumber, setPaginationNumber] =
     useInfiniteScroll(leaderboardData, isLeaderboardReversed);
 
-  function addDataOnScroll() {
-    const paginationLeaderboardData = paginateData(
-      leaderboardData,
-      paginationNumber
-    );
-    const value = leaderboardScroll.concat(paginationLeaderboardData);
-
-    dispatch(updateLeaderboardState({ key: "leaderboardScroll", value }));
-  }
-
-  function checkAndLoadMoreData() {
-    const isLastPagination = getIsLastPagination(
-      leaderboardData,
-      paginationNumber
-    );
-
-    // In this case the handleShowAll() is activated already
-    const isSameArrayReference = leaderboardScroll === leaderboardData;
-
-    const lastVisitedPage = pageVisits?.[pageVisits.length - 1];
-    const cameFromDifferentPage =
-      lastVisitedPage !== "/leaderboards" && lastVisitedPage !== undefined;
-
-    const shouldShowMoreData =
-      !isLastPagination &&
-      !isSameArrayReference &&
-      !allDataDisplayed &&
-      isLeaderboardExpanded &&
-      !cameFromDifferentPage;
-
-    if (shouldShowMoreData) addDataOnScroll();
-  }
-
   function getLeaderboardData() {
     dispatch(fetchLeaderboard(paramsObject));
     setPaginationNumber(1);
@@ -79,7 +46,15 @@ const LeaderBoard = () => {
   }, [searchParams, tryFetchAgain]);
 
   useEffect(() => {
-    checkAndLoadMoreData();
+    checkAndLoadMoreData({
+      leaderboardData,
+      paginationNumber,
+      leaderboardScroll,
+      allDataDisplayed,
+      isLeaderboardExpanded,
+      pageVisits,
+      dispatch,
+    });
   }, [paginationNumber]);
 
   return (
@@ -101,3 +76,55 @@ const LeaderBoard = () => {
 };
 
 export default LeaderBoard;
+
+function checkAndLoadMoreData({
+  leaderboardData,
+  paginationNumber,
+  leaderboardScroll,
+  allDataDisplayed,
+  isLeaderboardExpanded,
+  pageVisits,
+  dispatch,
+} = {}) {
+  const isLastPagination = getIsLastPagination(
+    leaderboardData,
+    paginationNumber
+  );
+
+  // In this case the handleShowAll() is activated already
+  const isSameArrayReference = leaderboardScroll === leaderboardData;
+
+  const lastVisitedPage = pageVisits?.[pageVisits.length - 1];
+  const cameFromDifferentPage =
+    lastVisitedPage !== "/leaderboards" && lastVisitedPage !== undefined;
+
+  const shouldShowMoreData =
+    !isLastPagination &&
+    !isSameArrayReference &&
+    !allDataDisplayed &&
+    isLeaderboardExpanded &&
+    !cameFromDifferentPage;
+
+  if (shouldShowMoreData)
+    addDataOnScroll({
+      leaderboardData,
+      paginationNumber,
+      leaderboardScroll,
+      dispatch,
+    });
+}
+
+function addDataOnScroll({
+  leaderboardData,
+  paginationNumber,
+  leaderboardScroll,
+  dispatch,
+} = {}) {
+  const paginationLeaderboardData = paginateData(
+    leaderboardData,
+    paginationNumber
+  );
+  const value = leaderboardScroll.concat(paginationLeaderboardData);
+
+  dispatch(updateLeaderboardState({ key: "leaderboardScroll", value }));
+}
