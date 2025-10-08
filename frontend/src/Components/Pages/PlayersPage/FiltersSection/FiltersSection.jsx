@@ -4,7 +4,6 @@ import { stripColorCodes } from "@/Functions/utils";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import {
   resetPagination,
   setSearchTerm,
@@ -94,7 +93,9 @@ const FiltersSection = ({
               className={s.clearButton}
               title="Clear search"
             >
-              <SvgIcon name="xMark" />
+              <svg>
+                <use href="/badgesIcons.svg#xMark" />
+              </svg>
             </button>
           </div>
         </div>

@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getColoredName } from "@/Functions/components";
 import Link from "next/link";
 import s from "./PlayerPrimaryInfo.module.scss";
@@ -14,7 +13,9 @@ const PlayerPrimaryInfo = ({ name, rank, adminLevel, id }) => {
         <span className={s.playerId}>#{id}</span>
 
         <div className={s.adminLevel}>
-          <SvgIcon name={"shield"} />
+          <svg>
+            <use href="/badgesIcons.svg#shield" />
+          </svg>
           <span>{adminLevel}</span>
         </div>
       </div>

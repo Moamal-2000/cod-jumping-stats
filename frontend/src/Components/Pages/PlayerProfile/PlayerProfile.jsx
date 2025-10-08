@@ -1,7 +1,6 @@
 "use client";
 
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getColoredName } from "@/Functions/components";
 import {
   clearPlayerProfile,
@@ -524,7 +523,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                 size={60}
               />
             ) : (
-              <SvgIcon name="users" />
+              <svg>
+                <use href="/badgesIcons.svg#users" />
+              </svg>
             )}
           </div>
 
@@ -556,7 +557,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
             className={`${s.tabButton} ${activeTab === tab.id ? s.active : ""}`}
             onClick={() => setActiveTab(tab.id)}
           >
-            <SvgIcon name={tab.icon} />
+            <svg>
+              <use href={`/badgesIcons.svg#${tab.icon}`} />
+            </svg>
             <span>{tab.label}</span>
           </button>
         ))}
@@ -716,7 +719,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                                 {fps} FPS
                                 {isBestFps && (
                                   <span className={s.bestFpsIndicator}>
-                                    <SvgIcon name="star" />
+                                    <svg>
+                                      <use href="/badgesIcons.svg#star" />
+                                    </svg>
                                   </span>
                                 )}
                               </div>
@@ -768,7 +773,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                       .map((run, index) => (
                         <div key={index} className={s.recentActivityItem}>
                           <div className={s.activityIcon}>
-                            <SvgIcon name="star" />
+                            <svg>
+                              <use href="/badgesIcons.svg#star" />
+                            </svg>
                           </div>
                           <div className={s.activityContent}>
                             <div className={s.activityTitle}>
@@ -980,7 +987,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                     </>
                   ) : (
                     <div className={s.emptyState}>
-                      <SvgIcon name="star" />
+                      <svg>
+                        <use href="/badgesIcons.svg#star" />
+                      </svg>
                       <p>No runs found for the selected filters.</p>
                     </div>
                   );
@@ -1128,7 +1137,9 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                     </>
                   ) : (
                     <div className={s.emptyState}>
-                      <SvgIcon name="trophy" />
+                      <svg>
+                        <use href="/badgesIcons.svg#trophy" />
+                      </svg>
                       <p>
                         No leaderboard positions found for the selected FPS
                         filters.
@@ -1153,3 +1164,5 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
 };
 
 export default PlayerProfile;
+
+// TODO: Fix Player details page sprite icons

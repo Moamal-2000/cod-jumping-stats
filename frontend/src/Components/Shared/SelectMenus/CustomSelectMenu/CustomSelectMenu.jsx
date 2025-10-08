@@ -3,7 +3,6 @@
 import { getSortByLabel } from "@/Functions/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import SvgIcon from "../../SvgIcon";
 import s from "./CustomSelectMenu.module.scss";
 import DropDownMenu from "./DropDownMenu/DropDownMenu";
 
@@ -37,7 +36,9 @@ const CustomSelectMenu = () => {
     <div ref={menuRef} className={`${s.selectMenu} ${visibleClass}`}>
       <button type="button" className={s.selectButton} onClick={handleClick}>
         <span>{currentSortBy}</span>
-        <SvgIcon name="solidArrow" />
+        <svg>
+          <use href="/badgesIcons.svg#solidArrow" />
+        </svg>
       </button>
 
       <DropDownMenu

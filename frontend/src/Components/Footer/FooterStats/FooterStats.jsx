@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getJumpersHeavenStats } from "@/Redux/slices/globalSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -18,7 +17,9 @@ const FooterStats = () => {
     <section className={s.statsSection}>
       <div className={s.dateWrapper}>
         <div className={s.iconHolder}>
-          <SvgIcon name="timer" />
+          <svg>
+            <use href="/badgesIcons.svg#timer" />
+          </svg>
         </div>
 
         <div className={s.info}>

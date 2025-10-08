@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import SvgIcon from "../../SvgIcon";
 import s from "./ScrollToTopBtn.module.scss";
 
 const ScrollToTopBtn = () => {
@@ -51,7 +50,9 @@ const ScrollToTopBtn = () => {
       onClick={scrollToPosition}
       title={title}
     >
-      <SvgIcon name="right-arrow" />
+      <svg>
+        <use href="/badgesIcons.svg#right-arrow" />
+      </svg>
     </button>
   );
 };

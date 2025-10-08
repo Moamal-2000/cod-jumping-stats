@@ -1,4 +1,4 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
+import AnimatedSpinnerIcon from "./AnimatedSpinnerIcon.jsx";
 import s from "./SpinnerLoader.module.scss";
 
 const SpinnerLoader = ({ title, description, type }) => {
@@ -6,7 +6,7 @@ const SpinnerLoader = ({ title, description, type }) => {
     return (
       <tr className={s.loader} data-loader>
         <td>
-          <SvgIcon name="animated-spinner" />
+          <AnimatedSpinnerIcon />
           <b className={s.title}>{title}</b>
           <p className={s.description}>{description}</p>
         </td>
@@ -15,7 +15,7 @@ const SpinnerLoader = ({ title, description, type }) => {
 
   return (
     <div className={s.loader} data-loader>
-      <SvgIcon name="animated-spinner" />
+      <AnimatedSpinnerIcon />
       <b className={s.title}>{title}</b>
       <p className={s.description}>{description}</p>
     </div>

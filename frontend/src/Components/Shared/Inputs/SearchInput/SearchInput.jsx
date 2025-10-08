@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "../../SvgIcon";
 import s from "./SearchInput.module.scss";
 
 const SearchInput = ({ placeholder }) => {
@@ -23,7 +22,9 @@ const SearchInput = ({ placeholder }) => {
         className={s.searchButton}
         aria-label="Search for a player by name"
       >
-        <SvgIcon name="search" />
+        <svg>
+          <use href="/badgesIcons.svg#search" />
+        </svg>
       </button>
 
       <input

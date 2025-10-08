@@ -12,8 +12,15 @@ import ViewMaps from "./ViewMaps/ViewMaps";
 
 const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   const dispatch = useDispatch();
-  const { mapsData, mapsScroll, allDataDisplayed, loading, error, searchTerm, filteredMaps, sortedMaps } =
-    useSelector((s) => s.maps);
+  const {
+    mapsScroll,
+    allDataDisplayed,
+    loading,
+    error,
+    searchTerm,
+    filteredMaps,
+    sortedMaps,
+  } = useSelector((s) => s.maps);
   const { pageVisits, isMapsExpanded } = useSelector((s) => s.global);
   const searchParams = useSearchParams();
   const viewType = searchParams.get("view") || "grid";
@@ -68,9 +75,9 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
         />
       )}
 
-      <ViewMaps 
-        lastMapRef={lastMapRef} 
-        mapsScroll={mapsScroll} 
+      <ViewMaps
+        lastMapRef={lastMapRef}
+        mapsScroll={mapsScroll}
         searchTerm={searchTerm}
         filteredMaps={filteredMaps}
       />

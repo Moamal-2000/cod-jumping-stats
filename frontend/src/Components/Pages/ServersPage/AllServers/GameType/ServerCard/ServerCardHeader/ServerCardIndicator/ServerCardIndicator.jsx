@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { getServerStatusColor } from "@/Functions/utils";
 import s from "./ServerCardIndicator.module.scss";
 
@@ -12,7 +11,6 @@ const ServerCardIndicator = ({ server }) => {
         }}
       />
       <span className={s.statusText}>
-        <SvgIcon name="users" />
         {server.Online ? `${server.PlayerCount || 0} Players` : "Offline"}
       </span>
     </div>

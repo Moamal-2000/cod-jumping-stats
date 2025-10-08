@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { isMobile } from "@/Functions/validation";
 import { toggleMobileNav } from "@/Redux/slices/globalSlice";
 import { useEffect, useState } from "react";
@@ -31,7 +30,9 @@ const MobileNavBtn = () => {
       onClick={handleToggleMenu}
       title={title}
     >
-      <SvgIcon name={iconName} />
+      <svg>
+        <use href={`/badgesIcons.svg#${iconName}`} />
+      </svg>
     </button>
   );
 };

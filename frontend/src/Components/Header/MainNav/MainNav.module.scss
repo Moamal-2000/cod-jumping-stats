@@ -49,8 +49,8 @@
 
 .mainNav>a>svg {
   color: #9ca3af;
-  width: 20px;
-  height: 20px;
+  width: 20px !important;
+  height: 20px !important;
 
   & path {
     stroke: #9ca3af;

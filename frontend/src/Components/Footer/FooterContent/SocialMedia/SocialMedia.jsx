@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { SOCIAL_MEDIA_DATA } from "@/Data/staticData";
 import s from "./SocialMedia.module.scss";
 
@@ -16,7 +15,9 @@ const SocialMedia = () => {
               title={iconName}
               data-icon={iconName}
             >
-              <SvgIcon name={iconName} />
+              <svg>
+                <use href={`/badgesIcons.svg#${iconName}`} />
+              </svg>
             </a>
           </li>
         ))}

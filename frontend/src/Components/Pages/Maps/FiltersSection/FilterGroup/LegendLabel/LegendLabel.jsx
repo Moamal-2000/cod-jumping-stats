@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import s from "./LegendLabel.module.scss";
 
 const LegendLabel = ({ label, tooltipText }) => {
@@ -7,7 +6,9 @@ const LegendLabel = ({ label, tooltipText }) => {
       {label}
       <div className={s.tooltip}>
         <div className={s.icon}>
-          <SvgIcon name="questionMark" />
+          <svg>
+            <use href="/badgesIcons.svg#questionMark" />
+          </svg>
         </div>
 
         <p className={s.tooltipText}>{tooltipText}</p>

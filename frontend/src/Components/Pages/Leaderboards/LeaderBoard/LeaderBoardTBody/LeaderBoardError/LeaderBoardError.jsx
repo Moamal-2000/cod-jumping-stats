@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { updateGlobalState } from "@/Redux/slices/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./LeaderBoardError.module.scss";
@@ -30,7 +29,9 @@ const LeaderBoardError = () => {
           className={s.retryBtn}
           onClick={handleRetryButton}
         >
-          <SvgIcon name="retry" />
+          <svg>
+            <use href="/badgesIcons.svg#retry" />
+          </svg>
           <span>Retry</span>
         </button>
       </td>

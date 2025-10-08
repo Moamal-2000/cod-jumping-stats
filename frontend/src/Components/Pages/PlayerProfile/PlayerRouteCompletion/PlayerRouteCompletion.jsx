@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { fetchPlayerRouteCompletionNew } from "@/Redux/thunks/playerRouteCompletionThunk";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -157,7 +156,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
   if (!completionData) {
     return (
       <div className={s.emptyState}>
-        <SvgIcon name="map" />
+        <svg>
+          <use href="/badgesIcons.svg#map" />
+        </svg>
         <p>No route completion data available.</p>
       </div>
     );
@@ -211,7 +212,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
           }`}
           onClick={() => setActiveList("completed")}
         >
-          <SvgIcon name="check-circle" />
+          <svg>
+            <use href="/badgesIcons.svg#check-circle" />
+          </svg>
           <span>Completed Routes ({completedRoutes.length})</span>
         </button>
         <button
@@ -220,7 +223,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
           }`}
           onClick={() => setActiveList("not_completed")}
         >
-          <SvgIcon name="x-circle" />
+          <svg>
+            <use href="/badgesIcons.svg#x-circle" />
+          </svg>
           <span>Not Completed Routes ({notCompletedRoutes.length})</span>
         </button>
       </div>
@@ -325,7 +330,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
             })
           ) : (
             <div className={s.emptyState}>
-              <SvgIcon name="check-circle" />
+              <svg>
+                <use href="/badgesIcons.svg#check-circle" />
+              </svg>
               <p>No completed routes found.</p>
             </div>
           )
@@ -368,7 +375,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
           })
         ) : (
           <div className={s.emptyState}>
-            <SvgIcon name="x-circle" />
+            <svg>
+              <use href="/badgesIcons.svg#x-circle" />
+            </svg>
             <p>No uncompleted routes found.</p>
           </div>
         )}

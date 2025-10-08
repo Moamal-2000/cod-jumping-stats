@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { NAV_LINKS_DATA } from "@/Data/staticData";
 import { toggleMobileNav } from "@/Redux/slices/globalSlice";
 import Link from "next/link";
@@ -30,7 +29,9 @@ const MobileNavLinks = () => {
               className={`${s.link} ${activeClass}`}
               onClick={handleLinkClick}
             >
-              <SvgIcon name={iconName} />
+              <svg>
+                <use href={`/badgesIcons.svg#${iconName}`} />
+              </svg>
               <span>{name}</span>
             </Link>
           </li>

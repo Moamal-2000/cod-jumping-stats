@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import s from "./ExpandTopStatBtn.module.scss";
 
 const ExpandTopStatBtn = ({ showMoreStats, setShowMoreStats }) => {
@@ -15,7 +14,9 @@ const ExpandTopStatBtn = ({ showMoreStats, setShowMoreStats }) => {
       className={`${s.expandButton} ${activeClass}`}
       aria-label="Expand stats bars"
     >
-      <SvgIcon name="right-arrow" />
+      <svg>
+        <use href="/badgesIcons.svg#right-arrow" />
+      </svg>
     </button>
   );
 };

@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { openVideo } from "@/Functions/utils";
 import s from "./MapsVideos.module.scss";
 
@@ -15,7 +14,9 @@ const MapsVideos = ({ videos }) => {
           onClick={() => openVideo(videos, index)}
           data-icon={icon}
         >
-          <SvgIcon name={icon} />
+          <svg>
+            <use href={`badgesIcons.svg#${icon}`} />
+          </svg>
           <span className={s.type}>{type}</span>
         </button>
       ))}

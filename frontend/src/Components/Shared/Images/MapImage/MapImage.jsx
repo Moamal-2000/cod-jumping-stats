@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import { memo, useState } from "react";
-import SvgIcon from "../../SvgIcon";
 import s from "./MapImage.module.scss";
 
 const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
@@ -29,7 +28,9 @@ const MapImage = memo(({ mapName, objectFit = "contain" }) => {
     <div className={s.imageContainer}>
       {isLoading && (
         <div className={s.loader}>
-          <SvgIcon name="animated-spinner" />
+          <svg>
+            <use href="/badgesIcons.svg#animated-spinner" />
+          </svg>
         </div>
       )}
 

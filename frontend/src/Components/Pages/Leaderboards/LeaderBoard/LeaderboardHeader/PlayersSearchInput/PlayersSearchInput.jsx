@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { paginateData, stripColorCodes } from "@/Functions/utils";
 import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
 import { updateSearchState } from "@/Redux/slices/searchSlice";
@@ -50,7 +49,9 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
         className={s.clearButton}
         title="Clear search"
       >
-        <SvgIcon name="xMark" />
+        <svg>
+          <use href="/badgesIcons.svg#xMark" />
+        </svg>
       </button>
     </div>
   );

@@ -72,8 +72,11 @@
 
 .socialMediaNav ul li a[data-icon=jumpersHeaven] svg {
   position: relative;
-  left: -1px;
   top: 1px;
   width: 32px;
   height: 32px;
+}
+
+.socialMediaNav ul li a[data-icon=jumpersHeaven]:hover svg {
+  fill: #FFD700 !important;
 }

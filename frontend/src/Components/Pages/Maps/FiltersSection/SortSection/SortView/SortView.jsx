@@ -1,6 +1,5 @@
 "use client";
 
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import { createQueryString, removeQueryString } from "@/Functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ExpandButton from "./ExpandButton/ExpandButton";
@@ -44,7 +43,9 @@ const SortView = ({ setPaginationNumber }) => {
               title={`Change maps view to ${value}`}
             >
               <span>
-                <SvgIcon name={icon} />
+                <svg>
+                  <use href={`/badgesIcons.svg#${icon}`} />
+                </svg>
               </span>
             </button>
           );

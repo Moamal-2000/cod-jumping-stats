@@ -1,6 +1,5 @@
-import { useDispatch, useSelector } from "react-redux";
 import { setSortBy } from "@/Redux/slices/mapsSlice";
-import SvgIcon from "@/Components/Shared/SvgIcon";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
 
@@ -19,7 +18,9 @@ const SortSection = ({ setPaginationNumber }) => {
           Sort Maps By:
           <div className={s.tooltip}>
             <div className={s.icon}>
-              <SvgIcon name="questionMark" />
+              <svg>
+                <use href="/badgesIcons.svg#questionMark" />
+              </svg>
             </div>
 
             <p className={s.tooltipText}>

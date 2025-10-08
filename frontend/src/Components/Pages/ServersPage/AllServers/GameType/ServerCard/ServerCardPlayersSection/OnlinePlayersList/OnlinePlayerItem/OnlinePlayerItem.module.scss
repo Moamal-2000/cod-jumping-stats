@@ -49,3 +49,8 @@
   color: #facc15;
   min-width: 46px;
 }
+
+:where(.playerPing, .playerAdminLevel)>svg {
+  width: 16px;
+  height: 16px;
+}

@@ -2,7 +2,6 @@
 
 import { COPY_BUTTON_DELAY_MS } from "@/Data/constants";
 import { useState } from "react";
-import SvgIcon from "../../SvgIcon";
 import s from "./CopyButton.module.scss";
 
 const CopyButton = ({ copyText, title }) => {
@@ -29,7 +28,9 @@ const CopyButton = ({ copyText, title }) => {
       type="button"
       onClick={handleClick}
     >
-      <SvgIcon name={isCopied ? "checked" : "copy"} />
+      <svg>
+        <use href={`badgesIcons.svg#${isCopied ? "checked" : "copy"}`} />
+      </svg>
     </button>
   );
 };

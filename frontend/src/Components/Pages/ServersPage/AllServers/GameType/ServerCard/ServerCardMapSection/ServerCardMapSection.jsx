@@ -1,4 +1,3 @@
-import SvgIcon from "@/Components/Shared/SvgIcon";
 import Link from "next/link";
 import s from "./ServerCard.module.scss";
 
@@ -9,7 +8,10 @@ const ServerCardMapSection = ({ server }) => {
     <div className={s.mapSection}>
       <div className={s.mapInfo}>
         <span className={s.mapLabel}>
-          <SvgIcon name="globe" /> Map
+          <svg>
+            <use href="/badgesIcons.svg#globe" />
+          </svg>{" "}
+          Map
         </span>
 
         {isCod4 && <span className={s.mapName}>{server.Map}</span>}
