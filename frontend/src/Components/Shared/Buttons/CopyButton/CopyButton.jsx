@@ -29,7 +29,7 @@ const CopyButton = ({ copyText, title }) => {
       onClick={handleClick}
     >
       <svg>
-        <use href={`badgesIcons.svg#${isCopied ? "checked" : "copy"}`} />
+        <use href={`icons-sprite.svg#${isCopied ? "checked" : "copy"}`} />
       </svg>
     </button>
   );

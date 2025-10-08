@@ -44,7 +44,7 @@ const PlayerBadges = ({
             <div key={id} className={`${s.badge} ${classes}`}>
               {tooltipText && <ToolTip>{tooltipText}</ToolTip>}
               <svg>
-                <use href={`/badgesIcons.svg#${icon}`}></use>
+                <use href={`/icons-sprite.svg#${icon}`}></use>
               </svg>
               <span>{label}</span>
             </div>

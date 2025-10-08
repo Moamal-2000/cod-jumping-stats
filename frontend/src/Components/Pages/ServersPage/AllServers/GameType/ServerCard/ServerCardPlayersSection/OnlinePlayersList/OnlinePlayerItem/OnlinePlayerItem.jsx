@@ -21,14 +21,14 @@ const OnlinePlayerItem = ({ player, server }) => {
       <div className={s.playerInfo}>
         <span className={s.playerAdminLevel}>
           <svg>
-            <use href="/badgesIcons.svg#shield" />
+            <use href="/icons-sprite.svg#shield" />
           </svg>{" "}
           {player?.Admin || "N/A"}
         </span>
 
         <span className={s.playerPing}>
           <svg>
-            <use href="/badgesIcons.svg#ping" />
+            <use href="/icons-sprite.svg#ping" />
           </svg>{" "}
           {player?.Ping || 0}ms
         </span>

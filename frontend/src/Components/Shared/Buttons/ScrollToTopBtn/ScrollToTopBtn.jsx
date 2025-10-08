@@ -51,7 +51,7 @@ const ScrollToTopBtn = () => {
       title={title}
     >
       <svg>
-        <use href="/badgesIcons.svg#right-arrow" />
+        <use href="/icons-sprite.svg#right-arrow" />
       </svg>
     </button>
   );

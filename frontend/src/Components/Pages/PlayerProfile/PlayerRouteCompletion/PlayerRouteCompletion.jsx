@@ -157,7 +157,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
     return (
       <div className={s.emptyState}>
         <svg>
-          <use href="/badgesIcons.svg#map" />
+          <use href="/icons-sprite.svg#map" />
         </svg>
         <p>No route completion data available.</p>
       </div>
@@ -213,7 +213,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
           onClick={() => setActiveList("completed")}
         >
           <svg>
-            <use href="/badgesIcons.svg#check-circle" />
+            <use href="/icons-sprite.svg#check-circle" />
           </svg>
           <span>Completed Routes ({completedRoutes.length})</span>
         </button>
@@ -224,7 +224,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
           onClick={() => setActiveList("not_completed")}
         >
           <svg>
-            <use href="/badgesIcons.svg#x-circle" />
+            <use href="/icons-sprite.svg#x-circle" />
           </svg>
           <span>Not Completed Routes ({notCompletedRoutes.length})</span>
         </button>
@@ -331,7 +331,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
           ) : (
             <div className={s.emptyState}>
               <svg>
-                <use href="/badgesIcons.svg#check-circle" />
+                <use href="/icons-sprite.svg#check-circle" />
               </svg>
               <p>No completed routes found.</p>
             </div>
@@ -376,7 +376,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
         ) : (
           <div className={s.emptyState}>
             <svg>
-              <use href="/badgesIcons.svg#x-circle" />
+              <use href="/icons-sprite.svg#x-circle" />
             </svg>
             <p>No uncompleted routes found.</p>
           </div>

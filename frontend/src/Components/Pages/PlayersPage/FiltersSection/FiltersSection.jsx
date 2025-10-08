@@ -94,7 +94,7 @@ const FiltersSection = ({
               title="Clear search"
             >
               <svg>
-                <use href="/badgesIcons.svg#xMark" />
+                <use href="/icons-sprite.svg#xMark" />
               </svg>
             </button>
           </div>

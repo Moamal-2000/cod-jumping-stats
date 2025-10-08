@@ -23,7 +23,7 @@ const SearchInput = ({ placeholder }) => {
         aria-label="Search for a player by name"
       >
         <svg>
-          <use href="/badgesIcons.svg#search" />
+          <use href="/icons-sprite.svg#search" />
         </svg>
       </button>
 

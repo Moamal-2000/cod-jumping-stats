@@ -16,7 +16,7 @@ const SocialMedia = () => {
               data-icon={iconName}
             >
               <svg>
-                <use href={`/badgesIcons.svg#${iconName}`} />
+                <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
             </a>
           </li>

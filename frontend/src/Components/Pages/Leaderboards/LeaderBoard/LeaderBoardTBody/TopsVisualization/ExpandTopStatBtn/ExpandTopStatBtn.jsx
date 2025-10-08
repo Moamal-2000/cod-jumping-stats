@@ -15,7 +15,7 @@ const ExpandTopStatBtn = ({ showMoreStats, setShowMoreStats }) => {
       aria-label="Expand stats bars"
     >
       <svg>
-        <use href="/badgesIcons.svg#right-arrow" />
+        <use href="/icons-sprite.svg#right-arrow" />
       </svg>
     </button>
   );

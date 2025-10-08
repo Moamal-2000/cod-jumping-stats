@@ -43,7 +43,7 @@ const MapCard2 = memo(({ mapData, mapsScroll, lastMapRef, index }) => {
                 title="Open video"
               >
                 <svg>
-                  <use href="/badgesIcons.svg#youtube" />
+                  <use href="/icons-sprite.svg#youtube" />
                 </svg>
               </button>
             )}

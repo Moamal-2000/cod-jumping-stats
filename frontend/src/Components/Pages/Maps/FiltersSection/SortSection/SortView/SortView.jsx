@@ -44,7 +44,7 @@ const SortView = ({ setPaginationNumber }) => {
             >
               <span>
                 <svg>
-                  <use href={`/badgesIcons.svg#${icon}`} />
+                  <use href={`/icons-sprite.svg#${icon}`} />
                 </svg>
               </span>
             </button>

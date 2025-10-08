@@ -6,7 +6,7 @@ const WebsiteLogo = () => {
   return (
     <Link href="/" className={s.logo}>
       <svg>
-        <use href="/badgesIcons.svg#jumpersHeaven" />
+        <use href="/icons-sprite.svg#jumpersHeaven" />
       </svg>
       <span>{WEBSITE_NAME}</span>
     </Link>

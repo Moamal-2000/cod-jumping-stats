@@ -30,7 +30,7 @@ const LeaderBoardError = () => {
           onClick={handleRetryButton}
         >
           <svg>
-            <use href="/badgesIcons.svg#retry" />
+            <use href="/icons-sprite.svg#retry" />
           </svg>
           <span>Retry</span>
         </button>

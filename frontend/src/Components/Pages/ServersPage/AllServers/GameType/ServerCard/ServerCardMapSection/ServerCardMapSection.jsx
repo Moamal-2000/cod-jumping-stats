@@ -9,7 +9,7 @@ const ServerCardMapSection = ({ server }) => {
       <div className={s.mapInfo}>
         <span className={s.mapLabel}>
           <svg>
-            <use href="/badgesIcons.svg#globe" />
+            <use href="/icons-sprite.svg#globe" />
           </svg>{" "}
           Map
         </span>

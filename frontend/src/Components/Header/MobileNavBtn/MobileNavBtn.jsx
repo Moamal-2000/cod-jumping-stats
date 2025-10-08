@@ -31,7 +31,7 @@ const MobileNavBtn = () => {
       title={title}
     >
       <svg>
-        <use href={`/badgesIcons.svg#${iconName}`} />
+        <use href={`/icons-sprite.svg#${iconName}`} />
       </svg>
     </button>
   );

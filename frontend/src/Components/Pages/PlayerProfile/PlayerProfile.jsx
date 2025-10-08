@@ -524,7 +524,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
               />
             ) : (
               <svg>
-                <use href="/badgesIcons.svg#users" />
+                <use href="/icons-sprite.svg#users" />
               </svg>
             )}
           </div>
@@ -558,7 +558,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
             onClick={() => setActiveTab(tab.id)}
           >
             <svg>
-              <use href={`/badgesIcons.svg#${tab.icon}`} />
+              <use href={`/icons-sprite.svg#${tab.icon}`} />
             </svg>
             <span>{tab.label}</span>
           </button>
@@ -720,7 +720,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                                 {isBestFps && (
                                   <span className={s.bestFpsIndicator}>
                                     <svg>
-                                      <use href="/badgesIcons.svg#star" />
+                                      <use href="/icons-sprite.svg#star" />
                                     </svg>
                                   </span>
                                 )}
@@ -774,7 +774,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                         <div key={index} className={s.recentActivityItem}>
                           <div className={s.activityIcon}>
                             <svg>
-                              <use href="/badgesIcons.svg#star" />
+                              <use href="/icons-sprite.svg#star" />
                             </svg>
                           </div>
                           <div className={s.activityContent}>
@@ -988,7 +988,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                   ) : (
                     <div className={s.emptyState}>
                       <svg>
-                        <use href="/badgesIcons.svg#star" />
+                        <use href="/icons-sprite.svg#star" />
                       </svg>
                       <p>No runs found for the selected filters.</p>
                     </div>
@@ -1138,7 +1138,7 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                   ) : (
                     <div className={s.emptyState}>
                       <svg>
-                        <use href="/badgesIcons.svg#trophy" />
+                        <use href="/icons-sprite.svg#trophy" />
                       </svg>
                       <p>
                         No leaderboard positions found for the selected FPS

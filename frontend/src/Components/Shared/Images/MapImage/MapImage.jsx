@@ -29,7 +29,7 @@ const MapImage = memo(({ mapName, objectFit = "contain" }) => {
       {isLoading && (
         <div className={s.loader}>
           <svg>
-            <use href="/badgesIcons.svg#animated-spinner" />
+            <use href="/icons-sprite.svg#animated-spinner" />
           </svg>
         </div>
       )}

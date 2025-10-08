@@ -30,7 +30,7 @@ const MobileNavLinks = () => {
               onClick={handleLinkClick}
             >
               <svg>
-                <use href={`/badgesIcons.svg#${iconName}`} />
+                <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
               <span>{name}</span>
             </Link>

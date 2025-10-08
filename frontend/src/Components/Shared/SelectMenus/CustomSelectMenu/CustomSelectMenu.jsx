@@ -37,7 +37,7 @@ const CustomSelectMenu = () => {
       <button type="button" className={s.selectButton} onClick={handleClick}>
         <span>{currentSortBy}</span>
         <svg>
-          <use href="/badgesIcons.svg#solidArrow" />
+          <use href="/icons-sprite.svg#solidArrow" />
         </svg>
       </button>
 

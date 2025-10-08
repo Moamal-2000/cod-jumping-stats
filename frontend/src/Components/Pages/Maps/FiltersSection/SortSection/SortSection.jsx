@@ -19,7 +19,7 @@ const SortSection = ({ setPaginationNumber }) => {
           <div className={s.tooltip}>
             <div className={s.icon}>
               <svg>
-                <use href="/badgesIcons.svg#questionMark" />
+                <use href="/icons-sprite.svg#questionMark" />
               </svg>
             </div>
 

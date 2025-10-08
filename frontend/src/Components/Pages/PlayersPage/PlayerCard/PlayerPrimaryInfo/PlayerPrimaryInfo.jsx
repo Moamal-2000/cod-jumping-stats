@@ -14,7 +14,7 @@ const PlayerPrimaryInfo = ({ name, rank, adminLevel, id }) => {
 
         <div className={s.adminLevel}>
           <svg>
-            <use href="/badgesIcons.svg#shield" />
+            <use href="/icons-sprite.svg#shield" />
           </svg>
           <span>{adminLevel}</span>
         </div>

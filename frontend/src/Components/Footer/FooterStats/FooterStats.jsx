@@ -18,7 +18,7 @@ const FooterStats = () => {
       <div className={s.dateWrapper}>
         <div className={s.iconHolder}>
           <svg>
-            <use href="/badgesIcons.svg#timer" />
+            <use href="/icons-sprite.svg#timer" />
           </svg>
         </div>
 

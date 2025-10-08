@@ -15,7 +15,7 @@ const MapsVideos = ({ videos }) => {
           data-icon={icon}
         >
           <svg>
-            <use href={`badgesIcons.svg#${icon}`} />
+            <use href={`icons-sprite.svg#${icon}`} />
           </svg>
           <span className={s.type}>{type}</span>
         </button>
