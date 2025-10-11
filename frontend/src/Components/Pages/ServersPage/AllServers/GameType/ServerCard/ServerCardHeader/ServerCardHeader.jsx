@@ -34,6 +34,7 @@ const ServerCardHeader = ({ server, index }) => {
         onError={() => setSrc("/placeholders/blank-black.svg")}
         loading={index < 3 ? "eager" : "lazy"}
         priority={index < 3}
+        fetchPriority={index < 3 ? "high" : "low"}
       />
     </header>
   );
