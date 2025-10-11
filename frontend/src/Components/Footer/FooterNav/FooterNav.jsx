@@ -10,7 +10,7 @@ const FooterNav = () => {
 
   return (
     <nav className={s.navigation}>
-      <h3>Navigation</h3>
+      <h2 role="presentation">Navigation</h2>
 
       <ul className={s.links}>
         {NAV_LINKS_DATA.map(({ name, href, iconName, id }) => (

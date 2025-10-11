@@ -4,7 +4,9 @@ import s from "./SocialMedia.module.scss";
 const SocialMedia = () => {
   return (
     <nav className={s.socialMediaNav}>
-      <h4 className={s.title}>Connect with us</h4>
+      <h2 className={s.title} role="presentation">
+        Connect with us
+      </h2>
 
       <ul>
         {SOCIAL_MEDIA_DATA.map(({ iconName, link, id }) => (
