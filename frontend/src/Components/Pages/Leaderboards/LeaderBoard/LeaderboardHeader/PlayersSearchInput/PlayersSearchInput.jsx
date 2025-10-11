@@ -37,7 +37,6 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
     <div className={s.searchContainer}>
       <input
         type="text"
-        role="search"
         className={s.searchInput}
         placeholder="Search by player name..."
         value={searchPlayer}
