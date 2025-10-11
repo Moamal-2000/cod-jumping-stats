@@ -32,7 +32,6 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
     jumpScores,
     loading,
     error,
-    performanceStatsLoading,
     leaderboardPositionsLoading,
     topRunsLoading,
     jumpScoresLoading,
@@ -74,7 +73,6 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
     return "Unknown Player";
   };
 
-  const [selectedFps, setSelectedFps] = useState("125");
   const [activeTab, setActiveTab] = useState("overview");
 
   // Get tab parameter from URL
@@ -225,29 +223,6 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
       common: { color: "#9ca3af", glow: "#9ca3af" },
     };
     return rarityMap[rarity];
-  };
-
-  const getActivityLevelColor = (level) => {
-    switch (level?.toLowerCase()) {
-      case "active":
-        return "#4CAF50";
-      case "inactive":
-        return "#FF9800";
-      case "banned":
-        return "#F44336";
-      default:
-        return "#9E9E9E";
-    }
-  };
-
-  // Get rank color based on rank number
-  const getRankColor = (rank) => {
-    if (rank === 1) return "#FFD700"; // Gold
-    if (rank === 2) return "#C0C0C0"; // Silver
-    if (rank === 3) return "#CD7F32"; // Bronze
-    if (rank <= 10) return "#4CAF50"; // Green for top 10
-    if (rank <= 50) return "#2196F3"; // Blue for top 50
-    return "#9E9E9E"; // Gray for others
   };
 
   // Get rank category for styling
