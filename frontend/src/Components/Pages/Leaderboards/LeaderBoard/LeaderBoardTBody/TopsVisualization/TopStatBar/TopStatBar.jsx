@@ -1,12 +1,7 @@
 import { getStatsBarStyles } from "@/Functions/utils";
 import s from "./TopStatBar.module.scss";
 
-const TopStatBar = ({
-  top,
-  times,
-  maxFinishTimes,
-  isSkilledLeaderboard,
-}) => {
+const TopStatBar = ({ top, times, maxFinishTimes, isSkilledLeaderboard }) => {
   const tooltipText = isSkilledLeaderboard
     ? `Earnt ${times} points over ${top} difficulty maps`
     : `${times} times in position #${top}`;
@@ -19,7 +14,7 @@ const TopStatBar = ({
   });
 
   return (
-    <div className={s.statBarWrapper}>
+    <div className={`${s.statBarWrapper} ${+top === 1 ? s.top1 : ""}`}>
       <p className={s.toolTip}>{tooltipText}</p>
 
       <span className={s.top}>#{top}</span>
