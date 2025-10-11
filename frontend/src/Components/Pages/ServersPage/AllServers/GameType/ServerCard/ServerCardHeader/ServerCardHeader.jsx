@@ -7,7 +7,7 @@ import s from "./ServerCardHeader.module.scss";
 import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
-const ServerCardHeader = ({ server }) => {
+const ServerCardHeader = ({ server, index }) => {
   const [src, setSrc] = useState(`/maps/512/${server.Map}.webp`);
 
   return (
@@ -32,6 +32,8 @@ const ServerCardHeader = ({ server }) => {
         sizes="383px"
         className={s.mapBackground}
         onError={() => setSrc("/placeholders/blank-black.svg")}
+        loading={index < 3 ? "eager" : "lazy"}
+        priority={index < 3}
       />
     </header>
   );

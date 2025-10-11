@@ -5,10 +5,10 @@ import ServerCardHeader from "./ServerCardHeader/ServerCardHeader";
 import ServerCardMapSection from "./ServerCardMapSection/ServerCardMapSection";
 import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlayersSection";
 
-const ServerCard = ({ server }) => {
+const ServerCard = ({ server, index }) => {
   return (
     <div className={s.serverCard}>
-      <ServerCardHeader server={server} />
+      <ServerCardHeader server={server} index={index} />
       <ServerCardMapSection server={server} />
       <ServerCardPlayersSection server={server} />
     </div>
