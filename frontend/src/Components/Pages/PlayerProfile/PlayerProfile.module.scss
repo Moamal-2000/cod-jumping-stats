@@ -100,6 +100,7 @@
     opacity: 0;
     transform: translateY(10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -328,7 +329,8 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
   align-items: start;
-  padding-top: 1px; /* Prevent clipping on hover translateY */
+  padding-top: 1px;
+  /* Prevent clipping on hover translateY */
 }
 
 .infoItem {
@@ -876,7 +878,8 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  padding-top: 2px; /* Prevent clipping on hover translateY */
+  padding-top: 2px;
+  /* Prevent clipping on hover translateY */
 }
 
 .achievementCard {
@@ -1326,7 +1329,7 @@
 .leaderboardHeader {
   margin-bottom: 2rem;
   text-align: center;
-  
+
   h2 {
     font-size: 2.5rem;
     color: #f9fafb;
@@ -1402,7 +1405,7 @@
   @media (max-width: 1024px) {
     min-width: 250px;
   }
-  
+
   @media (max-width: 768px) {
     justify-content: stretch;
     min-width: 200px;
@@ -1496,7 +1499,7 @@
     background: #374151;
     border: 1px solid #d97706;
     box-shadow: 0 0 15px rgba(217, 119, 6, 0.2);
-    
+
     &:hover {
       box-shadow: 0 8px 25px rgba(217, 119, 6, 0.3);
     }
@@ -1506,7 +1509,7 @@
     background: transparent;
     border: 1px solid #6b7280;
     box-shadow: none;
-    
+
     &:hover {
       transform: none;
       box-shadow: none;
@@ -1517,7 +1520,7 @@
     background: transparent;
     border: 1px solid #c2410c;
     box-shadow: none;
-    
+
     &:hover {
       transform: none;
       box-shadow: none;
@@ -1528,7 +1531,7 @@
     background: transparent;
     border: none;
     box-shadow: none;
-    
+
     &:hover {
       transform: none;
       box-shadow: none;
@@ -1570,7 +1573,7 @@
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border: 2px solid #d97706;
     box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(217, 119, 6, 0.5);
     }
@@ -1580,7 +1583,7 @@
     background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
     border: 2px solid #6b7280;
     box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(107, 114, 128, 0.5);
     }
@@ -1590,7 +1593,7 @@
     background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
     border: 2px solid #c2410c;
     box-shadow: 0 4px 12px rgba(194, 65, 12, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(194, 65, 12, 0.5);
     }
@@ -1600,7 +1603,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -1610,7 +1613,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -1620,7 +1623,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -1768,14 +1771,16 @@
   flex-wrap: wrap;
   gap: 1.5rem;
   align-items: flex-start;
-  padding-top: 4px; /* Prevent clipping on hover translateY */
+  padding-top: 4px;
+  /* Prevent clipping on hover translateY */
 }
 
 .topRunsList {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
   gap: 1rem;
-  padding-top: 4px; /* Prevent clipping on hover translateY */
+  padding-top: 4px;
+  /* Prevent clipping on hover translateY */
 }
 
 @media (min-width: 1200px) {
@@ -2012,7 +2017,7 @@
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border: 2px solid #d97706;
     box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(217, 119, 6, 0.5);
     }
@@ -2022,7 +2027,7 @@
     background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
     border: 2px solid #6b7280;
     box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(107, 114, 128, 0.5);
     }
@@ -2032,7 +2037,7 @@
     background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
     border: 2px solid #c2410c;
     box-shadow: 0 4px 12px rgba(194, 65, 12, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(194, 65, 12, 0.5);
     }
@@ -2043,7 +2048,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     }
@@ -2054,7 +2059,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     }
@@ -2065,7 +2070,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
     }
@@ -2161,6 +2166,7 @@
     border-color: #4b5563;
     transform: translateY(-1px);
   }
+
   overflow: hidden;
 }
 
@@ -2168,21 +2174,32 @@
 
 
 @keyframes epicGlow {
-  0% { box-shadow: 0 0 20px rgba(139, 92, 246, 0.3); }
-  100% { box-shadow: 0 0 30px rgba(139, 92, 246, 0.6); }
+  0% {
+    box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  }
+
+  100% {
+    box-shadow: 0 0 30px rgba(139, 92, 246, 0.6);
+  }
 }
 
 @keyframes legendaryGlow {
-  0% { box-shadow: 0 0 25px rgba(236, 72, 153, 0.4); }
-  100% { box-shadow: 0 0 35px rgba(236, 72, 153, 0.7); }
+  0% {
+    box-shadow: 0 0 25px rgba(236, 72, 153, 0.4);
+  }
+
+  100% {
+    box-shadow: 0 0 35px rgba(236, 72, 153, 0.7);
+  }
 }
 
 
 @keyframes mythicalCardGlow {
-  0% { 
+  0% {
     box-shadow: 0 0 25px rgba(245, 158, 11, 0.3);
   }
-  100% { 
+
+  100% {
     box-shadow: 0 0 35px rgba(245, 158, 11, 0.5);
   }
 }
@@ -2274,7 +2291,7 @@
     background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
     border: 2px solid #d97706;
     box-shadow: 0 4px 12px rgba(217, 119, 6, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(217, 119, 6, 0.5);
     }
@@ -2284,7 +2301,7 @@
     background: linear-gradient(135deg, #9ca3af 0%, #6b7280 100%);
     border: 2px solid #6b7280;
     box-shadow: 0 4px 12px rgba(107, 114, 128, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(107, 114, 128, 0.5);
     }
@@ -2294,7 +2311,7 @@
     background: linear-gradient(135deg, #ea580c 0%, #c2410c 100%);
     border: 2px solid #c2410c;
     box-shadow: 0 4px 12px rgba(194, 65, 12, 0.4);
-    
+
     &:hover {
       box-shadow: 0 6px 16px rgba(194, 65, 12, 0.5);
     }
@@ -2304,7 +2321,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -2314,7 +2331,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -2324,7 +2341,7 @@
     background: linear-gradient(135deg, #374151 0%, #1f2937 100%);
     border: 2px solid #4b5563;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    
+
     &:hover {
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     }
@@ -2386,16 +2403,16 @@
   line-height: 1.3;
   max-width: 100%;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  
+
   // Responsive font sizing for very long names
   @media (max-width: 768px) {
     font-size: 1.2rem;
   }
-  
+
   // For extremely long names, use smaller font
   &.longName {
     font-size: 1.2rem;
-    
+
     @media (max-width: 768px) {
       font-size: 1.1rem;
     }
@@ -2438,7 +2455,7 @@
 .topRunsHeader {
   margin-bottom: 2rem;
   text-align: center;
-  
+
   h2 {
     font-size: 2.5rem;
     color: #f9fafb;
@@ -2684,6 +2701,13 @@
   }
 }
 
+:where(.fpsSelect,
+  .rankSelect,
+  .sortSelect,
+  .orderSelect) option {
+  color: #000;
+}
+
 .checkbox {
   margin-right: 0.5rem;
   accent-color: #facc15;
@@ -2743,14 +2767,20 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes mythicalCardGlow {
   0% {
     box-shadow: 0 12px 35px rgba(245, 158, 11, 0.5);
   }
+
   100% {
     box-shadow: 0 12px 35px rgba(245, 158, 11, 0.8), 0 0 20px rgba(245, 158, 11, 0.3);
   }
@@ -3009,7 +3039,7 @@
   .tabButton {
     padding: 0.5rem 1rem;
     font-size: 0.8rem;
-    
+
     svg {
       width: 0.9rem;
       height: 0.9rem;
