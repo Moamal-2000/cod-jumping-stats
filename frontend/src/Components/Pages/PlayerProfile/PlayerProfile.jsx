@@ -744,37 +744,28 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
                 </p>
 
                 <div className={s.recentActivityList}>
-                  {performanceStats.recent_tops
-                    .slice(0, 10)
-                    .map((run, index) => (
-                      <div key={index} className={s.recentActivityItem}>
-                        <div className={s.activityIcon}>
-                          <svg>
-                            <use href="/icons-sprite.svg#star" />
-                          </svg>
-                        </div>
-                        <div className={s.activityContent}>
-                          <div className={s.activityTitle}>{run.map_name}</div>
-                          <div className={s.activityDetails}>
-                            <span className={s.activityRank}>
-                              Rank #{run.rank}
-                            </span>
-                            <span className={s.activityFps}>{run.fps} FPS</span>
-                            <span className={s.activityDate}>
-                              {formatDate(run.finish_date)}
-                            </span>
-                          </div>
+                  {performanceStats.recent_tops.map((run, index) => (
+                    <div key={index} className={s.recentActivityItem}>
+                      <div className={s.activityIcon}>
+                        <svg>
+                          <use href="/icons-sprite.svg#star" />
+                        </svg>
+                      </div>
+                      <div className={s.activityContent}>
+                        <div className={s.activityTitle}>{run.map_name}</div>
+                        <div className={s.activityDetails}>
+                          <span className={s.activityRank}>
+                            Rank #{run.rank}
+                          </span>
+                          <span className={s.activityFps}>{run.fps} FPS</span>
+                          <span className={s.activityDate}>
+                            {formatDate(run.finish_date)}
+                          </span>
                         </div>
                       </div>
-                    ))}
+                    </div>
+                  ))}
                 </div>
-
-                {performanceStats.recent_tops.length > 10 && (
-                  <div className={s.moreActivityText}>
-                    +{performanceStats.recent_tops.length - 10} more recent
-                    achievements
-                  </div>
-                )}
               </div>
             )}
           </div>
