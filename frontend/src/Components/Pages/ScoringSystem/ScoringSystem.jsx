@@ -1,6 +1,5 @@
 "use client";
 
-import PageHeader from "@/Components/Shared/PageHeroSection/PageHeroSection";
 import { useRef, useState } from "react";
 import s from "./ScoringSystem.module.scss";
 
@@ -52,11 +51,6 @@ const ScoringSystem = () => {
   return (
     <main className={s.scoringSystem}>
       <div className={s.container}>
-        <PageHeader
-          title="Leaderboard Scoring System"
-          description="Discover how we determine player rankings through our comprehensive scoring system. Each leaderboard uses unique algorithms to ensure fair and accurate competition across different play styles."
-        />
-
         <nav
           className={s.tabNavigation}
           role="tablist"

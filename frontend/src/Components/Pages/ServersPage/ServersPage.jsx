@@ -4,7 +4,6 @@ import { jhApis } from "@/Api/jumpersHeaven";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { useEffect, useState } from "react";
 import AllServers from "./AllServers/AllServers";
-import ServersHeader from "./ServersHeader/ServersHeader";
 
 const ServersPage = () => {
   const [servers, setServers] = useState([]);
@@ -33,12 +32,7 @@ const ServersPage = () => {
     fetchServers();
   }, []);
 
-  return (
-    <div>
-      <ServersHeader />
-      <AllServers servers={servers} loading={loading} error={error} />
-    </div>
-  );
+  return <AllServers servers={servers} loading={loading} error={error} />;
 };
 
 export default ServersPage;

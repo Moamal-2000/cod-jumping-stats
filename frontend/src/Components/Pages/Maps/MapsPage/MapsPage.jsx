@@ -1,6 +1,5 @@
 "use client";
 
-import PageHeader from "@/Components/Shared/PageHeroSection/PageHeroSection";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/Data/constants";
 import useInfiniteScroll from "@/Hooks/App/useInfiniteScroll";
 import { updateMapsState } from "@/Redux/slices/mapsSlice";
@@ -38,11 +37,6 @@ const MapsPage = () => {
   return (
     <div className="container">
       <main className={s.mapsPage}>
-        <PageHeader
-          title="Discover Amazing Maps"
-          description="Explore a vast collection of player-created challenges ranging from beginner-friendly courses to expert-level speedruns. Find your next favorite jump challenge and become a legend."
-        />
-
         <SearchSection />
         <Suspense>
           <FiltersSection setPaginationNumber={setPaginationNumber} />
