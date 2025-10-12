@@ -40,22 +40,14 @@
 }
 
 .statBarWrapper :where(.top, .times) {
-  --text-border-color: #1d1d1d;
   color: #fff;
   font-size: .75rem;
+  font-weight: bolder !important;
   position: absolute;
   left: 50%;
   translate: -50% 0;
   z-index: 1;
-  text-shadow:
-    -.5px -.5px 0 var(--text-border-color),
-    .5px -.5px 0 var(--text-border-color),
-    -.5px .5px 0 var(--text-border-color),
-    -.5px 0 0 var(--text-border-color),
-    0 -.5px 0 var(--text-border-color),
-    0 .5px 0 var(--text-border-color),
-    .5px 0 0 var(--text-border-color),
-    .5px .5px 0 var(--text-border-color);
+  -webkit-text-stroke: .5px #1d1d1d;
 }
 
 .statBarWrapper .top {
