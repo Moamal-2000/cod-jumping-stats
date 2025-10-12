@@ -1,5 +1,6 @@
 "use client";
 
+import PageHeader from "@/Components/Shared/PageHeroSection/PageHeroSection";
 import {
   loadMorePlayersAction,
   resetPagination,
@@ -116,20 +117,12 @@ const PlayersPage = () => {
 
   return (
     <div className={s.playersContainer}>
-      <div className={s.playersHeader}>
-        <div className={s.titleSection}>
-          <h1 className={s.playersTitle}>Players</h1>
-          <p className={s.playersSubtitle}>
-            {searchTerm
-              ? `${filteredPlayers.length} player${
-                  filteredPlayers.length !== 1 ? "s" : ""
-                } found`
-              : `${playersData.length} player${
-                  playersData.length !== 1 ? "s" : ""
-                } found`}
-          </p>
-        </div>
-      </div>
+      <PageHeader
+        title="Meet the Legends"
+        description={`Explore ${playersData.length} player${
+          playersData.length !== 1 ? "s" : ""
+        }, their stats, and achievements. Search, track, and follow top gamers, veterans, and contributors across all servers.`}
+      />
 
       <FiltersSection
         searchInputRef={searchInputRef}

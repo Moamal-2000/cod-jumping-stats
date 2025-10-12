@@ -1,12 +1,12 @@
 "use client";
 
+import PageHeader from "@/Components/Shared/PageHeroSection/PageHeroSection";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/Data/constants";
 import useInfiniteScroll from "@/Hooks/App/useInfiniteScroll";
 import { updateMapsState } from "@/Redux/slices/mapsSlice";
 import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "../FiltersSection/FiltersSection";
-import Introduction from "../Introduction/Introduction";
 import Maps from "../Maps/Maps";
 import SearchSection from "../SearchSection/SearchSection";
 import s from "./MapsPage.module.scss";
@@ -38,7 +38,11 @@ const MapsPage = () => {
   return (
     <div className="container">
       <main className={s.mapsPage}>
-        <Introduction />
+        <PageHeader
+          title="Discover Amazing Maps"
+          description="Explore a vast collection of player-created challenges ranging from beginner-friendly courses to expert-level speedruns. Find your next favorite jump challenge and become a legend."
+        />
+
         <SearchSection />
         <Suspense>
           <FiltersSection setPaginationNumber={setPaginationNumber} />

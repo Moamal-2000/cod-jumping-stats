@@ -1,15 +1,5 @@
 @use "@/Styles/mixins" as m;
 
-// Base Styles
-.scoringSystem {
-  min-height: 100vh;
-  padding: 80px 24px 40px;
-  
-  @include m.small {
-    padding: 70px 16px 30px;
-  }
-}
-
 .container {
   max-width: 1400px;
   margin: 0 auto;
