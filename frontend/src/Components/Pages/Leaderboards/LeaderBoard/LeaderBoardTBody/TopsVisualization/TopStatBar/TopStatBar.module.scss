@@ -48,14 +48,14 @@
   translate: -50% 0;
   z-index: 1;
   text-shadow:
-    -1px -1px 0 var(--text-border-color),
-    1px -1px 0 var(--text-border-color),
-    -1px 1px 0 var(--text-border-color),
-    -1px 0 0 var(--text-border-color),
-    0 -1px 0 var(--text-border-color),
-    0 1px 0 var(--text-border-color),
-    1px 0 0 var(--text-border-color),
-    1px 1px 0 var(--text-border-color);
+    -.5px -.5px 0 var(--text-border-color),
+    .5px -.5px 0 var(--text-border-color),
+    -.5px .5px 0 var(--text-border-color),
+    -.5px 0 0 var(--text-border-color),
+    0 -.5px 0 var(--text-border-color),
+    0 .5px 0 var(--text-border-color),
+    .5px 0 0 var(--text-border-color),
+    .5px .5px 0 var(--text-border-color);
 }
 
 .statBarWrapper .top {
