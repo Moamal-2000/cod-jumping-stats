@@ -37,6 +37,8 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
     jumpScoresLoading,
   } = useSelector((state) => state.playerProfile);
 
+  const topRunsCount = performanceStats?.recent_tops?.length;
+
   // Also get players data to find player name
   const { playersData } = useSelector((state) => state.players);
 
@@ -734,52 +736,47 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
               )}
 
             {/* Recent Activity */}
-            {performanceStats?.recent_tops &&
-              performanceStats.recent_tops.length > 0 && (
-                <div className={s.recentActivitySection}>
-                  <h2>Recent Activity</h2>
-                  <p className={s.sectionDescription}>
-                    Latest top 10 finishes and achievements
-                  </p>
+            {performanceStats?.recent_tops && topRunsCount > 0 && (
+              <div className={s.recentActivitySection}>
+                <h2>Recent Activity</h2>
+                <p className={s.sectionDescription}>
+                  Latest top {topRunsCount} finishes and achievements
+                </p>
 
-                  <div className={s.recentActivityList}>
-                    {performanceStats.recent_tops
-                      .slice(0, 10)
-                      .map((run, index) => (
-                        <div key={index} className={s.recentActivityItem}>
-                          <div className={s.activityIcon}>
-                            <svg>
-                              <use href="/icons-sprite.svg#star" />
-                            </svg>
-                          </div>
-                          <div className={s.activityContent}>
-                            <div className={s.activityTitle}>
-                              {run.map_name}
-                            </div>
-                            <div className={s.activityDetails}>
-                              <span className={s.activityRank}>
-                                Rank #{run.rank}
-                              </span>
-                              <span className={s.activityFps}>
-                                {run.fps} FPS
-                              </span>
-                              <span className={s.activityDate}>
-                                {formatDate(run.finish_date)}
-                              </span>
-                            </div>
+                <div className={s.recentActivityList}>
+                  {performanceStats.recent_tops
+                    .slice(0, 10)
+                    .map((run, index) => (
+                      <div key={index} className={s.recentActivityItem}>
+                        <div className={s.activityIcon}>
+                          <svg>
+                            <use href="/icons-sprite.svg#star" />
+                          </svg>
+                        </div>
+                        <div className={s.activityContent}>
+                          <div className={s.activityTitle}>{run.map_name}</div>
+                          <div className={s.activityDetails}>
+                            <span className={s.activityRank}>
+                              Rank #{run.rank}
+                            </span>
+                            <span className={s.activityFps}>{run.fps} FPS</span>
+                            <span className={s.activityDate}>
+                              {formatDate(run.finish_date)}
+                            </span>
                           </div>
                         </div>
-                      ))}
-                  </div>
-
-                  {performanceStats.recent_tops.length > 10 && (
-                    <div className={s.moreActivityText}>
-                      +{performanceStats.recent_tops.length - 10} more recent
-                      achievements
-                    </div>
-                  )}
+                      </div>
+                    ))}
                 </div>
-              )}
+
+                {performanceStats.recent_tops.length > 10 && (
+                  <div className={s.moreActivityText}>
+                    +{performanceStats.recent_tops.length - 10} more recent
+                    achievements
+                  </div>
+                )}
+              </div>
+            )}
           </div>
         )}
 
