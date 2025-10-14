@@ -15,6 +15,7 @@ import {
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import PlayerBadges from "../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import s from "./PlayerProfile.module.scss";
 import PlayerRouteCompletion from "./PlayerRouteCompletion/PlayerRouteCompletion";
 
@@ -478,49 +479,77 @@ const PlayerProfile = ({ playerId: propPlayerId }) => {
       {/* Header */}
       <div className={s.profileHeader}>
         <button onClick={() => router.back()} className={s.backButton}>
-          ← Back
+          Back
         </button>
 
         <div className={s.playerInfo}>
-          <div className={s.avatar}>
-            {(leaderboardPositions.length > 0 &&
-              leaderboardPositions[0].country_code) ||
-            performanceStats?.country_code ? (
-              <CountryImage
-                countryCode={
-                  leaderboardPositions.length > 0
-                    ? leaderboardPositions[0].country_code
-                    : performanceStats.country_code
-                }
-                countryName={
-                  leaderboardPositions.length > 0
-                    ? leaderboardPositions[0].country
-                    : performanceStats.country
-                }
-                size={60}
-              />
-            ) : (
+          <div className={s.avatarContainer}>
+            <div className={s.avatar}>
               <svg>
                 <use href="/icons-sprite.svg#users" />
               </svg>
-            )}
+
+              {((leaderboardPositions.length > 0 &&
+                leaderboardPositions[0].country_code) ||
+                performanceStats?.country_code) && (
+                <CountryImage
+                  countryCode={
+                    leaderboardPositions.length > 0
+                      ? leaderboardPositions[0].country_code
+                      : performanceStats.country_code
+                  }
+                  countryName={
+                    leaderboardPositions.length > 0
+                      ? leaderboardPositions[0].country
+                      : performanceStats.country
+                  }
+                  size={24}
+                />
+              )}
+            </div>
           </div>
 
           <div className={s.playerDetails}>
-            <h1 className={s.playerName}>{getColoredName(getPlayerName())}</h1>
-            <div className={s.playerMeta}>
-              <span className={s.playerId}>ID: {playerId}</span>
+            <h1 className={s.playerName}>
+              {getColoredName(getPlayerName())}
               {performanceStats?.admin_level > 0 && (
-                <span className={s.adminLevel}>
-                  Admin Level {performanceStats.admin_level}
+                <span className={s.adminBadge}>
+                  Admin {performanceStats.admin_level}
                 </span>
               )}
-              {performanceStats?.is_banned && (
-                <span className={s.banned}>BANNED</span>
+            </h1>
+
+            <div className={s.playerMeta}>
+              <span className={s.playerSteamId}>ID: {playerId}</span>
+
+              {performanceStats?.last_seen && (
+                <span className={s.metaItem}>
+                  <span
+                    className={
+                      performanceStats.is_online ? s.online : s.offline
+                    }
+                  >
+                    {performanceStats.is_online
+                      ? "Online"
+                      : formatLastSeen(performanceStats.last_seen)}
+                  </span>
+                </span>
               )}
-              {performanceStats?.is_donator && (
-                <span className={s.donator}>DONATOR</span>
-              )}
+
+              <div className={s.playerBadges}>
+                <PlayerBadges
+                  adminLevel={performanceStats?.admin_level}
+                  banned={playerInfo?.banned}
+                  donated={playerInfo?.donated}
+                  id={playerId}
+                  name={getPlayerName()}
+                  lastSeen={performanceStats?.last_seen}
+                  playerSince={playerInfo?.created_at}
+                  score={performanceStats?.score}
+                  averageScore={performanceStats?.average_score}
+                  top10Ids={performanceStats?.top10_ids || []}
+                />
+              </div>
             </div>
           </div>
         </div>

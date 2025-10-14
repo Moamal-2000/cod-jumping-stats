@@ -3,96 +3,315 @@
 .profileContainer {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
-  background: #1f2937;
+  padding: 2rem 1rem;
+  background: #111827;
   min-height: 100vh;
+  color: #f9fafb;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  line-height: 1.5;
+  position: relative;
 }
 
 .profileHeader {
   display: flex;
-  align-items: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
-  padding-bottom: 1.5rem;
-  border-bottom: 2px solid #4b5563;
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  padding: 1.5rem;
 }
 
-.backButton {
-  background: #374151;
-  color: #f9fafb;
-  border: 1px solid #4b5563;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
+.playerInfo {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  transition: all 0.2s ease;
-  margin-bottom: 1.5rem;
+  gap: 1.5rem;
+  width: 100%;
 
-  &:hover {
-    background: #4b5563;
-    border-color: #6b7280;
+  @media (max-width: 640px) {
+    flex-direction: column;
+    text-align: center;
+    gap: 1rem;
+  }
+}
+
+.avatarContainer {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar {
+  position: relative;
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  overflow: hidden;
+  background: linear-gradient(135deg, #374151 0%, #2d3748 100%);
+  border: 2px solid #4b5563;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 32px;
+    height: 32px;
+    color: #9ca3af;
+    opacity: 0.7;
+  }
+}
+
+.playerDetails {
+  flex: 1;
+  min-width: 0;
+}
+
+.playerName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0 0 0.25rem;
+  color: #f9fafb;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  line-height: 1.2;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+    text-align: center;
+  }
+}
+
+.playerSteamId {
+  font-size: 0.8rem;
+  color: #9ca3af;
+  font-family: 'Roboto Mono', monospace;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  word-break: break-all;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+
+.playerMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin: 0.5rem 0 0;
+  align-items: center;
+
+  @media (max-width: 640px) {
+    justify-content: center;
+  }
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #9ca3af;
+
+  svg {
+    color: #facc15;
+    width: 1.1em;
+    height: 1.1em;
+  }
+
+  &.online {
+    color: #10b981;
+  }
+
+  &.offline {
+    color: #9ca3af;
+  }
+}
+
+.playerActions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  @media (max-width: 640px) {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+.actionButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background: #374151;
+  color: #f9fafb;
+  border: 1px solid #4b5563;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    background: #1f2937;
+    border-color: #facc15;
+    color: #facc15;
+    outline: none;
+  }
+
+  &.primary {
+    background: #facc15;
+    color: #000;
+    font-weight: 600;
+
+    &:hover,
+    &:focus-visible {
+      background: #eab308;
+      border-color: #eab308;
+      color: #000;
+    }
+  }
+
+  svg {
+    width: 1.1em;
+    height: 1.1em;
+  }
+}
+
+.backButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.6rem 1.2rem;
+  background: #1f2937;
+  color: #f9fafb;
+  border: none;
+  font-size: 0.95rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  text-decoration: none;
+  width: fit-content;
+
+  svg {
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
   }
 }
 
 .tabNavigation {
   display: flex;
   gap: 0.5rem;
-  margin-bottom: 1.5rem;
-  border-bottom: 1px solid #4b5563;
+  margin: 0 -1rem 2rem;
+  padding: 0 1rem;
   overflow-x: auto;
-  padding-bottom: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #4b5563 transparent;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+
+  &::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #4b5563;
+    border-radius: 4px;
+  }
 }
 
 .tabButton {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1.5rem;
   background: transparent;
   border: none;
   color: #9ca3af;
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 6px 6px 0 0;
-  transition: all 0.3s ease;
+  border-radius: 8px 8px 0 0;
+  transition: all 0.2s ease;
   white-space: nowrap;
   min-width: fit-content;
+  margin: 0;
+  position: relative;
+  overflow: hidden;
 
-  &:hover {
-    background: #374151;
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: transparent;
+    transition: all 0.2s ease;
+  }
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(255, 255, 255, 0.05);
     color: #f9fafb;
+    outline: none;
+  }
+
+  &:focus-visible {
+    box-shadow: 0 0 0 2px #facc15;
   }
 
   &.active {
-    background: #facc15;
-    color: #000;
+    color: #facc15;
     font-weight: 600;
+
+    &::after {
+      background: #facc15;
+    }
   }
 
   svg {
-    width: 1rem;
-    height: 1rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex-shrink: 0;
   }
 }
 
 .tabContent {
   min-height: 300px;
-}
-
-.overviewTab,
-.leaderboardTab,
-.topRunsTab {
   animation: fadeIn 0.3s ease-in-out;
+
+  &[aria-busy="true"] {
+    position: relative;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &::after {
+      content: 'Loading...';
+      color: #9ca3af;
+      font-size: 1rem;
+      animation: pulse 1.5s infinite;
+    }
+  }
 }
 
 @keyframes fadeIn {
@@ -107,78 +326,148 @@
   }
 }
 
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
 .playerInfo {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   gap: 1.5rem;
-  flex: 1;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.avatarContainer {
+  position: relative;
+  width: 100px;
+  height: 100px;
+  flex-shrink: 0;
+
+  @media (min-width: 768px) {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 .avatar {
-  width: 80px;
-  height: 80px;
+  width: 100%;
+  height: 100%;
   border-radius: 50%;
   overflow: hidden;
   border: 3px solid #facc15;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: #374151;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+  }
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
   }
 
   svg {
-    width: 40px;
-    height: 40px;
+    width: 50%;
+    height: 50%;
     color: #9ca3af;
   }
 }
 
 .playerDetails {
   flex: 1;
+  min-width: 0;
 }
 
 .playerName {
-  font-size: 2.5rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #f9fafb;
   margin: 0 0 0.5rem 0;
   line-height: 1.2;
+  word-break: break-word;
+
+  @media (min-width: 768px) {
+    font-size: 2.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 2.5rem;
+  }
 }
 
 .playerMeta {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
+  margin-bottom: 0.5rem;
 }
 
 .playerId {
   color: #9ca3af;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-weight: 500;
+  background: #374151;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+
+  @media (min-width: 768px) {
+    font-size: 1.05rem;
+  }
+}
+
+.statusBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+
+  svg {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
 }
 
 .adminLevel {
-  background: #facc15;
+  background: #f59e0b;
   color: #000;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+
+  svg {
+    fill: currentColor;
+  }
 }
 
 .banned {
   background: #ef4444;
   color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 1rem;
-  font-size: 0.9rem;
-  font-weight: 600;
+
+  svg {
+    fill: currentColor;
+  }
 }
 
 .donator {
@@ -279,12 +568,6 @@
 }
 
 // Player Information
-.statsHeader {
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid #374151;
-}
-
 .playerInfoContainer {
   display: flex;
   justify-content: center;
@@ -3037,6 +3320,4 @@
       height: 0.9rem;
     }
   }
-
-
 }
