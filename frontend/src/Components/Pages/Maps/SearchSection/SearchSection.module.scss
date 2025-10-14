@@ -1,5 +1,3 @@
-@import "@/Styles/mixins";
-
 .searchSection {
   margin-bottom: 2rem;
   padding: 1.5rem;
@@ -54,8 +52,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .clearButton {
@@ -100,11 +103,11 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .searchContainer {
     width: 100%;
   }
-  
+
   .searchInput {
     min-width: unset;
     width: 100%;
