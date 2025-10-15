@@ -1,6 +1,7 @@
 "use client";
 
 import ExpandButton from "./ExpandButton";
+import HideLeaderboardHeaderBtn from "./HideLeaderboardHeaderBtn/HideLeaderboardHeaderBtn";
 import s from "./LeaderboardHeaderBtns.module.scss";
 import ShowAllButton from "./ShowAllButton";
 
@@ -9,6 +10,7 @@ const LeaderboardHeaderBtns = ({ setPaginationNumber }) => {
     <div className={s.buttons}>
       <ExpandButton />
       <ShowAllButton setPaginationNumber={setPaginationNumber} />
+      <HideLeaderboardHeaderBtn />
     </div>
   );
 };

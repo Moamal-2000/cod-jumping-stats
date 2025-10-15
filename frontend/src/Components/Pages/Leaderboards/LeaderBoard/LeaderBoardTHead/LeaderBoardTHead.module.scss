@@ -5,8 +5,13 @@
   top: 184px;
   left: 0;
   z-index: 10;
-  transition: background-color .3s;
   translate: 0 -10px;
+  transition: background-color .3s;
+}
+
+.thead.afterHideHeader {
+  top: 85px;
+  translate: 0 -2px;
 }
 
 .thead tr {
@@ -52,4 +57,15 @@
   opacity: .5;
   font-size: 1rem;
   transition: color .1s;
+}
+
+.thead tr th.tops {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+
+  &.afterHideHeader {
+    justify-content: flex-end;
+  }
 }

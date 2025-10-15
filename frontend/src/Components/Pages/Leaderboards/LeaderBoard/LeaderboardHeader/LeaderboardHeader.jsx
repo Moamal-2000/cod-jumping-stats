@@ -13,9 +13,8 @@ import LeaderboardHeaderBtns from "./LeaderboardHeaderBtns/LeaderboardHeaderBtns
 import PlayersSearchInput from "./PlayersSearchInput/PlayersSearchInput";
 
 const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
-  const { leaderboardData, leaderboardScroll } = useSelector(
-    (s) => s.leaderboard
-  );
+  const { leaderboardData, leaderboardScroll, isLeaderboardHeaderVisible } =
+    useSelector((s) => s.leaderboard);
   const statistics = useSelector((s) => s.global.statistics);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
@@ -48,7 +47,9 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
   }, [leaderboardScroll]);
 
   return (
-    <header className={s.header}>
+    <header
+      className={`${s.header} ${isLeaderboardHeaderVisible ? "" : s.hidden}`}
+    >
       <div className={s.mainWrapper}>
         <div className={s.wrapper}>
           <h3>{leaderboardTitle}</h3>

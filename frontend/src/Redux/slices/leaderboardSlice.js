@@ -10,6 +10,7 @@ const initialState = {
   allDataDisplayed: [],
   loading: false,
   error: false,
+  isLeaderboardHeaderVisible: true,
 };
 
 export const leaderboardSlice = createSlice({
