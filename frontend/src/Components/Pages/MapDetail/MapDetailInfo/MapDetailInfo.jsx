@@ -1,7 +1,7 @@
 import s from "./MapDetailInfo.module.scss";
 
 const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
-  const { difficulty } = mapData;
+  const { Difficulty } = mapData;
 
   const formatTime = (seconds) => {
     const minutes = Math.floor(seconds / 60);
@@ -10,14 +10,14 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
   };
 
   const getDifficultyValue = (fps) => {
-    const diff = difficulty?.[fps];
-    if (!diff || diff.difficulty < 0) return "?";
-    return Number(diff.difficulty).toFixed(2);
+    const diff = Difficulty?.[fps];
+    if (!diff || diff.Difficulty < 0) return "?";
+    return Number(diff.Difficulty).toFixed(2);
   };
 
   const getStatsForFps = (fps) => {
-    const diff = difficulty?.[fps];
-    if (!diff || diff.difficulty < 0) return null;
+    const diff = Difficulty?.[fps];
+    if (!diff || diff.Difficulty < 0) return null;
     return diff;
   };
 
