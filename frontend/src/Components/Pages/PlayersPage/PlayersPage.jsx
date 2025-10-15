@@ -28,13 +28,12 @@ const PlayersPage = () => {
     isLoadingMore,
   } = useSelector((s) => s.players);
 
-  const effectiveDisplayedCount = displayedCount || 200;
-  const playersToDisplay = searchTerm
-    ? filteredPlayers
-    : playersData.slice(
-        0,
-        Math.min(effectiveDisplayedCount, playersData.length)
-      );
+  const playersToDisplay = getPlayersToDisplay({
+    displayedCount,
+    searchTerm,
+    filteredPlayers,
+    playersData,
+  });
 
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
@@ -117,3 +116,14 @@ const PlayersPage = () => {
 };
 
 export default PlayersPage;
+
+function getPlayersToDisplay({
+  displayedCount,
+  searchTerm,
+  filteredPlayers,
+  playersData,
+} = {}) {
+  if (searchTerm) return filteredPlayers;
+  const count = displayedCount || 200;
+  return playersData.slice(0, Math.min(count, playersData.length));
+}
