@@ -22,7 +22,6 @@ const PlayerCard = ({
           <div className={s.country}>
             <CountryImage
               countryCode={country}
-              countryName={country}
               size={40}
               colorPlaceholder={true}
             />

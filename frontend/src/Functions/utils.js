@@ -284,3 +284,14 @@ export async function getPlayerById({ playerId }) {
 
   return players.find((player) => +player.PlayerID === +playerId);
 }
+
+export function getCountryName(countryCode) {
+  if (!countryCode) return "Unknown Country";
+
+  try {
+    const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
+    return regionNames.of(countryCode) || "Unknown Country";
+  } catch (e) {
+    return "Unknown Country";
+  }
+}
