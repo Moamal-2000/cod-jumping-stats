@@ -2,6 +2,7 @@
 
 import { jhApis } from "@/Api/jumpersHeaven";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
@@ -94,8 +95,10 @@ const MapDetailPage = ({ cpid }) => {
       setLoading(true);
       setError(false);
 
-      const response = await fetch(jhApis().map.getAllMaps);
-      mapsLocal = await response.json();
+      const response = await fetchMsgPackResponse({
+        url: jhApis().map.getAllMaps,
+      });
+      mapsLocal = await decodeAsyncData(response);
 
       const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
 
