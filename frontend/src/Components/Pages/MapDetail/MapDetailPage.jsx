@@ -98,7 +98,9 @@ const MapDetailPage = ({ cpid }) => {
       const response = await fetchMsgPackResponse({
         url: jhApis().map.getAllMaps,
       });
+
       mapsLocal = await decodeAsyncData(response);
+      localStorage.setItem("mapsData", JSON.stringify(mapsLocal));
 
       const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
 
