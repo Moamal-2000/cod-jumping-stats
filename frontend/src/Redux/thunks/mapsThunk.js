@@ -1,5 +1,5 @@
 import { jhApis } from "@/Api/jumpersHeaven";
-import { decodeAsyncData } from "@/Functions/utils";
+import { cacheMapsLocally, decodeAsyncData } from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMaps = createAsyncThunk(
@@ -10,6 +10,7 @@ export const fetchMaps = createAsyncThunk(
         headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
       });
       const mapsData = await decodeAsyncData(response);
+      cacheMapsLocally(mapsData);
 
       return { mapsData, paramsObject };
     } catch (error) {

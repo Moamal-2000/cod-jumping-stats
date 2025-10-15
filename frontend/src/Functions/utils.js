@@ -295,3 +295,8 @@ export function getCountryName(countryCode) {
     return "Unknown Country";
   }
 }
+
+export function cacheMapsLocally(mapsLocal) {
+  const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
+  localStorage.setItem("mapsData", JSON.stringify(cachedData));
+}

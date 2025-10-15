@@ -3,7 +3,7 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+import { cacheMapsLocally, decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
@@ -106,8 +106,7 @@ const MapDetailPage = ({ cpid }) => {
       });
 
       mapsLocal = await decodeAsyncData(response);
-      const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
-      localStorage.setItem("mapsData", JSON.stringify(cachedData));
+      cacheMapsLocally(mapsLocal);
 
       const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
 
