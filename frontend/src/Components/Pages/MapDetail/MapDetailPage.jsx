@@ -77,19 +77,29 @@ const MapDetailPage = ({ cpid }) => {
   }, [mapData, selectedFps]);
 
   const fetchMapData = async () => {
+    let mapsLocal = localStorage.getItem("mapsData");
+
+    if (mapsLocal) {
+      mapsLocal = JSON.parse(mapsLocal);
+      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
+
+      setMapData(map);
+      setError(false);
+      setLoading(false);
+
+      return;
+    }
+
     try {
       setLoading(true);
       setError(false);
 
       const response = await fetch(jhApis().map.getAllMaps);
-      const data = await response.json();
-      const map = data.find((m) => m.cp_id === parseInt(cpid));
+      mapsLocal = await response.json();
 
-      if (map) {
-        setMapData(map);
-      } else {
-        setError(true);
-      }
+      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
+
+      map ? setMapData(map) : setError(true);
     } catch (err) {
       console.error("Error fetching map data:", err);
       setError(true);
