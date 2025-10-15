@@ -2,6 +2,7 @@
 
 import { jhApis } from "@/Api/jumpersHeaven";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
+import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -81,14 +82,19 @@ const MapDetailPage = ({ cpid }) => {
     let mapsLocal = localStorage.getItem("mapsData");
 
     if (mapsLocal) {
-      mapsLocal = JSON.parse(mapsLocal);
-      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
+      const cachedData = JSON.parse(mapsLocal);
+      const isCacheExpire =
+        Date.now() - cachedData.timeStamp > MAPS_CACHE_EXPIRATION_TIME;
 
-      setMapData(map);
-      setError(false);
-      setLoading(false);
+      if (!isCacheExpire) {
+        const map = cachedData.maps.find((map) => map.CpID === parseInt(cpid));
 
-      return;
+        setMapData(map);
+        setError(false);
+        setLoading(false);
+
+        return;
+      }
     }
 
     try {
@@ -100,7 +106,8 @@ const MapDetailPage = ({ cpid }) => {
       });
 
       mapsLocal = await decodeAsyncData(response);
-      localStorage.setItem("mapsData", JSON.stringify(mapsLocal));
+      const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
+      localStorage.setItem("mapsData", JSON.stringify(cachedData));
 
       const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
 

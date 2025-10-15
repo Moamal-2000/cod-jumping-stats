@@ -10,7 +10,6 @@ export const fetchMaps = createAsyncThunk(
         headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
       });
       const mapsData = await decodeAsyncData(response);
-      localStorage.setItem("mapsData", JSON.stringify(mapsData));
 
       return { mapsData, paramsObject };
     } catch (error) {
