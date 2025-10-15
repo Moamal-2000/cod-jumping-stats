@@ -1,6 +1,8 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import AllServers from "@/Components/Pages/ServersPage/AllServers/AllServers";
+import ServersLoadingError from "@/Components/Pages/ServersPage/AllServers/ServersLoadingError/ServersLoadingError";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+import { Suspense } from "react";
 
 export const dynamic = "force-dynamic";
 
@@ -15,7 +17,9 @@ export default async function Servers() {
   return (
     <div className="container">
       <main>
-        <AllServers servers={servers} />;
+        <Suspense fallback={<ServersLoadingError />}>
+          <AllServers servers={servers} />
+        </Suspense>
       </main>
     </div>
   );
