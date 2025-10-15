@@ -28,83 +28,58 @@ const PlayersPage = () => {
     isLoadingMore,
   } = useSelector((s) => s.players);
 
-  // Calculate how many players to display based on client-side pagination
-  const effectiveDisplayedCount = displayedCount || 200; // Fallback to 200 if undefined
+  const effectiveDisplayedCount = displayedCount || 200;
   const playersToDisplay = searchTerm
-    ? filteredPlayers // Show all filtered results when searching
+    ? filteredPlayers
     : playersData.slice(
         0,
         Math.min(effectiveDisplayedCount, playersData.length)
-      ); // Show only the first displayedCount players when not searching
+      );
 
   const dispatch = useDispatch();
   const [isSearching, setIsSearching] = useState(false);
   const searchInputRef = useRef(null);
-  const observerRef = useRef(null);
   const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
   const noResults = playersToDisplay.length === 0;
 
   useEffect(() => {
-    // Reset pagination and fetch all players on initial load or sort change
     dispatch(resetPagination());
     dispatch(fetchAllPlayers({ sort: sortBy }));
   }, [dispatch, sortBy]);
 
-  const handleClearSearch = () => {
-    if (searchInputRef.current) {
-      searchInputRef.current.value = ""; // Clear input immediately
-    }
-
-    // Clear any pending search timeout
-    if (searchTimeoutRef.current) {
-      clearTimeout(searchTimeoutRef.current);
-    }
+  function handleClearSearch() {
+    if (searchInputRef.current) searchInputRef.current.value = "";
+    if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
 
     dispatch(setSearchTerm(""));
     setIsSearching(false);
-  };
+  }
 
   const loadMore = useCallback(() => {
-    // Don't load more when searching - search shows all matching results
-    if (hasMore && !isLoadingMore && !loading && !searchTerm) {
-      dispatch(setIsLoadingMore(true));
-      // Simulate a small delay for better UX
-      setTimeout(() => {
-        dispatch(loadMorePlayersAction());
-      }, 300);
-    }
+    if (!hasMore && isLoadingMore && loading && searchTerm) return;
+
+    dispatch(setIsLoadingMore(true));
+    setTimeout(() => dispatch(loadMorePlayersAction()), 300);
   }, [dispatch, hasMore, isLoadingMore, loading, searchTerm]);
 
-  // Intersection Observer for infinite scroll
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting) {
-          loadMore();
-        }
-      },
+      (entries) => entries[0].isIntersecting && loadMore(),
       { threshold: 0.1 }
     );
 
-    if (loadMoreRef.current) {
-      observer.observe(loadMoreRef.current);
-    }
+    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
 
     return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
-      }
+      if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
     };
   }, [loadMore]);
 
-  // Cleanup search timeout on unmount
   useEffect(() => {
     return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
+      if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
     };
   }, []);
 
