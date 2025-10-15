@@ -1,4 +1,8 @@
-import ServersPage from "@/Components/Pages/ServersPage/ServersPage";
+import { jhApis } from "@/Api/jumpersHeaven";
+import AllServers from "@/Components/Pages/ServersPage/AllServers/AllServers";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+
+export const dynamic = "force-dynamic";
 
 export const metadata = {
   title: "Servers | JumpersHeaven",
@@ -6,11 +10,29 @@ export const metadata = {
 };
 
 export default async function Servers() {
+  const servers = await fetchServers();
+
   return (
     <div className="container">
       <main>
-        <ServersPage />
+        <AllServers servers={servers} />;
       </main>
     </div>
   );
+}
+
+async function fetchServers() {
+  try {
+    const response = await fetchMsgPackResponse({
+      url: jhApis().player.getOnlinePlayers,
+      cache: "no-store",
+    });
+
+    if (!response.ok) throw new Error("Failed to fetch server data");
+
+    const data = await decodeAsyncData(response);
+    return data.Servers || [];
+  } catch (error) {
+    throw new Error(`Error fetching server data: ${error}`);
+  }
 }
