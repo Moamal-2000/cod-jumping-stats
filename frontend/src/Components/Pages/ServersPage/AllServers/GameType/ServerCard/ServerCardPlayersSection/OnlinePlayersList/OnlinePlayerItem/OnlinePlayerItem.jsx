@@ -17,9 +17,11 @@ const OnlinePlayerItem = ({ player, server }) => {
       href={`/player/${player.PlayerID}`}
       className={`${s.playerItem} ${isCod4 ? s.cod4 : ""}`}
       onClick={handleClick}
-      title={pureName}
     >
-      <strong className={s.playerName}>{coloredName}</strong>
+      <strong className={s.playerName}>
+        <span className="visually-hidden">Player </span>
+        {coloredName}
+      </strong>
 
       <div className={s.playerInfo}>
         <span className={s.playerAdminLevel}>
@@ -27,6 +29,7 @@ const OnlinePlayerItem = ({ player, server }) => {
             <use href="/icons-sprite.svg#shield" />
           </svg>{" "}
           {player?.Admin || "N/A"}
+          <span className="visually-hidden">Admin Level</span>
         </span>
 
         <span className={s.playerPing}>
