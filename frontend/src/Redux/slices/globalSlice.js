@@ -12,6 +12,7 @@ const initialState = {
   pageVisits: [],
   tryFetchAgain: 0,
   statistics: {},
+  hoveredPlayer: null,
 };
 
 export const getJumpersHeavenStats = createAsyncThunk(
