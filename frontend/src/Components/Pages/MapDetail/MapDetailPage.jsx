@@ -3,7 +3,11 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
-import { cacheMapsLocally, decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+import {
+  cacheMapsLocally,
+  decodeAsyncData,
+  fetchMsgPackResponse,
+} from "@/Functions/utils";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
@@ -255,9 +259,7 @@ const MapDetailPage = ({ cpid }) => {
           // First time loading - fetch all data from all FPS
           const allFps = ["125", "250", "333", "43", "76"];
           const promises = allFps.map((fps) =>
-            fetch(
-              jhApis({ fps, mapid: mapData?.mapid }).player.getPlayersPlayTime
-            )
+            fetch(jhApis({ fps, mapid: mapData?.ID }).player.getPlayersPlayTime)
               .then((res) => res.json())
               .then((data) => {
                 // Add FPS information to each player record
@@ -332,8 +334,7 @@ const MapDetailPage = ({ cpid }) => {
         // Mix FPS - use fps=0 in API call
         if (!isLoadMore) {
           const response = await fetch(
-            jhApis({ fps: "0", mapid: mapData?.mapid }).player
-              .getPlayersPlayTime
+            jhApis({ fps: "0", mapid: mapData?.ID }).player.getPlayersPlayTime
           );
           const data = await response.json();
 
@@ -358,7 +359,7 @@ const MapDetailPage = ({ cpid }) => {
         // Single FPS - fetch all data and paginate client-side
         if (!isLoadMore) {
           const response = await fetch(
-            jhApis({ fps: selectedFps, mapid: mapData?.mapid }).player
+            jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
               .getPlayersPlayTime
           );
           const data = await response.json();
