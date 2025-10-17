@@ -1,5 +1,5 @@
 import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
-import { openVideo } from "@/Functions/utils";
+import { JUMP_FPS } from "@/Data/constants";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
@@ -10,132 +10,85 @@ const MapCard = memo(({ mapData, mapsScroll, lastMapRef, index }) => {
     Author,
     Difficulty,
     Name,
-    Types,
     Classifications,
     Rate,
     CompilationRate,
     Released,
     Videos,
-    Ender,
-    CpID,
   } = mapData;
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
-  const nameAndRatingStyles = {
-    marginBottom: !Videos?.length > 0 ? "68px" : "",
-  };
 
   return (
-    <Link href={`/map/${CpID}`} className={s.mapCardLink}>
-      <div className={s.mapCard} ref={ref}>
-        <div className={s.imgHolder}>
-          <MapImage mapName={Name} />
+    <div className={s.mapCard} ref={ref}>
+      <div className={s.imgHolder}>
+        <MapImage mapName={Name} />
 
-          <div className={s.layer}>
-            <div className={s.classifications}>
-              {Classifications?.map((text, index) => (
-                <span className={`${s.classification} ${s[text]}`} key={index}>
-                  {text}
-                </span>
-              ))}
-            </div>
+        <div className={s.layer}>
+          <div className={s.classifications}>
+            {Classifications?.map((text, index) => (
+              <span className={`${s.classification} ${s[text]}`} key={index}>
+                {text}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
-            <div className={s.types}>
-              {Types?.map((type) => (
-                <span key={type}>{type}</span>
-              ))}
-            </div>
+      <section className={s.content}>
+        <div className={s.nameAndRating}>
+          <Link href="/maps/map/details">
+            {Name}
+            {Videos?.length > 0 && (
+              <span className={s.videoIcon}>
+                <svg>
+                  <use href="/icons-sprite.svg#youtube" />
+                </svg>
+              </span>
+            )}
+          </Link>
+
+          <div className={s.rateWrapper}>
+            <span className={s.star}>★</span>
+            <span className={s.rate}>{Rate ? Rate : "?"}</span>
           </div>
         </div>
 
-        <section className={s.content}>
-          <div className={s.nameSection}>
-            <div className={s.nameAndVideo}>
-              <span className={s.mapName}>
-                {Name}
-                {Ender && <span className={s.enderValue}> ({Ender})</span>}
-              </span>
+        <div className={s.difficultySection}>
+          <span className={s.difficultyLabel}>Difficulties</span>
+          <div className={s.fpsDifficulties}>
+            {JUMP_FPS.map((fps) => {
+              return (
+                <div className={s.fpsDifficulty}>
+                  <span className={s.fps}>{fps}</span>
+                  <span className={s.difficulty}>
+                    {Difficulty?.[fps]?.Difficulty < 0
+                      ? "???"
+                      : Number(Difficulty?.[fps]?.Difficulty)?.toFixed(2)}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+        </div>
 
-              {Videos?.length > 0 && (
-                <button
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    openVideo(Videos, 0);
-                  }}
-                  className={s.videoIcon}
-                  title="Open video"
-                >
-                  <svg>
-                    <use href="/icons-sprite.svg#youtube" />
-                  </svg>
-                </button>
-              )}
-            </div>
-
-            <div className={s.difficultySection}>
-              <span className={s.difficultyLabel}>Difficulties</span>
-              <div className={s.fpsDifficulties}>
-                {Difficulty?.[125] && (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>125</span>
-                    <span className={s.difficulty}>
-                      {Difficulty[125].Difficulty < 0
-                        ? "?"
-                        : Number(Difficulty[125].Difficulty).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-                {Difficulty?.[250] && (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>250</span>
-                    <span className={s.difficulty}>
-                      {Difficulty[250].Difficulty < 0
-                        ? "?"
-                        : Number(Difficulty[250].Difficulty).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-                {Difficulty?.[333] && (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>333</span>
-                    <span className={s.difficulty}>
-                      {Difficulty[333].Difficulty < 0
-                        ? "?"
-                        : Number(Difficulty[333].Difficulty).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-                {Difficulty?.[43] && (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>43</span>
-                    <span className={s.difficulty}>
-                      {Difficulty[43].Difficulty < 0
-                        ? "?"
-                        : Number(Difficulty[43].Difficulty).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-                {Difficulty?.[76] && (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>76</span>
-                    <span className={s.difficulty}>
-                      {Difficulty[76].Difficulty < 0
-                        ? "?"
-                        : Number(Difficulty[76].Difficulty).toFixed(2)}
-                    </span>
-                  </div>
-                )}
-              </div>
-            </div>
+        <div className={s.completionRate}>
+          <div className={s.textWrapper}>
+            <span className={s.text}>Completion Rate</span>
+            <span className={s.rate}>{CompilationRate || 0 + "%"}</span>
           </div>
 
-          <AuthorAndRelease author={Author} release={Released} />
-        </section>
-      </div>
-    </Link>
+          <div className={s.progressBar}>
+            <div
+              className={s.progressLine}
+              style={{ width: CompilationRate || 0 + "%" }}
+            />
+          </div>
+        </div>
+
+        <AuthorAndRelease author={Author} release={Released} />
+      </section>
+    </div>
   );
 });
-
-MapCard.displayName = "MapCard";
 
 export default MapCard;
