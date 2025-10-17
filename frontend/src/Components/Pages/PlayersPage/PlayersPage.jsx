@@ -1,5 +1,6 @@
 "use client";
 
+import { updateGlobalState } from "@/Redux/slices/globalSlice";
 import {
   loadMorePlayersAction,
   resetPagination,
@@ -63,6 +64,10 @@ const PlayersPage = () => {
     setTimeout(() => dispatch(loadMorePlayersAction()), 300);
   }, [dispatch, hasMore, isLoadingMore, loading, searchTerm]);
 
+  function handleMouseLeave() {
+    dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
+  }
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => entries[0].isIntersecting && loadMore(),
@@ -89,7 +94,7 @@ const PlayersPage = () => {
   }
 
   return (
-    <div className={s.playersContainer}>
+    <div className={s.playersContainer} onMouseLeave={handleMouseLeave}>
       <FiltersSection
         searchInputRef={searchInputRef}
         handleClearSearch={handleClearSearch}

@@ -1,4 +1,5 @@
 import PlayersPage from "@/Components/Pages/PlayersPage/PlayersPage";
+import PlayerToolTip from "@/Components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
 
 export const metadata = {
   title: "Players | JumpersHeaven",
@@ -10,6 +11,7 @@ const Page = () => {
     <div className="container">
       <main>
         <PlayersPage />
+        <PlayerToolTip />
       </main>
     </div>
   );
