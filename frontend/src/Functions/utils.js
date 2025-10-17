@@ -300,3 +300,23 @@ export function cacheMapsLocally(mapsLocal) {
   const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
   localStorage.setItem("mapsData", JSON.stringify(cachedData));
 }
+
+export function getMostFinishedMap(mapsData) {
+  return mapsData.reduce((map, currentMap) => {
+    if (map.IndividualFinishCount > currentMap.IndividualFinishCount)
+      return map;
+
+    return currentMap;
+  });
+}
+
+export function getMapCompletionRate({ mapsData, IndividualFinishCount }) {
+  const mostFinishedMap = getMostFinishedMap(mapsData);
+  const mostFinishedCount = mostFinishedMap.IndividualFinishCount;
+  const completionRate = (
+    (IndividualFinishCount / mostFinishedCount) *
+    100
+  ).toFixed(2);
+
+  return +completionRate || 0;
+}

@@ -7,7 +7,7 @@ import MapCard2 from "../../MapCard2/MapCard2";
 import s from "./ViewMaps.module.scss";
 
 const ViewMaps = ({ mapsScroll, lastMapRef, searchTerm, filteredMaps }) => {
-  const { loading, error } = useSelector((s) => s.maps);
+  const { loading, error, mapsData } = useSelector((s) => s.maps);
   const searchParams = useSearchParams();
   const viewType = searchParams.get("view") || "grid";
 
@@ -42,6 +42,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef, searchTerm, filteredMaps }) => {
         key={`${mapData.CpID}-${index}`}
         mapData={mapData}
         mapsScroll={mapsScroll}
+        mapsData={mapsData}
         lastMapRef={lastMapRef}
         index={index}
       />

@@ -1,22 +1,27 @@
 import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
 import { JUMP_FPS } from "@/Data/constants";
+import { getMapCompletionRate } from "@/Functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import s from "./MapCard.module.scss";
 
-const MapCard = memo(({ mapData, mapsScroll, lastMapRef, index }) => {
+const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
   const {
     Author,
     Difficulty,
+    IndividualFinishCount,
     Name,
     Classifications,
     Rate,
-    CompilationRate,
     Released,
     Videos,
   } = mapData;
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
+  const completionRate = getMapCompletionRate({
+    mapsData,
+    IndividualFinishCount,
+  });
 
   return (
     <div className={s.mapCard} ref={ref}>
@@ -74,13 +79,13 @@ const MapCard = memo(({ mapData, mapsScroll, lastMapRef, index }) => {
         <div className={s.completionRate}>
           <div className={s.textWrapper}>
             <span className={s.text}>Completion Rate</span>
-            <span className={s.rate}>{CompilationRate || 0 + "%"}</span>
+            <span className={s.rate}>{completionRate + "%"}</span>
           </div>
 
           <div className={s.progressBar}>
             <div
               className={s.progressLine}
-              style={{ width: CompilationRate || 0 + "%" }}
+              style={{ width: completionRate + "%" }}
             />
           </div>
         </div>
