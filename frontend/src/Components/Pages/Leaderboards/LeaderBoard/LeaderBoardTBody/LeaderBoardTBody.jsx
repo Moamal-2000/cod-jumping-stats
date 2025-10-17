@@ -1,19 +1,28 @@
 "use client";
 
+import { updateGlobalState } from "@/Redux/slices/globalSlice";
 import { Suspense } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import SpinnerLoader from "../../../../Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import LeaderBoardError from "./LeaderBoardError/LeaderBoardError";
 import s from "./LeaderBoardTBody.module.scss";
 import PlayerRow from "./PlayerRow/PlayerRow";
 
 const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
+  const dispatch = useDispatch();
   const { isLeaderboardReversed } = useSelector((s) => s.global);
   const { loading, error } = useSelector((s) => s.leaderboard);
   const reverseClass = isLeaderboardReversed ? s.reverse : "";
 
+  function handleMouseLeave() {
+    dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
+  }
+
   return (
-    <tbody className={`${s.tbody} ${reverseClass}`}>
+    <tbody
+      className={`${s.tbody} ${reverseClass}`}
+      onMouseLeave={handleMouseLeave}
+    >
       {loading && !error && (
         <SpinnerLoader
           title="Loading leaderboard..."
