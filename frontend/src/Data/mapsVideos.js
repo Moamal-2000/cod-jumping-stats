@@ -363,6 +363,13 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=v8rhtJa3Nh4",
         id: 1,
       },
+      {
+        type: "125 fps showcase",
+        icon: "showcase",
+        videoUrl: "https://www.youtube.com/watch?v=p2kWnrkG0xc",
+        id: 2,
+        playerId: 109442
+      },
     ],
   },
   {
@@ -520,6 +527,32 @@ export const MAPS_VIDEOS = [
         icon: "tutorial",
         videoUrl: "https://www.youtube.com/watch?v=0irPVp7mPKE",
         id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_paskvil",
+    mapId: 552125,
+    videos: [
+      {
+        type: "125 fps tutorial",
+        icon: "tutorial",
+        videoUrl: "https://www.youtube.com/watch?v=_8EZV5P05U0",
+        id: 1,
+        playerId: 109442
+      },
+    ],
+  },
+  {
+    mapName: "jm_pier_250",
+    mapId: 509299,
+    videos: [
+      {
+        type: "250 fps tutorial",
+        icon: "tutorial",
+        videoUrl: "https://www.youtube.com/watch?v=wgdaAjjG8AU",
+        id: 1,
+        playerId: 109442
       },
     ],
   },
