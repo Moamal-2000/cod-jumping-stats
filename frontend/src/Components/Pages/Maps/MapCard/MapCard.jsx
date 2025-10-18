@@ -17,6 +17,7 @@ const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
     Released,
     Videos,
     CpID,
+    Ender,
   } = mapData;
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
@@ -43,7 +44,10 @@ const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
       <section className={s.content}>
         <div className={s.nameAndRating}>
           <Link href={`/map/${CpID}`}>
-            {Name}
+            <span className={s.name}>
+              {Name}
+              {Ender && <span className={s.ender}>({Ender})</span>}
+            </span>
             {Videos?.length > 0 && (
               <span className={s.videoIcon}>
                 <svg>

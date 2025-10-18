@@ -127,7 +127,7 @@
 
 .mapCard .content .nameAndRating a {
   display: flex;
-  gap: 10px;
+  gap: 7px;
   font-size: 1.2rem;
   font-weight: 700;
   color: #fff;
@@ -155,12 +155,25 @@
   }
 }
 
+.mapCard .content .nameAndRating a .name {
+  display: flex;
+  align-items: center;
+}
+
+.mapCard .content .nameAndRating a .ender {
+  color: #facc15;
+  font-size: .85rem;
+  font-weight: 500;
+  margin-left: 5px;
+}
+
 .videoIcon {
   display: block;
   width: 24px;
   height: 24px;
   position: relative;
   z-index: 1;
+  margin-top: 2px;
 }
 
 .videoIcon::before {
