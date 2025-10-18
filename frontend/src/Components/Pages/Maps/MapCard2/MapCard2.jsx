@@ -24,79 +24,75 @@ const MapCard2 = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
   });
 
   return (
-    <div className={s.mapCardLink}>
-      <div className={s.mapCard} ref={ref}>
-        <Link href={`/map/${CpID}`} className={s.imgHolder}>
-          <MapImage mapName={Name} />
+    <div className={s.mapCard} ref={ref}>
+      <Link href={`/map/${CpID}`} className={s.imgHolder}>
+        <MapImage mapName={Name} />
+      </Link>
+
+      <div className={s.leftSide}>
+        <Link href={`/map/${CpID}`}>
+          <span className={s.name}>
+            {Name}
+            {Ender && <span className={s.ender}>({Ender})</span>}
+          </span>
+          {Videos?.length > 0 && (
+            <span className={s.videoIcon}>
+              <svg>
+                <use href="/icons-sprite.svg#youtube" />
+              </svg>
+            </span>
+          )}
         </Link>
 
-        <div className={s.leftSide}>
-          <Link href={`/map/${CpID}`}>
-            <span className={s.name}>
-              {Name}
-              {Ender && <span className={s.ender}>({Ender})</span>}
-            </span>
-            {Videos?.length > 0 && (
-              <span className={s.videoIcon}>
-                <svg>
-                  <use href="/icons-sprite.svg#youtube" />
-                </svg>
-              </span>
-            )}
-          </Link>
-
-          <div className={s.difficultySection}>
-            <span className={s.difficultyLabel}>Difficulties</span>
-            <div className={s.fpsDifficulties}>
-              {JUMP_FPS.map((fps) => {
-                return (
-                  <div className={s.fpsDifficulty}>
-                    <span className={s.fps}>{fps}</span>
-                    <span className={s.difficulty}>
-                      {Difficulty?.[fps]?.Difficulty < 0
-                        ? "???"
-                        : Number(Difficulty?.[fps]?.Difficulty)?.toFixed(2)}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          <div className={s.classifications}>
-            {Classifications?.map((text, index) => (
-              <span className={`${s.classification} ${s[text]}`} key={index}>
-                {text}
-              </span>
-            ))}
+        <div className={s.difficultySection}>
+          <span className={s.difficultyLabel}>Difficulties</span>
+          <div className={s.fpsDifficulties}>
+            {JUMP_FPS.map((fps) => {
+              return (
+                <div className={s.fpsDifficulty}>
+                  <span className={s.fps}>{fps}</span>
+                  <span className={s.difficulty}>
+                    {Difficulty?.[fps]?.Difficulty < 0
+                      ? "???"
+                      : Number(Difficulty?.[fps]?.Difficulty)?.toFixed(2)}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
 
-        <div className={s.rightSide}>
-          <div className={s.completionRate}>
-            <div className={s.textWrapper}>
-              <span className={s.text}>Completion Rate</span>
-              <span className={s.rate}>{completionRate + "%"}</span>
-            </div>
-
-            <div className={s.progressBar}>
-              <div className={s.progressLine} />
-              <div
-                className={s.hideLine}
-                style={{
-                  left: completionRate + "%",
-                  width: 100 - completionRate + "%",
-                }}
-              />
-            </div>
-          </div>
-
-          <div className={s.authorAndRelease}>
-            <span className={s.authorName}>{Author}</span>
-            <span className={s.releaseDate}>
-              {formateReleaseDate(Released)}
+        <div className={s.classifications}>
+          {Classifications?.map((text, index) => (
+            <span className={`${s.classification} ${s[text]}`} key={index}>
+              {text}
             </span>
+          ))}
+        </div>
+      </div>
+
+      <div className={s.rightSide}>
+        <div className={s.completionRate}>
+          <div className={s.textWrapper}>
+            <span className={s.text}>Completion Rate</span>
+            <span className={s.rate}>{completionRate + "%"}</span>
           </div>
+
+          <div className={s.progressBar}>
+            <div className={s.progressLine} />
+            <div
+              className={s.hideLine}
+              style={{
+                left: completionRate + "%",
+                width: 100 - completionRate + "%",
+              }}
+            />
+          </div>
+        </div>
+
+        <div className={s.authorAndRelease}>
+          <span className={s.authorName}>{Author}</span>
+          <span className={s.releaseDate}>{formateReleaseDate(Released)}</span>
         </div>
       </div>
     </div>
