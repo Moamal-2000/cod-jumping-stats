@@ -534,8 +534,8 @@ export const MAPS_VIDEOS = [
     mapId: 552125,
     videos: [
       {
-        type: "125 fps tutorial",
-        icon: "tutorial",
+        type: "125 fps showcase",
+        icon: "showcase",
         videoUrl: "https://www.youtube.com/watch?v=_8EZV5P05U0",
         id: 1,
       },
@@ -546,8 +546,8 @@ export const MAPS_VIDEOS = [
     mapId: 509299,
     videos: [
       {
-        type: "250 fps tutorial",
-        icon: "tutorial",
+        type: "250 fps showcase",
+        icon: "showcase",
         videoUrl: "https://www.youtube.com/watch?v=wgdaAjjG8AU",
         id: 1,
       },
