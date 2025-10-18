@@ -6,7 +6,7 @@ import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import s from "./MapCard.module.scss";
 
-const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
+const MapCard = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
   const {
     Author,
     Difficulty,
@@ -103,6 +103,6 @@ const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
       </section>
     </div>
   );
-});
+};
 
-export default MapCard;
+export default memo(MapCard);
