@@ -1,0 +1,89 @@
+.videosSection {
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  border: 1px solid #374151;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.videosSectionHeader {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+
+  span {
+    color: #f9fafb;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.youtubeIcon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.youtubeIcon::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  translate: -50% -50%;
+  background-color: #fff;
+  width: calc(100% - 6px);
+  height: calc(100% - 16px);
+  z-index: -1;
+}
+
+.youtubeIcon svg {
+  width: 100%;
+  height: 100%;
+  fill: #FF0000;
+}
+
+.videosList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.videoCard {
+  display: inline-flex;
+  background: #374151;
+  border: 1px solid #4b5563;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 12px;
+  gap: 16px;
+}
+
+.videoThumbnail {
+  width: 168px;
+  height: 94px;
+  border-radius: 8px;
+}
+
+.videoTitle {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.videoAuthor {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+.youtubeLink {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
+}

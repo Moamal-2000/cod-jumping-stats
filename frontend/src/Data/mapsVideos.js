@@ -362,6 +362,7 @@ export const MAPS_VIDEOS = [
         icon: "showcase",
         videoUrl: "https://www.youtube.com/watch?v=v8rhtJa3Nh4",
         id: 1,
+        author: "wormtongue"
       },
       {
         type: "125 fps showcase",

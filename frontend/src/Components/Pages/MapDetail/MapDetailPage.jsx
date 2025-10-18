@@ -15,6 +15,7 @@ import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
 import MapDetailPlayers from "./MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "./MapDetailTops/MapDetailTops";
+import MapDetailVideos from "./MapDetailVideos/MapDetailVideos";
 
 const MapDetailPage = ({ cpid }) => {
   const router = useRouter();
@@ -543,6 +544,7 @@ const MapDetailPage = ({ cpid }) => {
               onFpsChange={handleFpsChange}
               fpsOptions={fpsOptions}
             />
+            <MapDetailVideos mapData={mapData} />
           </div>
 
           <div className={s.rightColumn}>
