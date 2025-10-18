@@ -3,10 +3,26 @@
 .mapCard {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
   padding: 20px 24px;
   border-bottom: 1px solid #1e293b;
-  transition: all 0.3s ease;
   position: relative;
+}
+
+@include m.medium {
+  .mapCard {
+    border-bottom: 1px solid #394b69;
+    gap: 0 24px;
+  }
+}
+
+@include m.small {
+  .mapCard {
+    flex-direction: column;
+    gap: 24px;
+    padding: 14px 12px;
+  }
 }
 
 .mapCard .imgHolder {
@@ -14,17 +30,27 @@
   height: 170px;
   border-radius: 12px;
   overflow: hidden;
-  margin-right: 24px;
   position: relative;
   flex-shrink: 0;
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.mapCard .imgHolder>img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+@include m.medium {
+  .mapCard .imgHolder {
+    max-width: 320px;
+    width: 100%;
+    height: 180px;
+    border-radius: 6px;
+  }
+}
+
+@include m.small {
+  .mapCard .imgHolder {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .leftSide {
@@ -147,7 +173,14 @@
 
 .leftSide .difficultySection {
   margin-bottom: 24px;
-  max-width: 320px;
+  width: 320px;
+}
+
+@include m.small {
+  .leftSide .difficultySection {
+    max-width: 320px;
+    width: 100%;
+  }
 }
 
 .leftSide .difficultyLabel {
@@ -213,9 +246,28 @@
   font-weight: 500;
 }
 
+@include m.medium {
+  .rightSide {
+    width: 300px;
+  }
+}
+
+@include m.small {
+  .rightSide {
+    max-width: 320px;
+    width: 100%;
+  }
+}
+
 .rightSide .completionRate {
   margin-bottom: 26px;
   margin-top: 32px;
+}
+
+@include m.small {
+  .rightSide .completionRate {
+    margin-top: 0;
+  }
 }
 
 .rightSide .completionRate .textWrapper {
