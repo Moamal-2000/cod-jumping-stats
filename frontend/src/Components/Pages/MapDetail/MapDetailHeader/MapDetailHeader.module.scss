@@ -36,10 +36,11 @@
 .mapImage {
   flex-shrink: 0;
   width: 240px;
-  height: 150px;
+  height: 136px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #374151;
+  position: relative;
 }
 
 .mapDetails {
