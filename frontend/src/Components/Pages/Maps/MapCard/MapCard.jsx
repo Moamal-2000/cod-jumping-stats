@@ -83,9 +83,13 @@ const MapCard = memo(({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
           </div>
 
           <div className={s.progressBar}>
+            <div className={s.progressLine} />
             <div
-              className={s.progressLine}
-              style={{ width: completionRate + "%" }}
+              className={s.hideLine}
+              style={{
+                left: completionRate + "%",
+                width: 100 - completionRate + "%",
+              }}
             />
           </div>
         </div>

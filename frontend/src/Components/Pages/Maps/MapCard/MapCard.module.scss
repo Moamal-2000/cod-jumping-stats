@@ -296,8 +296,9 @@
   border-radius: 12px;
   position: relative;
   overflow: hidden;
-  background: linear-gradient(90deg, #E53E3E, #FFC107);
+  background: linear-gradient(90deg, #E53E3E 0, #FFC107 50%, #22C55E 100%);
   transition: width 1s cubic-bezier(.175, .885, .32, 1.275);
+  position: relative;
 }
 
 .mapCard .content .completionRate .progressLine::before {
@@ -309,6 +310,14 @@
       rgba(255, 255, 255, .2) 50%,
       rgba(255, 255, 255, 0) 100%);
   animation: shine 2s infinite;
+  z-index: 2;
+}
+
+.mapCard .content .completionRate .hideLine {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: oklch(27.8% 0.033 256.848);
 }
 
 @keyframes shine {
