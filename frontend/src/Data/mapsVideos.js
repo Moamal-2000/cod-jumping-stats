@@ -368,7 +368,6 @@ export const MAPS_VIDEOS = [
         icon: "showcase",
         videoUrl: "https://www.youtube.com/watch?v=p2kWnrkG0xc",
         id: 2,
-        playerId: 109442
       },
     ],
   },
@@ -539,7 +538,6 @@ export const MAPS_VIDEOS = [
         icon: "tutorial",
         videoUrl: "https://www.youtube.com/watch?v=_8EZV5P05U0",
         id: 1,
-        playerId: 109442
       },
     ],
   },
@@ -552,7 +550,6 @@ export const MAPS_VIDEOS = [
         icon: "tutorial",
         videoUrl: "https://www.youtube.com/watch?v=wgdaAjjG8AU",
         id: 1,
-        playerId: 109442
       },
     ],
   },
