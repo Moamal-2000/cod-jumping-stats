@@ -30,6 +30,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef, searchTerm, filteredMaps }) => {
           key={`${mapData.CpID}-${index}`}
           mapData={mapData}
           mapsScroll={mapsScroll}
+          mapsData={mapsData}
           lastMapRef={lastMapRef}
           index={index}
         />
