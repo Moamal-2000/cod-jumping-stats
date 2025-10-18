@@ -211,7 +211,10 @@ const MapDetailPage = ({ cpid }) => {
           const response = await fetch(
             jhApis({ fps: selectedFps, cpid }).map.getTops
           );
-          const data = await response.json();
+          var data = await response.json();
+          if (!data) {
+            data = []
+          }
 
           setAllTopsData(data);
 
@@ -362,7 +365,10 @@ const MapDetailPage = ({ cpid }) => {
             jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
               .getPlayersPlayTime
           );
-          const data = await response.json();
+          var data = await response.json();
+          if (!data) {
+            data = []
+          }
 
           setAllPlayersData(data);
 
