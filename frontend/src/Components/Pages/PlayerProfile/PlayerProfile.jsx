@@ -19,10 +19,11 @@ import PlayerBadges from "../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import s from "./PlayerProfile.module.scss";
 import PlayerRouteCompletion from "./PlayerRouteCompletion/PlayerRouteCompletion";
 
-const PlayerProfile = ({ playerId }) => {
+const PlayerProfile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
+  const playerId = +searchParams.get("playerid");
 
   const {
     playerInfo,
