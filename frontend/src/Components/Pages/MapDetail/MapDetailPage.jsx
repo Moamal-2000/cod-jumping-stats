@@ -8,7 +8,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
 } from "@/Functions/utils";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
@@ -16,7 +16,10 @@ import s from "./MapDetailPage.module.scss";
 import MapDetailPlayers from "./MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "./MapDetailTops/MapDetailTops";
 
-const MapDetailPage = ({ cpid }) => {
+const MapDetailPage = () => {
+  const searchParams = useSearchParams();
+  const cpid = +searchParams.get("mapid");
+
   const router = useRouter();
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
