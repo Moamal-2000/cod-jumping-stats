@@ -7,7 +7,7 @@
   gap: 26px;
 }
 
-@include m.small {
+@include m.medium {
   .sortSection {
     flex-direction: column;
     justify-content: flex-start;
@@ -15,11 +15,29 @@
   }
 }
 
-.sortSection .sortWrapper {
+.sortSection .leftSide {
   display: flex;
   align-items: center;
   gap: 10px;
   width: 100%;
+}
+
+@include m.small {
+  .sortSection .leftSide {
+    flex-wrap: wrap;
+  }
+}
+
+.sortSection .sortWrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@media (max-width: 410px) {
+  .sortSection .sortWrapper {
+    flex-wrap: wrap;
+  }
 }
 
 @include m.very-small {

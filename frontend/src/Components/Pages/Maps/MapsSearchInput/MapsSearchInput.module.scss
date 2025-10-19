@@ -1,3 +1,5 @@
+@use "@/Styles/mixins" as m;
+
 .searchContainer {
   display: flex;
   align-items: center;
@@ -5,6 +7,19 @@
   position: relative;
   max-width: 320px;
   width: 100%;
+}
+
+@include m.small {
+  .searchContainer {
+    min-width: 320px;
+    max-width: 360px;
+  }
+}
+
+@include m.very-small {
+  .searchContainer {
+    min-width: auto;
+  }
 }
 
 .searchInput {
