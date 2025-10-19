@@ -6,7 +6,7 @@ import { Suspense } from "react";
 
 const PlayerPageContent = () => {
   const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerId");
+  const playerId = +searchParams.get("playerid");
 
   return (
     <main>
