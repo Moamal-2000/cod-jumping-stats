@@ -19,6 +19,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
 }
 
 @include m.very-small {
@@ -36,6 +37,7 @@
   align-items: center;
   gap: 4px;
   letter-spacing: .02em;
+  text-wrap: nowrap;
 }
 
 .sortWrapper .label .tooltip {

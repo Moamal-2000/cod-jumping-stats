@@ -1,7 +1,7 @@
 .selectMenu {
   position: relative;
   user-select: none;
-  min-width: 220px;
+  min-width: 240px;
 }
 
 .selectMenu .selectButton {
@@ -10,7 +10,7 @@
   color: #c9d1d9;
   border: 1px solid #30363d;
   border-radius: 6px;
-  padding: 8px 12px;
+  padding: 7px 10px 7px;
   font-size: .875rem;
   font-weight: 500;
   display: flex;

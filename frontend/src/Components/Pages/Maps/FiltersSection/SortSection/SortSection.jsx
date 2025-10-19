@@ -1,4 +1,5 @@
 import CustomSelectMenu from "@/Components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
+import MapsSearchInput from "../../MapsSearchInput/MapsSearchInput";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
 
@@ -22,6 +23,7 @@ const SortSection = ({ setPaginationNumber }) => {
         </label>
 
         <CustomSelectMenu />
+        <MapsSearchInput />
       </div>
 
       <SortView setPaginationNumber={setPaginationNumber} />
