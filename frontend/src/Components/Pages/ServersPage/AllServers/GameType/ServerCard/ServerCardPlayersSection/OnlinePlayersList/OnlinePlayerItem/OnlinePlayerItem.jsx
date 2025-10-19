@@ -24,7 +24,7 @@ const OnlinePlayerItem = ({ player, server }) => {
 
   return (
     <Link
-      href={`/player/${player.PlayerID}`}
+      href={`/player?playerid=${player.PlayerID}`}
       className={`${s.playerItem} ${isCod4 ? s.cod4 : ""}`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}

@@ -43,7 +43,7 @@ const MapCard = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
 
       <section className={s.content}>
         <div className={s.nameAndRating}>
-          <Link href={`/map/${CpID}`}>
+          <Link href={`/map?mapid=${CpID}`}>
             <span className={s.name}>
               {Name}
               {Ender && <span className={s.ender}>({Ender})</span>}

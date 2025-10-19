@@ -24,7 +24,7 @@ const PlayerNameCell = ({ playerData }) => {
   return (
     <td className={`${s.player} ${rankClass}`}>
       <Link
-        href={`/player/${PlayerID}`}
+        href={`/player?playerid=${PlayerID}`}
         onMouseEnter={handleMouseEnter}
       >
         <span className={s.playerCountry}>

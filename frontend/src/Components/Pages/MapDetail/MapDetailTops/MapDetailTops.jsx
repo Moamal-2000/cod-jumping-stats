@@ -74,7 +74,7 @@ const MapDetailTops = ({
           <div
             key={`${run.run_id}-${index}`}
             className={s.topRun}
-            onClick={() => router.push(`/player/${run.player_id}`)}
+            onClick={() => router.push(`/player?playerid=${run.player_id}`)}
             style={{ cursor: "pointer" }}
           >
             <div className={s.rank}>#{index + 1}</div>

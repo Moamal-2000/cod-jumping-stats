@@ -27,12 +27,7 @@ const PlayerCard = ({
             />
           </div>
 
-          <PlayerPrimaryInfo
-            name={name}
-            rank={rank}
-            adminLevel={adminLevel}
-            id={id}
-          />
+          <PlayerPrimaryInfo name={name} adminLevel={adminLevel} id={id} />
         </div>
 
         <PlayerBadges

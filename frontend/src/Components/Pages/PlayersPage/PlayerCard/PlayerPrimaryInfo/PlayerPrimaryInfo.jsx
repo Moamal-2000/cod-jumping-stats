@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./PlayerPrimaryInfo.module.scss";
 
-const PlayerPrimaryInfo = ({ name, rank, adminLevel, id }) => {
+const PlayerPrimaryInfo = ({ name, adminLevel, id }) => {
   const dispatch = useDispatch();
   const pureName = stripColorCodes(name);
 
@@ -18,7 +18,7 @@ const PlayerPrimaryInfo = ({ name, rank, adminLevel, id }) => {
   return (
     <div className={s.primaryInfo}>
       <Link
-        href={`/player/${id || rank}`}
+        href={`/player?playerid=${id}`}
         className={s.playerName}
         onMouseEnter={handleMouseEnter}
       >
