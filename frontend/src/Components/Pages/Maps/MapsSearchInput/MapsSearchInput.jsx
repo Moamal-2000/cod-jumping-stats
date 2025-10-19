@@ -70,7 +70,9 @@ const MapsSearchInput = () => {
         className={s.clearButton}
         title="Clear search"
       >
-        x
+        <svg>
+          <use href="/icons-sprite.svg#xMark" />
+        </svg>
       </button>
     </div>
   );
