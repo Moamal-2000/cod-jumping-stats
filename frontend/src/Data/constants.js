@@ -1,6 +1,5 @@
 export const WEBSITE_NAME = "JH Statistics";
 export const PAGINATION_ITEMS_PER_PAGE = 10;
-export const PAGINATION_DISPLAY_LIMIT = 5;
 export const NUMBER_OF_RATING_STARS = 5;
 export const MONTHS = {
   1: "January",
