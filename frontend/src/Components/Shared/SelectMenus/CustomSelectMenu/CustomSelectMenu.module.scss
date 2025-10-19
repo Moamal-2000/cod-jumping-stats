@@ -1,5 +1,6 @@
 .selectWrapper {
   position: relative;
+  flex: 1;
 }
 
 .selectMenu {
@@ -31,6 +32,14 @@
   &:hover {
     background-color: #30363d;
     border-color: #8b949e;
+  }
+}
+
+@media (max-width: 410px) {
+  .selectMenu .selectButton {
+    width: 100%;
+    min-width: auto;
+    max-width: 100%;
   }
 }
 
