@@ -3,13 +3,23 @@ import { modifyMapsData, paginateData } from "@/Functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchMaps } from "../thunks/mapsThunk";
 
-// Sorting function for maps
-const sortMaps = (maps) => {
+function getMapsByFpsDifficulty({ sortedMaps, fps }) {
+  return sortedMaps.sort((a, b) => {
+    const difficultyA = a.Difficulty?.[fps]?.Difficulty ?? -1;
+    const difficultyB = b.Difficulty?.[fps]?.Difficulty ?? -1;
+
+    if (difficultyA < 0 && difficultyB < 0) return 0;
+    if (difficultyA < 0) return 1;
+    if (difficultyB < 0) return -1;
+    return difficultyB - difficultyA;
+  });
+}
+
+function sortMaps(maps) {
   if (!maps || maps.length === 0) return maps;
 
   const sortBy =
     new URLSearchParams(window.location.search).get("sort-by") || "newest";
-
   const sortedMaps = [...maps];
 
   switch (sortBy) {
@@ -33,80 +43,26 @@ const sortMaps = (maps) => {
         (b.Name || "").localeCompare(a.Name || "")
       );
 
-    case "completions-high-to-low": {
-      return sortedMaps.sort((a, b) => {
-        const completionsA = a.IndividualFinishCount || 0;
-        const completionsB = b.IndividualFinishCount || 0;
-        return completionsB - completionsA;
-      });
-    }
+    case "completions-high-to-low":
+      return sortedMaps.sort(
+        (a, b) =>
+          (b.IndividualFinishCount || 0) - (a.IndividualFinishCount || 0)
+      );
 
-    case "completions-low-to-high": {
-      return sortedMaps.sort((a, b) => {
-        const completionsA = a.IndividualFinishCount || 0;
-        const completionsB = b.IndividualFinishCount || 0;
-        return completionsA - completionsB;
-      });
-    }
-
-    case "43-difficulty":
-      return sortedMaps.sort((a, b) => {
-        const difficultyA = a.Difficulty?.[43]?.Difficulty ?? -1;
-        const difficultyB = b.Difficulty?.[43]?.Difficulty ?? -1;
-        if (difficultyA < 0 && difficultyB < 0) return 0;
-        if (difficultyA < 0) return 1;
-        if (difficultyB < 0) return -1;
-        return difficultyB - difficultyA; // Higher to lower
-      });
-
-    case "76-difficulty":
-      return sortedMaps.sort((a, b) => {
-        const difficultyA = a.Difficulty?.[76]?.Difficulty ?? -1;
-        const difficultyB = b.Difficulty?.[76]?.Difficulty ?? -1;
-        // Treat negative values as lowest (uncalculated difficulties go to bottom)
-        if (difficultyA < 0 && difficultyB < 0) return 0;
-        if (difficultyA < 0) return 1;
-        if (difficultyB < 0) return -1;
-        return difficultyB - difficultyA; // Higher to lower
-      });
-
-    case "125-difficulty":
-      return sortedMaps.sort((a, b) => {
-        const difficultyA = a.Difficulty?.[125]?.Difficulty ?? -1;
-        const difficultyB = b.Difficulty?.[125]?.Difficulty ?? -1;
-        // Treat negative values as lowest (uncalculated difficulties go to bottom)
-        if (difficultyA < 0 && difficultyB < 0) return 0;
-        if (difficultyA < 0) return 1;
-        if (difficultyB < 0) return -1;
-        return difficultyB - difficultyA; // Higher to lower
-      });
-
-    case "250-difficulty":
-      return sortedMaps.sort((a, b) => {
-        const difficultyA = a.Difficulty?.[250]?.Difficulty ?? -1;
-        const difficultyB = b.Difficulty?.[250]?.Difficulty ?? -1;
-        // Treat negative values as lowest (uncalculated difficulties go to bottom)
-        if (difficultyA < 0 && difficultyB < 0) return 0;
-        if (difficultyA < 0) return 1;
-        if (difficultyB < 0) return -1;
-        return difficultyB - difficultyA; // Higher to lower
-      });
-
-    case "333-difficulty":
-      return sortedMaps.sort((a, b) => {
-        const difficultyA = a.Difficulty?.[333]?.Difficulty ?? -1;
-        const difficultyB = b.Difficulty?.[333]?.Difficulty ?? -1;
-        // Treat negative values as lowest (uncalculated difficulties go to bottom)
-        if (difficultyA < 0 && difficultyB < 0) return 0;
-        if (difficultyA < 0) return 1;
-        if (difficultyB < 0) return -1;
-        return difficultyB - difficultyA; // Higher to lower
-      });
+    case "completions-low-to-high":
+      return sortedMaps.sort(
+        (a, b) =>
+          (a.IndividualFinishCount || 0) - (b.IndividualFinishCount || 0)
+      );
 
     default:
+      // If sortBy is a number, treat it as FPS difficulty
+      if (parseInt(sortBy))
+        return getMapsByFpsDifficulty({ sortedMaps, fps: parseInt(sortBy) });
+
       return sortedMaps;
   }
-};
+}
 
 const initialState = {
   mapsData: [],
