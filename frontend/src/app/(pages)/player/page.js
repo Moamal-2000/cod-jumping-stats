@@ -1,25 +1,16 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { Suspense, useEffect } from "react";
+import PlayerProfile from "@/Components/Pages/PlayerProfile/PlayerProfile";
+import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 const PlayerPageContent = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const playerId = searchParams.get("id");
-
-  useEffect(() => {
-    if (playerId) {
-      router.replace(`/player/${playerId}`);
-      return;
-    }
-
-    router.replace("/players");
-  }, [playerId, router]);
+  const playerId = +searchParams.get("playerId");
 
   return (
     <main>
-      <div>Redirecting...</div>
+      <PlayerProfile playerId={playerId} />
     </main>
   );
 };
