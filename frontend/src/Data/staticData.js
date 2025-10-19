@@ -179,18 +179,6 @@ export const SORT_MAPS_OPTIONS = [
       { label: "Low Checkpoints", value: "low-checkpoints", id: 6 },
       { label: "Name (A-Z)", value: "name-a-z", id: 7 },
       { label: "Name (Z-A)", value: "name-z-a", id: 8 },
-      { label: "Rating (High to Low)", value: "rating-high-to-low", id: 9 },
-      { label: "Rating (Low to High)", value: "rating-low-to-high", id: 10 },
-      {
-        label: "Avg Attempts (High to Low)",
-        value: "avg-attempts-high-to-low",
-        id: 11,
-      },
-      {
-        label: "Avg Attempts (Low to High)",
-        value: "avg-attempts-low-to-high",
-        id: 12,
-      },
       {
         label: "Completions (High to Low)",
         value: "completions-high-to-low",

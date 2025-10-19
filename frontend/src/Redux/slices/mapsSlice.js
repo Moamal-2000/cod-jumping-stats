@@ -4,8 +4,11 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchMaps } from "../thunks/mapsThunk";
 
 // Sorting function for maps
-const sortMaps = (maps, sortBy) => {
+const sortMaps = (maps) => {
   if (!maps || maps.length === 0) return maps;
+
+  const sortBy =
+    new URLSearchParams(window.location.search).get("sort-by") || "newest";
 
   const sortedMaps = [...maps];
 
@@ -30,11 +33,26 @@ const sortMaps = (maps, sortBy) => {
         (b.Name || "").localeCompare(a.Name || "")
       );
 
+    case "completions-high-to-low": {
+      return sortedMaps.sort((a, b) => {
+        const completionsA = a.IndividualFinishCount || 0;
+        const completionsB = b.IndividualFinishCount || 0;
+        return completionsB - completionsA;
+      });
+    }
+
+    case "completions-low-to-high": {
+      return sortedMaps.sort((a, b) => {
+        const completionsA = a.IndividualFinishCount || 0;
+        const completionsB = b.IndividualFinishCount || 0;
+        return completionsA - completionsB;
+      });
+    }
+
     case "43-difficulty":
       return sortedMaps.sort((a, b) => {
         const difficultyA = a.Difficulty?.[43]?.Difficulty ?? -1;
         const difficultyB = b.Difficulty?.[43]?.Difficulty ?? -1;
-        // Treat negative values as lowest (uncalculated difficulties go to bottom)
         if (difficultyA < 0 && difficultyB < 0) return 0;
         if (difficultyA < 0) return 1;
         if (difficultyB < 0) return -1;
@@ -115,16 +133,14 @@ export const mapsSlice = createSlice({
     },
     setFilteredMaps: (state, { payload }) => {
       state.filteredMaps = payload;
-      // Update sorted maps when search results change
-      state.sortedMaps = sortMaps(payload, state.sortBy);
-      // Reset mapsScroll to first page of filtered results
-      state.mapsScroll = payload.slice(0, 10); // 10 items per page
+      state.sortedMaps = sortMaps(payload);
+      state.mapsScroll = payload.slice(0, 10);
     },
     clearSearch: (state) => {
       state.searchTerm = "";
       state.filteredMaps = [];
       // Reset to sorted maps from all data
-      state.sortedMaps = sortMaps(state.mapsData, state.sortBy);
+      state.sortedMaps = sortMaps(state.mapsData);
       // Reset mapsScroll to first page
       state.mapsScroll = state.sortedMaps.slice(0, 10);
     },
