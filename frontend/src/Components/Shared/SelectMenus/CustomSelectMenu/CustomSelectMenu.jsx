@@ -20,12 +20,8 @@ const CustomSelectMenu = () => {
 
   useEffect(() => {
     function handleClickOutside(event) {
-      const isSelectMenu = menuRef.current.contains(event.target);
-      const elementRole = event.target?.closest("button")?.getAttribute("role");
-      const isOption = elementRole === "option";
-      const shouldCloseMenu = (menuRef.current && !isSelectMenu) || isOption;
-
-      if (shouldCloseMenu) setIsOpen(false);
+      const isMenuClicked = menuRef.current?.contains(event.target);
+      if (!isMenuClicked) setIsOpen(false);
     }
 
     document.addEventListener("click", handleClickOutside);
@@ -33,13 +29,15 @@ const CustomSelectMenu = () => {
   }, []);
 
   return (
-    <div ref={menuRef} className={`${s.selectMenu} ${visibleClass}`}>
-      <button type="button" className={s.selectButton} onClick={handleClick}>
-        <span>{currentSortBy}</span>
-        <svg>
-          <use href="/icons-sprite.svg#solidArrow" />
-        </svg>
-      </button>
+    <div className={s.selectWrapper}>
+      <div ref={menuRef} className={`${s.selectMenu} ${visibleClass}`}>
+        <button type="button" className={s.selectButton} onClick={handleClick}>
+          <span>{currentSortBy}</span>
+          <svg>
+            <use href="/icons-sprite.svg#solidArrow" />
+          </svg>
+        </button>
+      </div>
 
       <DropDownMenu
         isOpen={isOpen}

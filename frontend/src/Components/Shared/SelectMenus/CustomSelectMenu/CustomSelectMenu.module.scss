@@ -1,5 +1,8 @@
-.selectMenu {
+.selectWrapper {
   position: relative;
+}
+
+.selectMenu {
   user-select: none;
   min-width: 240px;
 }
