@@ -363,23 +363,11 @@ const PlayerProfile = () => {
     return filteredRuns;
   }
 
-  if (error) {
+  if (error && !loading) {
     return (
       <div className={s.errorContainer}>
         <h2>Error Loading Profile</h2>
         <p>Unable to fetch player data. Please try again later.</p>
-        <button onClick={() => router.back()} className={s.backButton}>
-          ← Back
-        </button>
-      </div>
-    );
-  }
-
-  if (!playerInfo) {
-    return (
-      <div className={s.errorContainer}>
-        <h2>Player Not Found</h2>
-        <p>This player profile could not be found.</p>
         <button onClick={() => router.back()} className={s.backButton}>
           ← Back
         </button>

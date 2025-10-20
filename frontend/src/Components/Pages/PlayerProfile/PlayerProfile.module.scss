@@ -3068,26 +3068,6 @@
   }
 }
 
-.errorContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 3rem;
-  text-align: center;
-  min-height: 50vh;
-
-  h2 {
-    color: #ef4444;
-    margin-bottom: 1rem;
-  }
-
-  p {
-    color: #9ca3af;
-    margin-bottom: 2rem;
-  }
-}
-
 .noRuns {
   text-align: center;
   color: #9ca3af;
