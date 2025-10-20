@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPlayerProfile, fetchPlayerLeaderboardPositions, fetchPlayerTops, fetchPlayerJumpScores } from "../thunks/playerProfileThunk";
+import { fetchPlayerJumpScores, fetchPlayerLeaderboardPositions, fetchPlayerProfile, fetchPlayerTops } from "../thunks/playerProfileThunk";
 
 const initialState = {
   // Player basic info

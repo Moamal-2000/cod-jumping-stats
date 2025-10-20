@@ -20,78 +20,20 @@ import PlayerBadges from "../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import s from "./PlayerProfile.module.scss";
 import PlayerRouteCompletion from "./PlayerRouteCompletion/PlayerRouteCompletion";
 
+const tabs = [
+  { id: "overview", label: "Overview", icon: "chart-bar" },
+  { id: "tops", label: "Top Runs", icon: "star" },
+  { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
+  { id: "routes", label: "Route Completion", icon: "check-circle" },
+];
+
 const PlayerProfile = () => {
   const dispatch = useDispatch();
   const router = useRouter();
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
 
-  const {
-    playerInfo,
-    performanceStats,
-    leaderboardPositions,
-    topRuns,
-    jumpScores,
-    loading,
-    error,
-    leaderboardPositionsLoading,
-    topRunsLoading,
-    jumpScoresLoading,
-  } = useSelector((state) => state.playerProfile);
-
-  const topRunsCount = performanceStats?.recent_tops?.length;
-
-  // Also get players data to find player name
-  const { playersData } = useSelector((state) => state.players);
-
-  // Get player name from available data sources
-  const getPlayerName = () => {
-    // First try leaderboard positions
-    if (leaderboardPositions.length > 0) {
-      return leaderboardPositions[0].player_name;
-    }
-
-    // Then try top runs
-    if (topRuns[1] && topRuns[1].length > 0) {
-      return topRuns[1][0].playername;
-    }
-
-    // Then try to find in players list
-    if (playersData.length > 0 && playerId) {
-      const player = playersData.find((p) => p.id === parseInt(playerId));
-      if (player) {
-        return player.name;
-      }
-    }
-
-    // Then try performance stats (though it might not have player_name)
-    if (performanceStats?.player_name) {
-      return performanceStats.player_name;
-    }
-
-    // Finally try playerInfo
-    if (playerInfo?.name && playerInfo.name !== "Loading...") {
-      return playerInfo.name;
-    }
-
-    return "Unknown Player";
-  };
-
   const [activeTab, setActiveTab] = useState("overview");
-
-  // Get tab parameter from URL
-  const tabParam = searchParams.get("tab");
-
-  // Set active tab based on URL parameter
-  useEffect(() => {
-    if (
-      tabParam &&
-      ["overview", "tops", "leaderboards", "routes"].includes(tabParam)
-    ) {
-      setActiveTab(tabParam);
-    }
-  }, [tabParam]);
-
   const [rankFilter, setRankFilter] = useState("1-10"); // "1", "1-10", "all"
   const [sortOrder, setSortOrder] = useState("desc"); // "asc", "desc"
   const [sortBy, setSortBy] = useState("score"); // "rank", "time", "date", "score"
@@ -136,6 +78,54 @@ const PlayerProfile = () => {
   // Track which FPS is currently being fetched
   const [currentFetchingFps, setCurrentFetchingFps] = useState("125");
 
+  const {
+    playerInfo,
+    performanceStats,
+    leaderboardPositions,
+    topRuns,
+    jumpScores,
+    loading,
+    error,
+    leaderboardPositionsLoading,
+    topRunsLoading,
+    jumpScoresLoading,
+  } = useSelector((s) => s.playerProfile);
+  const playersData = useSelector((s) => s.players.playersData);
+
+  const topRunsCount = performanceStats?.recent_tops?.length;
+
+  function getPlayerName() {
+    // First try leaderboard positions
+    if (leaderboardPositions.length > 0) {
+      return leaderboardPositions[0].player_name;
+    }
+
+    // Then try top runs
+    if (topRuns[1] && topRuns[1].length > 0) {
+      return topRuns[1][0].playername;
+    }
+
+    // Then try to find in players list
+    if (playersData.length > 0 && playerId) {
+      const player = playersData.find((p) => p.id === parseInt(playerId));
+      if (player) {
+        return player.name;
+      }
+    }
+
+    // Then try performance stats (though it might not have player_name)
+    if (performanceStats?.player_name) {
+      return performanceStats.player_name;
+    }
+
+    // Finally try playerInfo
+    if (playerInfo?.name && playerInfo.name !== "Loading...") {
+      return playerInfo.name;
+    }
+
+    return "Unknown Player";
+  }
+
   useEffect(() => {
     if (playerId) {
       // Clear previous data
@@ -177,21 +167,16 @@ const PlayerProfile = () => {
     }
   }, [jumpScores, currentFetchingFps]);
 
-  const formatDate = (dateString) => {
+  function formatDate(dateString) {
     if (!dateString) return "Unknown";
     try {
       return new Date(dateString).toLocaleDateString();
     } catch {
       return dateString;
     }
-  };
+  }
 
-  const formatTime = (timeString) => {
-    if (!timeString) return "N/A";
-    return timeString;
-  };
-
-  const formatLastSeen = (lastSeen) => {
+  function formatLastSeen(lastSeen) {
     if (!lastSeen) return "Unknown";
     try {
       const date = new Date(lastSeen);
@@ -205,42 +190,29 @@ const PlayerProfile = () => {
     } catch {
       return lastSeen;
     }
-  };
+  }
 
-  const getCompletionRateRarity = (completionRate) => {
+  function getCompletionRateInfo(completionRate) {
     if (completionRate >= 95) return "mythical";
     if (completionRate >= 85) return "legendary";
     if (completionRate >= 70) return "epic";
     if (completionRate >= 50) return "rare";
     if (completionRate >= 25) return "uncommon";
     return "common";
-  };
-
-  const getCompletionRateInfo = (completionRate) => {
-    const rarity = getCompletionRateRarity(completionRate);
-    const rarityMap = {
-      mythical: { color: "#ff0080", glow: "#ff0080" },
-      legendary: { color: "#ff6b35", glow: "#ff6b35" },
-      epic: { color: "#9d4edd", glow: "#9d4edd" },
-      rare: { color: "#3a86ff", glow: "#3a86ff" },
-      uncommon: { color: "#06ffa5", glow: "#06ffa5" },
-      common: { color: "#9ca3af", glow: "#9ca3af" },
-    };
-    return rarityMap[rarity];
-  };
+  }
 
   // Get rank category for styling
-  const getRankCategory = (rank) => {
+  function getRankCategory(rank) {
     if (rank === 1) return "rank1";
     if (rank === 2) return "rank2";
     if (rank === 3) return "rank3";
     if (rank >= 4 && rank <= 10) return "rank4to10";
     if (rank >= 11 && rank <= 20) return "rank10to20";
     return "rankBelow20";
-  };
+  }
 
   // Calculate score and get epic styling
-  const getScoreInfo = (run) => {
+  function getScoreInfo(run) {
     // Always use jump-scores (defaults to 0 if not found)
     const score = run.jumpScore || 0;
     const totalNr = run.originalTotalNr || run.totalNr;
@@ -253,67 +225,23 @@ const PlayerProfile = () => {
       isLegendary: score >= 800, // Legendary threshold
       isMythical: score >= 1200, // Mythical threshold (max)
     };
-  };
-
-  // Process and group leaderboard data by FPS
-  const getProcessedLeaderboards = () => {
-    if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
-
-    // Filter out howmany leaderboards (they're displayed separately in the controls)
-    // and filter out hidden leaderboards (defrag, surf, jump, speed)
-    const otherPositions = leaderboardPositions.filter((pos) => {
-      if (pos.leaderboard_type === "howmany") return false;
-      if (pos.leaderboard_type === "defrag" && !visibleLeaderboards.defrag)
-        return false;
-      if (pos.leaderboard_type === "surf" && !visibleLeaderboards.surf)
-        return false;
-      if (pos.leaderboard_type === "jump" && !visibleLeaderboards.jump)
-        return false;
-      if (pos.leaderboard_type === "speed" && !visibleLeaderboards.speed)
-        return false;
-      return true;
-    });
-
-    // Filter by selected FPS only
-    const filteredPositions = otherPositions.filter(
-      (pos) => pos.fps === selectedLeaderboardFps
-    );
-
-    // Group positions by FPS (should only be one FPS now)
-    const groupedByFps = filteredPositions.reduce((acc, position) => {
-      const fps = position.fps;
-      if (!acc[fps]) {
-        acc[fps] = [];
-      }
-      acc[fps].push(position);
-      return acc;
-    }, {});
-
-    // Sort each FPS group by leaderboard name
-    Object.keys(groupedByFps).forEach((fps) => {
-      groupedByFps[fps].sort((a, b) =>
-        a.leaderboard_type.localeCompare(b.leaderboard_type)
-      );
-    });
-
-    return groupedByFps;
-  };
+  }
 
   // Select single FPS for leaderboard ranks
-  const selectLeaderboardFps = (fps) => {
+  function selectLeaderboardFps(fps) {
     setSelectedLeaderboardFps(fps);
-  };
+  }
 
   // Toggle leaderboard visibility
-  const toggleLeaderboard = (leaderboard) => {
+  function toggleLeaderboard(leaderboard) {
     setVisibleLeaderboards((prev) => ({
       ...prev,
       [leaderboard]: !prev[leaderboard],
     }));
-  };
+  }
 
   // Toggle top runs FPS visibility
-  const toggleTopRunsFps = (fps) => {
+  function toggleTopRunsFps(fps) {
     const newVisibleState = !visibleTopRunsFps[fps];
 
     setVisibleTopRunsFps((prev) => ({
@@ -330,10 +258,10 @@ const PlayerProfile = () => {
       dispatch(fetchPlayerTops({ playerId, fps }));
       dispatch(fetchPlayerJumpScores({ playerId, fps }));
     }
-  };
+  }
 
   // Process and filter top runs data, combining jump-scores and tops data
-  const getProcessedTopRuns = () => {
+  function getProcessedTopRuns() {
     // Combine data from all visible FPS values
     let allRuns = [];
 
@@ -433,15 +361,6 @@ const PlayerProfile = () => {
     });
 
     return filteredRuns;
-  };
-
-  if (loading) {
-    return (
-      <div className={s.loadingContainer}>
-        <div className={s.loadingSpinner}></div>
-        <p>Loading player profile...</p>
-      </div>
-    );
   }
 
   if (error) {
@@ -467,13 +386,6 @@ const PlayerProfile = () => {
       </div>
     );
   }
-
-  const tabs = [
-    { id: "overview", label: "Overview", icon: "chart-bar" },
-    { id: "tops", label: "Top Runs", icon: "star" },
-    { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
-    { id: "routes", label: "Route Completion", icon: "check-circle" },
-  ];
 
   return (
     <div className={s.profileContainer}>
@@ -536,8 +448,6 @@ const PlayerProfile = () => {
                   </span>
                 </span>
               )}
-
-              {}
 
               <div className={s.playerBadges}>
                 <PlayerBadges
@@ -1160,5 +1070,3 @@ const PlayerProfile = () => {
 };
 
 export default PlayerProfile;
-
-// TODO: Fix Player details page sprite icons
