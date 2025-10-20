@@ -537,18 +537,16 @@ const PlayerProfile = () => {
                 </span>
               )}
 
+              {}
+
               <div className={s.playerBadges}>
                 <PlayerBadges
                   adminLevel={performanceStats?.admin_level}
-                  banned={playerInfo?.banned}
-                  donated={playerInfo?.donated}
+                  banned={performanceStats?.is_banned}
+                  donated={performanceStats?.is_donator}
+                  lastSeen={jumpScores?.last_seen}
                   id={playerId}
                   name={getPlayerName()}
-                  lastSeen={performanceStats?.last_seen}
-                  playerSince={playerInfo?.created_at}
-                  score={performanceStats?.score}
-                  averageScore={performanceStats?.average_score}
-                  top10Ids={performanceStats?.top10_ids || []}
                 />
               </div>
             </div>
