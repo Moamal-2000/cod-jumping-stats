@@ -12,6 +12,7 @@ import {
   fetchPlayerProfile,
   fetchPlayerTops,
 } from "@/Redux/thunks/playerProfileThunk";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -781,7 +782,12 @@ const PlayerProfile = () => {
                         </svg>
                       </div>
                       <div className={s.activityContent}>
-                        <div className={s.activityTitle}>{run.map_name}</div>
+                        <Link
+                          href={`/map?mapid=${run.cpid}`}
+                          className={s.activityTitle}
+                        >
+                          {run.map_name}
+                        </Link>
                         <div className={s.activityDetails}>
                           <span className={s.activityRank}>
                             Rank #{run.rank}
