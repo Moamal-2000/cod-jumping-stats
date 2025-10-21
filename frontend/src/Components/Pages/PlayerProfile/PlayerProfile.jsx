@@ -425,10 +425,6 @@ const PlayerProfile = () => {
     <div className={s.profileContainer}>
       {/* Header */}
       <div className={s.profileHeader}>
-        <button onClick={() => router.back()} className={s.backButton}>
-          Back
-        </button>
-
         <div className={s.playerInfo}>
           <div className={s.avatarContainer}>
             <div className={s.avatar}>
