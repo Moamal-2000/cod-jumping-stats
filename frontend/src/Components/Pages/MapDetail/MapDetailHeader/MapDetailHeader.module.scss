@@ -9,24 +9,6 @@
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
 }
 
-.backButton {
-  background: #374151;
-  color: #f9fafb;
-  border: 1px solid #4b5563;
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-bottom: 1.5rem;
-
-  &:hover {
-    background: #4b5563;
-    border-color: #6b7280;
-  }
-}
-
 .mapInfo {
   display: flex;
   gap: 2rem;

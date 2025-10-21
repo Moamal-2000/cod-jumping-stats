@@ -3,14 +3,9 @@ import s from "./MapDetailHeader.module.scss";
 
 const MapDetailHeader = ({
   mapData: { Name, Author, Released, Type, Ender },
-  onBack,
 }) => {
   return (
     <div className={s.header}>
-      <button className={s.backButton} onClick={onBack}>
-        ← Back to Maps
-      </button>
-
       <div className={s.mapInfo}>
         <div className={s.mapImage}>
           <MapImage mapName={Name} objectFit="cover" />

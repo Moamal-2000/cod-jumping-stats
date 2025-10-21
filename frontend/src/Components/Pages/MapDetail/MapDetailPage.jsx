@@ -542,7 +542,7 @@ const MapDetailPage = () => {
           breadcrumbPaths={breadcrumbPaths}
         />
 
-        <MapDetailHeader mapData={mapData} onBack={() => router.back()} />
+        <MapDetailHeader mapData={mapData} />
 
         <div className={s.contentGrid}>
           <div className={s.leftColumn}>
