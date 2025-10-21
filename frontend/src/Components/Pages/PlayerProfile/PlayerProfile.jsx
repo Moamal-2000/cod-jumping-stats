@@ -413,7 +413,7 @@ const PlayerProfile = () => {
           <div className={s.playerDetails}>
             <h1 className={s.playerName}>
               {getColoredName(getPlayerName())}
-              {performanceStats?.admin_level > 0 && (
+              {performanceStats?.admin_level >= 0 && (
                 <span className={s.adminBadge}>
                   Admin {performanceStats.admin_level}
                 </span>
