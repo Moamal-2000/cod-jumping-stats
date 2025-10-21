@@ -9,9 +9,7 @@ export const metadata = {
 const PlayerPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <main>
-        <PlayerProfile />
-      </main>
+      <PlayerProfile />
     </Suspense>
   );
 };

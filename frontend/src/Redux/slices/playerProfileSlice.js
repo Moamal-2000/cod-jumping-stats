@@ -1,39 +1,49 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchPlayerJumpScores, fetchPlayerLeaderboardPositions, fetchPlayerProfile, fetchPlayerTops } from "../thunks/playerProfileThunk";
+import {
+  fetchPlayerJumpScores,
+  fetchPlayerLeaderboardPositions,
+  fetchPlayerProfile,
+  fetchPlayerTops,
+} from "../thunks/playerProfileThunk";
 
 const initialState = {
   // Player basic info
   playerInfo: null,
-  
+
   // Performance stats
   performanceStats: null,
   performanceStatsLoading: false,
   performanceStatsError: false,
-  
+
   // Leaderboard positions
   leaderboardPositions: [],
   leaderboardPositionsLoading: false,
   leaderboardPositionsError: false,
-  
+
   // Top runs
   topRuns: {},
   topRunsLoading: false,
   topRunsError: false,
-  
+
   // Jump scores
   jumpScores: null,
   jumpScoresLoading: false,
   jumpScoresError: false,
-  
+
   // Overall loading state
   loading: false,
   error: false,
+
+  currentFetchingFps: "125",
 };
 
 export const playerProfileSlice = createSlice({
   name: "playerProfileSlice",
   initialState,
   reducers: {
+    updatePlayerProfileState: (state, { payload }) => {
+      state[payload.key] = payload.value;
+    },
     setPlayerInfo: (state, { payload }) => {
       state.playerInfo = payload;
     },
@@ -77,11 +87,14 @@ export const playerProfileSlice = createSlice({
       state.leaderboardPositionsLoading = true;
       state.leaderboardPositionsError = false;
     })
-      .addCase(fetchPlayerLeaderboardPositions.fulfilled, (state, { payload }) => {
-        state.leaderboardPositions = payload;
-        state.leaderboardPositionsLoading = false;
-        state.leaderboardPositionsError = false;
-      })
+      .addCase(
+        fetchPlayerLeaderboardPositions.fulfilled,
+        (state, { payload }) => {
+          state.leaderboardPositions = payload;
+          state.leaderboardPositionsLoading = false;
+          state.leaderboardPositionsError = false;
+        }
+      )
       .addCase(fetchPlayerLeaderboardPositions.rejected, (state) => {
         state.leaderboardPositionsError = true;
         state.leaderboardPositionsLoading = false;
@@ -119,5 +132,6 @@ export const playerProfileSlice = createSlice({
   },
 });
 
-export const { setPlayerInfo, clearPlayerProfile } = playerProfileSlice.actions;
+export const { updatePlayerProfileState, setPlayerInfo, clearPlayerProfile } =
+  playerProfileSlice.actions;
 export default playerProfileSlice.reducer;

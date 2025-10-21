@@ -1,11 +1,12 @@
 "use client";
 
 import { fetchPlayerRouteCompletionNew } from "@/Redux/thunks/playerRouteCompletionThunk";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
 
-const PlayerRouteCompletion = ({ playerId }) => {
+const PlayerRouteCompletion = () => {
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState("mapname"); // "mapname", "finishers"
   const [sortOrder, setSortOrder] = useState("asc"); // "asc", "desc"
@@ -16,13 +17,14 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const [error, setError] = useState(null);
   const [completionData, setCompletionData] = useState(null);
 
+  const searchParams = useSearchParams();
+  const playerId = +searchParams.get("playerid");
+
   useEffect(() => {
-    if (playerId) {
-      fetchData();
-    }
+    if (playerId) fetchData();
   }, [playerId]);
 
-  const fetchData = async () => {
+  async function fetchData() {
     setLoading(true);
     setError(null);
 
@@ -44,14 +46,13 @@ const PlayerRouteCompletion = ({ playerId }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  const getSortedData = (data) => {
+  function getSortedData(data) {
     if (!data) return [];
 
     const sorted = [...data];
 
-    // Sort the data
     sorted.sort((a, b) => {
       let comparison = 0;
 
@@ -70,18 +71,18 @@ const PlayerRouteCompletion = ({ playerId }) => {
     });
 
     return sorted;
-  };
+  }
 
-  const getRarityLevel = (finishCount) => {
+  function getRarityLevel(finishCount) {
     if (finishCount <= 2) return "mythical";
     if (finishCount <= 10) return "legendary";
     if (finishCount <= 20) return "epic";
     if (finishCount <= 30) return "rare";
     if (finishCount <= 50) return "uncommon";
     return "common";
-  };
+  }
 
-  const getRarityInfo = (finishCount) => {
+  function getRarityInfo(finishCount) {
     const level = getRarityLevel(finishCount);
     const rarityMap = {
       mythical: { label: "MYTHICAL", color: "#ff0080", glow: "#ff0080" },
@@ -92,9 +93,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
       common: { label: "COMMON", color: "#9ca3af", glow: "#9ca3af" },
     };
     return rarityMap[level];
-  };
+  }
 
-  const getCompletionRateRarity = (completionRate) => {
+  function getCompletionRateRarity(completionRate) {
     // Remove % sign and convert to number
     const rate = parseFloat(completionRate.replace("%", ""));
     if (rate >= 95) return "mythical";
@@ -103,9 +104,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
     if (rate >= 50) return "rare";
     if (rate >= 25) return "uncommon";
     return "common";
-  };
+  }
 
-  const getCompletionRateInfo = (completionRate) => {
+  function getCompletionRateInfo(completionRate) {
     const rarity = getCompletionRateRarity(completionRate);
     const rarityMap = {
       mythical: { color: "#ff0080", glow: "#ff0080" },
