@@ -17,7 +17,7 @@ const ServerCardMapSection = ({ server }) => {
         {isCod4 && <span className={s.mapName}>{server.Map}</span>}
 
         {!isCod4 && (
-          <Link href={`/map/${server.MapID}`} className={s.mapName}>
+          <Link href={`/map?mapid=${server.MapID}`} className={s.mapName}>
             {server.Map}
           </Link>
         )}
