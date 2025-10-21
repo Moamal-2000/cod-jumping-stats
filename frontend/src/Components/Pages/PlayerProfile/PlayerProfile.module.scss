@@ -90,6 +90,10 @@
   }
 }
 
+.playerName>span:not(.adminBadge) {
+  display: contents;
+}
+
 .playerName .adminBadge {
   font-size: 0.9rem;
   color: #facc15;
