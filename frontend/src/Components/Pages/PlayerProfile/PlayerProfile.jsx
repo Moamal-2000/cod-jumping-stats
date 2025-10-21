@@ -671,19 +671,18 @@ const PlayerProfile = () => {
 
                 <div className={s.recentActivityList}>
                   {performanceStats.recent_tops.map((run, index) => (
-                    <div key={index} className={s.recentActivityItem}>
+                    <Link
+                      href={`/map?mapid=${run.cpid}`}
+                      className={s.recentActivityItem}
+                      key={index}
+                    >
                       <div className={s.activityIcon}>
                         <svg>
                           <use href="/icons-sprite.svg#star" />
                         </svg>
                       </div>
                       <div className={s.activityContent}>
-                        <Link
-                          href={`/map?mapid=${run.cpid}`}
-                          className={s.activityTitle}
-                        >
-                          {run.map_name}
-                        </Link>
+                        <div className={s.activityTitle}>{run.map_name}</div>
                         <div className={s.activityDetails}>
                           <span className={s.activityRank}>
                             Rank #{run.rank}
@@ -694,7 +693,7 @@ const PlayerProfile = () => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </Link>
                   ))}
                 </div>
               </div>
