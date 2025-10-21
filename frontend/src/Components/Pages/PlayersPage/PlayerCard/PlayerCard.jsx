@@ -6,7 +6,6 @@ import PlayerStats from "./PlayerStats/PlayerStats";
 
 const PlayerCard = ({
   name,
-  rank,
   id,
   adminLevel,
   lastSeen,
