@@ -227,6 +227,50 @@ const PlayerProfile = () => {
     };
   }
 
+  // Process and group leaderboard data by FPS
+  function getProcessedLeaderboards() {
+    if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
+
+    // Filter out howmany leaderboards (they're displayed separately in the controls)
+    // and filter out hidden leaderboards (defrag, surf, jump, speed)
+    const otherPositions = leaderboardPositions.filter((pos) => {
+      if (pos.leaderboard_type === "howmany") return false;
+      if (pos.leaderboard_type === "defrag" && !visibleLeaderboards.defrag)
+        return false;
+      if (pos.leaderboard_type === "surf" && !visibleLeaderboards.surf)
+        return false;
+      if (pos.leaderboard_type === "jump" && !visibleLeaderboards.jump)
+        return false;
+      if (pos.leaderboard_type === "speed" && !visibleLeaderboards.speed)
+        return false;
+      return true;
+    });
+
+    // Filter by selected FPS only
+    const filteredPositions = otherPositions.filter(
+      (pos) => pos.fps === selectedLeaderboardFps
+    );
+
+    // Group positions by FPS (should only be one FPS now)
+    const groupedByFps = filteredPositions.reduce((acc, position) => {
+      const fps = position.fps;
+      if (!acc[fps]) {
+        acc[fps] = [];
+      }
+      acc[fps].push(position);
+      return acc;
+    }, {});
+
+    // Sort each FPS group by leaderboard name
+    Object.keys(groupedByFps).forEach((fps) => {
+      groupedByFps[fps].sort((a, b) =>
+        a.leaderboard_type.localeCompare(b.leaderboard_type)
+      );
+    });
+
+    return groupedByFps;
+  }
+
   // Select single FPS for leaderboard ranks
   function selectLeaderboardFps(fps) {
     setSelectedLeaderboardFps(fps);
@@ -363,16 +407,18 @@ const PlayerProfile = () => {
     return filteredRuns;
   }
 
-  if (error && !loading) {
-    return (
-      <div className={s.errorContainer}>
-        <h2>Error Loading Profile</h2>
-        <p>Unable to fetch player data. Please try again later.</p>
-        <button onClick={() => router.back()} className={s.backButton}>
-          ← Back
-        </button>
-      </div>
-    );
+  function formatTime(timeString) {
+    if (!timeString) return "N/A";
+    return timeString;
+  }
+
+  function formatDate(dateString) {
+    if (!dateString) return "N/A";
+    try {
+      return new Date(dateString).toLocaleDateString();
+    } catch {
+      return dateString;
+    }
   }
 
   return (

@@ -72,20 +72,6 @@ const PlayerRouteCompletion = ({ playerId }) => {
     return sorted;
   };
 
-  const formatTime = (timeString) => {
-    if (!timeString) return "N/A";
-    return timeString;
-  };
-
-  const formatDate = (dateString) => {
-    if (!dateString) return "N/A";
-    try {
-      return new Date(dateString).toLocaleDateString();
-    } catch {
-      return dateString;
-    }
-  };
-
   const getRarityLevel = (finishCount) => {
     if (finishCount <= 2) return "mythical";
     if (finishCount <= 10) return "legendary";
