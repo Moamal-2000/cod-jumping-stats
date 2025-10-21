@@ -77,7 +77,6 @@
   color: #f9fafb;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
   flex-wrap: wrap;
   line-height: 1.2;
 
@@ -88,12 +87,13 @@
 }
 
 .playerName .adminBadge {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   color: #facc15;
   font-weight: 500;
   background: rgba(250, 204, 21, 0.1);
-  padding: 0.2rem 0.5rem;
+  padding: 0.4rem 0.6rem;
   border-radius: 4px;
+  margin-left: 16px;
 }
 
 .playerSteamId {
