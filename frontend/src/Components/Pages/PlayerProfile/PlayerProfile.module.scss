@@ -359,12 +359,6 @@
   border: 3px solid #facc15;
   background: #374151;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
-  }
 
   img {
     width: 100%;
@@ -572,28 +566,6 @@
   overflow: hidden;
   max-width: 1000px;
   width: 100%;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #facc15, #eab308);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-    border-color: #6b7280;
-
-    &::before {
-      opacity: 1;
-    }
-  }
 }
 
 .infoGrid {
@@ -602,7 +574,6 @@
   gap: 1.5rem;
   align-items: start;
   padding-top: 1px;
-  /* Prevent clipping on hover translateY */
 }
 
 .infoItem {
@@ -656,27 +627,6 @@
   padding: 2rem;
   position: relative;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #facc15, #eab308);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-  }
-
-  &:hover {
-    border-color: #6b7280;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-
-    &::before {
-      opacity: 1;
-    }
-  }
 }
 
 .fpsOverviewStats {
@@ -694,29 +644,12 @@
   border: 1px solid rgba(75, 85, 99, 0.3);
   transition: all 0.3s ease;
   position: relative;
-
-  &:hover {
-    background: rgba(0, 0, 0, 0.3);
-    border-color: rgba(107, 114, 128, 0.5);
-    transform: translateY(-2px);
-  }
 }
 
 .bestFpsOverview {
   border-color: #facc15;
   background: rgba(250, 204, 21, 0.1);
   position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #facc15, #eab308);
-    border-radius: 12px 12px 0 0;
-  }
 }
 
 .fpsOverviewLabel {
@@ -806,11 +739,9 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  transition: all 0.3s ease;
+  transition: border-color .3s ease;
 
   &:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     border-color: #6b7280;
   }
 }
