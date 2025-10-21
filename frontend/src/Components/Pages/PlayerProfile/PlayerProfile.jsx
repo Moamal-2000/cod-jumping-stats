@@ -1,7 +1,9 @@
 "use client";
 
+import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
 import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
 import { getColoredName } from "@/Functions/components";
+import { stripColorCodes } from "@/Functions/utils";
 import {
   clearPlayerProfile,
   setPlayerInfo,
@@ -13,7 +15,7 @@ import {
   fetchPlayerTops,
 } from "@/Redux/thunks/playerProfileThunk";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerBadges from "../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
@@ -29,7 +31,6 @@ const tabs = [
 
 const PlayerProfile = () => {
   const dispatch = useDispatch();
-  const router = useRouter();
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
 
@@ -84,8 +85,6 @@ const PlayerProfile = () => {
     leaderboardPositions,
     topRuns,
     jumpScores,
-    loading,
-    error,
     leaderboardPositionsLoading,
     topRunsLoading,
     jumpScoresLoading,
@@ -93,6 +92,15 @@ const PlayerProfile = () => {
   const playersData = useSelector((s) => s.players.playersData);
 
   const topRunsCount = performanceStats?.recent_tops?.length;
+  const breadcrumbLabels = [
+    "Home",
+    "Players",
+    stripColorCodes(getPlayerName()),
+  ];
+  const breadcrumbPaths = [
+    { index: 0, path: "/" },
+    { index: 1, path: `/players` },
+  ];
 
   function getPlayerName() {
     // First try leaderboard positions
@@ -422,524 +430,340 @@ const PlayerProfile = () => {
   }
 
   return (
-    <div className={s.profileContainer}>
-      {/* Header */}
-      <div className={s.profileHeader}>
-        <div className={s.playerInfo}>
-          <div className={s.avatarContainer}>
-            <div className={s.avatar}>
-              <svg>
-                <use href="/icons-sprite.svg#users" />
-              </svg>
+    <div className={s.playerPage}>
+      <Breadcrumbs
+        breadcrumbLabels={breadcrumbLabels}
+        breadcrumbPaths={breadcrumbPaths}
+      />
 
-              {((leaderboardPositions.length > 0 &&
-                leaderboardPositions[0].country_code) ||
-                performanceStats?.country_code) && (
-                <CountryImage
-                  countryCode={
-                    leaderboardPositions.length > 0
-                      ? leaderboardPositions[0].country_code
-                      : performanceStats.country_code
-                  }
-                  countryName={
-                    leaderboardPositions.length > 0
-                      ? leaderboardPositions[0].country
-                      : performanceStats.country
-                  }
-                  size={24}
-                />
-              )}
-            </div>
-          </div>
+      <div className={s.profileContainer}>
+        {/* Header */}
+        <div className={s.profileHeader}>
+          <div className={s.playerInfo}>
+            <div className={s.avatarContainer}>
+              <div className={s.avatar}>
+                <svg>
+                  <use href="/icons-sprite.svg#users" />
+                </svg>
 
-          <div className={s.playerDetails}>
-            <h1 className={s.playerName}>
-              {getColoredName(getPlayerName())}
-              {performanceStats?.admin_level >= 0 && (
-                <span className={s.adminBadge}>
-                  Admin {performanceStats.admin_level}
-                </span>
-              )}
-            </h1>
-
-            <div className={s.playerMeta}>
-              <span className={s.playerSteamId}>ID: {playerId}</span>
-
-              {performanceStats?.last_seen && (
-                <span className={s.metaItem}>
-                  <span
-                    className={
-                      performanceStats.is_online ? s.online : s.offline
+                {((leaderboardPositions.length > 0 &&
+                  leaderboardPositions[0].country_code) ||
+                  performanceStats?.country_code) && (
+                  <CountryImage
+                    countryCode={
+                      leaderboardPositions.length > 0
+                        ? leaderboardPositions[0].country_code
+                        : performanceStats.country_code
                     }
-                  >
-                    {performanceStats.is_online
-                      ? "Online"
-                      : formatLastSeen(performanceStats.last_seen)}
-                  </span>
-                </span>
-              )}
+                    countryName={
+                      leaderboardPositions.length > 0
+                        ? leaderboardPositions[0].country
+                        : performanceStats.country
+                    }
+                    size={24}
+                  />
+                )}
+              </div>
+            </div>
 
-              <div className={s.playerBadges}>
-                <PlayerBadges
-                  adminLevel={performanceStats?.admin_level}
-                  banned={performanceStats?.is_banned}
-                  donated={performanceStats?.is_donator}
-                  lastSeen={jumpScores?.last_seen}
-                  id={playerId}
-                  name={getPlayerName()}
-                />
+            <div className={s.playerDetails}>
+              <h1 className={s.playerName}>
+                {getColoredName(getPlayerName())}
+                {performanceStats?.admin_level >= 0 && (
+                  <span className={s.adminBadge}>
+                    Admin {performanceStats.admin_level}
+                  </span>
+                )}
+              </h1>
+
+              <div className={s.playerMeta}>
+                <span className={s.playerSteamId}>ID: {playerId}</span>
+
+                {performanceStats?.last_seen && (
+                  <span className={s.metaItem}>
+                    <span
+                      className={
+                        performanceStats.is_online ? s.online : s.offline
+                      }
+                    >
+                      {performanceStats.is_online
+                        ? "Online"
+                        : formatLastSeen(performanceStats.last_seen)}
+                    </span>
+                  </span>
+                )}
+
+                <div className={s.playerBadges}>
+                  <PlayerBadges
+                    adminLevel={performanceStats?.admin_level}
+                    banned={performanceStats?.is_banned}
+                    donated={performanceStats?.is_donator}
+                    lastSeen={jumpScores?.last_seen}
+                    id={playerId}
+                    name={getPlayerName()}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Tab Navigation */}
-      <div className={s.tabNavigation}>
-        {tabs.map((tab) => (
-          <button
-            key={tab.id}
-            className={`${s.tabButton} ${activeTab === tab.id ? s.active : ""}`}
-            onClick={() => setActiveTab(tab.id)}
-          >
-            <svg>
-              <use href={`/icons-sprite.svg#${tab.icon}`} />
-            </svg>
-            <span>{tab.label}</span>
-          </button>
-        ))}
-      </div>
+        {/* Tab Navigation */}
+        <div className={s.tabNavigation}>
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              className={`${s.tabButton} ${
+                activeTab === tab.id ? s.active : ""
+              }`}
+              onClick={() => setActiveTab(tab.id)}
+            >
+              <svg>
+                <use href={`/icons-sprite.svg#${tab.icon}`} />
+              </svg>
+              <span>{tab.label}</span>
+            </button>
+          ))}
+        </div>
 
-      {/* Tab Content */}
-      <div className={s.tabContent}>
-        {/* Overview Tab */}
-        {activeTab === "overview" && (
-          <div className={s.overviewTab}>
-            {/* Player Information */}
-            <div className={s.playerStatsOverview}>
-              <div className={s.statsHeader}>
-                <h2>Player Information</h2>
-              </div>
+        {/* Tab Content */}
+        <div className={s.tabContent}>
+          {/* Overview Tab */}
+          {activeTab === "overview" && (
+            <div className={s.overviewTab}>
+              {/* Player Information */}
+              <div className={s.playerStatsOverview}>
+                <div className={s.statsHeader}>
+                  <h2>Player Information</h2>
+                </div>
 
-              <div className={s.playerInfoContainer}>
-                {performanceStats ? (
-                  <div className={s.mainInfoCard}>
-                    <div className={s.infoGrid}>
-                      <div className={s.infoItem}>
-                        <div className={s.infoLabel}>Routes Completed</div>
-                        <div className={s.infoValue}>
-                          {performanceStats.total_maps_completed.toLocaleString()}
-                        </div>
-                        <div
-                          className={s.infoSubtext}
-                          style={{
-                            color: getCompletionRateInfo(
-                              performanceStats.maps_completed_ratio * 100
-                            ).color,
-                            textShadow: `0 0 8px ${
-                              getCompletionRateInfo(
+                <div className={s.playerInfoContainer}>
+                  {performanceStats ? (
+                    <div className={s.mainInfoCard}>
+                      <div className={s.infoGrid}>
+                        <div className={s.infoItem}>
+                          <div className={s.infoLabel}>Routes Completed</div>
+                          <div className={s.infoValue}>
+                            {performanceStats.total_maps_completed.toLocaleString()}
+                          </div>
+                          <div
+                            className={s.infoSubtext}
+                            style={{
+                              color: getCompletionRateInfo(
                                 performanceStats.maps_completed_ratio * 100
-                              ).glow
-                            }`,
-                          }}
-                        >
-                          {Math.round(
-                            performanceStats.maps_completed_ratio * 100
-                          )}
-                          % completion rate
+                              ).color,
+                              textShadow: `0 0 8px ${
+                                getCompletionRateInfo(
+                                  performanceStats.maps_completed_ratio * 100
+                                ).glow
+                              }`,
+                            }}
+                          >
+                            {Math.round(
+                              performanceStats.maps_completed_ratio * 100
+                            )}
+                            % completion rate
+                          </div>
                         </div>
-                      </div>
 
-                      <div className={s.infoItem}>
-                        <div className={s.infoLabel}>Last Seen</div>
-                        <div className={s.infoValue}>
-                          {performanceStats.days_since_last_seen === 0
-                            ? "Today"
-                            : performanceStats.days_since_last_seen === 1
-                            ? "Yesterday"
-                            : `${performanceStats.days_since_last_seen} days ago`}
+                        <div className={s.infoItem}>
+                          <div className={s.infoLabel}>Last Seen</div>
+                          <div className={s.infoValue}>
+                            {performanceStats.days_since_last_seen === 0
+                              ? "Today"
+                              : performanceStats.days_since_last_seen === 1
+                              ? "Yesterday"
+                              : `${performanceStats.days_since_last_seen} days ago`}
+                          </div>
+                          {performanceStats.last_seen && (
+                            <div className={s.infoSubtext}>
+                              {formatLastSeen(performanceStats.last_seen)}
+                            </div>
+                          )}
                         </div>
-                        {performanceStats.last_seen && (
-                          <div className={s.infoSubtext}>
-                            {formatLastSeen(performanceStats.last_seen)}
+
+                        {performanceStats?.oldest_top10_map && (
+                          <div className={s.infoItem}>
+                            <div className={s.infoLabel}>
+                              Oldest standing record
+                            </div>
+                            <div className={s.infoValue}>
+                              {performanceStats.oldest_top10_map.map_name}
+                            </div>
+                            <div className={s.infoSubtext}>
+                              Rank #{performanceStats.oldest_top10_map.rank} •{" "}
+                              {performanceStats.oldest_top10_map.fps} FPS •{" "}
+                              {formatDate(
+                                performanceStats.oldest_top10_map.finish_date
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {performanceStats?.oldest_top && (
+                          <div className={s.infoItem}>
+                            <div className={s.infoLabel}>Oldest top run</div>
+                            <div className={s.infoValue}>
+                              {performanceStats.oldest_top.map_name}
+                            </div>
+                            <div className={s.infoSubtext}>
+                              Rank #{performanceStats.oldest_top.rank} •{" "}
+                              {performanceStats.oldest_top.fps} FPS •{" "}
+                              {formatDate(
+                                performanceStats.oldest_top.finish_date
+                              )}
+                            </div>
                           </div>
                         )}
                       </div>
-
-                      {performanceStats?.oldest_top10_map && (
-                        <div className={s.infoItem}>
-                          <div className={s.infoLabel}>
-                            Oldest standing record
-                          </div>
-                          <div className={s.infoValue}>
-                            {performanceStats.oldest_top10_map.map_name}
-                          </div>
-                          <div className={s.infoSubtext}>
-                            Rank #{performanceStats.oldest_top10_map.rank} •{" "}
-                            {performanceStats.oldest_top10_map.fps} FPS •{" "}
-                            {formatDate(
-                              performanceStats.oldest_top10_map.finish_date
-                            )}
-                          </div>
-                        </div>
-                      )}
-
-                      {performanceStats?.oldest_top && (
-                        <div className={s.infoItem}>
-                          <div className={s.infoLabel}>Oldest top run</div>
-                          <div className={s.infoValue}>
-                            {performanceStats.oldest_top.map_name}
-                          </div>
-                          <div className={s.infoSubtext}>
-                            Rank #{performanceStats.oldest_top.rank} •{" "}
-                            {performanceStats.oldest_top.fps} FPS •{" "}
-                            {formatDate(
-                              performanceStats.oldest_top.finish_date
-                            )}
-                          </div>
-                        </div>
-                      )}
                     </div>
-                  </div>
-                ) : (
-                  <div className={s.mainInfoCard}>
-                    <div className={s.infoGrid}>
-                      <div className={s.infoItem}>
-                        <div className={s.infoLabel}>Player Data</div>
-                        <div className={s.infoValue}>
-                          Limited Data Available
+                  ) : (
+                    <div className={s.mainInfoCard}>
+                      <div className={s.infoGrid}>
+                        <div className={s.infoItem}>
+                          <div className={s.infoLabel}>Player Data</div>
+                          <div className={s.infoValue}>
+                            Limited Data Available
+                          </div>
+                          <div className={s.infoSubtext}>
+                            This player has insufficient data for detailed
+                            statistics
+                          </div>
                         </div>
-                        <div className={s.infoSubtext}>
-                          This player has insufficient data for detailed
-                          statistics
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* FPS Performance Overview */}
+              {performanceStats?.nb_tops_per_fps &&
+                Object.keys(performanceStats.nb_tops_per_fps).length > 0 && (
+                  <div className={s.fpsPerformanceSection}>
+                    <h2>FPS Performance</h2>
+                    <p className={s.sectionDescription}>
+                      Number of runs in top 10 per fps
+                    </p>
+
+                    <div className={s.fpsOverviewContainer}>
+                      <div className={s.fpsOverviewStats}>
+                        {Object.entries(performanceStats.nb_tops_per_fps)
+                          .sort(([a], [b]) => {
+                            const order = [
+                              "125",
+                              "250",
+                              "333",
+                              "76",
+                              "43",
+                              "mix",
+                            ];
+                            return order.indexOf(a) - order.indexOf(b);
+                          })
+                          .map(([fps, count]) => {
+                            const totalTops = Object.values(
+                              performanceStats.nb_tops_per_fps
+                            ).reduce((sum, val) => sum + val, 0);
+                            const percentage =
+                              totalTops > 0
+                                ? Math.round((count / totalTops) * 100)
+                                : 0;
+                            const isBestFps = fps === performanceStats.best_fps;
+
+                            return (
+                              <div
+                                key={fps}
+                                className={`${s.fpsOverviewItem} ${
+                                  isBestFps ? s.bestFpsOverview : ""
+                                }`}
+                              >
+                                <div className={s.fpsOverviewLabel}>
+                                  {fps} FPS
+                                  {isBestFps && (
+                                    <span className={s.bestFpsIndicator}>
+                                      <svg>
+                                        <use href="/icons-sprite.svg#star" />
+                                      </svg>
+                                    </span>
+                                  )}
+                                </div>
+                                <div className={s.fpsOverviewValue}>
+                                  {count.toLocaleString()}
+                                </div>
+                                <div className={s.fpsOverviewPercentage}>
+                                  {percentage}%
+                                </div>
+                              </div>
+                            );
+                          })}
+                      </div>
+
+                      <div className={s.fpsSummary}>
+                        <div className={s.fpsSummaryItem}>
+                          <span className={s.fpsSummaryLabel}>
+                            Total Top Runs
+                          </span>
+                          <span className={s.fpsSummaryValue}>
+                            {Object.values(performanceStats.nb_tops_per_fps)
+                              .reduce((sum, val) => sum + val, 0)
+                              .toLocaleString()}
+                          </span>
+                        </div>
+                        <div className={s.fpsSummaryItem}>
+                          <span className={s.fpsSummaryLabel}>Best FPS</span>
+                          <span className={s.fpsSummaryValue}>
+                            {performanceStats.best_fps}
+                          </span>
                         </div>
                       </div>
                     </div>
                   </div>
                 )}
-              </div>
-            </div>
 
-            {/* FPS Performance Overview */}
-            {performanceStats?.nb_tops_per_fps &&
-              Object.keys(performanceStats.nb_tops_per_fps).length > 0 && (
-                <div className={s.fpsPerformanceSection}>
-                  <h2>FPS Performance</h2>
+              {/* Recent Activity */}
+              {performanceStats?.recent_tops && topRunsCount > 0 && (
+                <div className={s.recentActivitySection}>
+                  <h2>Recent Activity</h2>
                   <p className={s.sectionDescription}>
-                    Number of runs in top 10 per fps
+                    Latest top {topRunsCount} finishes and achievements
                   </p>
 
-                  <div className={s.fpsOverviewContainer}>
-                    <div className={s.fpsOverviewStats}>
-                      {Object.entries(performanceStats.nb_tops_per_fps)
-                        .sort(([a], [b]) => {
-                          const order = [
-                            "125",
-                            "250",
-                            "333",
-                            "76",
-                            "43",
-                            "mix",
-                          ];
-                          return order.indexOf(a) - order.indexOf(b);
-                        })
-                        .map(([fps, count]) => {
-                          const totalTops = Object.values(
-                            performanceStats.nb_tops_per_fps
-                          ).reduce((sum, val) => sum + val, 0);
-                          const percentage =
-                            totalTops > 0
-                              ? Math.round((count / totalTops) * 100)
-                              : 0;
-                          const isBestFps = fps === performanceStats.best_fps;
-
-                          return (
-                            <div
-                              key={fps}
-                              className={`${s.fpsOverviewItem} ${
-                                isBestFps ? s.bestFpsOverview : ""
-                              }`}
-                            >
-                              <div className={s.fpsOverviewLabel}>
-                                {fps} FPS
-                                {isBestFps && (
-                                  <span className={s.bestFpsIndicator}>
-                                    <svg>
-                                      <use href="/icons-sprite.svg#star" />
-                                    </svg>
-                                  </span>
-                                )}
-                              </div>
-                              <div className={s.fpsOverviewValue}>
-                                {count.toLocaleString()}
-                              </div>
-                              <div className={s.fpsOverviewPercentage}>
-                                {percentage}%
-                              </div>
-                            </div>
-                          );
-                        })}
-                    </div>
-
-                    <div className={s.fpsSummary}>
-                      <div className={s.fpsSummaryItem}>
-                        <span className={s.fpsSummaryLabel}>
-                          Total Top Runs
-                        </span>
-                        <span className={s.fpsSummaryValue}>
-                          {Object.values(performanceStats.nb_tops_per_fps)
-                            .reduce((sum, val) => sum + val, 0)
-                            .toLocaleString()}
-                        </span>
-                      </div>
-                      <div className={s.fpsSummaryItem}>
-                        <span className={s.fpsSummaryLabel}>Best FPS</span>
-                        <span className={s.fpsSummaryValue}>
-                          {performanceStats.best_fps}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-            {/* Recent Activity */}
-            {performanceStats?.recent_tops && topRunsCount > 0 && (
-              <div className={s.recentActivitySection}>
-                <h2>Recent Activity</h2>
-                <p className={s.sectionDescription}>
-                  Latest top {topRunsCount} finishes and achievements
-                </p>
-
-                <div className={s.recentActivityList}>
-                  {performanceStats.recent_tops.map((run, index) => (
-                    <Link
-                      href={`/map?mapid=${run.cpid}`}
-                      className={s.recentActivityItem}
-                      key={index}
-                    >
-                      <div className={s.activityIcon}>
-                        <svg>
-                          <use href="/icons-sprite.svg#star" />
-                        </svg>
-                      </div>
-                      <div className={s.activityContent}>
-                        <div className={s.activityTitle}>{run.map_name}</div>
-                        <div className={s.activityDetails}>
-                          <span className={s.activityRank}>
-                            Rank #{run.rank}
-                          </span>
-                          <span className={s.activityFps}>{run.fps} FPS</span>
-                          <span className={s.activityDate}>
-                            {formatDate(run.finish_date)}
-                          </span>
-                        </div>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Top Runs Tab */}
-        {activeTab === "tops" && (
-          <div className={s.topRunsTab}>
-            <div className={s.topRunsHeader}>
-              <div className={s.topRunsControls}>
-                <div className={s.fpsToggleGroup}>
-                  <label>Show FPS:</label>
-                  <div className={s.fpsToggleButtons}>
-                    {["125", "250", "mix", "333", "76", "43"].map((fps) => (
-                      <button
-                        key={fps}
-                        className={`${s.fpsToggleButton} ${
-                          visibleTopRunsFps[fps] ? s.active : ""
-                        }`}
-                        onClick={() => toggleTopRunsFps(fps)}
+                  <div className={s.recentActivityList}>
+                    {performanceStats.recent_tops.map((run, index) => (
+                      <Link
+                        href={`/map?mapid=${run.cpid}`}
+                        className={s.recentActivityItem}
+                        key={index}
                       >
-                        {fps === "mix" ? "Mixed" : fps}
-                      </button>
+                        <div className={s.activityIcon}>
+                          <svg>
+                            <use href="/icons-sprite.svg#star" />
+                          </svg>
+                        </div>
+                        <div className={s.activityContent}>
+                          <div className={s.activityTitle}>{run.map_name}</div>
+                          <div className={s.activityDetails}>
+                            <span className={s.activityRank}>
+                              Rank #{run.rank}
+                            </span>
+                            <span className={s.activityFps}>{run.fps} FPS</span>
+                            <span className={s.activityDate}>
+                              {formatDate(run.finish_date)}
+                            </span>
+                          </div>
+                        </div>
+                      </Link>
                     ))}
                   </div>
                 </div>
-
-                <div className={s.controlGroup}>
-                  <label htmlFor="rank-filter">Rank Filter:</label>
-                  <select
-                    id="rank-filter"
-                    value={rankFilter}
-                    onChange={(e) => setRankFilter(e.target.value)}
-                    className={s.rankSelect}
-                  >
-                    <option value="1">Top 1 Only</option>
-                    <option value="1-10">Top 1-10</option>
-                    <option value="all">All Ranks</option>
-                  </select>
-                </div>
-
-                <div className={s.controlGroup}>
-                  <label htmlFor="sort-by">Sort By:</label>
-                  <select
-                    id="sort-by"
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className={s.sortSelect}
-                  >
-                    <option value="rank">Rank</option>
-                    <option value="time">Time</option>
-                    <option value="date">Date</option>
-                    <option value="score">Score</option>
-                  </select>
-                </div>
-
-                <div className={s.controlGroup}>
-                  <label htmlFor="sort-order">Order:</label>
-                  <select
-                    id="sort-order"
-                    value={sortOrder}
-                    onChange={(e) => setSortOrder(e.target.value)}
-                    className={s.orderSelect}
-                  >
-                    <option value="asc">Ascending</option>
-                    <option value="desc">Descending</option>
-                  </select>
-                </div>
-              </div>
+              )}
             </div>
+          )}
 
-            {topRunsLoading || jumpScoresLoading ? (
-              <div className={s.loadingContainer}>
-                <div className={s.loadingSpinner}></div>
-                <p>Loading top runs...</p>
-              </div>
-            ) : (
-              <div className={s.topRunsContent}>
-                {/* Detailed Top Runs */}
-                {(() => {
-                  const processedRuns = getProcessedTopRuns();
-                  return processedRuns.length > 0 ? (
-                    <>
-                      <div className={s.runsSummary}>
-                        <p>
-                          Showing {processedRuns.length} detailed run
-                          {processedRuns.length !== 1 ? "s" : ""}
-                          {rankFilter === "1"
-                            ? " (Top 1 only)"
-                            : rankFilter === "1-10"
-                            ? " (Top 1-10)"
-                            : " (All ranks)"}
-                        </p>
-                      </div>
-                      <div className={s.topRunsList}>
-                        {processedRuns.map((run, index) => {
-                          const scoreInfo = getScoreInfo(run);
-                          const cardClass = scoreInfo.isMythical
-                            ? s.mythical
-                            : scoreInfo.isLegendary
-                            ? s.legendary
-                            : scoreInfo.isEpic
-                            ? s.epic
-                            : "";
-                          return (
-                            <div
-                              key={`${run.run_id}-${index}`}
-                              className={`${s.runCard} ${cardClass}`}
-                            >
-                              <div className={s.runCardHeader}>
-                                <div
-                                  className={`${s.runRank} ${
-                                    s[getRankCategory(run.rank)]
-                                  }`}
-                                >
-                                  <span className={s.rankNumber}>
-                                    {run.rank}
-                                  </span>
-                                  <div className={s.rankSubInfo}>
-                                    <span className={s.rankSeparator}>/</span>
-                                    <span className={s.rankTotal}>
-                                      {run.totalNr}
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className={s.runInfo}>
-                                  <h3
-                                    className={
-                                      run.mapname.length > 20 ? s.longName : ""
-                                    }
-                                    title={run.mapname}
-                                  >
-                                    {run.mapname}
-                                  </h3>
-                                  <div className={s.runDetails}>
-                                    <span className={s.runFps}>
-                                      {run.fps} FPS
-                                    </span>
-                                    {run.difficulty && (
-                                      <span className={s.runDifficulty}>
-                                        Map Difficulty:{" "}
-                                        {run.difficulty.toFixed(2)}
-                                      </span>
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                              <div className={s.runStats}>
-                                <div className={s.runScore}>
-                                  <span className={s.statLabel}>Score:</span>
-                                  <span
-                                    className={`${s.statValue} ${
-                                      scoreInfo.isMythical
-                                        ? s.mythical
-                                        : scoreInfo.isLegendary
-                                        ? s.legendary
-                                        : scoreInfo.isEpic
-                                        ? s.epic
-                                        : ""
-                                    }`}
-                                  >
-                                    {scoreInfo.score.toLocaleString()}
-                                  </span>
-                                </div>
-                                <div className={s.runTime}>
-                                  <span className={s.statLabel}>Time:</span>
-                                  <span className={s.statValue}>
-                                    {formatTime(run.time_played_string)}
-                                  </span>
-                                </div>
-                                <div className={s.runDate}>
-                                  <span className={s.statLabel}>Date:</span>
-                                  <span className={s.statValue}>
-                                    {formatDate(run.time_created)}
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-                    </>
-                  ) : (
-                    <div className={s.emptyState}>
-                      <svg>
-                        <use href="/icons-sprite.svg#star" />
-                      </svg>
-                      <p>No runs found for the selected filters.</p>
-                    </div>
-                  );
-                })()}
-              </div>
-            )}
-          </div>
-        )}
-
-        {/* Leaderboard Ranks Tab */}
-        {activeTab === "leaderboards" && (
-          <div className={s.leaderboardTab}>
-            <div className={s.leaderboardHeader}>
-              <div className={s.leaderboardHeaderRow}>
-                <div className={s.leaderboardControls}>
+          {/* Top Runs Tab */}
+          {activeTab === "tops" && (
+            <div className={s.topRunsTab}>
+              <div className={s.topRunsHeader}>
+                <div className={s.topRunsControls}>
                   <div className={s.fpsToggleGroup}>
                     <label>Show FPS:</label>
                     <div className={s.fpsToggleButtons}>
@@ -947,9 +771,9 @@ const PlayerProfile = () => {
                         <button
                           key={fps}
                           className={`${s.fpsToggleButton} ${
-                            selectedLeaderboardFps === fps ? s.active : ""
+                            visibleTopRunsFps[fps] ? s.active : ""
                           }`}
-                          onClick={() => selectLeaderboardFps(fps)}
+                          onClick={() => toggleTopRunsFps(fps)}
                         >
                           {fps === "mix" ? "Mixed" : fps}
                         </button>
@@ -957,142 +781,341 @@ const PlayerProfile = () => {
                     </div>
                   </div>
 
-                  <div className={s.leaderboardToggleGroup}>
-                    <label>Show Leaderboards:</label>
-                    <div className={s.leaderboardToggleButtons}>
-                      <button
-                        className={`${s.leaderboardToggleButton} ${
-                          visibleLeaderboards.defrag ? s.active : ""
-                        }`}
-                        onClick={() => toggleLeaderboard("defrag")}
-                      >
-                        Defrag
-                      </button>
-                      <button
-                        className={`${s.leaderboardToggleButton} ${
-                          visibleLeaderboards.surf ? s.active : ""
-                        }`}
-                        onClick={() => toggleLeaderboard("surf")}
-                      >
-                        Surf
-                      </button>
-                      <button
-                        className={`${s.leaderboardToggleButton} ${
-                          visibleLeaderboards.jump ? s.active : ""
-                        }`}
-                        onClick={() => toggleLeaderboard("jump")}
-                      >
-                        Jump
-                      </button>
-                      <button
-                        className={`${s.leaderboardToggleButton} ${
-                          visibleLeaderboards.speed ? s.active : ""
-                        }`}
-                        onClick={() => toggleLeaderboard("speed")}
-                      >
-                        Speed
-                      </button>
-                    </div>
+                  <div className={s.controlGroup}>
+                    <label htmlFor="rank-filter">Rank Filter:</label>
+                    <select
+                      id="rank-filter"
+                      value={rankFilter}
+                      onChange={(e) => setRankFilter(e.target.value)}
+                      className={s.rankSelect}
+                    >
+                      <option value="1">Top 1 Only</option>
+                      <option value="1-10">Top 1-10</option>
+                      <option value="all">All Ranks</option>
+                    </select>
+                  </div>
+
+                  <div className={s.controlGroup}>
+                    <label htmlFor="sort-by">Sort By:</label>
+                    <select
+                      id="sort-by"
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className={s.sortSelect}
+                    >
+                      <option value="rank">Rank</option>
+                      <option value="time">Time</option>
+                      <option value="date">Date</option>
+                      <option value="score">Score</option>
+                    </select>
+                  </div>
+
+                  <div className={s.controlGroup}>
+                    <label htmlFor="sort-order">Order:</label>
+                    <select
+                      id="sort-order"
+                      value={sortOrder}
+                      onChange={(e) => setSortOrder(e.target.value)}
+                      className={s.orderSelect}
+                    >
+                      <option value="asc">Ascending</option>
+                      <option value="desc">Descending</option>
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
 
-            {leaderboardPositionsLoading ? (
-              <div className={s.loadingContainer}>
-                <div className={s.loadingSpinner}></div>
-                <p>Loading leaderboard positions...</p>
-              </div>
-            ) : (
-              <div className={s.leaderboardContent}>
-                {(() => {
-                  const processedGroups = getProcessedLeaderboards();
-                  const visibleGroups = Object.keys(processedGroups);
-
-                  return visibleGroups.length > 0 ? (
-                    <>
-                      {visibleGroups.map((fps) => (
-                        <div key={fps} className={s.fpsGroup}>
-                          <h3 className={s.fpsGroupTitle}>
-                            {fps === "mix"
-                              ? "Mixed FPS Leaderboards"
-                              : `${fps} FPS Leaderboards`}
-                          </h3>
-                          <div className={s.leaderboardList}>
-                            {processedGroups[fps].map((position, index) => (
+              {topRunsLoading || jumpScoresLoading ? (
+                <div className={s.loadingContainer}>
+                  <div className={s.loadingSpinner}></div>
+                  <p>Loading top runs...</p>
+                </div>
+              ) : (
+                <div className={s.topRunsContent}>
+                  {/* Detailed Top Runs */}
+                  {(() => {
+                    const processedRuns = getProcessedTopRuns();
+                    return processedRuns.length > 0 ? (
+                      <>
+                        <div className={s.runsSummary}>
+                          <p>
+                            Showing {processedRuns.length} detailed run
+                            {processedRuns.length !== 1 ? "s" : ""}
+                            {rankFilter === "1"
+                              ? " (Top 1 only)"
+                              : rankFilter === "1-10"
+                              ? " (Top 1-10)"
+                              : " (All ranks)"}
+                          </p>
+                        </div>
+                        <div className={s.topRunsList}>
+                          {processedRuns.map((run, index) => {
+                            const scoreInfo = getScoreInfo(run);
+                            const cardClass = scoreInfo.isMythical
+                              ? s.mythical
+                              : scoreInfo.isLegendary
+                              ? s.legendary
+                              : scoreInfo.isEpic
+                              ? s.epic
+                              : "";
+                            return (
                               <div
-                                key={`${fps}-${index}`}
-                                className={`${s.leaderboardCard} ${
-                                  s[getRankCategory(position.rank)]
-                                }`}
+                                key={`${run.run_id}-${index}`}
+                                className={`${s.runCard} ${cardClass}`}
                               >
-                                <div className={s.leaderboardCardHeader}>
+                                <div className={s.runCardHeader}>
                                   <div
-                                    className={`${s.leaderboardRank} ${
-                                      s[getRankCategory(position.rank)]
+                                    className={`${s.runRank} ${
+                                      s[getRankCategory(run.rank)]
                                     }`}
                                   >
                                     <span className={s.rankNumber}>
-                                      {position.rank}
+                                      {run.rank}
                                     </span>
-                                  </div>
-                                  <div className={s.leaderboardInfo}>
-                                    <h3>
-                                      {position.leaderboard_type
-                                        .charAt(0)
-                                        .toUpperCase() +
-                                        position.leaderboard_type.slice(1)}
-                                    </h3>
-                                    <div className={s.leaderboardDetails}>
-                                      <span className={s.leaderboardFps}>
-                                        {position.fps} FPS
+                                    <div className={s.rankSubInfo}>
+                                      <span className={s.rankSeparator}>/</span>
+                                      <span className={s.rankTotal}>
+                                        {run.totalNr}
                                       </span>
                                     </div>
                                   </div>
+                                  <div className={s.runInfo}>
+                                    <h3
+                                      className={
+                                        run.mapname.length > 20
+                                          ? s.longName
+                                          : ""
+                                      }
+                                      title={run.mapname}
+                                    >
+                                      {run.mapname}
+                                    </h3>
+                                    <div className={s.runDetails}>
+                                      <span className={s.runFps}>
+                                        {run.fps} FPS
+                                      </span>
+                                      {run.difficulty && (
+                                        <span className={s.runDifficulty}>
+                                          Map Difficulty:{" "}
+                                          {run.difficulty.toFixed(2)}
+                                        </span>
+                                      )}
+                                    </div>
+                                  </div>
                                 </div>
-                                <div className={s.leaderboardStats}>
-                                  <div className={s.leaderboardScore}>
+                                <div className={s.runStats}>
+                                  <div className={s.runScore}>
                                     <span className={s.statLabel}>Score:</span>
-                                    <span className={s.statValue}>
-                                      {position.score.toLocaleString()}
+                                    <span
+                                      className={`${s.statValue} ${
+                                        scoreInfo.isMythical
+                                          ? s.mythical
+                                          : scoreInfo.isLegendary
+                                          ? s.legendary
+                                          : scoreInfo.isEpic
+                                          ? s.epic
+                                          : ""
+                                      }`}
+                                    >
+                                      {scoreInfo.score.toLocaleString()}
                                     </span>
                                   </div>
-                                  <div className={s.leaderboardRating}>
-                                    <span className={s.statLabel}>Rating:</span>
+                                  <div className={s.runTime}>
+                                    <span className={s.statLabel}>Time:</span>
                                     <span className={s.statValue}>
-                                      {position.rating.toFixed(2)}
+                                      {formatTime(run.time_played_string)}
+                                    </span>
+                                  </div>
+                                  <div className={s.runDate}>
+                                    <span className={s.statLabel}>Date:</span>
+                                    <span className={s.statValue}>
+                                      {formatDate(run.time_created)}
                                     </span>
                                   </div>
                                 </div>
                               </div>
-                            ))}
-                          </div>
+                            );
+                          })}
                         </div>
-                      ))}
-                    </>
-                  ) : (
-                    <div className={s.emptyState}>
-                      <svg>
-                        <use href="/icons-sprite.svg#trophy" />
-                      </svg>
-                      <p>
-                        No leaderboard positions found for the selected FPS
-                        filters.
-                      </p>
-                    </div>
-                  );
-                })()}
-              </div>
-            )}
-          </div>
-        )}
+                      </>
+                    ) : (
+                      <div className={s.emptyState}>
+                        <svg>
+                          <use href="/icons-sprite.svg#star" />
+                        </svg>
+                        <p>No runs found for the selected filters.</p>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+          )}
 
-        {/* Route Completion Tab */}
-        {activeTab === "routes" && (
-          <div className={s.routeCompletionTab}>
-            <PlayerRouteCompletion playerId={playerId} />
-          </div>
-        )}
+          {/* Leaderboard Ranks Tab */}
+          {activeTab === "leaderboards" && (
+            <div className={s.leaderboardTab}>
+              <div className={s.leaderboardHeader}>
+                <div className={s.leaderboardHeaderRow}>
+                  <div className={s.leaderboardControls}>
+                    <div className={s.fpsToggleGroup}>
+                      <label>Show FPS:</label>
+                      <div className={s.fpsToggleButtons}>
+                        {["125", "250", "mix", "333", "76", "43"].map((fps) => (
+                          <button
+                            key={fps}
+                            className={`${s.fpsToggleButton} ${
+                              selectedLeaderboardFps === fps ? s.active : ""
+                            }`}
+                            onClick={() => selectLeaderboardFps(fps)}
+                          >
+                            {fps === "mix" ? "Mixed" : fps}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className={s.leaderboardToggleGroup}>
+                      <label>Show Leaderboards:</label>
+                      <div className={s.leaderboardToggleButtons}>
+                        <button
+                          className={`${s.leaderboardToggleButton} ${
+                            visibleLeaderboards.defrag ? s.active : ""
+                          }`}
+                          onClick={() => toggleLeaderboard("defrag")}
+                        >
+                          Defrag
+                        </button>
+                        <button
+                          className={`${s.leaderboardToggleButton} ${
+                            visibleLeaderboards.surf ? s.active : ""
+                          }`}
+                          onClick={() => toggleLeaderboard("surf")}
+                        >
+                          Surf
+                        </button>
+                        <button
+                          className={`${s.leaderboardToggleButton} ${
+                            visibleLeaderboards.jump ? s.active : ""
+                          }`}
+                          onClick={() => toggleLeaderboard("jump")}
+                        >
+                          Jump
+                        </button>
+                        <button
+                          className={`${s.leaderboardToggleButton} ${
+                            visibleLeaderboards.speed ? s.active : ""
+                          }`}
+                          onClick={() => toggleLeaderboard("speed")}
+                        >
+                          Speed
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {leaderboardPositionsLoading ? (
+                <div className={s.loadingContainer}>
+                  <div className={s.loadingSpinner}></div>
+                  <p>Loading leaderboard positions...</p>
+                </div>
+              ) : (
+                <div className={s.leaderboardContent}>
+                  {(() => {
+                    const processedGroups = getProcessedLeaderboards();
+                    const visibleGroups = Object.keys(processedGroups);
+
+                    return visibleGroups.length > 0 ? (
+                      <>
+                        {visibleGroups.map((fps) => (
+                          <div key={fps} className={s.fpsGroup}>
+                            <h3 className={s.fpsGroupTitle}>
+                              {fps === "mix"
+                                ? "Mixed FPS Leaderboards"
+                                : `${fps} FPS Leaderboards`}
+                            </h3>
+                            <div className={s.leaderboardList}>
+                              {processedGroups[fps].map((position, index) => (
+                                <div
+                                  key={`${fps}-${index}`}
+                                  className={`${s.leaderboardCard} ${
+                                    s[getRankCategory(position.rank)]
+                                  }`}
+                                >
+                                  <div className={s.leaderboardCardHeader}>
+                                    <div
+                                      className={`${s.leaderboardRank} ${
+                                        s[getRankCategory(position.rank)]
+                                      }`}
+                                    >
+                                      <span className={s.rankNumber}>
+                                        {position.rank}
+                                      </span>
+                                    </div>
+                                    <div className={s.leaderboardInfo}>
+                                      <h3>
+                                        {position.leaderboard_type
+                                          .charAt(0)
+                                          .toUpperCase() +
+                                          position.leaderboard_type.slice(1)}
+                                      </h3>
+                                      <div className={s.leaderboardDetails}>
+                                        <span className={s.leaderboardFps}>
+                                          {position.fps} FPS
+                                        </span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className={s.leaderboardStats}>
+                                    <div className={s.leaderboardScore}>
+                                      <span className={s.statLabel}>
+                                        Score:
+                                      </span>
+                                      <span className={s.statValue}>
+                                        {position.score.toLocaleString()}
+                                      </span>
+                                    </div>
+                                    <div className={s.leaderboardRating}>
+                                      <span className={s.statLabel}>
+                                        Rating:
+                                      </span>
+                                      <span className={s.statValue}>
+                                        {position.rating.toFixed(2)}
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        ))}
+                      </>
+                    ) : (
+                      <div className={s.emptyState}>
+                        <svg>
+                          <use href="/icons-sprite.svg#trophy" />
+                        </svg>
+                        <p>
+                          No leaderboard positions found for the selected FPS
+                          filters.
+                        </p>
+                      </div>
+                    );
+                  })()}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Route Completion Tab */}
+          {activeTab === "routes" && (
+            <div className={s.routeCompletionTab}>
+              <PlayerRouteCompletion playerId={playerId} />
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
