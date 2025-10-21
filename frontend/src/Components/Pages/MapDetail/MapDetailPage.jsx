@@ -1,6 +1,7 @@
 "use client";
 
 import { jhApis } from "@/Api/jumpersHeaven";
+import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
 import {
@@ -15,6 +16,12 @@ import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
 import MapDetailPlayers from "./MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "./MapDetailTops/MapDetailTops";
+
+const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
+const breadcrumbPaths = [
+  { index: 0, path: "/" },
+  { index: 1, path: "/maps" },
+];
 
 const MapDetailPage = () => {
   const searchParams = useSearchParams();
@@ -530,6 +537,11 @@ const MapDetailPage = () => {
   return (
     <main className={s.mapDetailPage}>
       <div className="container">
+        <Breadcrumbs
+          breadcrumbLabels={breadcrumbLabels(mapData?.Name)}
+          breadcrumbPaths={breadcrumbPaths}
+        />
+
         <MapDetailHeader mapData={mapData} onBack={() => router.back()} />
 
         <div className={s.contentGrid}>
