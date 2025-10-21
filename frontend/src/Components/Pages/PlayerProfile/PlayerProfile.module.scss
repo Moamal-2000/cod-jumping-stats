@@ -91,7 +91,7 @@
 }
 
 .playerName>span:not(.adminBadge) {
-  display: contents;
+  display: contents; // Not supported widely
 }
 
 .playerName .adminBadge {
