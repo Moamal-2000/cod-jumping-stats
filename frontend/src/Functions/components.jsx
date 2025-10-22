@@ -20,7 +20,7 @@ export function getModifiedRank(rank) {
   );
 }
 
-export function getColoredName(name) {
+export function getColoredName(name = "Unknown Player") {
   const colorParts = name.split(/\^(?=\d)/);
   const colorNumbers = colorParts.slice(1).map((part) => part.charAt(0));
 
