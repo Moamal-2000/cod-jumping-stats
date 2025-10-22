@@ -18,25 +18,32 @@ const playerProfileTabs = () => {
 
   return (
     <nav className={s.tabs}>
-      {tabs.map((tab) => {
-        const tabPath = tab.id === "overview" ? "" : tab.id;
-        const href = `/player/${tabPath}?playerid=${playerId}`;
-        const currentTab = pathname.split("/player")[1].slice(1) || tabs[0].id;
-        const classes = `${s.tabButton} ${
-          tab.id === currentTab ? s.active : ""
-        }`;
-
-        return (
-          <Link href={href} key={tab.id} className={classes}>
-            <svg>
-              <use href={`/icons-sprite.svg#${tab.icon}`} />
-            </svg>
-            {tab.label}
-          </Link>
-        );
-      })}
+      {tabs.map((tab) => (
+        <PlayerProfileTab
+          key={tab.id}
+          tab={tab}
+          playerId={playerId}
+          pathname={pathname}
+        />
+      ))}
     </nav>
   );
 };
 
 export default playerProfileTabs;
+
+const PlayerProfileTab = ({ tab, playerId, pathname }) => {
+  const tabPath = tab.id === "overview" ? "" : tab.id;
+  const href = `/player/${tabPath}?playerid=${playerId}`;
+  const currentTab = pathname.split("/player")[1].slice(1) || tabs[0].id;
+  const classes = `${s.tabButton} ${tab.id === currentTab ? s.active : ""}`;
+
+  return (
+    <Link href={href} key={tab.id} className={classes}>
+      <svg>
+        <use href={`/icons-sprite.svg#${tab.icon}`} />
+      </svg>
+      {tab.label}
+    </Link>
+  );
+};
