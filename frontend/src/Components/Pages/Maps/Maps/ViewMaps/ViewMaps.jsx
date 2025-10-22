@@ -7,7 +7,7 @@ import MapCard2 from "../../MapCard2/MapCard2";
 import s from "./ViewMaps.module.scss";
 
 const ViewMaps = ({ mapsScroll, lastMapRef }) => {
-  const { loading, error, mapsData } = useSelector((s) => s.maps);
+  const { loading, error, allMaps } = useSelector((s) => s.maps);
   const searchParams = useSearchParams();
   const searchByAuthor = searchParams.get("author");
   const searchByName = searchParams.get("name");
@@ -34,7 +34,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
           key={`${mapData.CpID}-${index}`}
           mapData={mapData}
           mapsScroll={mapsScroll}
-          mapsData={mapsData}
+          allMaps={allMaps}
           lastMapRef={lastMapRef}
           index={index}
         />
@@ -47,7 +47,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
         key={`${mapData.CpID}-${index}`}
         mapData={mapData}
         mapsScroll={mapsScroll}
-        mapsData={mapsData}
+        allMaps={allMaps}
         lastMapRef={lastMapRef}
         index={index}
       />

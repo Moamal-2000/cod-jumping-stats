@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchMaps } from "../thunks/mapsThunk";
 
 const initialState = {
+  allMaps: [],
   mapsData: [],
   mapsScroll: [],
   firstChunkMaps: [],
@@ -30,6 +31,7 @@ export const mapsSlice = createSlice({
         const processedMaps = getMapsByParams({ mapsData, paramsObject });
         const paginationMaps = paginateData(processedMaps, 1);
 
+        state.allMaps = mapsData;
         state.mapsData = processedMaps;
         state.mapsScroll = paginationMaps;
         state.firstChunkMaps = paginationMaps;

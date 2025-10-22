@@ -6,7 +6,7 @@ import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import s from "./MapCard.module.scss";
 
-const MapCard = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
+const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   const {
     Author,
     Difficulty,
@@ -21,7 +21,7 @@ const MapCard = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
   } = mapData;
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
-    mapsData,
+    allMaps,
     IndividualFinishCount,
   });
 

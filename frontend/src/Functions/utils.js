@@ -310,8 +310,8 @@ export function getMostFinishedMap(mapsData) {
   });
 }
 
-export function getMapCompletionRate({ mapsData, IndividualFinishCount }) {
-  const mostFinishedMap = getMostFinishedMap(mapsData);
+export function getMapCompletionRate({ allMaps, IndividualFinishCount }) {
+  const mostFinishedMap = getMostFinishedMap(allMaps);
   const mostFinishedCount = mostFinishedMap.IndividualFinishCount;
   const completionRate = (
     (IndividualFinishCount / mostFinishedCount) *

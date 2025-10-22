@@ -5,7 +5,7 @@ import Link from "next/link";
 import { memo } from "react";
 import s from "./MapCard2.module.scss";
 
-const MapCard2 = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
+const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   const {
     Author,
     Name,
@@ -19,7 +19,7 @@ const MapCard2 = ({ mapData, mapsScroll, mapsData, lastMapRef, index }) => {
   } = mapData;
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
-    mapsData,
+    allMaps,
     IndividualFinishCount,
   });
 
