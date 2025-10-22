@@ -10,12 +10,16 @@ const MapsSearchInput = ({ queryName, placeholder }) => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
+  const [searchValue, setSearchValue] = useState(
+    searchParams.get(queryName) || ""
+  );
   const [isSearching, setIsSearching] = useState(false);
   const inputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
   function handleSearchInput(event) {
     const inputValue = event.target.value;
+    setSearchValue(inputValue);
 
     clearTimeout(searchTimeoutRef?.current);
     searchTimeoutRef.current = setTimeout(() => performSearch(inputValue), 300);
@@ -55,6 +59,7 @@ const MapsSearchInput = ({ queryName, placeholder }) => {
         type="text"
         placeholder={placeholder}
         onChange={handleSearchInput}
+        value={searchValue}
         className={s.searchInput}
       />
 

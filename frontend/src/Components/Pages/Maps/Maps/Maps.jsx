@@ -57,10 +57,6 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
     checkAndLoadMoreData();
   }, [paginationNumber]);
 
-  // useEffect(() => {
-  //   console.log(mapsScroll);
-  // }, [mapsScroll])
-
   return (
     <section className={`${s.mapsSection} ${collapseClass} ${listClass}`}>
       {loading && !error && (
