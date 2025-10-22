@@ -96,7 +96,7 @@ function checkAndLoadMoreData({
     paginationNumber
   );
 
-  // In this case the handleShowAll() is activated already
+  // In this case the handleShowAll() is invoked already
   const isSameArrayReference = leaderboardScroll === leaderboardData;
 
   const lastVisitedPage = pageVisits?.[pageVisits.length - 1];

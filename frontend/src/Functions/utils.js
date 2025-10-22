@@ -106,7 +106,7 @@ export function formateReleaseDate(dateStr) {
   return `${MONTHS[+month]} ${day}, ${year}`;
 }
 
-export function modifyMapsData(mapsData) {
+export function modifyMapsData(mapsData = []) {
   const now = Date.now();
   const dateBeforeMonth = now - 30 * 24 * 60 * 60 * 1000;
   const currentYear = new Date().getFullYear();

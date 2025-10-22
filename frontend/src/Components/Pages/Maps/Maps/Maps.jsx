@@ -11,38 +11,33 @@ import s from "./Maps.module.scss";
 import ViewMaps from "./ViewMaps/ViewMaps";
 
 const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
-  const dispatch = useDispatch();
-  const {
-    mapsScroll,
-    allDataDisplayed,
-    loading,
-    error,
-    searchTerm,
-    filteredMaps,
-    sortedMaps,
-  } = useSelector((s) => s.maps);
+  const { mapsScroll, allDataDisplayed, loading, error, mapsData } =
+    useSelector((s) => s.maps);
   const { pageVisits, isMapsExpanded } = useSelector((s) => s.global);
+  const dispatch = useDispatch();
+
   const searchParams = useSearchParams();
   const viewType = searchParams.get("view") || "grid";
   const paramsObject = Object.fromEntries(searchParams.entries());
+
   const collapseClass = isMapsExpanded ? "" : s.collapse;
   const listClass = viewType === "list" ? s.list : "";
 
   function addDataOnScroll() {
-    const paginationMapsData = paginateData(sortedMaps, paginationNumber);
+    const paginationMapsData = paginateData(mapsData, paginationNumber);
     const value = mapsScroll.concat(paginationMapsData);
 
     dispatch(updateMapsState({ key: "mapsScroll", value }));
   }
 
   function checkAndLoadMoreData() {
-    const isLastPage = getIsLastPagination(sortedMaps, paginationNumber);
+    const isLastPage = getIsLastPagination(mapsData, paginationNumber);
     const lastVisitedPage = pageVisits?.[pageVisits.length - 1];
     const cameFromDifferentPage =
       lastVisitedPage !== "/maps" && lastVisitedPage !== undefined;
 
-    // In this case the handleShowAll() is activated already
-    const isSameArrayReference = mapsScroll === sortedMaps;
+    // In this case the handleShowAll() is invoked already
+    const isSameArrayReference = mapsScroll === mapsData;
 
     const shouldLoadMoreData =
       !isLastPage &&
@@ -53,18 +48,18 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
     if (shouldLoadMoreData) addDataOnScroll();
   }
 
-  function getMapsData() {
+  useEffect(() => {
     dispatch(fetchMaps(paramsObject));
     setPaginationNumber(1);
-  }
-
-  useEffect(() => {
-    getMapsData();
   }, [searchParams]);
 
   useEffect(() => {
     checkAndLoadMoreData();
   }, [paginationNumber]);
+
+  // useEffect(() => {
+  //   console.log(mapsScroll);
+  // }, [mapsScroll])
 
   return (
     <section className={`${s.mapsSection} ${collapseClass} ${listClass}`}>
@@ -75,12 +70,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
         />
       )}
 
-      <ViewMaps
-        lastMapRef={lastMapRef}
-        mapsScroll={mapsScroll}
-        searchTerm={searchTerm}
-        filteredMaps={filteredMaps}
-      />
+      <ViewMaps lastMapRef={lastMapRef} mapsScroll={mapsScroll} />
     </section>
   );
 };

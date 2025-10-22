@@ -15,11 +15,9 @@ function getMapsByFpsDifficulty({ sortedMaps, fps }) {
   });
 }
 
-function sortMaps(maps) {
+function sortMaps(maps, sortBy) {
   if (!maps || maps.length === 0) return maps;
 
-  const sortBy =
-    new URLSearchParams(window.location.search).get("sort-by") || "newest";
   const sortedMaps = [...maps];
 
   switch (sortBy) {
@@ -71,10 +69,6 @@ const initialState = {
   allDataDisplayed: [],
   loading: true,
   error: false,
-  searchTerm: "",
-  filteredMaps: [],
-  sortBy: "125-difficulty", // Default sort
-  sortedMaps: [], // Sorted maps for display
 };
 
 export const mapsSlice = createSlice({
@@ -84,29 +78,8 @@ export const mapsSlice = createSlice({
     updateMapsState: (state, { payload }) => {
       state[payload.key] = payload.value;
     },
-    setSearchTerm: (state, { payload }) => {
-      state.searchTerm = payload;
-    },
     setFilteredMaps: (state, { payload }) => {
-      state.filteredMaps = payload;
-      state.sortedMaps = sortMaps(payload);
-      state.mapsScroll = payload.slice(0, 10);
-    },
-    clearSearch: (state) => {
-      state.searchTerm = "";
-      state.filteredMaps = [];
-      // Reset to sorted maps from all data
-      state.sortedMaps = sortMaps(state.mapsData);
-      // Reset mapsScroll to first page
-      state.mapsScroll = state.sortedMaps.slice(0, 10);
-    },
-    setSortBy: (state, { payload }) => {
-      state.sortBy = payload;
-      // Sort the current maps data
-      const dataToSort = state.searchTerm ? state.filteredMaps : state.mapsData;
-      state.sortedMaps = sortMaps(dataToSort, payload);
-      // Reset mapsScroll to first page
-      state.mapsScroll = state.sortedMaps.slice(0, 10);
+      state.mapsScroll = sortMaps(payload).slice(0, 10);
     },
   },
   extraReducers: ({ addCase }) => {
@@ -116,18 +89,38 @@ export const mapsSlice = createSlice({
     })
       .addCase(fetchMaps.fulfilled, (state, { payload }) => {
         const { mapsData, paramsObject } = payload;
-        const filteredMapsData = getFilteredMaps(mapsData, paramsObject);
-        const modifiedMapsData = modifyMapsData(filteredMapsData);
+        let mapsResult = mapsData;
 
-        // Apply sorting using the current sortBy state
-        const sortedMapsData = sortMaps(modifiedMapsData, state.sortBy);
-        const paginationMaps = paginateData(sortedMapsData, 1);
+        const type = paramsObject?.type || "all";
+        const sortBy = paramsObject?.["sort-by"] || "newest";
 
-        state.mapsData = modifiedMapsData;
+        const mapNameSearch = paramsObject?.name || "";
+        const mapAuthorSearch = paramsObject?.author || "";
+
+        if (type !== "all") {
+          mapsResult = getFilteredMaps(mapsData, paramsObject);
+        }
+
+        if (mapNameSearch) {
+          mapsResult = mapsResult.filter((map) =>
+            map.Name.toLowerCase().includes(mapNameSearch)
+          );
+        }
+
+        if (mapAuthorSearch) {
+          mapsResult = mapsResult.filter((map) =>
+            map?.Author?.toLowerCase()?.includes?.(mapAuthorSearch)
+          );
+        }
+
+        mapsResult = sortMaps(mapsResult, sortBy);
+        mapsResult = modifyMapsData(mapsResult);
+
+        const paginationMaps = paginateData(mapsResult, 1);
+
+        state.mapsData = mapsResult;
         state.mapsScroll = paginationMaps;
         state.firstChunkMaps = paginationMaps;
-        state.sortedMaps = sortedMapsData;
-        state.filteredMaps = sortedMapsData; // Set filteredMaps to sorted data
         state.loading = false;
         state.error = false;
       })
@@ -138,11 +131,5 @@ export const mapsSlice = createSlice({
   },
 });
 
-export const {
-  updateMapsState,
-  setSearchTerm,
-  setFilteredMaps,
-  clearSearch,
-  setSortBy,
-} = mapsSlice.actions;
+export const { updateMapsState, setFilteredMaps } = mapsSlice.actions;
 export default mapsSlice.reducer;

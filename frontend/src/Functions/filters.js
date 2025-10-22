@@ -27,14 +27,14 @@ export function getRegionLeaderboard(data, filterKey) {
 }
 
 export function getFilteredMaps(mapsData, paramsObject) {
-  const mapType = paramsObject?.type || "jump";
+  const mapType = paramsObject?.type || "all";
   const shouldFilterByType = mapType !== "all";
 
   let filteredData = mapsData;
 
   if (shouldFilterByType) {
     filteredData = mapsData.filter((map) => {
-      const mapTypeLower = map.Type?.toLowerCase() || "jump";
+      const mapTypeLower = map.Type?.toLowerCase() || "all";
       return mapTypeLower === mapType;
     });
   }

@@ -6,19 +6,23 @@ import MapCard from "../../MapCard/MapCard";
 import MapCard2 from "../../MapCard2/MapCard2";
 import s from "./ViewMaps.module.scss";
 
-const ViewMaps = ({ mapsScroll, lastMapRef, searchTerm, filteredMaps }) => {
+const ViewMaps = ({ mapsScroll, lastMapRef }) => {
   const { loading, error, mapsData } = useSelector((s) => s.maps);
   const searchParams = useSearchParams();
+  const searchByAuthor = searchParams.get("author");
+  const searchByName = searchParams.get("name");
   const viewType = searchParams.get("view") || "grid";
 
   if (loading || error) return null;
 
-  // Show no results message when searching and no maps found
-  if (searchTerm && filteredMaps.length === 0) {
+  const hasNoResults =
+    (searchByAuthor || searchByName) && mapsScroll.length === 0;
+
+  if (hasNoResults) {
     return (
       <div className={s.noResults}>
         <h3>No maps found</h3>
-        <p>No maps match "{searchTerm}"</p>
+        <p>No maps match your search criteria</p>
       </div>
     );
   }

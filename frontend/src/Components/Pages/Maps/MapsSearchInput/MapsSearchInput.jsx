@@ -1,37 +1,30 @@
 "use client";
 
-import {
-  clearSearch,
-  setFilteredMaps,
-  setSearchTerm,
-} from "@/Redux/slices/mapsSlice";
+import { createQueryString, removeQueryString } from "@/Functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import s from "./MapsSearchInput.module.scss";
 
 const MapsSearchInput = () => {
-  const dispatch = useDispatch();
-  const { mapsData } = useSelector((s) => s.maps);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [isSearching, setIsSearching] = useState(false);
   const inputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
   function performSearch(searchValue) {
     if (!searchValue.trim()) {
-      dispatch(clearSearch());
       setIsSearching(false);
+      removeQueryString("name", searchParams, router, pathname);
       return;
     }
-
     setIsSearching(true);
 
     const searchLowerCased = searchValue.toLowerCase();
-    const filteredMaps = mapsData.filter((map) =>
-      map.Name?.toLowerCase().includes(searchLowerCased)
-    );
 
-    dispatch(setFilteredMaps(filteredMaps));
-    dispatch(setSearchTerm(searchValue));
+    createQueryString("name", searchLowerCased, searchParams, router, pathname);
     setIsSearching(false);
   }
 
@@ -44,10 +37,8 @@ const MapsSearchInput = () => {
 
   function handleClearSearch() {
     if (inputRef.current) inputRef.current.value = "";
-
+    removeQueryString("name", searchParams, router, pathname);
     clearTimeout(searchTimeoutRef?.current);
-
-    dispatch(clearSearch());
     setIsSearching(false);
   }
 

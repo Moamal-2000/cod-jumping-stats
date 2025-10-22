@@ -1,39 +1,38 @@
-import {
-  clearSearch,
-  setFilteredMaps,
-  setSearchTerm,
-} from "@/Redux/slices/mapsSlice";
+import { createQueryString, removeQueryString } from "@/Functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import s from "./MapAuthorSearchInput.module.scss";
 
 const MapAuthorSearchInput = () => {
-  const dispatch = useDispatch();
-  const { mapsData } = useSelector((s) => s.maps);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
   const [isSearching, setIsSearching] = useState(false);
   const inputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
   function performSearch(searchValue) {
     if (!searchValue.trim()) {
-      dispatch(clearSearch());
       setIsSearching(false);
+      removeQueryString("author", searchParams, router, pathname);
       return;
     }
-
     setIsSearching(true);
 
     const searchLowerCased = searchValue.toLowerCase();
-    const filteredMaps = mapsData.filter((map) =>
-      map.Author?.toLowerCase().includes(searchLowerCased)
-    );
 
-    dispatch(setFilteredMaps(filteredMaps));
-    dispatch(setSearchTerm(searchValue));
+    createQueryString(
+      "author",
+      searchLowerCased,
+      searchParams,
+      router,
+      pathname
+    );
     setIsSearching(false);
   }
 
-  function handleSearchInput(event) {
+  function handleOnChange(event) {
     const inputValue = event.target.value;
 
     clearTimeout(searchTimeoutRef?.current);
@@ -42,10 +41,8 @@ const MapAuthorSearchInput = () => {
 
   function handleClearSearch() {
     if (inputRef.current) inputRef.current.value = "";
-
+    removeQueryString("author", searchParams, router, pathname);
     clearTimeout(searchTimeoutRef?.current);
-
-    dispatch(clearSearch());
     setIsSearching(false);
   }
 
@@ -55,7 +52,7 @@ const MapAuthorSearchInput = () => {
         ref={inputRef}
         type="text"
         placeholder="Search maps by author name..."
-        onChange={handleSearchInput}
+        onChange={handleOnChange}
         className={s.searchInput}
       />
       {isSearching && (

@@ -70,7 +70,7 @@ export const MAPS_FILTERS_DATA = [
   {
     label: "Map Type",
     queryName: "type",
-    defaultUrlQuery: "jump",
+    defaultUrlQuery: "all",
     filtersData: [
       { text: "All", queryValue: "all", id: 1 },
       { text: "Jump", queryValue: "jump", id: 2 },

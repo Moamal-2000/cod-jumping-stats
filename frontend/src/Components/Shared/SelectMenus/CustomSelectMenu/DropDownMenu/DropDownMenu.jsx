@@ -1,17 +1,12 @@
 import { SORT_MAPS_OPTIONS } from "@/Data/staticData";
 import { createQueryString, removeQueryString } from "@/Functions/utils";
-import { setFilteredMaps } from "@/Redux/slices/mapsSlice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import s from "./DropDownMenu.module.scss";
 
 const DropDownMenu = ({ isOpen, currentSortBy, setCurrentSortBy }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
-  const dispatch = useDispatch();
-  const { filteredMaps } = useSelector((s) => s.maps);
   const visibleClass = isOpen ? `${s.visible}` : "";
 
   function handleSelectOption(value, label) {
@@ -26,12 +21,6 @@ const DropDownMenu = ({ isOpen, currentSortBy, setCurrentSortBy }) => {
     setCurrentSortBy(label);
     createQueryString("sort-by", value, searchParams, router, pathname);
   }
-
-  useEffect(() => {
-    if (currentSortBy === "Newest First") return;
-
-    dispatch(setFilteredMaps(filteredMaps));
-  }, [currentSortBy]);
 
   return (
     <div
