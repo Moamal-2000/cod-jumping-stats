@@ -15,19 +15,12 @@ import {
   fetchPlayerProfile,
   fetchPlayerTops,
 } from "@/Redux/thunks/playerProfileThunk";
-import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerBadges from "../../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import s from "./PlayerProfileLayout.module.scss";
-
-const tabs = [
-  { id: "overview", label: "Overview", icon: "chart-bar" },
-  { id: "tops", label: "Top Runs", icon: "star" },
-  { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
-  { id: "routes", label: "Route Completion", icon: "check-circle" },
-];
+import PlayerProfileTabs from "./playerProfileTabs/playerProfileTabs";
 
 const PlayerProfileLayout = ({ children }) => {
   const {
@@ -39,7 +32,6 @@ const PlayerProfileLayout = ({ children }) => {
   } = useSelector((s) => s.playerProfile);
   const playersData = useSelector((s) => s.players.playersData);
 
-  const pathname = usePathname();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
@@ -187,31 +179,7 @@ const PlayerProfileLayout = ({ children }) => {
             </div>
           </div>
 
-          {/* Tab Navigation */}
-          <div className={s.tabNavigation}>
-            {tabs.map((tab) => {
-              const currentTab =
-                pathname.split("/player")[1].slice(1) || tabs[0].id;
-
-              return (
-                <Link
-                  href={`/player/${
-                    tab.id === "overview" ? "" : tab.id
-                  }?playerid=${playerId}`}
-                  key={tab.id}
-                  className={`${s.tabButton} ${
-                    tab.id === currentTab ? s.active : ""
-                  }`}
-                >
-                  <svg>
-                    <use href={`/icons-sprite.svg#${tab.icon}`} />
-                  </svg>
-                  <span>{tab.label}</span>
-                </Link>
-              );
-            })}
-          </div>
-
+          <PlayerProfileTabs />
           {children}
         </div>
       </div>
