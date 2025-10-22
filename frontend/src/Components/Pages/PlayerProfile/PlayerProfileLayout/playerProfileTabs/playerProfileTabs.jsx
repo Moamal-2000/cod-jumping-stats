@@ -17,28 +17,25 @@ const playerProfileTabs = () => {
   const playerId = +searchParams.get("playerid");
 
   return (
-    <div className={s.tabs}>
+    <nav className={s.tabs}>
       {tabs.map((tab) => {
+        const tabPath = tab.id === "overview" ? "" : tab.id;
+        const href = `/player/${tabPath}?playerid=${playerId}`;
         const currentTab = pathname.split("/player")[1].slice(1) || tabs[0].id;
+        const classes = `${s.tabButton} ${
+          tab.id === currentTab ? s.active : ""
+        }`;
 
         return (
-          <Link
-            href={`/player/${
-              tab.id === "overview" ? "" : tab.id
-            }?playerid=${playerId}`}
-            key={tab.id}
-            className={`${s.tabButton} ${
-              tab.id === currentTab ? s.active : ""
-            }`}
-          >
+          <Link href={href} key={tab.id} className={classes}>
             <svg>
               <use href={`/icons-sprite.svg#${tab.icon}`} />
             </svg>
-            <span>{tab.label}</span>
+            {tab.label}
           </Link>
         );
       })}
-    </div>
+    </nav>
   );
 };
 
