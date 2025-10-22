@@ -1,8 +1,7 @@
+import MapsSearchInput from "@/Components/Shared/Inputs/MapsSearchInput/MapsSearchInput";
 import CustomSelectMenu from "@/Components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
-import MapsSearchInput from "../../MapsSearchInput/MapsSearchInput";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
-import MapAuthorSearchInput from "../../MapAuthorSearchInput/MapAuthorSearchInput";
 
 const SortSection = ({ setPaginationNumber }) => {
   return (
@@ -27,8 +26,14 @@ const SortSection = ({ setPaginationNumber }) => {
           <CustomSelectMenu />
         </div>
 
-        <MapsSearchInput />
-        <MapAuthorSearchInput />
+        <MapsSearchInput
+          placeholder="Search maps by name..."
+          queryName="name"
+        />
+        <MapsSearchInput
+          placeholder="Search maps by author name..."
+          queryName="author"
+        />
       </div>
 
       <SortView setPaginationNumber={setPaginationNumber} />

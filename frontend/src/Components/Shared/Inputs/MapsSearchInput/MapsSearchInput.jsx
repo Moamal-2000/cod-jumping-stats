@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import s from "./MapsSearchInput.module.scss";
 
-const MapsSearchInput = () => {
+const MapsSearchInput = ({ queryName, placeholder }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -14,20 +14,6 @@ const MapsSearchInput = () => {
   const inputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
-  function performSearch(searchValue) {
-    if (!searchValue.trim()) {
-      setIsSearching(false);
-      removeQueryString("name", searchParams, router, pathname);
-      return;
-    }
-    setIsSearching(true);
-
-    const searchLowerCased = searchValue.toLowerCase();
-
-    createQueryString("name", searchLowerCased, searchParams, router, pathname);
-    setIsSearching(false);
-  }
-
   function handleSearchInput(event) {
     const inputValue = event.target.value;
 
@@ -35,9 +21,29 @@ const MapsSearchInput = () => {
     searchTimeoutRef.current = setTimeout(() => performSearch(inputValue), 300);
   }
 
+  function performSearch(searchValue) {
+    if (!searchValue.trim()) {
+      setIsSearching(false);
+      removeQueryString(queryName, searchParams, router, pathname);
+      return;
+    }
+    setIsSearching(true);
+
+    const searchLowerCased = searchValue.toLowerCase();
+
+    createQueryString(
+      queryName,
+      searchLowerCased,
+      searchParams,
+      router,
+      pathname
+    );
+    setIsSearching(false);
+  }
+
   function handleClearSearch() {
     if (inputRef.current) inputRef.current.value = "";
-    removeQueryString("name", searchParams, router, pathname);
+    removeQueryString(queryName, searchParams, router, pathname);
     clearTimeout(searchTimeoutRef?.current);
     setIsSearching(false);
   }
@@ -47,15 +53,17 @@ const MapsSearchInput = () => {
       <input
         ref={inputRef}
         type="text"
-        placeholder="Search maps by name..."
+        placeholder={placeholder}
         onChange={handleSearchInput}
         className={s.searchInput}
       />
+
       {isSearching && (
         <div className={s.searchLoadingIndicator}>
-          <div className={s.searchSpinner}></div>
+          <div className={s.searchSpinner} />
         </div>
       )}
+
       <button
         onClick={handleClearSearch}
         className={s.clearButton}
