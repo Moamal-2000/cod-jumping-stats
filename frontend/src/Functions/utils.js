@@ -168,8 +168,14 @@ export function updateThemeByPage(currentPage) {
 }
 
 export function getSortByLabel(value) {
-  const option = SORT_MAPS_OPTIONS.find((option) => option.value === value);
-  return option?.label || "Newest First";
+  if (!value) return "Newest First";
+
+  for (const group of SORT_MAPS_OPTIONS) {
+    const option = group.groupOptions.find((opt) => opt.value === value);
+    if (option) return option.label;
+  }
+
+  return "Newest First";
 }
 
 export function openVideo(videos, videoIndex) {

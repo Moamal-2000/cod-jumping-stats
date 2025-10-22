@@ -9,9 +9,11 @@ import DropDownMenu from "./DropDownMenu/DropDownMenu";
 const CustomSelectMenu = () => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
+
   const searchParams = useSearchParams();
   const urlQuery = searchParams.get("sort-by");
   const [currentSortBy, setCurrentSortBy] = useState(getSortByLabel(urlQuery));
+
   const visibleClass = isOpen ? `${s.visible}` : "";
 
   function handleClick() {
