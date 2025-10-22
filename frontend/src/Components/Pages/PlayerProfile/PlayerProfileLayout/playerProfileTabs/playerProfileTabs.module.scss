@@ -1,8 +1,8 @@
 .tabs {
   display: flex;
-  gap: 0.5rem;
-  margin: 0 -1rem 2rem;
-  padding: 0 1rem;
+  margin: 0 -16px 32px;
+  padding: 0 16px;
+  width: 100%;
   overflow-x: auto;
   scrollbar-width: thin;
   scrollbar-color: #4b5563 transparent;
@@ -24,60 +24,68 @@
 }
 
 .tabs .tabButton {
-  position: relative;
+  outline: none;
+  border: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 8px;
+  padding: 12px 24px;
   background: transparent;
-  border: none;
   color: #9ca3af;
-  font-size: 0.95rem;
+  font-size: .95rem;
+  min-width: fit-content;
   font-weight: 500;
   cursor: pointer;
-  border-radius: 8px 8px 0 0;
-  transition: all 0.2s ease;
   white-space: nowrap;
-  min-width: fit-content;
-  margin: 0;
   position: relative;
   overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: transparent;
-    transition: all 0.2s ease;
-  }
+  transition: background .2s ease, color .2s ease;
 
   &:hover,
   &:focus-visible {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, .04);
     color: #f9fafb;
-    outline: none;
-  }
-
-  &:focus-visible {
-    box-shadow: 0 0 0 2px #facc15;
-  }
-
-  &.active {
-    color: #facc15;
-    font-weight: 600;
 
     &::after {
-      background: #facc15;
+      background: #fff;
     }
   }
 
-  svg {
-    width: 1.1rem;
-    height: 1.1rem;
-    flex-shrink: 0;
+  &:active {
+    background: rgba(255, 255, 255, .07);
   }
+}
+
+.tabs .tabButton.active {
+  color: #facc15;
+
+  &:hover,
+  &:focus-visible {
+    background: rgba(250, 204, 21, .04);
+  }
+
+  &:active {
+    background: rgba(250, 204, 21, .07);
+  }
+
+  &::after {
+    background: #facc15;
+  }
+}
+
+.tabs .tabButton::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background: transparent;
+  transition: background .2s ease;
+}
+
+.tabs .tabButton svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
 }
