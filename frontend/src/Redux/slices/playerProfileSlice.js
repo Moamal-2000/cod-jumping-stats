@@ -44,9 +44,6 @@ export const playerProfileSlice = createSlice({
     updatePlayerProfileState: (state, { payload }) => {
       state[payload.key] = payload.value;
     },
-    setPlayerInfo: (state, { payload }) => {
-      state.playerInfo = payload;
-    },
     clearPlayerProfile: (state) => {
       state.playerInfo = null;
       state.performanceStats = null;
@@ -132,6 +129,6 @@ export const playerProfileSlice = createSlice({
   },
 });
 
-export const { updatePlayerProfileState, setPlayerInfo, clearPlayerProfile } =
+export const { updatePlayerProfileState, clearPlayerProfile } =
   playerProfileSlice.actions;
 export default playerProfileSlice.reducer;
