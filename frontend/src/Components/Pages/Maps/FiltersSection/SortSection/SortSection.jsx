@@ -2,6 +2,7 @@ import CustomSelectMenu from "@/Components/Shared/SelectMenus/CustomSelectMenu/C
 import MapsSearchInput from "../../MapsSearchInput/MapsSearchInput";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
+import MapAuthorSearchInput from "../../MapAuthorSearchInput/MapAuthorSearchInput";
 
 const SortSection = ({ setPaginationNumber }) => {
   return (
@@ -27,6 +28,7 @@ const SortSection = ({ setPaginationNumber }) => {
         </div>
 
         <MapsSearchInput />
+        <MapAuthorSearchInput />
       </div>
 
       <SortView setPaginationNumber={setPaginationNumber} />
