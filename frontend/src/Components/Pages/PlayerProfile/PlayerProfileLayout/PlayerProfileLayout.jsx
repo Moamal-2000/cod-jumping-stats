@@ -16,7 +16,7 @@ import {
   fetchPlayerTops,
 } from "@/Redux/thunks/playerProfileThunk";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerBadges from "../../PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
@@ -39,6 +39,7 @@ const PlayerProfileLayout = ({ children }) => {
   } = useSelector((s) => s.playerProfile);
   const playersData = useSelector((s) => s.players.playersData);
 
+  const pathname = usePathname();
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
@@ -188,20 +189,27 @@ const PlayerProfileLayout = ({ children }) => {
 
           {/* Tab Navigation */}
           <div className={s.tabNavigation}>
-            {tabs.map((tab) => (
-              <Link
-                href={`/player/${
-                  tab.id === "overview" ? "" : tab.id
-                }?playerid=${playerId}`}
-                key={tab.id}
-                className={s.tabButton}
-              >
-                <svg>
-                  <use href={`/icons-sprite.svg#${tab.icon}`} />
-                </svg>
-                <span>{tab.label}</span>
-              </Link>
-            ))}
+            {tabs.map((tab) => {
+              const currentTab =
+                pathname.split("/player")[1].slice(1) || tabs[0].id;
+
+              return (
+                <Link
+                  href={`/player/${
+                    tab.id === "overview" ? "" : tab.id
+                  }?playerid=${playerId}`}
+                  key={tab.id}
+                  className={`${s.tabButton} ${
+                    tab.id === currentTab ? s.active : ""
+                  }`}
+                >
+                  <svg>
+                    <use href={`/icons-sprite.svg#${tab.icon}`} />
+                  </svg>
+                  <span>{tab.label}</span>
+                </Link>
+              );
+            })}
           </div>
 
           {children}
