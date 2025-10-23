@@ -2,6 +2,7 @@ import { API_URL } from "./src/Api/jumpersHeaven.js";
 
 const nextConfig = {
   devIndicators: false,
+  reactCompiler: true,
   productionBrowserSourceMaps: true,
   async rewrites() {
     return [
