@@ -3,7 +3,6 @@ import { fetchAllPlayers, searchPlayers } from "../thunks/playersThunk";
 
 const initialState = {
   playersData: [],
-  filteredPlayers: [],
   loading: false,
   error: false,
   searchTerm: "",
@@ -18,13 +17,6 @@ export const playersSlice = createSlice({
   reducers: {
     updatePlayersState: (state, { payload }) => {
       state[payload.key] = payload.value;
-    },
-    setSearchTerm: (state, { payload }) => {
-      state.searchTerm = payload;
-    },
-    clearSearch: (state) => {
-      state.searchTerm = "";
-      state.filteredPlayers = state.playersData;
     },
     setDisplayedCount: (state, { payload }) => {
       state.displayedCount = payload;
@@ -61,7 +53,6 @@ export const playersSlice = createSlice({
         const { playersData } = payload;
 
         state.playersData = playersData;
-        state.filteredPlayers = playersData;
         state.displayedCount = 200;
         state.hasMore = playersData.length > 200;
         state.isLoadingMore = false;
@@ -95,8 +86,6 @@ export const playersSlice = createSlice({
 
 export const {
   updatePlayersState,
-  setSearchTerm,
-  clearSearch,
   setDisplayedCount,
   setHasMore,
   setIsLoadingMore,

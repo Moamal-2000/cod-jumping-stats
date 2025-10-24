@@ -1,17 +1,13 @@
 import s from "./NoPlayersFound.module.scss";
 
-const NoPlayersFound = ({ noResults, searchTerm, handleClearSearch }) => {
+const NoPlayersFound = ({ noResults, handleClearSearch }) => {
   if (!noResults) return null;
-
-  const description = searchTerm
-    ? `No players match "${searchTerm}"`
-    : "No players available at the moment";
 
   return (
     <section className={s.notFoundSection}>
       <div className={s.noResults}>
         <h3>No players found</h3>
-        <p>{description}</p>
+        <p>No players match your search criteria.</p>
 
         <button
           type="button"
