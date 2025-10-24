@@ -15,7 +15,7 @@ const FiltersSection = () => {
     const newSort = e.target.value;
     dispatch(setSortBy(newSort));
     dispatch(resetPagination());
-    dispatch(fetchAllPlayers({ sort: newSort }));
+    dispatch(fetchAllPlayers());
   }
 
   return (

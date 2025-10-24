@@ -45,7 +45,7 @@ const PlayersPage = () => {
 
   useEffect(() => {
     dispatch(resetPagination());
-    dispatch(fetchAllPlayers({ sort: sortBy }));
+    dispatch(fetchAllPlayers());
   }, [dispatch, sortBy]);
 
   function handleClearSearch() {
@@ -86,9 +86,7 @@ const PlayersPage = () => {
   }, []);
 
   if (loading || error || playersData.length === 0) {
-    return (
-      <PlayersLoadingError sortBy={sortBy} error={error} dispatch={dispatch} />
-    );
+    return <PlayersLoadingError error={error} dispatch={dispatch} />;
   }
 
   return (

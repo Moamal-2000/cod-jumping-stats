@@ -1,6 +1,6 @@
 import s from "./PlayersLoadingError.module.scss";
 
-const PlayersLoadingError = ({ error, dispatch, sortBy }) => {
+const PlayersLoadingError = ({ error, dispatch }) => {
   if (error) {
     return (
       <div className={s.errorContainer}>
@@ -9,7 +9,7 @@ const PlayersLoadingError = ({ error, dispatch, sortBy }) => {
         <button
           onClick={() => {
             dispatch(resetPagination());
-            dispatch(fetchAllPlayers({ sort: sortBy }));
+            dispatch(fetchAllPlayers());
           }}
           className={s.retryButton}
         >

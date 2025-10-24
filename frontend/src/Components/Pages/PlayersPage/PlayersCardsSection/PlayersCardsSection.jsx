@@ -11,7 +11,11 @@ const PlayersCardsSection = ({
   return (
     <section className={s.playersSection}>
       {playersToDisplay.map((playerData, index) => (
-        <PlayerCard key={playerData.id} rank={index + 1} {...playerData} />
+        <PlayerCard
+          key={playerData.PlayerID}
+          rank={index + 1}
+          {...playerData}
+        />
       ))}
 
       {isLoadingMore && (

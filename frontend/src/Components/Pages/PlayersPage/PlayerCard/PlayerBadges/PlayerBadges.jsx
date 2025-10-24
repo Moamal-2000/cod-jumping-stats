@@ -9,12 +9,12 @@ import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 
 const PlayerBadges = ({
-  adminLevel,
-  banned,
-  donated,
-  id,
-  name,
-  lastSeen,
+  Admin,
+  Banned,
+  Donated,
+  PlayerID,
+  PlayerName,
+  LastSeen,
   playerSince,
   score,
   averageScore,
@@ -22,12 +22,12 @@ const PlayerBadges = ({
 }) => {
   const playerBadgesData = getPlayerBadges({
     cssModule: s,
-    adminLevel,
-    banned,
-    donated,
-    id,
-    name,
-    lastSeen,
+    Admin,
+    Banned,
+    Donated,
+    PlayerID,
+    PlayerName,
+    LastSeen,
     playerSince,
     score,
     averageScore,
@@ -59,12 +59,12 @@ export default PlayerBadges;
 
 export function getPlayerBadges({
   cssModule,
-  adminLevel,
-  banned,
-  donated,
-  id,
-  name,
-  lastSeen,
+  Admin,
+  Banned,
+  Donated,
+  PlayerID,
+  PlayerName,
+  LastSeen,
   playerSince,
   score,
   averageScore,
@@ -78,21 +78,21 @@ export function getPlayerBadges({
 
   return [
     {
-      displayCondition: banned,
-      classes: cssModule.banned,
+      displayCondition: Banned,
+      classes: cssModule.Banned,
       icon: "ban",
       label: "Banned",
       id: 2,
     },
     {
-      displayCondition: donated,
+      displayCondition: Donated,
       classes: cssModule.donator,
       icon: "crown",
       label: "Donator",
       id: 3,
     },
     {
-      displayCondition: isActiveWithinWeek(lastSeen),
+      displayCondition: isActiveWithinWeek(LastSeen),
       classes: cssModule.active,
       icon: "activeStatus",
       label: "Active",
@@ -100,7 +100,7 @@ export function getPlayerBadges({
       id: 4,
     },
     {
-      displayCondition: mappersIds.includes(id),
+      displayCondition: mappersIds.includes(PlayerID),
       classes: cssModule.mapper,
       icon: "special-mapper",
       label: "Mapper",
@@ -117,7 +117,7 @@ export function getPlayerBadges({
     },
     // Top Scorer: Only top 10
     {
-      displayCondition: Array.isArray(top10Ids) && top10Ids.includes(id),
+      displayCondition: Array.isArray(top10Ids) && top10Ids.includes(PlayerID),
       classes: cssModule.topScorer,
       icon: "trophy",
       label: "Top Scorer",
@@ -133,7 +133,7 @@ export function getPlayerBadges({
       id: 10,
     },
     {
-      displayCondition: eventWinnerIds.includes(id),
+      displayCondition: eventWinnerIds.includes(PlayerID),
       classes: cssModule.eventWinner,
       icon: "trophy",
       label: "Winner",
@@ -141,7 +141,7 @@ export function getPlayerBadges({
       id: 11,
     },
     {
-      displayCondition: bugHunterIds.includes(id),
+      displayCondition: bugHunterIds.includes(PlayerID),
       classes: cssModule.bugHunter,
       icon: "exclamation-mark",
       label: "Bug Hunter",
@@ -149,21 +149,21 @@ export function getPlayerBadges({
       id: 12,
     },
     {
-      displayCondition: contentCreatorIds.includes(id),
+      displayCondition: contentCreatorIds.includes(PlayerID),
       classes: cssModule.contentCreator,
       icon: "youtube",
       label: "Creator",
       id: 14,
     },
     {
-      displayCondition: adminLevel >= 100,
+      displayCondition: Admin >= 100,
       classes: cssModule.highLevel,
       icon: "star",
       label: "Admin",
       id: 5,
     },
     {
-      displayCondition: id === 1 && name === "IzNoGoD",
+      displayCondition: PlayerID === 1 && PlayerName === "IzNoGoD",
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",

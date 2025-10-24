@@ -5,14 +5,15 @@ import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
 
 const PlayerCard = ({
-  name,
-  id,
-  adminLevel,
-  lastSeen,
-  visitCount,
-  country,
-  banned,
-  donated,
+  PlayerName,
+  PrefName,
+  PlayerID,
+  Admin,
+  LastSeen,
+  Visits,
+  Country,
+  Banned,
+  Donated,
 }) => {
   return (
     <div className={s.playerCard}>
@@ -20,26 +21,30 @@ const PlayerCard = ({
         <div className={s.wrapper}>
           <div className={s.country}>
             <CountryImage
-              countryCode={country}
+              countryCode={Country}
               size={40}
               colorPlaceholder={true}
             />
           </div>
 
-          <PlayerPrimaryInfo name={name} adminLevel={adminLevel} id={id} />
+          <PlayerPrimaryInfo
+            PlayerName={PrefName || PlayerName}
+            Admin={Admin}
+            PlayerID={PlayerID}
+          />
         </div>
 
         <PlayerBadges
-          adminLevel={adminLevel}
-          banned={banned}
-          donated={donated}
-          id={id}
-          name={name}
-          lastSeen={lastSeen}
+          Admin={Admin}
+          Banned={Banned}
+          Donated={Donated}
+          PlayerID={PlayerID}
+          PlayerName={PlayerName || PrefName}
+          LastSeen={LastSeen}
         />
       </div>
 
-      <PlayerStats lastSeen={lastSeen} visitCount={visitCount} />
+      <PlayerStats LastSeen={LastSeen} Visits={Visits} />
     </div>
   );
 };

@@ -1,16 +1,16 @@
 import s from "./PlayerStats.module.scss";
 
-const PlayerStats = ({ visitCount, lastSeen }) => {
+const PlayerStats = ({ Visits, LastSeen }) => {
   return (
     <div className={s.statsGrid}>
       <div className={s.statItem}>
         <span className={s.statLabel}>Visits:</span>
-        <span className={s.statValue}>{visitCount.toLocaleString()}</span>
+        <span className={s.statValue}>{Visits.toLocaleString()}</span>
       </div>
 
       <div className={s.statItem}>
         <span className={s.statLabel}>Last seen:</span>
-        <span className={s.statValue}>{formatLastSeen(lastSeen)}</span>
+        <span className={s.statValue}>{formatLastSeen(LastSeen)}</span>
       </div>
     </div>
   );

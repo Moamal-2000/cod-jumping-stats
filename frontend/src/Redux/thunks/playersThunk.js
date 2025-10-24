@@ -1,26 +1,19 @@
 import { jhApis } from "@/Api/jumpersHeaven";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
-  async (paramsObject) => {
+  async () => {
     try {
-      const url = jhApis({
-        sort: paramsObject.sort || "admin_level",
-      }).player.getAll;
-
-      const response = await fetch(url, {
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
-      });
+      const url = jhApis().player.getAll;
+      const response = await fetchMsgPackResponse({ url, cache: "no-cache" });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const playersData = await response.json();
+      const playersData = await decodeAsyncData(response);
 
       return { playersData };
     } catch (error) {

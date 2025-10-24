@@ -7,9 +7,9 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./PlayerPrimaryInfo.module.scss";
 
-const PlayerPrimaryInfo = ({ name, adminLevel, id }) => {
+const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
   const dispatch = useDispatch();
-  const pureName = stripColorCodes(name);
+  const pureName = stripColorCodes(PlayerName);
 
   function handleMouseEnter() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: pureName }));
@@ -18,21 +18,21 @@ const PlayerPrimaryInfo = ({ name, adminLevel, id }) => {
   return (
     <div className={s.primaryInfo}>
       <Link
-        href={`/player?playerid=${id}`}
+        href={`/player?playerid=${PlayerID}`}
         className={s.playerName}
         onMouseEnter={handleMouseEnter}
       >
-        {getColoredName(name)}
+        {getColoredName(PlayerName)}
       </Link>
 
       <div className={s.wrapper}>
-        <span className={s.playerId}>#{id}</span>
+        <span className={s.playerId}>#{PlayerID}</span>
 
         <div className={s.adminLevel}>
           <svg>
             <use href="/icons-sprite.svg#shield" />
           </svg>
-          <span>{adminLevel}</span>
+          <span>{Admin}</span>
         </div>
       </div>
     </div>
