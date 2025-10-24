@@ -22,6 +22,11 @@
   }
 }
 
+.filterLabel {
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
 .searchInput {
   background: #1a1e24;
   border: 1px solid #2a313a;

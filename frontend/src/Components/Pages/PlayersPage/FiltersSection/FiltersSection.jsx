@@ -20,13 +20,11 @@ const FiltersSection = () => {
     <div className={s.filtersSection}>
       <div className={s.filtersContainer}>
         <div className={s.filterGroup}>
-          <label className={s.filterLabel} htmlFor="player-search">
-            Search
-          </label>
-
           <SearchInput
             queryName="name"
             placeholder="Search players by name..."
+            id="player-search"
+            label="Search"
           />
         </div>
 

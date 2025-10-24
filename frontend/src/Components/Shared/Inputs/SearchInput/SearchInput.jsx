@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import s from "./SearchInput.module.scss";
 
-const SearchInput = ({ queryName, placeholder }) => {
+const SearchInput = ({ queryName, placeholder, label, id }) => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -54,13 +54,20 @@ const SearchInput = ({ queryName, placeholder }) => {
 
   return (
     <div className={s.searchContainer}>
+      {label !== undefined && (
+        <label className={s.filterLabel} htmlFor={id}>
+          {label}
+        </label>
+      )}
+
       <input
-        ref={inputRef}
+        className={s.searchInput}
         type="text"
         placeholder={placeholder}
         onChange={handleSearchInput}
         value={searchValue}
-        className={s.searchInput}
+        ref={inputRef}
+        id={id}
       />
 
       {isSearching && (
