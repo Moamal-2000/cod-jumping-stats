@@ -21,14 +21,12 @@ const FiltersSection = () => {
   return (
     <div className={s.filtersSection}>
       <div className={s.filtersContainer}>
-        <div className={s.filterGroup}>
-          <SearchInput
-            queryName="name"
-            placeholder="Search players by name..."
-            id="player-search"
-            label="Search"
-          />
-        </div>
+        <SearchInput
+          queryName="name"
+          placeholder="Search players by name..."
+          id="player-search"
+          label="Search"
+        />
 
         <SelectMenu
           optionsData={SORT_PLAYERS_OPTIONS}
