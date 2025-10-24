@@ -14,7 +14,7 @@ const ExpandTopStatBtn = ({ showMoreStats, setShowMoreStats }) => {
       className={`${s.expandButton} ${activeClass}`}
       aria-label="Expand stats bars"
     >
-      <svg>
+      <svg aria-hidden="true">
         <use href="/icons-sprite.svg#right-arrow" />
       </svg>
     </button>

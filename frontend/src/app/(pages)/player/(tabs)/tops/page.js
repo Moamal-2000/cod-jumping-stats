@@ -386,7 +386,7 @@ const TopTab = () => {
               </>
             ) : (
               <div className={s.emptyState}>
-                <svg>
+                <svg aria-hidden="true">
                   <use href="/icons-sprite.svg#star" />
                 </svg>
                 <p>No runs found for the selected filters.</p>

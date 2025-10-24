@@ -50,7 +50,7 @@ const ScrollToTopBtn = () => {
       onClick={scrollToPosition}
       title={title}
     >
-      <svg>
+      <svg aria-hidden="true">
         <use href="/icons-sprite.svg#right-arrow" />
       </svg>
     </button>

@@ -16,7 +16,7 @@ const MainNav = () => {
           href={href}
           className={currentPage === href ? s.active : ""}
         >
-          <svg>
+          <svg aria-hidden="true">
             <use href={`/icons-sprite.svg#${iconName}`} />
           </svg>
           <span>{name}</span>

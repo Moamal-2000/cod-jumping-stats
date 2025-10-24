@@ -8,7 +8,7 @@ const ServerCardMapSection = ({ server }) => {
     <div className={s.mapSection}>
       <div className={s.mapInfo}>
         <span className={s.mapLabel}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#globe" />
           </svg>{" "}
           Map

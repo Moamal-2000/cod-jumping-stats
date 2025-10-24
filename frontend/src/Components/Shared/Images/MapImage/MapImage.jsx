@@ -27,7 +27,7 @@ const MapImage = memo(({ mapName }) => {
     <div className={s.imageContainer}>
       {isLoading && (
         <div className={s.loader}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#animated-spinner" />
           </svg>
         </div>

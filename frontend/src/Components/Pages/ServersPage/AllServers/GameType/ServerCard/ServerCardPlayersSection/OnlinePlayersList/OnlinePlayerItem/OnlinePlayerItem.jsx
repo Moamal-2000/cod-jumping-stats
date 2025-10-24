@@ -36,7 +36,7 @@ const OnlinePlayerItem = ({ player, server }) => {
 
       <div className={s.playerInfo}>
         <span className={s.playerAdminLevel}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#shield" />
           </svg>{" "}
           {player?.Admin || "N/A"}
@@ -44,7 +44,7 @@ const OnlinePlayerItem = ({ player, server }) => {
         </span>
 
         <span className={s.playerPing}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#ping" />
           </svg>{" "}
           {player?.Ping || 0}ms

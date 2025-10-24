@@ -81,7 +81,7 @@ const SearchInput = ({ queryName, placeholder, label, id }) => {
         className={s.clearButton}
         title="Clear search"
       >
-        <svg>
+        <svg aria-hidden="true">
           <use href="/icons-sprite.svg#xMark" />
         </svg>
       </button>

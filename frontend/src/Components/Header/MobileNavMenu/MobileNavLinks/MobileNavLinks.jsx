@@ -29,7 +29,7 @@ const MobileNavLinks = () => {
               className={`${s.link} ${activeClass}`}
               onClick={handleLinkClick}
             >
-              <svg>
+              <svg aria-hidden="true">
                 <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
               <span>{name}</span>

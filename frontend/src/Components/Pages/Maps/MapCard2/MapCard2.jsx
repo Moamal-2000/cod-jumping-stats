@@ -37,7 +37,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           </span>
           {Videos?.length > 0 && (
             <span className={s.videoIcon}>
-              <svg>
+              <svg aria-hidden="true">
                 <use href="/icons-sprite.svg#youtube" />
               </svg>
             </span>

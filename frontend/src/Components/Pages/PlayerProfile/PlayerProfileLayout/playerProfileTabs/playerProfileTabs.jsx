@@ -40,7 +40,7 @@ const PlayerProfileTab = ({ tab, playerId, pathname }) => {
 
   return (
     <Link href={href} key={tab.id} className={classes}>
-      <svg>
+      <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${tab.icon}`} />
       </svg>
       {tab.label}

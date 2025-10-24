@@ -43,7 +43,7 @@ const SortView = ({ setPaginationNumber }) => {
               title={`Change maps view to ${value}`}
             >
               <span>
-                <svg>
+                <svg aria-hidden="true">
                   <use href={`/icons-sprite.svg#${icon}`} />
                 </svg>
               </span>

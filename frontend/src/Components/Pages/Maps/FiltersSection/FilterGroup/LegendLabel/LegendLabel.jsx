@@ -6,7 +6,7 @@ const LegendLabel = ({ label, tooltipText }) => {
       {label}
       <div className={s.tooltip}>
         <div className={s.icon}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#questionMark" />
           </svg>
         </div>

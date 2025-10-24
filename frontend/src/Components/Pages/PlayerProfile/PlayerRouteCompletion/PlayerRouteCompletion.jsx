@@ -117,7 +117,7 @@ const PlayerRouteCompletion = () => {
       common: { color: "#9ca3af", glow: "#9ca3af" },
     };
     return rarityMap[rarity];
-  };
+  }
 
   if (loading) {
     return (
@@ -143,7 +143,7 @@ const PlayerRouteCompletion = () => {
   if (!completionData) {
     return (
       <div className={s.emptyState}>
-        <svg>
+        <svg aria-hidden="true">
           <use href="/icons-sprite.svg#map" />
         </svg>
         <p>No route completion data available.</p>
@@ -199,7 +199,7 @@ const PlayerRouteCompletion = () => {
           }`}
           onClick={() => setActiveList("completed")}
         >
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#check-circle" />
           </svg>
           <span>Completed Routes ({completedRoutes.length})</span>
@@ -210,7 +210,7 @@ const PlayerRouteCompletion = () => {
           }`}
           onClick={() => setActiveList("not_completed")}
         >
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#x-circle" />
           </svg>
           <span>Not Completed Routes ({notCompletedRoutes.length})</span>
@@ -317,7 +317,7 @@ const PlayerRouteCompletion = () => {
             })
           ) : (
             <div className={s.emptyState}>
-              <svg>
+              <svg aria-hidden="true">
                 <use href="/icons-sprite.svg#check-circle" />
               </svg>
               <p>No completed routes found.</p>
@@ -362,7 +362,7 @@ const PlayerRouteCompletion = () => {
           })
         ) : (
           <div className={s.emptyState}>
-            <svg>
+            <svg aria-hidden="true">
               <use href="/icons-sprite.svg#x-circle" />
             </svg>
             <p>No uncompleted routes found.</p>

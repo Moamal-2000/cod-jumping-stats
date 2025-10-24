@@ -48,7 +48,7 @@ const PlayersSearchInput = ({ setPaginationNumber }) => {
         className={s.clearButton}
         title="Clear search"
       >
-        <svg>
+        <svg aria-hidden="true">
           <use href="/icons-sprite.svg#xMark" />
         </svg>
       </button>

@@ -29,7 +29,7 @@ const LeaderBoardError = () => {
           className={s.retryBtn}
           onClick={handleRetryButton}
         >
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#retry" />
           </svg>
           <span>Retry</span>

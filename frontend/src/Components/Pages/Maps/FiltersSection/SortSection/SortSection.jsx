@@ -12,7 +12,7 @@ const SortSection = ({ setPaginationNumber }) => {
             Sort Maps By:
             <div className={s.tooltip}>
               <div className={s.icon}>
-                <svg>
+                <svg aria-hidden="true">
                   <use href="/icons-sprite.svg#questionMark" />
                 </svg>
               </div>

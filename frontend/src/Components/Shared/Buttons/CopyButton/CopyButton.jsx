@@ -28,7 +28,7 @@ const CopyButton = ({ copyText, title }) => {
       type="button"
       onClick={handleClick}
     >
-      <svg>
+      <svg aria-hidden="true">
         <use href={`icons-sprite.svg#${isCopied ? "checked" : "copy"}`} />
       </svg>
     </button>

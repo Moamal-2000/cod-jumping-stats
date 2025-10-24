@@ -20,7 +20,7 @@ const PlayerProfileHeader = () => {
       <div className={s.playerInfo}>
         <div className={s.avatarContainer}>
           <div className={s.avatar}>
-            <svg>
+            <svg aria-hidden="true">
               <use href="/icons-sprite.svg#users" />
             </svg>
 

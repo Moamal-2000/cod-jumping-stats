@@ -30,7 +30,7 @@ const MobileNavBtn = () => {
       onClick={handleToggleMenu}
       title={title}
     >
-      <svg>
+      <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${iconName}`} />
       </svg>
     </button>

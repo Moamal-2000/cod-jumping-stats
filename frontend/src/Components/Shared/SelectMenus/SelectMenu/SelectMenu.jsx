@@ -9,7 +9,7 @@ const SelectMenu = ({ optionsData, value, onChange, label, id }) => {
     <div className={s.selectMenuWrapper}>
       {label !== undefined && <label htmlFor={id}>{label}</label>}
 
-      <svg>
+      <svg aria-hidden="true">
         <use href="/icons-sprite.svg#chevron-down" />
       </svg>
 

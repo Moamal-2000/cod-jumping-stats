@@ -207,7 +207,7 @@ const LeaderboardsTab = () => {
               </>
             ) : (
               <div className={s.emptyState}>
-                <svg>
+                <svg aria-hidden="true">
                   <use href="/icons-sprite.svg#trophy" />
                 </svg>
                 <p>

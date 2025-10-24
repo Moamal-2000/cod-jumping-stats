@@ -14,7 +14,7 @@ const MapsVideos = ({ videos }) => {
           onClick={() => openVideo(videos, index)}
           data-icon={icon}
         >
-          <svg>
+          <svg aria-hidden="true">
             <use href={`icons-sprite.svg#${icon}`} />
           </svg>
           <span className={s.type}>{type}</span>

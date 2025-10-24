@@ -43,7 +43,7 @@ const PlayerBadges = ({
           return (
             <div key={id} className={`${s.badge} ${classes}`}>
               {tooltipText && <ToolTip>{tooltipText}</ToolTip>}
-              <svg>
+              <svg aria-hidden="true">
                 <use href={`/icons-sprite.svg#${icon}`}></use>
               </svg>
               <span>{label}</span>

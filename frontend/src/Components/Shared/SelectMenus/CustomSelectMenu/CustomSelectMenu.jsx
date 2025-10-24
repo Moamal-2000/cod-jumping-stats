@@ -35,7 +35,7 @@ const CustomSelectMenu = () => {
       <div ref={menuRef} className={`${s.selectMenu} ${visibleClass}`}>
         <button type="button" className={s.selectButton} onClick={handleClick}>
           <span>{currentSortBy}</span>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#solidArrow" />
           </svg>
         </button>

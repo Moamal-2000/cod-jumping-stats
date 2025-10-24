@@ -17,7 +17,7 @@ const SocialMedia = () => {
               title={iconName}
               data-icon={iconName}
             >
-              <svg>
+              <svg aria-hidden="true">
                 <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
             </a>

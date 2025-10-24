@@ -17,7 +17,7 @@ const FooterStats = () => {
     <section className={s.statsSection}>
       <div className={s.dateWrapper}>
         <div className={s.iconHolder}>
-          <svg>
+          <svg aria-hidden="true">
             <use href="/icons-sprite.svg#timer" />
           </svg>
         </div>
