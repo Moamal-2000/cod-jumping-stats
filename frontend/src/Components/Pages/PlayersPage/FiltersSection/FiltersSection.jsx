@@ -1,21 +1,19 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
-
 import MapsSearchInput from "@/Components/Shared/Inputs/MapsSearchInput/MapsSearchInput";
-import { resetPagination, setSortBy } from "@/Redux/slices/playersSlice";
-import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
+import { createQueryString } from "@/Functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 
 const FiltersSection = () => {
-  const { sortBy } = useSelector((s) => s.players);
-  const dispatch = useDispatch();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const sortBy = searchParams?.get("sort") || "admin";
 
   function handleSortChange(e) {
-    const newSort = e.target.value;
-    dispatch(setSortBy(newSort));
-    dispatch(resetPagination());
-    dispatch(fetchAllPlayers(newSort));
+    const newValue = e.target.value;
+    createQueryString("sort", newValue, searchParams, router, pathname);
   }
 
   return (
@@ -33,17 +31,17 @@ const FiltersSection = () => {
         </div>
 
         <div className={s.filterGroup}>
-          <label className={s.filterLabel} htmlFor="player-sort">
+          <label className={s.filterLabel} htmlFor="players-sort">
             Sort by
           </label>
           <select
             value={sortBy}
             onChange={handleSortChange}
             className={s.sortSelect}
-            id="player-sort"
+            id="players-sort"
           >
-            <option value="">Admin Level</option>
-            <option value="lastSeen">Last Seen</option>
+            <option value="admin">Admin Level</option>
+            <option value="last-seen">Last Seen</option>
             <option value="visits">Visit Count</option>
           </select>
         </div>

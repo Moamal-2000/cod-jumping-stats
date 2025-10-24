@@ -1,4 +1,4 @@
-import { modifyMapsData } from "./utils";
+import { modifyMapsData, stripColorCodes } from "./utils";
 
 export function getLastSeenCategories(lastSeen) {
   const now = new Date();
@@ -168,5 +168,19 @@ export function getMapsByFpsDifficulty({ sortedMaps, fps }) {
     if (difficultyA < 0) return 1;
     if (difficultyB < 0) return -1;
     return difficultyB - difficultyA;
+  });
+}
+
+export function getPlayersByParams({ playersData, paramsObject }) {
+  if (paramsObject?.name === undefined) return playersData;
+
+  return playersData.filter((player) => {
+    const playerPrefName = player.PerfName?.toLowerCase();
+    const playerName = player.PlayerName?.toLowerCase();
+
+    const purePlayerName =
+      stripColorCodes(playerPrefName) || stripColorCodes(playerName);
+
+    return purePlayerName.includes(paramsObject.name);
   });
 }

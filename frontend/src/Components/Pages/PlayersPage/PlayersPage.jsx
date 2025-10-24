@@ -8,6 +8,7 @@ import {
   setSearchTerm,
 } from "@/Redux/slices/playersSlice";
 import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
+import { useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
@@ -17,13 +18,13 @@ import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
 
 const PlayersPage = () => {
+  const dispatch = useDispatch();
   const {
     playersData,
     filteredPlayers,
     loading,
     error,
     searchTerm,
-    sortBy,
     displayedCount,
     hasMore,
     isLoadingMore,
@@ -36,7 +37,9 @@ const PlayersPage = () => {
     playersData,
   });
 
-  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const paramsObject = Object.fromEntries(searchParams.entries());
+
   const searchInputRef = useRef(null);
   const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
@@ -45,8 +48,8 @@ const PlayersPage = () => {
 
   useEffect(() => {
     dispatch(resetPagination());
-    dispatch(fetchAllPlayers());
-  }, []);
+    dispatch(fetchAllPlayers(paramsObject));
+  }, [searchParams]);
 
   function handleClearSearch() {
     if (searchInputRef.current) searchInputRef.current.value = "";

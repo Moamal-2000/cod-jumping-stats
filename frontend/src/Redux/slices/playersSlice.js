@@ -7,8 +7,6 @@ const initialState = {
   loading: false,
   error: false,
   searchTerm: "",
-  sortBy: "admin",
-  // Client-side pagination state
   displayedCount: 200,
   hasMore: true,
   isLoadingMore: false,
@@ -23,9 +21,6 @@ export const playersSlice = createSlice({
     },
     setSearchTerm: (state, { payload }) => {
       state.searchTerm = payload;
-    },
-    setSortBy: (state, { payload }) => {
-      state.sortBy = payload;
     },
     clearSearch: (state) => {
       state.searchTerm = "";
@@ -101,7 +96,6 @@ export const playersSlice = createSlice({
 export const {
   updatePlayersState,
   setSearchTerm,
-  setSortBy,
   clearSearch,
   setDisplayedCount,
   setHasMore,
