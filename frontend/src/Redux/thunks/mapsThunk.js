@@ -1,6 +1,10 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
-import { cacheMapsLocally, decodeAsyncData } from "@/Functions/utils";
+import {
+  cacheMapsLocally,
+  decodeAsyncData,
+  fetchMsgPackResponse,
+} from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMaps = createAsyncThunk(
@@ -19,12 +23,13 @@ export const fetchMaps = createAsyncThunk(
     }
 
     try {
-      const response = await fetch(jhApis().map.getAllMaps, {
-        headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
+      const response = await fetchMsgPackResponse({
+        url: jhApis().map.getAllMaps,
+        cache: "no-cache",
       });
       const mapsData = await decodeAsyncData(response);
-      cacheMapsLocally(mapsData);
 
+      cacheMapsLocally(mapsData);
       return { mapsData, paramsObject };
     } catch (error) {
       console.error(error);
