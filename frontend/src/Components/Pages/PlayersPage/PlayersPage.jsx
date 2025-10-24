@@ -17,6 +17,7 @@ import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
 import PlayersCardsSection from "./PlayersCardsSection/PlayersCardsSection";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
+import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
 
 const PlayersPage = () => {
   const dispatch = useDispatch();

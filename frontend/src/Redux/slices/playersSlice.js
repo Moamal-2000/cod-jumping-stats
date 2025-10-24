@@ -41,7 +41,6 @@ export const playersSlice = createSlice({
     },
   },
   extraReducers: ({ addCase }) => {
-    // Fetch all players
     addCase(fetchAllPlayers.pending, (state) => {
       state.loading = true;
       state.error = false;

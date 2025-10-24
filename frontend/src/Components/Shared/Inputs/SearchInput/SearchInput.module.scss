@@ -1,71 +1,88 @@
-.input {
-  background-color: #151923;
-  color: #fff;
-  position: relative;
-  max-width: 672px;
-  min-height: 51px;
-  width: 100%;
-  outline: 2px solid transparent;
-  transition: outline-color .1s ease;
-  border: 1px solid #151923;
-  border-radius: 12px;
-  transition: border-color .2s, box-shadow .2s;
+@use "@/Styles/mixins" as m;
 
-  &:has(:focus) {
-    border-color: #FFB800;
-    box-shadow: 0 0 0 3px rgba(255, 184, 0, .2);
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+}
+
+@include m.small {
+  .searchContainer {
+    min-width: 320px;
+    max-width: 360px;
   }
 }
 
-.searchButton {
-  border: none;
-  outline: none;
-  background-color: transparent;
-  width: 30px;
-  height: 100%;
+@include m.very-small {
+  .searchContainer {
+    min-width: auto;
+  }
+}
+
+.searchInput {
+  background: #1a1e24;
+  border: 1px solid #2a313a;
+  border-radius: 6px;
+  padding: 10px 10px 7px;
+  color: #e5e7eb;
+  font-size: .875rem;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #374151;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+  }
+
+  &::placeholder {
+    color: #6b7280;
+  }
+}
+
+.searchInput:not(:placeholder-shown)+.clearButton {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.clearButton {
   position: absolute;
-  left: 10px;
+  right: 8px;
   top: 50%;
   translate: 0 -50%;
+  background: none;
+  border: none;
   cursor: pointer;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.searchButton svg {
-  stroke: #757575;
-  width: 20px;
-  height: 20px;
+  border-radius: 4px;
+  opacity: 0;
   pointer-events: none;
-  transition: stroke .1s ease;
-}
+  transition: background-color .2s ease;
 
-.input:not(:has(:placeholder-shown)) .searchButton svg {
-  stroke: #e3e6eb;
-}
+  &:hover {
+    background-color: #374151;
+    color: #e5e7eb;
 
-.input:not(:has(:placeholder-shown)) .searchButton:hover svg {
-  stroke: #f3f3f3;
-}
-
-.searchButton:hover svg {
-  stroke: #f3f3f3;
-}
-
-.input>input {
-  background-color: transparent;
-  border: none;
-  outline: none;
-  width: 100%;
-  padding: 0 15px 0 46px;
-  display: block;
-  min-height: 48px;
-  color: #e3e6eb;
-  font-size: 1rem;
-  min-height: 48px;
-
-  &::placeholder {
-    color: #757575;
+    &>svg {
+      fill: #e5e7eb;
+    }
   }
+}
+
+.clearButton>svg {
+  width: 12px;
+  height: 12px;
+  fill: #6b7280;
 }

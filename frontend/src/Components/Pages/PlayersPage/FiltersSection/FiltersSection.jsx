@@ -1,6 +1,6 @@
 "use client";
 
-import MapsSearchInput from "@/Components/Shared/Inputs/MapsSearchInput/MapsSearchInput";
+import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
 import { createQueryString } from "@/Functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
@@ -24,7 +24,7 @@ const FiltersSection = () => {
             Search
           </label>
 
-          <MapsSearchInput
+          <SearchInput
             queryName="name"
             placeholder="Search players by name..."
           />
