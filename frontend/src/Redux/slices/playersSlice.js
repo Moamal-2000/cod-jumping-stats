@@ -1,3 +1,4 @@
+import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers, searchPlayers } from "../thunks/playersThunk";
 
@@ -6,7 +7,7 @@ const initialState = {
   loading: false,
   error: false,
   searchTerm: "",
-  displayedCount: 200,
+  displayedCount: PLAYERS_BATCH_SIZE,
   hasMore: true,
   isLoadingMore: false,
 };
@@ -18,9 +19,6 @@ export const playersSlice = createSlice({
     updatePlayersState: (state, { payload }) => {
       state[payload.key] = payload.value;
     },
-    setDisplayedCount: (state, { payload }) => {
-      state.displayedCount = payload;
-    },
     setHasMore: (state, { payload }) => {
       state.hasMore = payload;
     },
@@ -28,12 +26,12 @@ export const playersSlice = createSlice({
       state.isLoadingMore = payload;
     },
     resetPagination: (state) => {
-      state.displayedCount = 200;
+      state.displayedCount = PLAYERS_BATCH_SIZE;
       state.hasMore = true;
       state.isLoadingMore = false;
     },
     loadMorePlayersAction: (state) => {
-      const newDisplayedCount = state.displayedCount + 200;
+      const newDisplayedCount = state.displayedCount + PLAYERS_BATCH_SIZE;
       state.displayedCount = Math.min(
         newDisplayedCount,
         state.playersData.length
@@ -53,8 +51,8 @@ export const playersSlice = createSlice({
         const { playersData } = payload;
 
         state.playersData = playersData;
-        state.displayedCount = 200;
-        state.hasMore = playersData.length > 200;
+        state.displayedCount = PLAYERS_BATCH_SIZE;
+        state.hasMore = playersData.length > PLAYERS_BATCH_SIZE;
         state.isLoadingMore = false;
         state.loading = false;
         state.error = false;
@@ -86,7 +84,6 @@ export const playersSlice = createSlice({
 
 export const {
   updatePlayersState,
-  setDisplayedCount,
   setHasMore,
   setIsLoadingMore,
   resetPagination,

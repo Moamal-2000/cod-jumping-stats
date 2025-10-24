@@ -1,5 +1,6 @@
 "use client";
 
+import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
 import { removeQueryString } from "@/Functions/utils";
 import { updateGlobalState } from "@/Redux/slices/globalSlice";
 import {
@@ -114,7 +115,9 @@ const PlayersPage = () => {
 
 export default PlayersPage;
 
-function getPlayersToDisplay({ displayedCount, playersData } = {}) {
-  const count = displayedCount || 200;
-  return playersData.slice(0, Math.min(count, playersData.length));
+function getPlayersToDisplay({
+  displayedCount = PLAYERS_BATCH_SIZE,
+  playersData,
+} = {}) {
+  return playersData.slice(0, Math.min(displayedCount, playersData.length));
 }
