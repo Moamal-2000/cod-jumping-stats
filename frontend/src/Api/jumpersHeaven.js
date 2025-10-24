@@ -8,6 +8,7 @@ export const jhApis = ({
   name = "SAD",
   playerid = 108468,
   cpid = 14606,
+  sort = ""
 } = {}) => {
   fps = fps === "mix" ? 0 : fps;
 
@@ -18,7 +19,7 @@ export const jhApis = ({
       getTops: generateUrl("/map/tops", { cpid, fps, limit }),
     },
     player: {
-      getAll: generateUrl("/player/all"),
+      getAll: generateUrl("/player/all", { sort }),
       getAllTops: generateUrl("/player/all-tops", { fps, limit }),
       getTops: generateUrl("/player/tops", { fps, playerid, limit }),
       getJumpScores: generateUrl("/player/jump-scores", { fps, playerid }),

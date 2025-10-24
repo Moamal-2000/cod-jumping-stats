@@ -4,9 +4,9 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
-  async () => {
+  async (sort) => {
     try {
-      const url = jhApis().player.getAll;
+      const url = jhApis({ sort }).player.getAll;
       const response = await fetchMsgPackResponse({ url, cache: "no-cache" });
 
       if (!response.ok) {

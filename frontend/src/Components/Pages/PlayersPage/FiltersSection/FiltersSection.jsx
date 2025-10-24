@@ -15,7 +15,7 @@ const FiltersSection = () => {
     const newSort = e.target.value;
     dispatch(setSortBy(newSort));
     dispatch(resetPagination());
-    dispatch(fetchAllPlayers());
+    dispatch(fetchAllPlayers(newSort));
   }
 
   return (
@@ -42,8 +42,8 @@ const FiltersSection = () => {
             className={s.sortSelect}
             id="player-sort"
           >
-            <option value="admin">Admin Level</option>
-            <option value="last_seen">Last Seen</option>
+            <option value="">Admin Level</option>
+            <option value="lastSeen">Last Seen</option>
             <option value="visits">Visit Count</option>
           </select>
         </div>

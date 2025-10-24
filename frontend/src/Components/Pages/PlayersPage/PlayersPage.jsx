@@ -46,7 +46,7 @@ const PlayersPage = () => {
   useEffect(() => {
     dispatch(resetPagination());
     dispatch(fetchAllPlayers());
-  }, [dispatch, sortBy]);
+  }, []);
 
   function handleClearSearch() {
     if (searchInputRef.current) searchInputRef.current.value = "";
