@@ -1,0 +1,45 @@
+.selectMenuWrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 320px;
+  width: 100%;
+}
+
+.selectMenuWrapper>label {
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
+.selectMenuWrapper>select {
+  background: #1a1e24;
+  border: 1px solid #2a313a;
+  border-radius: 6px;
+  padding: 10px 16px;
+  color: #e5e7eb;
+  font-size: .875rem;
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236b7280' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 32px;
+  width: 200px;
+  transition: all .2s ease;
+
+  &:hover {
+    border-color: #374151;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+  }
+}
+
+.selectMenuWrapper>select>option {
+  background: #1a1e24;
+  color: #e5e7eb;
+  padding: 8px;
+}

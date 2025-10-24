@@ -1,6 +1,8 @@
 "use client";
 
 import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
+import SelectMenu from "@/Components/Shared/SelectMenus/SelectMenu/SelectMenu";
+import { SORT_PLAYERS_OPTIONS } from "@/Data/staticData";
 import { createQueryString } from "@/Functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
@@ -11,8 +13,8 @@ const FiltersSection = () => {
   const searchParams = useSearchParams();
   const sortBy = searchParams?.get("sort") || "admin";
 
-  function handleSortChange(e) {
-    const newValue = e.target.value;
+  function handleSortChange(event) {
+    const newValue = event.target.value;
     createQueryString("sort", newValue, searchParams, router, pathname);
   }
 
@@ -28,21 +30,13 @@ const FiltersSection = () => {
           />
         </div>
 
-        <div className={s.filterGroup}>
-          <label className={s.filterLabel} htmlFor="players-sort">
-            Sort by
-          </label>
-          <select
-            value={sortBy}
-            onChange={handleSortChange}
-            className={s.sortSelect}
-            id="players-sort"
-          >
-            <option value="admin">Admin Level</option>
-            <option value="last-seen">Last Seen</option>
-            <option value="visits">Visit Count</option>
-          </select>
-        </div>
+        <SelectMenu
+          optionsData={SORT_PLAYERS_OPTIONS}
+          onChange={handleSortChange}
+          value={sortBy}
+          label="Sort By"
+          id="players-sort"
+        />
       </div>
     </div>
   );
