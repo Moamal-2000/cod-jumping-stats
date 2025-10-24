@@ -24,96 +24,10 @@
   }
 }
 
-.searchContainer {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  position: relative;
-  max-width: 320px;
-  width: 100%;
-}
-
 .sortContainer {
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-.searchInput {
-  background: #1a1e24;
-  border: 1px solid #2a313a;
-  border-radius: 6px;
-  padding: 10px 16px;
-  color: #e5e7eb;
-  font-size: .875rem;
-  width: 100%;
-  transition: all 0.2s ease;
-
-  &:hover {
-    border-color: #374151;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: #3b82f6;
-    box-shadow: 0 0 0 1px #3b82f6;
-  }
-
-  &::placeholder {
-    color: #6b7280;
-  }
-}
-
-.searchLoadingIndicator {
-  position: absolute;
-  right: 48px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.searchSpinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #374151;
-  border-top: 2px solid #facc15;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-.clearButton {
-  position: absolute;
-  right: 8px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px;
-  width: 24px;
-  height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 4px;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #374151;
-    color: #e5e7eb;
-
-    & svg {
-      fill: #e5e7eb;
-    }
-  }
-
-  svg {
-    width: 12px;
-    height: 12px;
-    fill: #6b7280;
-  }
 }
 
 .searchButton {

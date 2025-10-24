@@ -8,7 +8,7 @@ import {
   setSearchTerm,
 } from "@/Redux/slices/playersSlice";
 import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
@@ -37,7 +37,6 @@ const PlayersPage = () => {
   });
 
   const dispatch = useDispatch();
-  const [isSearching, setIsSearching] = useState(false);
   const searchInputRef = useRef(null);
   const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
@@ -54,7 +53,6 @@ const PlayersPage = () => {
     if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
 
     dispatch(setSearchTerm(""));
-    setIsSearching(false);
   }
 
   const loadMore = useCallback(() => {
@@ -95,12 +93,7 @@ const PlayersPage = () => {
 
   return (
     <div className={s.playersContainer} onMouseLeave={handleMouseLeave}>
-      <FiltersSection
-        searchInputRef={searchInputRef}
-        handleClearSearch={handleClearSearch}
-        isSearching={isSearching}
-        setIsSearching={setIsSearching}
-      />
+      <FiltersSection />
       <NoPlayersFound
         noResults={noResults}
         searchTerm={searchTerm}
