@@ -6,7 +6,7 @@ const PlayersCardsSection = ({
   hasMore,
   isLoadingMore,
   loadMoreRef,
-  searchTerm,
+  searchByName,
 }) => {
   return (
     <section className={s.playersSection}>
@@ -25,11 +25,11 @@ const PlayersCardsSection = ({
         </div>
       )}
 
-      {hasMore && !isLoadingMore && !searchTerm && (
+      {hasMore && !isLoadingMore && !searchByName && (
         <div ref={loadMoreRef} className={s.loadMoreTrigger} />
       )}
 
-      {!hasMore && playersToDisplay.length > 0 && !searchTerm && (
+      {!hasMore && playersToDisplay.length > 0 && !searchByName && (
         <div className={s.endOfResults}>
           <p>You've reached the end of the players list!</p>
         </div>

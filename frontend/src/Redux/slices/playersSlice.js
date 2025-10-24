@@ -6,7 +6,6 @@ const initialState = {
   playersData: [],
   loading: false,
   error: false,
-  searchTerm: "",
   displayedCount: PLAYERS_BATCH_SIZE,
   hasMore: true,
   isLoadingMore: false,

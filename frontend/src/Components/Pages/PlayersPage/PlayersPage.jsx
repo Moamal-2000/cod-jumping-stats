@@ -24,7 +24,6 @@ const PlayersPage = () => {
     playersData,
     loading,
     error,
-    searchTerm,
     displayedCount,
     hasMore,
     isLoadingMore,
@@ -40,6 +39,7 @@ const PlayersPage = () => {
 
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
+  const searchByName = searchParams.get("name") || "";
 
   const searchInputRef = useRef(null);
   const loadMoreRef = useRef(null);
@@ -59,11 +59,11 @@ const PlayersPage = () => {
   }
 
   const loadMore = useCallback(() => {
-    if (!hasMore && isLoadingMore && loading && searchTerm) return;
+    if (!hasMore && isLoadingMore && loading && searchByName) return;
 
     dispatch(setIsLoadingMore(true));
     setTimeout(() => dispatch(loadMorePlayersAction()), 300);
-  }, [dispatch, hasMore, isLoadingMore, loading, searchTerm]);
+  }, [hasMore, isLoadingMore, loading, searchByName]);
 
   function handleMouseLeave() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
@@ -106,7 +106,7 @@ const PlayersPage = () => {
           hasMore={hasMore}
           isLoadingMore={isLoadingMore}
           loadMoreRef={loadMoreRef}
-          searchTerm={searchTerm}
+          searchByName={searchByName}
         />
       )}
     </div>
