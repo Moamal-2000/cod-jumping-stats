@@ -9,6 +9,10 @@ const SelectMenu = ({ optionsData, value, onChange, label, id }) => {
     <div className={s.selectMenuWrapper}>
       {label !== undefined && <label htmlFor={id}>{label}</label>}
 
+      <svg>
+        <use href="/icons-sprite.svg#chevron-down" />
+      </svg>
+
       <select value={value} onChange={onChange} id={id}>
         {optionsData.map(({ label, value, id }) => {
           return (
