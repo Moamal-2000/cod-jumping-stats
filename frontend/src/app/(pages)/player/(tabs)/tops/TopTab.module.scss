@@ -95,10 +95,6 @@
   background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
   border-bottom: 1px solid #334155;
   padding: 1.25rem 1.5rem;
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
   @media (min-width: 768px) {
     padding: 1.5rem 2rem;
