@@ -304,84 +304,72 @@ const TopTab = () => {
                   </p>
                 </div>
                 <div className={s.topRunsList}>
-                  {processedRuns.map((run, index) => {
-                    const scoreInfo = getScoreInfo(run);
-                    const cardClass = scoreInfo.isMythical
-                      ? s.mythical
-                      : scoreInfo.isLegendary
-                      ? s.legendary
-                      : scoreInfo.isEpic
-                      ? s.epic
-                      : "";
-                    return (
-                      <div
-                        key={`${run.run_id}-${index}`}
-                        className={`${s.runCard} ${cardClass}`}
-                      >
-                        <div className={s.runCardHeader}>
-                          <div
-                            className={`${s.runRank} ${
-                              s[getRankCategory(run.rank)]
-                            }`}
+                  <table className={s.leaderboardTable}>
+                    <thead>
+                      <tr>
+                        <th>Rank</th>
+                        <th>Map Name</th>
+                        <th>FPS</th>
+                        <th>Score</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {processedRuns.map((run, index) => {
+                        const scoreInfo = getScoreInfo(run);
+                        const rowClass = scoreInfo.isMythical
+                          ? s.mythical
+                          : scoreInfo.isLegendary
+                          ? s.legendary
+                          : scoreInfo.isEpic
+                          ? s.epic
+                          : "";
+                        const rankCategory = getRankCategory(run.rank);
+                        return (
+                          <tr
+                            key={`${run.run_id}-${index}`}
+                            className={rowClass}
                           >
-                            <span className={s.rankNumber}>{run.rank}</span>
-                            <div className={s.rankSubInfo}>
-                              <span className={s.rankSeparator}>/</span>
-                              <span className={s.rankTotal}>{run.totalNr}</span>
-                            </div>
-                          </div>
-                          <div className={s.runInfo}>
-                            <h3
-                              className={
-                                run.mapname.length > 20 ? s.longName : ""
-                              }
-                              title={run.mapname}
-                            >
+                            <td className={s.rankCell}>
+                              <div className={`${s.rankBadge} ${s[rankCategory]}`}>
+                                <span>{run.rank}</span>
+                                <span>/</span>
+                                <span>{run.totalNr}</span>
+                              </div>
+                            </td>
+                            <td className={s.mapNameCell} title={run.mapname}>
                               {run.mapname}
-                            </h3>
-                            <div className={s.runDetails}>
-                              <span className={s.runFps}>{run.fps} FPS</span>
-                              {run.difficulty && (
-                                <span className={s.runDifficulty}>
-                                  Map Difficulty: {run.difficulty.toFixed(2)}
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                        </div>
-                        <div className={s.runStats}>
-                          <div className={s.runScore}>
-                            <span className={s.statLabel}>Score:</span>
-                            <span
-                              className={`${s.statValue} ${
-                                scoreInfo.isMythical
-                                  ? s.mythical
-                                  : scoreInfo.isLegendary
-                                  ? s.legendary
-                                  : scoreInfo.isEpic
-                                  ? s.epic
-                                  : ""
-                              }`}
-                            >
-                              {scoreInfo.score.toLocaleString()}
-                            </span>
-                          </div>
-                          <div className={s.runTime}>
-                            <span className={s.statLabel}>Time:</span>
-                            <span className={s.statValue}>
+                            </td>
+                            <td>
+                              <span className={s.fpsCell}>{run.fps}</span>
+                            </td>
+                            <td>
+                              <span
+                                className={`${s.scoreCell} ${
+                                  scoreInfo.isMythical
+                                    ? s.mythical
+                                    : scoreInfo.isLegendary
+                                    ? s.legendary
+                                    : scoreInfo.isEpic
+                                    ? s.epic
+                                    : ""
+                                }`}
+                              >
+                                {scoreInfo.score.toLocaleString()}
+                              </span>
+                            </td>
+                            <td className={s.timeCell}>
                               {formatTime(run.time_played_string)}
-                            </span>
-                          </div>
-                          <div className={s.runDate}>
-                            <span className={s.statLabel}>Date:</span>
-                            <span className={s.statValue}>
+                            </td>
+                            <td className={s.dateCell}>
                               {formatDate(run.time_created)}
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                            </td>
+                          </tr>
+                        );
+                      })}
+                    </tbody>
+                  </table>
                 </div>
               </>
             ) : (
