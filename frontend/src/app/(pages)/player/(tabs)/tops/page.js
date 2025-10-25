@@ -1,6 +1,6 @@
 "use client";
 
-import s from "@/Components/Pages/PlayerProfile/TopTab.module.scss";
+import s from "./TopTab.module.scss";
 import { getRankCategory } from "@/Functions/utils";
 import { updatePlayerProfileState } from "@/Redux/slices/playerProfileSlice";
 import {
