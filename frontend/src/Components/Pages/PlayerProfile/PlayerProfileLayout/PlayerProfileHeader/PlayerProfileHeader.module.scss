@@ -32,28 +32,6 @@
   }
 }
 
-.metaItem {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.9rem;
-  color: #9ca3af;
-
-  svg {
-    color: #facc15;
-    width: 1.1em;
-    height: 1.1em;
-  }
-
-  &.online {
-    color: #10b981;
-  }
-
-  &.offline {
-    color: #9ca3af;
-  }
-}
-
 .playerSteamId {
   font-size: 0.8rem;
   color: #9ca3af;

@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import s from "./PlayerProfile.module.scss";
 
 const PlayerProfile = () => {
-  const performanceStats = useSelector((s) => s.playerProfile.performanceStats);
-  const topRunsCount = performanceStats?.recent_tops?.length;
+  const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
+  const topRunsCount = performanceStats?.RecentTops?.length;
 
   function formatLastSeen(lastSeen) {
     if (!lastSeen) return "Unknown";
@@ -97,11 +97,11 @@ const PlayerProfile = () => {
                   <div
                     className={`${s.infoValue} ${
                       getCompletionRateInfo(
-                        performanceStats.maps_completed_ratio * 100
+                        performanceStats.MapsCompletedRatio * 100
                       ).class
                     }`}
                   >
-                    {performanceStats.total_maps_completed.toLocaleString()}
+                    {performanceStats.TotalMapsCompleted.toLocaleString()}
                   </div>
                   <div className={`${s.infoSubtext} ${s.highlight}`}>
                     <svg
@@ -117,19 +117,17 @@ const PlayerProfile = () => {
                       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                       <polyline points="22 4 12 14.01 9 11.01"></polyline>
                     </svg>
-                    {Math.round(performanceStats.maps_completed_ratio * 100)}%
+                    {Math.round(performanceStats.MapsCompletedRatio * 100)}%
                     completion rate
                   </div>
                   <div className={s.progressBar}>
                     <div
                       className={s.progressBarFill}
                       style={{
-                        width: `${
-                          performanceStats.maps_completed_ratio * 100
-                        }%`,
+                        width: `${performanceStats.MapsCompletedRatio * 100}%`,
                         background:
                           getCompletionRateInfo(
-                            performanceStats.maps_completed_ratio * 100
+                            performanceStats.MapsCompletedRatio * 100
                           ).gradient || "var(--accent-color)",
                       }}
                     />
@@ -154,109 +152,18 @@ const PlayerProfile = () => {
                     Last Active
                   </div>
                   <div className={s.infoValue}>
-                    {performanceStats.days_since_last_seen === 0
+                    {performanceStats.DaysSinceLastSeen === 0
                       ? "Today"
-                      : performanceStats.days_since_last_seen === 1
+                      : performanceStats.DaysSinceLastSeen === 1
                       ? "Yesterday"
-                      : `${performanceStats.days_since_last_seen} days ago`}
+                      : `${performanceStats.DaysSinceLastSeen} days ago`}
                   </div>
-                  {performanceStats.last_seen && (
-                    <div className={s.infoSubtext}>
-                      Last seen: {formatLastSeen(performanceStats.last_seen)}
-                    </div>
-                  )}
+                  <div className={s.infoSubtext}>
+                    Last seen: {formatLastSeen(jumpScores?.last_seen)}
+                  </div>
                 </div>
 
-                {performanceStats?.oldest_top10_map && (
-                  <div className={s.infoItem}>
-                    <div className={s.infoLabel}>
-                      <svg
-                        viewBox="0 0 24 24"
-                        width="16"
-                        height="16"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-                      </svg>
-                      Oldest Standing Record
-                    </div>
-                    <div
-                      className={s.mapName}
-                      title={performanceStats.oldest_top10_map.map_name}
-                    >
-                      {performanceStats.oldest_top10_map.map_name}
-                    </div>
-                    <div className={s.metaInfo}>
-                      <span>
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="14"
-                          height="14"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                          <circle cx="9" cy="7" r="4"></circle>
-                          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        Rank #{performanceStats.oldest_top10_map.rank}
-                      </span>
-                      <span>
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="14"
-                          height="14"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <circle cx="12" cy="12" r="10"></circle>
-                          <polyline points="12 6 12 12 16 14"></polyline>
-                        </svg>
-                        {performanceStats.oldest_top10_map.fps} FPS
-                      </span>
-                      <span>
-                        <svg
-                          viewBox="0 0 24 24"
-                          width="14"
-                          height="14"
-                          fill="none"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        >
-                          <rect
-                            x="3"
-                            y="4"
-                            width="18"
-                            height="18"
-                            rx="2"
-                            ry="2"
-                          ></rect>
-                          <line x1="16" y1="2" x2="16" y2="6"></line>
-                          <line x1="8" y1="2" x2="8" y2="6"></line>
-                          <line x1="3" y1="10" x2="21" y2="10"></line>
-                        </svg>
-                        {formatDate(
-                          performanceStats.oldest_top10_map.finish_date
-                        )}
-                      </span>
-                    </div>
-                  </div>
-                )}
-
-                {performanceStats?.oldest_top && (
+                {performanceStats?.OldestTop && (
                   <div className={s.infoItem}>
                     <div className={s.infoLabel}>
                       <svg
@@ -275,9 +182,9 @@ const PlayerProfile = () => {
                     </div>
                     <div
                       className={s.mapName}
-                      title={performanceStats.oldest_top.map_name}
+                      title={performanceStats.OldestTop.MapName}
                     >
-                      {performanceStats.oldest_top.map_name}
+                      {performanceStats.OldestTop.MapName}
                     </div>
                     <div className={s.metaInfo}>
                       <span>
@@ -296,7 +203,7 @@ const PlayerProfile = () => {
                           <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
                           <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
                         </svg>
-                        Rank #{performanceStats.oldest_top.rank}
+                        Rank #{performanceStats.OldestTop.Rank}
                       </span>
                       <span>
                         <svg
@@ -312,7 +219,7 @@ const PlayerProfile = () => {
                           <circle cx="12" cy="12" r="10"></circle>
                           <polyline points="12 6 12 12 16 14"></polyline>
                         </svg>
-                        {performanceStats.oldest_top.fps} FPS
+                        {performanceStats.OldestTop.FPS} FPS
                       </span>
                       <span>
                         <svg
@@ -337,7 +244,7 @@ const PlayerProfile = () => {
                           <line x1="8" y1="2" x2="8" y2="6"></line>
                           <line x1="3" y1="10" x2="21" y2="10"></line>
                         </svg>
-                        {formatDate(performanceStats.oldest_top.finish_date)}
+                        {formatDate(performanceStats.OldestTop.FinishDate)}
                       </span>
                     </div>
                   </div>
@@ -374,8 +281,8 @@ const PlayerProfile = () => {
         </div>
 
         {/* FPS Performance Overview */}
-        {performanceStats?.nb_tops_per_fps &&
-          Object.keys(performanceStats.nb_tops_per_fps).length > 0 && (
+        {performanceStats?.NbTopsPerFps &&
+          Object.keys(performanceStats.NbTopsPerFps).length > 0 && (
             <div className={s.fpsPerformanceSection}>
               <div className={s.fpsOverviewContainer}>
                 <div className={s.fpsHeader}>
@@ -383,7 +290,7 @@ const PlayerProfile = () => {
                   <div className={s.totalRuns}>
                     Total Runs:{" "}
                     <strong>
-                      {Object.values(performanceStats.nb_tops_per_fps)
+                      {Object.values(performanceStats.NbTopsPerFps)
                         .reduce((a, b) => a + b, 0)
                         .toLocaleString()}
                     </strong>
@@ -391,22 +298,22 @@ const PlayerProfile = () => {
                 </div>
 
                 <div className={s.fpsOverviewStats}>
-                  {Object.entries(performanceStats.nb_tops_per_fps)
+                  {Object.entries(performanceStats.NbTopsPerFps)
                     .sort(([a], [b]) => {
                       const order = ["125", "250", "333", "76", "43", "mix"];
                       return order.indexOf(a) - order.indexOf(b);
                     })
                     .map(([fps, count]) => {
                       const totalTops = Object.values(
-                        performanceStats.nb_tops_per_fps
+                        performanceStats.NbTopsPerFps
                       ).reduce((sum, val) => sum + val, 0);
                       const percentage =
                         totalTops > 0
                           ? Math.round((count / totalTops) * 100)
                           : 0;
-                      const isBestFps = fps === performanceStats.best_fps;
+                      const isBestFps = fps === performanceStats.BestFPS;
                       const rank =
-                        Object.entries(performanceStats.nb_tops_per_fps)
+                        Object.entries(performanceStats.NbTopsPerFps)
                           .sort(([, a], [, b]) => b - a)
                           .findIndex(([f]) => f === fps) + 1;
 
@@ -444,7 +351,7 @@ const PlayerProfile = () => {
           )}
 
         {/* Recent Activity */}
-        {performanceStats?.recent_tops && topRunsCount > 0 && (
+        {performanceStats?.RecentTops && topRunsCount > 0 && (
           <div className={s.recentActivitySection}>
             <h2>Recent Activity</h2>
             <p className={s.sectionDescription}>
@@ -452,9 +359,9 @@ const PlayerProfile = () => {
             </p>
 
             <div className={s.recentActivityList}>
-              {performanceStats.recent_tops.map((run, index) => (
+              {performanceStats.RecentTops.map((run, index) => (
                 <Link
-                  href={`/map?mapid=${run.cpid}`}
+                  href={`/map?mapid=${run.Cpid}`}
                   className={s.recentActivityItem}
                   key={index}
                 >
@@ -464,12 +371,12 @@ const PlayerProfile = () => {
                     </svg>
                   </div>
                   <div className={s.activityContent}>
-                    <div className={s.activityTitle}>{run.map_name}</div>
+                    <div className={s.activityTitle}>{run.MapName}</div>
                     <div className={s.activityDetails}>
-                      <span className={s.activityRank}>Rank #{run.rank}</span>
-                      <span className={s.activityFps}>{run.fps} FPS</span>
+                      <span className={s.activityRank}>Rank #{run.Rank}</span>
+                      <span className={s.activityFps}>{run.FPS} FPS</span>
                       <span className={s.activityDate}>
-                        {formatDate(run.finish_date)}
+                        {formatDate(run.FinishDate)}
                       </span>
                     </div>
                   </div>

@@ -8,9 +8,7 @@ import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";
 
 const PlayerProfileHeader = () => {
-  const { performanceStats, leaderboardPositions, jumpScores } = useSelector(
-    (s) => s.playerProfile
-  );
+  const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
@@ -24,20 +22,10 @@ const PlayerProfileHeader = () => {
               <use href="/icons-sprite.svg#users" />
             </svg>
 
-            {((leaderboardPositions.length > 0 &&
-              leaderboardPositions[0].country_code) ||
-              performanceStats?.country_code) && (
+            {jumpScores?.country && (
               <CountryImage
-                countryCode={
-                  leaderboardPositions.length > 0
-                    ? leaderboardPositions[0].country_code
-                    : performanceStats.country_code
-                }
-                countryName={
-                  leaderboardPositions.length > 0
-                    ? leaderboardPositions[0].country
-                    : performanceStats.country
-                }
+                countryCode={jumpScores.country_code}
+                countryName={jumpScores.country}
                 size={24}
               />
             )}
@@ -47,9 +35,9 @@ const PlayerProfileHeader = () => {
         <div className={s.playerDetails}>
           <h1 className={s.playerName}>
             {getColoredName(jumpScores?.player_name)}
-            {performanceStats?.admin_level >= 0 && (
+            {performanceStats?.AdminLevel >= 0 && (
               <span className={s.adminBadge}>
-                Admin {performanceStats.admin_level}
+                Admin {performanceStats.AdminLevel}
               </span>
             )}
           </h1>
@@ -57,26 +45,14 @@ const PlayerProfileHeader = () => {
           <div className={s.playerMeta}>
             <span className={s.playerSteamId}>ID: {playerId}</span>
 
-            {performanceStats?.last_seen && (
-              <span className={s.metaItem}>
-                <span
-                  className={performanceStats.is_online ? s.online : s.offline}
-                >
-                  {performanceStats.is_online
-                    ? "Online"
-                    : formatLastSeen(performanceStats.last_seen)}
-                </span>
-              </span>
-            )}
-
             <div className={s.playerBadges}>
               <PlayerBadges
-                adminLevel={performanceStats?.admin_level}
-                banned={performanceStats?.is_banned}
-                donated={performanceStats?.is_donator}
-                lastSeen={jumpScores?.last_seen}
-                id={playerId}
-                name={jumpScores?.player_name}
+                Admin={performanceStats?.AdminLevel}
+                Banned={performanceStats?.IsBanned}
+                Donated={performanceStats?.IsDonator}
+                LastSeen={jumpScores?.last_seen}
+                PlayerID={playerId}
+                PlayerName={jumpScores?.player_name}
               />
             </div>
           </div>
