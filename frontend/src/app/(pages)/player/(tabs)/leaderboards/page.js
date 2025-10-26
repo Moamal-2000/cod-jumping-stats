@@ -22,8 +22,6 @@ const LeaderboardsTab = () => {
   function getProcessedLeaderboards() {
     if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
 
-    // Filter out howmany leaderboards (they're displayed separately in the controls)
-    // and filter out hidden leaderboards (defrag, surf, jump, speed)
     const otherPositions = leaderboardPositions.filter((pos) => {
       if (pos.leaderboard_type === "howmany") return false;
       if (pos.leaderboard_type === "defrag" && !visibleLeaderboards.defrag)
@@ -37,22 +35,17 @@ const LeaderboardsTab = () => {
       return true;
     });
 
-    // Filter by selected FPS only
     const filteredPositions = otherPositions.filter(
       (pos) => pos.fps === selectedLeaderboardFps
     );
 
-    // Group positions by FPS (should only be one FPS now)
     const groupedByFps = filteredPositions.reduce((acc, position) => {
       const fps = position.fps;
-      if (!acc[fps]) {
-        acc[fps] = [];
-      }
+      if (!acc[fps]) acc[fps] = [];
       acc[fps].push(position);
       return acc;
     }, {});
 
-    // Sort each FPS group by leaderboard name
     Object.keys(groupedByFps).forEach((fps) => {
       groupedByFps[fps].sort((a, b) =>
         a.leaderboard_type.localeCompare(b.leaderboard_type)
@@ -62,7 +55,6 @@ const LeaderboardsTab = () => {
     return groupedByFps;
   }
 
-  // Toggle leaderboard visibility
   function toggleLeaderboard(leaderboard) {
     setVisibleLeaderboards((prev) => ({
       ...prev,
@@ -77,10 +69,21 @@ const LeaderboardsTab = () => {
           <div className={s.leaderboardControls}>
             <div className={s.fpsToggleGroup}>
               <label>Show FPS:</label>
-              <div className={s.fpsToggleButtons}>
+              <div
+                className={s.fpsToggleButtons}
+                role="tablist"
+                aria-label="FPS selector"
+              >
                 {["125", "250", "mix", "333", "76", "43"].map((fps) => (
                   <button
                     key={fps}
+                    type="button"
+                    role="tab"
+                    aria-selected={selectedLeaderboardFps === fps}
+                    aria-pressed={selectedLeaderboardFps === fps}
+                    aria-label={`Show ${
+                      fps === "mix" ? "Mixed" : fps
+                    } FPS leaderboards`}
                     className={`${s.fpsToggleButton} ${
                       selectedLeaderboardFps === fps ? s.active : ""
                     }`}
@@ -94,39 +97,30 @@ const LeaderboardsTab = () => {
 
             <div className={s.leaderboardToggleGroup}>
               <label>Show Leaderboards:</label>
-              <div className={s.leaderboardToggleButtons}>
-                <button
-                  className={`${s.leaderboardToggleButton} ${
-                    visibleLeaderboards.defrag ? s.active : ""
-                  }`}
-                  onClick={() => toggleLeaderboard("defrag")}
-                >
-                  Defrag
-                </button>
-                <button
-                  className={`${s.leaderboardToggleButton} ${
-                    visibleLeaderboards.surf ? s.active : ""
-                  }`}
-                  onClick={() => toggleLeaderboard("surf")}
-                >
-                  Surf
-                </button>
-                <button
-                  className={`${s.leaderboardToggleButton} ${
-                    visibleLeaderboards.jump ? s.active : ""
-                  }`}
-                  onClick={() => toggleLeaderboard("jump")}
-                >
-                  Jump
-                </button>
-                <button
-                  className={`${s.leaderboardToggleButton} ${
-                    visibleLeaderboards.speed ? s.active : ""
-                  }`}
-                  onClick={() => toggleLeaderboard("speed")}
-                >
-                  Speed
-                </button>
+              <div
+                className={s.leaderboardToggleButtons}
+                role="toolbar"
+                aria-label="Leaderboard toggles"
+              >
+                {[
+                  { key: "defrag", label: "Defrag" },
+                  { key: "surf", label: "Surf" },
+                  { key: "jump", label: "Jump" },
+                  { key: "speed", label: "Speed" },
+                ].map(({ key, label }) => (
+                  <button
+                    key={key}
+                    type="button"
+                    aria-pressed={!!visibleLeaderboards[key]}
+                    aria-label={`Toggle ${label} leaderboards`}
+                    className={`${s.leaderboardToggleButton} ${
+                      visibleLeaderboards[key] ? s.active : ""
+                    }`}
+                    onClick={() => toggleLeaderboard(key)}
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
             </div>
           </div>
@@ -153,10 +147,20 @@ const LeaderboardsTab = () => {
                         ? "Mixed FPS Leaderboards"
                         : `${fps} FPS Leaderboards`}
                     </h3>
-                    <div className={s.leaderboardList}>
+
+                    <div className={s.leaderboardList} role="list">
                       {processedGroups[fps].map((position, index) => (
                         <div
                           key={`${fps}-${index}`}
+                          role="listitem"
+                          tabIndex={0}
+                          aria-label={`Leaderboard ${
+                            position.leaderboard_type
+                          } — Rank ${
+                            position.rank
+                          }, Score ${position.score.toLocaleString()}, ${
+                            position.fps
+                          } FPS`}
                           className={`${s.leaderboardCard} ${
                             s[getRankCategory(position.rank)]
                           }`}
@@ -171,6 +175,7 @@ const LeaderboardsTab = () => {
                                 {position.rank}
                               </span>
                             </div>
+
                             <div className={s.leaderboardInfo}>
                               <h3>
                                 {position.leaderboard_type
@@ -185,6 +190,7 @@ const LeaderboardsTab = () => {
                               </div>
                             </div>
                           </div>
+
                           <div className={s.leaderboardStats}>
                             <div className={s.leaderboardScore}>
                               <span className={s.statLabel}>Score:</span>
