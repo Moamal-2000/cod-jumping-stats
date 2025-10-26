@@ -8,27 +8,24 @@ export const fetchPlayerProfile = createAsyncThunk(
       const response = await fetch(
         jhApis({ playerid }).player.getPerformanceStats
       );
+
       if (!response.ok) {
-        if (response.status === 500) {
-          console.warn(
-            `Player ${playerid} has insufficient data for performance stats, returning empty data`
-          );
-          return {
-            performanceStats: null,
-          };
-        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      if (response.status === 500) {
+        console.warn(
+          `Player with ID \`${playerid}\` has insufficient data for performance stats, returning empty data`
+        );
+        return { performanceStats: null };
+      }
+
       const performanceStats = await response.json();
 
-      return {
-        performanceStats,
-      };
+      return { performanceStats };
     } catch (error) {
-      console.error("Error fetching player profile:", error);
-      return {
-        performanceStats: null,
-      };
+      console.error(`Error fetching player profile: ${error}`);
+      return { performanceStats: null };
     }
   }
 );
@@ -42,19 +39,21 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
       );
 
       if (!response.ok) {
-        if (response.status === 500) {
-          console.warn(
-            `Player ${playerid} has insufficient data for leaderboard positions, returning empty data`
-          );
-          return [];
-        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      if (response.status === 500) {
+        console.warn(
+          `Player with Id \`${playerid}\` has insufficient data for leaderboard positions, returning empty data`
+        );
+        return [];
+      }
+
       const leaderboardPositions = await response.json();
 
       return leaderboardPositions;
     } catch (error) {
-      console.error("Error fetching player leaderboard positions:", error);
+      console.error(`Error fetching player leaderboard positions: ${error}`);
       return [];
     }
   }
@@ -68,20 +67,23 @@ export const fetchPlayerJumpScores = createAsyncThunk(
       const response = await fetch(
         `${API_URL}/player/jump-scores?fps=${fps}&playerid=${playerid}`
       );
+
       if (!response.ok) {
-        if (response.status === 500) {
-          console.warn(
-            `Player ${playerid} has insufficient data for jump scores (${fps} FPS), returning empty data`
-          );
-          return null;
-        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      if (response.status === 500) {
+        console.warn(
+          `Player with ID \`${playerid}\` has insufficient data for jump scores (${fps} FPS), returning empty data`
+        );
+        return null;
+      }
+
       const jumpScores = await response.json();
 
       return jumpScores;
     } catch (error) {
-      console.error("Error fetching player jump scores:", error);
+      console.error(`Error fetching player jump scores: ${error}`);
       return null;
     }
   }
@@ -95,20 +97,23 @@ export const fetchPlayerTops = createAsyncThunk(
       const response = await fetch(
         jhApis({ playerid, fps, limit }).player.getTops
       );
+
       if (!response.ok) {
-        if (response.status === 500) {
-          console.warn(
-            `Player ${playerid} has insufficient data for top runs (${fps} FPS), returning empty data`
-          );
-          return {};
-        }
         throw new Error(`HTTP error! status: ${response.status}`);
       }
+
+      if (response.status === 500) {
+        console.warn(
+          `Player with ID \`${playerid}\` has insufficient data for top runs (${fps} FPS), returning empty data`
+        );
+        return {};
+      }
+
       const topRuns = await response.json();
 
       return topRuns;
     } catch (error) {
-      console.error("Error fetching player tops:", error);
+      console.error(`Error fetching player tops: ${error}`);
       return {};
     }
   }
