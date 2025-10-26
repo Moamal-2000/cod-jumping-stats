@@ -159,7 +159,7 @@ const PlayerProfile = () => {
                       : `${performanceStats.DaysSinceLastSeen} days ago`}
                   </div>
                   <div className={s.infoSubtext}>
-                    Last seen: {formatLastSeen(jumpScores?.last_seen)}
+                    Last seen: {formatLastSeen(jumpScores?.LastSeen)}
                   </div>
                 </div>
 

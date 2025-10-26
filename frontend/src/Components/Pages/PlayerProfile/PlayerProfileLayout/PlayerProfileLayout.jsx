@@ -46,7 +46,7 @@ const PlayerProfileLayout = ({ children }) => {
       <div className={s.playerProfile}>
         <Breadcrumbs
           breadcrumbLabels={breadcrumbLabels(
-            stripColorCodes(jumpScores?.player_name)
+            stripColorCodes(jumpScores?.PlayerName)
           )}
           breadcrumbPaths={breadcrumbPaths}
         />

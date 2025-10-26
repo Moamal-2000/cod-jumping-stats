@@ -22,10 +22,10 @@ const PlayerProfileHeader = () => {
               <use href="/icons-sprite.svg#users" />
             </svg>
 
-            {jumpScores?.country && (
+            {jumpScores?.Country && (
               <CountryImage
-                countryCode={jumpScores.country_code}
-                countryName={jumpScores.country}
+                countryCode={jumpScores.CountryCode}
+                countryName={jumpScores.Country}
                 size={24}
               />
             )}
@@ -34,7 +34,7 @@ const PlayerProfileHeader = () => {
 
         <div className={s.playerDetails}>
           <h1 className={s.playerName}>
-            {getColoredName(jumpScores?.player_name)}
+            {getColoredName(jumpScores?.PlayerName)}
             {performanceStats?.AdminLevel >= 0 && (
               <span className={s.adminBadge}>
                 Admin {performanceStats.AdminLevel}
@@ -50,9 +50,9 @@ const PlayerProfileHeader = () => {
                 Admin={performanceStats?.AdminLevel}
                 Banned={performanceStats?.IsBanned}
                 Donated={performanceStats?.IsDonator}
-                LastSeen={jumpScores?.last_seen}
+                LastSeen={jumpScores?.LastSeen}
                 PlayerID={playerId}
-                PlayerName={jumpScores?.player_name}
+                PlayerName={jumpScores?.PlayerName}
               />
             </div>
           </div>

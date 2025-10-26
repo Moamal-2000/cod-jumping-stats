@@ -1,4 +1,4 @@
-import { API_URL, jhApis } from "@/Api/jumpersHeaven";
+import { jhApis } from "@/Api/jumpersHeaven";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -67,9 +67,10 @@ export const fetchPlayerJumpScores = createAsyncThunk(
   async ({ playerid, fps = 125 }) => {
     try {
       fps === "mix" ? 0 : fps;
-      const response = await fetch(
-        `${API_URL}/player/jump-scores?fps=${fps}&playerid=${playerid}`
-      );
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ playerid, fps }).player.getJumpScores,
+        cache: "no-cache",
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -82,7 +83,7 @@ export const fetchPlayerJumpScores = createAsyncThunk(
         return null;
       }
 
-      const jumpScores = await response.json();
+      const jumpScores = await decodeAsyncData(response);
 
       return jumpScores;
     } catch (error) {
