@@ -26,6 +26,8 @@ export const jhApis = ({
       getIdFromName: generateUrl("/player/id-from-name", { name, limit }),
       getOnlinePlayers: generateUrl("/tracker/online-players"),
       getPlayersPlayTime: generateUrl("/map/players-playtime", { fps, limit, mapid }),
+      getPerformanceStats: generateUrl("/player/performance-stats", { playerid }),
+      getLeaderboardPositions: generateUrl("/player/leaderboard-positions", { playerid }),
     },
     leaderboard: {
       getSkilledLeaderboard: generateUrl("/leaderboard/jump-skill", { fps }),

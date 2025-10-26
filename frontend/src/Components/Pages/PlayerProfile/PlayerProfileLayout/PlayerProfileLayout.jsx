@@ -24,22 +24,22 @@ const PlayerProfileLayout = ({ children }) => {
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerid");
+  const playerid = +searchParams.get("playerid");
 
   useEffect(() => {
-    if (!playerId) return;
+    if (!playerid) return;
 
     dispatch(clearPlayerProfile());
 
-    dispatch(fetchPlayerProfile({ playerId }));
-    dispatch(fetchPlayerLeaderboardPositions({ playerId }));
-    dispatch(fetchPlayerTops({ playerId, fps: "125" }));
-    dispatch(fetchPlayerJumpScores({ playerId, fps: "125" }));
+    dispatch(fetchPlayerProfile({ playerid }));
+    dispatch(fetchPlayerLeaderboardPositions({ playerid }));
+    dispatch(fetchPlayerTops({ playerid, fps: "125" }));
+    dispatch(fetchPlayerJumpScores({ playerid, fps: "125" }));
 
     dispatch(
       updatePlayerProfileState({ key: "currentFetchingFps", value: "125" })
     );
-  }, [dispatch, playerId]);
+  }, [dispatch, playerid]);
 
   return (
     <main className={s.playerPage}>

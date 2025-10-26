@@ -1,6 +1,5 @@
 "use client";
 
-import s from "./TopTab.module.scss";
 import { getRankCategory } from "@/Functions/utils";
 import { updatePlayerProfileState } from "@/Redux/slices/playerProfileSlice";
 import {
@@ -10,6 +9,7 @@ import {
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import s from "./TopTab.module.scss";
 
 const jumpScoresByFps = {
   125: null,
@@ -25,7 +25,7 @@ const TopTab = () => {
     useSelector((s) => s.playerProfile);
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerid");
+  const playerid = +searchParams.get("playerid");
 
   const [rankFilter, setRankFilter] = useState("1-10"); // "1", "1-10", "all"
   const [sortOrder, setSortOrder] = useState("desc"); // "asc", "desc"
@@ -170,8 +170,8 @@ const TopTab = () => {
       dispatch(
         updatePlayerProfileState({ key: "currentFetchingFps", value: fps })
       );
-      dispatch(fetchPlayerTops({ playerId, fps }));
-      dispatch(fetchPlayerJumpScores({ playerId, fps }));
+      dispatch(fetchPlayerTops({ playerid, fps }));
+      dispatch(fetchPlayerJumpScores({ playerid, fps }));
     }
   }
 
@@ -332,7 +332,9 @@ const TopTab = () => {
                             className={rowClass}
                           >
                             <td className={s.rankCell}>
-                              <div className={`${s.rankBadge} ${s[rankCategory]}`}>
+                              <div
+                                className={`${s.rankBadge} ${s[rankCategory]}`}
+                              >
                                 <span>{run.rank}</span>
                                 <span>/</span>
                                 <span>{run.totalNr}</span>

@@ -1,18 +1,18 @@
-import { API_URL } from "@/Api/jumpersHeaven";
+import { API_URL, jhApis } from "@/Api/jumpersHeaven";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 // Fetch player performance stats
 export const fetchPlayerProfile = createAsyncThunk(
   "playerProfile/fetchPlayerProfile",
-  async ({ playerId, playerInfo }) => {
+  async ({ playerid, playerInfo }) => {
     try {
       const response = await fetch(
-        `${API_URL}/player/performance-stats?playerid=${playerId}`
+        jhApis({ playerid }).player.getPerformanceStats
       );
       if (!response.ok) {
         if (response.status === 500) {
           console.warn(
-            `Player ${playerId} has insufficient data for performance stats, returning empty data`
+            `Player ${playerid} has insufficient data for performance stats, returning empty data`
           );
           return {
             playerInfo,
@@ -41,15 +41,16 @@ export const fetchPlayerProfile = createAsyncThunk(
 // Fetch player leaderboard positions
 export const fetchPlayerLeaderboardPositions = createAsyncThunk(
   "playerProfile/fetchPlayerLeaderboardPositions",
-  async ({ playerId }) => {
+  async ({ playerid }) => {
     try {
       const response = await fetch(
-        `${API_URL}/player/leaderboard-positions?playerid=${playerId}`
+        jhApis({ playerid }).player.getLeaderboardPositions
       );
+
       if (!response.ok) {
         if (response.status === 500) {
           console.warn(
-            `Player ${playerId} has insufficient data for leaderboard positions, returning empty data`
+            `Player ${playerid} has insufficient data for leaderboard positions, returning empty data`
           );
           return [];
         }
@@ -69,17 +70,16 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
 // Fetch player jump scores
 export const fetchPlayerJumpScores = createAsyncThunk(
   "playerProfile/fetchPlayerJumpScores",
-  async ({ playerId, fps = 125 }) => {
+  async ({ playerid, fps = 125 }) => {
     try {
-      // Use fps=0 for mix queries
-      const fpsParam = fps === "mix" ? 0 : fps;
+      fps === "mix" ? 0 : fps;
       const response = await fetch(
-        `${API_URL}/player/jump-scores?fps=${fpsParam}&playerid=${playerId}`
+        `${API_URL}/player/jump-scores?fps=${fps}&playerid=${playerid}`
       );
       if (!response.ok) {
         if (response.status === 500) {
           console.warn(
-            `Player ${playerId} has insufficient data for jump scores (${fps} FPS), returning empty data`
+            `Player ${playerid} has insufficient data for jump scores (${fps} FPS), returning empty data`
           );
           return null;
         }
@@ -99,17 +99,16 @@ export const fetchPlayerJumpScores = createAsyncThunk(
 // Fetch player top runs
 export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
-  async ({ playerId, fps = 125, limit = 200 }) => {
+  async ({ playerid, fps = 125, limit = 200 }) => {
     try {
-      // Use fps=0 for mix queries
-      const fpsParam = fps === "mix" ? 0 : fps;
+      fps === "mix" ? 0 : fps;
       const response = await fetch(
-        `${API_URL}/player/tops?fps=${fpsParam}&playerid=${playerId}&limit=${limit}`
+        jhApis({ playerid, fps, limit }).player.getTops
       );
       if (!response.ok) {
         if (response.status === 500) {
           console.warn(
-            `Player ${playerId} has insufficient data for top runs (${fps} FPS), returning empty data`
+            `Player ${playerid} has insufficient data for top runs (${fps} FPS), returning empty data`
           );
           return {};
         }
