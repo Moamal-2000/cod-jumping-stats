@@ -95,12 +95,9 @@ export const fetchPlayerJumpScores = createAsyncThunk(
 
 export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
-  async ({ playerid, fps = 125, limit = 200 }) => {
+  async ({ playerid, limit = 200 }) => {
     try {
-      fps === "mix" ? 0 : fps;
-      const response = await fetch(
-        jhApis({ playerid, fps, limit }).player.getTops
-      );
+      const response = await fetch(jhApis({ playerid, limit }).player.getTops);
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -108,7 +105,7 @@ export const fetchPlayerTops = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with ID \`${playerid}\` has insufficient data for top runs (${fps} FPS), returning empty data`
+          `Player with ID \`${playerid}\` has insufficient data for top runs, returning empty data`
         );
         return {};
       }

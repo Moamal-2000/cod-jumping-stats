@@ -2,11 +2,6 @@
 
 import { getRankCategory } from "@/Functions/utils";
 import { updatePlayerProfileState } from "@/Redux/slices/playerProfileSlice";
-import {
-  fetchPlayerJumpScores,
-  fetchPlayerTops,
-} from "@/Redux/thunks/playerProfileThunk";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./TopTab.module.scss";
@@ -24,8 +19,6 @@ const TopTab = () => {
   const { topRuns, topRunsLoading, jumpScoresLoading, currentFetchingFps } =
     useSelector((s) => s.playerProfile);
   const dispatch = useDispatch();
-  const searchParams = useSearchParams();
-  const playerid = +searchParams.get("playerid");
 
   const [rankFilter, setRankFilter] = useState("1-10"); // "1", "1-10", "all"
   const [sortOrder, setSortOrder] = useState("desc"); // "asc", "desc"
@@ -170,8 +163,6 @@ const TopTab = () => {
       dispatch(
         updatePlayerProfileState({ key: "currentFetchingFps", value: fps })
       );
-      dispatch(fetchPlayerTops({ playerid, fps }));
-      dispatch(fetchPlayerJumpScores({ playerid, fps }));
     }
   }
 
