@@ -7,30 +7,22 @@ import {
 } from "../thunks/playerProfileThunk";
 
 const initialState = {
-  // Player basic info
-  playerInfo: null,
-
-  // Performance stats
   performanceStats: null,
   performanceStatsLoading: false,
   performanceStatsError: false,
 
-  // Leaderboard positions
   leaderboardPositions: [],
   leaderboardPositionsLoading: false,
   leaderboardPositionsError: false,
 
-  // Top runs
   topRuns: {},
   topRunsLoading: false,
   topRunsError: false,
 
-  // Jump scores
   jumpScores: null,
   jumpScoresLoading: false,
   jumpScoresError: false,
 
-  // Overall loading state
   loading: false,
   error: false,
 
@@ -45,7 +37,6 @@ export const playerProfileSlice = createSlice({
       state[payload.key] = payload.value;
     },
     clearPlayerProfile: (state) => {
-      state.playerInfo = null;
       state.performanceStats = null;
       state.leaderboardPositions = [];
       state.topRuns = {};
@@ -63,13 +54,11 @@ export const playerProfileSlice = createSlice({
     },
   },
   extraReducers: ({ addCase }) => {
-    // Fetch player profile
     addCase(fetchPlayerProfile.pending, (state) => {
       state.loading = true;
       state.error = false;
     })
       .addCase(fetchPlayerProfile.fulfilled, (state, { payload }) => {
-        state.playerInfo = payload.playerInfo;
         state.performanceStats = payload.performanceStats;
         state.loading = false;
         state.error = false;
@@ -79,7 +68,6 @@ export const playerProfileSlice = createSlice({
         state.loading = false;
       });
 
-    // Fetch player leaderboard positions
     addCase(fetchPlayerLeaderboardPositions.pending, (state) => {
       state.leaderboardPositionsLoading = true;
       state.leaderboardPositionsError = false;
@@ -97,7 +85,6 @@ export const playerProfileSlice = createSlice({
         state.leaderboardPositionsLoading = false;
       });
 
-    // Fetch player tops
     addCase(fetchPlayerTops.pending, (state) => {
       state.topRunsLoading = true;
       state.topRunsError = false;
@@ -112,7 +99,6 @@ export const playerProfileSlice = createSlice({
         state.topRunsLoading = false;
       });
 
-    // Fetch player jump scores
     addCase(fetchPlayerJumpScores.pending, (state) => {
       state.jumpScoresLoading = true;
       state.jumpScoresError = false;
