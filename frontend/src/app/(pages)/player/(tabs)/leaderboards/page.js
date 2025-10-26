@@ -23,24 +23,24 @@ const LeaderboardsTab = () => {
     if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
 
     const otherPositions = leaderboardPositions.filter((pos) => {
-      if (pos.leaderboard_type === "howmany") return false;
-      if (pos.leaderboard_type === "defrag" && !visibleLeaderboards.defrag)
+      if (pos.LeaderboardType === "howmany") return false;
+      if (pos.LeaderboardType === "defrag" && !visibleLeaderboards.defrag)
         return false;
-      if (pos.leaderboard_type === "surf" && !visibleLeaderboards.surf)
+      if (pos.LeaderboardType === "surf" && !visibleLeaderboards.surf)
         return false;
-      if (pos.leaderboard_type === "jump" && !visibleLeaderboards.jump)
+      if (pos.LeaderboardType === "jump" && !visibleLeaderboards.jump)
         return false;
-      if (pos.leaderboard_type === "speed" && !visibleLeaderboards.speed)
+      if (pos.LeaderboardType === "speed" && !visibleLeaderboards.speed)
         return false;
       return true;
     });
 
     const filteredPositions = otherPositions.filter(
-      (pos) => pos.fps === selectedLeaderboardFps
+      (pos) => pos.FPS === selectedLeaderboardFps
     );
 
     const groupedByFps = filteredPositions.reduce((acc, position) => {
-      const fps = position.fps;
+      const fps = position.FPS;
       if (!acc[fps]) acc[fps] = [];
       acc[fps].push(position);
       return acc;
@@ -48,7 +48,7 @@ const LeaderboardsTab = () => {
 
     Object.keys(groupedByFps).forEach((fps) => {
       groupedByFps[fps].sort((a, b) =>
-        a.leaderboard_type.localeCompare(b.leaderboard_type)
+        a.LeaderboardType.localeCompare(b.LeaderboardType)
       );
     });
 
@@ -155,37 +155,37 @@ const LeaderboardsTab = () => {
                           role="listitem"
                           tabIndex={0}
                           aria-label={`Leaderboard ${
-                            position.leaderboard_type
+                            position.LeaderboardType
                           } — Rank ${
-                            position.rank
-                          }, Score ${position.score.toLocaleString()}, ${
-                            position.fps
+                            position.Rank
+                          }, Score ${position.Score.toLocaleString()}, ${
+                            position.FPS
                           } FPS`}
                           className={`${s.leaderboardCard} ${
-                            s[getRankCategory(position.rank)]
+                            s[getRankCategory(position.Rank)]
                           }`}
                         >
                           <div className={s.leaderboardCardHeader}>
                             <div
                               className={`${s.leaderboardRank} ${
-                                s[getRankCategory(position.rank)]
+                                s[getRankCategory(position.Rank)]
                               }`}
                             >
                               <span className={s.rankNumber}>
-                                {position.rank}
+                                {position.Rank}
                               </span>
                             </div>
 
                             <div className={s.leaderboardInfo}>
                               <h3>
-                                {position.leaderboard_type
-                                  .charAt(0)
-                                  .toUpperCase() +
-                                  position.leaderboard_type.slice(1)}
+                                {position.LeaderboardType.charAt(
+                                  0
+                                ).toUpperCase() +
+                                  position.LeaderboardType.slice(1)}
                               </h3>
                               <div className={s.leaderboardDetails}>
                                 <span className={s.leaderboardFps}>
-                                  {position.fps} FPS
+                                  {position.FPS} FPS
                                 </span>
                               </div>
                             </div>
@@ -195,13 +195,13 @@ const LeaderboardsTab = () => {
                             <div className={s.leaderboardScore}>
                               <span className={s.statLabel}>Score:</span>
                               <span className={s.statValue}>
-                                {position.score.toLocaleString()}
+                                {position.Score.toLocaleString()}
                               </span>
                             </div>
                             <div className={s.leaderboardRating}>
                               <span className={s.statLabel}>Rating:</span>
                               <span className={s.statValue}>
-                                {position.rating.toFixed(2)}
+                                {position.Rating.toFixed(2)}
                               </span>
                             </div>
                           </div>

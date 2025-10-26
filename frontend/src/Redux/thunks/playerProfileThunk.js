@@ -36,9 +36,10 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
   "playerProfile/fetchPlayerLeaderboardPositions",
   async ({ playerid }) => {
     try {
-      const response = await fetch(
-        jhApis({ playerid }).player.getLeaderboardPositions
-      );
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ playerid }).player.getLeaderboardPositions,
+        cache: "no-cache",
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -51,7 +52,7 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
         return [];
       }
 
-      const leaderboardPositions = await response.json();
+      const leaderboardPositions = await decodeAsyncData(response);
 
       return leaderboardPositions;
     } catch (error) {
