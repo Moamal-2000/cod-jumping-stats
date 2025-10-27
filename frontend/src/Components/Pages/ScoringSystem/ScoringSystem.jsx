@@ -3,50 +3,21 @@
 import { useRef, useState } from "react";
 import s from "./ScoringSystem.module.scss";
 
+const tabs = [
+  { id: "route-completion", label: "Route Completion" },
+  { id: "speed", label: "Speedrun" },
+  { id: "jump", label: "Skill Rating" },
+  { id: "difficulty", label: "Map Difficulty" },
+  { id: "overview", label: "Overview" },
+];
+
 const ScoringSystem = () => {
   const [activeTab, setActiveTab] = useState("route-completion");
   const tabRefs = useRef({});
 
-  const tabs = [
-    { id: "route-completion", label: "Route Completion" },
-    { id: "speed", label: "Speedrun" },
-    { id: "jump", label: "Skill Rating" },
-    { id: "difficulty", label: "Map Difficulty" },
-    { id: "overview", label: "Overview" },
-  ];
-
-  const handleTabChange = (tabId) => {
+  function handleTabChange(tabId) {
     setActiveTab(tabId);
-  };
-
-  const handleKeyDown = (e, currentIndex) => {
-    let newIndex = currentIndex;
-
-    switch (e.key) {
-      case "ArrowLeft":
-        e.preventDefault();
-        newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-        break;
-      case "ArrowRight":
-        e.preventDefault();
-        newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
-        break;
-      case "Home":
-        e.preventDefault();
-        newIndex = 0;
-        break;
-      case "End":
-        e.preventDefault();
-        newIndex = tabs.length - 1;
-        break;
-      default:
-        return;
-    }
-
-    const newTab = tabs[newIndex];
-    setActiveTab(newTab.id);
-    tabRefs.current[newTab.id]?.focus();
-  };
+  }
 
   return (
     <main className={s.scoringSystem}>
@@ -56,7 +27,7 @@ const ScoringSystem = () => {
           role="tablist"
           aria-label="Scoring system categories"
         >
-          {tabs.map((tab, index) => (
+          {tabs.map((tab) => (
             <button
               key={tab.id}
               ref={(el) => (tabRefs.current[tab.id] = el)}
@@ -64,12 +35,10 @@ const ScoringSystem = () => {
               id={`tab-${tab.id}`}
               aria-selected={activeTab === tab.id}
               aria-controls={`panel-${tab.id}`}
-              tabIndex={activeTab === tab.id ? 0 : -1}
               className={`${s.tabButton} ${
                 activeTab === tab.id ? s.active : ""
               }`}
               onClick={() => handleTabChange(tab.id)}
-              onKeyDown={(e) => handleKeyDown(e, index)}
             >
               {tab.label}
             </button>
@@ -83,7 +52,6 @@ const ScoringSystem = () => {
               id="panel-route-completion"
               role="tabpanel"
               aria-labelledby="tab-route-completion"
-              tabIndex={0}
               className={s.section}
             >
               <h2 className={s.sectionTitle}>Route Completion Leaderboard</h2>
@@ -141,7 +109,6 @@ const ScoringSystem = () => {
               id="panel-speed"
               role="tabpanel"
               aria-labelledby="tab-speed"
-              tabIndex={0}
               className={s.section}
             >
               <h2 className={s.sectionTitle}>Speedrun Leaderboard</h2>
@@ -240,7 +207,6 @@ const ScoringSystem = () => {
               id="panel-jump"
               role="tabpanel"
               aria-labelledby="tab-jump"
-              tabIndex={0}
               className={s.section}
             >
               <h2 className={s.sectionTitle}>Skill Rating Leaderboard</h2>
@@ -463,7 +429,6 @@ const ScoringSystem = () => {
               id="panel-difficulty"
               role="tabpanel"
               aria-labelledby="tab-difficulty"
-              tabIndex={0}
               className={s.section}
             >
               <h2 className={s.sectionTitle}>Map Difficulty System</h2>
@@ -762,7 +727,6 @@ const ScoringSystem = () => {
               id="panel-overview"
               role="tabpanel"
               aria-labelledby="tab-overview"
-              tabIndex={0}
               className={s.section}
             >
               <h2 className={s.sectionTitle}>System Overview</h2>

@@ -67,6 +67,7 @@
   &:focus-visible {
     outline: 2px solid #facc15;
     outline-offset: 2px;
+    z-index: 1;
   }
 }
 
