@@ -14,18 +14,8 @@ const ScrollToTopBtn = () => {
     isAtTopHalf ? s.reverse : ""
   }`;
 
-  const scrollToPosition = () => {
-    const pageHeight = document.documentElement.scrollHeight;
-    const isAtTop = window.scrollY < pageHeight / 2;
-
-    window.scrollTo({
-      top: isAtTop ? pageHeight : 0,
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
-    const handleScroll = () => {
+    function handleScroll() {
       clearTimeout(debounceId.current);
 
       debounceId.current = setTimeout(() => {
@@ -34,7 +24,7 @@ const ScrollToTopBtn = () => {
         setIsAtTopHalf(window.scrollY < pageHeight / 2);
         setIsVisible(window.scrollY > 1600);
       }, 250);
-    };
+    }
 
     window.addEventListener("scroll", handleScroll);
 
@@ -48,10 +38,10 @@ const ScrollToTopBtn = () => {
     <button
       type="button"
       className={buttonClass}
+      title={title}
       onClick={scrollToPosition}
       onFocus={() => setIsFocused(true)}
       onBlur={() => setIsFocused(false)}
-      title={title}
     >
       <svg aria-hidden="true">
         <use href="/icons-sprite.svg#right-arrow" />
@@ -61,3 +51,13 @@ const ScrollToTopBtn = () => {
 };
 
 export default ScrollToTopBtn;
+
+function scrollToPosition() {
+  const pageHeight = document.documentElement.scrollHeight;
+  const isAtTop = window.scrollY < pageHeight / 2;
+
+  window.scrollTo({
+    top: isAtTop ? pageHeight : 0,
+    behavior: "smooth",
+  });
+}
