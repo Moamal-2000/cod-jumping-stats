@@ -1,14 +1,13 @@
 .card {
-  background-color: #0e1217;
+  background-color: #131820;
   border: 1px solid #2A3040;
   border-radius: 1rem;
   padding: 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .1);
   position: relative;
-  transition: background-color .3s, border-color .3s;
+  transition: border-color .3s;
 
   &:hover {
-    background-color: #131820;
     border-color: rgb(255, 183, 0);
   }
 }
