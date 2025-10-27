@@ -1,7 +1,7 @@
 @use "@/Styles/mixins" as m;
 
 .filtersSection {
-  background-color: #131820;
+  background-color: #151a25;
   border: 1px solid #374151;
   border-radius: 10px;
   padding: 20px 24px;
@@ -13,7 +13,6 @@
   transition: background-color .3s, border-color .3s;
 
   &:hover {
-    background-color: #151a25;
     border-color: #007bff;
   }
 }
