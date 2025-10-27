@@ -6,10 +6,11 @@ import s from "./ScrollToTopBtn.module.scss";
 const ScrollToTopBtn = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [isAtTopHalf, setIsAtTopHalf] = useState(true);
+  const [isFocused, setIsFocused] = useState(false);
   const debounceId = useRef();
   const title = `Scroll to ${isAtTopHalf ? "down" : "top"}`;
 
-  const buttonClass = `${s.button} ${isVisible ? s.active : ""} ${
+  const buttonClass = `${s.button} ${isVisible || isFocused ? s.active : ""} ${
     isAtTopHalf ? s.reverse : ""
   }`;
 
@@ -48,6 +49,8 @@ const ScrollToTopBtn = () => {
       type="button"
       className={buttonClass}
       onClick={scrollToPosition}
+      onFocus={() => setIsFocused(true)}
+      onBlur={() => setIsFocused(false)}
       title={title}
     >
       <svg aria-hidden="true">
