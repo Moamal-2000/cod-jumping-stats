@@ -1,6 +1,6 @@
 import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllPlayers, searchPlayers } from "../thunks/playersThunk";
+import { fetchAllPlayers } from "../thunks/playersThunk";
 
 const initialState = {
   playersData: [],
@@ -56,24 +56,6 @@ export const playersSlice = createSlice({
         state.error = false;
       })
       .addCase(fetchAllPlayers.rejected, (state) => {
-        state.error = true;
-        state.loading = false;
-      });
-
-    // Search players
-    addCase(searchPlayers.pending, (state) => {
-      state.loading = true;
-      state.error = false;
-    })
-      .addCase(searchPlayers.fulfilled, (state, { payload }) => {
-        const { playersData } = payload;
-        const transformedPlayers = transformPlayerData(playersData);
-
-        state.filteredPlayers = transformedPlayers;
-        state.loading = false;
-        state.error = false;
-      })
-      .addCase(searchPlayers.rejected, (state) => {
         state.error = true;
         state.loading = false;
       });
