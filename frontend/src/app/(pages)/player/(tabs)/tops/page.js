@@ -221,7 +221,7 @@ const TopTab = () => {
                   }`}
                   onClick={() => toggleTopRunsFps(fps)}
                 >
-                  {fps === "mix" ? "Mixed" : fps}
+                  {fps}
                 </button>
               ))}
             </div>
