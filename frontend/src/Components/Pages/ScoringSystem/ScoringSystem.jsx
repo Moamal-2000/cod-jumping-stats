@@ -76,7 +76,7 @@ const ScoringSystem = () => {
           ))}
         </nav>
 
-        <main className={s.content}>
+        <div className={s.content}>
           {/* Route Completion Leaderboard Section */}
           {activeTab === "route-completion" && (
             <section
@@ -811,7 +811,7 @@ const ScoringSystem = () => {
               </div>
             </section>
           )}
-        </main>
+        </div>
       </div>
     </main>
   );
