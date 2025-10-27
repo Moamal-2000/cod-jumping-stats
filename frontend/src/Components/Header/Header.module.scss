@@ -2,17 +2,14 @@
 
 .header {
   width: 100%;
-  min-height: 72px;
+  min-height: 60px;
   position: fixed;
   left: 50%;
   translate: -50% 0;
   top: 0;
   z-index: 100;
-  background-color: #0a0d12;
-
-  &.v2 {
-    background: transparent;
-  }
+  background-color: rgba(18, 18, 18, .5);
+  backdrop-filter: blur(15px);
 }
 
 .header [data-container] {
@@ -20,5 +17,5 @@
   align-items: center;
   justify-content: space-between;
   gap: 30px;
-  padding: 1.4rem 1rem;
+  padding: 16px 16px;
 }

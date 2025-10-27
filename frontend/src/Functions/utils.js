@@ -155,18 +155,6 @@ export function getStarsText(text) {
   return solidStars + emptyStars;
 }
 
-export function updateThemeByPage(currentPage) {
-  const isMapsPage = currentPage === "/maps";
-  const htmlElement = document.documentElement;
-
-  if (isMapsPage) {
-    htmlElement.classList.add("maps-page");
-    return;
-  }
-
-  htmlElement.classList = "";
-}
-
 export function getSortByLabel(value) {
   if (!value) return "Newest First";
 
