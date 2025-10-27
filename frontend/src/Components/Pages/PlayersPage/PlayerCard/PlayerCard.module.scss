@@ -2,6 +2,7 @@
 
 .playerCard {
   background-color: #0e1217;
+  background-color: #131820;
   border: 1px solid #2a313a;
   padding: 20px;
   border-radius: 12px;
@@ -12,7 +13,6 @@
   transition: background-color .3s ease, border-color .3s ease;
 
   &:hover {
-    background-color: #131820;
     border-color: #374151;
   }
 }
