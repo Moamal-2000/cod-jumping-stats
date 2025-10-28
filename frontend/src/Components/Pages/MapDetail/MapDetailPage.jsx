@@ -23,11 +23,14 @@ const breadcrumbPaths = [
   { index: 1, path: "/maps" },
 ];
 
+const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
+const ITEMS_PER_PAGE = 10;
+
 const MapDetailPage = () => {
+  const router = useRouter();
   const searchParams = useSearchParams();
   const cpid = +searchParams.get("mapid");
 
-  const router = useRouter();
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
   const [playersData, setPlayersData] = useState(null);
@@ -55,36 +58,29 @@ const MapDetailPage = () => {
   const [allTopsData, setAllTopsData] = useState(null);
   const [allPlayersData, setAllPlayersData] = useState(null);
 
-  const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
-  const ITEMS_PER_PAGE = 10;
-
   useEffect(() => {
-    if (cpid) {
-      fetchMapData();
-    }
+    if (cpid) fetchMapData();
   }, [cpid]);
 
   useEffect(() => {
-    if (mapData) {
-      setTopsPage(1);
-      setPlayersPage(1);
-      setHasMoreTops(true);
-      setHasMorePlayers(true);
-      setTopsData(null);
-      setPlayersData(null);
-      setAllTopsData(null);
-      setAllPlayersData(null);
-      setDisplayedTopsCount(0);
-      setDisplayedPlayersCount(0);
-      setShowingAllTops(false);
-      setShowingAllPlayers(false);
+    if (!mapData) return;
 
-      fetchTopsData();
-      fetchPlayersData();
-    }
+    setHasMoreTops(true);
+    setHasMorePlayers(true);
+    setTopsData(null);
+    setPlayersData(null);
+    setAllTopsData(null);
+    setAllPlayersData(null);
+    setDisplayedTopsCount(0);
+    setDisplayedPlayersCount(0);
+    setShowingAllTops(false);
+    setShowingAllPlayers(false);
+
+    fetchTopsData();
+    fetchPlayersData();
   }, [mapData, selectedFps]);
 
-  const fetchMapData = async () => {
+  async function fetchMapData() {
     let mapsLocal = localStorage.getItem("mapsData");
 
     if (mapsLocal) {
@@ -123,15 +119,12 @@ const MapDetailPage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }
 
-  const fetchTopsData = async (isLoadMore = false) => {
+  async function fetchTopsData(isLoadMore = false) {
     try {
-      if (isLoadMore) {
-        setLoadingMoreTops(true);
-      } else {
-        setLoadingTops(true);
-      }
+      if (isLoadMore) setLoadingMoreTops(true);
+      else setLoadingTops(true);
 
       if (selectedFps === "All") {
         if (!isLoadMore) {
@@ -234,15 +227,12 @@ const MapDetailPage = () => {
         setLoadingTops(false);
       }
     }
-  };
+  }
 
-  const fetchPlayersData = async (isLoadMore = false) => {
+  async function fetchPlayersData(isLoadMore = false) {
     try {
-      if (isLoadMore) {
-        setLoadingMorePlayers(true);
-      } else {
-        setLoadingPlayers(true);
-      }
+      if (isLoadMore) setLoadingMorePlayers(true);
+      else setLoadingPlayers(true);
 
       if (selectedFps === "All") {
         if (!isLoadMore) {
@@ -372,43 +362,43 @@ const MapDetailPage = () => {
         setLoadingPlayers(false);
       }
     }
-  };
+  }
 
-  const handleFpsChange = (fps) => {
+  function handleFpsChange() {
     setSelectedFps(fps);
-  };
+  }
 
-  const handleTabChange = (tab) => {
+  function handleTabChange() {
     setActiveTab(tab);
-  };
+  }
 
-  const loadMoreTops = () => {
+  function loadMoreTops() {
     if (!loadingMoreTops && hasMoreTops) {
       fetchTopsData(true);
     }
-  };
+  }
 
-  const loadMorePlayers = () => {
+  function loadMorePlayers() {
     if (!loadingMorePlayers && hasMorePlayers) {
       fetchPlayersData(true);
     }
-  };
+  }
 
-  const showAllTops = () => {
+  function showAllTops() {
     if (allTopsData) {
       setTopsData(allTopsData);
       setShowingAllTops(true);
       setHasMoreTops(false);
     }
-  };
+  }
 
-  const showAllPlayers = () => {
-    if (allPlayersData) {
-      setPlayersData(allPlayersData);
-      setShowingAllPlayers(true);
-      setHasMorePlayers(false);
-    }
-  };
+  function showAllPlayers() {
+    if (!allPlayersData) return;
+
+    setPlayersData(allPlayersData);
+    setShowingAllPlayers(true);
+    setHasMorePlayers(false);
+  }
 
   useEffect(() => {
     if (activeTab !== "tops" || !topsData || topsData.length === 0) return;
