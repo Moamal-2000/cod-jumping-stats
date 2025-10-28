@@ -4,7 +4,7 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: var(--padding);
+  padding: 16px;
   position: relative;
 }
 
@@ -35,11 +35,10 @@
 }
 
 .serverHeader .mapBackground {
-  --height: calc(100% + 66px);
   position: absolute;
   inset: 0;
   width: 100%;
-  height: calc(100% + 66px) !important;
+  height: calc(100% + 90px) !important;
   object-fit: cover;
   border-radius: 12px 12px 0 0;
   z-index: 1;
@@ -50,8 +49,7 @@
   position: absolute;
   inset: 0;
   width: 100%;
-  height: 100%;
-  height: calc(100% + 66px) !important;
+  height: calc(100% + 90px) !important;
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px 12px 0 0;
   z-index: 2;

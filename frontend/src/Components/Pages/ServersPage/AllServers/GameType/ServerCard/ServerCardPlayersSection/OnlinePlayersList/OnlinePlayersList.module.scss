@@ -3,10 +3,12 @@
   flex-direction: column;
   gap: 8px;
   overflow-y: auto;
-  max-height: 222px;
+  max-height: 274px;
   flex-grow: 1;
   padding-right: 4px;
+  border-radius: 0 0 12px 12px;
   overscroll-behavior: contain;
+  padding: 12px;
 
   /* For Firefox */
   scrollbar-width: thin;

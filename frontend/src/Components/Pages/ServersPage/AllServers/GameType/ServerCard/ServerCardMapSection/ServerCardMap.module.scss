@@ -1,10 +1,9 @@
-.mapSection {
-  padding: var(--padding);
+.mapInfo {
+  padding: 16px;
+  padding-bottom: 26px;
   position: relative;
   z-index: 2;
-}
-
-.mapInfo {
+  top: 28px;
   display: flex;
   justify-content: space-between;
   align-items: center;

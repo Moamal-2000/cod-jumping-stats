@@ -1,7 +1,6 @@
 .playersSection {
   display: flex;
   flex-direction: column;
-  padding: 0 var(--padding);
 }
 
 .noPlayersText {
@@ -9,4 +8,5 @@
   font-size: .95rem;
   display: flex;
   align-items: center;
+  padding: 10px 12px;
 }

@@ -19,12 +19,8 @@ const SkeletonCard = () => {
       </div>
 
       <div className={s.players}>
-        {[...Array(7)].map((_, i) => (
-          <div
-            key={i}
-            className={s.line}
-            style={{ animationDelay: `${i * 0.2}s` }}
-          />
+        {[...Array(9)].map((_, i) => (
+          <div key={i} className={s.line} />
         ))}
       </div>
     </div>

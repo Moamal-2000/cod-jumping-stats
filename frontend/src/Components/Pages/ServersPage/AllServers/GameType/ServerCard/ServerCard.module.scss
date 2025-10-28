@@ -1,17 +1,10 @@
 .serverCard {
-  --padding: 16px;
-  background: linear-gradient(180deg,
-      rgba(14, 17, 22, .6),
-      rgba(26, 34, 50, .55));
+  background-color: #1c2333;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  min-height: 392px;
-
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 8px 24px rgba(2, 6, 23, .5);
+  min-height: 440px;
 }
 
 @media (max-width: 820px) {
