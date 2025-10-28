@@ -323,3 +323,8 @@ export function getRankCategory(rank) {
   if (rank >= 11 && rank <= 20) return "rank10to20";
   return "rankBelow20";
 }
+
+export function getValueFromLocalStorage({ key, defaultValue }) {
+  const value = localStorage.getItem(key);
+  return value ? JSON.parse(value) : defaultValue;
+}

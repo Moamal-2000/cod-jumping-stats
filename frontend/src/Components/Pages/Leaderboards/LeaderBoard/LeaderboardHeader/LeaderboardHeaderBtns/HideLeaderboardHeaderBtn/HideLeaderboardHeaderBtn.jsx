@@ -15,6 +15,11 @@ const HideLeaderboardHeaderBtn = () => {
         value: !isLeaderboardHeaderVisible,
       })
     );
+
+    localStorage.setItem(
+      "isLeaderboardHeaderVisible",
+      !isLeaderboardHeaderVisible
+    );
   }
 
   return (

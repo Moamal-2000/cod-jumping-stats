@@ -1,7 +1,12 @@
 import { getFilteredLeaderboard } from "@/Functions/filters";
-import { paginateData } from "@/Functions/utils";
+import { getValueFromLocalStorage, paginateData } from "@/Functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchLeaderboard } from "../thunks/leaderboardThunk";
+
+const isLeaderboardHeaderVisible = getValueFromLocalStorage({
+  key: "isLeaderboardHeaderVisible",
+  defaultValue: true,
+});
 
 const initialState = {
   leaderboardData: [],
@@ -10,7 +15,7 @@ const initialState = {
   allDataDisplayed: [],
   loading: false,
   error: false,
-  isLeaderboardHeaderVisible: true,
+  isLeaderboardHeaderVisible,
 };
 
 export const leaderboardSlice = createSlice({
