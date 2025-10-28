@@ -8,26 +8,17 @@ const HideLeaderboardHeaderBtn = () => {
   const { isLeaderboardHeaderVisible } = useSelector((s) => s.leaderboard);
   const dispatch = useDispatch();
 
-  function handleToggleLeaderboardHeader() {
-    dispatch(
-      updateLeaderboardState({
-        key: "isLeaderboardHeaderVisible",
-        value: !isLeaderboardHeaderVisible,
-      })
-    );
+  function handleToggleHeader() {
+    const value = !isLeaderboardHeaderVisible;
 
-    localStorage.setItem(
-      "isLeaderboardHeaderVisible",
-      !isLeaderboardHeaderVisible
+    dispatch(
+      updateLeaderboardState({ key: "isLeaderboardHeaderVisible", value })
     );
+    localStorage.setItem("isLeaderboardHeaderVisible", value);
   }
 
   return (
-    <button
-      type="button"
-      className={s.button}
-      onClick={handleToggleLeaderboardHeader}
-    >
+    <button type="button" className={s.button} onClick={handleToggleHeader}>
       {isLeaderboardHeaderVisible ? "Hide" : "Show"} Header
     </button>
   );
