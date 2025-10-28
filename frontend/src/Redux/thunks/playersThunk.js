@@ -14,10 +14,13 @@ export const fetchAllPlayers = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      let playersData = await decodeAsyncData(response);
-      playersData = getPlayersByParams({ playersData, paramsObject });
+      const allPlayersData = await decodeAsyncData(response);
+      const filteredPlayersData = getPlayersByParams({
+        allPlayersData,
+        paramsObject,
+      });
 
-      return { playersData };
+      return { allPlayersData, filteredPlayersData };
     } catch (error) {
       console.error("Error in fetchAllPlayers:", error);
       throw error;

@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers } from "../thunks/playersThunk";
 
 const initialState = {
+  allPlayersData: [],
   playersData: [],
   loading: false,
   error: false,
@@ -46,11 +47,12 @@ export const playersSlice = createSlice({
       state.error = false;
     })
       .addCase(fetchAllPlayers.fulfilled, (state, { payload }) => {
-        const { playersData } = payload;
+        const { allPlayersData, filteredPlayersData } = payload;
 
-        state.playersData = playersData;
+        state.allPlayersData = allPlayersData;
+        state.playersData = filteredPlayersData;
         state.displayedCount = PLAYERS_BATCH_SIZE;
-        state.hasMore = playersData.length > PLAYERS_BATCH_SIZE;
+        state.hasMore = filteredPlayersData.length > PLAYERS_BATCH_SIZE;
         state.isLoadingMore = false;
         state.loading = false;
         state.error = false;

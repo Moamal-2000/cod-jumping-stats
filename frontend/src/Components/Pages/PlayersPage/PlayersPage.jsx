@@ -1,12 +1,14 @@
 "use client";
 
 import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
+import { getPlayersByParams } from "@/Functions/filters";
 import { removeQueryString } from "@/Functions/utils";
 import { updateGlobalState } from "@/Redux/slices/globalSlice";
 import {
   loadMorePlayersAction,
   resetPagination,
   setIsLoadingMore,
+  updatePlayersState,
 } from "@/Redux/slices/playersSlice";
 import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -21,6 +23,7 @@ import s from "./PlayersPage.module.scss";
 const PlayersPage = () => {
   const dispatch = useDispatch();
   const {
+    allPlayersData,
     playersData,
     loading,
     error,
@@ -40,6 +43,7 @@ const PlayersPage = () => {
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const searchByName = searchParams.get("name") || "";
+  const sortBy = searchParams.get("sort");
 
   const searchInputRef = useRef(null);
   const loadMoreRef = useRef(null);
@@ -50,7 +54,20 @@ const PlayersPage = () => {
   useEffect(() => {
     dispatch(resetPagination());
     dispatch(fetchAllPlayers(paramsObject));
-  }, [searchParams]);
+  }, [sortBy]);
+
+  useEffect(() => {
+    if (allPlayersData.length === 0) return;
+
+    const filteredPlayers = getPlayersByParams({
+      allPlayersData,
+      paramsObject,
+    });
+
+    dispatch(
+      updatePlayersState({ key: "playersData", value: filteredPlayers })
+    );
+  }, [searchByName]);
 
   function handleClearSearch() {
     if (searchInputRef.current) searchInputRef.current.value = "";

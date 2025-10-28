@@ -171,10 +171,10 @@ export function getMapsByFpsDifficulty({ sortedMaps, fps }) {
   });
 }
 
-export function getPlayersByParams({ playersData, paramsObject }) {
-  if (paramsObject?.name === undefined) return playersData;
+export function getPlayersByParams({ allPlayersData, paramsObject }) {
+  if (paramsObject?.name === undefined) return allPlayersData;
 
-  return playersData.filter((player) => {
+  return allPlayersData.filter((player) => {
     const playerPrefName = player.PerfName?.toLowerCase();
     const playerName = player.PlayerName?.toLowerCase();
 
