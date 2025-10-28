@@ -56,7 +56,7 @@ const MapDetailHeader = ({ mapData }) => {
           </div>
         </div>
 
-        {otherRoutes.length > 1 && (
+        {otherRoutes.length > 0 && (
           <div className={s.otherRoutes}>
             <div className={s.otherRoutesLabel} aria-hidden="true">
               Routes from this map
