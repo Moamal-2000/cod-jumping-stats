@@ -36,29 +36,22 @@ const MapDetailPage = () => {
   const [loadingPlayers, setLoadingPlayers] = useState(false);
   const [error, setError] = useState(false);
   const [selectedFps, setSelectedFps] = useState("125");
-  const [activeTab, setActiveTab] = useState("tops"); // "tops" or "players"
+  const [activeTab, setActiveTab] = useState("tops");
 
-  // Pagination state
-  const [topsPage, setTopsPage] = useState(1);
-  const [playersPage, setPlayersPage] = useState(1);
   const [hasMoreTops, setHasMoreTops] = useState(true);
   const [hasMorePlayers, setHasMorePlayers] = useState(true);
   const [loadingMoreTops, setLoadingMoreTops] = useState(false);
   const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
 
-  // Track displayed items count for "All" FPS
   const [displayedTopsCount, setDisplayedTopsCount] = useState(0);
   const [displayedPlayersCount, setDisplayedPlayersCount] = useState(0);
 
-  // Track if showing all items
   const [showingAllTops, setShowingAllTops] = useState(false);
   const [showingAllPlayers, setShowingAllPlayers] = useState(false);
 
-  // Refs for infinite scroll
   const topsLoadMoreRef = useRef(null);
   const playersLoadMoreRef = useRef(null);
 
-  // Store all fetched data for "All" FPS case
   const [allTopsData, setAllTopsData] = useState(null);
   const [allPlayersData, setAllPlayersData] = useState(null);
 
@@ -73,7 +66,6 @@ const MapDetailPage = () => {
 
   useEffect(() => {
     if (mapData) {
-      // Reset pagination when FPS changes
       setTopsPage(1);
       setPlayersPage(1);
       setHasMoreTops(true);
@@ -142,15 +134,12 @@ const MapDetailPage = () => {
       }
 
       if (selectedFps === "All") {
-        // For "All" FPS, fetch all data once and paginate client-side
         if (!isLoadMore) {
-          // First time loading - fetch all data from all FPS
           const allFps = ["125", "250", "333", "43", "76"];
           const promises = allFps.map((fps) =>
             fetch(jhApis({ fps, cpid }).map.getTops)
               .then((res) => res.json())
               .then((data) => {
-                // Add FPS information to each run record
                 if (Array.isArray(data)) {
                   return data.map((run) => ({ ...run, fps }));
                 }
@@ -177,13 +166,11 @@ const MapDetailPage = () => {
 
           setAllTopsData(allData);
 
-          // Show first page
           const firstPage = allData.slice(0, ITEMS_PER_PAGE);
           setTopsData(firstPage);
           setHasMoreTops(allData.length > ITEMS_PER_PAGE);
           setDisplayedTopsCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedTopsCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allTopsData.slice(startIndex, endIndex);
@@ -193,20 +180,17 @@ const MapDetailPage = () => {
           setDisplayedTopsCount(endIndex);
         }
       } else if (selectedFps === "mix") {
-        // Mix FPS - use fps=0 in API call
         if (!isLoadMore) {
           const response = await fetch(jhApis({ fps: "0", cpid }).map.getTops);
           const data = await response.json();
 
           setAllTopsData(data);
 
-          // Show first page
           const firstPage = data.slice(0, ITEMS_PER_PAGE);
           setTopsData(firstPage);
           setHasMoreTops(data.length > ITEMS_PER_PAGE);
           setDisplayedTopsCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedTopsCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allTopsData.slice(startIndex, endIndex);
@@ -216,7 +200,6 @@ const MapDetailPage = () => {
           setDisplayedTopsCount(endIndex);
         }
       } else {
-        // Single FPS - fetch all data and paginate client-side
         if (!isLoadMore) {
           const response = await fetch(
             jhApis({ fps: selectedFps, cpid }).map.getTops
@@ -225,13 +208,11 @@ const MapDetailPage = () => {
 
           setAllTopsData(data);
 
-          // Show first page
           const firstPage = data.slice(0, ITEMS_PER_PAGE);
           setTopsData(firstPage);
           setHasMoreTops(data.length > ITEMS_PER_PAGE);
           setDisplayedTopsCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedTopsCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allTopsData.slice(startIndex, endIndex);
@@ -264,15 +245,12 @@ const MapDetailPage = () => {
       }
 
       if (selectedFps === "All") {
-        // For "All" FPS, fetch all data once and paginate client-side
         if (!isLoadMore) {
-          // First time loading - fetch all data from all FPS
           const allFps = ["125", "250", "333", "43", "76"];
           const promises = allFps.map((fps) =>
             fetch(jhApis({ fps, mapid: mapData?.ID }).player.getPlayersPlayTime)
               .then((res) => res.json())
               .then((data) => {
-                // Add FPS information to each player record
                 if (Array.isArray(data)) {
                   return data.map((player) => ({ ...player, fps }));
                 }
@@ -297,14 +275,12 @@ const MapDetailPage = () => {
                 player.time_played !== undefined
             );
 
-          // Group by player and sum playtime, preserving FPS information
           const playerMap = new Map();
           combinedData.forEach((player) => {
             const key = player.player_id;
             if (playerMap.has(key)) {
               const existingPlayer = playerMap.get(key);
               existingPlayer.time_played += player.time_played;
-              // Add FPS to the list if not already present
               if (!existingPlayer.fps_list) {
                 existingPlayer.fps_list = [existingPlayer.fps];
               }
@@ -325,13 +301,11 @@ const MapDetailPage = () => {
 
           setAllPlayersData(allData);
 
-          // Show first page
           const firstPage = allData.slice(0, ITEMS_PER_PAGE);
           setPlayersData(firstPage);
           setHasMorePlayers(allData.length > ITEMS_PER_PAGE);
           setDisplayedPlayersCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedPlayersCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allPlayersData.slice(startIndex, endIndex);
@@ -341,7 +315,6 @@ const MapDetailPage = () => {
           setDisplayedPlayersCount(endIndex);
         }
       } else if (selectedFps === "mix") {
-        // Mix FPS - use fps=0 in API call
         if (!isLoadMore) {
           const response = await fetch(
             jhApis({ fps: "0", mapid: mapData?.ID }).player.getPlayersPlayTime
@@ -350,13 +323,11 @@ const MapDetailPage = () => {
 
           setAllPlayersData(data);
 
-          // Show first page
           const firstPage = data.slice(0, ITEMS_PER_PAGE);
           setPlayersData(firstPage);
           setHasMorePlayers(data.length > ITEMS_PER_PAGE);
           setDisplayedPlayersCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedPlayersCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allPlayersData.slice(startIndex, endIndex);
@@ -366,7 +337,6 @@ const MapDetailPage = () => {
           setDisplayedPlayersCount(endIndex);
         }
       } else {
-        // Single FPS - fetch all data and paginate client-side
         if (!isLoadMore) {
           const response = await fetch(
             jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
@@ -376,13 +346,11 @@ const MapDetailPage = () => {
 
           setAllPlayersData(data);
 
-          // Show first page
           const firstPage = data.slice(0, ITEMS_PER_PAGE);
           setPlayersData(firstPage);
           setHasMorePlayers(data.length > ITEMS_PER_PAGE);
           setDisplayedPlayersCount(ITEMS_PER_PAGE);
         } else {
-          // Load more - paginate through stored data
           const startIndex = displayedPlayersCount;
           const endIndex = startIndex + ITEMS_PER_PAGE;
           const nextPage = allPlayersData.slice(startIndex, endIndex);
@@ -416,14 +384,12 @@ const MapDetailPage = () => {
 
   const loadMoreTops = () => {
     if (!loadingMoreTops && hasMoreTops) {
-      // Both "All" and individual FPS use direct call approach
       fetchTopsData(true);
     }
   };
 
   const loadMorePlayers = () => {
     if (!loadingMorePlayers && hasMorePlayers) {
-      // Both "All" and individual FPS use direct call approach
       fetchPlayersData(true);
     }
   };
@@ -444,7 +410,6 @@ const MapDetailPage = () => {
     }
   };
 
-  // Infinite scroll effect for tops
   useEffect(() => {
     if (activeTab !== "tops" || !topsData || topsData.length === 0) return;
 
@@ -457,7 +422,6 @@ const MapDetailPage = () => {
       { threshold: 0.1 }
     );
 
-    // Small delay to ensure DOM is ready
     const timeoutId = setTimeout(() => {
       if (topsLoadMoreRef.current) {
         topsObserver.observe(topsLoadMoreRef.current);
@@ -472,7 +436,6 @@ const MapDetailPage = () => {
     };
   }, [hasMoreTops, loadingMoreTops, activeTab, topsData]);
 
-  // Infinite scroll effect for players
   useEffect(() => {
     if (activeTab !== "players" || !playersData || playersData.length === 0)
       return;
@@ -490,7 +453,6 @@ const MapDetailPage = () => {
       { threshold: 0.1 }
     );
 
-    // Small delay to ensure DOM is ready
     const timeoutId = setTimeout(() => {
       if (playersLoadMoreRef.current) {
         playersObserver.observe(playersLoadMoreRef.current);
