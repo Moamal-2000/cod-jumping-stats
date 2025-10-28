@@ -291,6 +291,8 @@ export function getCountryName(countryCode) {
 }
 
 export function cacheMapsLocally(mapsLocal) {
+  if (window === undefined) return;
+
   const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
   localStorage.setItem("mapsData", JSON.stringify(cachedData));
 }
@@ -325,6 +327,8 @@ export function getRankCategory(rank) {
 }
 
 export function getValueFromLocalStorage({ key, defaultValue }) {
+  if (typeof window === "undefined") return defaultValue;
+
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : defaultValue;
 }
