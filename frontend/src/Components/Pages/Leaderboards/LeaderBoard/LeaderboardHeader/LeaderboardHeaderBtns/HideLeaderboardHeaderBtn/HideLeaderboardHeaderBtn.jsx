@@ -23,7 +23,7 @@ const HideLeaderboardHeaderBtn = () => {
       className={s.button}
       onClick={handleToggleLeaderboardHeader}
     >
-      Hide Header
+      {isLeaderboardHeaderVisible ? "Hide" : "Show"} Header
     </button>
   );
 };
