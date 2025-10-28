@@ -28,15 +28,15 @@
   background: transparent;
 
   &:hover {
-    background: rgba(255, 255, 255, .03);
+    background: rgba(255, 255, 255, .05);
   }
 
   &:active {
-    background: rgba(255, 255, 255, .055);
+    background: rgba(255, 255, 255, .1);
   }
 
   &.active {
-    background: rgba(255, 255, 255, .08);
+    background: rgba(255, 255, 255, .16);
   }
 }
 
@@ -65,17 +65,18 @@
   }
 }
 
-.mainNav>a.active>svg {
-  color: #fff;
+.mainNav>a:not(.active):hover>svg {
+  color: #ebebeb;
 
   & path {
-    stroke: #fff;
-    color: #fff;
+    stroke: #ebebeb;
+    color: #ebebeb;
   }
 }
 
-.mainNav>a:not(.active):hover>svg {
-  color: #ebebeb;
+.mainNav>a.active>svg,
+.mainNav>a:not(.active):active>svg {
+  color: #fff;
 
   & path {
     stroke: #fff;
@@ -96,10 +97,11 @@
   }
 }
 
-.mainNav>a.active>span {
-  color: #fff;
-}
-
 .mainNav>a:not(.active):hover>span {
   color: #ebebeb;
+}
+
+.mainNav>a.active>span,
+.mainNav>a:not(.active):active>span {
+  color: #fff;
 }
