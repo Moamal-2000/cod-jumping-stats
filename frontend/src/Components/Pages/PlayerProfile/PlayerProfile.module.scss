@@ -1,169 +1,3 @@
-// Main container with improved spacing and typography
-.playerProfile {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem 1.5rem;
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: var(--text-primary);
-  line-height: 1.6;
-  background: var(--bg-primary);
-  min-height: calc(100vh - 4rem);
-  
-  @media (max-width: 768px) {
-    padding: 1.5rem 1rem;
-  }
-  
-  h2 {
-    color: var(--text-primary);
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    position: relative;
-    padding-bottom: 0.75rem;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    
-    &::after {
-      content: '';
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 3rem;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-color), transparent);
-      border-radius: 3px;
-    }
-    
-    svg {
-      color: var(--accent-color);
-      width: 1.25rem;
-      height: 1.25rem;
-    }
-  }
-  
-  // Section spacing
-  > div {
-    margin-bottom: 2rem;
-    
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
-}
-
-// Player header section with modern card design
-.playerHeader {
-  background: rgba(31, 41, 55, 0.6);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 2.5rem 2rem;
-  margin-bottom: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.2);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-  
-  // Subtle gradient overlay
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
-    z-index: 0;
-  }
-  
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.25);
-    border-color: rgba(99, 102, 241, 0.2);
-  }
-  
-  @media (max-width: 768px) {
-    padding: 1.75rem 1.25rem;
-    margin-bottom: 2rem;
-    border-radius: 12px;
-  }
-  
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-}
-
-.playerInfo {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1.75rem;
-  width: 100%;
-  position: relative;
-  
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 2.5rem;
-  }
-  
-  // Decorative elements
-  &::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -20%;
-    width: 60%;
-    height: 200%;
-    background: radial-gradient(circle at center, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-  &::after {
-    content: '';
-    position: absolute;
-    bottom: -30%;
-    left: -10%;
-    width: 40%;
-    height: 150%;
-    background: radial-gradient(circle at center, rgba(168, 85, 247, 0.05) 0%, transparent 60%);
-    z-index: 0;
-    pointer-events: none;
-  }
-  
-  > * {
-    position: relative;
-    z-index: 1;
-  }
-  
-  // Responsive adjustments
-  @media (max-width: 480px) {
-    gap: 1.25rem;
-  }
-}
-
-.playerDetails {
-  flex: 1;
-  min-width: 0;
-  width: 100%;
-  
-  @media (min-width: 768px) {
-    padding-top: 0.5rem;
-  }
-  
-  // Add subtle animation to content
-  > * {
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    opacity: 0;
-    transform: translateY(10px);
-    
-  }
-}
-
-// Stats overview section
 .playerStatsOverview {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
@@ -172,10 +6,10 @@
   margin-bottom: 2.5rem;
   border: 1px solid rgba(255, 255, 255, 0.05);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  
+
   .statsHeader {
     margin-bottom: 1.5rem;
-    
+
     h2 {
       margin: 0 0 0.5rem 0;
       font-size: 1.5rem;
@@ -186,28 +20,28 @@
       gap: 0.5rem;
     }
   }
-  
+
   .playerInfoContainer {
     width: 100%;
   }
-  
+
   .infoGrid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
     gap: 1.25rem;
-    
+
     @media (max-width: 640px) {
       grid-template-columns: 1fr;
     }
   }
-  
+
   .infoItem {
     background: rgba(31, 41, 55, 0.6);
     border-radius: 12px;
     padding: 1.5rem;
     position: relative;
   }
-  
+
   .infoLabel {
     font-size: 0.75rem;
     color: #9ca3af;
@@ -218,14 +52,14 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    
+
     svg {
       width: 16px;
       height: 16px;
       flex-shrink: 0;
     }
   }
-  
+
   .infoValue {
     font-size: 1.75rem;
     font-weight: 700;
@@ -234,24 +68,24 @@
     line-height: 1.2;
     font-family: 'Inter', -apple-system, sans-serif;
     letter-spacing: -0.5px;
-    
+
     &.highlight {
       color: var(--accent-color, #6366f1);
     }
   }
-  
+
   .infoSubtext {
     font-size: 0.875rem;
     color: #9ca3af;
     line-height: 1.5;
     margin: 0.5rem 0 0;
-    
+
     &.highlight {
       color: #e5e7eb;
       font-weight: 500;
       display: flex;
       align-items: center;
-      
+
       svg {
         margin-right: 0.5rem;
         width: 16px;
@@ -259,21 +93,21 @@
       }
     }
   }
-  
+
   .progressBar {
     height: 6px;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 3px;
     margin-top: 1rem;
     overflow: hidden;
-    
+
     &Fill {
       height: 100%;
       background: var(--accent-color, #6366f1);
       border-radius: 3px;
     }
   }
-  
+
   .mapName {
     display: inline-block;
     max-width: 100%;
@@ -286,7 +120,7 @@
     margin: 0.5rem 0 0.75rem;
     position: relative;
     padding-left: 1.25rem;
-    
+
     &::before {
       content: '';
       position: absolute;
@@ -300,7 +134,7 @@
       opacity: 0.6;
     }
   }
-  
+
   .metaInfo {
     display: flex;
     gap: 0.75rem;
@@ -308,12 +142,12 @@
     font-size: 0.8rem;
     color: #9ca3af;
     flex-wrap: wrap;
-    
+
     span {
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-      
+
       svg {
         width: 14px;
         height: 14px;
@@ -324,7 +158,6 @@
   }
 }
 
-// FPS Performance Section
 .fpsPerformanceSection {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
@@ -341,7 +174,6 @@
   font-size: 0.95rem;
 }
 
-// FPS Overview Section
 .fpsOverviewContainer {
   background: rgba(17, 24, 39, 0.6);
   border-radius: 12px;
@@ -350,7 +182,6 @@
   margin-bottom: 2rem;
 }
 
-// Section header with total runs
 .fpsHeader {
   display: flex;
   justify-content: space-between;
@@ -358,14 +189,14 @@
   margin-bottom: 1.5rem;
   padding-bottom: 0.75rem;
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  
+
   h2 {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 600;
     color: #f9fafb;
   }
-  
+
   .totalRuns {
     font-size: 0.95rem;
     color: #9ca3af;
@@ -373,7 +204,7 @@
     padding: 0.4rem 0.8rem;
     border-radius: 20px;
     font-weight: 500;
-    
+
     strong {
       color: #f9fafb;
       margin-left: 0.25rem;
@@ -381,23 +212,21 @@
   }
 }
 
-// Stats Grid - 2 columns on mobile, 3 on tablet, 4 on desktop
 .fpsOverviewStats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
   width: 100%;
-  
+
   @media (min-width: 640px) {
     grid-template-columns: repeat(3, 1fr);
   }
-  
+
   @media (min-width: 1024px) {
     grid-template-columns: repeat(5, 1fr);
   }
 }
 
-// Individual FPS Stat Card
 .fpsOverviewItem {
   background: rgba(31, 41, 55, 0.4);
   border-radius: 10px;
@@ -410,12 +239,11 @@
   position: relative;
   overflow: hidden;
 
-  // Best FPS highlight
   &.bestFpsOverview {
     background: rgba(31, 41, 55, 0.6);
     border-color: rgba(250, 204, 21);
     box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.2);
-    
+
     &::before {
       content: 'BEST FPS';
       position: absolute;
@@ -430,14 +258,13 @@
       text-transform: uppercase;
       letter-spacing: 0.05em;
     }
-    
+
     .fpsOverviewValue {
       color: #facc15;
     }
   }
 }
 
-// FPS Label (e.g., "125 FPS")
 .fpsOverviewLabel {
   font-size: 0.9rem;
   color: #9ca3af;
@@ -447,19 +274,18 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
-  
+
   .fpsValue {
     font-weight: 600;
     color: #e5e7eb;
   }
-  
+
   .fpsText {
     font-size: 0.8em;
     opacity: 0.8;
   }
 }
 
-// Main value (number of runs)
 .fpsOverviewValue {
   font-size: 1.75rem;
   font-weight: 700;
@@ -470,19 +296,18 @@
   letter-spacing: -0.02em;
 }
 
-// Percentage and rank container
 .fpsMeta {
   margin-top: 0.75rem;
   display: flex;
   justify-content: center;
   gap: 0.75rem;
   font-size: 0.85rem;
-  
-  > div {
+
+  >div {
     display: flex;
     align-items: center;
     gap: 0.25rem;
-    
+
     svg {
       width: 0.9em;
       height: 0.9em;
@@ -491,34 +316,32 @@
   }
 }
 
-// Percentage of total
 .fpsPercentage {
   color: #facc15;
   font-weight: 500;
-  
+
   svg {
     color: #facc15;
   }
 }
 
-// Responsive adjustments
 @media (max-width: 640px) {
   .fpsOverviewStats {
     grid-template-columns: repeat(2, 1fr);
   }
-  
+
   .fpsOverviewItem {
     padding: 1rem 0.5rem;
   }
-  
+
   .fpsOverviewValue {
     font-size: 1.6rem;
   }
-  
+
   .fpsOverviewLabel {
     font-size: 0.85rem;
   }
-  
+
   .fpsMeta {
     flex-direction: column;
     gap: 0.25rem;
@@ -526,53 +349,6 @@
   }
 }
 
-.bestFpsIndicator {
-  display: inline-flex;
-  color: #facc15;
-  margin-left: 0.25rem;
-
-  svg {
-    width: 1em;
-    height: 1em;
-  }
-}
-
-// Animations
-@keyframes shine {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes pulse {
-  0%, 100% {
-    opacity: 0.5;
-  }
-  50% {
-    opacity: 1;
-  }
-}
-
-// Recent Activity Section
 .recentActivitySection {
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
@@ -583,7 +359,7 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -595,7 +371,7 @@
     z-index: 0;
     pointer-events: none;
   }
-  
+
   h2 {
     position: relative;
     z-index: 1;
@@ -605,7 +381,7 @@
     gap: 0.75rem;
     font-size: 1.5rem;
     color: #f9fafb;
-    
+
     &::after {
       content: '';
       position: absolute;
@@ -617,7 +393,7 @@
       border-radius: 3px;
     }
   }
-  
+
   .sectionDescription {
     color: #9ca3af;
     margin: 0.5rem 0 1.5rem;
@@ -648,7 +424,7 @@
   overflow: hidden;
   text-decoration: none;
   color: inherit;
-  
+
   &::before {
     content: '';
     position: absolute;
@@ -661,7 +437,7 @@
     opacity: 0;
     transition: opacity 0.3s ease;
   }
-  
+
   &:hover {
     &::before {
       opacity: 1;
@@ -671,38 +447,37 @@
       color: #f9fafb;
     }
   }
-  
-  // Add border accent based on rank
+
   &[data-rank="1"] {
     border-left: 3px solid #facc15;
-    
+
     .activityIcon {
       background: linear-gradient(135deg, #facc15, #eab308);
-      
+
       svg {
         color: #fef3c7;
       }
     }
   }
-  
+
   &[data-rank="2"] {
     border-left: 3px solid #94a3b8;
-    
+
     .activityIcon {
       background: linear-gradient(135deg, #94a3b8, #64748b);
-      
+
       svg {
         color: #f1f5f9;
       }
     }
   }
-  
+
   &[data-rank="3"] {
     border-left: 3px solid #f59e0b;
-    
+
     .activityIcon {
       background: linear-gradient(135deg, #f59e0b, #d97706);
-      
+
       svg {
         color: #fef3c7;
       }
@@ -721,7 +496,7 @@
   box-shadow: 0 4px 15px -8px #eab2089f;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;
-  
+
   svg {
     width: 1.25rem;
     height: 1.25rem;
@@ -754,25 +529,24 @@
   gap: 0.75rem;
   font-size: 0.85rem;
   color: #9ca3af;
-  
+
   span {
     display: inline-flex;
     align-items: center;
     gap: 0.25rem;
-    
+
     &::before {
       content: '•';
       color: rgba(156, 163, 175, 0.5);
       margin-right: 0.25rem;
     }
-    
+
     &:first-child::before {
       display: none;
     }
   }
 }
 
-// Rank-specific styles
 [data-rank="1"] {
   .activityRank {
     color: #facc15;
@@ -794,13 +568,8 @@
   }
 }
 
-// Responsive adjustments
 @media (max-width: 768px) {
-  .playerProfile {
-    padding: 1rem;
-  }
 
-  .playerHeader,
   .playerStatsOverview,
   .fpsPerformanceSection,
   .recentActivitySection {
@@ -811,33 +580,28 @@
     grid-template-columns: 1fr;
   }
 
-  .playerInfo {
-    flex-direction: column;
-    text-align: center;
-  }
-
   .playerName {
     font-size: 2rem;
   }
-  
+
   .recentActivityItem {
     padding: 0.875rem 1rem;
-    
+
     .activityIcon {
       width: 2.25rem;
       height: 2.25rem;
-      
+
       svg {
         width: 1.1rem;
         height: 1.1rem;
       }
     }
-    
+
     .activityTitle {
       font-size: 0.95rem;
       margin-bottom: 0.2rem;
     }
-    
+
     .activityDetails {
       gap: 0.5rem;
       font-size: 0.8rem;
@@ -985,7 +749,6 @@
     width: 100%;
   }
 
-  // Media query for smaller screens
   @media (max-width: 768px) {
     .topRunsList {
       grid-template-columns: 1fr;
@@ -1017,21 +780,6 @@
     .runTime,
     .runDate {
       justify-content: space-between;
-    }
-
-    .tabNavigation {
-      gap: 0.25rem;
-      padding-bottom: 0.25rem;
-    }
-
-    .tabButton {
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
-
-      svg {
-        width: 0.9rem;
-        height: 0.9rem;
-      }
     }
   }
 }
