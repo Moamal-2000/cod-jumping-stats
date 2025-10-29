@@ -364,11 +364,11 @@ const MapDetailPage = () => {
     }
   }
 
-  function handleFpsChange() {
+  function handleFpsChange(fps) {
     setSelectedFps(fps);
   }
 
-  function handleTabChange() {
+  function handleTabChange(tab) {
     setActiveTab(tab);
   }
 
