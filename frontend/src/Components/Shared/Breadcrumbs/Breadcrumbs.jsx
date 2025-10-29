@@ -16,7 +16,7 @@ const Breadcrumbs = ({ breadcrumbLabels, breadcrumbPaths }) => {
         </div>
       ))}
 
-      <span className={s.currentPage}>{currentPage}</span>
+      <span className={s.currentPage}>{currentPage || "Unknown"}</span>
     </div>
   );
 };
