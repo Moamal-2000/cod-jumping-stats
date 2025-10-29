@@ -8,23 +8,6 @@ const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
   const completionRatio = (performanceStats?.MapsCompletedRatio || 0) * 100;
 
-  function formatLastSeen(lastSeen) {
-    if (!lastSeen) return "Unknown";
-
-    try {
-      const date = new Date(lastSeen);
-      const now = new Date();
-      const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
-
-      if (diffInHours < 1) return "Just now";
-      if (diffInHours < 24) return `${diffInHours}h ago`;
-      if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
-      return date.toLocaleDateString();
-    } catch {
-      return lastSeen;
-    }
-  }
-
   return (
     <div className={s.playerStatsOverview}>
       <div className={s.statsHeader}>
@@ -148,4 +131,18 @@ function getCompletionRateClass(completionRate) {
   if (completionRate >= 25) return s[`highlight-25`];
 
   return "";
+}
+
+function formatLastSeen(lastSeen) {
+  if (!lastSeen) return "Unknown";
+
+  const date = new Date(lastSeen);
+  const now = new Date();
+  const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
+
+  if (diffInHours < 1) return "Just now";
+  if (diffInHours < 24) return `${diffInHours}h ago`;
+  if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
+
+  return date.toLocaleDateString();
 }
