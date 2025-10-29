@@ -6,6 +6,7 @@ import s from "./PlayerInfo.module.scss";
 
 const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
+  const completionRatio = (performanceStats?.MapsCompletedRatio || 0) * 100;
 
   function formatLastSeen(lastSeen) {
     if (!lastSeen) return "Unknown";
@@ -24,35 +25,6 @@ const PlayerInfo = () => {
     }
   }
 
-  function getCompletionRateInfo(completionRate) {
-    if (completionRate >= 95)
-      return {
-        class: "highlight",
-        gradient: "linear-gradient(90deg, #f59e0b, #f97316)",
-      };
-    if (completionRate >= 85)
-      return {
-        class: "highlight",
-        gradient: "linear-gradient(90deg, #8b5cf6, #a855f7)",
-      };
-    if (completionRate >= 70)
-      return {
-        class: "highlight",
-        gradient: "linear-gradient(90deg, #3b82f6, #6366f1)",
-      };
-    if (completionRate >= 50)
-      return {
-        class: "highlight",
-        gradient: "linear-gradient(90deg, #10b981, #14b8a6)",
-      };
-    if (completionRate >= 25)
-      return {
-        class: "highlight",
-        gradient: "linear-gradient(90deg, #06b6d4, #0ea5e9)",
-      };
-    return { class: "" };
-  }
-
   return (
     <div className={s.playerStatsOverview}>
       <div className={s.statsHeader}>
@@ -69,32 +41,21 @@ const PlayerInfo = () => {
                 </svg>
                 Routes Completed
               </div>
-              <div
-                className={`${s.infoValue} ${
-                  getCompletionRateInfo(
-                    performanceStats.MapsCompletedRatio * 100
-                  ).class
-                }`}
-              >
+              <div className={s.infoValue}>
                 {performanceStats.TotalMapsCompleted.toLocaleString()}
               </div>
               <div className={`${s.infoSubtext} ${s.highlight}`}>
                 <svg aria-hidden="true">
                   <use href="/icons-sprite.svg#check-circle"></use>
                 </svg>
-                {Math.round(performanceStats.MapsCompletedRatio * 100)}%
-                completion rate
+                {Math.round(completionRatio)}% completion rate
               </div>
               <div className={s.progressBar}>
                 <div
-                  className={s.progressBarFill}
-                  style={{
-                    width: `${performanceStats.MapsCompletedRatio * 100}%`,
-                    background:
-                      getCompletionRateInfo(
-                        performanceStats.MapsCompletedRatio * 100
-                      ).gradient || "var(--accent-color)",
-                  }}
+                  className={`${s.progressBarFill} ${getCompletionRateClass(
+                    completionRatio
+                  )}`}
+                  style={{ width: `${completionRatio}%` }}
                 />
               </div>
             </div>
@@ -179,3 +140,12 @@ const PlayerInfo = () => {
 };
 
 export default PlayerInfo;
+
+function getCompletionRateClass(completionRate) {
+  if (completionRate >= 95) return s[`highlight-95`];
+  if (completionRate >= 70) return s[`highlight-70`];
+  if (completionRate >= 50) return s[`highlight-50`];
+  if (completionRate >= 25) return s[`highlight-25`];
+
+  return "";
+}
