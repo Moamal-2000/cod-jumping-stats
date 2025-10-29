@@ -147,13 +147,13 @@
       display: inline-flex;
       align-items: center;
       gap: 0.35rem;
-
-      svg {
-        width: 14px;
-        height: 14px;
-        opacity: 0.7;
-        flex-shrink: 0;
-      }
     }
   }
+}
+
+.playerStatsOverview .metaInfo>span>svg {
+  width: 15px;
+  height: 15px;
+  opacity: 0.7;
+  flex-shrink: 0;
 }
