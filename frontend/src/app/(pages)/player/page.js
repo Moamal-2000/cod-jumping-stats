@@ -1,4 +1,4 @@
-import PlayerProfile from "@/Components/Pages/PlayerProfile/PlayerProfile";
+import PlayerOverview from "@/Components/Pages/PlayerProfile/PlayerOverview/PlayerOverview";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 const PlayerPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <PlayerProfile />
+      <PlayerOverview />
     </Suspense>
   );
 };
