@@ -332,3 +332,15 @@ export function getValueFromLocalStorage({ key, defaultValue }) {
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : defaultValue;
 }
+
+export function formatDate(dateStr, fallback) {
+  if (!dateStr) return fallback;
+
+  const date = new Date(dateStr);
+
+  if (isNaN(date.getTime())) {
+    return dateStr;
+  }
+
+  return date.toLocaleDateString();
+}

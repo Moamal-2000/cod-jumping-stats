@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDate } from "@/Functions/utils";
 import { useSelector } from "react-redux";
 import s from "./PlayerInfo.module.scss";
 
@@ -229,7 +230,7 @@ const PlayerInfo = () => {
                       <line x1="8" y1="2" x2="8" y2="6"></line>
                       <line x1="3" y1="10" x2="21" y2="10"></line>
                     </svg>
-                    {formatDate(performanceStats.OldestTop.FinishDate)}
+                    {formatDate(performanceStats.OldestTop.FinishDate, "N/A")}
                   </span>
                 </div>
               </div>
@@ -268,13 +269,3 @@ const PlayerInfo = () => {
 };
 
 export default PlayerInfo;
-
-function formatDate(dateString) {
-  if (!dateString) return "N/A";
-
-  try {
-    return new Date(dateString).toLocaleDateString();
-  } catch {
-    return dateString;
-  }
-}

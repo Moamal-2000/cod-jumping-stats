@@ -1,6 +1,6 @@
 "use client";
 
-import { getRankCategory } from "@/Functions/utils";
+import { formatDate, getRankCategory } from "@/Functions/utils";
 import { updatePlayerProfileState } from "@/Redux/slices/playerProfileSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -187,15 +187,6 @@ const TopTab = () => {
     return timeString;
   }
 
-  function formatDate(dateString) {
-    if (!dateString) return "Unknown";
-    try {
-      return new Date(dateString).toLocaleDateString();
-    } catch {
-      return dateString;
-    }
-  }
-
   // Handle fetched top runs data and store by FPS
   useEffect(() => {
     if (topRuns && Object.keys(topRuns).length > 0 && currentFetchingFps) {
@@ -356,7 +347,7 @@ const TopTab = () => {
                               {formatTime(run.time_played_string)}
                             </td>
                             <td className={s.dateCell}>
-                              {formatDate(run.time_created)}
+                              {formatDate(run.time_created, "Unknown")}
                             </td>
                           </tr>
                         );

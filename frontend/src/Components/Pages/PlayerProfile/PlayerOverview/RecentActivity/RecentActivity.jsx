@@ -1,5 +1,6 @@
 "use client";
 
+import { formatDate } from "@/Functions/utils";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import s from "./RecentActivity.module.scss";
@@ -36,7 +37,7 @@ const RecentActivity = () => {
                 <span className={s.activityRank}>Rank #{run.Rank}</span>
                 <span className={s.activityFps}>{run.FPS} FPS</span>
                 <span className={s.activityDate}>
-                  {formatDate(run.FinishDate)}
+                  {formatDate(run.FinishDate, "N/A")}
                 </span>
               </div>
             </div>
@@ -48,13 +49,3 @@ const RecentActivity = () => {
 };
 
 export default RecentActivity;
-
-function formatDate(dateString) {
-  if (!dateString) return "N/A";
-
-  try {
-    return new Date(dateString).toLocaleDateString();
-  } catch {
-    return dateString;
-  }
-}
