@@ -6,6 +6,9 @@ import {
 } from "@/Data/constants";
 import { MAPS_VIDEOS } from "@/Data/mapsVideos";
 import { SORT_MAPS_OPTIONS, TOP_STATS_COLOR } from "@/Data/staticData";
+import { encode } from "@msgpack/msgpack";
+import { Buffer } from "buffer";
+import LZString from "lz-string";
 import { decode } from "msgpackr";
 
 export function getMaxFinishTimesFrom(bestPlayer) {
@@ -290,13 +293,6 @@ export function getCountryName(countryCode) {
   }
 }
 
-export function cacheMapsLocally(mapsLocal) {
-  if (window === undefined) return;
-
-  const cachedData = { maps: mapsLocal, timeStamp: Date.now() };
-  localStorage.setItem("mapsData", JSON.stringify(cachedData));
-}
-
 export function getMostFinishedMap(mapsData) {
   return mapsData.reduce((map, currentMap) => {
     if (map.IndividualFinishCount > currentMap.IndividualFinishCount)
@@ -343,4 +339,34 @@ export function formatDate(dateStr, fallback) {
   }
 
   return date.toLocaleDateString();
+}
+
+export function cacheMapsLocally(mapsLocal) {
+  if (typeof window === "undefined") return;
+
+  const dataToCache = { maps: mapsLocal, timeStamp: Date.now() };
+
+  const encoded = encode(dataToCache);
+  const base64 = Buffer.from(encoded).toString("base64");
+  const compressed = LZString.compressToUTF16(base64);
+
+  localStorage.setItem("mapsData", compressed);
+}
+
+export function getCachedMaps() {
+  if (typeof window === "undefined") return null;
+
+  const compressed = localStorage.getItem("mapsData");
+  if (!compressed) return null;
+
+  try {
+    const base64 = LZString.decompressFromUTF16(compressed);
+    const bytes = new Uint8Array(Buffer.from(base64, "base64"));
+    const data = decode(bytes);
+
+    return data;
+  } catch (err) {
+    console.error(`Failed to decompress or decode mapsData: ${err}`);
+    return null;
+  }
 }

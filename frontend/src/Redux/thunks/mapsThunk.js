@@ -4,6 +4,7 @@ import {
   cacheMapsLocally,
   decodeAsyncData,
   fetchMsgPackResponse,
+  getCachedMaps,
 } from "@/Functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -13,9 +14,10 @@ export const fetchMaps = createAsyncThunk(
     let mapsLocal = localStorage.getItem("mapsData");
 
     if (mapsLocal) {
-      const cachedData = JSON.parse(mapsLocal);
+      const cachedData = getCachedMaps();
       const isCacheExpire =
-        Date.now() - cachedData.timeStamp > MAPS_CACHE_EXPIRATION_TIME;
+        Date.now() - parseInt(cachedData.timeStamp) >
+        MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
         return { mapsData: cachedData.maps, paramsObject };
