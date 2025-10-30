@@ -8,6 +8,7 @@ import {
   cacheMapsLocally,
   decodeAsyncData,
   fetchMsgPackResponse,
+  getCachedMaps,
 } from "@/Functions/utils";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -81,15 +82,14 @@ const MapDetailPage = () => {
   }, [mapData, selectedFps]);
 
   async function fetchMapData() {
-    let mapsLocal = localStorage.getItem("mapsData");
+    let mapsLocal = getCachedMaps();
 
-    if (mapsLocal) {
-      const cachedData = JSON.parse(mapsLocal);
-      const isCacheExpire =
-        Date.now() - cachedData.timeStamp > MAPS_CACHE_EXPIRATION_TIME;
+    if (mapsLocal !== null) {
+      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp);
+      const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
-        const map = cachedData.maps.find((map) => map.CpID === parseInt(cpid));
+        const map = mapsLocal.maps.find((map) => map.CpID === parseInt(cpid));
 
         setMapData(map);
         setError(false);
