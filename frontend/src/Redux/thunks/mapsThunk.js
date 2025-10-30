@@ -11,13 +11,11 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchMaps = createAsyncThunk(
   "globalSlice/fetchMaps",
   async (paramsObject) => {
-    let mapsLocal = localStorage.getItem("mapsData");
+    const cachedData = getCachedMaps();
 
-    if (mapsLocal) {
-      const cachedData = getCachedMaps();
-      const isCacheExpire =
-        Date.now() - parseInt(cachedData.timeStamp) >
-        MAPS_CACHE_EXPIRATION_TIME;
+    if (cachedData !== null) {
+      const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
+      const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
         return { mapsData: cachedData.maps, paramsObject };
@@ -30,8 +28,8 @@ export const fetchMaps = createAsyncThunk(
         cache: "no-cache",
       });
       const mapsData = await decodeAsyncData(response);
-
       cacheMapsLocally(mapsData);
+
       return { mapsData, paramsObject };
     } catch (error) {
       console.error(error);
