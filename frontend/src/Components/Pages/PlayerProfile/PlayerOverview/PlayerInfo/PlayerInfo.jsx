@@ -15,7 +15,7 @@ const PlayerInfo = () => {
       </div>
 
       <div className={s.playerInfoContainer}>
-        {performanceStats ? (
+        {performanceStats && (
           <div className={s.infoGrid}>
             <div className={s.infoItem}>
               <div className={s.infoLabel}>
@@ -99,7 +99,9 @@ const PlayerInfo = () => {
               </div>
             )}
           </div>
-        ) : (
+        )}
+
+        {!performanceStats && (
           <div className={s.mainInfoCard}>
             <div className={s.infoGrid}>
               <div className={s.infoItem}>
