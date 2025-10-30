@@ -4,10 +4,10 @@ import { formatDate } from "@/Functions/utils";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";
+import RoutesCard from "./RoutesCard/RoutesCard";
 
 const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
-  const completionRatio = (performanceStats?.MapsCompletedRatio || 0) * 100;
 
   return (
     <div className={s.playerStatsOverview}>
@@ -18,31 +18,7 @@ const PlayerInfo = () => {
       <div className={s.playerInfoContainer}>
         {performanceStats && (
           <div className={s.infoGrid}>
-            <div className={s.infoItem}>
-              <div className={s.infoLabel}>
-                <svg aria-hidden="true">
-                  <use href="/icons-sprite.svg#flag"></use>
-                </svg>
-                Routes Completed
-              </div>
-              <div className={s.infoValue}>
-                {performanceStats.TotalMapsCompleted.toLocaleString()}
-              </div>
-              <div className={`${s.infoSubtext} ${s.highlight}`}>
-                <svg aria-hidden="true">
-                  <use href="/icons-sprite.svg#check-circle"></use>
-                </svg>
-                {Math.round(completionRatio)}% completion rate
-              </div>
-              <div className={s.progressBar}>
-                <div
-                  className={`${s.progressBarFill} ${getCompletionRateClass(
-                    completionRatio
-                  )}`}
-                  style={{ width: `${completionRatio}%` }}
-                />
-              </div>
-            </div>
+            <RoutesCard performanceStats={performanceStats} />
 
             <div className={s.infoItem}>
               <div className={s.infoLabel}>
@@ -109,15 +85,6 @@ const PlayerInfo = () => {
 };
 
 export default PlayerInfo;
-
-function getCompletionRateClass(completionRate) {
-  if (completionRate >= 95) return s[`highlight-95`];
-  if (completionRate >= 70) return s[`highlight-70`];
-  if (completionRate >= 50) return s[`highlight-50`];
-  if (completionRate >= 25) return s[`highlight-25`];
-
-  return "";
-}
 
 function formatLastSeen(lastSeen) {
   if (!lastSeen) return "Unknown";
