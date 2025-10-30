@@ -1,0 +1,42 @@
+.card {
+  background: rgba(31, 41, 55, 0.6);
+  border-radius: 12px;
+  padding: 1.5rem;
+  position: relative;
+  width: fit-content;
+}
+
+.title {
+  font-size: 0.75rem;
+  color: #9ca3af;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.title>svg {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.infoTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: #f9fafb;
+  margin: 0.5rem 0 1rem;
+  line-height: 1.2;
+  font-family: 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.infoSubtext {
+  font-size: 0.875rem;
+  color: #9ca3af;
+  line-height: 1.5;
+  margin: 0.5rem 0 0;
+}

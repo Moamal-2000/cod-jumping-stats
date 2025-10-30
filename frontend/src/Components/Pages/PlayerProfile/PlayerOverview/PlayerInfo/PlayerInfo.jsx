@@ -2,6 +2,7 @@
 
 import { formatDate } from "@/Functions/utils";
 import { useSelector } from "react-redux";
+import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";
 
 const PlayerInfo = () => {
@@ -101,24 +102,7 @@ const PlayerInfo = () => {
           </div>
         )}
 
-        {!performanceStats && (
-          <div className={s.mainInfoCard}>
-            <div className={s.infoGrid}>
-              <div className={s.infoItem}>
-                <div className={s.infoLabel}>
-                  <svg aria-hidden="true">
-                    <use href="/icons-sprite.svg#chart-bar"></use>
-                  </svg>
-                  Player Data
-                </div>
-                <div className={s.infoValue}>Limited Data Available</div>
-                <div className={s.infoSubtext}>
-                  This player has insufficient data for detailed statistics
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
+        {!performanceStats && <LimitedDataCard />}
       </div>
     </div>
   );
