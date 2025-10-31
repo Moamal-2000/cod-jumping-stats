@@ -1,7 +1,7 @@
 @use "@/Styles/mixins" as m;
 
 .header {
-  background: linear-gradient(135deg,#1f2937 0%,#111827 100%);
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
   border: 1px solid #374151;
   border-radius: 12px;
   padding: 2rem;
@@ -17,8 +17,8 @@
 
 .mapImage {
   flex-shrink: 0;
-  width: 240px;
-  height: 136px;
+  width: 480px;
+  height: 272px;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #374151;

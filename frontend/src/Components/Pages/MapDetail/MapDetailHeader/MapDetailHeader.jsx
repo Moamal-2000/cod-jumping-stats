@@ -25,7 +25,7 @@ const MapDetailHeader = ({ mapData }) => {
     <div className={s.header}>
       <div className={s.mapInfo}>
         <div className={s.mapImage}>
-          <MapImage mapName={Name} objectFit="cover" />
+          <MapImage mapName={Name} resolution="1920" />
         </div>
 
         <div className={s.mapDetails}>

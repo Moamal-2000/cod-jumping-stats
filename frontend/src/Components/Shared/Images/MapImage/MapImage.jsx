@@ -6,10 +6,10 @@ import s from "./MapImage.module.scss";
 
 const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
 
-const MapImage = memo(({ mapName }) => {
+const MapImage = memo(({ mapName, resolution = "512" }) => {
   const cleanMapName =
     mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "") || "unknown";
-  const [src, setSrc] = useState(`/maps/512/${cleanMapName}.webp`);
+  const [src, setSrc] = useState(`/maps/${resolution}/${cleanMapName}.webp`);
   const [isLoading, setIsLoading] = useState(true);
   const [scale, setScale] = useState(1);
 
@@ -43,6 +43,7 @@ const MapImage = memo(({ mapName }) => {
         onError={handleError}
         onLoad={handleLoadCompleted}
         priority
+        quality={100}
       />
     </div>
   );
