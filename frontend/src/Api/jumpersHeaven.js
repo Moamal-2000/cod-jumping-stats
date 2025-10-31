@@ -8,7 +8,8 @@ export const jhApis = ({
   name = "SAD",
   playerid = 108468,
   cpid = 14606,
-  sort = ""
+  sort = "",
+  gametype = "jump",
 } = {}) => {
   fps = fps === "mix" ? 0 : fps;
 
@@ -28,6 +29,7 @@ export const jhApis = ({
       getPlayersPlayTime: generateUrl("/map/players-playtime", { fps, limit, mapid }),
       getPerformanceStats: generateUrl("/player/performance-stats", { playerid }),
       getLeaderboardPositions: generateUrl("/player/leaderboard-positions", { playerid }),
+      getPlayerProgress: generateUrl("/historical/player-progress", { playerid, fps, gametype, limit }),
     },
     leaderboard: {
       getSkilledLeaderboard: generateUrl("/leaderboard/jump-skill", { fps }),
