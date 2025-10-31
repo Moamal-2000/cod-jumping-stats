@@ -1,5 +1,5 @@
 import { getColoredName, getModifiedRank } from "@/Functions/components";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import s from "./MapDetailPlayers.module.scss";
 
 const MapDetailPlayers = ({
@@ -13,8 +13,6 @@ const MapDetailPlayers = ({
   onShowAll,
   allData,
 }) => {
-  const router = useRouter();
-
   const formatPlaytime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -84,13 +82,10 @@ const MapDetailPlayers = ({
           const modifiedRank = getModifiedRank(index + 1);
 
           return (
-            <div
+            <Link
+              href={`/player?playerid=${player.player_id}`}
               key={`${player.player_id}-${index}`}
               className={s.playerItem}
-              onClick={() =>
-                router.push(`/player?playerid=${player.player_id}`)
-              }
-              style={{ cursor: "pointer" }}
             >
               <div className={s.rank}>{modifiedRank}</div>
 
@@ -117,7 +112,7 @@ const MapDetailPlayers = ({
                 </div>
                 <div className={s.playtimeLabel}>Playtime</div>
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>

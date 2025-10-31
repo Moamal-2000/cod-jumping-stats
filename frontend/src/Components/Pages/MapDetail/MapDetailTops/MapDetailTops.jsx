@@ -1,5 +1,5 @@
 import { getColoredName, getModifiedRank } from "@/Functions/components";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import s from "./MapDetailTops.module.scss";
 
 const MapDetailTops = ({
@@ -13,8 +13,6 @@ const MapDetailTops = ({
   onShowAll,
   allData,
 }) => {
-  const router = useRouter();
-
   if (loading) {
     return (
       <div className={s.topsCard}>
@@ -74,11 +72,10 @@ const MapDetailTops = ({
           const modifiedRank = getModifiedRank(run.rank);
 
           return (
-            <div
+            <Link
+              href={`/player?playerid=${run.player_id}`}
               key={`${run.run_id}-${index}`}
               className={s.topRun}
-              onClick={() => router.push(`/player?playerid=${run.player_id}`)}
-              style={{ cursor: "pointer" }}
             >
               <div className={s.rank}>{modifiedRank}</div>
 
@@ -114,7 +111,7 @@ const MapDetailTops = ({
                   </div>
                 )}
               </div>
-            </div>
+            </Link>
           );
         })}
       </div>
