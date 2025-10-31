@@ -104,12 +104,10 @@ const MapDetailTops = ({
                   <span className={s.statLabel}>Saves</span>
                   <span className={s.statValue}>{run.save_count}</span>
                 </div>
-                {run.nadejumps > 0 && (
-                  <div className={s.stat}>
-                    <span className={s.statLabel}>Nade Jumps</span>
-                    <span className={s.statValue}>{run.nadejumps}</span>
-                  </div>
-                )}
+                <div className={s.stat}>
+                  <span className={s.statLabel}>Nade Jumps</span>
+                  <span className={s.statValue}>{run.nadejumps}</span>
+                </div>
               </div>
             </Link>
           );
