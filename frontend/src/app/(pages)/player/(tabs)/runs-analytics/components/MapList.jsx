@@ -1,7 +1,7 @@
 "use client";
 import styles from "../RunAnalytics.module.scss";
 
-const MapList = ({ maps, selectedCpid, onSelect, search, setSearch }) => {
+const MapList = ({ allMaps, selectedCpid, onSelect, search, setSearch }) => {
   return (
     <div className={styles.leftPanel}>
       <div className={styles.searchWrap}>
@@ -15,21 +15,22 @@ const MapList = ({ maps, selectedCpid, onSelect, search, setSearch }) => {
       </div>
 
       <div className={styles.mapsList} role="list">
-        {maps.map((m) => {
-          const active = selectedCpid === m.cpid;
+        {allMaps.map((map) => {
+          const active = selectedCpid === map.CpID;
+
           return (
             <button
-              key={m.cpid}
+              key={map.CpID}
               className={`${styles.mapButton} ${
                 active ? styles.mapButtonActive : ""
               }`}
-              onClick={() => onSelect(m.cpid)}
+              onClick={() => onSelect(map.CpID)}
               role="listitem"
               aria-pressed={active}
             >
-              <span>{m.mapname}</span>
+              <span>{map.Name}</span>
               <span style={{ color: "#9ca3af", fontSize: "0.85rem" }}>
-                {m.count}
+                {map?.count}
               </span>
             </button>
           );

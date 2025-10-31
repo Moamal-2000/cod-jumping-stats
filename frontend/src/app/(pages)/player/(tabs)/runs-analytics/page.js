@@ -1,6 +1,8 @@
 "use client";
 import { graphData } from "@/Data/graphData";
-import { useMemo, useState } from "react";
+import { fetchMaps } from "@/Redux/thunks/mapsThunk";
+import { useEffect, useMemo, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./RunAnalytics.module.scss";
 import Graph from "./components/Graph";
 import MapList from "./components/MapList";
@@ -8,20 +10,11 @@ import MapList from "./components/MapList";
 const RunAnalyticsPage = () => {
   // prepare maps list (unique by cpid)
   const [search, setSearch] = useState("");
-  const maps = useMemo(() => {
-    const mapBy = {};
-    graphData.forEach((r) => {
-      const key = r.cpid;
-      if (!mapBy[key])
-        mapBy[key] = { cpid: r.cpid, mapname: r.mapname, count: 0 };
-      mapBy[key].count += 1;
-    });
-    return Object.values(mapBy).filter((m) =>
-      m.mapname.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [search]);
 
-  const [selectedCpid, setSelectedCpid] = useState(maps[0]?.cpid || null);
+  const allMaps = useSelector((s) => s.maps.allMaps);
+  const dispatch = useDispatch();
+
+  const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
   // fps selection and route selection (static for now)
   const fpsOptions = useMemo(
     () => Array.from(new Set(graphData.map((d) => d.fps))),
@@ -38,12 +31,16 @@ const RunAnalyticsPage = () => {
     );
   }, [selectedCpid, selectedFps]);
 
+  useEffect(() => {
+    dispatch(fetchMaps());
+  }, []);
+
   return (
     <div>
       <h1 style={{ marginBottom: "0.5rem" }}>Run Analytics</h1>
       <div className={styles.container}>
         <MapList
-          maps={maps}
+          allMaps={allMaps}
           selectedCpid={selectedCpid}
           onSelect={setSelectedCpid}
           search={search}
