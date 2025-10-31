@@ -9,6 +9,7 @@ const tabs = [
   { id: "tops", label: "Top Runs", icon: "star" },
   { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
   { id: "routes", label: "Route Completion", icon: "check-circle" },
+  { id: "runs-analytics", label: "Runs Analytics", icon: "line-chart" },
 ];
 
 const playerProfileTabs = () => {
