@@ -1,7 +1,7 @@
 @use "@/Styles/mixins" as m;
 
 .header {
-  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+  background: linear-gradient(135deg,#1f2937 0%,#111827 100%);
   border: 1px solid #374151;
   border-radius: 12px;
   padding: 2rem;
@@ -78,20 +78,18 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  color: #fff;
 
   &.jump {
-    background: #10b981;
-    color: #064e3b;
+    background: #3a86ff;
   }
 
   &.defrag {
-    background: #3b82f6;
-    color: #1e3a8a;
+    background: #994ee0;
   }
 
   &.surf {
-    background: #8b5cf6;
-    color: #4c1d95;
+    background: #13a797;
   }
 }
 

@@ -27,40 +27,47 @@
   display: flex;
   flex-direction: column;
   gap: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
 }
 
 .tabNavigation {
   display: flex;
-  background: #374151;
-  border-radius: 8px 8px 0 0;
-  border: 1px solid #4b5563;
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 10px 10px 0 0;
   border-bottom: none;
   overflow: hidden;
+  align-items: center;
+  gap: 0;
 }
 
 .tabButton {
   flex: 1;
   background: transparent;
-  color: #9ca3af;
+  color: #c0c6cc;
   border: none;
   padding: 0.75rem 1rem;
-  font-weight: 500;
-  font-size: 0.875rem;
+  font-weight: 600;
+  font-size: 0.9rem;
   cursor: pointer;
-  transition: all 0.2s ease;
-  border-right: 1px solid #4b5563;
-  
+  transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
+  border-right: 1px solid rgba(255, 255, 255, 0.015);
+
   &:last-child {
     border-right: none;
   }
-  
+
   &:hover {
-    background: #4b5563;
+    background: rgba(255, 255, 255, 0.03);
     color: #f9fafb;
   }
-  
+
   &.active {
-    background: #1f2937;
+    background: rgba(255, 255, 255, 0.03);
     color: #f9fafb;
     border-bottom: 2px solid #facc15;
   }
@@ -68,22 +75,25 @@
 
 .tabContent {
   background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
-  border: 1px solid #4b5563;
-  border-radius: 0 0 8px 8px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 0 0 10px 10px;
   border-top: none;
   min-height: 400px;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.5);
 }
 
 .errorContainer {
   text-align: center;
   padding: 4rem 2rem;
-  
+
   h2 {
     color: #f9fafb;
     font-size: 2rem;
     margin-bottom: 1rem;
   }
-  
+
   p {
     color: #9ca3af;
     font-size: 1.125rem;
@@ -99,11 +109,12 @@
   border-radius: 6px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
-  
+  transition: background 180ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  box-shadow: 0 8px 20px rgba(250, 204, 21, 0.08);
+
   &:hover {
     background: #eab308;
-    transform: translateY(-1px);
+    box-shadow: 0 14px 36px rgba(2, 6, 23, 0.45), 0 6px 18px rgba(250, 204, 21, 0.06);
   }
 }
 
@@ -112,7 +123,7 @@
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
-  
+
   .mapDetailPage {
     padding: 1rem 0;
   }

@@ -1,4 +1,4 @@
-import { getColoredName } from "@/Functions/components";
+import { getColoredName, getModifiedRank } from "@/Functions/components";
 import { useRouter } from "next/navigation";
 import s from "./MapDetailTops.module.scss";
 
@@ -70,49 +70,53 @@ const MapDetailTops = ({
       </div>
 
       <div className={s.topsList}>
-        {topsData.map((run, index) => (
-          <div
-            key={`${run.run_id}-${index}`}
-            className={s.topRun}
-            onClick={() => router.push(`/player?playerid=${run.player_id}`)}
-            style={{ cursor: "pointer" }}
-          >
-            <div className={s.rank}>#{index + 1}</div>
+        {topsData.map((run, index) => {
+          const modifiedRank = getModifiedRank(run.rank);
 
-            <div className={s.playerInfo}>
-              <div className={s.playerName}>
-                <span>{getColoredName(run.playername)}</span>
-                {selectedFps === "All" && run.fps && (
-                  <span className={s.fpsDisplay}>{run.fps} FPS</span>
+          return (
+            <div
+              key={`${run.run_id}-${index}`}
+              className={s.topRun}
+              onClick={() => router.push(`/player?playerid=${run.player_id}`)}
+              style={{ cursor: "pointer" }}
+            >
+              <div className={s.rank}>{modifiedRank}</div>
+
+              <div className={s.playerInfo}>
+                <div className={s.playerName}>
+                  <span>{getColoredName(run.playername)}</span>
+                  {selectedFps === "All" && run.fps && (
+                    <span className={s.fpsDisplay}>{run.fps} FPS</span>
+                  )}
+                </div>
+                <div className={s.runDetails}>
+                  <span className={s.time}>{run.time_played_string}</span>
+                  <span className={s.separator}>•</span>
+                  <span className={s.date}>
+                    {new Date(run.time_created).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+
+              <div className={s.stats}>
+                <div className={s.stat}>
+                  <span className={s.statLabel}>Loads</span>
+                  <span className={s.statValue}>{run.load_count}</span>
+                </div>
+                <div className={s.stat}>
+                  <span className={s.statLabel}>Saves</span>
+                  <span className={s.statValue}>{run.save_count}</span>
+                </div>
+                {run.nadejumps > 0 && (
+                  <div className={s.stat}>
+                    <span className={s.statLabel}>Nade Jumps</span>
+                    <span className={s.statValue}>{run.nadejumps}</span>
+                  </div>
                 )}
               </div>
-              <div className={s.runDetails}>
-                <span className={s.time}>{run.time_played_string}</span>
-                <span className={s.separator}>•</span>
-                <span className={s.date}>
-                  {new Date(run.time_created).toLocaleDateString()}
-                </span>
-              </div>
             </div>
-
-            <div className={s.stats}>
-              <div className={s.stat}>
-                <span className={s.statLabel}>Loads</span>
-                <span className={s.statValue}>{run.load_count}</span>
-              </div>
-              <div className={s.stat}>
-                <span className={s.statLabel}>Saves</span>
-                <span className={s.statValue}>{run.save_count}</span>
-              </div>
-              {run.nadejumps > 0 && (
-                <div className={s.stat}>
-                  <span className={s.statLabel}>Nade Jumps</span>
-                  <span className={s.statValue}>{run.nadejumps}</span>
-                </div>
-              )}
-            </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {hasMore && (

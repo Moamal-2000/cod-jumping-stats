@@ -1,4 +1,4 @@
-import { getColoredName } from "@/Functions/components";
+import { getColoredName, getModifiedRank } from "@/Functions/components";
 import { useRouter } from "next/navigation";
 import s from "./MapDetailPlayers.module.scss";
 
@@ -80,40 +80,46 @@ const MapDetailPlayers = ({
       </div>
 
       <div className={s.playersList}>
-        {playersData.map((player, index) => (
-          <div
-            key={`${player.player_id}-${index}`}
-            className={s.playerItem}
-            onClick={() => router.push(`/player?playerid=${player.player_id}`)}
-            style={{ cursor: "pointer" }}
-          >
-            <div className={s.rank}>#{index + 1}</div>
+        {playersData.map((player, index) => {
+          const modifiedRank = getModifiedRank(index + 1);
 
-            <div className={s.playerInfo}>
-              <div className={s.playerName}>
-                <span>{getColoredName(player.player_name)}</span>
-                {selectedFps === "All" &&
-                  player.fps_list &&
-                  player.fps_list.length > 0 && (
-                    <span className={s.fpsDisplay}>
-                      {player.fps_list
-                        .sort((a, b) => parseInt(a) - parseInt(b))
-                        .join(", ")}{" "}
-                      FPS
-                    </span>
-                  )}
-              </div>
-              <div className={s.playerId}>ID: {player.player_id}</div>
-            </div>
+          return (
+            <div
+              key={`${player.player_id}-${index}`}
+              className={s.playerItem}
+              onClick={() =>
+                router.push(`/player?playerid=${player.player_id}`)
+              }
+              style={{ cursor: "pointer" }}
+            >
+              <div className={s.rank}>{modifiedRank}</div>
 
-            <div className={s.playtime}>
-              <div className={s.playtimeValue}>
-                {formatPlaytime(player.time_played)}
+              <div className={s.playerInfo}>
+                <div className={s.playerName}>
+                  <span>{getColoredName(player.player_name)}</span>
+                  {selectedFps === "All" &&
+                    player.fps_list &&
+                    player.fps_list.length > 0 && (
+                      <span className={s.fpsDisplay}>
+                        {player.fps_list
+                          .sort((a, b) => parseInt(a) - parseInt(b))
+                          .join(", ")}{" "}
+                        FPS
+                      </span>
+                    )}
+                </div>
+                <div className={s.playerId}>ID: {player.player_id}</div>
               </div>
-              <div className={s.playtimeLabel}>Playtime</div>
+
+              <div className={s.playtime}>
+                <div className={s.playtimeValue}>
+                  {formatPlaytime(player.time_played)}
+                </div>
+                <div className={s.playtimeLabel}>Playtime</div>
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {hasMore && (
