@@ -7,16 +7,11 @@ import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";
 
-const PlayerProfileHeader = () => {
+const PlayerProfileHeader = ({ playerData }) => {
   const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
-  const allPlayersData = useSelector((s) => s.players.allPlayersData);
 
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
-
-  const playerData = allPlayersData.find(
-    (player) => player.PlayerID === playerId
-  );
 
   const { countryCode, playerName, lastSeen, adminLevel, isBanned, isDonated } =
     getPlayerInfo({ playerData, jumpScores });

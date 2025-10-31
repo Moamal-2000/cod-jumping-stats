@@ -21,11 +21,19 @@ import s from "./PlayerProfileLayout.module.scss";
 import PlayerProfileTabs from "./playerProfileTabs/playerProfileTabs";
 
 const PlayerProfileLayout = ({ children }) => {
-  const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
+  const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
   const playerid = +searchParams.get("playerid");
+
+  const playerData = allPlayersData.find(
+    (player) => player.PlayerID === playerid
+  );
+
+  const purePlayerName = stripColorCodes(
+    playerData?.PrefName || playerData?.PlayerName
+  );
 
   useEffect(() => {
     if (!playerid) return;
@@ -47,14 +55,12 @@ const PlayerProfileLayout = ({ children }) => {
     <main className={s.playerPage}>
       <div className={s.playerProfile}>
         <Breadcrumbs
-          breadcrumbLabels={breadcrumbLabels(
-            stripColorCodes(jumpScores?.PlayerName)
-          )}
+          breadcrumbLabels={breadcrumbLabels(purePlayerName)}
           breadcrumbPaths={breadcrumbPaths}
         />
 
         <div className={s.profileContainer}>
-          <PlayerProfileHeader />
+          <PlayerProfileHeader playerData={playerData} />
           <PlayerProfileTabs />
           {children}
         </div>
