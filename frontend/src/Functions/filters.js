@@ -175,12 +175,12 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   if (paramsObject?.name === undefined) return allPlayersData;
 
   return allPlayersData.filter((player) => {
-    const playerPrefName = player.PerfName?.toLowerCase();
+    const playerPrefName = player.PrefName?.toLowerCase();
     const playerName = player.PlayerName?.toLowerCase();
 
-    const purePlayerName =
-      stripColorCodes(playerPrefName) || stripColorCodes(playerName);
-
-    return purePlayerName.includes(paramsObject.name);
+    return (
+      stripColorCodes(playerName).includes(paramsObject.name) ||
+      stripColorCodes(playerPrefName).includes(paramsObject.name)
+    );
   });
 }
