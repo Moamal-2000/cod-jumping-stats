@@ -435,6 +435,28 @@ const MapDetailPage = () => {
     };
   }, [hasMorePlayers, loadingMorePlayers, activeTab, playersData]);
 
+  useEffect(() => {
+    if (cpid) fetchMapData();
+  }, [cpid]);
+
+  useEffect(() => {
+    if (!mapData) return;
+
+    setHasMoreTops(true);
+    setHasMorePlayers(true);
+    setTopsData(null);
+    setPlayersData(null);
+    setAllTopsData(null);
+    setAllPlayersData(null);
+    setDisplayedTopsCount(0);
+    setDisplayedPlayersCount(0);
+    setShowingAllTops(false);
+    setShowingAllPlayers(false);
+
+    fetchTopsData();
+    fetchPlayersData();
+  }, [mapData, selectedFps]);
+
   if (loading) {
     return (
       <main className={s.mapDetailPage}>
@@ -463,28 +485,6 @@ const MapDetailPage = () => {
       </main>
     );
   }
-
-  useEffect(() => {
-    if (cpid) fetchMapData();
-  }, [cpid]);
-
-  useEffect(() => {
-    if (!mapData) return;
-
-    setHasMoreTops(true);
-    setHasMorePlayers(true);
-    setTopsData(null);
-    setPlayersData(null);
-    setAllTopsData(null);
-    setAllPlayersData(null);
-    setDisplayedTopsCount(0);
-    setDisplayedPlayersCount(0);
-    setShowingAllTops(false);
-    setShowingAllPlayers(false);
-
-    fetchTopsData();
-    fetchPlayersData();
-  }, [mapData, selectedFps]);
 
   return (
     <main className={s.mapDetailPage}>

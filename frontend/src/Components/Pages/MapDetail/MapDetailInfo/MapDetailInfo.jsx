@@ -67,13 +67,14 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
         )}
       </div>
 
-      {currentStats && selectedFps !== "All" && (
+      {/* Hide, until dcoy fix it */}
+      {currentStats && selectedFps !== "All" && true === false && (
         <div className={s.statsSection}>
           <h3>Statistics ({selectedFps} FPS)</h3>
           <div className={s.statsGrid}>
             <div className={s.statItem}>
               <span className={s.statLabel}>Number of Tops</span>
-              <span className={s.statValue}>{currentStats.nb_tops}</span>
+              <span className={s.statValue}>{currentStats.NbTops}</span>
             </div>
           </div>
         </div>
