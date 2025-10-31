@@ -1,7 +1,7 @@
 "use client";
 import { graphData } from "@/Data/graphData";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./RunAnalytics.module.scss";
 import Graph from "./components/Graph";
@@ -15,21 +15,19 @@ const RunAnalyticsPage = () => {
   const dispatch = useDispatch();
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
-  // fps selection and route selection (static for now)
-  const fpsOptions = useMemo(
-    () => Array.from(new Set(graphData.map((d) => d.fps))),
-    []
-  );
+  const fpsOptions = Array.from(new Set(graphData.map((d) => d.fps)));
+
   const [selectedFps, setSelectedFps] = useState(fpsOptions[0] || "125");
   const [selectedRoute, setSelectedRoute] = useState("Route 1");
 
   // filter runs for the selected map + fps
-  const runsForSelected = useMemo(() => {
+  function runsForSelected() {
     if (!selectedCpid) return [];
+
     return graphData.filter(
       (r) => r.cpid === selectedCpid && String(r.fps) === String(selectedFps)
     );
-  }, [selectedCpid, selectedFps]);
+  }
 
   useEffect(() => {
     dispatch(fetchMaps());
@@ -80,7 +78,6 @@ const RunAnalyticsPage = () => {
                 role="tablist"
                 aria-label="route selection"
               >
-                {/* static route for demo; future: derive from data */}
                 <button
                   className={`${styles.chip} ${
                     selectedRoute === "Route 1" ? styles.chipActive : ""
