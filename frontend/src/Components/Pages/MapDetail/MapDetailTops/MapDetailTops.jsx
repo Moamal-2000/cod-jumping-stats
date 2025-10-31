@@ -98,15 +98,15 @@ const MapDetailTops = ({
               <div className={s.stats}>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Loads</span>
-                  <span className={s.statValue}>{run.load_count}</span>
+                  <span className={s.statValue}>{run.load_count || 0}</span>
                 </div>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Saves</span>
-                  <span className={s.statValue}>{run.save_count}</span>
+                  <span className={s.statValue}>{run.save_count || 0}</span>
                 </div>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Nade Jumps</span>
-                  <span className={s.statValue}>{run.nadejumps}</span>
+                  <span className={s.statValue}>{run.nadejumps || 0}</span>
                 </div>
               </div>
             </Link>
