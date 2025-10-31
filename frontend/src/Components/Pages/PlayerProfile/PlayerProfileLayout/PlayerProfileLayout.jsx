@@ -12,6 +12,7 @@ import {
   fetchPlayerProfile,
   fetchPlayerTops,
 } from "@/Redux/thunks/playerProfileThunk";
+import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -35,6 +36,7 @@ const PlayerProfileLayout = ({ children }) => {
     dispatch(fetchPlayerLeaderboardPositions({ playerid }));
     dispatch(fetchPlayerTops({ playerid, fps: "125" }));
     dispatch(fetchPlayerJumpScores({ playerid, fps: "125" }));
+    dispatch(fetchAllPlayers());
 
     dispatch(
       updatePlayerProfileState({ key: "currentFetchingFps", value: "125" })

@@ -8,10 +8,18 @@ import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";
 
 const PlayerProfileHeader = () => {
-  const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
+  const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
+  const allPlayersData = useSelector((s) => s.players.allPlayersData);
 
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
+
+  const playerData = allPlayersData.find(
+    (player) => player.PlayerID === playerId
+  );
+
+  const { countryCode, playerName, lastSeen, adminLevel, isBanned, isDonated } =
+    getPlayerInfo({ playerData, jumpScores });
 
   return (
     <div className={s.profileHeader}>
@@ -22,10 +30,10 @@ const PlayerProfileHeader = () => {
               <use href="/icons-sprite.svg#users" />
             </svg>
 
-            {jumpScores?.Country && (
+            {countryCode && (
               <CountryImage
-                countryCode={jumpScores.CountryCode}
-                countryName={jumpScores.Country}
+                countryCode={countryCode}
+                countryName={jumpScores?.Country}
                 size={24}
               />
             )}
@@ -34,11 +42,9 @@ const PlayerProfileHeader = () => {
 
         <div className={s.playerDetails}>
           <h1 className={s.playerName}>
-            {getColoredName(jumpScores?.PlayerName)}
-            {performanceStats?.AdminLevel >= 0 && (
-              <span className={s.adminBadge}>
-                Admin {performanceStats.AdminLevel}
-              </span>
+            {getColoredName(playerName)}
+            {adminLevel >= 0 && (
+              <span className={s.adminBadge}>Admin {adminLevel}</span>
             )}
           </h1>
 
@@ -47,12 +53,12 @@ const PlayerProfileHeader = () => {
 
             <div className={s.playerBadges}>
               <PlayerBadges
-                Admin={performanceStats?.AdminLevel}
-                Banned={performanceStats?.IsBanned}
-                Donated={performanceStats?.IsDonator}
-                LastSeen={jumpScores?.LastSeen}
+                Admin={adminLevel}
+                Banned={isBanned}
+                Donated={isDonated}
+                LastSeen={lastSeen}
                 PlayerID={playerId}
-                PlayerName={jumpScores?.PlayerName}
+                PlayerName={playerName}
               />
             </div>
           </div>
@@ -63,3 +69,15 @@ const PlayerProfileHeader = () => {
 };
 
 export default PlayerProfileHeader;
+
+function getPlayerInfo({ playerData, jumpScores }) {
+  return {
+    countryCode: playerData?.Country || jumpScores?.CountryCode,
+    playerName:
+      playerData?.PrefName || playerData?.PlayerName || jumpScores?.PlayerName,
+    lastSeen: playerData?.LastSeen || jumpScores?.LastSeen,
+    adminLevel: playerData?.Admin,
+    isBanned: playerData?.Banned === 1,
+    isDonated: playerData?.Donated === 1,
+  };
+}
