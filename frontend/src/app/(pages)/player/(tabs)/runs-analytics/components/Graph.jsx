@@ -3,6 +3,14 @@ import { stripColorCodes } from "@/Functions/utils";
 import { useEffect, useRef, useState } from "react";
 import styles from "../RunAnalytics.module.scss";
 
+const SCALE_STEP = 1.15; // multiplicative step
+const SCALE_MIN = 1;
+const SCALE_MAX = 10.0;
+const EDGE_THRESHOLD_MIN = 100; // px minimum edge threshold
+const EDGE_THRESHOLD_RATIO = 0.08; // percent of width to use for threshold
+const SPEED_BASE = 8; // pixels per frame maximum for auto-pan
+const ZOOM_SENSITIVITY = 0.0018; // smaller = slower
+
 function formatDateLabel(d) {
   const dt = new Date(d);
   return `${dt.getFullYear()}-${(dt.getMonth() + 1)
@@ -11,17 +19,27 @@ function formatDateLabel(d) {
 }
 
 const Graph = ({ data }) => {
+  const containerRef = useRef(null);
+  const [containerWidth, setContainerWidth] = useState(800);
+  const width = containerWidth || 800;
+  const height = 382;
+  const padding = { l: 40, r: 12, t: 12, b: 28 };
+
   const [hover, setHover] = useState(null);
   // horizontal spacing scale between points. 1 = default, >1 increases spacing
   const [scale, setScale] = useState(1);
-  const SCALE_STEP = 1.15; // multiplicative step
-  const SCALE_MIN = 1;
-  const SCALE_MAX = 10.0;
   const [pan, setPan] = useState(0); // pan offset in pixels
   const svgRef = useRef(null);
   const isDragging = useRef(false);
   const dragStartX = useRef(0);
   const dragStartPan = useRef(0);
+  const mouseXRef = useRef(null);
+  const rafAutoRef = useRef(null);
+
+  const edgeThresholdPx = Math.max(
+    EDGE_THRESHOLD_MIN,
+    EDGE_THRESHOLD_RATIO * width
+  ); // pixels from edge to trigger auto-pan
 
   function getGraphPoints() {
     if (!data || data.length === 0) return [];
@@ -37,10 +55,6 @@ const Graph = ({ data }) => {
 
   const points = getGraphPoints();
 
-  const width = 800;
-  const height = 382;
-  const padding = { l: 40, r: 12, t: 12, b: 28 };
-
   // dragging handlers for pan (defined before any early returns so hooks/order stays stable)
   const handleMouseDown = (e) => {
     if (scale <= SCALE_MIN) return;
@@ -48,6 +62,16 @@ const Graph = ({ data }) => {
     dragStartX.current = e.clientX;
     dragStartPan.current = pan;
     document.body.style.cursor = "grabbing";
+  };
+  const handleTouchStart = (e) => {
+    if (scale <= SCALE_MIN) return;
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    isDragging.current = true;
+    dragStartX.current = t.clientX;
+    dragStartPan.current = pan;
+    // prevent the browser from scrolling while interacting with the chart
+    e.preventDefault();
   };
   const handleMouseMove = (e) => {
     if (!isDragging.current) return;
@@ -61,11 +85,63 @@ const Graph = ({ data }) => {
     next = Math.max(minPan, Math.min(maxPan, next));
     setPan(next);
   };
+  const handleTouchMove = (e) => {
+    if (!isDragging.current) return;
+    const t = e.touches && e.touches[0];
+    if (!t) return;
+    const delta = t.clientX - dragStartX.current;
+    const focal = width / 2;
+    const minPan = (padding.l - focal) * (scale - 1);
+    const maxPan = (width - padding.r - focal) * (scale - 1);
+    let next = dragStartPan.current - delta;
+    next = Math.max(minPan, Math.min(maxPan, next));
+    setPan(next);
+    e.preventDefault();
+  };
 
   const handleMouseUp = () => {
     if (!isDragging.current) return;
     isDragging.current = false;
     document.body.style.cursor = "";
+  };
+  // refs for latest values (used by native event handlers)
+  const scaleRef = useRef(scale);
+  const panRef = useRef(pan);
+  useEffect(() => {
+    scaleRef.current = scale;
+  }, [scale]);
+  useEffect(() => {
+    panRef.current = pan;
+  }, [pan]);
+
+  // set scale around a pixel coordinate (localX within svg/container)
+  const setScaleAround = (nextScale, localX) => {
+    const focal = width / 2;
+    const s = scaleRef.current;
+    const p = panRef.current;
+    const x = typeof localX === "number" ? localX : focal;
+    // compute base (pre-scale) from current values
+    const base = (x + p - focal) / s + focal;
+    // compute new pan so that base maps to same x after scaling
+    const panNext = (base - focal) * nextScale + focal - x;
+    // clamp
+    const minPan = (padding.l - focal) * (nextScale - 1);
+    const maxPan = (width - padding.r - focal) * (nextScale - 1);
+    const panClamped = Math.max(minPan, Math.min(maxPan, panNext));
+    // apply (update refs immediately so rapid wheel events compute from latest values)
+    scaleRef.current = nextScale;
+    panRef.current = panClamped;
+    setScale(nextScale);
+    setPan(panClamped);
+  };
+
+  const increaseScale = (localX) => {
+    const next = Math.min(SCALE_MAX, scaleRef.current * SCALE_STEP);
+    setScaleAround(next, localX);
+  };
+  const decreaseScale = (localX) => {
+    const next = Math.max(SCALE_MIN, scaleRef.current / SCALE_STEP);
+    setScaleAround(next, localX);
   };
 
   useEffect(() => {
@@ -77,9 +153,144 @@ const Graph = ({ data }) => {
     };
   }, [scale, pan]);
 
+  // resize observer to make chart responsive
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el || typeof ResizeObserver === "undefined") return;
+    const ro = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const w = Math.floor(entry.contentRect.width || 800);
+        setContainerWidth(w);
+      }
+    });
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, []);
+
+  // add a native, non-passive wheel listener to prevent browser/OS zoom and page scroll
+  // and to zoom towards the cursor. Uses refs to read latest scale/pan.
+  useEffect(() => {
+    const el = svgRef.current || containerRef.current;
+    if (!el) return;
+    const wheelHandler = (ev) => {
+      // prevent browser/OS pinch-zoom or page zoom that some touchpads trigger
+      ev.preventDefault();
+      const rect = svgRef.current?.getBoundingClientRect();
+      const localX = rect ? ev.clientX - rect.left : width / 2;
+      const factor = Math.exp(-ev.deltaY * ZOOM_SENSITIVITY);
+      const next = Math.max(
+        SCALE_MIN,
+        Math.min(SCALE_MAX, scaleRef.current * factor)
+      );
+      setScaleAround(next, localX);
+    };
+    el.addEventListener("wheel", wheelHandler, { passive: false });
+    return () => el.removeEventListener("wheel", wheelHandler);
+    // intentionally empty deps: handler reads current values from refs
+  }, []);
+
+  // compute pan bounds helper
+  const getPanBounds = () => {
+    const focal = width / 2;
+    const minPan = (padding.l - focal) * (scale - 1);
+    const maxPan = (width - padding.r - focal) * (scale - 1);
+    return { minPan, maxPan };
+  };
+
+  // auto-pan when mouse near edges
+  const autoPanStep = () => {
+    const mx = mouseXRef.current;
+    if (mx == null || isDragging.current) {
+      rafAutoRef.current = requestAnimationFrame(autoPanStep);
+      return;
+    }
+    const { minPan, maxPan } = getPanBounds();
+    let next = pan;
+    const leftEdge = edgeThresholdPx;
+    const rightEdge = width - edgeThresholdPx;
+    if (mx < leftEdge) {
+      const factor = (leftEdge - mx) / leftEdge; // 0..1
+      next = Math.max(minPan, pan - Math.ceil(SPEED_BASE * factor));
+    } else if (mx > rightEdge) {
+      const factor = (mx - rightEdge) / edgeThresholdPx;
+      next = Math.min(maxPan, pan + Math.ceil(SPEED_BASE * factor));
+    }
+    if (next !== pan) setPan(next);
+    rafAutoRef.current = requestAnimationFrame(autoPanStep);
+  };
+
+  const onSvgMouseMove = (e) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const localX = e.clientX - rect.left;
+    mouseXRef.current = localX;
+    // start auto pan loop if near edges and not already running
+    if (
+      (localX < edgeThresholdPx || localX > width - edgeThresholdPx) &&
+      !rafAutoRef.current
+    ) {
+      rafAutoRef.current = requestAnimationFrame(autoPanStep);
+    }
+    // stop when moved away
+    if (
+      localX >= edgeThresholdPx &&
+      localX <= width - edgeThresholdPx &&
+      rafAutoRef.current
+    ) {
+      cancelAnimationFrame(rafAutoRef.current);
+      rafAutoRef.current = null;
+    }
+  };
+
+  const onSvgTouchMove = (e) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    const t = e.touches && e.touches[0];
+    if (!rect || !t) return;
+    const localX = t.clientX - rect.left;
+    mouseXRef.current = localX;
+    if (
+      (localX < edgeThresholdPx || localX > width - edgeThresholdPx) &&
+      !rafAutoRef.current
+    ) {
+      rafAutoRef.current = requestAnimationFrame(autoPanStep);
+    }
+    if (
+      localX >= edgeThresholdPx &&
+      localX <= width - edgeThresholdPx &&
+      rafAutoRef.current
+    ) {
+      cancelAnimationFrame(rafAutoRef.current);
+      rafAutoRef.current = null;
+    }
+  };
+
+  const onSvgMouseLeave = () => {
+    mouseXRef.current = null;
+    if (rafAutoRef.current) {
+      cancelAnimationFrame(rafAutoRef.current);
+      rafAutoRef.current = null;
+    }
+  };
+
+  const onSvgKeyDown = (e) => {
+    if (e.key === "ArrowLeft") {
+      setPan((p) => Math.max(getPanBounds().minPan, p - 40));
+      e.preventDefault();
+    } else if (e.key === "ArrowRight") {
+      setPan((p) => Math.min(getPanBounds().maxPan, p + 40));
+      e.preventDefault();
+    } else if (e.key === "+" || e.key === "=") {
+      increaseScale();
+      e.preventDefault();
+    } else if (e.key === "-") {
+      decreaseScale();
+      e.preventDefault();
+    }
+  };
+
   if (points.length === 0) {
     return (
-      <div className={styles.graphWrap}>
+      <div className={styles.graphWrap} ref={containerRef}>
         <div className={styles.graphTitle}>No data to display</div>
       </div>
     );
@@ -117,28 +328,14 @@ const Graph = ({ data }) => {
     height - padding.b
   } L ${xScale(points[0].x).toFixed(2)} ${height - padding.b} Z`;
 
-  const increaseScale = () =>
-    setScale((s) => {
-      const next = Math.min(SCALE_MAX, s * SCALE_STEP);
-      // clamp pan to new bounds
-      const focal = width / 2;
-      const minPan = (padding.l - focal) * (next - 1);
-      const maxPan = (width - padding.r - focal) * (next - 1);
-      setPan((p) => Math.max(minPan, Math.min(maxPan, p)));
-      return next;
-    });
-  const decreaseScale = () =>
-    setScale((s) => {
-      const next = Math.max(SCALE_MIN, s / SCALE_STEP);
-      const focal = width / 2;
-      const minPan = (padding.l - focal) * (next - 1);
-      const maxPan = (width - padding.r - focal) * (next - 1);
-      setPan((p) => Math.max(minPan, Math.min(maxPan, p)));
-      return next;
-    });
-
   return (
-    <div className={styles.graphWrap} style={{ userSelect: "none" }}>
+    <div
+      className={styles.graphWrap}
+      style={{ userSelect: "none", touchAction: "none" }}
+      ref={containerRef}
+      tabIndex={0}
+      onKeyDown={onSvgKeyDown}
+    >
       <div className={styles.graphControls}>
         <button
           aria-label="zoom out"
@@ -158,7 +355,15 @@ const Graph = ({ data }) => {
       <svg
         ref={svgRef}
         onMouseDown={handleMouseDown}
-        viewBox={`0 0 ${width} ${height}`}
+        onMouseMove={onSvgMouseMove}
+        onMouseLeave={onSvgMouseLeave}
+        onTouchStart={handleTouchStart}
+        onTouchMove={(e) => {
+          handleTouchMove(e);
+          onSvgTouchMove(e);
+        }}
+        onTouchEnd={() => handleMouseUp()}
+        viewBox={`0 0 ${Math.max(300, width)} ${height}`}
         width="100%"
         height={height}
         role="img"
