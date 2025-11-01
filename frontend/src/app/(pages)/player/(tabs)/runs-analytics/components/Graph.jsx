@@ -1,6 +1,6 @@
 "use client";
 import { stripColorCodes } from "@/Functions/utils";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styles from "../RunAnalytics.module.scss";
 
 function formatDateLabel(d) {
@@ -12,6 +12,16 @@ function formatDateLabel(d) {
 
 const Graph = ({ data }) => {
   const [hover, setHover] = useState(null);
+  // horizontal spacing scale between points. 1 = default, >1 increases spacing
+  const [scale, setScale] = useState(1);
+  const SCALE_STEP = 1.15; // multiplicative step
+  const SCALE_MIN = 1;
+  const SCALE_MAX = 10.0;
+  const [pan, setPan] = useState(0); // pan offset in pixels
+  const svgRef = useRef(null);
+  const isDragging = useRef(false);
+  const dragStartX = useRef(0);
+  const dragStartPan = useRef(0);
 
   function getGraphPoints() {
     if (!data || data.length === 0) return [];
@@ -31,6 +41,42 @@ const Graph = ({ data }) => {
   const height = 382;
   const padding = { l: 40, r: 12, t: 12, b: 28 };
 
+  // dragging handlers for pan (defined before any early returns so hooks/order stays stable)
+  const handleMouseDown = (e) => {
+    if (scale <= SCALE_MIN) return;
+    isDragging.current = true;
+    dragStartX.current = e.clientX;
+    dragStartPan.current = pan;
+    document.body.style.cursor = "grabbing";
+  };
+  const handleMouseMove = (e) => {
+    if (!isDragging.current) return;
+    const delta = e.clientX - dragStartX.current;
+    // compute pan bounds for current scale
+    const focal = width / 2;
+    const minPan = (padding.l - focal) * (scale - 1);
+    const maxPan = (width - padding.r - focal) * (scale - 1);
+    let next = dragStartPan.current - delta;
+    // clamp between minPan and maxPan
+    next = Math.max(minPan, Math.min(maxPan, next));
+    setPan(next);
+  };
+
+  const handleMouseUp = () => {
+    if (!isDragging.current) return;
+    isDragging.current = false;
+    document.body.style.cursor = "";
+  };
+
+  useEffect(() => {
+    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mouseup", handleMouseUp);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      window.removeEventListener("mouseup", handleMouseUp);
+    };
+  }, [scale, pan]);
+
   if (points.length === 0) {
     return (
       <div className={styles.graphWrap}>
@@ -48,9 +94,11 @@ const Graph = ({ data }) => {
 
   const xScale = (t) => {
     if (maxX === minX) return padding.l;
-    return (
-      padding.l + ((t - minX) / (maxX - minX)) * (width - padding.l - padding.r)
-    );
+    const base =
+      padding.l +
+      ((t - minX) / (maxX - minX)) * (width - padding.l - padding.r);
+    const focal = width / 2;
+    return (base - focal) * scale + focal - pan;
   };
   const yScale = (v) => {
     const h = height - padding.t - padding.b;
@@ -69,9 +117,47 @@ const Graph = ({ data }) => {
     height - padding.b
   } L ${xScale(points[0].x).toFixed(2)} ${height - padding.b} Z`;
 
+  const increaseScale = () =>
+    setScale((s) => {
+      const next = Math.min(SCALE_MAX, s * SCALE_STEP);
+      // clamp pan to new bounds
+      const focal = width / 2;
+      const minPan = (padding.l - focal) * (next - 1);
+      const maxPan = (width - padding.r - focal) * (next - 1);
+      setPan((p) => Math.max(minPan, Math.min(maxPan, p)));
+      return next;
+    });
+  const decreaseScale = () =>
+    setScale((s) => {
+      const next = Math.max(SCALE_MIN, s / SCALE_STEP);
+      const focal = width / 2;
+      const minPan = (padding.l - focal) * (next - 1);
+      const maxPan = (width - padding.r - focal) * (next - 1);
+      setPan((p) => Math.max(minPan, Math.min(maxPan, p)));
+      return next;
+    });
+
   return (
-    <div className={styles.graphWrap}>
+    <div className={styles.graphWrap} style={{ userSelect: "none" }}>
+      <div className={styles.graphControls}>
+        <button
+          aria-label="zoom out"
+          onClick={decreaseScale}
+          className={styles.graphBtn}
+        >
+          -
+        </button>
+        <button
+          aria-label="zoom in"
+          onClick={increaseScale}
+          className={styles.graphBtn}
+        >
+          +
+        </button>
+      </div>
       <svg
+        ref={svgRef}
+        onMouseDown={handleMouseDown}
         viewBox={`0 0 ${width} ${height}`}
         width="100%"
         height={height}

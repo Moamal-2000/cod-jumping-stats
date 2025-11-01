@@ -106,6 +106,43 @@
   font-weight: 700;
 }
 
+.graphControls {
+  display: flex;
+  gap: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  top: 0.75rem;
+  z-index: 4;
+}
+
+.graphBtn {
+  width: 36px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: rgba(255, 255, 255, 0.02);
+  color: #f9fafb;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: box-shadow 120ms ease, filter 120ms ease;
+}
+
+.graphBtn:hover {
+  filter: brightness(1.06);
+  box-shadow: 0 10px 24px rgba(2, 6, 23, 0.35);
+}
+
+.graphBtn:active {
+  box-shadow: inset 0 4px 10px rgba(2, 6, 23, 0.45);
+}
+
+.graphWrap {
+  position: relative;
+}
+
 @include m.small {
   .container {
     grid-template-columns: 1fr;
