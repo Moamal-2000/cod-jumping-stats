@@ -9,7 +9,7 @@ const SCALE_MAX = 10.0;
 const EDGE_THRESHOLD_MIN = 100; // px minimum edge threshold
 const EDGE_THRESHOLD_RATIO = 0.08; // percent of width to use for threshold
 const SPEED_BASE = 8; // pixels per frame maximum for auto-pan
-const ZOOM_SENSITIVITY = 0.0018; // smaller = slower
+const ZOOM_SENSITIVITY = 0.01; // smaller = slower
 
 function formatDateLabel(d) {
   const dt = new Date(d);
