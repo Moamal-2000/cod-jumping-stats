@@ -3,292 +3,313 @@ import { stripColorCodes } from "@/Functions/utils";
 import { useEffect, useRef, useState } from "react";
 import styles from "../RunAnalytics.module.scss";
 
-const SCALE_STEP = 1.15; // multiplicative step
-const SCALE_MIN = 1;
-const SCALE_MAX = 10.0;
-const EDGE_THRESHOLD_MIN = 100; // px minimum edge threshold
-const EDGE_THRESHOLD_RATIO = 0.08; // percent of width to use for threshold
-const SPEED_BASE = 8; // pixels per frame maximum for auto-pan
-const ZOOM_SENSITIVITY = 0.01; // smaller = slower
+const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
+const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
+const SCALE_MAX = 10.0; // Maximum zoom scale
+const EDGE_AUTOPAN_THRESHOLD_MIN_PX = 100; // Minimum pixel distance from edge to trigger auto-pan
+const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for auto-pan threshold
+const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
+const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
 
-function formatDateLabel(d) {
-  const dt = new Date(d);
-  return `${dt.getFullYear()}-${(dt.getMonth() + 1)
-    .toString()
-    .padStart(2, "0")}-${dt.getDate().toString().padStart(2, "0")}`;
+function formatDateLabel(timestampOrDateString) {
+  const dateObj = new Date(timestampOrDateString);
+  const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
+  const day = dateObj.getDate().toString().padStart(2, "0");
+  return `${dateObj.getFullYear()}-${month}-${day}`;
 }
 
-const Graph = ({ data }) => {
+const RunGraph = ({ data: runData }) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
-  const width = containerWidth || 800;
-  const height = 382;
-  const padding = { l: 40, r: 12, t: 12, b: 28 };
+  const chartWidth = containerWidth || 800; // Final width used for calculations
+  const chartHeight = 382;
+  const chartPadding = { left: 40, right: 12, top: 12, bottom: 28 };
 
-  const [hover, setHover] = useState(null);
-  // horizontal spacing scale between points. 1 = default, >1 increases spacing
-  const [scale, setScale] = useState(1);
-  const [pan, setPan] = useState(0); // pan offset in pixels
+  const [hoveredPoint, setHoveredPoint] = useState(null);
+  // Horizontal zoom level. 1 = default spacing, >1 increases spacing.
+  const [zoomScale, setZoomScale] = useState(1);
+  // Horizontal pan offset in pixels relative to the default (unscaled, unpanned) position.
+  const [panOffsetPx, setPanOffsetPx] = useState(0);
+
   const svgRef = useRef(null);
-  const isDragging = useRef(false);
-  const dragStartX = useRef(0);
-  const dragStartPan = useRef(0);
-  const mouseXRef = useRef(null);
-  const rafAutoRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const dragStartXRef = useRef(0); // ClientX coordinate where dragging started
+  const dragStartPanOffsetRef = useRef(0); // panOffsetPx value when dragging started
+  const mouseXLocalRef = useRef(null); // Local X position within the SVG/container
+  const rafAutoPanRef = useRef(null); // Animation frame ID for auto-pan loop
 
-  const edgeThresholdPx = Math.max(
-    EDGE_THRESHOLD_MIN,
-    EDGE_THRESHOLD_RATIO * width
-  ); // pixels from edge to trigger auto-pan
+  // Pixels from edge to trigger auto-pan
+  const edgeAutopanThresholdPx = Math.max(
+    EDGE_AUTOPAN_THRESHOLD_MIN_PX,
+    EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth
+  );
 
   function getGraphPoints() {
-    if (!data || data.length === 0) return [];
+    if (!runData || runData.length === 0) return [];
 
-    return data
+    return runData
       .map((run) => ({
-        x: new Date(run.TimeCreated).getTime(),
-        y: Number(run.TimePlayed) || 0,
-        raw: run,
+        x: new Date(run.TimeCreated).getTime(), // X-coordinate is timestamp
+        y: Number(run.TimePlayed) || 0, // Y-coordinate is time played
+        rawData: run, // Original run object
       }))
       .sort((a, b) => a.x - b.x);
   }
 
-  const points = getGraphPoints();
+  const graphPoints = getGraphPoints();
 
-  // dragging handlers for pan (defined before any early returns so hooks/order stays stable)
-  const handleMouseDown = (e) => {
-    if (scale <= SCALE_MIN) return;
-    isDragging.current = true;
-    dragStartX.current = e.clientX;
-    dragStartPan.current = pan;
+  const handleMouseDown = (event) => {
+    if (zoomScale <= SCALE_MIN) return;
+    isDraggingRef.current = true;
+    dragStartXRef.current = event.clientX;
+    dragStartPanOffsetRef.current = panOffsetPx;
     document.body.style.cursor = "grabbing";
   };
-  const handleTouchStart = (e) => {
-    if (scale <= SCALE_MIN) return;
-    const t = e.touches && e.touches[0];
-    if (!t) return;
-    isDragging.current = true;
-    dragStartX.current = t.clientX;
-    dragStartPan.current = pan;
-    // prevent the browser from scrolling while interacting with the chart
-    e.preventDefault();
-  };
-  const handleMouseMove = (e) => {
-    if (!isDragging.current) return;
-    const delta = e.clientX - dragStartX.current;
-    // compute pan bounds for current scale
-    const focal = width / 2;
-    const minPan = (padding.l - focal) * (scale - 1);
-    const maxPan = (width - padding.r - focal) * (scale - 1);
-    let next = dragStartPan.current - delta;
-    // clamp between minPan and maxPan
-    next = Math.max(minPan, Math.min(maxPan, next));
-    setPan(next);
-  };
-  const handleTouchMove = (e) => {
-    if (!isDragging.current) return;
-    const t = e.touches && e.touches[0];
-    if (!t) return;
-    const delta = t.clientX - dragStartX.current;
-    const focal = width / 2;
-    const minPan = (padding.l - focal) * (scale - 1);
-    const maxPan = (width - padding.r - focal) * (scale - 1);
-    let next = dragStartPan.current - delta;
-    next = Math.max(minPan, Math.min(maxPan, next));
-    setPan(next);
-    e.preventDefault();
+
+  const handleTouchStart = (event) => {
+    if (zoomScale <= SCALE_MIN) return;
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    isDraggingRef.current = true;
+    dragStartXRef.current = touch.clientX;
+    dragStartPanOffsetRef.current = panOffsetPx;
+    // Prevent the browser from scrolling
+    event.preventDefault();
   };
 
-  const handleMouseUp = () => {
-    if (!isDragging.current) return;
-    isDragging.current = false;
+  const calculateNewPanOffset = (currentPan, deltaX) => {
+    // Focal point for scaling/panning (center of the chart)
+    const focalPointX = chartWidth / 2;
+    // Pan bounds calculation (based on center-of-chart panning logic)
+    const minPan = (chartPadding.left - focalPointX) * (zoomScale - 1);
+    const maxPan =
+      (chartWidth - chartPadding.right - focalPointX) * (zoomScale - 1);
+
+    let nextPan = currentPan - deltaX;
+    // Clamp between minPan and maxPan
+    return Math.max(minPan, Math.min(maxPan, nextPan));
+  };
+
+  const handleMouseMove = (event) => {
+    if (!isDraggingRef.current) return;
+    const deltaX = event.clientX - dragStartXRef.current;
+    const nextPan = calculateNewPanOffset(
+      dragStartPanOffsetRef.current,
+      deltaX
+    );
+    setPanOffsetPx(nextPan);
+  };
+
+  const handleTouchMove = (event) => {
+    if (!isDraggingRef.current) return;
+    const touch = event.touches && event.touches[0];
+    if (!touch) return;
+    const deltaX = touch.clientX - dragStartXRef.current;
+    const nextPan = calculateNewPanOffset(
+      dragStartPanOffsetRef.current,
+      deltaX
+    );
+    setPanOffsetPx(nextPan);
+    event.preventDefault();
+  };
+
+  const handleDragEnd = () => {
+    if (!isDraggingRef.current) return;
+    isDraggingRef.current = false;
     document.body.style.cursor = "";
   };
-  // refs for latest values (used by native event handlers)
-  const scaleRef = useRef(scale);
-  const panRef = useRef(pan);
-  useEffect(() => {
-    scaleRef.current = scale;
-  }, [scale]);
-  useEffect(() => {
-    panRef.current = pan;
-  }, [pan]);
 
-  // set scale around a pixel coordinate (localX within svg/container)
+  // Refs for latest state values (used by native event handlers)
+  const scaleRef = useRef(zoomScale);
+  const panRef = useRef(panOffsetPx);
+  useEffect(() => {
+    scaleRef.current = zoomScale;
+  }, [zoomScale]);
+  useEffect(() => {
+    panRef.current = panOffsetPx;
+  }, [panOffsetPx]);
+
   const setScaleAround = (nextScale, localX) => {
-    const focal = width / 2;
-    const s = scaleRef.current;
-    const p = panRef.current;
-    const x = typeof localX === "number" ? localX : focal;
-    // compute base (pre-scale) from current values
-    const base = (x + p - focal) / s + focal;
-    // compute new pan so that base maps to same x after scaling
-    const panNext = (base - focal) * nextScale + focal - x;
-    // clamp
-    const minPan = (padding.l - focal) * (nextScale - 1);
-    const maxPan = (width - padding.r - focal) * (nextScale - 1);
-    const panClamped = Math.max(minPan, Math.min(maxPan, panNext));
-    // apply (update refs immediately so rapid wheel events compute from latest values)
+    const focalPointX = chartWidth / 2;
+    const currentScale = scaleRef.current;
+    const currentPan = panRef.current;
+
+    // Default to focal point if no localX provided (e.g., button click)
+    const zoomPivotX = typeof localX === "number" ? localX : focalPointX;
+
+    const baseUnscaledX =
+      (zoomPivotX + currentPan - focalPointX) / currentScale + focalPointX;
+
+    const nextPan =
+      (baseUnscaledX - focalPointX) * nextScale + focalPointX - zoomPivotX;
+
+    // Clamp the new pan offset
+    const { minPan, maxPan } = getPanBounds(nextScale);
+    const panClamped = Math.max(minPan, Math.min(maxPan, nextPan));
+
+    // Apply (update refs immediately so rapid wheel events compute from latest values)
     scaleRef.current = nextScale;
     panRef.current = panClamped;
-    setScale(nextScale);
-    setPan(panClamped);
+    setZoomScale(nextScale);
+    setPanOffsetPx(panClamped);
   };
 
   const increaseScale = (localX) => {
-    const next = Math.min(SCALE_MAX, scaleRef.current * SCALE_STEP);
-    setScaleAround(next, localX);
+    const nextScale = Math.min(SCALE_MAX, scaleRef.current * SCALE_MULTIPLIER);
+    setScaleAround(nextScale, localX);
   };
+
   const decreaseScale = (localX) => {
-    const next = Math.max(SCALE_MIN, scaleRef.current / SCALE_STEP);
-    setScaleAround(next, localX);
+    const nextScale = Math.max(SCALE_MIN, scaleRef.current / SCALE_MULTIPLIER);
+    setScaleAround(nextScale, localX);
+  };
+
+  const getPanBounds = (scaleLevel = zoomScale) => {
+    const focalPointX = chartWidth / 2;
+    // The min pan offset occurs when the far left of the data is aligned with the left padding boundary.
+    const minPan = (chartPadding.left - focalPointX) * (scaleLevel - 1);
+    // The max pan offset occurs when the far right of the data is aligned with the right padding boundary.
+    const maxPan =
+      (chartWidth - chartPadding.right - focalPointX) * (scaleLevel - 1);
+    return { minPan, maxPan };
+  };
+
+  const autoPanStep = () => {
+    const mouseX = mouseXLocalRef.current;
+    if (mouseX == null || isDraggingRef.current) {
+      rafAutoPanRef.current = requestAnimationFrame(autoPanStep);
+      return;
+    }
+
+    const { minPan, maxPan } = getPanBounds();
+    let nextPan = panOffsetPx;
+
+    const leftEdgeLimit = edgeAutopanThresholdPx;
+    const rightEdgeLimit = chartWidth - edgeAutopanThresholdPx;
+
+    if (mouseX < leftEdgeLimit) {
+      // Pan left
+      const factor = (leftEdgeLimit - mouseX) / leftEdgeLimit; // 0..1
+      nextPan = Math.max(
+        minPan,
+        panOffsetPx - Math.ceil(AUTOPAN_SPEED_BASE_PX * factor)
+      );
+    } else if (mouseX > rightEdgeLimit) {
+      // Pan right
+      const factor = (mouseX - rightEdgeLimit) / edgeAutopanThresholdPx; // >0
+      nextPan = Math.min(
+        maxPan,
+        panOffsetPx + Math.ceil(AUTOPAN_SPEED_BASE_PX * factor)
+      );
+    }
+
+    if (nextPan !== panOffsetPx) setPanOffsetPx(nextPan);
+    rafAutoPanRef.current = requestAnimationFrame(autoPanStep);
+  };
+
+  const onSvgMove = (clientX) => {
+    const rect = svgRef.current?.getBoundingClientRect();
+    if (!rect) return;
+    const localX = clientX - rect.left;
+    mouseXLocalRef.current = localX;
+
+    const leftEdgeLimit = edgeAutopanThresholdPx;
+    const rightEdgeLimit = chartWidth - edgeAutopanThresholdPx;
+
+    const nearEdge = localX < leftEdgeLimit || localX > rightEdgeLimit;
+
+    // Start auto pan loop if near edges and not already running
+    if (nearEdge && !rafAutoPanRef.current) {
+      rafAutoPanRef.current = requestAnimationFrame(autoPanStep);
+    }
+    // Stop when moved away
+    if (!nearEdge && rafAutoPanRef.current) {
+      cancelAnimationFrame(rafAutoPanRef.current);
+      rafAutoPanRef.current = null;
+    }
+  };
+
+  const onSvgMouseMove = (event) => onSvgMove(event.clientX);
+
+  const onSvgTouchMove = (event) => {
+    const touch = event.touches && event.touches[0];
+    if (touch) onSvgMove(touch.clientX);
+  };
+
+  const onSvgMouseLeave = () => {
+    mouseXLocalRef.current = null;
+    if (rafAutoPanRef.current) {
+      cancelAnimationFrame(rafAutoPanRef.current);
+      rafAutoPanRef.current = null;
+    }
+  };
+
+  const onSvgKeyDown = (event) => {
+    if (event.key === "ArrowLeft") {
+      setPanOffsetPx((prevPan) =>
+        Math.max(getPanBounds().minPan, prevPan - 40)
+      );
+      event.preventDefault();
+    } else if (event.key === "ArrowRight") {
+      setPanOffsetPx((prevPan) =>
+        Math.min(getPanBounds().maxPan, prevPan + 40)
+      );
+      event.preventDefault();
+    } else if (event.key === "+" || event.key === "=") {
+      increaseScale();
+      event.preventDefault();
+    } else if (event.key === "-") {
+      decreaseScale();
+      event.preventDefault();
+    }
   };
 
   useEffect(() => {
     window.addEventListener("mousemove", handleMouseMove);
-    window.addEventListener("mouseup", handleMouseUp);
+    window.addEventListener("mouseup", handleDragEnd);
+    // Note: handleMouseUp was renamed to handleDragEnd for clarity
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mouseup", handleDragEnd);
     };
-  }, [scale, pan]);
+  }, [zoomScale, panOffsetPx]); // Depend on state to get latest pan bounds in handleMouseMove
 
-  // resize observer to make chart responsive
+  // Resize observer to make chart responsive
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el || typeof ResizeObserver === "undefined") return;
-    const ro = new ResizeObserver((entries) => {
+    const element = containerRef.current;
+    if (!element || typeof ResizeObserver === "undefined") return;
+    const resizeObserver = new ResizeObserver((entries) => {
       for (const entry of entries) {
-        const w = Math.floor(entry.contentRect.width || 800);
-        setContainerWidth(w);
+        const width = Math.floor(entry.contentRect.width || 800);
+        setContainerWidth(width);
       }
     });
-    ro.observe(el);
-    return () => ro.disconnect();
+    resizeObserver.observe(element);
+    return () => resizeObserver.disconnect();
   }, []);
 
-  // add a native, non-passive wheel listener to prevent browser/OS zoom and page scroll
-  // and to zoom towards the cursor. Uses refs to read latest scale/pan.
+  // Add a native, non-passive wheel listener for zooming towards the cursor.
   useEffect(() => {
-    const el = svgRef.current || containerRef.current;
-    if (!el) return;
-    const wheelHandler = (ev) => {
-      // prevent browser/OS pinch-zoom or page zoom that some touchpads trigger
-      ev.preventDefault();
+    const element = svgRef.current || containerRef.current;
+    if (!element) return;
+    const wheelHandler = (event) => {
+      // Prevent browser/OS pinch-zoom or page zoom
+      event.preventDefault();
       const rect = svgRef.current?.getBoundingClientRect();
-      const localX = rect ? ev.clientX - rect.left : width / 2;
-      const factor = Math.exp(-ev.deltaY * ZOOM_SENSITIVITY);
-      const next = Math.max(
+      const localX = rect ? event.clientX - rect.left : chartWidth / 2;
+      const factor = Math.exp(-event.deltaY * ZOOM_SENSITIVITY);
+      const nextScale = Math.max(
         SCALE_MIN,
         Math.min(SCALE_MAX, scaleRef.current * factor)
       );
-      setScaleAround(next, localX);
+      setScaleAround(nextScale, localX);
     };
-    el.addEventListener("wheel", wheelHandler, { passive: false });
-    return () => el.removeEventListener("wheel", wheelHandler);
-    // intentionally empty deps: handler reads current values from refs
+    element.addEventListener("wheel", wheelHandler, { passive: false });
+    return () => element.removeEventListener("wheel", wheelHandler);
+    // Intentionally empty deps: handler reads current values from refs
   }, []);
 
-  // compute pan bounds helper
-  const getPanBounds = () => {
-    const focal = width / 2;
-    const minPan = (padding.l - focal) * (scale - 1);
-    const maxPan = (width - padding.r - focal) * (scale - 1);
-    return { minPan, maxPan };
-  };
-
-  // auto-pan when mouse near edges
-  const autoPanStep = () => {
-    const mx = mouseXRef.current;
-    if (mx == null || isDragging.current) {
-      rafAutoRef.current = requestAnimationFrame(autoPanStep);
-      return;
-    }
-    const { minPan, maxPan } = getPanBounds();
-    let next = pan;
-    const leftEdge = edgeThresholdPx;
-    const rightEdge = width - edgeThresholdPx;
-    if (mx < leftEdge) {
-      const factor = (leftEdge - mx) / leftEdge; // 0..1
-      next = Math.max(minPan, pan - Math.ceil(SPEED_BASE * factor));
-    } else if (mx > rightEdge) {
-      const factor = (mx - rightEdge) / edgeThresholdPx;
-      next = Math.min(maxPan, pan + Math.ceil(SPEED_BASE * factor));
-    }
-    if (next !== pan) setPan(next);
-    rafAutoRef.current = requestAnimationFrame(autoPanStep);
-  };
-
-  const onSvgMouseMove = (e) => {
-    const rect = svgRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const localX = e.clientX - rect.left;
-    mouseXRef.current = localX;
-    // start auto pan loop if near edges and not already running
-    if (
-      (localX < edgeThresholdPx || localX > width - edgeThresholdPx) &&
-      !rafAutoRef.current
-    ) {
-      rafAutoRef.current = requestAnimationFrame(autoPanStep);
-    }
-    // stop when moved away
-    if (
-      localX >= edgeThresholdPx &&
-      localX <= width - edgeThresholdPx &&
-      rafAutoRef.current
-    ) {
-      cancelAnimationFrame(rafAutoRef.current);
-      rafAutoRef.current = null;
-    }
-  };
-
-  const onSvgTouchMove = (e) => {
-    const rect = svgRef.current?.getBoundingClientRect();
-    const t = e.touches && e.touches[0];
-    if (!rect || !t) return;
-    const localX = t.clientX - rect.left;
-    mouseXRef.current = localX;
-    if (
-      (localX < edgeThresholdPx || localX > width - edgeThresholdPx) &&
-      !rafAutoRef.current
-    ) {
-      rafAutoRef.current = requestAnimationFrame(autoPanStep);
-    }
-    if (
-      localX >= edgeThresholdPx &&
-      localX <= width - edgeThresholdPx &&
-      rafAutoRef.current
-    ) {
-      cancelAnimationFrame(rafAutoRef.current);
-      rafAutoRef.current = null;
-    }
-  };
-
-  const onSvgMouseLeave = () => {
-    mouseXRef.current = null;
-    if (rafAutoRef.current) {
-      cancelAnimationFrame(rafAutoRef.current);
-      rafAutoRef.current = null;
-    }
-  };
-
-  const onSvgKeyDown = (e) => {
-    if (e.key === "ArrowLeft") {
-      setPan((p) => Math.max(getPanBounds().minPan, p - 40));
-      e.preventDefault();
-    } else if (e.key === "ArrowRight") {
-      setPan((p) => Math.min(getPanBounds().maxPan, p + 40));
-      e.preventDefault();
-    } else if (e.key === "+" || e.key === "=") {
-      increaseScale();
-      e.preventDefault();
-    } else if (e.key === "-") {
-      decreaseScale();
-      e.preventDefault();
-    }
-  };
-
-  if (points.length === 0) {
+  if (graphPoints.length === 0) {
     return (
       <div className={styles.graphWrap} ref={containerRef}>
         <div className={styles.graphTitle}>No data to display</div>
@@ -296,37 +317,51 @@ const Graph = ({ data }) => {
     );
   }
 
-  const xs = points.map((p) => p.x);
-  const ys = points.map((p) => p.y);
-  const minX = Math.min(...xs);
-  const maxX = Math.max(...xs);
-  const minY = 0;
-  const maxY = Math.max(...ys) || 1;
+  const allXValues = graphPoints.map((point) => point.x);
+  const allYValues = graphPoints.map((point) => point.y);
+  const minXValue = Math.min(...allXValues);
+  const maxXValue = Math.max(...allXValues);
+  const minYValue = 0;
+  const maxYValue = Math.max(...allYValues) || 1;
 
-  const xScale = (t) => {
-    if (maxX === minX) return padding.l;
-    const base =
-      padding.l +
-      ((t - minX) / (maxX - minX)) * (width - padding.l - padding.r);
-    const focal = width / 2;
-    return (base - focal) * scale + focal - pan;
-  };
-  const yScale = (v) => {
-    const h = height - padding.t - padding.b;
-    return padding.t + (1 - (v - minY) / (maxY - minY)) * h;
+  // Time-to-Pixel X Scale function
+  const xScale = (timestamp) => {
+    if (maxXValue === minXValue) return chartPadding.left;
+    // 1. Calculate base (unscaled) X position
+    const graphRange = maxXValue - minXValue;
+    const pixelRange = chartWidth - chartPadding.left - chartPadding.right;
+    const baseUnscaledX =
+      chartPadding.left + ((timestamp - minXValue) / graphRange) * pixelRange;
+
+    // 2. Apply scale and pan offset (centered on focalPointX)
+    const focalPointX = chartWidth / 2;
+    return (
+      (baseUnscaledX - focalPointX) * zoomScale + focalPointX - panOffsetPx
+    );
   };
 
-  const pathD = points
-    .map((p, i) => {
-      const x = xScale(p.x);
-      const y = yScale(p.y);
-      return `${i === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`;
+  // Value-to-Pixel Y Scale function
+  const yScale = (value) => {
+    const graphHeight = chartHeight - chartPadding.top - chartPadding.bottom;
+    const dataRange = maxYValue - minYValue;
+    // Y-axis is inverted (0 at top), so we subtract from 1
+    const normalizedY = dataRange === 0 ? 0 : (value - minYValue) / dataRange;
+    return chartPadding.top + (1 - normalizedY) * graphHeight;
+  };
+
+  const linePathD = graphPoints
+    .map((point, index) => {
+      const x = xScale(point.x);
+      const y = yScale(point.y);
+      return `${index === 0 ? "M" : "L"} ${x.toFixed(2)} ${y.toFixed(2)}`;
     })
     .join(" ");
 
-  const areaD = `${pathD} L ${xScale(points[points.length - 1].x).toFixed(2)} ${
-    height - padding.b
-  } L ${xScale(points[0].x).toFixed(2)} ${height - padding.b} Z`;
+  const areaPathD = `${linePathD} L ${xScale(
+    graphPoints[graphPoints.length - 1].x
+  ).toFixed(2)} ${chartHeight - chartPadding.bottom} L ${xScale(
+    graphPoints[0].x
+  ).toFixed(2)} ${chartHeight - chartPadding.bottom} Z`;
 
   return (
     <div
@@ -339,14 +374,14 @@ const Graph = ({ data }) => {
       <div className={styles.graphControls}>
         <button
           aria-label="zoom out"
-          onClick={decreaseScale}
+          onClick={() => decreaseScale()}
           className={styles.graphBtn}
         >
           -
         </button>
         <button
           aria-label="zoom in"
-          onClick={increaseScale}
+          onClick={() => increaseScale()}
           className={styles.graphBtn}
         >
           +
@@ -358,16 +393,16 @@ const Graph = ({ data }) => {
         onMouseMove={onSvgMouseMove}
         onMouseLeave={onSvgMouseLeave}
         onTouchStart={handleTouchStart}
-        onTouchMove={(e) => {
-          handleTouchMove(e);
-          onSvgTouchMove(e);
+        onTouchMove={(event) => {
+          handleTouchMove(event); // Handle pan
+          onSvgTouchMove(event); // Handle auto-pan trigger
         }}
-        onTouchEnd={() => handleMouseUp()}
-        viewBox={`0 0 ${Math.max(300, width)} ${height}`}
+        onTouchEnd={handleDragEnd}
+        viewBox={`0 0 ${Math.max(300, chartWidth)} ${chartHeight}`}
         width="100%"
-        height={height}
+        height={chartHeight}
         role="img"
-        aria-label="Runs timeline"
+        aria-label="Runs timeline graph"
       >
         <defs>
           <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
@@ -377,11 +412,11 @@ const Graph = ({ data }) => {
         </defs>
 
         {/* area */}
-        <path d={areaD} fill="url(#areaGrad)" stroke="none" />
+        <path d={areaPathD} fill="url(#areaGrad)" stroke="none" />
 
         {/* line */}
         <path
-          d={pathD}
+          d={linePathD}
           fill="none"
           stroke="#60a5fa"
           strokeWidth={2.5}
@@ -390,14 +425,14 @@ const Graph = ({ data }) => {
         />
 
         {/* points */}
-        {points.map((p, i) => {
-          const x = xScale(p.x);
-          const y = yScale(p.y);
+        {graphPoints.map((point, index) => {
+          const x = xScale(point.x);
+          const y = yScale(point.y);
           return (
             <g
-              key={i}
-              onMouseEnter={() => setHover({ p, x, y })}
-              onMouseLeave={() => setHover(null)}
+              key={index}
+              onMouseEnter={() => setHoveredPoint({ point, x, y })}
+              onMouseLeave={() => setHoveredPoint(null)}
             >
               <circle
                 cx={x}
@@ -413,41 +448,49 @@ const Graph = ({ data }) => {
 
         {/* x axis labels: show years from min run year to max run year */}
         {(() => {
-          const minYear = new Date(minX).getFullYear();
-          const maxYear = new Date(maxX).getFullYear();
+          const minYear = new Date(minXValue).getFullYear();
+          const maxYear = new Date(maxXValue).getFullYear();
           const years = [];
-          for (let y = minYear; y <= maxYear; y++) years.push(y);
-          return years.map((yr) => {
-            const t = new Date(yr, 0, 1).getTime();
-            const x = xScale(t);
+          for (let year = minYear; year <= maxYear; year++) years.push(year);
+          return years.map((year) => {
+            const timestamp = new Date(year, 0, 1).getTime();
+            const x = xScale(timestamp);
             return (
               <text
-                key={yr}
+                key={year}
                 x={x}
-                y={height - 6}
+                y={chartHeight - 6}
                 fontSize={11}
                 fill="#9ca3af"
                 textAnchor="middle"
               >
-                {yr}
+                {year}
               </text>
             );
           });
         })()}
 
         {/* y axis labels */}
-        {[0, Math.round(maxY / 2), Math.round(maxY)].map((v, idx) => (
-          <text key={idx} x={8} y={yScale(v)} fontSize={10} fill="#9ca3af">
-            {v}
-          </text>
-        ))}
+        {[0, Math.round(maxYValue / 2), Math.round(maxYValue)].map(
+          (value, index) => (
+            <text
+              key={index}
+              x={8}
+              y={yScale(value)}
+              fontSize={10}
+              fill="#9ca3af"
+            >
+              {value}
+            </text>
+          )
+        )}
 
         {/* hover tooltip */}
-        {hover && (
+        {hoveredPoint && (
           <g>
             <rect
-              x={hover.x + 8}
-              y={hover.y - 36}
+              x={hoveredPoint.x + 8}
+              y={hoveredPoint.y - 36}
               width={180}
               height={48}
               rx={8}
@@ -455,16 +498,22 @@ const Graph = ({ data }) => {
               stroke="rgba(255,255,255,0.04)"
             />
             <text
-              x={hover.x + 16}
-              y={hover.y - 18}
+              x={hoveredPoint.x + 16}
+              y={hoveredPoint.y - 18}
               fontSize={12}
               fill="#f9fafb"
             >
-              {stripColorCodes(hover.p.raw.PlayerName)}
+              {stripColorCodes(hoveredPoint.point.rawData.PlayerName)}
             </text>
-            <text x={hover.x + 16} y={hover.y - 6} fontSize={11} fill="#9ca3af">
-              {formatDateLabel(hover.p.raw.TimeCreated)} —{" "}
-              {hover.p.raw.TimePlayedString || hover.p.raw.TimePlayed + "s"}
+            <text
+              x={hoveredPoint.x + 16}
+              y={hoveredPoint.y - 6}
+              fontSize={11}
+              fill="#9ca3af"
+            >
+              {formatDateLabel(hoveredPoint.point.rawData.TimeCreated)} —{" "}
+              {hoveredPoint.point.rawData.TimePlayedString ||
+                hoveredPoint.point.rawData.TimePlayed + "s"}
             </text>
           </g>
         )}
@@ -473,4 +522,4 @@ const Graph = ({ data }) => {
   );
 };
 
-export default Graph;
+export default RunGraph;
