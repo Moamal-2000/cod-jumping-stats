@@ -1,5 +1,6 @@
 "use client";
-import { useMemo, useState } from "react";
+import { stripColorCodes } from "@/Functions/utils";
+import { useState } from "react";
 import styles from "../RunAnalytics.module.scss";
 
 function formatDateLabel(d) {
@@ -12,20 +13,22 @@ function formatDateLabel(d) {
 const Graph = ({ data }) => {
   const [hover, setHover] = useState(null);
 
-  const points = useMemo(() => {
+  function getGraphPoints() {
     if (!data || data.length === 0) return [];
-    // map to {x: timestamp, y: time_played}
+
     return data
-      .map((r) => ({
-        x: new Date(r.time_created).getTime(),
-        y: Number(r.time_played) || 0,
-        raw: r,
+      .map((run) => ({
+        x: new Date(run.TimeCreated).getTime(),
+        y: Number(run.TimePlayed) || 0,
+        raw: run,
       }))
       .sort((a, b) => a.x - b.x);
-  }, [data]);
+  }
+
+  const points = getGraphPoints();
 
   const width = 800;
-  const height = 300;
+  const height = 382;
   const padding = { l: 40, r: 12, t: 12, b: 28 };
 
   if (points.length === 0) {
@@ -117,23 +120,29 @@ const Graph = ({ data }) => {
           );
         })}
 
-        {/* x axis labels */}
-        {points.map((p, i) => {
-          const x = xScale(p.x);
-          if (i % Math.max(1, Math.floor(points.length / 6)) !== 0) return null;
-          return (
-            <text
-              key={i}
-              x={x}
-              y={height - 6}
-              fontSize={10}
-              fill="#9ca3af"
-              textAnchor="middle"
-            >
-              {formatDateLabel(p.raw.time_created)}
-            </text>
-          );
-        })}
+        {/* x axis labels: show years from min run year to max run year */}
+        {(() => {
+          const minYear = new Date(minX).getFullYear();
+          const maxYear = new Date(maxX).getFullYear();
+          const years = [];
+          for (let y = minYear; y <= maxYear; y++) years.push(y);
+          return years.map((yr) => {
+            const t = new Date(yr, 0, 1).getTime();
+            const x = xScale(t);
+            return (
+              <text
+                key={yr}
+                x={x}
+                y={height - 6}
+                fontSize={11}
+                fill="#9ca3af"
+                textAnchor="middle"
+              >
+                {yr}
+              </text>
+            );
+          });
+        })()}
 
         {/* y axis labels */}
         {[0, Math.round(maxY / 2), Math.round(maxY)].map((v, idx) => (
@@ -160,11 +169,11 @@ const Graph = ({ data }) => {
               fontSize={12}
               fill="#f9fafb"
             >
-              {hover.p.raw.playername}
+              {stripColorCodes(hover.p.raw.PlayerName)}
             </text>
             <text x={hover.x + 16} y={hover.y - 6} fontSize={11} fill="#9ca3af">
-              {formatDateLabel(hover.p.raw.time_created)} —{" "}
-              {hover.p.raw.time_played_string || hover.p.raw.time_played + "s"}
+              {formatDateLabel(hover.p.raw.TimeCreated)} —{" "}
+              {hover.p.raw.TimePlayedString || hover.p.raw.TimePlayed + "s"}
             </text>
           </g>
         )}

@@ -119,3 +119,33 @@ export const fetchPlayerTops = createAsyncThunk(
     }
   }
 );
+
+export const fetchMapRuns = createAsyncThunk(
+  "playerProfile/fetchPlayerRuns",
+  async ({ playerid, cpid, fps }) => {
+    try {
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ playerid, cpid, fps }).player.getMapRuns,
+        cache: "no-cache",
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      if (response.status === 500) {
+        console.warn(
+          `Player with ID \`${playerid}\` has insufficient data for runs, returning empty data`
+        );
+        return [];
+      }
+
+      const runs = await decodeAsyncData(response);
+
+      return runs;
+    } catch (error) {
+      console.error(`Error fetching player runs: ${error}`);
+      return {};
+    }
+  }
+);

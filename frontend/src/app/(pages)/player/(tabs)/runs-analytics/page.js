@@ -1,6 +1,8 @@
 "use client";
 import { graphData } from "@/Data/graphData";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
+import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./RunAnalytics.module.scss";
@@ -8,7 +10,7 @@ import Graph from "./components/Graph";
 import MapList from "./components/MapList";
 
 const RunAnalyticsPage = () => {
-  // prepare maps list (unique by cpid)
+  const { mapRuns } = useSelector((s) => s.playerProfile);
   const [search, setSearch] = useState("");
 
   const allMaps = useSelector((s) => s.maps.allMaps);
@@ -20,18 +22,26 @@ const RunAnalyticsPage = () => {
   const [selectedFps, setSelectedFps] = useState(fpsOptions[0] || "125");
   const [selectedRoute, setSelectedRoute] = useState("Route 1");
 
+  const searchParams = useSearchParams();
+  const playerid = searchParams.get("playerid");
+
   // filter runs for the selected map + fps
   function runsForSelected() {
-    if (!selectedCpid) return [];
+    if (!selectedCpid && mapRuns?.length > 0) return [];
 
-    return graphData.filter(
-      (r) => r.cpid === selectedCpid && String(r.fps) === String(selectedFps)
+    return mapRuns?.filter(
+      (run) =>
+        run.CpID === selectedCpid && String(run.FPS) === String(selectedFps)
     );
   }
 
+  const runs = runsForSelected();
+
   useEffect(() => {
-    dispatch(fetchMaps());
-  }, []);
+    if (allMaps.length <= 0) dispatch(fetchMaps());
+
+    dispatch(fetchMapRuns({ playerid, cpid: selectedCpid, fps: 125 }));
+  }, [selectedCpid]);
 
   return (
     <div>
@@ -49,9 +59,7 @@ const RunAnalyticsPage = () => {
           <div className={styles.graphHeader}>
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
               <div className={styles.graphTitle}>Player runs</div>
-              <div style={{ color: "#9ca3af" }}>
-                {runsForSelected.length} runs
-              </div>
+              <div style={{ color: "#9ca3af" }}>{runs?.length || 0} runs</div>
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
@@ -98,7 +106,7 @@ const RunAnalyticsPage = () => {
             </div>
           </div>
 
-          <Graph data={runsForSelected} />
+          <Graph data={runs} />
         </div>
       </div>
     </div>

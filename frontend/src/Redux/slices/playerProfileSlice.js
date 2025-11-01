@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import {
+  fetchMapRuns,
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
   fetchPlayerProfile,
@@ -27,6 +28,10 @@ const initialState = {
   error: false,
 
   currentFetchingFps: "125",
+
+  mapRuns: [],
+  mapRunsLoading: false,
+  mapRunsError: false,
 };
 
 export const playerProfileSlice = createSlice({
@@ -111,6 +116,20 @@ export const playerProfileSlice = createSlice({
       .addCase(fetchPlayerJumpScores.rejected, (state) => {
         state.jumpScoresError = true;
         state.jumpScoresLoading = false;
+      });
+
+    addCase(fetchMapRuns.pending, (state) => {
+      state.mapRunsLoading = true;
+      state.mapRunsError = false;
+    })
+      .addCase(fetchMapRuns.fulfilled, (state, { payload }) => {
+        state.mapRuns = payload;
+        state.mapRunsLoading = false;
+        state.mapRunsError = false;
+      })
+      .addCase(fetchMapRuns.rejected, (state) => {
+        state.mapRunsError = true;
+        state.mapRunsLoading = false;
       });
   },
 });
