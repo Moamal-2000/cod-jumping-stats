@@ -11,7 +11,6 @@ import MapList from "./components/MapList";
 
 const RunAnalyticsPage = () => {
   const { mapRuns } = useSelector((s) => s.playerProfile);
-  const [search, setSearch] = useState("");
 
   const allMaps = useSelector((s) => s.maps.allMaps);
   const dispatch = useDispatch();
@@ -51,8 +50,6 @@ const RunAnalyticsPage = () => {
           allMaps={allMaps}
           selectedCpid={selectedCpid}
           onSelect={setSelectedCpid}
-          search={search}
-          setSearch={setSearch}
         />
 
         <div className={styles.rightPanel}>

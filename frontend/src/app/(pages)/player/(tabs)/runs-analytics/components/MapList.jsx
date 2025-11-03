@@ -1,18 +1,11 @@
 "use client";
+import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
 import styles from "../RunAnalytics.module.scss";
 
-const MapList = ({ allMaps, selectedCpid, onSelect, search, setSearch }) => {
+const MapList = ({ allMaps, selectedCpid, onSelect }) => {
   return (
     <div className={styles.leftPanel}>
-      <div className={styles.searchWrap}>
-        <input
-          aria-label="Search maps"
-          placeholder="Search map by name"
-          className={styles.searchInput}
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-        />
-      </div>
+      <SearchInput placeholder="Search map by name" queryName="mapname" />
 
       <div className={styles.mapsList} role="list">
         {allMaps.map((map) => {
