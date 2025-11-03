@@ -46,7 +46,7 @@ const SearchInput = ({ queryName, placeholder, label, id }) => {
   }
 
   function handleClearSearch() {
-    if (inputRef.current) inputRef.current.value = "";
+    if (inputRef.current) setSearchValue("");
     removeQueryString(queryName, searchParams, router, pathname);
     clearTimeout(searchTimeoutRef?.current);
     setIsSearching(false);
