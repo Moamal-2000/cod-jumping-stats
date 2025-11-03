@@ -1,5 +1,5 @@
 "use client";
-import { JUMP_FPS } from "@/Data/constants";
+import SelectMenu from "@/Components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/Functions/utils";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
 import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
@@ -9,6 +9,15 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./RunAnalytics.module.scss";
 import Graph from "./components/Graph";
 import MapList from "./components/MapList";
+
+const fpsOptions = [
+  { label: "43 FPS", value: "43", id: 1 },
+  { label: "76 FPS", value: "76", id: 2 },
+  { label: "125 FPS", value: "125", id: 3 },
+  { label: "250 FPS", value: "250", id: 4 },
+  { label: "333 FPS", value: "333", id: 5 },
+  { label: "mix FPS", value: "mix", id: 6 },
+];
 
 const RunAnalyticsPage = () => {
   const mapRuns = useSelector((s) => s.playerProfile.mapRuns);
@@ -57,20 +66,11 @@ const RunAnalyticsPage = () => {
             </h2>
 
             <div className={s.options}>
-              <div className={s.optionGroup}>
-                <label htmlFor="select-fps">FPS:</label>
-                <select
-                  value={selectedFps}
-                  onChange={handleFpsChange}
-                  id="select-fps"
-                >
-                  {JUMP_FPS.map((fps) => (
-                    <option key={fps} value={fps}>
-                      {fps}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <SelectMenu
+                label="FPS"
+                onChange={handleFpsChange}
+                optionsData={fpsOptions}
+              />
             </div>
           </div>
           <Graph data={mapRuns} />
