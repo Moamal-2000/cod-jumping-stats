@@ -5,7 +5,7 @@ import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import styles from "./RunAnalytics.module.scss";
+import s from "./RunAnalytics.module.scss";
 import Graph from "./components/Graph";
 import MapList from "./components/MapList";
 
@@ -44,65 +44,17 @@ const RunAnalyticsPage = () => {
 
   return (
     <div>
-      <h1 style={{ marginBottom: "0.5rem" }}>Run Analytics</h1>
-      <div className={styles.container}>
+      <div className={s.container}>
         <MapList
           allMaps={allMaps}
           selectedCpid={selectedCpid}
           onSelect={setSelectedCpid}
         />
-
-        <div className={styles.rightPanel}>
-          <div className={styles.graphHeader}>
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div className={styles.graphTitle}>Player runs</div>
-              <div style={{ color: "#9ca3af" }}>{runs?.length || 0} runs</div>
-            </div>
-
-            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              {/* <div
-                className={styles.btnGroup}
-                role="tablist"
-                aria-label="fps selection"
-              >
-                {fpsOptions.map((f) => (
-                  <button
-                    key={f}
-                    onClick={() => setSelectedFps(f)}
-                    className={`${styles.chip} ${
-                      selectedFps == f ? styles.chipActive : ""
-                    }`}
-                  >
-                    {f} fps
-                  </button>
-                ))}
-              </div> */}
-
-              {/* <div
-                className={styles.btnGroup}
-                role="tablist"
-                aria-label="route selection"
-              >
-                <button
-                  className={`${styles.chip} ${
-                    selectedRoute === "Route 1" ? styles.chipActive : ""
-                  }`}
-                  onClick={() => setSelectedRoute("Route 1")}
-                >
-                  Route 1
-                </button>
-                <button
-                  className={`${styles.chip} ${
-                    selectedRoute === "Route 2" ? styles.chipActive : ""
-                  }`}
-                  onClick={() => setSelectedRoute("Route 2")}
-                >
-                  Route 2
-                </button>
-              </div> */}
-            </div>
+        <div className={s.rightPanel}>
+          <div className={s.graphHeader}>
+            <div className={s.graphTitle}>Player runs</div>
+            <div className={s.runCount}>{runs?.length || 0} runs</div>
           </div>
-
           <Graph data={runs} />
         </div>
       </div>

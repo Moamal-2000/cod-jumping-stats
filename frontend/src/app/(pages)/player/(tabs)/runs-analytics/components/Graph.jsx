@@ -1,7 +1,61 @@
 "use client";
-import { stripColorCodes } from "@/Functions/utils";
+import { getColoredName } from "@/Functions/components";
 import { useEffect, useRef, useState } from "react";
-import styles from "../RunAnalytics.module.scss";
+import s from "../RunAnalytics.module.scss";
+
+// Icons
+const ZoomInIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <line x1="11" y1="8" x2="11" y2="14"></line>
+    <line x1="8" y1="11" x2="14" y2="11"></line>
+  </svg>
+);
+
+const ZoomOutIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <circle cx="11" cy="11" r="8"></circle>
+    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+    <line x1="8" y1="11" x2="14" y2="11"></line>
+  </svg>
+);
+
+const ResetIcon = () => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+  >
+    <path d="M3 2v6h6"></path>
+    <path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path>
+    <path d="M21 22v-6h-6"></path>
+    <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"></path>
+  </svg>
+);
 
 const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
 const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
@@ -10,13 +64,6 @@ const EDGE_AUTOPAN_THRESHOLD_MIN_PX = 100; // Minimum pixel distance from edge t
 const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for auto-pan threshold
 const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
 const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
-
-function formatDateLabel(timestampOrDateString) {
-  const dateObj = new Date(timestampOrDateString);
-  const month = (dateObj.getMonth() + 1).toString().padStart(2, "0");
-  const day = dateObj.getDate().toString().padStart(2, "0");
-  return `${dateObj.getFullYear()}-${month}-${day}`;
-}
 
 const RunGraph = ({ data: runData }) => {
   const containerRef = useRef(null);
@@ -43,6 +90,7 @@ const RunGraph = ({ data: runData }) => {
     EDGE_AUTOPAN_THRESHOLD_MIN_PX,
     EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth
   );
+  const mapName = runData?.[0]?.MapName;
 
   function getGraphPoints() {
     if (!runData || runData.length === 0) return [];
@@ -311,8 +359,25 @@ const RunGraph = ({ data: runData }) => {
 
   if (graphPoints.length === 0) {
     return (
-      <div className={styles.graphWrap} ref={containerRef}>
-        <div className={styles.graphTitle}>No data to display</div>
+      <div className={s.graphContainer} ref={containerRef}>
+        <div className={s.emptyState}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+            <line x1="8" y1="10" x2="16" y2="10"></line>
+            <line x1="8" y1="14" x2="14" y2="14"></line>
+          </svg>
+          <p>No run data available for the selected map</p>
+        </div>
       </div>
     );
   }
@@ -363,30 +428,75 @@ const RunGraph = ({ data: runData }) => {
     graphPoints[0].x
   ).toFixed(2)} ${chartHeight - chartPadding.bottom} Z`;
 
+  // Format tooltip content
+  const renderTooltip = () => {
+    if (!hoveredPoint) return null;
+
+    const { x, y } = hoveredPoint;
+    const pointData = hoveredPoint.point.rawData;
+    const coloredPlayerName = getColoredName(pointData.PlayerName);
+
+    const date = new Date(pointData.TimeCreated);
+    const formattedDate = date.toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+
+    return (
+      <div className={s.tooltip} style={{ left: x + 10, top: y - 10 }}>
+        <div className={s.header}>
+          <strong>{coloredPlayerName || "Unknown Player"}</strong> /
+          <strong>{mapName}</strong>
+        </div>
+
+        <div>Time: {pointData.TimePlayedString}</div>
+        <div className={s.tooltipDate}>{formattedDate}</div>
+      </div>
+    );
+  };
+
   return (
     <div
-      className={styles.graphWrap}
-      style={{ userSelect: "none", touchAction: "none" }}
+      className={s.graphContainer}
       ref={containerRef}
       tabIndex={0}
       onKeyDown={onSvgKeyDown}
+      style={{ userSelect: "none", touchAction: "none" }}
     >
-      <div className={styles.graphControls}>
+      <div className={s.graphControls}>
         <button
-          aria-label="zoom out"
+          aria-label="Zoom out"
           onClick={() => decreaseScale()}
-          className={styles.graphBtn}
+          className={s.controlButton}
+          disabled={zoomScale <= SCALE_MIN}
         >
-          -
+          <ZoomOutIcon />
         </button>
         <button
-          aria-label="zoom in"
-          onClick={() => increaseScale()}
-          className={styles.graphBtn}
+          aria-label="Reset zoom"
+          onClick={() => {
+            setZoomScale(1);
+            setPanOffsetPx(0);
+          }}
+          className={s.controlButton}
+          disabled={zoomScale === 1 && panOffsetPx === 0}
         >
-          +
+          <ResetIcon />
+        </button>
+        <button
+          aria-label="Zoom in"
+          onClick={() => increaseScale()}
+          className={s.controlButton}
+          disabled={zoomScale >= SCALE_MAX}
+        >
+          <ZoomInIcon />
         </button>
       </div>
+
+      {hoveredPoint && renderTooltip()}
       <svg
         ref={svgRef}
         onMouseDown={handleMouseDown}
@@ -483,39 +593,6 @@ const RunGraph = ({ data: runData }) => {
               {value}
             </text>
           )
-        )}
-
-        {/* hover tooltip */}
-        {hoveredPoint && (
-          <g>
-            <rect
-              x={hoveredPoint.x + 8}
-              y={hoveredPoint.y - 36}
-              width={180}
-              height={48}
-              rx={8}
-              fill="rgba(2,6,23,0.9)"
-              stroke="rgba(255,255,255,0.04)"
-            />
-            <text
-              x={hoveredPoint.x + 16}
-              y={hoveredPoint.y - 18}
-              fontSize={12}
-              fill="#f9fafb"
-            >
-              {stripColorCodes(hoveredPoint.point.rawData.PlayerName)}
-            </text>
-            <text
-              x={hoveredPoint.x + 16}
-              y={hoveredPoint.y - 6}
-              fontSize={11}
-              fill="#9ca3af"
-            >
-              {formatDateLabel(hoveredPoint.point.rawData.TimeCreated)} —{" "}
-              {hoveredPoint.point.rawData.TimePlayedString ||
-                hoveredPoint.point.rawData.TimePlayed + "s"}
-            </text>
-          </g>
         )}
       </svg>
     </div>
