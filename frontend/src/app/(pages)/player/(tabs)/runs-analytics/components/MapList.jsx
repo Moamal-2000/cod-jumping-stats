@@ -1,7 +1,8 @@
 "use client";
 
 import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
-import { useSearchParams } from "next/navigation";
+import { createQueryString } from "@/Functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "../RunAnalytics.module.scss";
 
@@ -12,20 +13,33 @@ const MapList = ({
   isLoading = false,
 }) => {
   const [filteredMaps, setFilteredMaps] = useState(allMaps);
+
+  const router = useRouter();
+  const pathname = usePathname();
+
   const searchParams = useSearchParams();
   const mapName = searchParams.get("mapname") || "";
+  const mapType = searchParams.get("maptype") || "all";
+
+  function handleSelectMapType(type) {
+    createQueryString("maptype", type, searchParams, router, pathname);
+  }
 
   useEffect(() => {
-    if (mapName === "") {
-      setFilteredMaps(allMaps);
-      return;
+    let filteredMaps = allMaps;
+
+    if (mapType && mapType !== "all") {
+      filteredMaps = allMaps.filter((map) => map.Type === mapType);
     }
 
-    const filtered = allMaps.filter((map) =>
-      map.Name.toLowerCase().includes(mapName.toLowerCase())
-    );
-    setFilteredMaps(filtered);
-  }, [mapName, allMaps]);
+    if (mapName !== "") {
+      filteredMaps = filteredMaps.filter((map) =>
+        map.Name.toLowerCase().includes(mapName.toLowerCase())
+      );
+    }
+
+    setFilteredMaps(filteredMaps);
+  }, [allMaps, mapName, mapType]);
 
   if (isLoading) {
     return (
@@ -37,6 +51,7 @@ const MapList = ({
             disabled={true}
           />
         </div>
+
         <div className={s.loadingState}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -61,6 +76,18 @@ const MapList = ({
     <div className={s.leftPanel}>
       <div className={s.searchContainer}>
         <SearchInput placeholder="Search map by name" queryName="mapname" />
+      </div>
+
+      <div className={s.mapsTypes}>
+        {["All", "Jump", "Defrag", "Surf"].map((type) => (
+          <button
+            key={type}
+            className={s.mapType}
+            onClick={() => handleSelectMapType(type)}
+          >
+            {type}
+          </button>
+        ))}
       </div>
 
       <div className={s.mapsList} role="list">
