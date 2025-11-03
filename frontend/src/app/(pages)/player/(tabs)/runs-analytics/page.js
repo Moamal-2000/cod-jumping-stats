@@ -12,7 +12,10 @@ import MapList from "./components/MapList";
 const RunAnalyticsPage = () => {
   const { mapRuns } = useSelector((s) => s.playerProfile);
 
-  const allMaps = useSelector((s) => s.maps.allMaps);
+  const { allMaps, loading: isLoadingMaps } = useSelector((s) => ({
+    allMaps: s.maps.allMaps,
+    loading: s.maps.loading
+  }));
   const dispatch = useDispatch();
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
@@ -49,6 +52,7 @@ const RunAnalyticsPage = () => {
           allMaps={allMaps}
           selectedCpid={selectedCpid}
           onSelect={setSelectedCpid}
+          isLoading={isLoadingMaps}
         />
         <div className={s.rightPanel}>
           <div className={s.graphHeader}>

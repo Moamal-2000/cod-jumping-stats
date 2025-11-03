@@ -5,7 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "../RunAnalytics.module.scss";
 
-const MapList = ({ allMaps = [], selectedCpid, onSelect }) => {
+const MapList = ({ allMaps = [], selectedCpid, onSelect, isLoading = false }) => {
   const [filteredMaps, setFilteredMaps] = useState(allMaps);
   const searchParams = useSearchParams();
   const mapName = searchParams.get("mapname") || "";
@@ -21,6 +21,36 @@ const MapList = ({ allMaps = [], selectedCpid, onSelect }) => {
     );
     setFilteredMaps(filtered);
   }, [mapName, allMaps]);
+
+  if (isLoading) {
+    return (
+      <div className={s.leftPanel}>
+        <div className={s.searchContainer}>
+          <SearchInput
+            placeholder="Search map by name"
+            queryName="mapname"
+            disabled={true}
+          />
+        </div>
+        <div className={s.loadingState}>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+          </svg>
+          <p>Loading maps...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (allMaps.length === 0) {
     return (
