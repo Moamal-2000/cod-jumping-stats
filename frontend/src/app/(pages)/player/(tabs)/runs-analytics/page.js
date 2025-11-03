@@ -20,7 +20,7 @@ const fpsOptions = [
 ];
 
 const RunAnalyticsPage = () => {
-  const mapRuns = useSelector((s) => s.playerProfile.mapRuns);
+  const { mapRuns, mapRunsLoading } = useSelector((s) => s.playerProfile);
   const { allMaps, loading } = useSelector((s) => s.maps);
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
@@ -73,7 +73,7 @@ const RunAnalyticsPage = () => {
               />
             </div>
           </div>
-          <Graph data={mapRuns} />
+          <Graph data={mapRuns} isLoading={mapRunsLoading} />
         </div>
       </div>
     </div>

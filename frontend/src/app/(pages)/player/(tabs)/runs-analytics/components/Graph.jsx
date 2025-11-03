@@ -3,6 +3,30 @@ import { getColoredName } from "@/Functions/components";
 import { useEffect, useRef, useState } from "react";
 import s from "../RunAnalytics.module.scss";
 
+const LoadingSpinner = () => (
+  <svg
+    width="48"
+    height="48"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeOpacity="0.2"
+    />
+    <path
+      d="M12 2C6.48 2 2 6.48 2 12C2 14.9 3.26 17.46 5.25 19.19L12 12.44V2Z"
+      fill="currentColor"
+      className={s.spinnerPath}
+    />
+  </svg>
+);
+
 // Icons
 const ZoomInIcon = () => (
   <svg
@@ -65,7 +89,7 @@ const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for 
 const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
 const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
 
-const RunGraph = ({ data: runData }) => {
+const RunGraph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
   const chartWidth = containerWidth || 800; // Final width used for calculations
@@ -356,6 +380,17 @@ const RunGraph = ({ data: runData }) => {
     return () => element.removeEventListener("wheel", wheelHandler);
     // Intentionally empty deps: handler reads current values from refs
   }, []);
+
+  if (isLoading) {
+    return (
+      <div className={s.graphContainer} ref={containerRef}>
+        <div className={s.loadingState}>
+          <LoadingSpinner />
+          <p>Loading graph data...</p>
+        </div>
+      </div>
+    );
+  }
 
   if (graphPoints.length === 0) {
     return (
