@@ -63,7 +63,7 @@ const RunAnalyticsPage = () => {
             </div>
 
             <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
-              <div
+              {/* <div
                 className={styles.btnGroup}
                 role="tablist"
                 aria-label="fps selection"
@@ -79,9 +79,9 @@ const RunAnalyticsPage = () => {
                     {f} fps
                   </button>
                 ))}
-              </div>
+              </div> */}
 
-              <div
+              {/* <div
                 className={styles.btnGroup}
                 role="tablist"
                 aria-label="route selection"
@@ -102,7 +102,7 @@ const RunAnalyticsPage = () => {
                 >
                   Route 2
                 </button>
-              </div>
+              </div> */}
             </div>
           </div>
 
