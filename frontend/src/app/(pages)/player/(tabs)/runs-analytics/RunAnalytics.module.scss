@@ -67,6 +67,39 @@
   }
 }
 
+.mapsTypes {
+  display: flex;
+  gap: 0.3rem;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+
+  .mapType {
+    flex: 1;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    background: rgba(31, 41, 55, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    color: #9ca3af;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: capitalize;
+
+    &:hover:not(.active) {
+      background: rgba(55, 65, 81, 0.6);
+      color: #e5e7eb;
+    }
+
+    &.active {
+      background: var(--accent-color, #6366f1);
+      color: white;
+      border-color: transparent;
+      box-shadow: 0 0 0 1px rgba(99, 102, 241, 0.3);
+    }
+  }
+}
+
 .mapsList {
   display: flex;
   flex-direction: column;
@@ -301,7 +334,8 @@
 }
 
 // Empty State
-.emptyState, .loadingState {
+.emptyState,
+.loadingState {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -328,8 +362,13 @@
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Tooltip
