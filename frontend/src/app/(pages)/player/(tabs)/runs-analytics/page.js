@@ -12,7 +12,7 @@ import MapList from "./components/MapList";
 const RunAnalyticsPage = () => {
   const { mapRuns } = useSelector((s) => s.playerProfile);
 
-  const { allMaps, loading } = useSelector((s) => (s.maps));
+  const { allMaps, loading } = useSelector((s) => s.maps);
   const dispatch = useDispatch();
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
@@ -53,8 +53,9 @@ const RunAnalyticsPage = () => {
         />
         <div className={s.rightPanel}>
           <div className={s.graphHeader}>
-            <div className={s.graphTitle}>Player runs</div>
-            <div className={s.runCount}>{runs?.length || 0} runs</div>
+            <h2 className={s.graphTitle}>
+              {runs?.length >= 1 ? `${runs?.length || 0} Runs` : ""}
+            </h2>
           </div>
           <Graph data={runs} />
         </div>

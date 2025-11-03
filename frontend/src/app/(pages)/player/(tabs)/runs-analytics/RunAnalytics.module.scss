@@ -246,15 +246,6 @@
   margin: 0;
 }
 
-.runCount {
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 4px;
-  padding: 0.25rem 0.5rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: #cbd5e1;
-}
-
 // Graph Container
 .graphContainer {
   position: relative;
@@ -396,11 +387,6 @@
 
   .graphTitle {
     font-size: 1.1rem;
-  }
-
-  .runCount {
-    font-size: 0.75rem;
-    padding: 0.2rem 0.5rem;
   }
 }
 
