@@ -1,4 +1,5 @@
 "use client";
+import { JUMP_FPS } from "@/Data/constants";
 import { createQueryString } from "@/Functions/utils";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
 import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
@@ -63,7 +64,7 @@ const RunAnalyticsPage = () => {
                   onChange={handleFpsChange}
                   id="select-fps"
                 >
-                  {["125", "250", "333", "76", "43", "mix"].map((fps) => (
+                  {JUMP_FPS.map((fps) => (
                     <option key={fps} value={fps}>
                       {fps}
                     </option>
