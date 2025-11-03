@@ -16,7 +16,6 @@ const fpsOptions = [
   { label: "125 FPS", value: "125", id: 3 },
   { label: "250 FPS", value: "250", id: 4 },
   { label: "333 FPS", value: "333", id: 5 },
-  { label: "mix FPS", value: "mix", id: 6 },
 ];
 
 const RunAnalyticsPage = () => {
