@@ -1,5 +1,4 @@
 "use client";
-import { graphData } from "@/Data/graphData";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
 import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
 import { useSearchParams } from "next/navigation";
@@ -16,25 +15,9 @@ const RunAnalyticsPage = () => {
   const dispatch = useDispatch();
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
-  const fpsOptions = Array.from(new Set(graphData.map((d) => d.fps)));
-
-  const [selectedFps, setSelectedFps] = useState(fpsOptions[0] || "125");
-  const [selectedRoute, setSelectedRoute] = useState("Route 1");
 
   const searchParams = useSearchParams();
   const playerid = searchParams.get("playerid");
-
-  // filter runs for the selected map + fps
-  function runsForSelected() {
-    if (!selectedCpid && mapRuns?.length > 0) return [];
-
-    return mapRuns?.filter(
-      (run) =>
-        run.CpID === selectedCpid && String(run.FPS) === String(selectedFps)
-    );
-  }
-
-  const runs = runsForSelected();
 
   useEffect(() => {
     if (allMaps.length <= 0) dispatch(fetchMaps());
@@ -54,10 +37,10 @@ const RunAnalyticsPage = () => {
         <div className={s.rightPanel}>
           <div className={s.graphHeader}>
             <h2 className={s.graphTitle}>
-              {runs?.length >= 1 ? `${runs?.length || 0} Runs` : ""}
+              {mapRuns?.length >= 1 ? `${mapRuns?.length || 0} Runs` : ""}
             </h2>
           </div>
-          <Graph data={runs} />
+          <Graph data={mapRuns} />
         </div>
       </div>
     </div>
