@@ -11,15 +11,14 @@ import Graph from "./components/Graph";
 import MapList from "./components/MapList";
 
 const RunAnalyticsPage = () => {
-  const { mapRuns } = useSelector((s) => s.playerProfile);
-
+  const mapRuns = useSelector((s) => s.playerProfile.mapRuns);
   const { allMaps, loading } = useSelector((s) => s.maps);
-  const dispatch = useDispatch();
 
   const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
 
   const router = useRouter();
   const pathname = usePathname();
+  const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
   const playerid = searchParams.get("playerid");
@@ -50,6 +49,7 @@ const RunAnalyticsPage = () => {
           onSelect={setSelectedCpid}
           isLoading={loading}
         />
+
         <div className={s.rightPanel}>
           <div className={s.graphHeader}>
             <h2 className={s.graphTitle}>
