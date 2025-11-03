@@ -126,9 +126,7 @@ const MapList = ({
                 aria-label={`Select ${map.Name} map`}
               >
                 <span>{map.Name}</span>
-                {map.count !== undefined && (
-                  <span className={s.mapCount}>{map.count}</span>
-                )}
+                {map.Ender && <span className={s.mapRoute}>{map.Ender}</span>}
               </button>
             );
           })
