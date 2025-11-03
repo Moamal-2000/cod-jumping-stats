@@ -82,7 +82,9 @@ const MapList = ({
         {["All", "Jump", "Defrag", "Surf"].map((type) => (
           <button
             key={type}
-            className={s.mapType}
+            className={`${s.mapType} ${
+              mapType === type.toLowerCase() ? s.active : ""
+            }`}
             onClick={() => handleSelectMapType(type)}
           >
             {type}
