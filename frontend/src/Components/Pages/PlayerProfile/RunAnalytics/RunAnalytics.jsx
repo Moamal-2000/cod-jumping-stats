@@ -1,6 +1,5 @@
 "use client";
 
-import { getMapRoutes } from "@/Components/Shared/MapRoutesSelector/MapRoutesSelector";
 import SelectMenu from "@/Components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/Functions/utils";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
@@ -10,6 +9,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Graph from "./Graph";
 import MapList from "./MapList";
+import MapRoutes from "./MapRoutes/MapRoutes";
 import s from "./RunAnalytics.module.scss";
 
 const fpsOptions = [
@@ -32,14 +32,6 @@ const RunAnalytics = () => {
   const playerid = searchParams.get("playerid");
   const selectedFps = searchParams.get("fps") || 125;
   const selectedMapId = parseInt(searchParams.get("mapid"));
-
-  const selectedMap = allMaps.find((map) => map.CpID === selectedMapId) || {};
-
-  const mapRoutes = getMapRoutes({
-    allMaps,
-    Name: selectedMap?.Name,
-    Ender: selectedMap?.Ender,
-  });
 
   function handleFpsChange(event) {
     createQueryString(
@@ -78,24 +70,11 @@ const RunAnalytics = () => {
             </h2>
 
             <div className={s.options}>
-              {mapRoutes.length > 0 && (
-                <div className={s.mapRoutesSelector}>
-                  <label htmlFor="map-routes">Routes</label>
-
-                  <div className="routes">
-                    {mapRoutes.map((route) => (
-                      <button
-                        type="button"
-                        key={route.CpID}
-                        onClick={() => selectMapRoute(route.CpID)}
-                      >
-                        {route.Ender}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
-
+              <MapRoutes
+                allMaps={allMaps}
+                selectedMapId={selectedMapId}
+                selectMapRoute={selectMapRoute}
+              />
               <SelectMenu
                 label="FPS"
                 onChange={handleFpsChange}
