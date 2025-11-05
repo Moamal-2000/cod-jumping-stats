@@ -1,0 +1,50 @@
+.otherRoutes {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+  margin-top: 14px;
+}
+
+.otherRoutesLabel {
+  color: #cbd5e1;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.otherRoutesList {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.otherRoutesList a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  color: #bbc2cd;
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+  z-index: 2;
+}
+
+.otherRoutesList a:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #e6eef8;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.otherRoutesList a:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.04);
+  border-color: rgba(255, 215, 0, 0.08);
+}

@@ -1,9 +1,30 @@
-import s from './MapRoutesSelector.module.scss'
+import Link from "next/link";
+import s from "./MapRoutesSelector.module.scss";
 
-const MapRoutesSelector = () => {
+const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
+  const otherRoutes = getMapRoutes({ allMaps, Name, Ender });
+
+  if (otherRoutes.length <= 0) return null;
+
   return (
-    <div>MapRoutesSelector</div>
-  )
-}
+    <nav className={s.otherRoutes}>
+      <p className={s.otherRoutesLabel}>Routes from this map</p>
 
-export default MapRoutesSelector
+      <div className={s.otherRoutesList}>
+        {otherRoutes.map((route) => (
+          <Link key={route.CpID} href={`/map?mapid=${route.CpID}`}>
+            {route.Ender}
+          </Link>
+        ))}
+      </div>
+    </nav>
+  );
+};
+
+export default MapRoutesSelector;
+
+function getMapRoutes({ allMaps, Name, Ender } = {}) {
+  return allMaps.filter((map) => {
+    return map.Name === Name && map.Ender !== Ender;
+  });
+}
