@@ -13,20 +13,16 @@ const MapRoutes = ({ allMaps, selectedMapId, selectMapRoute }) => {
   if (mapRoutes.length <= 0) return null;
 
   return (
-    <div className={s.mapRoutesSelector}>
-      <label htmlFor="map-routes">Routes</label>
-
-      <div className="routes">
-        {mapRoutes.map((route) => (
-          <button
-            type="button"
-            key={route.CpID}
-            onClick={() => selectMapRoute(route.CpID)}
-          >
-            {route.Ender}
-          </button>
-        ))}
-      </div>
+    <div className={s.routes}>
+      {mapRoutes.map((route) => (
+        <button
+          type="button"
+          key={route.CpID}
+          onClick={() => selectMapRoute(route.CpID)}
+        >
+          {route.Ender}
+        </button>
+      ))}
     </div>
   );
 };
