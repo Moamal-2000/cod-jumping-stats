@@ -1,5 +1,6 @@
 "use client";
 
+import { getMapRoutes } from "@/Components/Shared/MapRoutesSelector/MapRoutesSelector";
 import SelectMenu from "@/Components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/Functions/utils";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
@@ -33,6 +34,14 @@ const RunAnalytics = () => {
   const playerid = searchParams.get("playerid");
   const selectedFps = searchParams.get("fps") || 125;
 
+  const selectedMap = allMaps.find((map) => map.CpID === selectedCpid) || {};
+
+  const mapRoutes = getMapRoutes({
+    allMaps,
+    Name: selectedMap?.Name,
+    Ender: selectedMap?.Ender,
+  });
+
   function handleFpsChange(event) {
     createQueryString(
       "fps",
@@ -41,6 +50,10 @@ const RunAnalytics = () => {
       router,
       pathname
     );
+  }
+
+  function selectMapRoute(mapId) {
+    createQueryString("mapid", mapId, searchParams, router, pathname);
   }
 
   useEffect(() => {
@@ -66,6 +79,24 @@ const RunAnalytics = () => {
             </h2>
 
             <div className={s.options}>
+              {mapRoutes.length > 0 && (
+                <div className={s.mapRoutesSelector}>
+                  <label htmlFor="map-routes">Routes</label>
+
+                  <div className="routes">
+                    {mapRoutes.map((route) => (
+                      <button
+                        type="button"
+                        key={route.CpID}
+                        onClick={() => selectMapRoute(route.CpID)}
+                      >
+                        {route.Ender}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              )}
+
               <SelectMenu
                 label="FPS"
                 onChange={handleFpsChange}

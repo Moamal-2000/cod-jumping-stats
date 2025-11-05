@@ -23,7 +23,7 @@ const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
 
 export default MapRoutesSelector;
 
-function getMapRoutes({ allMaps, Name, Ender } = {}) {
+export function getMapRoutes({ allMaps, Name, Ender } = {}) {
   return allMaps.filter((map) => {
     return map.Name === Name && map.Ender !== Ender;
   });
