@@ -1,7 +1,7 @@
 "use client";
+import s from "@/Components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
 import { getColoredName } from "@/Functions/components";
 import { useEffect, useRef, useState } from "react";
-import s from "../RunAnalytics.module.scss";
 
 const LoadingSpinner = () => (
   <svg
@@ -89,7 +89,7 @@ const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for 
 const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
 const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
 
-const RunGraph = ({ data: runData, isLoading = false }) => {
+const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
   const chartWidth = containerWidth || 800; // Final width used for calculations
@@ -634,4 +634,4 @@ const RunGraph = ({ data: runData, isLoading = false }) => {
   );
 };
 
-export default RunGraph;
+export default Graph;
