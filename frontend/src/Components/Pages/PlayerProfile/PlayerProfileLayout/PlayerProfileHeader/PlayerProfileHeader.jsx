@@ -53,7 +53,6 @@ const PlayerProfileHeader = ({ playerData }) => {
                 Donated={isDonated}
                 LastSeen={lastSeen}
                 PlayerID={playerId}
-                PlayerName={playerName}
               />
             </div>
           </div>

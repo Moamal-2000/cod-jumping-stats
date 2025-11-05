@@ -39,7 +39,6 @@ const PlayerCard = ({
           Banned={Banned}
           Donated={Donated}
           PlayerID={PlayerID}
-          PlayerName={PlayerName || PrefName}
           LastSeen={LastSeen}
         />
       </div>

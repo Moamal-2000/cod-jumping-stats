@@ -13,11 +13,7 @@ const PlayerBadges = ({
   Banned,
   Donated,
   PlayerID,
-  PlayerName,
   LastSeen,
-  playerSince,
-  score,
-  averageScore,
   top10Ids,
 }) => {
   const playerBadgesData = getPlayerBadges({
@@ -26,11 +22,7 @@ const PlayerBadges = ({
     Banned,
     Donated,
     PlayerID,
-    PlayerName,
     LastSeen,
-    playerSince,
-    score,
-    averageScore,
     top10Ids,
   });
 
@@ -63,19 +55,9 @@ export function getPlayerBadges({
   Banned,
   Donated,
   PlayerID,
-  PlayerName,
   LastSeen,
-  playerSince,
-  score,
-  averageScore,
   top10Ids,
 }) {
-  const playerSince5Years =
-    playerSince <= Date.now() - 1000 * 60 * 60 * 24 * 365 * 5;
-
-  const newPlayerSinceMonth =
-    playerSince && playerSince >= Date.now() - 1000 * 60 * 60 * 24 * 30;
-
   return [
     {
       displayCondition: Banned,
@@ -106,16 +88,6 @@ export function getPlayerBadges({
       label: "Mapper",
       id: 7,
     },
-    // Veteran: 5+ years and above average score
-    {
-      displayCondition: true,
-      classes: cssModule.veteran,
-      icon: "timer",
-      label: "Veteran",
-      tooltipText: "5+ years & above avg score",
-      id: 8,
-    },
-    // Top Scorer: Only top 10
     {
       displayCondition: Array.isArray(top10Ids) && top10Ids.includes(PlayerID),
       classes: cssModule.topScorer,
@@ -123,14 +95,6 @@ export function getPlayerBadges({
       label: "Top Scorer",
       tooltipText: "Top 10",
       id: 9,
-    },
-    // Newcomer: Joined today or within a month
-    {
-      displayCondition: true,
-      classes: cssModule.newcomer,
-      icon: "star",
-      label: "Newcomer",
-      id: 10,
     },
     {
       displayCondition: eventWinnerIds.includes(PlayerID),

@@ -95,21 +95,6 @@
   }
 }
 
-.veteran {
-  color: #FF7F50;
-  /* Coral - unique color not used by other badges */
-  background: linear-gradient(to right, #FF7F50, #FF6347);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 127, 80, 0.3);
-
-  svg {
-    color: #FF7F50;
-    filter: drop-shadow(0 0 4px rgba(255, 127, 80, 0.6));
-  }
-}
-
 .topScorer {
   color: #ffd700;
   background: linear-gradient(to right, #ffd700, #ffa500);
@@ -121,20 +106,6 @@
   svg {
     color: #ffd700;
     filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
-  }
-}
-
-.newcomer {
-  color: #7fffd4;
-  background: linear-gradient(to right, #7fffd4, #20b2aa);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(127, 255, 212, 0.2);
-
-  svg {
-    color: #7fffd4;
-    filter: drop-shadow(0 0 3px rgba(127, 255, 212, 0.6));
   }
 }
 
