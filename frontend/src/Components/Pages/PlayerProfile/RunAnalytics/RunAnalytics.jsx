@@ -80,6 +80,7 @@ const RunAnalytics = () => {
                 label="FPS"
                 onChange={handleFpsChange}
                 optionsData={fpsOptions}
+                value={selectedFps}
               />
             </div>
           </div>
