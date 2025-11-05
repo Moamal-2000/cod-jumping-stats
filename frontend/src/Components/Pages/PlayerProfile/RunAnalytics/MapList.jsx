@@ -114,6 +114,7 @@ const MapList = ({
         ) : (
           filteredMaps.map((map) => {
             const isActive = selectedMapId === map.CpID;
+
             return (
               <button
                 key={map.CpID}
