@@ -6,7 +6,7 @@ import { createQueryString } from "@/Functions/utils";
 import { fetchMaps } from "@/Redux/thunks/mapsThunk";
 import { fetchMapRuns } from "@/Redux/thunks/playerProfileThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Graph from "./Graph";
 import MapList from "./MapList";
@@ -24,8 +24,6 @@ const RunAnalytics = () => {
   const { mapRuns, mapRunsLoading } = useSelector((s) => s.playerProfile);
   const { allMaps, loading } = useSelector((s) => s.maps);
 
-  const [selectedCpid, setSelectedCpid] = useState(allMaps[0]?.CpID || null);
-
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
@@ -33,8 +31,9 @@ const RunAnalytics = () => {
   const searchParams = useSearchParams();
   const playerid = searchParams.get("playerid");
   const selectedFps = searchParams.get("fps") || 125;
+  const selectedMapId = parseInt(searchParams.get("mapid"));
 
-  const selectedMap = allMaps.find((map) => map.CpID === selectedCpid) || {};
+  const selectedMap = allMaps.find((map) => map.CpID === selectedMapId) || {};
 
   const mapRoutes = getMapRoutes({
     allMaps,
@@ -59,16 +58,16 @@ const RunAnalytics = () => {
   useEffect(() => {
     if (allMaps.length <= 0) dispatch(fetchMaps());
 
-    dispatch(fetchMapRuns({ playerid, cpid: selectedCpid, fps: selectedFps }));
-  }, [selectedCpid, selectedFps]);
+    dispatch(fetchMapRuns({ playerid, cpid: selectedMapId, fps: selectedFps }));
+  }, [selectedMapId, selectedFps]);
 
   return (
     <div>
       <div className={s.container}>
         <MapList
           allMaps={allMaps}
-          selectedCpid={selectedCpid}
-          onSelect={setSelectedCpid}
+          selectedMapId={selectedMapId}
+          selectMapRoute={selectMapRoute}
           isLoading={loading}
         />
 

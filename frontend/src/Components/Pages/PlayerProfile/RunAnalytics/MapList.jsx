@@ -8,8 +8,8 @@ import { useEffect, useState } from "react";
 
 const MapList = ({
   allMaps = [],
-  selectedCpid,
-  onSelect,
+  selectedMapId,
+  selectMapRoute,
   isLoading = false,
 }) => {
   const [filteredMaps, setFilteredMaps] = useState(allMaps);
@@ -113,14 +113,14 @@ const MapList = ({
           </div>
         ) : (
           filteredMaps.map((map) => {
-            const isActive = selectedCpid === map.CpID;
+            const isActive = selectedMapId === map.CpID;
             return (
               <button
                 key={map.CpID}
                 className={`${s.mapButton} ${isActive ? s.active : ""} ${
                   s.fadeIn
                 }`}
-                onClick={() => onSelect(map.CpID)}
+                onClick={() => selectMapRoute(map.CpID)}
                 role="listitem"
                 aria-pressed={isActive}
                 aria-label={`Select ${map.Name} map`}
