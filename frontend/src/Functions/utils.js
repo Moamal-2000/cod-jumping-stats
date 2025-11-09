@@ -138,7 +138,7 @@ export function modifyMapsData(mapsData = []) {
 export function getRequiredMapVideos(mapData) {
   return MAPS_VIDEOS.find((video) => {
     const hasMatchedMap =
-      video.mapName === mapData.Name && video.mapId === mapData.ID;
+      video.mapName === mapData.Name && video.mapId === mapData.CpID;
 
     if (video.mapHasRoutes) {
       const hasMatchRoute = video.videos.find(
