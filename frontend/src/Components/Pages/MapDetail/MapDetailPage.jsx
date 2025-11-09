@@ -17,6 +17,7 @@ import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
 import MapDetailPlayers from "./MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "./MapDetailTops/MapDetailTops";
+import MapVideos from "./MapVideos/MapVideos";
 
 const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
 const breadcrumbPaths = [
@@ -504,6 +505,7 @@ const MapDetailPage = () => {
               onFpsChange={handleFpsChange}
               fpsOptions={fpsOptions}
             />
+            {mapData && <MapVideos mapId={mapData.CpID} />}
           </div>
 
           <div className={s.rightColumn}>
