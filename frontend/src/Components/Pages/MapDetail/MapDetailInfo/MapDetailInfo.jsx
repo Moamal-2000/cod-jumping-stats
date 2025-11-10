@@ -1,16 +1,11 @@
 import { JUMP_FPS } from "@/Data/constants";
+import { getFpsDifficultyValue } from "@/Functions/utils";
 import s from "./MapDetailInfo.module.scss";
 
 const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 
 const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
-  const { Difficulty } = mapData;
-
-  const getDifficultyValue = (fps) => {
-    const diff = Difficulty?.[fps];
-    if (!diff || diff.Difficulty < 0) return "?";
-    return Number(diff.Difficulty).toFixed(2);
-  };
+  const Difficulty = mapData?.Difficulty;
 
   const getStatsForFps = (fps) => {
     const diff = Difficulty?.[fps];
@@ -19,7 +14,9 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
   };
 
   const currentStats = getStatsForFps(selectedFps);
-  const hasDifficulty = JUMP_FPS.some((fps) => getDifficultyValue(fps) !== "?");
+  const hasDifficulty = JUMP_FPS.some(
+    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?"
+  );
 
   return (
     <div className={s.infoCard}>
@@ -48,16 +45,14 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
         {hasDifficulty ? (
           <div className={s.difficultyGrid}>
             {JUMP_FPS.map((fps) => {
-              const fpsDifficulty = getDifficultyValue(fps);
+              const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
 
               if (fpsDifficulty === "?") return null;
 
               return (
                 <div key={fps} className={s.difficultyItem}>
                   <span className={s.fpsLabel}>{fps} FPS</span>
-                  <span className={s.difficultyValue}>
-                    {getDifficultyValue(fps)}
-                  </span>
+                  <span className={s.difficultyValue}>{fpsDifficulty}</span>
                 </div>
               );
             })}
