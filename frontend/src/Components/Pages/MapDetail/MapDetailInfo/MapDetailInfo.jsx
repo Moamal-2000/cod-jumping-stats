@@ -54,9 +54,7 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
 
               return (
                 <div key={fps} className={s.difficultyItem}>
-                  <span className={s.fpsLabel}>
-                    {fps === "mix" ? "Mixed" : fps} FPS
-                  </span>
+                  <span className={s.fpsLabel}>{fps} FPS</span>
                   <span className={s.difficultyValue}>
                     {getDifficultyValue(fps)}
                   </span>
