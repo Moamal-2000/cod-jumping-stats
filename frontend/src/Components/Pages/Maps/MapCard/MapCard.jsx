@@ -75,9 +75,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
                 <div key={fps} className={s.fpsDifficulty}>
                   <span className={s.fps}>{fps}</span>
                   <span className={s.difficulty}>
-                    {Difficulty?.[fps]?.Difficulty < 0
-                      ? "???"
-                      : Number(Difficulty?.[fps]?.Difficulty)?.toFixed(2)}
+                    {Number(fpsDifficulty)?.toFixed(2)}
                   </span>
                 </div>
               );
