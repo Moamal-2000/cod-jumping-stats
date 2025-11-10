@@ -193,19 +193,3 @@
   height: 100%;
   fill: #FF0000;
 }
-
-.mapCard .content .nameAndRating .rateWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1e2939;
-  min-width: 60px;
-  border-radius: 10px;
-  padding: 4px;
-}
-
-.mapCard .content .nameAndRating .rateWrapper .star {
-  color: #FFC107;
-  font-size: .875rem;
-  margin-right: 6px;
-}

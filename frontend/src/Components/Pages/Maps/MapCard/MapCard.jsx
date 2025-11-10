@@ -3,9 +3,9 @@ import { getMapCompletionRate } from "@/Functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
+import CompletionRate from "./CompletionRate/CompletionRate";
 import s from "./MapCard.module.scss";
 import MapDifficulties from "./MapDifficulties/MapDifficulties";
-import CompletionRate from "./CompletionRate/CompletionRate";
 
 const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   const {
@@ -13,7 +13,6 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
     Name,
     Classifications,
-    Rate,
     Released,
     Videos,
     CpID,
@@ -56,11 +55,6 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
               </span>
             )}
           </Link>
-
-          <div className={s.rateWrapper}>
-            <span className={s.star}>★</span>
-            <span className={s.rate}>{Rate ? Rate : "?"}</span>
-          </div>
         </div>
 
         <MapDifficulties Difficulty={mapData?.Difficulty} />
