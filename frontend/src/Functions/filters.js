@@ -86,6 +86,7 @@ export function getMapsByParams({ mapsData, paramsObject }) {
 
   const type = paramsObject?.type || "all";
   const sortBy = paramsObject?.["sort-by"] || "newest";
+  const filterBy = paramsObject?.["filter-by"] || "all";
 
   const mapNameSearch = paramsObject?.name || "";
   const mapAuthorSearch = paramsObject?.author || "";
@@ -106,8 +107,13 @@ export function getMapsByParams({ mapsData, paramsObject }) {
     );
   }
 
-  processedMaps = sortMaps(processedMaps, sortBy);
   processedMaps = modifyMapsData(processedMaps);
+
+  if (filterBy !== "all") {
+    processedMaps = filterMaps(processedMaps, filterBy);
+  }
+
+  processedMaps = sortMaps(processedMaps, sortBy);
 
   return processedMaps;
 }
@@ -168,6 +174,19 @@ export function getMapsByFpsDifficulty({ sortedMaps, fps }) {
     if (difficultyA < 0) return 1;
     if (difficultyB < 0) return -1;
     return difficultyB - difficultyA;
+  });
+}
+
+export function filterMaps(maps, filterBy = "all") {
+  if (!maps || maps.length === 0 || filterBy === "all") return maps;
+
+  return maps.filter((map) => {
+    const hasVideos = map?.Videos?.length > 0;
+
+    return (
+      (hasVideos && filterBy === "has-videos") ||
+      (!hasVideos && filterBy === "no-videos")
+    );
   });
 }
 
