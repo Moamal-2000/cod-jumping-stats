@@ -67,6 +67,10 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           <span className={s.difficultyLabel}>Difficulties</span>
           <div className={s.fpsDifficulties}>
             {JUMP_FPS.map((fps) => {
+              const fpsDifficulty = Difficulty?.[fps]?.Difficulty;
+
+              if (fpsDifficulty < 0) return null;
+
               return (
                 <div key={fps} className={s.fpsDifficulty}>
                   <span className={s.fps}>{fps}</span>
