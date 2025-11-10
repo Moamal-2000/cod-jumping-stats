@@ -1,13 +1,10 @@
+import { JUMP_FPS } from "@/Data/constants";
 import s from "./MapDetailInfo.module.scss";
 
-const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
-  const { Difficulty } = mapData;
+const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 
-  const formatTime = (seconds) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds.toString().padStart(2, "0")}`;
-  };
+const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
+  const { Difficulty } = mapData;
 
   const getDifficultyValue = (fps) => {
     const diff = Difficulty?.[fps];
@@ -22,6 +19,7 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
   };
 
   const currentStats = getStatsForFps(selectedFps);
+  const hasDifficulty = JUMP_FPS.some((fps) => getDifficultyValue(fps) !== "?");
 
   return (
     <div className={s.infoCard}>
@@ -47,18 +45,24 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange, fpsOptions }) => {
 
       <div className={s.difficultySection}>
         <h3>Difficulty</h3>
-        {fpsOptions.some((fps) => getDifficultyValue(fps) !== "?") ? (
+        {hasDifficulty ? (
           <div className={s.difficultyGrid}>
-            {fpsOptions.map((fps) => (
-              <div key={fps} className={s.difficultyItem}>
-                <span className={s.fpsLabel}>
-                  {fps === "mix" ? "Mixed" : fps} FPS
-                </span>
-                <span className={s.difficultyValue}>
-                  {getDifficultyValue(fps)}
-                </span>
-              </div>
-            ))}
+            {JUMP_FPS.map((fps) => {
+              const fpsDifficulty = getDifficultyValue(fps);
+
+              if (fpsDifficulty === "?") return null;
+
+              return (
+                <div key={fps} className={s.difficultyItem}>
+                  <span className={s.fpsLabel}>
+                    {fps === "mix" ? "Mixed" : fps} FPS
+                  </span>
+                  <span className={s.difficultyValue}>
+                    {getDifficultyValue(fps)}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className={s.noDifficulty}>

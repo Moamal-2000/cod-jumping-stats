@@ -25,7 +25,6 @@ const breadcrumbPaths = [
   { index: 1, path: "/maps" },
 ];
 
-const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 const ITEMS_PER_PAGE = 10;
 
 const MapDetailPage = () => {
@@ -503,7 +502,6 @@ const MapDetailPage = () => {
               mapData={mapData}
               selectedFps={selectedFps}
               onFpsChange={handleFpsChange}
-              fpsOptions={fpsOptions}
             />
             {mapData && <MapVideos mapId={mapData.CpID} />}
           </div>

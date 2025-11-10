@@ -1,7 +1,7 @@
 @use "@/Styles/mixins" as m;
 
 .infoCard {
-  background: linear-gradient(135deg,#1f2937 0%,#111827 100%);
+  background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
   border: 1px solid rgba(255, 255, 255, 0.04);
   border-radius: 12px;
   padding: 1.5rem;
@@ -80,7 +80,7 @@
 
 .difficultyGrid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(120px, 134px));
   gap: 0.75rem;
 }
 
@@ -158,10 +158,6 @@
 
   .fpsButtons {
     flex-wrap: wrap;
-  }
-
-  .difficultyGrid {
-    grid-template-columns: repeat(2, 1fr);
   }
 
   .statsGrid {
