@@ -1,9 +1,25 @@
-import s from './CompletionRate.module.scss'
+import s from "./CompletionRate.module.scss";
 
-const CompletionRate = () => {
+const CompletionRate = ({ completionRate }) => {
   return (
-    <div>CompletionRate</div>
-  )
-}
+    <div className={s.completionRate}>
+      <div className={s.textWrapper}>
+        <span className={s.text}>Completion Rate</span>
+        <span className={s.rate}>{completionRate + "%"}</span>
+      </div>
 
-export default CompletionRate
+      <div className={s.progressBar}>
+        <div className={s.progressLine} />
+        <div
+          className={s.hideLine}
+          style={{
+            left: completionRate + "%",
+            width: 100 - completionRate + "%",
+          }}
+        />
+      </div>
+    </div>
+  );
+};
+
+export default CompletionRate;
