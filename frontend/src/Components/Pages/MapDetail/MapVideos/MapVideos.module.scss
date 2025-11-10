@@ -77,15 +77,26 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
   z-index: 2;
   pointer-events: none;
   opacity: 0;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+  transition: all 0.3s ease;
 }
 
 .videoCard:hover .playButton {
   opacity: 0.9;
+}
+
+.playButton::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 24px;
+  height: 24px;
+  background-color: #fff;
+  z-index: -1;
 }
 
 .playButton svg {
