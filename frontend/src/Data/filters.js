@@ -80,4 +80,16 @@ export const MAPS_FILTERS_DATA = [
     tooltipText: "Select a map type to narrow down results",
     id: 1,
   },
+  {
+    label: "Filter Maps By",
+    queryName: "filter-by",
+    defaultUrlQuery: "all",
+    filtersData: [
+      { text: "All", queryValue: "all", id: 1 },
+      { text: "Has videos", queryValue: "has-videos", id: 2 },
+      { text: "No videos", queryValue: "no-videos", id: 3 },
+    ],
+    tooltipText: "Select a filter to narrow down results",
+    id: 2,
+  },
 ];
