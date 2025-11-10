@@ -1,22 +1,13 @@
 import { JUMP_FPS } from "@/Data/constants";
-import { getFpsDifficultyValue } from "@/Functions/utils";
+import { getFpsDifficultyValue, mapHasDifficulties } from "@/Functions/utils";
 import s from "./MapDetailInfo.module.scss";
 
 const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 
 const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
   const Difficulty = mapData?.Difficulty;
-
-  const getStatsForFps = (fps) => {
-    const diff = Difficulty?.[fps];
-    if (!diff || diff.Difficulty < 0) return null;
-    return diff;
-  };
-
-  const currentStats = getStatsForFps(selectedFps);
-  const hasDifficulty = JUMP_FPS.some(
-    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?"
-  );
+  const currentStats = getStatsForFps({ selectedFps, Difficulty });
+  const hasDifficulty = mapHasDifficulties(Difficulty);
 
   return (
     <div className={s.infoCard}>
@@ -81,3 +72,11 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
 };
 
 export default MapDetailInfo;
+
+function getStatsForFps({ selectedFps, Difficulty } = {}) {
+  const fpsData = Difficulty?.[selectedFps];
+
+  if (!fpsData || fpsData.Difficulty < 0) return null;
+
+  return fpsData;
+}

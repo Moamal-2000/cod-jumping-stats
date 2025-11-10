@@ -1,5 +1,6 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import {
+  JUMP_FPS,
   MONTHS,
   NUMBER_OF_RATING_STARS,
   PAGINATION_ITEMS_PER_PAGE,
@@ -375,4 +376,10 @@ export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
   const diff = Difficulty?.[fps];
   if (!diff || diff?.Difficulty < 0) return "?";
   return Number(diff.Difficulty).toFixed(2);
+}
+
+export function mapHasDifficulties(Difficulty) {
+  return JUMP_FPS.some(
+    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?"
+  );
 }
