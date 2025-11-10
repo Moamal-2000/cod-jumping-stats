@@ -1,8 +1,8 @@
-import { API_KEY, buildYouTubeApiUrl } from "@/Lib/youtube";
+import { YOUTUBE_API_KEY, buildYouTubeApiUrl } from "@/Lib/youtube";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {
-  if (!API_KEY) return jsonError("Missing YouTube API key", 500);
+  if (!YOUTUBE_API_KEY) return jsonError("Missing YouTube API key", 500);
 
   try {
     const { searchParams } = new URL(req.url);
