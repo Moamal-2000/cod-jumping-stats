@@ -194,67 +194,6 @@
   fill: #FF0000;
 }
 
-.mapCard .content .difficultySection {
-  margin-bottom: 24px;
-}
-
-.mapCard .content .difficultyLabel {
-  color: #9ca3af;
-  font-size: 0.75rem;
-  font-weight: 500;
-  margin-right: 8px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.mapCard .content .fpsDifficulties {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-  margin-top: 4px;
-  min-height: 23.6px;
-}
-
-.mapCard .content .fpsDifficulty {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: #1e2939;
-  border-radius: 4px;
-  padding: 3px 6px;
-  gap: 12px;
-  border: 1px solid #374151;
-}
-
-.mapCard .content .fps {
-  color: #9ca3af;
-  font-size: 0.7rem;
-  font-weight: 500;
-}
-
-.mapCard .content .difficulty {
-  color: #facc15;
-  font-size: 0.75rem;
-  font-weight: 600;
-}
-
-.mapCard .content .moreDifficulties {
-  display: flex;
-  align-items: center;
-  background-color: #374151;
-  border-radius: 4px;
-  padding: 3px 6px;
-  border: 1px solid #4b5563;
-  cursor: pointer;
-  transition: all 0.2s ease;
-
-  &:hover {
-    background-color: #4b5563;
-    border-color: #6b7280;
-  }
-}
-
 .mapCard .content .nameAndRating .rateWrapper {
   display: flex;
   align-items: center;

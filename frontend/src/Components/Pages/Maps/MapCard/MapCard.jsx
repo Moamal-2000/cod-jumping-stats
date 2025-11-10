@@ -1,15 +1,14 @@
 import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
-import { JUMP_FPS } from "@/Data/constants";
-import { getFpsDifficultyValue, getMapCompletionRate } from "@/Functions/utils";
+import { getMapCompletionRate } from "@/Functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import s from "./MapCard.module.scss";
+import MapDifficulties from "./MapDifficulties/MapDifficulties";
 
 const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   const {
     Author,
-    Difficulty,
     IndividualFinishCount,
     Name,
     Classifications,
@@ -63,23 +62,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           </div>
         </div>
 
-        <div className={s.difficultySection}>
-          <span className={s.difficultyLabel}>Difficulties</span>
-          <div className={s.fpsDifficulties}>
-            {JUMP_FPS.map((fps) => {
-              const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
-
-              if (fpsDifficulty === "?") return null;
-
-              return (
-                <div key={fps} className={s.fpsDifficulty}>
-                  <span className={s.fps}>{fps}</span>
-                  <span className={s.difficulty}>{fpsDifficulty}</span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <MapDifficulties Difficulty={mapData?.Difficulty} />
 
         <div className={s.completionRate}>
           <div className={s.textWrapper}>

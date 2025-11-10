@@ -1,9 +1,28 @@
-import s from './MapDifficulties.module.scss'
+import { JUMP_FPS } from "@/Data/constants";
+import { getFpsDifficultyValue } from "@/Functions/utils";
+import s from "./MapDifficulties.module.scss";
 
-const MapDifficulties = () => {
+const MapDifficulties = ({ Difficulty }) => {
   return (
-    <div>MapDifficulties</div>
-  )
-}
+    <div className={s.difficultySection}>
+      <span className={s.difficultyLabel}>Difficulties</span>
 
-export default MapDifficulties
+      <div className={s.fpsDifficulties}>
+        {JUMP_FPS.map((fps) => {
+          const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
+
+          if (fpsDifficulty === "?") return null;
+
+          return (
+            <div key={fps} className={s.fpsDifficulty}>
+              <span className={s.fps}>{fps}</span>
+              <span className={s.difficulty}>{fpsDifficulty}</span>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default MapDifficulties;
