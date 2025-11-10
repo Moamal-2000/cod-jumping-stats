@@ -28,7 +28,7 @@
   top: 0;
   left: 0;
   right: 0;
-  padding: 8px;
+  padding: 10px;
   background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 100%);
   z-index: 1;
 }
@@ -40,18 +40,11 @@
 }
 
 .channelAvatar {
-  width: 36px;
-  height: 36px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 2px solid rgba(255, 255, 255, 0.9);
-}
-
-.channelImage {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
 }
 
 .videoTitleOverlay {
