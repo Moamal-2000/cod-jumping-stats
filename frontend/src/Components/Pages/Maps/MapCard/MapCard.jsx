@@ -1,6 +1,6 @@
 import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
 import { JUMP_FPS } from "@/Data/constants";
-import { getMapCompletionRate } from "@/Functions/utils";
+import { getFpsDifficultyValue, getMapCompletionRate } from "@/Functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
@@ -67,16 +67,14 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           <span className={s.difficultyLabel}>Difficulties</span>
           <div className={s.fpsDifficulties}>
             {JUMP_FPS.map((fps) => {
-              const fpsDifficulty = Difficulty?.[fps]?.Difficulty;
+              const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
 
-              if (fpsDifficulty < 0) return null;
+              if (fpsDifficulty === "?") return null;
 
               return (
                 <div key={fps} className={s.fpsDifficulty}>
                   <span className={s.fps}>{fps}</span>
-                  <span className={s.difficulty}>
-                    {Number(fpsDifficulty)?.toFixed(2)}
-                  </span>
+                  <span className={s.difficulty}>{fpsDifficulty}</span>
                 </div>
               );
             })}

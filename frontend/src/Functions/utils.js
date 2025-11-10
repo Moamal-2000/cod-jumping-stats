@@ -370,3 +370,9 @@ export function getCachedMaps() {
     return null;
   }
 }
+
+export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
+  const diff = Difficulty?.[fps];
+  if (!diff || diff?.Difficulty < 0) return "?";
+  return Number(diff.Difficulty).toFixed(2);
+}
