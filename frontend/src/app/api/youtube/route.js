@@ -1,7 +1,5 @@
+import { API_KEY, buildYouTubeApiUrl } from "@/Lib/youtube";
 import { NextResponse } from "next/server";
-
-const API_KEY = process.env.YOUTUBE_API_KEY;
-const BASE_URL = "https://www.googleapis.com/youtube/v3";
 
 export async function GET(req) {
   if (!API_KEY) return jsonError("Missing YouTube API key", 500);
@@ -23,18 +21,6 @@ export async function GET(req) {
     console.error("YouTube API Error:", err);
     return jsonError("Internal Server Error", 500);
   }
-}
-
-function buildYouTubeApiUrl({ videoId, channelId }) {
-  if (channelId) {
-    return `${BASE_URL}/channels?part=snippet&id=${channelId}&key=${API_KEY}`;
-  }
-
-  if (videoId) {
-    return `${BASE_URL}/videos?part=snippet&id=${videoId}&key=${API_KEY}`;
-  }
-
-  return null;
 }
 
 function jsonError(message, status = 500) {
