@@ -8,16 +8,7 @@ const Video = ({ video }) => {
   const [oEmbedData, setOEmbedData] = useState(null);
   const [channelThumbnail, setChannelThumbnail] = useState("");
 
-  let videoUrl;
-  try {
-    videoUrl = new URL(video.videoUrl);
-  } catch {
-    return null;
-  }
-
-  const videoId =
-    videoUrl.searchParams.get("v") || videoUrl.pathname.split("/").pop();
-  const oEmbedUrl = `https://www.youtube.com/oembed?url=${video.videoUrl}&format=json`;
+  const { videoId, oEmbedUrl } = extractYouTubeVideoInfo(video);
 
   useEffect(() => {
     let isMounted = true;
@@ -109,3 +100,13 @@ const Video = ({ video }) => {
 };
 
 export default Video;
+
+function extractYouTubeVideoInfo(video) {
+  if (!video) return { videoId: "", oEmbedUrl: "" };
+
+  const videoUrl = new URL(video.videoUrl);
+  const videoId =
+    videoUrl.searchParams.get("v") || videoUrl.pathname.split("/").pop();
+  const oEmbedUrl = `https://www.youtube.com/oembed?url=${video.videoUrl}&format=json`;
+  return { videoId, oEmbedUrl };
+}
