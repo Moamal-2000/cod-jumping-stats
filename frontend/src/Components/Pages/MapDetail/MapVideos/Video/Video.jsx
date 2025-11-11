@@ -11,42 +11,32 @@ const Video = ({ video }) => {
   const { videoId, oEmbedUrl } = extractYouTubeVideoInfo(video);
 
   useEffect(() => {
-    let isMounted = true;
-
-    async function loadData() {
+    async function fetchYouTubeVideoData() {
       try {
         const [oEmbedRes, videoRes] = await Promise.all([
           fetch(oEmbedUrl),
           fetch(`/api/youtube?videoId=${videoId}`),
         ]);
 
-        if (!oEmbedRes.ok || !videoRes.ok) throw new Error("Request failed");
+        if (!oEmbedRes.ok && !videoRes.ok)
+          throw new Error("Failed to fetch YouTube data");
 
-        const oEmbedJson = await oEmbedRes.json();
-        const videoJson = await videoRes.json();
-        const channelId = videoJson.items[0]?.snippet?.channelId;
+        const [oEmbedJson, videoJson] = [
+          await oEmbedRes.json(),
+          await videoRes.json(),
+        ];
 
-        const channelRes = await fetch(`/api/youtube?channelId=${channelId}`);
-        const channelJson = await channelRes.json();
-        const channelImage =
-          channelJson.items[0]?.snippet?.thumbnails?.high?.url ||
-          channelJson.items[0]?.snippet?.thumbnails?.default?.url ||
-          "";
+        const channelImage = await fetchChannelThumbnail(videoJson);
 
-        if (isMounted) {
-          setOEmbedData(oEmbedJson);
-          setChannelThumbnail(channelImage);
-        }
+        setOEmbedData(oEmbedJson);
+        setChannelThumbnail(channelImage);
       } catch (err) {
         console.error("Error loading video data:", err);
       }
     }
 
-    loadData();
-    return () => {
-      isMounted = false;
-    };
-  }, [videoId, oEmbedUrl]);
+    fetchYouTubeVideoData();
+  }, []);
 
   return (
     <div className={s.videoCard}>
@@ -108,5 +98,27 @@ function extractYouTubeVideoInfo(video) {
   const videoId =
     videoUrl.searchParams.get("v") || videoUrl.pathname.split("/").pop();
   const oEmbedUrl = `https://www.youtube.com/oembed?url=${video.videoUrl}&format=json`;
+
   return { videoId, oEmbedUrl };
+}
+
+async function fetchChannelThumbnail(videoJson) {
+  const channelId = videoJson.items[0]?.snippet?.channelId;
+  if (!channelId) return "";
+
+  try {
+    const channelRes = await fetch(`/api/youtube?channelId=${channelId}`);
+    const channelJson = await channelRes.json();
+    const channelThumbnails = channelJson.items[0]?.snippet?.thumbnails;
+
+    return (
+      channelThumbnails?.high?.url ||
+      channelThumbnails?.default?.url ||
+      channelThumbnails?.medium?.url ||
+      ""
+    );
+  } catch (err) {
+    console.error("Error fetching channel thumbnail:", err);
+    return "";
+  }
 }
