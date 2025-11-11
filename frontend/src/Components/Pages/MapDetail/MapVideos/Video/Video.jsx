@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import s from "./Video.module.scss";
 import VideoOverlay from "./VideoOverlay/VideoOverlay";
@@ -41,7 +42,7 @@ const Video = ({ video }) => {
 
   return (
     <div className={s.videoCard}>
-      <a
+      <Link
         href={video.videoUrl}
         className={s.videoLink}
         target="_blank"
@@ -59,11 +60,6 @@ const Video = ({ video }) => {
             />
           )}
 
-          <VideoOverlay
-            oEmbedData={oEmbedData}
-            channelThumbnail={channelThumbnail}
-          />
-
           <div className={s.playButton}>
             <svg aria-hidden="true">
               <use href="/icons-sprite.svg#youtube"></use>
@@ -71,7 +67,12 @@ const Video = ({ video }) => {
           </div>
           {video.type && <span className={s.videoType}>{video.type}</span>}
         </div>
-      </a>
+      </Link>
+
+      <VideoOverlay
+        oEmbedData={oEmbedData}
+        channelThumbnail={channelThumbnail}
+      />
     </div>
   );
 };

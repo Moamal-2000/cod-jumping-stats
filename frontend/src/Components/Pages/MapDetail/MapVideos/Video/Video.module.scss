@@ -5,10 +5,10 @@
   overflow: hidden;
   background: var(--card-bg);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
 }
 
 .thumbnailContainer {
-  position: relative;
   width: 100%;
   padding-top: 56.25%;
   background: #000;

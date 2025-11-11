@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import s from "./VideoOverlay.module.scss";
 
 const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
@@ -7,14 +8,16 @@ const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
       <div className={s.channelInfo}>
         {channelThumbnail && (
           <div className={s.channelAvatar}>
-            <Image
-              src={channelThumbnail}
-              alt={oEmbedData?.author_name || "Channel"}
-              width={36}
-              height={36}
-              className={s.channelImage}
-              onError={(e) => (e.target.style.display = "none")}
-            />
+            <Link href={oEmbedData.author_url} target="_blank" rel="noopener">
+              <Image
+                src={channelThumbnail}
+                alt={oEmbedData?.author_name || "Channel"}
+                width={36}
+                height={36}
+                className={s.channelImage}
+                onError={(e) => (e.target.style.display = "none")}
+              />
+            </Link>
           </div>
         )}
 
