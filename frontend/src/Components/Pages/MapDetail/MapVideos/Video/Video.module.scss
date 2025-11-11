@@ -30,7 +30,7 @@
   }
 }
 
-.playButton {
+.youtubeIcon {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -41,11 +41,11 @@
   transition: all 0.3s ease;
 }
 
-.videoCard:hover .playButton {
+.videoCard:hover .youtubeIcon {
   opacity: 0.9;
 }
 
-.playButton::before {
+.youtubeIcon::before {
   content: "";
   position: absolute;
   left: 50%;
@@ -57,7 +57,7 @@
   z-index: -1;
 }
 
-.playButton svg {
+.youtubeIcon svg {
   width: 64px;
   height: 64px;
   fill: #ff0000;

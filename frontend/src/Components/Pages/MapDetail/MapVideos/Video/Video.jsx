@@ -61,11 +61,12 @@ const Video = ({ video }) => {
             />
           )}
 
-          <div className={s.playButton}>
+          <div className={s.youtubeIcon}>
             <svg aria-hidden="true">
               <use href="/icons-sprite.svg#youtube"></use>
             </svg>
           </div>
+
           {video.type && <span className={s.videoType}>{video.type}</span>}
         </div>
       </Link>
