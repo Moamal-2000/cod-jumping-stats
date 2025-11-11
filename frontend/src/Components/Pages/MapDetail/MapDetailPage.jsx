@@ -15,9 +15,8 @@ import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
-import MapDetailPlayers from "./MapDetailPlayers/MapDetailPlayers";
-import MapDetailTops from "./MapDetailTops/MapDetailTops";
 import MapVideos from "./MapVideos/MapVideos";
+import TabsSection from "./TabsSection/TabsSection";
 
 const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
 const breadcrumbPaths = [
@@ -36,28 +35,31 @@ const MapDetailPage = () => {
   const [topsData, setTopsData] = useState(null);
   const [playersData, setPlayersData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [loadingTops, setLoadingTops] = useState(false);
-  const [loadingPlayers, setLoadingPlayers] = useState(false);
   const [error, setError] = useState(false);
   const [selectedFps, setSelectedFps] = useState("125");
-  const [activeTab, setActiveTab] = useState("tops");
 
   const [hasMoreTops, setHasMoreTops] = useState(true);
   const [hasMorePlayers, setHasMorePlayers] = useState(true);
-  const [loadingMoreTops, setLoadingMoreTops] = useState(false);
-  const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
 
   const [displayedTopsCount, setDisplayedTopsCount] = useState(0);
   const [displayedPlayersCount, setDisplayedPlayersCount] = useState(0);
-
-  const [showingAllTops, setShowingAllTops] = useState(false);
-  const [showingAllPlayers, setShowingAllPlayers] = useState(false);
 
   const topsLoadMoreRef = useRef(null);
   const playersLoadMoreRef = useRef(null);
 
   const [allTopsData, setAllTopsData] = useState(null);
   const [allPlayersData, setAllPlayersData] = useState(null);
+
+  const [loadingTops, setLoadingTops] = useState(false);
+  const [loadingPlayers, setLoadingPlayers] = useState(false);
+
+  const [showingAllTops, setShowingAllTops] = useState(false);
+  const [showingAllPlayers, setShowingAllPlayers] = useState(false);
+
+  const [loadingMoreTops, setLoadingMoreTops] = useState(false);
+  const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
+
+  const activeTab = searchParams.get("tab") || "tops";
 
   async function fetchMapData() {
     let mapsLocal = getCachedMaps();
@@ -346,10 +348,6 @@ const MapDetailPage = () => {
     setSelectedFps(fps);
   }
 
-  function handleTabChange(tab) {
-    setActiveTab(tab);
-  }
-
   function loadMoreTops() {
     if (!loadingMoreTops && hasMoreTops) {
       fetchTopsData(true);
@@ -506,58 +504,25 @@ const MapDetailPage = () => {
             {mapData && <MapVideos mapId={mapData.CpID} />}
           </div>
 
-          <div className={s.rightColumn}>
-            <div className={s.tabContainer}>
-              <div className={s.tabNavigation}>
-                <button
-                  className={`${s.tabButton} ${
-                    activeTab === "tops" ? s.active : ""
-                  }`}
-                  onClick={() => handleTabChange("tops")}
-                >
-                  Top Runs
-                </button>
-                <button
-                  className={`${s.tabButton} ${
-                    activeTab === "players" ? s.active : ""
-                  }`}
-                  onClick={() => handleTabChange("players")}
-                >
-                  Most Played
-                </button>
-              </div>
-
-              <div className={s.tabContent}>
-                {activeTab === "tops" && (
-                  <MapDetailTops
-                    topsData={topsData}
-                    selectedFps={selectedFps}
-                    loading={loadingTops}
-                    loadingMore={loadingMoreTops}
-                    hasMore={hasMoreTops}
-                    loadMoreRef={topsLoadMoreRef}
-                    showingAll={showingAllTops}
-                    onShowAll={showAllTops}
-                    allData={allTopsData}
-                  />
-                )}
-
-                {activeTab === "players" && (
-                  <MapDetailPlayers
-                    playersData={playersData}
-                    selectedFps={selectedFps}
-                    loading={loadingPlayers}
-                    loadingMore={loadingMorePlayers}
-                    hasMore={hasMorePlayers}
-                    loadMoreRef={playersLoadMoreRef}
-                    showingAll={showingAllPlayers}
-                    onShowAll={showAllPlayers}
-                    allData={allPlayersData}
-                  />
-                )}
-              </div>
-            </div>
-          </div>
+          <TabsSection
+            topsData={topsData}
+            playersData={playersData}
+            selectedFps={selectedFps}
+            loadingTops={loadingTops}
+            loadingMoreTops={loadingMoreTops}
+            hasMoreTops={hasMoreTops}
+            topsLoadMoreRef={topsLoadMoreRef}
+            showingAllTops={showingAllTops}
+            showAllTops={showAllTops}
+            allTopsData={allTopsData}
+            loadingPlayers={loadingPlayers}
+            loadingMorePlayers={loadingMorePlayers}
+            hasMorePlayers={hasMorePlayers}
+            playersLoadMoreRef={playersLoadMoreRef}
+            showingAllPlayers={showingAllPlayers}
+            showAllPlayers={showAllPlayers}
+            allPlayersData={allPlayersData}
+          />
         </div>
       </div>
     </main>
