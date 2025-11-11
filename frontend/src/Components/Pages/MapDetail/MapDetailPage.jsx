@@ -3,7 +3,7 @@
 import { jhApis } from "@/Api/jumpersHeaven";
 import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
 import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
-import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
+import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
 import {
   cacheMapsLocally,
   decodeAsyncData,
@@ -108,8 +108,7 @@ const MapDetailPage = () => {
 
       if (selectedFps === "All") {
         if (!isLoadMore) {
-          const allFps = ["125", "250", "333", "43", "76"];
-          const promises = allFps.map((fps) =>
+          const promises = JUMP_FPS.map((fps) =>
             fetch(jhApis({ fps, cpid }).map.getTops)
               .then((res) => res.json())
               .then((data) => {
@@ -216,8 +215,7 @@ const MapDetailPage = () => {
 
       if (selectedFps === "All") {
         if (!isLoadMore) {
-          const allFps = ["125", "250", "333", "43", "76"];
-          const promises = allFps.map((fps) =>
+          const promises = JUMP_FPS.map((fps) =>
             fetch(jhApis({ fps, mapid: mapData?.ID }).player.getPlayersPlayTime)
               .then((res) => res.json())
               .then((data) => {
@@ -344,10 +342,6 @@ const MapDetailPage = () => {
     }
   }
 
-  function handleFpsChange(fps) {
-    setSelectedFps(fps);
-  }
-
   function loadMoreTops() {
     if (!loadingMoreTops && hasMoreTops) {
       fetchTopsData(true);
@@ -381,9 +375,9 @@ const MapDetailPage = () => {
 
     const topsObserver = new IntersectionObserver(
       (entries) => {
-        if (entries[0].isIntersecting && hasMoreTops && !loadingMoreTops) {
-          loadMoreTops();
-        }
+        const shouldLoadMore =
+          entries[0].isIntersecting && hasMoreTops && !loadingMoreTops;
+        if (shouldLoadMore) loadMoreTops();
       },
       { threshold: 0.1 }
     );
@@ -408,13 +402,9 @@ const MapDetailPage = () => {
 
     const playersObserver = new IntersectionObserver(
       (entries) => {
-        if (
-          entries[0].isIntersecting &&
-          hasMorePlayers &&
-          !loadingMorePlayers
-        ) {
-          loadMorePlayers();
-        }
+        const shouldLoadMore =
+          entries[0].isIntersecting && hasMorePlayers && !loadingMorePlayers;
+        if (shouldLoadMore) loadMorePlayers();
       },
       { threshold: 0.1 }
     );
@@ -499,7 +489,7 @@ const MapDetailPage = () => {
             <MapDetailInfo
               mapData={mapData}
               selectedFps={selectedFps}
-              onFpsChange={handleFpsChange}
+              onFpsChange={setSelectedFps}
             />
             {mapData && <MapVideos mapId={mapData.CpID} />}
           </div>
