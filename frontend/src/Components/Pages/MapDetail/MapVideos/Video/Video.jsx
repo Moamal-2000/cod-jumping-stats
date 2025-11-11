@@ -74,7 +74,6 @@ const Video = ({ video }) => {
               height={180}
               className={s.thumbnail}
               priority
-              quality={100}
             />
           )}
 

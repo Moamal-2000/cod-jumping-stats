@@ -1,5 +1,3 @@
-"use client";
-
 import { MAPS_VIDEOS } from "@/Data/mapsVideos";
 import s from "./MapVideos.module.scss";
 import Video from "./Video/Video";
