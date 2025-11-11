@@ -3,12 +3,7 @@
 
 html {
   scrollbar-color: rgba(255, 255, 255, .3) transparent;
-}
-
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 }
 
 body {
