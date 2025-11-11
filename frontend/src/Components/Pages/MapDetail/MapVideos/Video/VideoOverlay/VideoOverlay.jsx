@@ -8,7 +8,12 @@ const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
       <div className={s.channelInfo}>
         {channelThumbnail && (
           <div className={s.channelAvatar}>
-            <Link href={oEmbedData.author_url} target="_blank" rel="noopener">
+            <Link
+              href={oEmbedData.author_url}
+              target="_blank"
+              rel="noopener"
+              title={`Visit ${oEmbedData?.author_name || "owner"}'s channel`}
+            >
               <Image
                 src={channelThumbnail}
                 alt={oEmbedData?.author_name || "Channel"}

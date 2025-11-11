@@ -47,6 +47,7 @@ const Video = ({ video }) => {
         className={s.videoLink}
         target="_blank"
         rel="noopener noreferrer"
+        title={`Watch ${oEmbedData?.title || "this"} video`}
       >
         <div className={s.thumbnailContainer}>
           {oEmbedData?.thumbnail_url && (
