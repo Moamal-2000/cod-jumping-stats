@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import s from "./Video.module.scss";
+import VideoOverlay from "./VideoOverlay/VideoOverlay";
 
 const Video = ({ video }) => {
   const [oEmbedData, setOEmbedData] = useState(null);
@@ -58,25 +59,11 @@ const Video = ({ video }) => {
             />
           )}
 
-          <div className={s.overlayContent}>
-            <div className={s.channelInfo}>
-              {channelThumbnail && (
-                <div className={s.channelAvatar}>
-                  <Image
-                    src={channelThumbnail}
-                    alt={oEmbedData?.author_name || "Channel"}
-                    width={36}
-                    height={36}
-                    className={s.channelImage}
-                    onError={(e) => (e.target.style.display = "none")}
-                  />
-                </div>
-              )}
-              <span className={s.videoTitleOverlay}>
-                {oEmbedData?.title || ""}
-              </span>
-            </div>
-          </div>
+          <VideoOverlay
+            oEmbedData={oEmbedData}
+            channelThumbnail={channelThumbnail}
+          />
+
           <div className={s.playButton}>
             <svg aria-hidden="true">
               <use href="/icons-sprite.svg#youtube"></use>
