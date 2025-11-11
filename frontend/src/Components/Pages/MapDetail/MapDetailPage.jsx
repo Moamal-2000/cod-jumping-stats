@@ -2,7 +2,6 @@
 
 import { jhApis } from "@/Api/jumpersHeaven";
 import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
-import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
 import {
   cacheMapsLocally,
@@ -10,13 +9,13 @@ import {
   fetchMsgPackResponse,
   getCachedMaps,
 } from "@/Functions/utils";
-import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
 import MapVideos from "./MapVideos/MapVideos";
+import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
 const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
@@ -446,32 +445,9 @@ const MapDetailPage = () => {
     fetchPlayersData();
   }, [mapData, selectedFps]);
 
-  if (loading) {
+  if (loading || error || !mapData) {
     return (
-      <main className={s.mapDetailPage}>
-        <div className="container">
-          <SpinnerLoader
-            title="Loading map details..."
-            description="Fetching map information and statistics"
-          />
-        </div>
-      </main>
-    );
-  }
-
-  if (error || !mapData) {
-    return (
-      <main className={s.mapDetailPage}>
-        <div className="container">
-          <div className={s.errorContainer}>
-            <h2>Map Not Found</h2>
-            <p>The requested map could not be found.</p>
-            <Link href="/maps" className={s.backButton}>
-              Go Maps Page
-            </Link>
-          </div>
-        </div>
-      </main>
+      <PageLoadingError loading={loading} error={error} mapData={mapData} />
     );
   }
 
