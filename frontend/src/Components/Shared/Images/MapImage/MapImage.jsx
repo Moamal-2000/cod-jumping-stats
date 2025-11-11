@@ -34,16 +34,15 @@ const MapImage = memo(({ mapName, resolution = "512" }) => {
       )}
 
       <Image
-        sizes="402.9px"
-        fill={true}
+        width={480}
+        height={272}
         src={src || PLACEHOLDER_PATH}
         alt={mapName}
         title={mapName}
-        style={{ scale, objectFit: "contain", objectPosition: "center" }}
+        quality={100}
+        priority
         onError={handleError}
         onLoad={handleLoadCompleted}
-        priority
-        quality={100}
       />
     </div>
   );

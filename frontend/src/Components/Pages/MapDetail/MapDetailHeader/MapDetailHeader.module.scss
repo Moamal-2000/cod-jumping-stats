@@ -11,18 +11,9 @@
 
 .mapInfo {
   display: flex;
-  gap: 2rem;
   align-items: flex-start;
-}
-
-.mapImage {
-  flex-shrink: 0;
-  width: 480px;
-  height: 272px;
-  border-radius: 8px;
-  overflow: hidden;
-  border: 1px solid #374151;
-  position: relative;
+  flex-wrap: wrap;
+  gap: 2rem;
 }
 
 .mapName {
@@ -101,11 +92,6 @@
   .mapInfo {
     flex-direction: column;
     gap: 1.5rem;
-  }
-
-  .mapImage {
-    width: 100%;
-    height: 200px;
   }
 
   .mapName {

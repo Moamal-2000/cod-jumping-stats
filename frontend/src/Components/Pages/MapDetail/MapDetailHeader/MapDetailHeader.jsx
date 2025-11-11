@@ -20,9 +20,7 @@ const MapDetailHeader = ({ mapData }) => {
   return (
     <div className={s.header}>
       <div className={s.mapInfo}>
-        <div className={s.mapImage}>
-          <MapImage mapName={Name} resolution="1920" />
-        </div>
+        <MapImage mapName={Name} resolution="1920" />
 
         <div className={s.mapDetails}>
           <h1 className={s.mapName}>
