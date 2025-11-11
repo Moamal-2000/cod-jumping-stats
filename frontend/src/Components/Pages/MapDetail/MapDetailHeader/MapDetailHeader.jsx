@@ -44,7 +44,7 @@ const MapDetailHeader = ({ mapData }) => {
             <div className={s.metaItem}>
               <span className={s.label}>Type:</span>
               <span className={`${s.value} ${s.typeBadge} ${s[Type]}`}>
-                {Type.charAt(0).toUpperCase() + Type.slice(1)}
+                {Type}
               </span>
             </div>
           </div>
