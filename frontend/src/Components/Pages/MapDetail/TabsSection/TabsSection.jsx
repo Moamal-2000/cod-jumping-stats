@@ -39,20 +39,15 @@ const TabsSection = ({
     <div className={s.rightColumn}>
       <div className={s.tabContainer}>
         <div className={s.tabNavigation}>
-          <button
-            className={`${s.tabButton} ${activeTab === "tops" ? s.active : ""}`}
-            onClick={() => handleUpdateTab("tops")}
-          >
-            Top Runs
-          </button>
-          <button
-            className={`${s.tabButton} ${
-              activeTab === "players" ? s.active : ""
-            }`}
-            onClick={() => handleUpdateTab("players")}
-          >
-            Most Played
-          </button>
+          {tabs.map(({ id, label }) => (
+            <button
+              key={id}
+              className={`${s.tabButton} ${activeTab === id ? s.active : ""}`}
+              onClick={() => handleUpdateTab(id)}
+            >
+              {label}
+            </button>
+          ))}
         </div>
 
         <div className={s.tabContent}>
@@ -90,3 +85,14 @@ const TabsSection = ({
 };
 
 export default TabsSection;
+
+const tabs = [
+  {
+    id: "tops",
+    label: "Top Runs",
+  },
+  {
+    id: "players",
+    label: "Most Played",
+  },
+];
