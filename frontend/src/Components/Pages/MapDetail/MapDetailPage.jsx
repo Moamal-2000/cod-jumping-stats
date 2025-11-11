@@ -10,6 +10,7 @@ import {
   fetchMsgPackResponse,
   getCachedMaps,
 } from "@/Functions/utils";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
@@ -465,9 +466,9 @@ const MapDetailPage = () => {
           <div className={s.errorContainer}>
             <h2>Map Not Found</h2>
             <p>The requested map could not be found.</p>
-            <button className={s.backButton} onClick={() => router.back()}>
-              Go Back
-            </button>
+            <Link href="/maps" className={s.backButton}>
+              Go Maps Page
+            </Link>
           </div>
         </div>
       </main>
