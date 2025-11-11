@@ -18,7 +18,6 @@ const VideoCard = ({ video }) => {
 
   const videoId =
     videoUrl.searchParams.get("v") || videoUrl.pathname.split("/").pop();
-  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
   const oEmbedUrl = `https://www.youtube.com/oembed?url=${video.videoUrl}&format=json`;
 
   useEffect(() => {
@@ -68,15 +67,18 @@ const VideoCard = ({ video }) => {
         rel="noopener noreferrer"
       >
         <div className={s.thumbnailContainer}>
-          <Image
-            src={thumbnailUrl}
-            alt={oEmbedData?.title || video.type || "Video thumbnail"}
-            width={320}
-            height={180}
-            className={s.thumbnail}
-            priority
-            quality={100}
-          />
+          {oEmbedData?.thumbnail_url && (
+            <Image
+              src={oEmbedData.thumbnail_url}
+              alt={oEmbedData?.title || video.type || "Video thumbnail"}
+              width={320}
+              height={180}
+              className={s.thumbnail}
+              priority
+              quality={100}
+            />
+          )}
+
           <div className={s.overlayContent}>
             <div className={s.channelInfo}>
               {channelThumbnail && (
