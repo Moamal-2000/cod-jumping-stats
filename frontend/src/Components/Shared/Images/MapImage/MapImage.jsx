@@ -1,14 +1,14 @@
 "use client";
 
 import Image from "next/image";
-import { memo, useState } from "react";
+import { useState } from "react";
 import s from "./MapImage.module.scss";
 
 const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
 
-const MapImage = memo(({ mapName, resolution = "512" }) => {
-  const cleanMapName =
-    mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "") || "unknown";
+const MapImage = ({ mapName, resolution = "512" }) => {
+  const cleanMapName = getCleanMapName(mapName);
+
   const [src, setSrc] = useState(`/maps/${resolution}/${cleanMapName}.webp`);
   const [isLoading, setIsLoading] = useState(true);
   const [scale, setScale] = useState(1);
@@ -17,10 +17,6 @@ const MapImage = memo(({ mapName, resolution = "512" }) => {
     setSrc(PLACEHOLDER_PATH);
     setIsLoading(false);
     setScale(0.5);
-  }
-
-  function handleLoadCompleted() {
-    setIsLoading(false);
   }
 
   return (
@@ -39,15 +35,19 @@ const MapImage = memo(({ mapName, resolution = "512" }) => {
         src={src || PLACEHOLDER_PATH}
         alt={mapName}
         title={mapName}
+        style={{ scale, objectFit: "contain", objectPosition: "center" }}
         quality={100}
         priority
         onError={handleError}
-        onLoad={handleLoadCompleted}
+        onLoad={() => setIsLoading(false)}
       />
     </div>
   );
-});
-
-MapImage.displayName = "MapImage";
+};
 
 export default MapImage;
+
+function getCleanMapName(mapName) {
+  if (!mapName) return "unknown";
+  return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
+}
