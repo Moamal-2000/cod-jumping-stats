@@ -9,7 +9,7 @@ import {
   fetchMsgPackResponse,
   getCachedMaps,
 } from "@/Functions/utils";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
@@ -18,16 +18,7 @@ import MapVideos from "./MapVideos/MapVideos";
 import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
-const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
-const breadcrumbPaths = [
-  { index: 0, path: "/" },
-  { index: 1, path: "/maps" },
-];
-
-const ITEMS_PER_PAGE = 10;
-
 const MapDetailPage = () => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const cpid = +searchParams.get("mapid");
 
@@ -497,3 +488,11 @@ const MapDetailPage = () => {
 };
 
 export default MapDetailPage;
+
+const breadcrumbLabels = (mapName) => ["Home", "Maps", mapName || "Map"];
+const breadcrumbPaths = [
+  { index: 0, path: "/" },
+  { index: 1, path: "/maps" },
+];
+
+const ITEMS_PER_PAGE = 10;
