@@ -1,4 +1,4 @@
-@use "@/Styles/mixins" as m;
+@use "@/styles/mixins" as m;
 
 .routeCompletionContainer {
   padding: 2rem;
@@ -412,6 +412,7 @@
 
 // Rarity-based text styling only
 .mapCard {
+
   // Rarity-specific text colors only
   &.mythical {
     .mapName {
@@ -419,35 +420,35 @@
       text-shadow: 0 0 6px rgba(255, 0, 128, 0.3);
     }
   }
-  
+
   &.legendary {
     .mapName {
       color: #ff6b35;
       text-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
     }
   }
-  
+
   &.epic {
     .mapName {
       color: #9d4edd;
       text-shadow: 0 0 4px rgba(157, 78, 221, 0.3);
     }
   }
-  
+
   &.rare {
     .mapName {
       color: #3a86ff;
       text-shadow: 0 0 3px rgba(58, 134, 255, 0.25);
     }
   }
-  
+
   &.uncommon {
     .mapName {
       color: #06ffa5;
       text-shadow: 0 0 2px rgba(6, 255, 165, 0.2);
     }
   }
-  
+
   &.common {
     .mapName {
       color: #f9fafb;
@@ -520,8 +521,13 @@
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .retryButton {

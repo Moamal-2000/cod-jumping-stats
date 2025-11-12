@@ -3,7 +3,7 @@ import Header from "@/components/Header/Header";
 import ScrollToTopBtn from "@/components/Shared/Buttons/ScrollToTopBtn/ScrollToTopBtn";
 import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
 import LayoutLayer from "@/components/Shared/LayoutLayer/LayoutLayer";
-import "../Styles/globals.scss";
+import "../styles/globals.scss";
 import RootProviders from "./RootProviders";
 
 export const metadata = {
