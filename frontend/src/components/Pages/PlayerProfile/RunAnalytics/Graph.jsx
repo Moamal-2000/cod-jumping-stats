@@ -1,5 +1,5 @@
 "use client";
-import s from "@/Components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
+import s from "@/components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
 import { getColoredName } from "@/functions/components";
 import { useEffect, useRef, useState } from "react";
 

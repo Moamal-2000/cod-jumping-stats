@@ -1,6 +1,6 @@
 "use client";
 
-import s from "@/Components/Pages/NotFoundPage/NotFoundPage.module.scss";
+import s from "@/components/Pages/NotFoundPage/NotFoundPage.module.scss";
 import NotFoundPageList from "@/components/Pages/NotFoundPage/NotFoundPageList/NotFoundPageList";
 import Link from "next/link";
 

@@ -1,6 +1,6 @@
 "use client";
 
-import s from "@/Components/Pages/PlayerProfile/leaderboardsTab.module.scss";
+import s from "@/components/Pages/PlayerProfile/leaderboardsTab.module.scss";
 import { getRankCategory } from "@/functions/utils";
 import { useState } from "react";
 import { useSelector } from "react-redux";

@@ -1,6 +1,6 @@
 "use client";
 
-import s from "@/Components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
+import s from "@/components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import { createQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
