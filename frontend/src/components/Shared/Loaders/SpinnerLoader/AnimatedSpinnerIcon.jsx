@@ -1,6 +1,6 @@
 const AnimatedSpinnerIcon = () => {
   return (
-    <svg viewBox="0 0 100 100">
+    <svg viewBox="0 0 100 100" data-loader>
       <circle
         cx="50"
         cy="50"

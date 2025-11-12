@@ -2,9 +2,8 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import SpinnerLoader from "../../Loaders/SpinnerLoader/SpinnerLoader";
 import s from "./MapImage.module.scss";
-
-const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
 
 const MapImage = ({ mapName, resolution = "512" }) => {
   const cleanMapName = getCleanMapName(mapName);
@@ -21,13 +20,7 @@ const MapImage = ({ mapName, resolution = "512" }) => {
 
   return (
     <div className={s.imageContainer}>
-      {isLoading && (
-        <div className={s.loader}>
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#animated-spinner" />
-          </svg>
-        </div>
-      )}
+      {isLoading && <SpinnerLoader />}
 
       <Image
         width={480}
@@ -46,6 +39,8 @@ const MapImage = ({ mapName, resolution = "512" }) => {
 };
 
 export default MapImage;
+
+const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
 
 function getCleanMapName(mapName) {
   if (!mapName) return "unknown";
