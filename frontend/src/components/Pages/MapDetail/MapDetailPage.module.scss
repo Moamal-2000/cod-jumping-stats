@@ -1,0 +1,29 @@
+@use "@/Styles/mixins" as m;
+
+.mapDetailPage {
+  min-height: 100vh;
+}
+
+.contentGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@include m.small {
+  .contentGrid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .mapDetailPage {
+    padding: 1rem 0;
+  }
+}

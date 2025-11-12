@@ -1,0 +1,62 @@
+@use "@/Styles/mixins" as m;
+
+.player {
+  color: #fff;
+}
+
+.player a {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+@include m.small {
+  .player a {
+    align-items: flex-end;
+  }
+}
+
+.player .playerCountry {
+  --size: 32px;
+  min-width: var(--size);
+  min-height: var(--size);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  margin-right: 10px;
+  background-color: #c9c9c9;
+  color: #fff;
+  border: 2px solid #2a2e39;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+@include m.small {
+  .player .playerName {
+    position: relative;
+    top: -6px;
+  }
+}
+
+.player.rank1 .playerCountry {
+  border-color: #ffc107;
+  box-shadow: 0 0 6px #ffc107;
+}
+
+.player.rank2 .playerCountry {
+  border-color: #c0c0c0;
+  box-shadow: 0 0 6px #c0c0c0;
+}
+
+.player.rank3 .playerCountry {
+  border-color: #cd7f32;
+  box-shadow: 0 0 6px #cd7f32;
+}
+
+.player .playerCountry>img {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}

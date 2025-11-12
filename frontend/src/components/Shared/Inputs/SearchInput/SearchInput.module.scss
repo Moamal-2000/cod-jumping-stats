@@ -1,0 +1,93 @@
+@use "@/Styles/mixins" as m;
+
+.searchContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+  max-width: 320px;
+  width: 100%;
+}
+
+@include m.small {
+  .searchContainer {
+    min-width: 320px;
+    max-width: 360px;
+  }
+}
+
+@include m.very-small {
+  .searchContainer {
+    min-width: auto;
+  }
+}
+
+.filterLabel {
+  cursor: pointer;
+  text-wrap: nowrap;
+}
+
+.searchInput {
+  background: #1a1e24;
+  border: 1px solid #2a313a;
+  border-radius: 6px;
+  padding: 10px 10px 7px;
+  color: #e5e7eb;
+  font-size: .875rem;
+  width: 100%;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #374151;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+  }
+
+  &::placeholder {
+    color: #6b7280;
+  }
+}
+
+.searchInput:not(:placeholder-shown)+.clearButton {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.clearButton {
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  translate: 0 -50%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  opacity: 0;
+  pointer-events: none;
+  transition: background-color .2s ease;
+
+  &:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+
+    &>svg {
+      fill: #e5e7eb;
+    }
+  }
+}
+
+.clearButton>svg {
+  width: 12px;
+  height: 12px;
+  fill: #6b7280;
+}

@@ -1,0 +1,67 @@
+@use "@/Styles/mixins" as m;
+
+.notFoundSection {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 20px;
+  padding-top: 4px;
+  margin: 0 auto 32px;
+  max-width: 1600px;
+  width: 100%;
+}
+
+@include m.large {
+  .notFoundSection {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+}
+
+@include m.small {
+  .notFoundSection {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 24px;
+  text-align: center;
+  background: #1a1e24;
+  border: 1px solid #2a313a;
+  border-radius: 12px;
+  padding: 48px;
+  grid-column: 1 / -1;
+}
+
+.noResults h3 {
+  color: #f6f6f6;
+  font-size: 1.75rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.noResults p {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.clearSearchButton {
+  background-color: #facc15;
+  color: #000;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color .2s;
+
+  &:hover {
+    background-color: #eab308;
+  }
+}

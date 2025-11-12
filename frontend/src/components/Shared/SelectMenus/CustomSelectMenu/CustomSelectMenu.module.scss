@@ -1,0 +1,58 @@
+.selectWrapper {
+  position: relative;
+  flex: 1;
+}
+
+.selectMenu {
+  user-select: none;
+  min-width: 240px;
+}
+
+.selectMenu .selectButton {
+  cursor: pointer;
+  background-color: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 7px 10px 7px;
+  font-size: .875rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 200px;
+  width: 100%;
+  justify-content: space-between;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  transition:
+    background-color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+
+  &:hover {
+    background-color: #30363d;
+    border-color: #8b949e;
+  }
+}
+
+@media (max-width: 410px) {
+  .selectMenu .selectButton {
+    width: 100%;
+    min-width: auto;
+    max-width: 100%;
+  }
+}
+
+.selectMenu.visible .selectButton {
+  background-color: #30363d;
+  border-color: #8b949e;
+}
+
+.selectMenu .selectButton svg {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}

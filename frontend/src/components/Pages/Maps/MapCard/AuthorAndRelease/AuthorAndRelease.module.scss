@@ -1,0 +1,74 @@
+@use "@/Styles/mixins" as m;
+
+.authorAndRelease {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(45, 55, 72, .7);
+}
+
+.authorAndRelease .authorWrapper {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.authorAndRelease .authorWrapper .countryFlag {
+  --size: 46px;
+  min-width: var(--size);
+  min-height: var(--size);
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.125rem;
+  font-weight: 600;
+  border: 2px solid #364153;
+  position: relative;
+  overflow: hidden;
+}
+
+@include m.very-small {
+  .authorAndRelease .authorWrapper .countryFlag {
+    display: none;
+  }
+}
+
+.authorAndRelease .authorWrapper .countryFlag>img {
+  border-radius: inherit;
+  width: 100%;
+  height: 100%;
+}
+
+.authorAndRelease .authorWrapper .authorName {
+  color: #fff;
+  font-size: .9rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.authorAndRelease .releaseBox {
+  background-color: #1a2434;
+  border: solid 1px #1a2434;
+  border-radius: 8px;
+  padding: 8px 14px;
+}
+
+.authorAndRelease .releaseBox .title {
+  color: #A0AEC0;
+  font-size: .75rem;
+  font-weight: 500;
+}
+
+.authorAndRelease .releaseBox .date {
+  color: #fff;
+  font-size: .8rem;
+  font-weight: 600;
+  margin: 2px 0 0 0;
+  width: max-content;
+}

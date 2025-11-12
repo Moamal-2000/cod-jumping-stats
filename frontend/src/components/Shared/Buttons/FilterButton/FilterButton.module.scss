@@ -1,0 +1,54 @@
+.button {
+  border: none;
+  background-color: #1F2534;
+  color: #9AA3B2;
+  border-radius: 10px;
+  min-width: 33px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: .9rem;
+  font-weight: 500;
+  position: relative;
+  outline: solid 2px transparent;
+  transition: background-color .2s, color .2s, outline-color .1s;
+
+  &:hover {
+    background-color: #2C344A;
+    color: #FFF;
+  }
+
+  &.active {
+    font-weight: 600;
+    background: linear-gradient(135deg, #FFB800, #FF9000);
+    box-shadow: 0 4px 10px rgba(255, 184, 0, .3);
+    color: #000;
+  }
+
+  &:focus-visible {
+    outline-color: #fff;
+  }
+}
+
+.button .toolTip {
+  position: absolute;
+  left: 50%;
+  translate: -50%;
+  top: -32px;
+  background-color: #111827;
+  color: #fff;
+  font-weight: 400;
+  font-size: .8rem;
+  line-height: 1rem;
+  padding: .25rem .5rem;
+  border-radius: .25rem;
+  white-space: nowrap;
+  z-index: 11;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease;
+}
+
+.button:hover .toolTip {
+  opacity: 1;
+  pointer-events: all;
+}

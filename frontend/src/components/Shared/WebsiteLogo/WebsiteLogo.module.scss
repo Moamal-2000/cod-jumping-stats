@@ -1,0 +1,64 @@
+@use "@/Styles/mixins" as m;
+
+.logo {
+  outline: none;
+  display: flex;
+  align-items: center;
+  min-width: 208px;
+  padding-left: 68px;
+  gap: 8px;
+  border-radius: 1px;
+  position: relative;
+}
+
+@include m.very-small {
+  .logo {
+    min-width: 172px;
+    padding-left: 64px;
+  }
+}
+
+.logo>svg {
+  width: 60px;
+  height: 60px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  translate: 0 -50%;
+  fill: #9ea3b0;
+}
+
+.logo:focus-visible>svg {
+  fill: #facc15;
+}
+
+@include m.very-small {
+  .logo>svg {
+    width: 58px;
+    height: 58px;
+  }
+}
+
+.logo>span {
+  background: linear-gradient(135deg, #9ea3b0, #fff);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #9ea3b0;
+  font-size: 1.45rem;
+  font-weight: 700;
+  text-wrap: nowrap;
+}
+
+.logo:focus-visible>span {
+  background: linear-gradient(135deg, #ffb800, #ff9000);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #0000;
+}
+
+@include m.very-small {
+  .logo>span {
+    font-size: 1.2rem;
+  }
+}

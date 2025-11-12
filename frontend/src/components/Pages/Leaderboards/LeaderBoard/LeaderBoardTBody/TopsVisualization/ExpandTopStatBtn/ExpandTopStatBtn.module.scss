@@ -1,0 +1,35 @@
+.expandButton {
+  cursor: pointer;
+  border: none;
+  background-color: #1f2937;
+  fill: #fff;
+  border-radius: .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color .2s ease;
+
+  &.active {
+    rotate: 180deg;
+
+    >svg {
+      fill: #00b906;
+    }
+  }
+
+  &:hover {
+    background-color: #303e50;
+  }
+
+  &:active {
+    background-color: #3a485b;
+  }
+
+}
+
+.expandButton>svg {
+  pointer-events: none;
+  width: 20px;
+  height: 20px;
+  transition: fill .1s .2s ease;
+}

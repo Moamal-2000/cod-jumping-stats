@@ -1,0 +1,23 @@
+.noResults {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+.noResults h3 {
+  color: #f9fafb;
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.noResults p {
+  color: #9ca3af;
+  margin: 0;
+  font-size: 1rem;
+}

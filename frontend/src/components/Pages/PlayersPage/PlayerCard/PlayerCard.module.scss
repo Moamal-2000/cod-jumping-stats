@@ -1,0 +1,62 @@
+@use "@/Styles/mixins" as m;
+
+.playerCard {
+  background-color: #0e1217;
+  background-color: #131820;
+  border: 1px solid #2a313a;
+  padding: 20px;
+  border-radius: 12px;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  transition: background-color .3s ease, border-color .3s ease;
+
+  &:hover {
+    border-color: #374151;
+  }
+}
+
+@include m.very-small {
+  .playerCard {
+    padding: 16px;
+  }
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.wrapper {
+  display: flex;
+  gap: 16px;
+}
+
+@include m.very-small {
+  .wrapper {
+    gap: 8px;
+  }
+}
+
+.country {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: #1f2937;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #facc15;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+@include m.very-small {
+  .country {
+    width: 36px;
+    height: 36px;
+  }
+}

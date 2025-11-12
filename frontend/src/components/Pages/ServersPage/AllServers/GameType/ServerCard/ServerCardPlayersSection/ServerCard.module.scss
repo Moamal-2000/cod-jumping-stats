@@ -1,0 +1,12 @@
+.playersSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.noPlayersText {
+  color: #e5e7eb;
+  font-size: .95rem;
+  display: flex;
+  align-items: center;
+  padding: 10px 12px;
+}

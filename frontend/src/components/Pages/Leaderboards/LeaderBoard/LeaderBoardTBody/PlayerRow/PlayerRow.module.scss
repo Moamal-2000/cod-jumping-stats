@@ -1,0 +1,37 @@
+@use "@/Styles/mixins" as m;
+
+@include m.small {
+  .playerRow td {
+    min-height: 64px;
+  }
+}
+
+.playerRow .rank {
+  color: #fff;
+}
+
+@media (max-width: 1300px) {
+  .playerRow .rank {
+    background-color: #14171d;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .playerRow .rank svg {
+    width: 34px !important;
+    height: 34px !important;
+  }
+}
+
+.playerRow .rating {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #FFB800;
+}
+
+.playerRow :where(.rating, .maps, .score) {
+  justify-content: center;
+}
+
+.playerRow .score {
+  font-weight: normal;
+}

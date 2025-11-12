@@ -1,0 +1,21 @@
+.indicator {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  grid-area: indicator;
+}
+
+.indicator .statusDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.indicator .statusText {
+  display: flex;
+  align-items: center;
+  color: #f6f6f6;
+  text-wrap: nowrap;
+}

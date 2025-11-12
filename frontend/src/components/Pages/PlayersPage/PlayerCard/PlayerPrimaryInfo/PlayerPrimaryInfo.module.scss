@@ -1,0 +1,65 @@
+.primaryInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+.playerName {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: inherit;
+  width: fit-content;
+  text-decoration: underline;
+  text-decoration-color: #42464d;
+  text-underline-offset: 2px;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+  }
+}
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wrapper .playerId {
+  color: #9ca3af;
+  font-weight: 500;
+  opacity: .9;
+  letter-spacing: .02em;
+}
+
+.wrapper .adminLevel {
+  gap: 2px;
+  display: inline-flex;
+  align-items: center;
+  font-size: .875rem;
+  font-weight: 500;
+  position: relative;
+}
+
+.wrapper .adminLevel>svg {
+  width: 16px;
+  height: 16px;
+}
+
+.wrapper .adminLevel {
+  color: #facc15;
+  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
+
+  svg {
+    color: #ffd700;
+    filter: drop-shadow(0 0 2px rgba(255, 215, 0, .5));
+  }
+}

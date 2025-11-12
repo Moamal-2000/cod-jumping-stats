@@ -1,0 +1,21 @@
+@use "@/Styles/mixins" as m;
+
+.header {
+  width: 100%;
+  min-height: 60px;
+  position: fixed;
+  left: 50%;
+  translate: -50% 0;
+  top: 0;
+  z-index: 100;
+  background-color: rgba(13, 17, 23, .5);
+  backdrop-filter: blur(8px);
+}
+
+.header [data-container] {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  padding: 16px 16px;
+}

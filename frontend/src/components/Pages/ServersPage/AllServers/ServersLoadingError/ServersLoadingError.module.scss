@@ -1,0 +1,41 @@
+@use "@/Styles/mixins" as m;
+
+.serversGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.35%;
+  margin-bottom: 100px;
+}
+
+@include m.large {
+  .serversGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+}
+
+@media (max-width: 820px) {
+  .serversGrid {
+    grid-template-columns: 1fr;
+    margin-bottom: 16px;
+  }
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 32px;
+  background: #1a1e24;
+  border-radius: 12px;
+  border: 1px solid #2a313a;
+
+  h3 {
+    color: #ef4444;
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: #9ca3af;
+    margin: 0;
+  }
+}

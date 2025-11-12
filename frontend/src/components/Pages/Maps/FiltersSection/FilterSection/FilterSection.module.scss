@@ -1,0 +1,30 @@
+@use "@/Styles/mixins" as m;
+
+.filtersSection {
+  background-color: #151a25;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  padding: 20px 24px;
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 36px;
+  transition: background-color .3s, border-color .3s;
+
+  &:hover {
+    border-color: #007bff;
+  }
+}
+
+@include m.small {
+  .filtersSection {
+    flex-wrap: wrap;
+  }
+}
+
+@include m.very-small {
+  .filtersSection {
+    justify-content: center;
+  }
+}

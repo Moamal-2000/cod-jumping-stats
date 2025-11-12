@@ -1,0 +1,56 @@
+.tbody {
+  display: flex;
+  flex-direction: column;
+  min-height: 483.2px;
+  position: relative;
+
+  &.reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+@media (max-width: 1300px) {
+  .tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+}
+
+.tbody tr {
+  width: inherit;
+  transition: background-color .1s ease;
+
+  & .score {
+    text-align: center;
+  }
+}
+
+.tbody tr[data-type=player-stats-row]:hover {
+  background-color: #242b3b;
+}
+
+@media (max-width: 1300px) {
+  .tbody tr[data-type=player-stats-row]:hover {
+    background-color: #1d222f;
+  }
+}
+
+.tbody tr:not(:last-child) {
+  border-bottom: solid 1px #2A3040;
+}
+
+.tbody tr td {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+}
+
+.tbody tr:not([data-loader]) td svg {
+  width: 20px;
+  height: 20px;
+}
+
+.tbody tr td svg[data-type=trophy] {
+  color: #facc15;
+}

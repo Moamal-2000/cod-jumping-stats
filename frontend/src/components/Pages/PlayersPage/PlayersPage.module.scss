@@ -1,0 +1,48 @@
+@use "@/Styles/mixins" as m;
+
+.playersContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+@include m.small {
+  .playersContainer {
+    gap: 24px;
+  }
+}
+
+.playersHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.titleSection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.playersTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #f9fafb;
+  margin: 0;
+  background: linear-gradient(135deg, #f9fafb 0%, #9ca3af 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.02em;
+}
+
+.playersSubtitle {
+  color: #9ca3af;
+  font-size: 1rem;
+  margin: 0;
+  font-weight: 500;
+  letter-spacing: .01em;
+}

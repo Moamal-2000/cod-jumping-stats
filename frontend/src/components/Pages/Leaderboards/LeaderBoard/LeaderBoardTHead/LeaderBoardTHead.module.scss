@@ -1,0 +1,71 @@
+.thead {
+  background-color: #151923;
+  color: #fff;
+  position: sticky;
+  top: 184px;
+  left: 0;
+  z-index: 10;
+  translate: 0 -10px;
+  transition: background-color .3s;
+}
+
+.thead.afterHideHeader {
+  top: 72px;
+  translate: 0 -2px;
+}
+
+.thead tr {
+  width: inherit;
+  color: #fff;
+
+  & :where(.rank, .player, .tops) {
+    text-align: left;
+  }
+}
+
+.thead tr th {
+  text-transform: uppercase;
+  border-bottom: 1px solid #2A3040;
+  color: #9AA3B2;
+  padding: 24px 20px;
+  font-weight: 600;
+  font-size: .9rem;
+  letter-spacing: .5px;
+  position: relative;
+}
+
+.thead tr th[data-sortable] {
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    color: #FFB800;
+  }
+}
+
+.thead tr th[data-sortable] span {
+  position: relative;
+  width: max-content;
+  transition: color .1s;
+}
+
+.thead tr th[data-sortable] span::after {
+  content: "↕";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  opacity: .5;
+  font-size: 1rem;
+  transition: color .1s;
+}
+
+.thead tr th.tops {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 20px;
+
+  &.afterHideHeader {
+    justify-content: flex-end;
+  }
+}

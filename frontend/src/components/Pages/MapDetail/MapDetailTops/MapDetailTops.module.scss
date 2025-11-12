@@ -1,0 +1,249 @@
+@use "@/Styles/mixins" as m;
+
+.topsCard {
+  padding: 1.25rem;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  min-height: 32px;
+
+  h2 {
+    color: #f9fafb;
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+  }
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.totalRuns {
+  color: #9ca3af;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.showAllButton {
+  background: linear-gradient(180deg, #2563eb, #1e40af);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  transition: box-shadow 160ms ease, background 160ms ease, filter 160ms ease;
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 2rem;
+  color: #9ca3af;
+}
+
+.spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #374151;
+  border-top: 2px solid #facc15;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.noData {
+  text-align: center;
+  padding: 2rem;
+  color: #9ca3af;
+}
+
+.topsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topRun {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.035);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+}
+
+.rank {
+  color: #fff;
+  font-weight: 700;
+  font-size: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  min-width: 50px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.rank svg {
+  width: 22px;
+  height: 22px;
+
+  &[data-type=trophy] {
+    color: #facc15;
+  }
+}
+
+.playerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.playerName {
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.fpsDisplay {
+  color: #facc15;
+  font-weight: 500;
+  font-size: 0.75rem;
+  background: rgba(250, 204, 21, 0.1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  white-space: nowrap;
+}
+
+.runDetails {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: #9ca3af;
+  flex-wrap: wrap;
+}
+
+.time {
+  color: #facc15;
+  font-weight: 600;
+}
+
+.separator {
+  color: #6b7280;
+}
+
+.date {
+  color: #9ca3af;
+}
+
+.stats {
+  display: flex;
+  gap: 1rem;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  min-width: 50px;
+}
+
+.statLabel {
+  color: #9ca3af;
+  font-size: 0.625rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.statValue {
+  color: #f9fafb;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.loadMoreContainer {
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+  border-top: 1px solid #374151;
+  min-height: 60px;
+}
+
+.loadingIndicator {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: #9ca3af;
+  font-size: 0.875rem;
+}
+
+.scrollHint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+  font-style: italic;
+}
+
+@include m.small {
+  .topRun {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .rank {
+    align-self: flex-start;
+  }
+
+  .stats {
+    align-self: stretch;
+    justify-content: space-around;
+  }
+
+  .runDetails {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+}

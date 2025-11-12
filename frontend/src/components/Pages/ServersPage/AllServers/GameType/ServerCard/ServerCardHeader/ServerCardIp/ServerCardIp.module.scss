@@ -1,0 +1,21 @@
+.serverAddress {
+  flex: 1;
+  grid-area: ip;
+}
+
+.domain {
+  color: #f9fafb;
+  font-weight: 600;
+  font-size: 1.125rem;
+}
+
+.serverIpContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.serverIp {
+  color: #f6f6f6;
+  font-size: .875rem;
+}

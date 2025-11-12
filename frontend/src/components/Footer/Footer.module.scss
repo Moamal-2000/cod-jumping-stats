@@ -1,0 +1,36 @@
+@use "@/Styles/mixins" as m;
+
+.footer {
+  margin-top: 40px;
+  padding: 48px 24px 80px;
+  position: relative;
+  background-color: oklch(21% .034 264.665);
+}
+
+.footer .line {
+  border: none;
+  outline: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 4px;
+  opacity: 60%;
+  width: 100%;
+
+  background-image: linear-gradient(to right,
+      transparent 0,
+      oklch(79.5% 0.184 86.047) 50%,
+      transparent 100%);
+}
+
+.sectionsLine {
+  border: none;
+  border-top: 1px solid #2a3346;
+  margin: 40px 0;
+}
+
+@include m.small {
+  .sectionsLine {
+    margin: 20px 0;
+  }
+}

@@ -1,0 +1,38 @@
+import { jhApis } from "@/api/jumpersHeaven";
+import { MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
+import {
+  cacheMapsLocally,
+  decodeAsyncData,
+  fetchMsgPackResponse,
+  getCachedMaps,
+} from "@/functions/utils";
+import { createAsyncThunk } from "@reduxjs/toolkit";
+
+export const fetchMaps = createAsyncThunk(
+  "globalSlice/fetchMaps",
+  async (paramsObject) => {
+    const cachedData = getCachedMaps();
+
+    if (cachedData !== null) {
+      const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
+      const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
+
+      if (!isCacheExpire) {
+        return { mapsData: cachedData.maps, paramsObject };
+      }
+    }
+
+    try {
+      const response = await fetchMsgPackResponse({
+        url: jhApis().map.getAllMaps,
+        cache: "no-cache",
+      });
+      const mapsData = await decodeAsyncData(response);
+      cacheMapsLocally(mapsData);
+
+      return { mapsData, paramsObject };
+    } catch (error) {
+      console.error(error);
+    }
+  }
+);

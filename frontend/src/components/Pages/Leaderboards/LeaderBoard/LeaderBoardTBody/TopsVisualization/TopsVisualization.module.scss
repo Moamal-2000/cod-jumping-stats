@@ -1,0 +1,12 @@
+.tops {
+  display: flex;
+  gap: 4px;
+}
+
+@media (max-width: 540px) {
+  .tops {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px 0;
+  }
+}

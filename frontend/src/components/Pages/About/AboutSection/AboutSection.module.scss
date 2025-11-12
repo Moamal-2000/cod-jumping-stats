@@ -1,0 +1,50 @@
+@use "@/Styles/mixins" as m;
+
+.section {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.sectionTitle {
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-block: 24px;
+  color: #fff;
+  letter-spacing: -0.01em;
+  position: relative;
+  padding-left: 16px;
+}
+
+@include m.small {
+  .sectionTitle {
+    font-size: 1.125rem;
+    margin-bottom: 12px;
+  }
+}
+
+.sectionTitle::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.25em;
+  bottom: 0.25em;
+  width: 4px;
+  background: #FFB800;
+  border-radius: 2px;
+}
+
+.card {
+  background-color: #0d1117;
+  border: solid 1px #30363d;
+  border-radius: 6px;
+  padding: 32px;
+  position: relative;
+  flex: 1;
+}
+
+@include m.small {
+  .card {
+    padding: 16px;
+  }
+}
