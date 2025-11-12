@@ -1,4 +1,4 @@
-import MapDetailPage from "@/Components/Pages/MapDetail/MapDetailPage";
+import MapDetailPage from "@/components/Pages/MapDetail/MapDetailPage";
 import { Suspense } from "react";
 
 export const metadata = {

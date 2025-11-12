@@ -1,5 +1,5 @@
-import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
-import CustomSelectMenu from "@/Components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
+import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import CustomSelectMenu from "@/components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
 

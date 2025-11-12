@@ -1,6 +1,6 @@
 "use client";
 
-import FilterButton from "@/Components/Shared/Buttons/FilterButton/FilterButton";
+import FilterButton from "@/components/Shared/Buttons/FilterButton/FilterButton";
 import { useSearchParams } from "next/navigation";
 import s from "./FilterButtons.module.scss";
 

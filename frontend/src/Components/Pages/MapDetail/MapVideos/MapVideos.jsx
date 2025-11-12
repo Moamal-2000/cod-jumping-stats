@@ -1,4 +1,4 @@
-import { MAPS_VIDEOS } from "@/Data/mapsVideos";
+import { MAPS_VIDEOS } from "@/data/mapsVideos";
 import s from "./MapVideos.module.scss";
 import Video from "./Video/Video";
 

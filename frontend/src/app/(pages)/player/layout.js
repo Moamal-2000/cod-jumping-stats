@@ -1,4 +1,4 @@
-import PlayerProfileLayout from "@/Components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
+import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
 import { Suspense } from "react";
 
 const PlayerLayout = ({ children }) => {

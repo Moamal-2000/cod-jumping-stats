@@ -1,4 +1,4 @@
-import { WEBSITE_NAME } from "@/Data/constants";
+import { WEBSITE_NAME } from "@/data/constants";
 import Link from "next/link";
 import s from "./WebsiteLogo.module.scss";
 

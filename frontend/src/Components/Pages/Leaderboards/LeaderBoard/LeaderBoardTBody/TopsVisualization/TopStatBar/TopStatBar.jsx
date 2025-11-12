@@ -1,4 +1,4 @@
-import { getStatsBarStyles } from "@/Functions/utils";
+import { getStatsBarStyles } from "@/functions/utils";
 import s from "./TopStatBar.module.scss";
 
 const TopStatBar = ({ top, times, maxFinishTimes, isSkilledLeaderboard }) => {

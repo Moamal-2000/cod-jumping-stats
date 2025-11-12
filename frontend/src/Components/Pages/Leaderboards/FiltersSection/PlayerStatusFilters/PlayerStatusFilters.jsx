@@ -1,4 +1,4 @@
-import CustomLabeledCheckbox from "@/Components/Shared/Checkboxes/CustomLabeledCheckbox/CustomLabeledCheckbox";
+import CustomLabeledCheckbox from "@/components/Shared/Checkboxes/CustomLabeledCheckbox/CustomLabeledCheckbox";
 import s from "./PlayerStatusFilters.module.scss";
 
 const PlayerStatusFilters = () => {

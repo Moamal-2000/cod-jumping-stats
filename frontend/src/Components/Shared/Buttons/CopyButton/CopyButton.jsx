@@ -1,6 +1,6 @@
 "use client";
 
-import { COPY_BUTTON_DELAY_MS } from "@/Data/constants";
+import { COPY_BUTTON_DELAY_MS } from "@/data/constants";
 import { useState } from "react";
 import s from "./CopyButton.module.scss";
 

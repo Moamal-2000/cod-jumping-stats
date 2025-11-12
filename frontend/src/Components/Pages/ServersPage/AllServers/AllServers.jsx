@@ -1,4 +1,4 @@
-import { getCodServers, getGameTypes } from "@/Functions/utils";
+import { getCodServers, getGameTypes } from "@/functions/utils";
 import GameType from "./GameType/GameType";
 import ServersLoadingError from "./ServersLoadingError/ServersLoadingError";
 

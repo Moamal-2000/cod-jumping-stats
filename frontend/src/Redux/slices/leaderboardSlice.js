@@ -1,5 +1,5 @@
-import { getFilteredLeaderboard } from "@/Functions/filters";
-import { getValueFromLocalStorage, paginateData } from "@/Functions/utils";
+import { getFilteredLeaderboard } from "@/functions/filters";
+import { getValueFromLocalStorage, paginateData } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchLeaderboard } from "../thunks/leaderboardThunk";
 

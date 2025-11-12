@@ -1,6 +1,6 @@
 "use client";
 
-import { NAV_LINKS_DATA } from "@/Data/staticData";
+import { NAV_LINKS_DATA } from "@/data/staticData";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from "./MainNav.module.scss";

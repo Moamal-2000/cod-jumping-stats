@@ -1,8 +1,8 @@
 "use client";
 
-import FilterCard from "@/Components/Shared/Cards/FilterCard/FilterCard";
-import { LEADERBOARDS_FILTERS_DATA } from "@/Data/filters";
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import FilterCard from "@/components/Shared/Cards/FilterCard/FilterCard";
+import { LEADERBOARDS_FILTERS_DATA } from "@/data/filters";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

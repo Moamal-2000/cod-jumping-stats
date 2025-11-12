@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const ExpandButton = () => {

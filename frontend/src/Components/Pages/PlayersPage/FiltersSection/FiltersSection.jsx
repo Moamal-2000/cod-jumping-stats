@@ -1,9 +1,9 @@
 "use client";
 
-import SearchInput from "@/Components/Shared/Inputs/SearchInput/SearchInput";
-import SelectMenu from "@/Components/Shared/SelectMenus/SelectMenu/SelectMenu";
-import { SORT_PLAYERS_OPTIONS } from "@/Data/staticData";
-import { createQueryString } from "@/Functions/utils";
+import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
+import { SORT_PLAYERS_OPTIONS } from "@/data/staticData";
+import { createQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 

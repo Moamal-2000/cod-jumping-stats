@@ -1,4 +1,4 @@
-import { jhApis } from "@/Api/jumpersHeaven";
+import { jhApis } from "@/api/jumpersHeaven";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerRouteCompletion = createAsyncThunk(

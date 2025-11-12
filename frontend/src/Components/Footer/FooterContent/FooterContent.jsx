@@ -1,4 +1,4 @@
-import WebsiteLogo from "@/Components/Shared/WebsiteLogo/WebsiteLogo";
+import WebsiteLogo from "@/components/Shared/WebsiteLogo/WebsiteLogo";
 import FooterNav from "../FooterNav/FooterNav";
 import s from "./FooterContent.module.scss";
 import SocialMedia from "./SocialMedia/SocialMedia";

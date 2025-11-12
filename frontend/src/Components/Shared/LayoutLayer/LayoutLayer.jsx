@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import { usePathname } from "next/navigation";
 import { useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

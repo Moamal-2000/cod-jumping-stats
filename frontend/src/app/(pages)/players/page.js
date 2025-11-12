@@ -1,5 +1,5 @@
-import PlayersPage from "@/Components/Pages/PlayersPage/PlayersPage";
-import PlayerToolTip from "@/Components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
+import PlayersPage from "@/components/Pages/PlayersPage/PlayersPage";
+import PlayerToolTip from "@/components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
 import { Suspense } from "react";
 
 export const metadata = {

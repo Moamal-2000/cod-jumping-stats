@@ -1,14 +1,14 @@
 "use client";
 
-import { jhApis } from "@/Api/jumpersHeaven";
-import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
-import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
+import { jhApis } from "@/api/jumpersHeaven";
+import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
+import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
 import {
   cacheMapsLocally,
   decodeAsyncData,
   fetchMsgPackResponse,
   getCachedMaps,
-} from "@/Functions/utils";
+} from "@/functions/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";

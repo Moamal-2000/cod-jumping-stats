@@ -1,5 +1,5 @@
-import { jhApis } from "@/Api/jumpersHeaven";
-import { decodeAsyncData } from "@/Functions/utils";
+import { jhApis } from "@/api/jumpersHeaven";
+import { decodeAsyncData } from "@/functions/utils";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const initialState = {

@@ -1,8 +1,8 @@
 "use client";
 
-import { paginateData, stripColorCodes } from "@/Functions/utils";
-import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
-import { updateSearchState } from "@/Redux/slices/searchSlice";
+import { paginateData, stripColorCodes } from "@/functions/utils";
+import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
+import { updateSearchState } from "@/redux/slices/searchSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

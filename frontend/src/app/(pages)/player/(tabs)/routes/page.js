@@ -1,4 +1,4 @@
-import PlayerRouteCompletion from "@/Components/Pages/PlayerProfile/PlayerRouteCompletion/PlayerRouteCompletion";
+import PlayerRouteCompletion from "@/components/Pages/PlayerProfile/PlayerRouteCompletion/PlayerRouteCompletion";
 
 const RoutesTab = () => {
   return <PlayerRouteCompletion />;

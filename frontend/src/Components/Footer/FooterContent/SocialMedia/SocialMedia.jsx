@@ -1,4 +1,4 @@
-import { SOCIAL_MEDIA_DATA } from "@/Data/staticData";
+import { SOCIAL_MEDIA_DATA } from "@/data/staticData";
 import s from "./SocialMedia.module.scss";
 
 const SocialMedia = () => {

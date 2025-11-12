@@ -1,6 +1,6 @@
 "use client";
 
-import { formatDate } from "@/Functions/utils";
+import { formatDate } from "@/functions/utils";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";

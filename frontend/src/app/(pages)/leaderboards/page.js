@@ -1,6 +1,6 @@
-import FiltersSection from "@/Components/Pages/Leaderboards/FiltersSection/FiltersSection";
-import LeaderBoard from "@/Components/Pages/Leaderboards/LeaderBoard/LeaderBoard";
-import PlayerToolTip from "@/Components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
+import FiltersSection from "@/components/Pages/Leaderboards/FiltersSection/FiltersSection";
+import LeaderBoard from "@/components/Pages/Leaderboards/LeaderBoard/LeaderBoard";
+import PlayerToolTip from "@/components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
 import { Suspense } from "react";
 
 export const metadata = {

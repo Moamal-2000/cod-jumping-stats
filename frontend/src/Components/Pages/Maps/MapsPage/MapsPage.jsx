@@ -1,8 +1,8 @@
 "use client";
 
-import { PAGINATION_ITEMS_PER_PAGE } from "@/Data/constants";
-import useInfiniteScroll from "@/Hooks/App/useInfiniteScroll";
-import { updateMapsState } from "@/Redux/slices/mapsSlice";
+import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
+import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
+import { updateMapsState } from "@/redux/slices/mapsSlice";
 import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "../FiltersSection/FiltersSection";

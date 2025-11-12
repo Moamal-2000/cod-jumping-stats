@@ -1,6 +1,6 @@
 "use client";
 import s from "@/Components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
-import { getColoredName } from "@/Functions/components";
+import { getColoredName } from "@/functions/components";
 import { useEffect, useRef, useState } from "react";
 
 const LoadingSpinner = () => (

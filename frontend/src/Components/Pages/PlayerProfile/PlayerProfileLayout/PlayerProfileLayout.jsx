@@ -1,18 +1,18 @@
 "use client";
 
-import Breadcrumbs from "@/Components/Shared/Breadcrumbs/Breadcrumbs";
-import { stripColorCodes } from "@/Functions/utils";
+import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
+import { stripColorCodes } from "@/functions/utils";
 import {
   clearPlayerProfile,
   updatePlayerProfileState,
-} from "@/Redux/slices/playerProfileSlice";
+} from "@/redux/slices/playerProfileSlice";
 import {
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
   fetchPlayerProfile,
   fetchPlayerTops,
-} from "@/Redux/thunks/playerProfileThunk";
-import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
+} from "@/redux/thunks/playerProfileThunk";
+import { fetchAllPlayers } from "@/redux/thunks/playersThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

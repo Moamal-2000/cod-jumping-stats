@@ -1,6 +1,6 @@
 "use client";
 
-import CopyRights from "@/Components/Footer/CopyRights/CopyRights";
+import CopyRights from "@/components/Footer/CopyRights/CopyRights";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import MobileNavLinks from "./MobileNavLinks/MobileNavLinks";

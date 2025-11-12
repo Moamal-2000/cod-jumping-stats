@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString, removeQueryString } from "@/Functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FilterButton.module.scss";
 
@@ -30,7 +30,9 @@ export function FilterButton({
     : `Filter the leaderboard by ${text}`;
 
   const handleClick = () => {
-    const value = isRegionFilter ? regionValue : (queryValue?.toLowerCase() || textValue);
+    const value = isRegionFilter
+      ? regionValue
+      : queryValue?.toLowerCase() || textValue;
     if (!value) return;
 
     const isDefault = value === defaultUrlQuery;

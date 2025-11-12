@@ -1,16 +1,16 @@
 "use client";
 
-import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
-import { getPlayersByParams } from "@/Functions/filters";
-import { removeQueryString } from "@/Functions/utils";
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import { PLAYERS_BATCH_SIZE } from "@/data/constants";
+import { getPlayersByParams } from "@/functions/filters";
+import { removeQueryString } from "@/functions/utils";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import {
   loadMorePlayersAction,
   resetPagination,
   setIsLoadingMore,
   updatePlayersState,
-} from "@/Redux/slices/playersSlice";
-import { fetchAllPlayers } from "@/Redux/thunks/playersThunk";
+} from "@/redux/slices/playersSlice";
+import { fetchAllPlayers } from "@/redux/thunks/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";

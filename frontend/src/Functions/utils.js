@@ -1,12 +1,12 @@
-import { jhApis } from "@/Api/jumpersHeaven";
+import { jhApis } from "@/api/jumpersHeaven";
 import {
   JUMP_FPS,
   MONTHS,
   NUMBER_OF_RATING_STARS,
   PAGINATION_ITEMS_PER_PAGE,
-} from "@/Data/constants";
-import { MAPS_VIDEOS } from "@/Data/mapsVideos";
-import { SORT_MAPS_OPTIONS, TOP_STATS_COLOR } from "@/Data/staticData";
+} from "@/data/constants";
+import { MAPS_VIDEOS } from "@/data/mapsVideos";
+import { SORT_MAPS_OPTIONS, TOP_STATS_COLOR } from "@/data/staticData";
 import { encode } from "@msgpack/msgpack";
 import { Buffer } from "buffer";
 import LZString from "lz-string";

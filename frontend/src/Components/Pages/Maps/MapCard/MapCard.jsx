@@ -1,5 +1,5 @@
-import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
-import { getMapCompletionRate } from "@/Functions/utils";
+import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import { getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";

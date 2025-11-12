@@ -1,4 +1,4 @@
-import { openVideo } from "@/Functions/utils";
+import { openVideo } from "@/functions/utils";
 import s from "./MapsVideos.module.scss";
 
 const MapsVideos = ({ videos }) => {

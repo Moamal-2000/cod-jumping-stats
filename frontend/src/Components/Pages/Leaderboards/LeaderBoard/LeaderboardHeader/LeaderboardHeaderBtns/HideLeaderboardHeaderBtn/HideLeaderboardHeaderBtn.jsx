@@ -1,6 +1,6 @@
 "use client";
 
-import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
+import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./HideLeaderboardHeaderBtn.module.scss";
 

@@ -3,8 +3,8 @@ import {
   contentCreatorIds,
   eventWinnerIds,
   mappersIds,
-} from "@/Data/manualBadges";
-import { isActiveWithinWeek } from "@/Functions/utils";
+} from "@/data/manualBadges";
+import { isActiveWithinWeek } from "@/functions/utils";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 

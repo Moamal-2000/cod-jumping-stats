@@ -1,4 +1,4 @@
-import { getMapRoutes } from "@/Components/Shared/MapRoutesSelector/MapRoutesSelector";
+import { getMapRoutes } from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
 import s from "./MapRoutes.module.scss";
 
 const MapRoutes = ({ allMaps, selectedMapId, selectMapRoute }) => {

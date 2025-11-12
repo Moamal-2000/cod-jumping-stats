@@ -1,4 +1,4 @@
-import RunAnalytics from "@/Components/Pages/PlayerProfile/RunAnalytics/RunAnalytics";
+import RunAnalytics from "@/components/Pages/PlayerProfile/RunAnalytics/RunAnalytics";
 
 const RunAnalyticsPage = () => {
   return <RunAnalytics />;

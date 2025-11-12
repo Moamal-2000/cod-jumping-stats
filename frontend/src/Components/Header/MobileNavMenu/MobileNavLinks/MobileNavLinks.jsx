@@ -1,5 +1,5 @@
-import { NAV_LINKS_DATA } from "@/Data/staticData";
-import { toggleMobileNav } from "@/Redux/slices/globalSlice";
+import { NAV_LINKS_DATA } from "@/data/staticData";
+import { toggleMobileNav } from "@/redux/slices/globalSlice";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";

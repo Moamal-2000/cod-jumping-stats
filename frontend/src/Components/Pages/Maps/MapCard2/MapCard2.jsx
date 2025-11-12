@@ -1,6 +1,6 @@
-import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
-import { JUMP_FPS } from "@/Data/constants";
-import { formateReleaseDate, getMapCompletionRate } from "@/Functions/utils";
+import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import { JUMP_FPS } from "@/data/constants";
+import { formateReleaseDate, getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
 import { memo } from "react";
 import s from "./MapCard2.module.scss";

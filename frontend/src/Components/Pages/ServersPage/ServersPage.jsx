@@ -1,7 +1,7 @@
 "use client";
 
-import { jhApis } from "@/Api/jumpersHeaven";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+import { jhApis } from "@/api/jumpersHeaven";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/functions/utils";
 import { useEffect, useState } from "react";
 import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";

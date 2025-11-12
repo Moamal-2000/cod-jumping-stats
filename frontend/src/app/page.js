@@ -1,4 +1,4 @@
-import ServersPage from "@/Components/Pages/ServersPage/ServersPage";
+import ServersPage from "@/components/Pages/ServersPage/ServersPage";
 
 export const metadata = {
   title: "Servers | JumpersHeaven",

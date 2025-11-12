@@ -1,6 +1,6 @@
 "use client";
 
-import { toggleMobileNav } from "@/Redux/slices/globalSlice";
+import { toggleMobileNav } from "@/redux/slices/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./GlobalOverlay.module.scss";
 

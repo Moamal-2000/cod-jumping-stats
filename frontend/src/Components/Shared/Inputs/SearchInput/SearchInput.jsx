@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString, removeQueryString } from "@/Functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import s from "./SearchInput.module.scss";

@@ -1,4 +1,4 @@
-import CopyButton from "@/Components/Shared/Buttons/CopyButton/CopyButton";
+import CopyButton from "@/components/Shared/Buttons/CopyButton/CopyButton";
 import s from "./ServerCardIp.module.scss";
 
 const ServerCardIp = ({ server }) => {

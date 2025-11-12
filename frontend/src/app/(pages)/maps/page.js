@@ -1,4 +1,4 @@
-import MapsPage from "@/Components/Pages/Maps/MapsPage/MapsPage";
+import MapsPage from "@/components/Pages/Maps/MapsPage/MapsPage";
 
 export const metadata = {
   title: "Maps | JumpersHeaven",

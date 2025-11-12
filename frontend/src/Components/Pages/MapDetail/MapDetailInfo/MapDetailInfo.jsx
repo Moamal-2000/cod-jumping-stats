@@ -1,5 +1,5 @@
-import { JUMP_FPS } from "@/Data/constants";
-import { getFpsDifficultyValue, mapHasDifficulties } from "@/Functions/utils";
+import { JUMP_FPS } from "@/data/constants";
+import { getFpsDifficultyValue, mapHasDifficulties } from "@/functions/utils";
 import s from "./MapDetailInfo.module.scss";
 
 const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];

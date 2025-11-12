@@ -1,4 +1,4 @@
-import SpinnerLoader from "@/Components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
+import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import Link from "next/link";
 import s from "./PageLoadingError.module.scss";
 

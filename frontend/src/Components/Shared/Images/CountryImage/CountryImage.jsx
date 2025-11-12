@@ -1,6 +1,6 @@
 "use client";
 
-import { getCountryName } from "@/Functions/utils";
+import { getCountryName } from "@/functions/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./CountryImage.module.scss";

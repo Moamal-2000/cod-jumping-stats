@@ -1,7 +1,7 @@
 "use client";
 
 import s from "@/Components/Pages/NotFoundPage/NotFoundPage.module.scss";
-import NotFoundPageList from "@/Components/Pages/NotFoundPage/NotFoundPageList/NotFoundPageList";
+import NotFoundPageList from "@/components/Pages/NotFoundPage/NotFoundPageList/NotFoundPageList";
 import Link from "next/link";
 
 const NotFoundPage = () => {

@@ -1,4 +1,4 @@
-import { PLAYERS_BATCH_SIZE } from "@/Data/constants";
+import { PLAYERS_BATCH_SIZE } from "@/data/constants";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers } from "../thunks/playersThunk";
 

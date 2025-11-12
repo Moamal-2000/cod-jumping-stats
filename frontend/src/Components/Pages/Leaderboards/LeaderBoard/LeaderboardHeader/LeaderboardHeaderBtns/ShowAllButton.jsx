@@ -1,8 +1,8 @@
 "use client";
 
-import { PAGINATION_ITEMS_PER_PAGE } from "@/Data/constants";
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
-import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
+import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 

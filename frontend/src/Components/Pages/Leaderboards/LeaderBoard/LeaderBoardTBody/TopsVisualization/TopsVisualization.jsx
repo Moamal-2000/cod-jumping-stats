@@ -1,6 +1,6 @@
 "use client";
 
-import { getMaxFinishTimesFrom } from "@/Functions/utils";
+import { getMaxFinishTimesFrom } from "@/functions/utils";
 import { useSearchParams } from "next/navigation";
 import TopStatBar from "./TopStatBar/TopStatBar";
 import s from "./TopsVisualization.module.scss";

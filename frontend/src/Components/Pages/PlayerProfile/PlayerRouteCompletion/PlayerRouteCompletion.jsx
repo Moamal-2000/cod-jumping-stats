@@ -1,6 +1,6 @@
 "use client";
 
-import { fetchPlayerRouteCompletionNew } from "@/Redux/thunks/playerRouteCompletionThunk";
+import { fetchPlayerRouteCompletionNew } from "@/redux/thunks/playerRouteCompletionThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";

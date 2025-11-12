@@ -1,4 +1,4 @@
-import { getColoredName, getModifiedRank } from "@/Functions/components";
+import { getColoredName, getModifiedRank } from "@/functions/components";
 import Link from "next/link";
 import s from "./MapDetailPlayers.module.scss";
 

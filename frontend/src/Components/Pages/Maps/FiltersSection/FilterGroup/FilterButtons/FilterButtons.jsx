@@ -4,7 +4,7 @@ import {
   createQueryString,
   getStarsText,
   removeQueryString,
-} from "@/Functions/utils";
+} from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FilterButtons.module.scss";
 

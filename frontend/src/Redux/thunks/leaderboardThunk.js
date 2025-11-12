@@ -2,7 +2,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
   getLeaderboardUrl,
-} from "@/Functions/utils";
+} from "@/functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchLeaderboard = createAsyncThunk(

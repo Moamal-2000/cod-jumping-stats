@@ -1,9 +1,9 @@
 "use client";
 
-import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
-import { getColoredName } from "@/Functions/components";
-import { stripColorCodes } from "@/Functions/utils";
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
+import { getColoredName } from "@/functions/components";
+import { stripColorCodes } from "@/functions/utils";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./PlayerNameCell.module.scss";

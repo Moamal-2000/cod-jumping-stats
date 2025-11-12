@@ -1,4 +1,4 @@
-import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
+import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
 import PlayerBadges from "./PlayerBadges/PlayerBadges";
 import s from "./PlayerCard.module.scss";
 import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";

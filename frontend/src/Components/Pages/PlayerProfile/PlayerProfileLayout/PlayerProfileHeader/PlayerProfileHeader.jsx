@@ -1,8 +1,8 @@
 "use client";
 
-import PlayerBadges from "@/Components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
-import CountryImage from "@/Components/Shared/Images/CountryImage/CountryImage";
-import { getColoredName } from "@/Functions/components";
+import PlayerBadges from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
+import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
+import { getColoredName } from "@/functions/components";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";

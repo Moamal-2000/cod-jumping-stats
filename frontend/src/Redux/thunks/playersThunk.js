@@ -1,6 +1,6 @@
-import { jhApis } from "@/Api/jumpersHeaven";
-import { getPlayersByParams } from "@/Functions/filters";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/Functions/utils";
+import { jhApis } from "@/api/jumpersHeaven";
+import { getPlayersByParams } from "@/functions/filters";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPlayers = createAsyncThunk(

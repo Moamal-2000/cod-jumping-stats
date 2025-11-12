@@ -1,11 +1,11 @@
-import { jhApis } from "@/Api/jumpersHeaven";
-import { MAPS_CACHE_EXPIRATION_TIME } from "@/Data/constants";
+import { jhApis } from "@/api/jumpersHeaven";
+import { MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
 import {
   cacheMapsLocally,
   decodeAsyncData,
   fetchMsgPackResponse,
   getCachedMaps,
-} from "@/Functions/utils";
+} from "@/functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMaps = createAsyncThunk(

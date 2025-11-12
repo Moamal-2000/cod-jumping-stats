@@ -3,8 +3,8 @@
 import {
   PAGINATION_ITEMS_PER_PAGE,
   TOTAL_MAPS_PLACEHOLDER,
-} from "@/Data/constants";
-import { updateLeaderboardState } from "@/Redux/slices/leaderboardSlice";
+} from "@/data/constants";
+import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

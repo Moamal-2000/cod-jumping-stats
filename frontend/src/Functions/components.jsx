@@ -1,4 +1,4 @@
-import { COD2_COLORS } from "@/Data/staticData";
+import { COD2_COLORS } from "@/data/staticData";
 
 export function getModifiedRank(rank) {
   const isTop1 = rank === 1;

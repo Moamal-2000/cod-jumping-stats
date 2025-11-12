@@ -1,4 +1,4 @@
-import { getServerStatusColor } from "@/Functions/utils";
+import { getServerStatusColor } from "@/functions/utils";
 import s from "./ServerCardIndicator.module.scss";
 
 const ServerCardIndicator = ({ server }) => {

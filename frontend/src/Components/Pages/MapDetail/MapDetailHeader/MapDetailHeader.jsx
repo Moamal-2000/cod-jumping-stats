@@ -1,6 +1,6 @@
-import MapImage from "@/Components/Shared/Images/MapImage/MapImage";
-import MapRoutesSelector from "@/Components/Shared/MapRoutesSelector/MapRoutesSelector";
-import { fetchMaps } from "@/Redux/thunks/mapsThunk";
+import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
+import { fetchMaps } from "@/redux/thunks/mapsThunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MapDetailHeader.module.scss";

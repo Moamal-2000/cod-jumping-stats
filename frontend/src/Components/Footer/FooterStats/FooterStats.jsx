@@ -1,6 +1,6 @@
 "use client";
 
-import { getJumpersHeavenStats } from "@/Redux/slices/globalSlice";
+import { getJumpersHeavenStats } from "@/redux/slices/globalSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./FooterStats.module.scss";

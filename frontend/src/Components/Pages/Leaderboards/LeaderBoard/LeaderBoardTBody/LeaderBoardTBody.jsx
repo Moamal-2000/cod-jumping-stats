@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGlobalState } from "@/Redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/slices/globalSlice";
 import { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerLoader from "../../../../Shared/Loaders/SpinnerLoader/SpinnerLoader";

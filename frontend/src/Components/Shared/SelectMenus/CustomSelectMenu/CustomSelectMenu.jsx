@@ -1,6 +1,6 @@
 "use client";
 
-import { getSortByLabel } from "@/Functions/utils";
+import { getSortByLabel } from "@/functions/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import s from "./CustomSelectMenu.module.scss";

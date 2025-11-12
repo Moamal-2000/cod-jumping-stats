@@ -1,6 +1,6 @@
 "use client";
 
-import { getIsLastPagination } from "@/Functions/utils";
+import { getIsLastPagination } from "@/functions/utils";
 import { useCallback, useRef, useState } from "react";
 
 const useInfiniteScroll = (data, isTableElementReversed = null) => {

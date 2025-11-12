@@ -1,4 +1,4 @@
-import PlayerOverview from "@/Components/Pages/PlayerProfile/PlayerOverview/PlayerOverview";
+import PlayerOverview from "@/components/Pages/PlayerProfile/PlayerOverview/PlayerOverview";
 import { Suspense } from "react";
 
 export const metadata = {

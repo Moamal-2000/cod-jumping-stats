@@ -1,4 +1,4 @@
-import ScoringSystem from "@/Components/Pages/ScoringSystem/ScoringSystem";
+import ScoringSystem from "@/components/Pages/ScoringSystem/ScoringSystem";
 
 export const metadata = {
   title: "Scoring | JumpersHeaven",
