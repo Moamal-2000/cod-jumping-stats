@@ -185,7 +185,7 @@ export function stripColorCodes(name) {
   return name.replace(/\^\d/g, "");
 }
 
-export function getCodServers(servers) {
+export function getCodServers(servers = []) {
   return servers.reduce((groups, server) => {
     const gameType = server.GameType;
     if (!groups[gameType]) groups[gameType] = [];

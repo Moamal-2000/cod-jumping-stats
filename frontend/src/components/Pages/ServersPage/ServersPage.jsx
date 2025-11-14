@@ -1,41 +1,15 @@
 "use client";
 
-import { jhApis } from "@/api/jumpersHeaven";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/functions/utils";
-import { useEffect, useState } from "react";
+import { useGetServersQuery } from "@/redux/features/servers/api/serversSlice";
 import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 
 const ServersPage = () => {
-  const [servers, setServers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchServers = async () => {
-      try {
-        const response = await fetchMsgPackResponse({
-          url: jhApis().player.getOnlinePlayers,
-          cache: "no-cache",
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch server data");
-
-        const data = await decodeAsyncData(response);
-        setServers(data.Servers || []);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchServers();
-  }, []);
+  const { data: servers, isLoading, isError } = useGetServersQuery();
 
   return (
     <>
-      <AllServers servers={servers} loading={loading} error={error} />
+      <AllServers servers={servers} loading={isLoading} error={isError} />
       <PlayerToolTip />
     </>
   );

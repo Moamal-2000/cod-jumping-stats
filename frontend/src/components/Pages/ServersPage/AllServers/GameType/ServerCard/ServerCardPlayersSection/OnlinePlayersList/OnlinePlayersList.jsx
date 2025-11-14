@@ -7,7 +7,8 @@ import s from "./OnlinePlayersList.module.scss";
 
 const OnlinePlayersList = ({ server }) => {
   const dispatch = useDispatch();
-  const sortBAdminPlayers = server.Players.sort((a, b) => b.Admin - a.Admin);
+  const players = [...server?.Players];
+  const sortBAdminPlayers = players.sort((a, b) => b.Admin - a.Admin);
 
   function handleMouseLeave() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
