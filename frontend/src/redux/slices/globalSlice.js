@@ -1,6 +1,4 @@
-import { jhApis } from "@/api/jumpersHeaven";
-import { decodeAsyncData } from "@/functions/utils";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isNotFoundPage: false,
@@ -11,25 +9,8 @@ const initialState = {
   isGlobalOverlayActive: false,
   pageVisits: [],
   tryFetchAgain: 0,
-  statistics: {},
   hoveredPlayer: null,
 };
-
-export const getJumpersHeavenStats = createAsyncThunk(
-  "globalSlice/getJumpersHeavenStats",
-  async () => {
-    try {
-      const response = await fetch(jhApis().map.getMapsCount, {
-        headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
-      });
-
-      const mapsCountData = await decodeAsyncData(response);
-      return { mapsCount: mapsCountData?.Count };
-    } catch (error) {
-      console.error(error);
-    }
-  }
-);
 
 export const globalSlice = createSlice({
   initialState,
@@ -43,13 +24,6 @@ export const globalSlice = createSlice({
       state.isMobileNavActive = value;
       state.isGlobalOverlayActive = value;
     },
-  },
-  extraReducers: ({ addCase }) => {
-    addCase(getJumpersHeavenStats.pending, (state, action) => {})
-      .addCase(getJumpersHeavenStats.fulfilled, (state, action) => {
-        state.statistics = action.payload;
-      })
-      .addCase(getJumpersHeavenStats.rejected, (state, action) => {});
   },
 });
 
