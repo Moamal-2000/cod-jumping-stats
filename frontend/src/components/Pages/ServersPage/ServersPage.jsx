@@ -5,11 +5,11 @@ import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 
 const ServersPage = () => {
-  const { data: servers, isLoading, isError } = useGetServersQuery();
+  const { data, isLoading, isError } = useGetServersQuery();
 
   return (
     <>
-      <AllServers servers={servers} loading={isLoading} error={isError} />
+      <AllServers servers={data?.Servers} loading={isLoading} error={isError} />
       <PlayerToolTip />
     </>
   );

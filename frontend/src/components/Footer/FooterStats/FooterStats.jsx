@@ -1,17 +1,11 @@
 "use client";
 
-import { getJumpersHeavenStats } from "@/redux/slices/globalSlice";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useGetJhStatsQuery } from "@/redux/features/jhStats/api/jhStatsSlice";
 import s from "./FooterStats.module.scss";
 
 const FooterStats = () => {
-  const dispatch = useDispatch();
-  const { statistics } = useSelector((s) => s.global);
-
-  useEffect(() => {
-    dispatch(getJumpersHeavenStats());
-  }, []);
+  const jhStatsQuery = useGetJhStatsQuery();
+  const jhStats = jhStatsQuery.data;
 
   return (
     <section className={s.statsSection}>
@@ -35,7 +29,7 @@ const FooterStats = () => {
         </div>
 
         <div className={s.stat}>
-          <b className={s.number}>{statistics?.mapsCount || "???"}</b>
+          <b className={s.number}>{jhStats?.mapsCount || "???"}</b>
           <span className={s.title}>Maps</span>
         </div>
 
