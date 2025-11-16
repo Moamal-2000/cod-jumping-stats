@@ -5,17 +5,19 @@
   font-size: .9rem;
   font-weight: 600;
   grid-area: indicator;
+  color: #f6f6f6;
 }
 
 .indicator .statusDot {
   width: 10px;
   height: 10px;
   border-radius: 50%;
-}
 
-.indicator .statusText {
-  display: flex;
-  align-items: center;
-  color: #f6f6f6;
-  text-wrap: nowrap;
+  &.online {
+    background-color: #47ca4b;
+  }
+
+  &.offline {
+    background-color: #F44336;
+  }
 }

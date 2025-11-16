@@ -1,15 +1,12 @@
-import { getServerStatusColor } from "@/functions/utils";
 import s from "./ServerCardIndicator.module.scss";
 
 const ServerCardIndicator = ({ server }) => {
   return (
     <div className={s.indicator}>
       <span
-        className={s.statusDot}
-        style={{
-          backgroundColor: getServerStatusColor(server.Online),
-        }}
+        className={`${s.statusDot} ${server.Online ? s.online : s.offline}`}
       />
+
       <span className={s.statusText}>
         {server.Online ? `${server.PlayerCount || 0} Players` : "Offline"}
       </span>

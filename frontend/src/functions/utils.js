@@ -201,10 +201,6 @@ export function getCountryFlag(domain) {
   return flagPath;
 }
 
-export function getServerStatusColor(online) {
-  return online ? "#47ca4b" : "#F44336";
-}
-
 export function getGameTypes(groupedServers) {
   return Object.keys(groupedServers).sort(
     (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")
