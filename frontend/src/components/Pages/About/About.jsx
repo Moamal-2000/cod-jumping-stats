@@ -9,9 +9,10 @@ const About = () => {
         <AboutSection title="Project Overview">
           <p className={s.description}>
             JumpersHeaven is a Call of Duty 2 mod created by{" "}
-            <strong>Iznogod</strong>, featuring custom servers maintained by the
-            mod creator. JH Stats is an independent leaderboard system that
-            retrieves and displays data from the JumpersHeaven database.
+            <strong>IzNoGoD</strong>, featuring custom
+            servers maintained by the mod creator. JH Stats is an independent
+            leaderboard system that retrieves and displays data from the
+            JumpersHeaven database.
           </p>
           <p className={s.description}>
             JH Stats provides players with comprehensive statistics, rankings,
@@ -72,7 +73,7 @@ const About = () => {
               <h3 className={s.techTitle}>Data Source</h3>
               <p className={s.techDescription}>
                 All leaderboard data is sourced from the JumpersHeaven database
-                with permission from Iznogod. We maintain data integrity while
+                with permission from IzNoGoD. We maintain data integrity while
                 providing enhanced visualization and user experience.
               </p>
             </div>
@@ -106,7 +107,7 @@ const About = () => {
 
           <AboutSection title="Special Thanks">
             <p className={s.description}>
-              Special thanks to <strong>Iznogod</strong> for creating the
+              Special thanks to <strong>IzNoGoD</strong> for creating the
               original JumpersHeaven Call of Duty 2 mod and maintaining the
               servers. Without his work and the database access he provided,
               this leaderboard project would not have been possible.
