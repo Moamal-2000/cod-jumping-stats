@@ -14,15 +14,8 @@
 }
 
 .description {
-  font-size: 1rem;
-  line-height: 1.8;
-  color: #f9fafb;
-  margin-bottom: 24px;
-}
-
-.description {
-  font-size: 1rem;
-  line-height: 1.8;
+  font-size: 1.05rem;
+  line-height: 1.6;
   color: #f9fafb;
   margin-bottom: 24px;
 
@@ -37,21 +30,32 @@
   }
 }
 
-.description strong {
+.highlight {
   color: #FFB800;
   font-weight: 600;
   position: relative;
 }
 
-.description strong::after {
+a.highlight::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2px;
-  height: 2px;
-  background: rgba(255, 184, 0, 0.3);
-  border-radius: 1px;
+  left: -50%;
+  width: 100%;
+  bottom: -1px;
+  height: 1px;
+  scale: 0 1;
+  opacity: .6;
+  background: rgb(255, 184, 0);
+  transition:
+    scale .2s ease,
+    translate .2s ease,
+    opacity .2s .22s ease;
+}
+
+a.highlight:hover::after {
+  translate: 50% 0;
+  scale: 1 2;
+  opacity: 1;
 }
 
 .teamGrid {
@@ -86,7 +90,7 @@
   text-decoration: underline;
 
   &:hover {
-    color: #ffd700;
+    color: #f1f1f1;
   }
 }
 
