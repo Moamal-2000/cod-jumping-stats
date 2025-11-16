@@ -1,3 +1,4 @@
+import Link from "next/link";
 import s from "./About.module.scss";
 import AboutSection from "./AboutSection/AboutSection";
 
@@ -38,7 +39,14 @@ const About = () => {
 
             <div className={s.teamMember} role="listitem">
               <div className={s.memberInfo}>
-                <strong className={s.memberName}>Moamal</strong>
+                <Link
+                  href="https://moamalalaa.netlify.app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={s.memberName}
+                >
+                  Moamal
+                </Link>
                 <p className={s.memberRole}>Frontend Developer</p>
               </div>
 

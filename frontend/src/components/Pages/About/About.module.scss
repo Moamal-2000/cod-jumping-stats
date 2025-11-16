@@ -82,6 +82,14 @@
   gap: 14px;
 }
 
+.memberInfo>a {
+  text-decoration: underline;
+
+  &:hover {
+    color: #ffd700;
+  }
+}
+
 .memberRole {
   font-size: .875rem;
   color: #FFC933;
