@@ -1,14 +1,10 @@
 .copyButton {
   background: none;
   border: none;
-  color: #f6f6f6;
+  color: #e0e0e0;
   padding: 0;
   cursor: pointer;
-  transition: color 0.2s;
-}
-
-.copyButton:hover svg[data-type=stroke] {
-  stroke: #47ca4b;
+  transition: color .2s;
 }
 
 .copyButton>svg {
@@ -16,11 +12,11 @@
   width: 18px;
   height: 18px;
 
-  &[data-type=stroke] {
-    stroke: #f6f6f6;
-  }
-
   &:not([data-type=stroke]) {
     fill: #32f639;
   }
+}
+
+.copyButton:hover svg {
+  color: #fff;
 }
