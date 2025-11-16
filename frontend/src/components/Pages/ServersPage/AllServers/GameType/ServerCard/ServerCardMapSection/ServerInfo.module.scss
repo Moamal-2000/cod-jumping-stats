@@ -1,15 +1,18 @@
-.mapInfo {
+.serverInfo {
   padding: 16px;
-  padding-bottom: 26px;
+  padding-bottom: 14px;
   position: relative;
   z-index: 2;
-  top: 28px;
+  top: 10px;
+}
+
+.serverInfo .infoItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.mapLabel {
+.label {
   color: #f6f6f6;
   font-size: .875rem;
   display: flex;
@@ -17,7 +20,7 @@
   gap: 6px;
 }
 
-.mapLabel>svg {
+.label>svg {
   width: 16px;
   height: 16px;
 }
@@ -29,5 +32,33 @@
 
   &:not(span):hover {
     text-decoration: underline;
+  }
+}
+
+.gameName {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: .875rem;
+
+  &.cod4 {
+    background: linear-gradient(135deg, #d2ffc4, #e6fcdf);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #84e486;
+    text-shadow:
+      -1px 0 2px rgba(94, 200, 95, .6),
+      -1px 0 3px rgba(94, 200, 95, .6);
+  }
+
+  &.cod2 {
+    background: linear-gradient(180deg, #f79d3e 20%, #fff 100%);
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: #e9ad6d;
+    text-shadow:
+      -1px 0 2px #e78f3199,
+      0 0 3px #ffffff6c;
   }
 }
