@@ -2,14 +2,14 @@
 
 import s from "./ServerCard.module.scss";
 import ServerCardHeader from "./ServerCardHeader/ServerCardHeader";
-import ServerCardMapSection from "./ServerCardMapSection/ServerCardMapSection";
+import ServerInfo from "./ServerCardMapSection/ServerInfo";
 import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlayersSection";
 
 const ServerCard = ({ server, index }) => {
   return (
     <div className={s.serverCard}>
       <ServerCardHeader server={server} index={index} />
-      <ServerCardMapSection server={server} />
+      <ServerInfo server={server} />
       <ServerCardPlayersSection server={server} />
     </div>
   );

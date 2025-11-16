@@ -1,7 +1,7 @@
 import Link from "next/link";
-import s from "./ServerCardMap.module.scss";
+import s from "./ServerInfo.module.scss";
 
-const ServerCardMapSection = ({ server }) => {
+const ServerInfo = ({ server }) => {
   const isCod4 = server.GameType === "COD4";
 
   return (
@@ -24,4 +24,4 @@ const ServerCardMapSection = ({ server }) => {
   );
 };
 
-export default ServerCardMapSection;
+export default ServerInfo;
