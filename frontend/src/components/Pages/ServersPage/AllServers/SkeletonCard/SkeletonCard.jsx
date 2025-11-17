@@ -14,8 +14,14 @@ const SkeletonCard = () => {
       </div>
 
       <div className={s.mapInfo}>
-        <div className={`${s.line} ${s.tiny}`} />
-        <div className={`${s.line} ${s.mini}`} />
+        <div className={s.info}>
+          <div className={`${s.line} ${s.tiny}`} />
+          <div className={`${s.line} ${s.mini}`} />
+        </div>
+        <div className={s.info}>
+          <div className={`${s.line} ${s.tiny}`} />
+          <div className={`${s.line} ${s.mini}`} />
+        </div>
       </div>
 
       <div className={s.players}>
