@@ -3,7 +3,7 @@
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
 import { getColoredName } from "@/functions/components";
 import { stripColorCodes } from "@/functions/utils";
-import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./PlayerNameCell.module.scss";

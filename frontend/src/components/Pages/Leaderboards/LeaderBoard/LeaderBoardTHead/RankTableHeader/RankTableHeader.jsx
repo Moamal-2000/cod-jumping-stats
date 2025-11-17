@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./RankTableHeader.module.scss";
 

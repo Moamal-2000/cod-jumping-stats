@@ -1,7 +1,7 @@
 "use client";
 
 import { isMobile } from "@/functions/validation";
-import { toggleMobileNav } from "@/redux/slices/globalSlice";
+import { toggleMobileNav } from "@/redux/features/global/slice/globalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MobileNavBtn.module.scss";

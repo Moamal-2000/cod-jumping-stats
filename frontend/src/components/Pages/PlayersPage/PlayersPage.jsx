@@ -3,7 +3,7 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
 import { getPlayersByParams } from "@/functions/filters";
 import { removeQueryString } from "@/functions/utils";
-import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import {
   loadMorePlayersAction,
   resetPagination,

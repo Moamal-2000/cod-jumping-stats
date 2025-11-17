@@ -2,7 +2,7 @@
 
 import FilterCard from "@/components/Shared/Cards/FilterCard/FilterCard";
 import { LEADERBOARDS_FILTERS_DATA } from "@/data/filters";
-import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";

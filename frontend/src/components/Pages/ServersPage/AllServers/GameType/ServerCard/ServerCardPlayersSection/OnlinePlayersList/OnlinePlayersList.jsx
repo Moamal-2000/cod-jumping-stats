@@ -1,6 +1,6 @@
 "use client";
 
-import { updateGlobalState } from "@/redux/slices/globalSlice";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch } from "react-redux";
 import OnlinePlayerItem from "./OnlinePlayerItem/OnlinePlayerItem";
 import s from "./OnlinePlayersList.module.scss";
