@@ -22,11 +22,12 @@ const LeaderBoard = () => {
     isLeaderboardExpanded,
     pageVisits,
   } = useSelector((s) => s.global);
-  const searchPlayer = useSelector((s) => s.search.searchPlayer);
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
+  const searchQuery = searchParams.get("query") || "";
+
   const collapseClass = isLeaderboardExpanded ? "" : s.collapse;
 
   const leaderboardType = searchParams.get("leaderboard");
@@ -48,7 +49,7 @@ const LeaderBoard = () => {
   }, [searchParams, tryFetchAgain]);
 
   useEffect(() => {
-    const searchHasValue = searchPlayer.length > 0;
+    const searchHasValue = searchQuery.length > 0;
 
     checkAndLoadMoreData({
       leaderboardData,
