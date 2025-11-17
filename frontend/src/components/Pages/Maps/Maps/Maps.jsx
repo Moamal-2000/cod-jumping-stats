@@ -32,9 +32,8 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 
   function checkAndLoadMoreData() {
     const isLastPage = getIsLastPagination(mapsData, paginationNumber);
-    const lastVisitedPage = pageVisits?.[pageVisits.length - 1];
-    const cameFromDifferentPage =
-      lastVisitedPage !== "/maps" && lastVisitedPage !== undefined;
+    const previousPage = pageVisits.at(-1);
+    const cameFromDifferentPage = previousPage !== "/maps";
 
     // In this case the handleShowAll() is invoked already
     const isSameArrayReference = mapsScroll === mapsData;

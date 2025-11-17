@@ -457,11 +457,11 @@ const Graph = ({ data: runData, isLoading = false }) => {
     })
     .join(" ");
 
-  const areaPathD = `${linePathD} L ${xScale(
-    graphPoints[graphPoints.length - 1].x
-  ).toFixed(2)} ${chartHeight - chartPadding.bottom} L ${xScale(
-    graphPoints[0].x
-  ).toFixed(2)} ${chartHeight - chartPadding.bottom} Z`;
+  const areaPathD = `${linePathD} L ${xScale(graphPoints.at(-1).x).toFixed(
+    2
+  )} ${chartHeight - chartPadding.bottom} L ${xScale(graphPoints[0].x).toFixed(
+    2
+  )} ${chartHeight - chartPadding.bottom} Z`;
 
   // Format tooltip content
   const renderTooltip = () => {

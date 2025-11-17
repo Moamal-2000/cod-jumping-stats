@@ -4,8 +4,8 @@ import Link from "next/link";
 import s from "./Breadcrumbs.module.scss";
 
 const Breadcrumbs = ({ breadcrumbLabels, breadcrumbPaths }) => {
-  const previousPages = breadcrumbLabels.slice(0, breadcrumbLabels.length - 1);
-  const currentPage = breadcrumbLabels[breadcrumbLabels.length - 1];
+  const previousPages = breadcrumbLabels.slice(0, breadcrumbLabels.at(-1));
+  const currentPage = breadcrumbLabels[breadcrumbLabels.at(-1)];
 
   return (
     <div className={s.breadcrumbs}>
