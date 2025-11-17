@@ -22,7 +22,8 @@ const LeaderBoard = () => {
     isLeaderboardExpanded,
     pageVisits,
   } = useSelector((s) => s.global);
-  const { searchPlayer } = useSelector((s) => s.search);
+  const searchPlayer = useSelector((s) => s.search.searchPlayer);
+
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
@@ -99,9 +100,8 @@ function checkAndLoadMoreData({
   // In this case the handleShowAll() is invoked already
   const isSameArrayReference = leaderboardScroll === leaderboardData;
 
-  const lastVisitedPage = pageVisits?.[pageVisits.length - 1];
-  const cameFromDifferentPage =
-    lastVisitedPage !== "/leaderboards" && lastVisitedPage !== undefined;
+  const previousPage = pageVisits.at(-1);
+  const cameFromDifferentPage = previousPage !== "/leaderboards";
 
   const shouldShowMoreData =
     !isLastPagination &&
