@@ -5,7 +5,7 @@ import {
   fetchPlayerLeaderboardPositions,
   fetchPlayerProfile,
   fetchPlayerTops,
-} from "../thunks/playerProfileThunk";
+} from "../thunk/playerProfileThunk";
 
 const initialState = {
   performanceStats: null,

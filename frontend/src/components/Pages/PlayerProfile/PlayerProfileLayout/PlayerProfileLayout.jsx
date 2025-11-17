@@ -2,17 +2,17 @@
 
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { stripColorCodes } from "@/functions/utils";
-import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import {
   clearPlayerProfile,
   updatePlayerProfileState,
-} from "@/redux/slices/playerProfileSlice";
+} from "@/redux/features/playerProfile/slice/playerProfileSlice";
 import {
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
   fetchPlayerProfile,
   fetchPlayerTops,
-} from "@/redux/thunks/playerProfileThunk";
+} from "@/redux/features/playerProfile/thunk/playerProfileThunk";
+import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

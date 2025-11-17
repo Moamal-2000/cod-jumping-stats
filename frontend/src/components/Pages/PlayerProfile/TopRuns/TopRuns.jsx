@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate, getRankCategory } from "@/functions/utils";
-import { updatePlayerProfileState } from "@/redux/slices/playerProfileSlice";
+import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./TopRuns.module.scss";
