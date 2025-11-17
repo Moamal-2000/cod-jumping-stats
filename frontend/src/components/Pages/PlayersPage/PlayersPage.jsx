@@ -9,8 +9,8 @@ import {
   resetPagination,
   setIsLoadingMore,
   updatePlayersState,
-} from "@/redux/slices/playersSlice";
-import { fetchAllPlayers } from "@/redux/thunks/playersThunk";
+} from "@/redux/features/players/slice/playersSlice";
+import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useCallback, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";

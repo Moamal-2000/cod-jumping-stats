@@ -2,6 +2,7 @@
 
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { stripColorCodes } from "@/functions/utils";
+import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import {
   clearPlayerProfile,
   updatePlayerProfileState,
@@ -12,7 +13,6 @@ import {
   fetchPlayerProfile,
   fetchPlayerTops,
 } from "@/redux/thunks/playerProfileThunk";
-import { fetchAllPlayers } from "@/redux/thunks/playersThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

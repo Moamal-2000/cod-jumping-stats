@@ -1,6 +1,6 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchAllPlayers } from "../thunks/playersThunk";
+import { fetchAllPlayers } from "../thunk/playersThunk";
 
 const initialState = {
   allPlayersData: [],
