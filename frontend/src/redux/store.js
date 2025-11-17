@@ -6,14 +6,12 @@ import mapsSlice from "./features/maps/slice/mapsSlice";
 import playerProfileSlice from "./features/playerProfile/slice/playerProfileSlice";
 import playersSlice from "./features/players/slice/playersSlice";
 import { serversSlice } from "./features/servers/api/serversSlice";
-import searchSlice from "./slices/searchSlice";
 
 export const store = configureStore({
   reducer: {
     [serversSlice.reducerPath]: serversSlice.reducer,
     [jhStatsSlice.reducerPath]: jhStatsSlice.reducer,
     global: globalSlice,
-    search: searchSlice,
     leaderboard: leaderboardSlice,
     maps: mapsSlice,
     players: playersSlice,
