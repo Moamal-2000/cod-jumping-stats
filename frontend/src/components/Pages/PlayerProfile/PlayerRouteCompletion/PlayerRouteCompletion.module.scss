@@ -133,6 +133,11 @@
     border-color: #facc15;
     box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.1);
   }
+
+  & option {
+    background: #1f2937;
+    color: #f9fafb;
+  }
 }
 
 .routesList {
