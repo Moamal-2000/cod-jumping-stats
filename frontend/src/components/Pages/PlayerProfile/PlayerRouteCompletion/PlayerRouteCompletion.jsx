@@ -328,13 +328,12 @@ const PlayerRouteCompletion = () => {
             const rarityInfo = getRarityInfo(map.individual_finish_count);
             const rarityLevel = getRarityLevel(map.individual_finish_count);
             return (
-              <div
+              <Link
+                href={`/map?mapid=${map.cp_id}`}
                 key={`${map.mapid}-${map.mapname}-${index}`}
                 className={`${s.mapCard} ${s.notCompleted} ${
                   s[rarityLevel] || ""
                 }`}
-                onClick={() => window.open(`/map/${map.cp_id}`, "_blank")}
-                style={{ cursor: "pointer" }}
               >
                 <div className={s.mapInfo}>
                   <div className={s.mapHeader}>
@@ -357,7 +356,7 @@ const PlayerRouteCompletion = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })
         ) : (
