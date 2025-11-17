@@ -2,7 +2,7 @@
 
 import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
-import { updateMapsState } from "@/redux/slices/mapsSlice";
+import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "../FiltersSection/FiltersSection";

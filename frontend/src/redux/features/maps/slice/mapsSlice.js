@@ -1,7 +1,7 @@
 import { getMapsByParams } from "@/functions/filters";
 import { paginateData } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMaps } from "../thunks/mapsThunk";
+import { fetchMaps } from "../thunk/mapsThunk";
 
 const initialState = {
   allMaps: [],

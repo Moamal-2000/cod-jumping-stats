@@ -2,7 +2,7 @@
 
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/functions/utils";
-import { fetchMaps } from "@/redux/thunks/mapsThunk";
+import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchMapRuns } from "@/redux/thunks/playerProfileThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";

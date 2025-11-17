@@ -1,7 +1,7 @@
 "use client";
 
 import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
-import { updateMapsState } from "@/redux/slices/mapsSlice";
+import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./ShowAllButton.module.scss";
 
