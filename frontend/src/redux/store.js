@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import globalSlice from "./features/global/slice/globalSlice";
 import { jhStatsSlice } from "./features/jhStats/api/jhStatsSlice";
+import leaderboardSlice from "./features/leaderboard/slice/leaderboardSlice";
 import { serversSlice } from "./features/servers/api/serversSlice";
-import leaderboardSlice from "./slices/leaderboardSlice";
 import mapsSlice from "./slices/mapsSlice";
 import playerProfileSlice from "./slices/playerProfileSlice";
 import playersSlice from "./slices/playersSlice";

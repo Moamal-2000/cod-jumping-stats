@@ -1,7 +1,7 @@
 "use client";
 
 import { paginateData, stripColorCodes } from "@/functions/utils";
-import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
+import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { updateSearchState } from "@/redux/slices/searchSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";

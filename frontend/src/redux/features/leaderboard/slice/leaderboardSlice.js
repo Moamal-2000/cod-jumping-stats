@@ -1,7 +1,7 @@
 import { getFilteredLeaderboard } from "@/functions/filters";
 import { getValueFromLocalStorage, paginateData } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchLeaderboard } from "../thunks/leaderboardThunk";
+import { fetchLeaderboard } from "../thunk/leaderboardThunk";
 
 const isLeaderboardHeaderVisible = getValueFromLocalStorage({
   key: "isLeaderboardHeaderVisible",

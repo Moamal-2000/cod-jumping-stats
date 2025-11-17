@@ -4,7 +4,7 @@ import {
   PAGINATION_ITEMS_PER_PAGE,
   TOTAL_MAPS_PLACEHOLDER,
 } from "@/data/constants";
-import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
+import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";

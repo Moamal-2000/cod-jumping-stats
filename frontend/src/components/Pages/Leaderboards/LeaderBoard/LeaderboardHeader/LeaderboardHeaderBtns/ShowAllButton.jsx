@@ -2,7 +2,7 @@
 
 import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
-import { updateLeaderboardState } from "@/redux/slices/leaderboardSlice";
+import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
