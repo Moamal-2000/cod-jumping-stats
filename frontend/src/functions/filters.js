@@ -82,47 +82,50 @@ export function getFilteredLeaderboard(leaderboardData, paramsObject) {
 }
 
 export function getMapsByParams({ mapsData, paramsObject }) {
-  let filteredMaps = mapsData;
-
   const mapType = paramsObject?.type || "all";
   const sortBy = paramsObject?.["sort-by"] || "newest";
   const filterBy = paramsObject?.["filter-by"] || "all";
-
   const nameQuery = paramsObject?.name || "";
   const authorQuery = paramsObject?.author || "";
 
-  if (mapType !== "all") {
-    filteredMaps = getFilteredMaps(mapsData, paramsObject);
-  }
+  let filteredMaps =
+    mapType !== "all" ? getFilteredMaps(mapsData, paramsObject) : mapsData;
 
-  if (nameQuery) {
-    filteredMaps = filteredMaps.filter((map) => {
-      const normalizedQuery = nameQuery.toLowerCase().trim();
-      const mapNameLower = map.Name.toLowerCase();
-      const mapNameSpaced = mapNameLower.replace(/[_-]/g, " ");
-
-      return (
-        mapNameSpaced.includes(normalizedQuery) ||
-        mapNameLower.includes(normalizedQuery)
-      );
-    });
-  }
-
-  if (authorQuery) {
-    filteredMaps = filteredMaps.filter((map) =>
-      map?.Author?.toLowerCase()?.includes?.(authorQuery)
-    );
-  }
-
+  filteredMaps = filterMapsByName(filteredMaps, nameQuery);
+  filteredMaps = filterMapsByAuthor(filteredMaps, authorQuery);
   filteredMaps = modifyMapsData(filteredMaps);
 
   if (filterBy !== "all") {
     filteredMaps = filterMaps(filteredMaps, filterBy);
   }
 
-  filteredMaps = sortMaps(filteredMaps, sortBy);
+  return sortMaps(filteredMaps, sortBy);
+}
 
-  return filteredMaps;
+export function filterMapsByName(maps, nameQuery) {
+  if (!nameQuery) return maps;
+
+  const normalizedQuery = nameQuery.toLowerCase().trim();
+
+  return maps.filter((map) => {
+    const mapNameLower = map.Name.toLowerCase();
+    const mapNameSpaced = mapNameLower.replace(/[_-]/g, " ");
+
+    return (
+      mapNameSpaced.includes(normalizedQuery) ||
+      mapNameLower.includes(normalizedQuery)
+    );
+  });
+}
+
+export function filterMapsByAuthor(maps, authorQuery) {
+  if (!authorQuery) return maps;
+
+  const normalizedAuthor = authorQuery.toLowerCase();
+
+  return maps.filter((map) =>
+    map?.Author?.toLowerCase()?.includes(normalizedAuthor)
+  );
 }
 
 export function sortMaps(maps, sortBy) {
