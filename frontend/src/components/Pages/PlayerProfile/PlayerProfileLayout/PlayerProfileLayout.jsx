@@ -22,6 +22,7 @@ import PlayerProfileTabs from "./playerProfileTabs/playerProfileTabs";
 
 const PlayerProfileLayout = ({ children }) => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
+  const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
@@ -32,7 +33,7 @@ const PlayerProfileLayout = ({ children }) => {
   );
 
   const purePlayerName = stripColorCodes(
-    playerData?.PrefName || playerData?.PlayerName
+    playerData?.PrefName || playerData?.PlayerName || jumpScores?.PlayerName
   );
 
   useEffect(() => {
