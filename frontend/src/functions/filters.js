@@ -96,7 +96,7 @@ export function getMapsByParams({ mapsData, paramsObject }) {
   filteredMaps = modifyMapsData(filteredMaps);
 
   if (filterBy !== "all") {
-    filteredMaps = filterMaps(filteredMaps, filterBy);
+    filteredMaps = filterMapsByVideos(filteredMaps, filterBy);
   }
 
   return sortMaps(filteredMaps, sortBy);
@@ -187,7 +187,7 @@ export function getMapsByFpsDifficulty({ sortedMaps, fps }) {
   });
 }
 
-export function filterMaps(maps, filterBy = "all") {
+export function filterMapsByVideos(maps, filterBy = "all") {
   if (!maps || maps.length === 0 || filterBy === "all") return maps;
 
   return maps.filter((map) => {
