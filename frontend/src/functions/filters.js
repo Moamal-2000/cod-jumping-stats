@@ -88,17 +88,24 @@ export function getMapsByParams({ mapsData, paramsObject }) {
   const sortBy = paramsObject?.["sort-by"] || "newest";
   const filterBy = paramsObject?.["filter-by"] || "all";
 
-  const mapNameSearch = paramsObject?.name || "";
+  const mapNameQuery = paramsObject?.name || "";
   const mapAuthorSearch = paramsObject?.author || "";
 
   if (type !== "all") {
     processedMaps = getFilteredMaps(mapsData, paramsObject);
   }
 
-  if (mapNameSearch) {
-    processedMaps = processedMaps.filter((map) =>
-      map.Name.toLowerCase().includes(mapNameSearch)
-    );
+  if (mapNameQuery) {
+    processedMaps = processedMaps.filter((map) => {
+      const normalizedQuery = mapNameQuery.toLowerCase().trim();
+      const mapNameLower = map.Name.toLowerCase();
+      const mapNameSpaced = mapNameLower.replace(/[_-]/g, " ");
+
+      return (
+        mapNameSpaced.includes(normalizedQuery) ||
+        mapNameLower.includes(normalizedQuery)
+      );
+    });
   }
 
   if (mapAuthorSearch) {
