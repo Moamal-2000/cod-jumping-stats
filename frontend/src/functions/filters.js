@@ -82,22 +82,22 @@ export function getFilteredLeaderboard(leaderboardData, paramsObject) {
 }
 
 export function getMapsByParams({ mapsData, paramsObject }) {
-  let processedMaps = mapsData;
+  let filteredMaps = mapsData;
 
-  const type = paramsObject?.type || "all";
+  const mapType = paramsObject?.type || "all";
   const sortBy = paramsObject?.["sort-by"] || "newest";
   const filterBy = paramsObject?.["filter-by"] || "all";
 
-  const mapNameQuery = paramsObject?.name || "";
-  const mapAuthorSearch = paramsObject?.author || "";
+  const nameQuery = paramsObject?.name || "";
+  const authorQuery = paramsObject?.author || "";
 
-  if (type !== "all") {
-    processedMaps = getFilteredMaps(mapsData, paramsObject);
+  if (mapType !== "all") {
+    filteredMaps = getFilteredMaps(mapsData, paramsObject);
   }
 
-  if (mapNameQuery) {
-    processedMaps = processedMaps.filter((map) => {
-      const normalizedQuery = mapNameQuery.toLowerCase().trim();
+  if (nameQuery) {
+    filteredMaps = filteredMaps.filter((map) => {
+      const normalizedQuery = nameQuery.toLowerCase().trim();
       const mapNameLower = map.Name.toLowerCase();
       const mapNameSpaced = mapNameLower.replace(/[_-]/g, " ");
 
@@ -108,21 +108,21 @@ export function getMapsByParams({ mapsData, paramsObject }) {
     });
   }
 
-  if (mapAuthorSearch) {
-    processedMaps = processedMaps.filter((map) =>
-      map?.Author?.toLowerCase()?.includes?.(mapAuthorSearch)
+  if (authorQuery) {
+    filteredMaps = filteredMaps.filter((map) =>
+      map?.Author?.toLowerCase()?.includes?.(authorQuery)
     );
   }
 
-  processedMaps = modifyMapsData(processedMaps);
+  filteredMaps = modifyMapsData(filteredMaps);
 
   if (filterBy !== "all") {
-    processedMaps = filterMaps(processedMaps, filterBy);
+    filteredMaps = filterMaps(filteredMaps, filterBy);
   }
 
-  processedMaps = sortMaps(processedMaps, sortBy);
+  filteredMaps = sortMaps(filteredMaps, sortBy);
 
-  return processedMaps;
+  return filteredMaps;
 }
 
 export function sortMaps(maps, sortBy) {
