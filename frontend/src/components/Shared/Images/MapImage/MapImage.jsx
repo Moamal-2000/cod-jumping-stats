@@ -19,7 +19,7 @@ const MapImage = ({ mapName, resolution = "512" }) => {
   }
 
   return (
-    <div className={s.imageContainer}>
+    <div className={s.imageContainer} data-type="img-holder">
       {isLoading && <SpinnerLoader />}
 
       <Image
