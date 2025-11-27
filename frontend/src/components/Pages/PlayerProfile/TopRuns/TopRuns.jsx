@@ -43,6 +43,8 @@ const TopRuns = () => {
     43: {},
   });
 
+  const isLoading = topRunsLoading || jumpScoresLoading;
+
   // Process and filter top runs data, combining jump-scores and tops data
   function getProcessedTopRuns() {
     // Combine data from all visible FPS values
@@ -212,12 +214,14 @@ const TopRuns = () => {
         />
       </div>
 
-      {topRunsLoading || jumpScoresLoading ? (
+      {isLoading && (
         <div className={s.loadingContainer}>
           <div className={s.loadingSpinner}></div>
           <p>Loading top runs...</p>
         </div>
-      ) : (
+      )}
+
+      {!isLoading && (
         <div className={s.topRunsContent}>
           {/* Detailed Top Runs */}
           {(() => {
