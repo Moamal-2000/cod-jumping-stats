@@ -33,7 +33,6 @@ const TopRuns = () => {
     43: false,
   });
 
-  // Store top runs data for each FPS separately
   const [topRunsByFps, setTopRunsByFps] = useState({
     125: {},
     250: {},
