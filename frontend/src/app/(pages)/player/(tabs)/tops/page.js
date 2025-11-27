@@ -1,6 +1,7 @@
+import TopRuns from "@/components/Pages/PlayerProfile/TopRuns/TopRuns";
+
 const TopTab = () => {
-  return <p>This tab is coming soon, please check back later</p>;
-  // return <TopRuns />;
+  return <TopRuns />;
 };
 
 export default TopTab;
