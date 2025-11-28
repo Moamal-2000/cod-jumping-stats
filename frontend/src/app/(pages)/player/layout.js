@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 
-function PlayerLayout({ children }) {
+function PlayerLayoutContent({ children }) {
   const searchParams = useSearchParams();
   const playerId = searchParams.get("playerid");
   const isPlayerIdExist = playerId !== null;
@@ -28,13 +28,15 @@ function PlayerLayout({ children }) {
         </main>
       )}
 
-      {isPlayerIdExist && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <PlayerProfileLayout>{children}</PlayerProfileLayout>
-        </Suspense>
-      )}
+      {isPlayerIdExist && <PlayerProfileLayout>{children}</PlayerProfileLayout>}
     </>
   );
 }
 
-export default PlayerLayout;
+export default function PlayerLayout({ children }) {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <PlayerLayoutContent>{children}</PlayerLayoutContent>
+    </Suspense>
+  );
+}
