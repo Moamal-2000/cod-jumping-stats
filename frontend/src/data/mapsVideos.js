@@ -460,7 +460,7 @@ export const MAPS_VIDEOS = [
     mapId: 1771,
     videos: [
       {
-        type: "125 fps no grenade",
+        type: "125 fps fps no grenade",
         icon: "no-grenade",
         videoUrl: "https://www.youtube.com/watch?v=qkJYjLpaoeA",
         id: 1,
@@ -549,6 +549,138 @@ export const MAPS_VIDEOS = [
         type: "250 fps showcase",
         icon: "showcase",
         videoUrl: "https://www.youtube.com/watch?v=wgdaAjjG8AU",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "bitch",
+    mapId: 3778,
+    videos: [
+      {
+        type: "125 fps no grenade",
+        icon: "no-grenade",
+        videoUrl: "https://www.youtube.com/watch?v=vAPCuimIpig",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_plazma",
+    mapId: 7594,
+    videos: [
+      {
+        type: "125 fps no grenade",
+        icon: "no-grenade",
+        videoUrl: "https://www.youtube.com/watch?v=zarAXwxsylE",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_plazma",
+    mapId: 16403,
+    videos: [
+      {
+        type: "125 fps no grenade",
+        icon: "no-grenade",
+        videoUrl: "https://www.youtube.com/watch?v=qZzB5uCZk9w",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_glass_hard",
+    mapId: 11136,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "showcase",
+        videoUrl: "https://www.youtube.com/watch?v=RenM2-h6Xnk",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_offices_hard",
+    mapId: 16066,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "showcase",
+        videoUrl: "https://www.youtube.com/watch?v=CbeS3z7bxUc",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_mega",
+    mapId: 13328,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "showcase",
+        videoUrl: "https://www.youtube.com/watch?v=IJzE1nPek84",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_arch",
+    mapId: 17078,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "showcase",
+        videoUrl: "https://www.youtube.com/watch?v=ID6-SiucX34",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_portal2",
+    mapId: 11880,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "",
+        videoUrl: "https://www.youtube.com/watch?v=mDgxYRvyzO0",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_residual",
+    mapId: 9714,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "",
+        videoUrl: "https://www.youtube.com/watch?v=qrldbVYi2zA&t=1s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_jumpers_heaven_hard",
+    mapId: 13283,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "",
+        videoUrl: "https://www.youtube.com/watch?v=-PTeYyyPYOs&t=53s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_contrast_hard",
+    mapId: 19137,
+    videos: [
+      {
+        type: "125 fps showcase",
+        icon: "",
+        videoUrl: "https://www.youtube.com/watch?v=PZCjbTDAVSY&t=616s",
         id: 1,
       },
     ],
