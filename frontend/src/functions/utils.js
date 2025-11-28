@@ -207,13 +207,6 @@ export function getGameTypes(groupedServers) {
   );
 }
 
-export function isActiveWithinWeek(lastSeen) {
-  const lastSeenDate = new Date(lastSeen);
-  const afterWeek = lastSeenDate.getTime() + 7 * 24 * 60 * 60 * 1000;
-  const afterWeekDate = new Date(afterWeek);
-  return afterWeekDate.getTime() > Date.now();
-}
-
 export async function generateMapMetadata({ cpid }) {
   try {
     const map = await getMapByCpId(cpid);
