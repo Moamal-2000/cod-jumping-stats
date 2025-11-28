@@ -1,0 +1,38 @@
+.heroSection {
+  background: linear-gradient(135deg, #1f2937 0, #111827 100%);
+  border: 1px solid #272f3d;
+  border-radius: 12px;
+  padding: 40px;
+  margin-bottom: 32px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, .45);
+  color: #f9fafb;
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    padding: 24px;
+  }
+}
+
+.heroSection>h1 {
+  font-size: clamp(1.75rem, 7vw, 2.25rem);
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: #f9fafb;
+}
+
+.heroSection>p {
+  font-size: clamp(.875rem, 3vw, 1.125rem);
+  color: #d1d5db;
+  max-width: 800px;
+  line-height: 1.6;
+}
+
+.heroSection>p>a {
+  color: #f1f1f1;
+  text-decoration: underline;
+
+  &:hover {
+    color: #facc15;
+  }
+}
