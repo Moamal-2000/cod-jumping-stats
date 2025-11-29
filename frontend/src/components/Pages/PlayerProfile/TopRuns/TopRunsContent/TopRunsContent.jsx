@@ -24,7 +24,8 @@ const TopRunsContent = ({ rankFilter, sortBy, sortOrder }) => {
           <svg aria-hidden="true">
             <use href="/icons-sprite.svg#star" />
           </svg>
-          <p>No runs found for the selected filters.</p>
+          {/* <p>No runs found for the selected filters.</p> */}
+          <strong>Under development, coming soon, please be patient.</strong>
         </div>
       )}
     </div>
