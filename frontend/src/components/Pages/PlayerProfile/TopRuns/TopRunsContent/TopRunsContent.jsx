@@ -1,7 +1,7 @@
 import TopRunsTable from "../TopRunsTable/TopRunsTable";
 import s from "./TopRunsContent.module.scss";
 
-const TopRunsContent = ({ rankFilter, sortBy, sortOrder }) => {
+const TopRunsContent = ({ rankFilter }) => {
   const processedRuns = [];
   const runSummeryText = getRunSummeryText({ processedRuns, rankFilter });
   const hasRuns = processedRuns.length > 0;
@@ -33,15 +33,6 @@ const TopRunsContent = ({ rankFilter, sortBy, sortOrder }) => {
 };
 
 export default TopRunsContent;
-
-const jumpScoresByFps = {
-  125: null,
-  250: null,
-  mix: null,
-  333: null,
-  76: null,
-  43: null,
-};
 
 function getRunSummeryText({ processedRuns, rankFilter }) {
   const rankFilterMap = {
