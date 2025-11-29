@@ -18,33 +18,26 @@
   }
 }
 
-.logo>svg {
-  width: 60px;
-  height: 60px;
+.logo>img {
+  width: 64px;
+  height: 64px;
   position: absolute;
   left: 0;
   top: 50%;
   translate: 0 -50%;
-  fill: #9ea3b0;
-}
-
-.logo:focus-visible>svg {
-  fill: #facc15;
+  filter: brightness(1.5) saturate(1.5);
 }
 
 @include m.very-small {
-  .logo>svg {
+  .logo>img {
     width: 58px;
     height: 58px;
   }
 }
 
 .logo>span {
-  background: linear-gradient(135deg, #9ea3b0, #fff);
-  -webkit-text-fill-color: transparent;
-  -webkit-background-clip: text;
   background-clip: text;
-  color: #9ea3b0;
+  color: #f2f2f2;
   font-size: 1.45rem;
   font-weight: 700;
   text-wrap: nowrap;
@@ -54,7 +47,7 @@
   background: linear-gradient(135deg, #ffb800, #ff9000);
   -webkit-background-clip: text;
   background-clip: text;
-  color: #0000;
+  color: #f2f2f2;
 }
 
 @include m.very-small {

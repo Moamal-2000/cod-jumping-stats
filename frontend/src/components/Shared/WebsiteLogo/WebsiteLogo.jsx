@@ -1,13 +1,12 @@
 import { WEBSITE_NAME } from "@/data/constants";
+import Image from "next/image";
 import Link from "next/link";
 import s from "./WebsiteLogo.module.scss";
 
 const WebsiteLogo = () => {
   return (
     <Link href="/" className={s.logo}>
-      <svg aria-hidden="true">
-        <use href="/icons-sprite.svg#jumpersHeaven" />
-      </svg>
+      <Image src="/logo.png" alt="Jumpers Heaven" width="64" height="64" />
       <span>{WEBSITE_NAME}</span>
     </Link>
   );
