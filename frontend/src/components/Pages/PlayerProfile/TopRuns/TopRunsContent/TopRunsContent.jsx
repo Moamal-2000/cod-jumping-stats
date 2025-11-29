@@ -111,21 +111,15 @@ const TopRunsContent = ({
 
   const processedRuns = getProcessedTopRuns();
 
+  const runSummeryText = getRunSummeryText({ processedRuns, rankFilter });
+
   return (
     <div className={s.topRunsContent}>
       {processedRuns.length > 0 ? (
         <>
           <div>
             <div className={s.runsSummary}>
-              <p>
-                Showing {processedRuns.length} detailed run
-                {processedRuns.length !== 1 ? "s" : ""}
-                {rankFilter === "1"
-                  ? " (Top 1 only)"
-                  : rankFilter === "1-10"
-                  ? " (Top 1-10)"
-                  : " (All ranks)"}
-              </p>
+              <p>{runSummeryText}</p>
             </div>
             <TopRunsTable processedRuns={processedRuns} />
           </div>
@@ -152,3 +146,15 @@ const jumpScoresByFps = {
   76: null,
   43: null,
 };
+
+function getRunSummeryText({ processedRuns, rankFilter }) {
+  const rankFilterMap = {
+    1: " (Top 1 only)",
+    "1-10": " (Top 1-10)",
+  };
+
+  const rankFilterText = rankFilterMap[rankFilter] || " (All ranks)";
+  const runWord = processedRuns.length === 1 ? "run" : "runs";
+
+  return `Showing ${processedRuns.length} detailed ${runWord} ${rankFilterText}`;
+}
