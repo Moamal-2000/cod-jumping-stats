@@ -303,15 +303,6 @@ export function getMapCompletionRate({ allMaps, IndividualFinishCount }) {
   return +completionRate || 0;
 }
 
-export function getRankCategory(rank) {
-  if (rank === 1) return "rank1";
-  if (rank === 2) return "rank2";
-  if (rank === 3) return "rank3";
-  if (rank >= 4 && rank <= 10) return "rank4to10";
-  if (rank >= 11 && rank <= 20) return "rank10to20";
-  return "rankBelow20";
-}
-
 export function getValueFromLocalStorage({ key, defaultValue }) {
   if (typeof window === "undefined") return defaultValue;
 

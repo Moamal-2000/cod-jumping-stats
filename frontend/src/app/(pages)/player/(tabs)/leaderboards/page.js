@@ -1,7 +1,6 @@
 "use client";
 
 import s from "@/components/Pages/PlayerProfile/leaderboardsTab.module.scss";
-import { getRankCategory } from "@/functions/utils";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
@@ -161,16 +160,10 @@ const LeaderboardsTab = () => {
                           }, Score ${position.Score.toLocaleString()}, ${
                             position.FPS
                           } FPS`}
-                          className={`${s.leaderboardCard} ${
-                            s[getRankCategory(position.Rank)]
-                          }`}
+                          className={s.leaderboardCard}
                         >
                           <div className={s.leaderboardCardHeader}>
-                            <div
-                              className={`${s.leaderboardRank} ${
-                                s[getRankCategory(position.Rank)]
-                              }`}
-                            >
+                            <div className={s.leaderboardRank}>
                               <span className={s.rankNumber}>
                                 {position.Rank}
                               </span>
