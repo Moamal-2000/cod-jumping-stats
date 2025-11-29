@@ -43,7 +43,7 @@
   }
 }
 
-.fpsToggleButtons {
+.fpsButtons {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0.4rem;
@@ -62,7 +62,7 @@
   }
 }
 
-.fpsToggleButton {
+.fps {
   padding: 0.5rem 0.6rem;
   background: #334155;
   color: #cbd5e1;

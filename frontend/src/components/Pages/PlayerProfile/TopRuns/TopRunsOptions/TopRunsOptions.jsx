@@ -1,4 +1,6 @@
 import { JUMP_FPS } from "@/data/constants";
+import { createQueryString } from "@/functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./TopRunsOptions.module.scss";
 
 const TopRunsOptions = ({
@@ -9,13 +11,29 @@ const TopRunsOptions = ({
   sortOrder,
   setSortOrder,
 }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const selectedFps = searchParams.get("fps") || 125;
+
+  function handleFpsClick(event) {
+    const fps = +event.target.textContent;
+    createQueryString("fps", fps, searchParams, router, pathname);
+  }
+
   return (
     <div className={s.topRunsControls}>
       <div className={s.fpsToggleGroup}>
         <label>Filter By FPS:</label>
-        <div className={s.fpsToggleButtons}>
+
+        <div className={s.fpsButtons}>
           {JUMP_FPS.map((fps) => (
-            <button key={fps} className={s.fpsToggleButton}>
+            <button
+              key={fps}
+              className={`${s.fps} ${+selectedFps === +fps ? s.active : ""}`}
+              onClick={handleFpsClick}
+            >
               {fps}
             </button>
           ))}
