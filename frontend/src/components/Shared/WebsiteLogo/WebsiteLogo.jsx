@@ -6,7 +6,14 @@ import s from "./WebsiteLogo.module.scss";
 const WebsiteLogo = () => {
   return (
     <Link href="/" className={s.logo}>
-      <Image src="/logo.png" alt="Jumpers Heaven" width="64" height="64" />
+      <Image
+        src="/logo.png"
+        alt="Jumpers Heaven"
+        width="64"
+        height="64"
+        quality={100}
+        priority
+      />
       <span>{WEBSITE_NAME}</span>
     </Link>
   );
