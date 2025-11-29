@@ -27,31 +27,11 @@
   gap: 0.25rem;
 }
 
-.tbody .rankBadge.top1 {
-  color: #fbbf24;
-}
-
-.tbody .rankBadge.top10 {
-  color: #a855f7;
-}
-
-.tbody tr.epic {
-  background: linear-gradient(90deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
-}
-
-.tbody tr.legendary {
-  background: linear-gradient(90deg, rgba(168, 85, 247, 0.05) 0%, transparent 100%);
-}
-
-.tbody tr.mythical {
-  background: linear-gradient(90deg, rgba(236, 72, 153, 0.05) 0%, transparent 100%);
-}
-
 /* Special styling for 1st, 2nd, 3rd place */
 .tbody tr:nth-child(1) {
-  background: linear-gradient(90deg, rgba(251, 191, 36, 0.15) 0%, transparent 100%) !important;
-  border-color: #fbbf24 !important;
-  border-width: 2px !important;
+  background: linear-gradient(90deg, rgba(251, 191, 36, 0.15) 0, transparent 100%);
+  border-color: #fbbf24;
+  border-width: 2px;
 }
 
 .tbody tr:nth-child(1) .rankBadge {
@@ -62,7 +42,7 @@
 }
 
 .tbody tr:nth-child(1) .rankBadge::before {
-  content: '🥇 ';
+  content: '🥇';
   margin-right: 0.3rem;
 }
 
@@ -94,9 +74,9 @@
 
 /* 2nd Place - Silver */
 .tbody tr:nth-child(2) {
-  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0%, transparent 100%) !important;
-  border-color: #e5e7eb !important;
-  border-width: 1.5px !important;
+  background: linear-gradient(90deg, rgba(192, 192, 192, 0.12) 0, transparent 100%);
+  border-color: #e5e7eb;
+  border-width: 1.5px;
 }
 
 .tbody tr:nth-child(2) .rankBadge {
@@ -139,9 +119,9 @@
 
 /* 3rd Place - Bronze */
 .tbody tr:nth-child(3) {
-  background: linear-gradient(90deg, rgba(217, 119, 6, 0.12) 0%, transparent 100%) !important;
-  border-color: #d97706 !important;
-  border-width: 1.5px !important;
+  background: linear-gradient(90deg, rgba(217, 119, 6, 0.12) 0, transparent 100%);
+  border-color: #d97706;
+  border-width: 1.5px;
 }
 
 .tbody tr:nth-child(3) .rankBadge {
@@ -204,27 +184,6 @@
   font-weight: 700;
   font-size: 0.98rem;
   color: #f1f5f9;
-}
-
-.nadesCell.epic {
-  background: linear-gradient(135deg, #6366f1, #818cf8);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.nadesCell.legendary {
-  background: linear-gradient(135deg, #a855f7, #d946ef);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.nadesCell.mythical {
-  background: linear-gradient(135deg, #ec4899, #f43f5e);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
 }
 
 .timeCell {
