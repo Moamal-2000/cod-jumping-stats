@@ -111,7 +111,7 @@
   font-weight: 700;
 }
 
-.leaderboardTable tbody tr:nth-child(1) .scoreCell {
+.leaderboardTable tbody tr:nth-child(1) .nadesCell {
   color: #fbbf24;
   font-weight: 800;
   font-size: 1.05rem;
@@ -156,7 +156,7 @@
   font-weight: 600;
 }
 
-.leaderboardTable tbody tr:nth-child(2) .scoreCell {
+.leaderboardTable tbody tr:nth-child(2) .nadesCell {
   color: #e5e7eb;
   font-weight: 700;
   font-size: 1.02rem;
@@ -201,7 +201,7 @@
   font-weight: 600;
 }
 
-.leaderboardTable tbody tr:nth-child(3) .scoreCell {
+.leaderboardTable tbody tr:nth-child(3) .nadesCell {
   color: #f97316;
   font-weight: 700;
   font-size: 1.02rem;
@@ -240,27 +240,27 @@
   letter-spacing: 0.6px;
 }
 
-.scoreCell {
+.nadesCell {
   font-weight: 700;
   font-size: 0.98rem;
   color: #f1f5f9;
 }
 
-.scoreCell.epic {
+.nadesCell.epic {
   background: linear-gradient(135deg, #6366f1, #818cf8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.scoreCell.legendary {
+.nadesCell.legendary {
   background: linear-gradient(135deg, #a855f7, #d946ef);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-.scoreCell.mythical {
+.nadesCell.mythical {
   background: linear-gradient(135deg, #ec4899, #f43f5e);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;

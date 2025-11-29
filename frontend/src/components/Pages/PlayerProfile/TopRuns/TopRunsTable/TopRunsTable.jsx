@@ -15,7 +15,7 @@ const TopRunsTable = ({ processedRuns }) => {
             <th>Rank</th>
             <th>Map Name</th>
             <th>FPS</th>
-            <th>Score</th>
+            <th>Nade Jumps</th>
             <th>Time</th>
             <th>Date</th>
           </tr>
@@ -38,7 +38,7 @@ const TopRunsTable = ({ processedRuns }) => {
                   <span className={s.fpsCell}>{run.fps}</span>
                 </td>
                 <td>
-                  <span className={s.scoreCell}>0</span>
+                  <span className={s.nadesCell}>{run.nadejumps}</span>
                 </td>
                 <td className={s.timeCell}>
                   {formatTime(run.time_played_string)}
