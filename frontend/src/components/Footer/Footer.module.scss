@@ -2,7 +2,7 @@
 
 .footer {
   margin-top: 40px;
-  padding: 48px 24px 80px;
+  padding-block: 48px 80px;
   position: relative;
   background-color: oklch(21% .034 264.665);
 }
@@ -33,4 +33,8 @@
   .sectionsLine {
     margin: 20px 0;
   }
+}
+
+.footer [data-container] {
+  padding-inline: 16px;
 }
