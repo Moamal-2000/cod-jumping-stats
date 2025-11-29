@@ -2,11 +2,6 @@ import { formatDate } from "@/functions/utils";
 import s from "./TopRunsTable.module.scss";
 
 const TopRunsTable = ({ processedRuns }) => {
-  function formatTime(timeString) {
-    if (!timeString) return "N/A";
-    return timeString;
-  }
-
   return (
     <div className={s.topRunsList}>
       <table className={s.leaderboardTable}>
@@ -20,6 +15,7 @@ const TopRunsTable = ({ processedRuns }) => {
             <th>Date</th>
           </tr>
         </thead>
+
         <tbody>
           {processedRuns.map((run, index) => {
             return (
@@ -56,3 +52,8 @@ const TopRunsTable = ({ processedRuns }) => {
 };
 
 export default TopRunsTable;
+
+function formatTime(timeString) {
+  if (!timeString) return "N/A";
+  return timeString;
+}
