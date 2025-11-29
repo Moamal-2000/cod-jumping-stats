@@ -1,8 +1,7 @@
+import { JUMP_FPS } from "@/data/constants";
 import s from "./TopRunsOptions.module.scss";
 
 const TopRunsOptions = ({
-  visibleTopRunsFps,
-  toggleTopRunsFps,
   rankFilter,
   setRankFilter,
   sortBy,
@@ -13,16 +12,10 @@ const TopRunsOptions = ({
   return (
     <div className={s.topRunsControls}>
       <div className={s.fpsToggleGroup}>
-        <label>Show FPS:</label>
+        <label>Filter By FPS:</label>
         <div className={s.fpsToggleButtons}>
-          {["125", "250", "mix", "333", "76", "43"].map((fps) => (
-            <button
-              key={fps}
-              className={`${s.fpsToggleButton} ${
-                visibleTopRunsFps[fps] ? s.active : ""
-              }`}
-              onClick={() => toggleTopRunsFps(fps)}
-            >
+          {JUMP_FPS.map((fps) => (
+            <button key={fps} className={s.fpsToggleButton}>
               {fps}
             </button>
           ))}

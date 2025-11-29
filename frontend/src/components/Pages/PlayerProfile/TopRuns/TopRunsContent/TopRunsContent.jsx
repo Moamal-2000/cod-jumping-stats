@@ -1,13 +1,7 @@
 import TopRunsTable from "../TopRunsTable/TopRunsTable";
 import s from "./TopRunsContent.module.scss";
 
-const TopRunsContent = ({
-  visibleTopRunsFps,
-  topRunsByFps,
-  rankFilter,
-  sortBy,
-  sortOrder,
-}) => {
+const TopRunsContent = ({ rankFilter, sortBy, sortOrder }) => {
   const processedRuns = [];
   const runSummeryText = getRunSummeryText({ processedRuns, rankFilter });
   const hasRuns = processedRuns.length > 0;
