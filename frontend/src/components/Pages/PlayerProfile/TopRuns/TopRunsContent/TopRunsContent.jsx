@@ -110,12 +110,12 @@ const TopRunsContent = ({
   }
 
   const processedRuns = getProcessedTopRuns();
-
   const runSummeryText = getRunSummeryText({ processedRuns, rankFilter });
+  const hasRuns = processedRuns.length > 0;
 
   return (
     <div className={s.topRunsContent}>
-      {processedRuns.length > 0 ? (
+      {hasRuns && (
         <>
           <div>
             <div className={s.runsSummary}>
@@ -124,7 +124,9 @@ const TopRunsContent = ({
             <TopRunsTable processedRuns={processedRuns} />
           </div>
         </>
-      ) : (
+      )}
+
+      {!hasRuns && (
         <div className={s.emptyState}>
           <svg aria-hidden="true">
             <use href="/icons-sprite.svg#star" />
