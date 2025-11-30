@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString } from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./TopRunsSelectMenu.module.scss";
 
@@ -10,13 +10,15 @@ const TopRunsSelectMenu = ({ options, label, urlQuery }) => {
   const pathname = usePathname();
 
   function handleOnChange(event) {
-    createQueryString(
-      urlQuery,
-      event.target.value,
-      searchParams,
-      router,
-      pathname
-    );
+    const value = event.target.value;
+    const defaultValue = options[0].value;
+
+    if (value === defaultValue) {
+      removeQueryString(urlQuery, searchParams, router, pathname);
+      return;
+    }
+
+    createQueryString(urlQuery, value, searchParams, router, pathname);
   }
 
   return (
