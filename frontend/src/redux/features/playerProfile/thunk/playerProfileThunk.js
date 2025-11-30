@@ -97,7 +97,9 @@ export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
   async ({ playerid, limit = 200 }) => {
     try {
-      const response = await fetch(jhApis({ playerid, limit }).player.getTops);
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ playerid, limit }).player.getTops,
+      });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -110,7 +112,7 @@ export const fetchPlayerTops = createAsyncThunk(
         return {};
       }
 
-      const topRuns = await response.json();
+      const topRuns = await decodeAsyncData(response);
 
       return topRuns;
     } catch (error) {
