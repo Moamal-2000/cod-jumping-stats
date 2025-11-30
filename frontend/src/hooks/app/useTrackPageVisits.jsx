@@ -5,16 +5,18 @@ import { usePathname } from "next/navigation";
 import { useLayoutEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-const useTrackPageVisits = () => {
+const useTrackPageVisits = (limit = 5) => {
   const pageVisits = useSelector((s) => s.global.pageVisits);
   const currentPage = usePathname();
   const dispatch = useDispatch();
 
   function watchPageVisits() {
-    const pageVisitsClone = [...pageVisits];
-    pageVisitsClone.push(currentPage);
+    const visitsClone = [...pageVisits];
 
-    dispatch(updateGlobalState({ key: "pageVisits", value: pageVisitsClone }));
+    if (limit === +visitsClone.length) visitsClone.shift();
+    visitsClone.push(currentPage);
+
+    dispatch(updateGlobalState({ key: "pageVisits", value: visitsClone }));
   }
 
   useLayoutEffect(() => {
