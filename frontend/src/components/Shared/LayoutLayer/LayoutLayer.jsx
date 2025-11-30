@@ -1,26 +1,10 @@
 "use client";
 
-import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
-import { usePathname } from "next/navigation";
-import { useLayoutEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import useTrackPageVisits from "@/hooks/app/useTrackPageVisits";
 import s from "./LayoutLayer.module.scss";
 
 const LayoutLayer = ({ children }) => {
-  const pageVisits = useSelector((s) => s.global.pageVisits);
-  const currentPage = usePathname();
-  const dispatch = useDispatch();
-
-  function watchPageVisits() {
-    const pageVisitsClone = [...pageVisits];
-    pageVisitsClone.push(currentPage);
-
-    dispatch(updateGlobalState({ key: "pageVisits", value: pageVisitsClone }));
-  }
-
-  useLayoutEffect(() => {
-    watchPageVisits();
-  }, [currentPage]);
+  useTrackPageVisits()
 
   return <div className={s.websiteLayer}>{children}</div>;
 };
