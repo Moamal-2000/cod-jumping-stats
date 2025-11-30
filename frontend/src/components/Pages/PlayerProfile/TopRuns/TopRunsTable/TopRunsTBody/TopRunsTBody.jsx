@@ -30,7 +30,7 @@ const TopRunsTBody = ({ processedRuns }) => {
             <td className={s.timeCell}>{formatTime(run.TimePlayedString)}</td>
 
             <td className={s.dateCell}>
-              {formatDate(run.time_created, "Unknown")}
+              {formatDate(run.TimeCreated, "Unknown")}
             </td>
           </tr>
         );
