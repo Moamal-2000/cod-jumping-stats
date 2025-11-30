@@ -43,61 +43,6 @@
   }
 }
 
-.fpsButtons {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.4rem;
-  min-width: 350px;
-
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-}
-
-.fps {
-  padding: 0.5rem 0.6rem;
-  background: #334155;
-  color: #cbd5e1;
-  border: 1px solid #475569;
-  border-radius: 5px;
-  font-size: 0.8rem;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: background-color 150ms ease, border-color 150ms ease, color 150ms ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  min-height: 36.6px;
-  text-transform: capitalize;
-
-  &:focus-visible {
-    outline: 2px solid #60a5fa;
-    outline-offset: 2px;
-  }
-
-  &.active {
-    background: #3b82f6;
-    border-color: #3b82f6;
-    color: #fff;
-    font-weight: 700;
-    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
-  }
-
-  @media (prefers-contrast: more) {
-    border-width: 2px;
-  }
-}
-
 .controlGroup {
   display: flex;
   flex-direction: column;
