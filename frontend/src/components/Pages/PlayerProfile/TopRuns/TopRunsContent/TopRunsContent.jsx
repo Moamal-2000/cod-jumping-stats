@@ -1,7 +1,11 @@
+import { useSearchParams } from "next/navigation";
 import TopRunsTable from "../TopRunsTable/TopRunsTable";
 import s from "./TopRunsContent.module.scss";
 
-const TopRunsContent = ({ rankFilter }) => {
+const TopRunsContent = () => {
+  const searchParams = useSearchParams();
+  const rankFilter = searchParams.get("rankFilter") || "1-10";
+
   const processedRuns = [];
   const runSummeryText = getRunSummeryText({ processedRuns, rankFilter });
   const hasRuns = processedRuns.length > 0;
