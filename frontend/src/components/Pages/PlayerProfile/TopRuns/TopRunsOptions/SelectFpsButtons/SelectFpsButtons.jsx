@@ -1,11 +1,11 @@
 "use client";
 
 import { JUMP_FPS } from "@/data/constants";
-import { createQueryString } from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./SelectFpsButtons.module.scss";
 
-const SelectFpsButtons = () => {
+const SelectFpsButtons = ({ defaultFps = 125 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -14,6 +14,12 @@ const SelectFpsButtons = () => {
 
   function handleFpsClick(event) {
     const fps = +event.target.textContent;
+
+    if (fps === defaultFps) {
+      removeQueryString("fps", searchParams, router, pathname);
+      return;
+    }
+
     createQueryString("fps", fps, searchParams, router, pathname);
   }
 
