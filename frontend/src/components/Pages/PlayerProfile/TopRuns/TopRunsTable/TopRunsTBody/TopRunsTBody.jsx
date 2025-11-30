@@ -6,28 +6,28 @@ const TopRunsTBody = ({ processedRuns }) => {
     <tbody className={s.tbody}>
       {processedRuns.map((run, index) => {
         return (
-          <tr key={`${run.run_id}-${index}`}>
+          <tr key={`${run.RunID}-${index}`}>
             <td className={s.rankCell}>
               <div className={`${s.rankBadge}`}>
-                <span>{run.rank}</span>
+                <span>{run.Rank}</span>
                 <span>/</span>
-                <span>{run.totalNr}</span>
+                <span>{run.TotalNr}</span>
               </div>
             </td>
 
-            <td className={s.mapNameCell} title={run.mapname}>
-              {run.mapname}
+            <td className={s.mapNameCell} title={run.MapName}>
+              {run.MapName}
             </td>
 
             <td>
-              <span className={s.fpsCell}>{run.fps}</span>
+              <span className={s.fpsCell}>{run.FPS}</span>
             </td>
 
             <td>
-              <span className={s.nadesCell}>{run.nadejumps}</span>
+              <span className={s.nadesCell}>{run.Nadejumps}</span>
             </td>
 
-            <td className={s.timeCell}>{formatTime(run.time_played_string)}</td>
+            <td className={s.timeCell}>{formatTime(run.TimePlayedString)}</td>
 
             <td className={s.dateCell}>
               {formatDate(run.time_created, "Unknown")}
