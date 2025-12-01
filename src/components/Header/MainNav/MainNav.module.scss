@@ -48,6 +48,7 @@
 
 .mainNav>a>svg {
   color: #9ca3af;
+  fill: #9ca3af;
   width: 18px !important;
   height: 18px !important;
   transition: color .12s ease;
@@ -67,6 +68,7 @@
 
 .mainNav>a:not(.active):hover>svg {
   color: #ebebeb;
+  fill: #ebebeb;
 
   & path {
     stroke: #ebebeb;
@@ -77,6 +79,7 @@
 .mainNav>a.active>svg,
 .mainNav>a:not(.active):active>svg {
   color: #fff;
+  fill: #fff;
 
   & path {
     stroke: #fff;
