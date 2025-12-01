@@ -8,7 +8,7 @@
 
 @include m.large {
   .mainNav {
-    gap: 5px;
+    gap: 0;
   }
 }
 
@@ -19,7 +19,7 @@
 }
 
 .mainNav>a {
-  padding: .6rem .9rem;
+  padding: 9px 14px;
   display: flex;
   align-items: center;
   gap: 6px;
@@ -40,9 +40,15 @@
   }
 }
 
+@include m.large {
+  .mainNav>a {
+    border-radius: 0;
+  }
+}
+
 @include m.medium {
   .mainNav>a {
-    padding: .7rem 1.03rem;
+    padding: 11px 16px;
   }
 }
 
@@ -51,20 +57,13 @@
 
   color: var(--svg-color);
   fill: var(--svg-color);
-  width: 18px !important;
-  height: 18px !important;
+  width: 18px;
+  height: 18px;
   transition: color .12s ease;
 
   & path {
     stroke: var(--svg-color);
     color: var(--svg-color);
-  }
-}
-
-@include m.medium {
-  .mainNav>a>svg {
-    width: 18px;
-    height: 18px;
   }
 }
 
@@ -84,9 +83,9 @@
   transition: color .12s ease;
 }
 
-@include m.medium {
+@include m.large {
   .mainNav>a>span {
-    font-size: .9rem;
+    font-size: .85rem;
   }
 }
 
