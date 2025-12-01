@@ -47,15 +47,17 @@
 }
 
 .mainNav>a>svg {
-  color: #9ca3af;
-  fill: #9ca3af;
+  --svg-color: #9ca3af;
+
+  color: var(--svg-color);
+  fill: var(--svg-color);
   width: 18px !important;
   height: 18px !important;
   transition: color .12s ease;
 
   & path {
-    stroke: #9ca3af;
-    color: #9ca3af;
+    stroke: var(--svg-color);
+    color: var(--svg-color);
   }
 }
 
@@ -67,24 +69,12 @@
 }
 
 .mainNav>a:not(.active):hover>svg {
-  color: #ebebeb;
-  fill: #ebebeb;
-
-  & path {
-    stroke: #ebebeb;
-    color: #ebebeb;
-  }
+  --svg-color: #ebebeb;
 }
 
 .mainNav>a.active>svg,
 .mainNav>a:not(.active):active>svg {
-  color: #fff;
-  fill: #fff;
-
-  & path {
-    stroke: #fff;
-    color: #fff;
-  }
+  --svg-color: #fff;
 }
 
 .mainNav>a>span {
