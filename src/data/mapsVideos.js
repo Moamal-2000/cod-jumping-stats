@@ -26,7 +26,7 @@ export const MAPS_VIDEOS = [
     mapId: 4305,
     videos: [
       {
-        type: "125 fps showcase",
+        type: "125 no grenade",
         videoUrl: "https://www.youtube.com/watch?v=_0TBcTwX-cY",
         id: 1,
       },
@@ -615,8 +615,8 @@ export const MAPS_VIDEOS = [
     ],
   },
   {
-    mapName: "jm_contrast_hard",
-    mapId: 19137,
+    mapName: "jm_contrast_pro",
+    mapId: 22435,
     videos: [
       {
         type: "125 fps showcase",
@@ -625,4 +625,174 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "jm_hellrun_hard",
+    mapId: 10191,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=MvWbuDB66OA",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_alexandria_hard",
+    mapId: 6747,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=Ikm3L_1BX5E&t=22s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_heaven_and_hell",
+    mapId: 10064,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=RB2PekDC5vg&t=78s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_cruise_hard",
+    mapId: 15831,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=4ORBHw2Trxo&t=318s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_warmup",
+    mapId: 23698,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=240s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_pier_pro",
+    mapId: 12304,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=X9cGJEVShAI&t=40s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "ultra_gap_training",
+    mapId: 6082,
+    videos: [
+      {
+        type: "125 tutorial",
+        videoUrl: "https://www.youtube.com/watch?v=Hk52T2-ASoY&t=659s",
+        id: 1,
+      },
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=myeGvLWFrKI",
+        id: 2,
+      },
+    ],
+  },
+  {
+    mapName: "jm_legomania",
+    mapId: 14556,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=yAd044053Gg&t=260s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "j4l_raceland",
+    mapId: 2040,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=YyqatvmCWhs&t=339s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_pyramid",
+    mapId: 1775,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=DgEr69y0ZhA",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_unique",
+    mapId: 2683,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=fVZX4A7xy_M",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_blowed_easy",
+    mapId: 2805,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=jiT6jp8MdLk",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "eplay_house",
+    mapId: 2100,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=LKRLhSjuSYQ",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "svt_stronghold_easy",
+    mapId: 1798,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=cyrWXiRkjWs",
+        id: 1,
+      },
+    ],
+  },
+  // {
+  //   mapName: "",
+  //   mapId: 0,
+  //   videos: [
+  //     {
+  //       type: "125 fps showcase",
+  //       videoUrl: "",
+  //       id: 1,
+  //     },
+  //   ],
+  // },
 ];
