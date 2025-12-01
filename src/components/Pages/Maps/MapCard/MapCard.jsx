@@ -24,6 +24,31 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
   });
 
+  function handleAddToFavoritesClick() {
+    const favoritesLocal = localStorage.getItem("favorites");
+
+    if (!favoritesLocal) {
+      localStorage.setItem("favorites", JSON.stringify({ maps: [mapData] }));
+      return "Added to favorites";
+    }
+
+    const favorites = JSON.parse(favoritesLocal);
+
+    if (!favorites.maps) {
+      favorites.maps = [mapData];
+      localStorage.setItem("favorites", JSON.stringify(favorites));
+      return "Added to favorites";
+    }
+
+    const isMapInFavorites = favorites.maps.some((map) => map.CpID === CpID);
+    if (isMapInFavorites) return "Already in favorites";
+
+    favorites.maps.push(mapData);
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+
+    return "Added to favorites";
+  }
+
   return (
     <div className={s.mapCard} ref={ref}>
       <div className={s.imgHolder}>
@@ -55,6 +80,10 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
               </span>
             )}
           </Link>
+
+          <button type="button" onClick={handleAddToFavoritesClick}>
+            Add to favorites
+          </button>
         </div>
 
         <MapDifficulties Difficulty={mapData?.Difficulty} />
