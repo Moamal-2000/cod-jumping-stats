@@ -4,7 +4,7 @@
   opacity: 0;
 }
 
-@for $i from 1 through 6 {
+@for $i from 1 through 7 {
   .links.active li:nth-child(#{$i}) {
     transition: opacity .4s ease #{$i * .09}s;
     opacity: 1;
@@ -27,8 +27,12 @@
     background-color: rgba(35, 36, 40, .4);
     color: #fff;
 
-    & svg path {
-      stroke: #fff;
+    & svg {
+      fill: #fff;
+
+      & path {
+        stroke: #fff;
+      }
     }
   }
 
@@ -36,8 +40,12 @@
     background-color: rgba(255, 193, 7, .1);
     color: #FFC107;
 
-    & svg path {
-      stroke: #FFC107;
+    & svg {
+      fill: #FFC107;
+
+      path {
+        stroke: #FFC107;
+      }
     }
   }
 
@@ -86,6 +94,8 @@
   justify-content: center;
   border-radius: 6px;
   font-size: 1rem;
+  fill: #8A8D98;
+  transition: fill .3s ease;
 
   & path {
     transition: stroke .3s ease;
