@@ -4,7 +4,7 @@ export const metadata = {
 };
 
 const FavoritesPage = () => {
-  return <div>FavoritesPage</div>;
+  return <main>FavoritesPage</main>;
 };
 
 export default FavoritesPage;

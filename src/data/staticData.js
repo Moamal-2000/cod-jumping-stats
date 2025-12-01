@@ -35,6 +35,12 @@ export const NAV_LINKS_DATA = [
     iconName: "exclamation-mark",
     id: 6,
   },
+  {
+    name: "Favorites",
+    href: "/favorites",
+    iconName: "heart",
+    id: 7,
+  },
 ];
 
 export const COD2_COLORS = {
