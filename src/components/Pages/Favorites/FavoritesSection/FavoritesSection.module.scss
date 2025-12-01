@@ -1,0 +1,32 @@
+@use "@/styles/mixins" as m;
+
+.mapsSection {
+  width: 100%;
+  min-height: 480px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(390px, 1fr));
+  gap: 16px;
+  position: relative;
+
+  &.collapse>* {
+    display: none;
+  }
+}
+
+@media (max-width: 1280px) {
+  .mapsSection {
+    grid-template-columns: repeat(3, minmax(368px, 1fr));
+  }
+}
+
+@include m.large {
+  .mapsSection {
+    grid-template-columns: repeat(2, minmax(368px, 1fr));
+  }
+}
+
+@media (max-width: 812px) {
+  .mapsSection {
+    grid-template-columns: 1fr;
+  }
+}

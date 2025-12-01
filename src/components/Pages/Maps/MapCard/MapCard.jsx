@@ -18,7 +18,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     CpID,
     Ender,
   } = mapData;
-  const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
+  const ref = mapsScroll?.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
     allMaps,
     IndividualFinishCount,
@@ -28,22 +28,22 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     const favoritesLocal = localStorage.getItem("favorites");
 
     if (!favoritesLocal) {
-      localStorage.setItem("favorites", JSON.stringify({ maps: [mapData] }));
+      localStorage.setItem("favorites", JSON.stringify({ mapsIds: [CpID] }));
       return "Added to favorites";
     }
 
     const favorites = JSON.parse(favoritesLocal);
 
-    if (!favorites.maps) {
-      favorites.maps = [mapData];
+    if (!favorites.mapsIds) {
+      favorites.mapsIds = [CpID];
       localStorage.setItem("favorites", JSON.stringify(favorites));
       return "Added to favorites";
     }
 
-    const isMapInFavorites = favorites.maps.some((map) => map.CpID === CpID);
+    const isMapInFavorites = favorites.mapsIds.some((mapId) => mapId === CpID);
     if (isMapInFavorites) return "Already in favorites";
 
-    favorites.maps.push(mapData);
+    favorites.mapsIds.push(CpID);
     localStorage.setItem("favorites", JSON.stringify(favorites));
 
     return "Added to favorites";
