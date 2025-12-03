@@ -26,25 +26,6 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
   });
 
-  function handleAddToFavorites() {
-    const favoritesLocal = localStorage.getItem("favorites");
-    let favorites = favoritesLocal
-      ? JSON.parse(favoritesLocal)
-      : { mapsIds: [] };
-
-    const isMapInFavorites = favorites.mapsIds?.includes(CpID);
-
-    if (isMapInFavorites) {
-      favorites.mapsIds = favorites.mapsIds.filter((mapId) => mapId !== CpID);
-      setIsFavorited(false);
-    } else {
-      favorites.mapsIds.push(CpID);
-      setIsFavorited(true);
-    }
-
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-  }
-
   useEffect(() => {
     checkIfMapIsFavorited({ setIsFavorited, CpID });
   }, [CpID]);
@@ -83,7 +64,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
 
           <button
             type="button"
-            onClick={handleAddToFavorites}
+            onClick={() => toggleFavorite({ setIsFavorited, CpID })}
             className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
             title={isFavorited ? "Remove from favorites" : "Add to favorites"}
             aria-label={
@@ -117,4 +98,21 @@ function checkIfMapIsFavorited({ setIsFavorited, CpID }) {
   const isMapInFavorites = favorites.mapsIds?.includes(CpID);
 
   setIsFavorited(isMapInFavorites);
+}
+
+function toggleFavorite({ setIsFavorited, CpID }) {
+  const favoritesLocal = localStorage.getItem("favorites");
+  let favorites = favoritesLocal ? JSON.parse(favoritesLocal) : { mapsIds: [] };
+
+  const isMapInFavorites = favorites.mapsIds?.includes(CpID);
+
+  if (isMapInFavorites) {
+    favorites.mapsIds = favorites.mapsIds.filter((mapId) => mapId !== CpID);
+    setIsFavorited(false);
+  } else {
+    favorites.mapsIds.push(CpID);
+    setIsFavorited(true);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
 }
