@@ -10,12 +10,13 @@ const MapImage = ({ mapName, resolution = "512" }) => {
 
   const [src, setSrc] = useState(`/maps/${resolution}/${cleanMapName}.webp`);
   const [isLoading, setIsLoading] = useState(true);
-  const [scale, setScale] = useState(1);
+
+  const scale = src === PLACEHOLDER_PATH ? 0.5 : 1;
+  const objectFit = src === PLACEHOLDER_PATH ? "contain" : "cover";
 
   function handleError() {
     setSrc(PLACEHOLDER_PATH);
     setIsLoading(false);
-    setScale(0.5);
   }
 
   return (
@@ -28,7 +29,7 @@ const MapImage = ({ mapName, resolution = "512" }) => {
         src={src || PLACEHOLDER_PATH}
         alt={mapName}
         title={mapName}
-        style={{ scale, objectFit: "contain", objectPosition: "center" }}
+        style={{ scale, objectFit }}
         quality={100}
         priority
         onError={handleError}
