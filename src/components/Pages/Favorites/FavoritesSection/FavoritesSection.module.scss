@@ -30,3 +30,11 @@
     grid-template-columns: 1fr;
   }
 }
+
+.mapsSection>p {
+  font-weight: 600;
+}
+
+.mapsSection>p>a {
+  text-decoration: underline;
+}
