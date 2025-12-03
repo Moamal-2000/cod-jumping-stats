@@ -1,14 +1,14 @@
 "use client";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import s from "./TopRuns.module.scss";
 import TopRunsContent from "./TopRunsContent/TopRunsContent";
 import TopRunsOptions from "./TopRunsOptions/TopRunsOptions";
 
 const TopRuns = () => {
-  const { topRuns, topRunsLoading, jumpScoresLoading, currentFetchingFps } =
-    useSelector((s) => s.playerProfile);
-  const dispatch = useDispatch();
+  const { topRunsLoading, jumpScoresLoading } = useSelector(
+    (s) => s.playerProfile
+  );
 
   const isLoading = topRunsLoading || jumpScoresLoading;
 

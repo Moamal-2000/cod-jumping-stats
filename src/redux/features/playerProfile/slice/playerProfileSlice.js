@@ -27,8 +27,6 @@ const initialState = {
   loading: false,
   error: false,
 
-  currentFetchingFps: "125",
-
   mapRuns: [],
   mapRunsLoading: false,
   mapRunsError: false,
