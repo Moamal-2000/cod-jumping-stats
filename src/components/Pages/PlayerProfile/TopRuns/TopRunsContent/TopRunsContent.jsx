@@ -29,8 +29,7 @@ const TopRunsContent = () => {
           <svg aria-hidden="true">
             <use href="/icons-sprite.svg#star" />
           </svg>
-          {/* <p>No runs found for the selected filters.</p> */}
-          <strong>Under development, coming soon, please be patient.</strong>
+          <p>No runs found for the selected filters.</p>
         </div>
       )}
     </div>
