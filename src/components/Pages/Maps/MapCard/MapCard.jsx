@@ -46,14 +46,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   }
 
   useEffect(() => {
-    const favoritesLocal = localStorage.getItem("favorites");
-
-    if (!favoritesLocal) return;
-
-    const favorites = JSON.parse(favoritesLocal);
-    const isMapInFavorites = favorites.mapsIds?.includes(CpID);
-
-    setIsFavorited(isMapInFavorites);
+    checkIfMapIsFavorited({ setIsFavorited, CpID });
   }, [CpID]);
 
   return (
@@ -114,3 +107,14 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
 };
 
 export default memo(MapCard);
+
+function checkIfMapIsFavorited({ setIsFavorited, CpID }) {
+  const favoritesLocal = localStorage.getItem("favorites");
+
+  if (!favoritesLocal) return;
+
+  const favorites = JSON.parse(favoritesLocal);
+  const isMapInFavorites = favorites.mapsIds?.includes(CpID);
+
+  setIsFavorited(isMapInFavorites);
+}
