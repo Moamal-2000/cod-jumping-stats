@@ -26,6 +26,7 @@
   font-weight: 700;
   font-size: 1.1rem;
   color: #FFB800;
+  user-select: text;
 }
 
 .playerRow :where(.rating, .maps, .score) {
@@ -34,4 +35,5 @@
 
 .playerRow .score {
   font-weight: normal;
+  user-select: text;
 }
