@@ -61,7 +61,7 @@ export const TOP_STATS_COLOR = ["#facc15", "#c0c0c0", "#cd7f32"];
 export const SOCIAL_MEDIA_DATA = [
   {
     iconName: "discord",
-    link: "https://discord.com/channels/@me/752895615347851264/1359590695429603451",
+    link: "https://discord.jumpersheaven.com",
     id: 1,
   },
   {
