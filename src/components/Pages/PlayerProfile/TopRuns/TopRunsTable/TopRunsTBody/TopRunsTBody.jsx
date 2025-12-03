@@ -1,10 +1,10 @@
 import { formatDate } from "@/functions/utils";
 import s from "./TopRunsTBody.module.scss";
 
-const TopRunsTBody = ({ processedRuns }) => {
+const TopRunsTBody = ({ topRuns }) => {
   return (
     <tbody className={s.tbody}>
-      {processedRuns.map((run, index) => {
+      {topRuns.map((run, index) => {
         return (
           <tr key={`${run.RunID}-${index}`}>
             <td className={s.rankCell}>

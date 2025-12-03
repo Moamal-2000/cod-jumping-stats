@@ -1,7 +1,7 @@
 import s from "./TopRunsTable.module.scss";
 import TopRunsTBody from "./TopRunsTBody/TopRunsTBody";
 
-const TopRunsTable = ({ processedRuns }) => {
+const TopRunsTable = ({ topRuns }) => {
   return (
     <div className={s.topRunsList}>
       <table className={s.leaderboardTable}>
@@ -16,7 +16,7 @@ const TopRunsTable = ({ processedRuns }) => {
           </tr>
         </thead>
 
-        <TopRunsTBody processedRuns={processedRuns} />
+        <TopRunsTBody topRuns={topRuns} />
       </table>
     </div>
   );
