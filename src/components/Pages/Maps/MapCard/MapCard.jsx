@@ -32,7 +32,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
 
   return (
     <div className={s.mapCard} ref={ref}>
-      <div className={s.imgHolder}>
+      <Link href={`/map?mapid=${CpID}`} className={s.imgHolder}>
         <MapImage mapName={Name} />
 
         <div className={s.layer}>
@@ -44,7 +44,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
             ))}
           </div>
         </div>
-      </div>
+      </Link>
 
       <section className={s.content}>
         <div className={s.nameAndRating}>
