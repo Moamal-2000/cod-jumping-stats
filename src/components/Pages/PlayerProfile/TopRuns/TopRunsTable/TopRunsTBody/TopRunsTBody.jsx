@@ -1,4 +1,5 @@
 import { formatDate } from "@/functions/utils";
+import Link from "next/link";
 import s from "./TopRunsTBody.module.scss";
 
 const TopRunsTBody = ({ topRuns }) => {
@@ -16,7 +17,7 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td className={s.mapNameCell} title={run.MapName}>
-              {run.MapName}
+              <Link href={`/map?mapid=${run.CpID}`}>{run.MapName}</Link>
             </td>
 
             <td>
