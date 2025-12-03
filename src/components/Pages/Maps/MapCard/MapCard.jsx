@@ -1,7 +1,7 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import CompletionRate from "./CompletionRate/CompletionRate";
 import s from "./MapCard.module.scss";
@@ -18,36 +18,43 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     CpID,
     Ender,
   } = mapData;
+  const [isFavorited, setIsFavorited] = useState(false);
+
   const ref = mapsScroll?.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
     allMaps,
     IndividualFinishCount,
   });
 
-  function handleAddToFavoritesClick() {
+  function handleAddToFavorites() {
+    const favoritesLocal = localStorage.getItem("favorites");
+    let favorites = favoritesLocal
+      ? JSON.parse(favoritesLocal)
+      : { mapsIds: [] };
+
+    const isMapInFavorites = favorites.mapsIds?.includes(CpID);
+
+    if (isMapInFavorites) {
+      favorites.mapsIds = favorites.mapsIds.filter((mapId) => mapId !== CpID);
+      setIsFavorited(false);
+    } else {
+      favorites.mapsIds.push(CpID);
+      setIsFavorited(true);
+    }
+
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }
+
+  useEffect(() => {
     const favoritesLocal = localStorage.getItem("favorites");
 
-    if (!favoritesLocal) {
-      localStorage.setItem("favorites", JSON.stringify({ mapsIds: [CpID] }));
-      return "Added to favorites";
-    }
+    if (!favoritesLocal) return;
 
     const favorites = JSON.parse(favoritesLocal);
+    const isMapInFavorites = favorites.mapsIds?.includes(CpID);
 
-    if (!favorites.mapsIds) {
-      favorites.mapsIds = [CpID];
-      localStorage.setItem("favorites", JSON.stringify(favorites));
-      return "Added to favorites";
-    }
-
-    const isMapInFavorites = favorites.mapsIds.some((mapId) => mapId === CpID);
-    if (isMapInFavorites) return "Already in favorites";
-
-    favorites.mapsIds.push(CpID);
-    localStorage.setItem("favorites", JSON.stringify(favorites));
-
-    return "Added to favorites";
-  }
+    setIsFavorited(isMapInFavorites);
+  }, [CpID]);
 
   return (
     <div className={s.mapCard} ref={ref}>
@@ -81,8 +88,20 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
             )}
           </Link>
 
-          <button type="button" onClick={handleAddToFavoritesClick}>
-            Add to favorites
+          <button
+            type="button"
+            onClick={handleAddToFavorites}
+            className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
+            title={isFavorited ? "Remove from favorites" : "Add to favorites"}
+            aria-label={
+              isFavorited ? "Remove from favorites" : "Add to favorites"
+            }
+          >
+            <svg viewBox="0 0 24 24">
+              <use
+                href={`/icons-sprite.svg#${isFavorited ? "trashCan" : "heart"}`}
+              ></use>
+            </svg>
           </button>
         </div>
 
