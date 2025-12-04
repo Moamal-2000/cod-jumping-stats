@@ -34,9 +34,9 @@ const TopRunsOptions = () => {
 export default TopRunsOptions;
 
 const rankOptions = [
+  { label: "All Ranks", value: "all" },
   { label: "Top 1 Only", value: "1" },
   { label: "Top 1-10", value: "1-10" },
-  { label: "All Ranks", value: "all" },
 ];
 
 const sortOptions = [

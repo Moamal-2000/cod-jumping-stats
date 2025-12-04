@@ -213,3 +213,29 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
     );
   });
 }
+
+export function getFilteredTopRuns(topRuns, paramsObject) {
+  if (!topRuns) return [];
+  const rank = paramsObject?.rank || "all";
+  const sort = paramsObject?.sort || "rank";
+
+  let filteredData = topRuns;
+
+  if (rank !== "all") {
+    filteredData = getTopRunsByRank(filteredData, rank);
+  }
+
+  return filteredData;
+}
+
+export function getTopRunsByRank(topRuns, rank) {
+  if (!topRuns) return [];
+
+  console.log(topRuns);
+
+  if (rank === "1") return topRuns.filter((run) => run.Rank === 1);
+  if (rank === "1-10")
+    return topRuns.filter((run) => run.Rank > 0 && run.Rank <= 10);
+
+  return topRuns;
+}

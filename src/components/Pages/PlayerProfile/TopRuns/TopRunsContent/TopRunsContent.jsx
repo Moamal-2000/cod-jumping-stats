@@ -1,15 +1,26 @@
+import { getFilteredTopRuns } from "@/functions/filters";
 import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import TopRunsTable from "../TopRunsTable/TopRunsTable";
 import s from "./TopRunsContent.module.scss";
 
 const TopRunsContent = () => {
   const topRuns = useSelector((s) => s.playerProfile.topRuns);
-  const searchParams = useSearchParams();
-  const rankFilter = searchParams.get("rankFilter") || "1-10";
+  const [filteredTopRuns, setFilteredTopRuns] = useState(topRuns);
 
-  const runSummeryText = getRunSummeryText({ topRuns, rankFilter });
-  const hasRuns = topRuns.length > 0;
+  const searchParams = useSearchParams();
+  const paramsObject = Object.fromEntries(searchParams.entries());
+  const rankFilter = searchParams.get("rank") || "all";
+
+  useEffect(() => {
+    const filterTopRuns = getFilteredTopRuns(topRuns, paramsObject);
+
+    setFilteredTopRuns(filterTopRuns);
+  }, [rankFilter]);
+
+  const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
+  const hasRuns = filteredTopRuns.length > 0;
 
   return (
     <div className={s.topRunsContent}>
@@ -19,7 +30,7 @@ const TopRunsContent = () => {
             <div className={s.runsSummary}>
               <p>{runSummeryText}</p>
             </div>
-            <TopRunsTable topRuns={topRuns} />
+            <TopRunsTable topRuns={filteredTopRuns} />
           </div>
         </>
       )}
@@ -38,14 +49,14 @@ const TopRunsContent = () => {
 
 export default TopRunsContent;
 
-function getRunSummeryText({ topRuns, rankFilter }) {
+function getRunSummeryText({ filteredTopRuns, rankFilter }) {
   const rankFilterMap = {
     1: " (Top 1 only)",
     "1-10": " (Top 1-10)",
   };
 
   const rankFilterText = rankFilterMap[rankFilter] || " (All ranks)";
-  const runWord = topRuns.length === 1 ? "run" : "runs";
+  const runWord = filteredTopRuns.length === 1 ? "run" : "runs";
 
-  return `Showing ${topRuns.length} detailed ${runWord} ${rankFilterText}`;
+  return `Showing ${filteredTopRuns.length} detailed ${runWord} ${rankFilterText}`;
 }

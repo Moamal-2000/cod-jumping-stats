@@ -17,12 +17,13 @@ const TopRuns = () => {
 
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
+  const selectedFps = searchParams.get("fps") || 125;
 
   const isLoading = topRunsLoading || jumpScoresLoading;
 
   useEffect(() => {
     dispatch(fetchPlayerTops(paramsObject));
-  }, [paramsObject]);
+  }, [selectedFps]);
 
   return (
     <div className={s.topRunsTab}>

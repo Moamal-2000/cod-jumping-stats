@@ -16,7 +16,7 @@ const initialState = {
   leaderboardPositionsLoading: false,
   leaderboardPositionsError: false,
 
-  topRuns: {},
+  topRuns: [],
   topRunsLoading: false,
   topRunsError: false,
 
