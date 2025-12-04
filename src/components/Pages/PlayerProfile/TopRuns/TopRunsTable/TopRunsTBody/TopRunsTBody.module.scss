@@ -181,7 +181,7 @@
   font-weight: 500;
   color: #f1f5f9;
   font-size: 0.95rem;
-  max-width: 300px;
+  max-width: 260px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -191,14 +191,20 @@
   font-size: 0.75rem;
   font-weight: 700;
   color: #93c5fd;
+  min-width: 90px;
   text-transform: uppercase;
   letter-spacing: 0.6px;
+}
+
+.scoreCell {
+  padding-left: 50px !important;
 }
 
 .nadesCell {
   font-weight: 700;
   font-size: 0.98rem;
   color: #f1f5f9;
+  padding-left: 50px !important;
 }
 
 .timeCell {

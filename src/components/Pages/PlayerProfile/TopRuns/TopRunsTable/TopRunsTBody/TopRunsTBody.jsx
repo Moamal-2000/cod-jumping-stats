@@ -20,18 +20,9 @@ const TopRunsTBody = ({ topRuns }) => {
               <Link href={`/map?mapid=${run.CpID}`}>{run.MapName}</Link>
             </td>
 
-            <td>
-              <span className={s.fpsCell}>{run.FPS}</span>
-            </td>
-
-            <td>
-              <span className={s.scoreCell}>{run?.Score}</span>
-            </td>
-
-            <td>
-              <span className={s.nadesCell}>{run.Nadejumps}</span>
-            </td>
-
+            <td className={s.fpsCell}>{run.FPS}</td>
+            <td className={s.scoreCell}>{run?.Score}</td>
+            <td className={s.nadesCell}>{run.Nadejumps}</td>
             <td className={s.timeCell}>{formatTime(run.TimePlayedString)}</td>
 
             <td className={s.dateCell}>
