@@ -1,6 +1,9 @@
 "use client";
 
-import { useSelector } from "react-redux";
+import { fetchPlayerTops } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./TopRuns.module.scss";
 import TopRunsContent from "./TopRunsContent/TopRunsContent";
 import TopRunsOptions from "./TopRunsOptions/TopRunsOptions";
@@ -10,7 +13,16 @@ const TopRuns = () => {
     (s) => s.playerProfile
   );
 
+  const dispatch = useDispatch();
+
+  const searchParams = useSearchParams();
+  const paramsObject = Object.fromEntries(searchParams.entries());
+
   const isLoading = topRunsLoading || jumpScoresLoading;
+
+  useEffect(() => {
+    dispatch(fetchPlayerTops(paramsObject));
+  }, [paramsObject]);
 
   return (
     <div className={s.topRunsTab}>

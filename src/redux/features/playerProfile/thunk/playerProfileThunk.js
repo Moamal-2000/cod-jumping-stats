@@ -95,10 +95,13 @@ export const fetchPlayerJumpScores = createAsyncThunk(
 
 export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
-  async ({ playerid, limit = 200 }) => {
+  async (paramsObject) => {
+    const playerid = paramsObject.playerid;
+    const fps = paramsObject.fps || "125";
+
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid, limit }).player.getTops,
+        url: jhApis({ playerid, fps }).player.getTops,
       });
 
       if (!response.ok) {

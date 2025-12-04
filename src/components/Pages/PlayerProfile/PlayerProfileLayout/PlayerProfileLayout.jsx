@@ -10,7 +10,6 @@ import {
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
   fetchPlayerProfile,
-  fetchPlayerTops,
 } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { useSearchParams } from "next/navigation";
@@ -43,7 +42,6 @@ const PlayerProfileLayout = ({ children }) => {
 
     dispatch(fetchPlayerProfile({ playerid }));
     dispatch(fetchPlayerLeaderboardPositions({ playerid }));
-    dispatch(fetchPlayerTops({ playerid, fps: "125" }));
     dispatch(fetchPlayerJumpScores({ playerid, fps: "125" }));
     dispatch(fetchAllPlayers());
 
