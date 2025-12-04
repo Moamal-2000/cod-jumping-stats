@@ -10,6 +10,7 @@ const TopRunsTable = ({ topRuns }) => {
             <th>Rank</th>
             <th>Map Name</th>
             <th>FPS</th>
+            <th>Skill Points</th>
             <th>Nade Jumps</th>
             <th>Time</th>
             <th>Date</th>

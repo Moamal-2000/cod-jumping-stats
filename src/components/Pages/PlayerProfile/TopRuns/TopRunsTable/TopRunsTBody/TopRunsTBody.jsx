@@ -25,6 +25,10 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td>
+              <span className={s.scoreCell}>{run?.Score}</span>
+            </td>
+
+            <td>
               <span className={s.nadesCell}>{run.Nadejumps}</span>
             </td>
 
