@@ -17,14 +17,23 @@
   color: #f1f5f9;
 }
 
-.tbody .rankBadge {
-  display: inline-flex;
+.tbody .rankCell {
+  display: flex;
   align-items: center;
-  justify-content: center;
   font-weight: 700;
   font-size: 0.9rem;
+  letter-spacing: 1.6;
   color: #f1f5f9;
   gap: 0.25rem;
+  padding-left: 20px;
+}
+
+.tbody .rankCell>svg {
+  width: 16px;
+  height: 16px;
+  position: absolute;
+  left: 0;
+  bottom: 4px;
 }
 
 /* Special styling for 1st, 2nd, 3rd place */
@@ -34,16 +43,10 @@
   border-width: 2px;
 }
 
-.tbody tr:nth-child(1) .rankBadge {
+.tbody tr:nth-child(1) .rankCell {
   color: #fbbf24;
-  font-size: 1.15rem;
-  font-weight: 900;
+  font-size: 1rem;
   text-shadow: 0 0 12px rgba(251, 191, 36, 0.6);
-}
-
-.tbody tr:nth-child(1) .rankBadge::before {
-  content: '🥇';
-  margin-right: 0.3rem;
 }
 
 .tbody tr:nth-child(1) .mapNameCell {
@@ -84,16 +87,10 @@
   border-width: 1.5px;
 }
 
-.tbody tr:nth-child(2) .rankBadge {
+.tbody tr:nth-child(2) .rankCell {
   color: #e5e7eb;
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 1rem;
   text-shadow: 0 0 8px rgba(192, 192, 192, 0.4);
-}
-
-.tbody tr:nth-child(2) .rankBadge::before {
-  content: '🥈 ';
-  margin-right: 0.3rem;
 }
 
 .tbody tr:nth-child(2) .mapNameCell {
@@ -134,16 +131,10 @@
   border-width: 1.5px;
 }
 
-.tbody tr:nth-child(3) .rankBadge {
+.tbody tr:nth-child(3) .rankCell {
   color: #f97316;
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 1rem;
   text-shadow: 0 0 8px rgba(217, 119, 6, 0.4);
-}
-
-.tbody tr:nth-child(3) .rankBadge::before {
-  content: '🥉 ';
-  margin-right: 0.3rem;
 }
 
 .tbody tr:nth-child(3) .mapNameCell {

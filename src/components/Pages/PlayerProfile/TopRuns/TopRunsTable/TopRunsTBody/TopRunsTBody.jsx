@@ -9,11 +9,7 @@ const TopRunsTBody = ({ topRuns }) => {
         return (
           <tr key={`${run.RunID}-${index}`}>
             <td className={s.rankCell}>
-              <div className={`${s.rankBadge}`}>
-                <span>{run.Rank}</span>
-                <span>/</span>
-                <span>{run.TotalNr}</span>
-              </div>
+              {run.Rank}/{run.TotalNr}
             </td>
 
             <td className={s.mapNameCell} title={run.MapName}>
