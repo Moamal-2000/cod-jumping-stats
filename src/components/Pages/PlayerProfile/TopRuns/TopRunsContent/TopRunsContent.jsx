@@ -31,9 +31,7 @@ const TopRunsContent = () => {
             orderFilter === "asc" ? s.asc : s.desc
           }`}
         >
-          <div className={s.runsSummary}>
-            <p>{runSummeryText}</p>
-          </div>
+          <p className={s.runsSummary}>{runSummeryText}</p>
           <TopRunsTable topRuns={filteredTopRuns} />
         </div>
       )}
