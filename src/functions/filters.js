@@ -228,11 +228,7 @@ export function getFilteredTopRuns(topRuns, paramsObject) {
   return filteredData;
 }
 
-export function getTopRunsByRank(topRuns, rank) {
-  if (!topRuns) return [];
-
-  console.log(topRuns);
-
+export function getTopRunsByRank(topRuns = [], rank) {
   if (rank === "1") return topRuns.filter((run) => run.Rank === 1);
   if (rank === "1-10")
     return topRuns.filter((run) => run.Rank > 0 && run.Rank <= 10);
