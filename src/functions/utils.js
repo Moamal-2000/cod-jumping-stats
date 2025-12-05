@@ -196,9 +196,9 @@ export function getCodServers(servers = []) {
 }
 
 export function getCountryFlag(domain) {
-  const country = domain.split(".")[0];
-  const flagPath = `/countryFlags/${country}.svg`;
-  return flagPath;
+  let country = domain.split(".")[0];
+  if (country === "uk") country = "gb";
+  return `/countryFlags/${country}.svg`;
 }
 
 export function getGameTypes(groupedServers) {
