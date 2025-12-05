@@ -12,7 +12,7 @@ const TopRunsTBody = ({ topRuns }) => {
               {run.Rank}/{run.TotalNr}
             </td>
 
-            <td className={s.mapNameCell} title={run.MapName}>
+            <td className={s.mapNameCell}>
               <Link href={`/map?mapid=${run.CpID}`}>{run.MapName}</Link>
             </td>
 
