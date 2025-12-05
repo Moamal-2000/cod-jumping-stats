@@ -17,6 +17,10 @@ const TopRunsContent = () => {
   const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
   const hasRuns = filteredTopRuns.length > 0;
 
+  const topRunsWrapperClasses = `${s.topRunsWrapper} ${
+    orderFilter === "asc" ? s.asc : s.desc
+  }`;
+
   useEffect(() => {
     const filterTopRuns = getFilteredTopRuns(topRuns, paramsObject);
 
@@ -26,11 +30,7 @@ const TopRunsContent = () => {
   return (
     <div className={s.topRunsContent}>
       {hasRuns && (
-        <div
-          className={`${s.topRunsWrapper} ${
-            orderFilter === "asc" ? s.asc : s.desc
-          }`}
-        >
+        <div className={topRunsWrapperClasses}>
           <p className={s.runsSummary}>{runSummeryText}</p>
           <TopRunsTable topRuns={filteredTopRuns} />
         </div>
