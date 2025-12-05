@@ -4,7 +4,7 @@ import s from "./TopRunsTBody.module.scss";
 
 const TopRunsTBody = ({ topRuns }) => {
   return (
-    <tbody className={s.tbody}>
+    <tbody className={s.tbody} data-type="top-runs-tbody">
       {topRuns.map((run, index) => {
         return (
           <tr key={`${run.RunID}-${index}`}>

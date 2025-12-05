@@ -4,7 +4,7 @@ import TopRunsTBody from "./TopRunsTBody/TopRunsTBody";
 const TopRunsTable = ({ topRuns }) => {
   return (
     <div className={s.topRunsList}>
-      <table className={s.leaderboardTable}>
+      <table className={s.table}>
         <thead>
           <tr>
             <th>Rank</th>

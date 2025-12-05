@@ -90,3 +90,8 @@
     font-weight: 500;
   }
 }
+
+.topRunsWrapper.desc [data-type=top-runs-tbody] {
+  display: flex;
+  flex-direction: column-reverse !important;
+}

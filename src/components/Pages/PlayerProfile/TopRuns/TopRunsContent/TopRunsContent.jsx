@@ -12,6 +12,10 @@ const TopRunsContent = () => {
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const rankFilter = searchParams.get("rank") || "all";
+  const orderFilter = searchParams.get("order") || "asc";
+
+  const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
+  const hasRuns = filteredTopRuns.length > 0;
 
   useEffect(() => {
     const filterTopRuns = getFilteredTopRuns(topRuns, paramsObject);
@@ -19,20 +23,19 @@ const TopRunsContent = () => {
     setFilteredTopRuns(filterTopRuns);
   }, [rankFilter]);
 
-  const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
-  const hasRuns = filteredTopRuns.length > 0;
-
   return (
     <div className={s.topRunsContent}>
       {hasRuns && (
-        <>
-          <div>
-            <div className={s.runsSummary}>
-              <p>{runSummeryText}</p>
-            </div>
-            <TopRunsTable topRuns={filteredTopRuns} />
+        <div
+          className={`${s.topRunsWrapper} ${
+            orderFilter === "asc" ? s.asc : s.desc
+          }`}
+        >
+          <div className={s.runsSummary}>
+            <p>{runSummeryText}</p>
           </div>
-        </>
+          <TopRunsTable topRuns={filteredTopRuns} />
+        </div>
       )}
 
       {!hasRuns && (
