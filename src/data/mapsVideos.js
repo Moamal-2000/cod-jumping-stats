@@ -164,7 +164,7 @@ export const MAPS_VIDEOS = [
       {
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=XhZqNmZ4VyU",
-      }
+      },
     ],
   },
   {
@@ -409,7 +409,7 @@ export const MAPS_VIDEOS = [
         type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=a50eIwMGdi4",
         id: 2,
-      }
+      },
     ],
   },
   {
@@ -910,6 +910,17 @@ export const MAPS_VIDEOS = [
       {
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=2dGieWuy3NA",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "j4l_baseton",
+    mapId: 8598,
+    videos: [
+      {
+        type: "125 fps touchpad showcase",
+        videoUrl: "https://www.youtube.com/watch?v=yq-ovrvjwDI",
         id: 1,
       },
     ],
