@@ -161,6 +161,10 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=qfNMnlbFTFM",
         id: 1,
       },
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=XhZqNmZ4VyU",
+      }
     ],
   },
   {
@@ -401,6 +405,11 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=FONKNlPJea4",
         id: 1,
       },
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=a50eIwMGdi4",
+        id: 2,
+      }
     ],
   },
   {
@@ -780,6 +789,127 @@ export const MAPS_VIDEOS = [
       {
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=cyrWXiRkjWs",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_unique",
+    mapId: 2683,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=fVZX4A7xy_M",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_d-jump",
+    mapId: 1749,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=fYNtdQEeTMU",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_fastend",
+    mapId: 1754,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=KZ7k0uSD00o",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_jump_arena",
+    mapId: 6317,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=kf6BUuxcNMw",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "sc_telijump",
+    mapId: 1797,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=_m14YuaUgng",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "railyard_jump_light",
+    mapId: 1794,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=V9ytP13z1vU",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_highgrass",
+    mapId: 3639,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=rE_i4rVnp4c",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_free_fall",
+    mapId: 1755,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=lisaFWKrwYQ",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "railyard_jump_hard",
+    mapId: 1793,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=EYXacNGhwwI",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_strange_ways",
+    mapId: 3244,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=hkgflw_vtr8",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_state",
+    mapId: 1737,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=2dGieWuy3NA",
         id: 1,
       },
     ],
