@@ -9,6 +9,8 @@ const TopRunsSelectMenu = ({ options, label, urlQuery }) => {
   const router = useRouter();
   const pathname = usePathname();
 
+  const queryValue = searchParams.get(urlQuery);
+
   function handleOnChange(event) {
     const value = event.target.value;
     const defaultValue = options[0].value;
@@ -25,7 +27,12 @@ const TopRunsSelectMenu = ({ options, label, urlQuery }) => {
     <div className={s.selectWrapper}>
       {label && <label htmlFor={urlQuery}>{label}</label>}
 
-      <select id={urlQuery} onChange={handleOnChange} className={s.select}>
+      <select
+        id={urlQuery}
+        onChange={handleOnChange}
+        className={s.select}
+        value={queryValue || options[0].value}
+      >
         {options.map(({ label, value }) => (
           <option key={value} value={value}>
             {label}
