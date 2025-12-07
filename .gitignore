@@ -12,6 +12,7 @@
 
 # vscode
 /.vscode
+.groupcode
 
 # testing
 /coverage

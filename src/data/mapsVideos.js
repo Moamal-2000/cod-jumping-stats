@@ -925,6 +925,17 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "jm_renaissance_hard",
+    mapId: 11109,
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=F65KrLc6ylo",
+        id: 1,
+      },
+    ],
+  },
   // {
   //   mapName: "",
   //   mapId: 0,
