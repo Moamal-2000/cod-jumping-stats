@@ -12,6 +12,7 @@ const TopRunsContent = () => {
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const rankFilter = searchParams.get("rank") || "all";
+  const sortFilter = searchParams.get("sort") || "rank";
   const orderFilter = searchParams.get("order") || "asc";
 
   const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
@@ -21,7 +22,7 @@ const TopRunsContent = () => {
     const filterTopRuns = getFilteredTopRuns(topRuns, paramsObject);
 
     setFilteredTopRuns(filterTopRuns);
-  }, [rankFilter]);
+  }, [rankFilter, sortFilter]);
 
   return (
     <div className={s.topRunsContent}>

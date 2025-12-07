@@ -225,6 +225,10 @@ export function getFilteredTopRuns(topRuns, paramsObject) {
     filteredData = getTopRunsByRank(filteredData, rank);
   }
 
+  if (sort !== "rank") {
+    filteredData = getSortedTopRuns(filteredData, sort);
+  }
+
   return filteredData;
 }
 
@@ -232,6 +236,25 @@ export function getTopRunsByRank(topRuns = [], rank) {
   if (rank === "1") return topRuns.filter((run) => run.Rank === 1);
   if (rank === "1-10")
     return topRuns.filter((run) => run.Rank > 0 && run.Rank <= 10);
+
+  return topRuns;
+}
+
+export function getSortedTopRuns(topRuns = [], sort) {
+  if (sort === "time") {
+    return topRuns.toSorted((a, b) => a.TimePlayed - b.TimePlayed);
+  }
+
+  if (sort === "date") {
+    return topRuns.toSorted(
+      (a, b) =>
+        new Date(b.TimeCreated).getTime() - new Date(a.TimeCreated).getTime()
+    );
+  }
+
+  if (sort === "nade") {
+    return topRuns.toSorted((a, b) => a.Nadejumps - b.Nadejumps);
+  }
 
   return topRuns;
 }
