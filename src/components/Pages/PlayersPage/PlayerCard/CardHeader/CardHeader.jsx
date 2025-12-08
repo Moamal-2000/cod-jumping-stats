@@ -1,9 +1,30 @@
-import s from './CardHeader.module.scss'
+import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
+import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
+import s from "./CardHeader.module.scss";
+import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 
-const CardHeader = () => {
+const CardHeader = ({ PlayerName, PrefName, PlayerID, Country, Admin }) => {
   return (
-    <div>CardHeader</div>
-  )
-}
+    <header className={s.cardHeader}>
+      <div className={s.wrapper}>
+        <div className={s.country}>
+          <CountryImage
+            countryCode={Country}
+            size={40}
+            colorPlaceholder={true}
+          />
+        </div>
 
-export default CardHeader
+        <PlayerPrimaryInfo
+          PlayerName={PrefName || PlayerName}
+          Admin={Admin}
+          PlayerID={PlayerID}
+        />
+      </div>
+
+      <AddToFavButton groupKey="playersIds" id={PlayerID} />
+    </header>
+  );
+};
+
+export default CardHeader;

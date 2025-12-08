@@ -1,8 +1,6 @@
-import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
-import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
+import CardHeader from "./CardHeader/CardHeader";
 import PlayerBadges from "./PlayerBadges/PlayerBadges";
 import s from "./PlayerCard.module.scss";
-import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
 import PlayerStats from "./PlayerStats/PlayerStats";
 
 const PlayerCard = ({
@@ -19,25 +17,13 @@ const PlayerCard = ({
   return (
     <div className={s.playerCard}>
       <div className={s.topSection}>
-        <header className={s.header}>
-          <div className={s.wrapper}>
-            <div className={s.country}>
-              <CountryImage
-                countryCode={Country}
-                size={40}
-                colorPlaceholder={true}
-              />
-            </div>
-
-            <PlayerPrimaryInfo
-              PlayerName={PrefName || PlayerName}
-              Admin={Admin}
-              PlayerID={PlayerID}
-            />
-          </div>
-
-          <AddToFavButton groupKey="playersIds" id={PlayerID} />
-        </header>
+        <CardHeader
+          PlayerName={PlayerName}
+          PrefName={PrefName}
+          PlayerID={PlayerID}
+          Country={Country}
+          Admin={Admin}
+        />
 
         <PlayerBadges
           Admin={Admin}
