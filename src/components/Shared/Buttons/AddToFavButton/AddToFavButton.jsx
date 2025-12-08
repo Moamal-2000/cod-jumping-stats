@@ -41,6 +41,8 @@ function toggleFavorite({ setIsFavorited, id, groupKey = "playersIds" } = {}) {
     favorites[groupKey] = favorites[groupKey].filter((itemId) => itemId !== id);
     setIsFavorited(false);
   } else {
+    if (!favorites[groupKey]) favorites[groupKey] = [];
+
     favorites[groupKey].push(id);
     setIsFavorited(true);
   }
