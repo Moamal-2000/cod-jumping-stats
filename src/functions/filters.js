@@ -214,7 +214,7 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   });
 }
 
-export function getFilteredTopRuns(topRuns, paramsObject) {
+export function getProcessedTopRuns(topRuns, paramsObject) {
   if (!topRuns) return [];
   const rank = paramsObject?.rank || "all";
   const sort = paramsObject?.sort || "rank";

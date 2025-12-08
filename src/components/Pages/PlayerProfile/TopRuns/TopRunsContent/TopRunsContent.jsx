@@ -1,4 +1,4 @@
-import { getFilteredTopRuns } from "@/functions/filters";
+import { getProcessedTopRuns } from "@/functions/filters";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
@@ -7,7 +7,7 @@ import s from "./TopRunsContent.module.scss";
 
 const TopRunsContent = () => {
   const topRuns = useSelector((s) => s.playerProfile.topRuns);
-  const [filteredTopRuns, setFilteredTopRuns] = useState(topRuns);
+  const [processedTopRuns, setProcessedTopRuns] = useState(topRuns);
 
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
@@ -15,13 +15,11 @@ const TopRunsContent = () => {
   const sortFilter = searchParams.get("sort") || "rank";
   const orderFilter = searchParams.get("order") || "asc";
 
-  const runSummeryText = getRunSummeryText({ filteredTopRuns, rankFilter });
-  const hasRuns = filteredTopRuns.length > 0;
+  const runSummeryText = getRunSummeryText({ processedTopRuns, rankFilter });
+  const hasRuns = processedTopRuns.length > 0;
 
   useEffect(() => {
-    const filterTopRuns = getFilteredTopRuns(topRuns, paramsObject);
-
-    setFilteredTopRuns(filterTopRuns);
+    setProcessedTopRuns(getProcessedTopRuns(topRuns, paramsObject));
   }, [rankFilter, sortFilter]);
 
   return (
@@ -29,7 +27,7 @@ const TopRunsContent = () => {
       {hasRuns && (
         <div className={`${s.topRunsWrapper} ${s[orderFilter]}`}>
           <p className={s.runsSummary}>{runSummeryText}</p>
-          <TopRunsTable topRuns={filteredTopRuns} />
+          <TopRunsTable topRuns={processedTopRuns} />
         </div>
       )}
 
@@ -47,14 +45,14 @@ const TopRunsContent = () => {
 
 export default TopRunsContent;
 
-function getRunSummeryText({ filteredTopRuns, rankFilter }) {
+function getRunSummeryText({ processedTopRuns, rankFilter }) {
   const rankFilterMap = {
     1: " (Top 1 only)",
     "1-10": " (Top 1-10)",
   };
 
   const rankFilterText = rankFilterMap[rankFilter] || " (All ranks)";
-  const runWord = filteredTopRuns.length === 1 ? "run" : "runs";
+  const runWord = processedTopRuns.length === 1 ? "run" : "runs";
 
-  return `Showing ${filteredTopRuns.length} detailed ${runWord} ${rankFilterText}`;
+  return `Showing ${processedTopRuns.length} detailed ${runWord} ${rankFilterText}`;
 }
