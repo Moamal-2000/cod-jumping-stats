@@ -1,8 +1,8 @@
+import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
-import { checkIsItemFavorited, toggleFavorite } from "@/functions/components";
 import { getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
-import { memo, useEffect, useState } from "react";
+import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import CompletionRate from "./CompletionRate/CompletionRate";
 import s from "./MapCard.module.scss";
@@ -19,17 +19,12 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     CpID,
     Ender,
   } = mapData;
-  const [isFavorited, setIsFavorited] = useState(false);
 
   const ref = mapsScroll?.length === index + 1 ? lastMapRef : null;
   const completionRate = getMapCompletionRate({
     allMaps,
     IndividualFinishCount,
   });
-
-  useEffect(() => {
-    checkIsItemFavorited({ setIsFavorited, id: CpID, groupKey: "mapsIds" });
-  }, [CpID]);
 
   return (
     <div className={s.mapCard} ref={ref}>
@@ -63,23 +58,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
             )}
           </Link>
 
-          <button
-            type="button"
-            onClick={() =>
-              toggleFavorite({ setIsFavorited, id: CpID, groupKey: "mapsIds" })
-            }
-            className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
-            title={isFavorited ? "Remove from favorites" : "Add to favorites"}
-            aria-label={
-              isFavorited ? "Remove from favorites" : "Add to favorites"
-            }
-          >
-            <svg viewBox="0 0 24 24">
-              <use
-                href={`/icons-sprite.svg#${isFavorited ? "trashCan" : "heart"}`}
-              ></use>
-            </svg>
-          </button>
+          <AddToFavButton id={CpID} groupKey="mapsIds" />
         </div>
 
         <MapDifficulties Difficulty={mapData?.Difficulty} />

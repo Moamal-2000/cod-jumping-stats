@@ -1,6 +1,5 @@
+import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { checkIsItemFavorited, toggleFavorite } from "@/functions/components";
-import { useEffect, useState } from "react";
 import PlayerBadges from "./PlayerBadges/PlayerBadges";
 import s from "./PlayerCard.module.scss";
 import PlayerPrimaryInfo from "./PlayerPrimaryInfo/PlayerPrimaryInfo";
@@ -17,12 +16,6 @@ const PlayerCard = ({
   Banned,
   Donated,
 }) => {
-  const [isFavorited, setIsFavorited] = useState(false);
-
-  useEffect(() => {
-    checkIsItemFavorited({ setIsFavorited, id: PlayerID });
-  }, [PlayerID]);
-
   return (
     <div className={s.playerCard}>
       <div className={s.topSection}>
@@ -43,21 +36,7 @@ const PlayerCard = ({
             />
           </div>
 
-          <button
-            type="button"
-            onClick={() => toggleFavorite({ setIsFavorited, id: PlayerID })}
-            className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
-            title={isFavorited ? "Remove from favorites" : "Add to favorites"}
-            aria-label={
-              isFavorited ? "Remove from favorites" : "Add to favorites"
-            }
-          >
-            <svg viewBox="0 0 24 24">
-              <use
-                href={`/icons-sprite.svg#${isFavorited ? "trashCan" : "heart"}`}
-              ></use>
-            </svg>
-          </button>
+          <AddToFavButton groupKey="playersIds" id={PlayerID} />
         </header>
 
         <PlayerBadges

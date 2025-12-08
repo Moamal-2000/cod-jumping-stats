@@ -1,6 +1,5 @@
 "use client";
 
-import { checkIsItemFavorited, toggleFavorite } from "@/functions/components";
 import { useEffect, useState } from "react";
 import s from "./AddToFavButton.module.scss";
 
@@ -29,3 +28,33 @@ const AddToFavButton = ({ id, groupKey }) => {
 };
 
 export default AddToFavButton;
+
+function toggleFavorite({ setIsFavorited, id, groupKey = "playersIds" } = {}) {
+  const favoritesLocal = localStorage.getItem("favorites");
+  let favorites = favoritesLocal
+    ? JSON.parse(favoritesLocal)
+    : { mapsIds: [], playersIds: [] };
+
+  const isPlayerInFavorites = favorites[groupKey]?.includes(id);
+
+  if (isPlayerInFavorites) {
+    favorites[groupKey] = favorites[groupKey].filter((itemId) => itemId !== id);
+    setIsFavorited(false);
+  } else {
+    favorites[groupKey].push(id);
+    setIsFavorited(true);
+  }
+
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+}
+
+function checkIsItemFavorited({ setIsFavorited, id, groupKey = "playersIds" }) {
+  const favoritesLocal = localStorage.getItem("favorites");
+
+  if (!favoritesLocal) return;
+
+  const favorites = JSON.parse(favoritesLocal);
+  const isFavorited = favorites[groupKey]?.includes(id);
+
+  setIsFavorited(isFavorited);
+}
