@@ -1,4 +1,5 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import { checkIsItemFavorited, toggleFavorite } from "@/functions/components";
 import { getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
 import { memo, useEffect, useState } from "react";
@@ -27,7 +28,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   });
 
   useEffect(() => {
-    checkIfMapIsFavorited({ setIsFavorited, CpID });
+    checkIsItemFavorited({ setIsFavorited, id: CpID, groupKey: "mapsIds" });
   }, [CpID]);
 
   return (
@@ -64,7 +65,9 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
 
           <button
             type="button"
-            onClick={() => toggleFavorite({ setIsFavorited, CpID })}
+            onClick={() =>
+              toggleFavorite({ setIsFavorited, id: CpID, groupKey: "mapsIds" })
+            }
             className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
             title={isFavorited ? "Remove from favorites" : "Add to favorites"}
             aria-label={
@@ -88,31 +91,3 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
 };
 
 export default memo(MapCard);
-
-function checkIfMapIsFavorited({ setIsFavorited, CpID }) {
-  const favoritesLocal = localStorage.getItem("favorites");
-
-  if (!favoritesLocal) return;
-
-  const favorites = JSON.parse(favoritesLocal);
-  const isMapInFavorites = favorites.mapsIds?.includes(CpID);
-
-  setIsFavorited(isMapInFavorites);
-}
-
-function toggleFavorite({ setIsFavorited, CpID }) {
-  const favoritesLocal = localStorage.getItem("favorites");
-  let favorites = favoritesLocal ? JSON.parse(favoritesLocal) : { mapsIds: [] };
-
-  const isMapInFavorites = favorites.mapsIds?.includes(CpID);
-
-  if (isMapInFavorites) {
-    favorites.mapsIds = favorites.mapsIds.filter((mapId) => mapId !== CpID);
-    setIsFavorited(false);
-  } else {
-    favorites.mapsIds.push(CpID);
-    setIsFavorited(true);
-  }
-
-  localStorage.setItem("favorites", JSON.stringify(favorites));
-}
