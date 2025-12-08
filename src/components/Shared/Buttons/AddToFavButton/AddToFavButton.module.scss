@@ -1,0 +1,26 @@
+.favoriteButton {
+  background: none;
+  border: none;
+  width: 32px;
+  height: 32px;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: #6b7280;
+  cursor: pointer;
+  transition: color .2s ease, background-color .2s ease;
+
+  &:hover {
+    color: #ffc107;
+    background-color: rgba(255, 193, 7, .1);
+  }
+}
+
+.favoriteButton>svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
