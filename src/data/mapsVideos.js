@@ -198,6 +198,11 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=TYntstrWPOc",
         id: 1,
       },
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=JQ_fIlnosyw",
+        id: 2,
+      },
     ],
   },
   {
@@ -932,6 +937,116 @@ export const MAPS_VIDEOS = [
       {
         type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=F65KrLc6ylo",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_jump",
+    mapId: 4928,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=Vnep0VBIRDs",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_bouncejump_hard",
+    mapId: 3940,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=3KCprdHm4Vs",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_ssirhc_easy",
+    mapId: 1735,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=7IKyVgu0rbs",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_toilet",
+    mapId: 1788,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=3ctWJkCKsG4",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_prisonbreak",
+    mapId: 1773,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=x3h04lggHyU",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_race_easy",
+    mapId: 5768,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=J7DwVZj03gQ",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_bouncejump_easy",
+    mapId: 3924,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=4RP-vIJ7N1c",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_gardenv2",
+    mapId: 4038,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=ASpVGFGV-p0",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "fun_playhouse",
+    mapId: 3788,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=Ejxm_qmiLsw",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_scjump",
+    mapId: 1776,
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=BXCZFykGO7g",
         id: 1,
       },
     ],
