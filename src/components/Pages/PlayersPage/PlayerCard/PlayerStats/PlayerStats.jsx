@@ -2,7 +2,7 @@ import s from "./PlayerStats.module.scss";
 
 const PlayerStats = ({ Visits, LastSeen }) => {
   return (
-    <div className={s.statsGrid}>
+    <footer className={s.statsGrid}>
       <div className={s.statItem}>
         <span className={s.statLabel}>Visits:</span>
         <span className={s.statValue}>{Visits.toLocaleString()}</span>
@@ -12,7 +12,7 @@ const PlayerStats = ({ Visits, LastSeen }) => {
         <span className={s.statLabel}>Last seen:</span>
         <span className={s.statValue}>{formatLastSeen(LastSeen)}</span>
       </div>
-    </div>
+    </footer>
   );
 };
 
