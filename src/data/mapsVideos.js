@@ -160,10 +160,12 @@ export const MAPS_VIDEOS = [
   {
     mapName: "mp_carentan",
     mapsIds: [3268],
+    mapHasRoutes: true,
     videos: [
       {
         type: "125 fps no save",
         videoUrl: "https://www.youtube.com/watch?v=wcPG_HoftEk",
+        route: "classic",
         id: 1,
       },
     ],
@@ -289,15 +291,18 @@ export const MAPS_VIDEOS = [
   {
     mapName: "sp_eldaba",
     mapsIds: [23284],
+    mapHasRoutes: true,
     videos: [
       {
         type: "250 fps showcase part 1",
         videoUrl: "https://www.youtube.com/watch?v=p3aTRSzMnB8",
+        route: "Easy",
         id: 1,
       },
       {
         type: "250 fps showcase part 2",
         videoUrl: "https://www.youtube.com/watch?v=dh2G7VozsNY",
+        route: "Easy",
         id: 2,
       },
     ],
@@ -419,10 +424,12 @@ export const MAPS_VIDEOS = [
   {
     mapName: "jm_ddl",
     mapsIds: [9480],
+    mapHasRoutes: true,
     videos: [
       {
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=GPCqtKMgfF4",
+        route: "Hard",
         id: 1,
       },
     ],
@@ -564,10 +571,12 @@ export const MAPS_VIDEOS = [
   {
     mapName: "jm_plazma",
     mapsIds: [7594],
+    mapHasRoutes: true,
     videos: [
       {
         type: "125 fps no grenade",
         videoUrl: "https://www.youtube.com/watch?v=zarAXwxsylE",
+        route: "Hard",
         id: 1,
       },
     ],
@@ -696,10 +705,12 @@ export const MAPS_VIDEOS = [
   {
     mapName: "jm_heaven_and_hell",
     mapsIds: [10064],
+    mapHasRoutes: true,
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=RB2PekDC5vg&t=78s",
+        videoUrl: "https://www.youtube.com/watch?v=RB2PekDC5vg",
+        route: "Hell",
         id: 1,
       },
     ],
@@ -717,12 +728,38 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_warmup",
-    mapsIds: [23698],
+    mapsIds: [23706, 23698, 23714, 23721, 23728],
+    mapHasRoutes: true,
     videos: [
       {
-        type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=240s",
+        type: "125 fps sppedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ",
+        route: "Easy",
         id: 1,
+      },
+      {
+        type: "125 fps sppedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=45s",
+        route: "Inter",
+        id: 5,
+      },
+      {
+        type: "125 fps sppedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=105s",
+        route: "Hard",
+        id: 2,
+      },
+      {
+        type: "125 fps sppedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=214s",
+        route: "Extreme",
+        id: 3,
+      },
+      {
+        type: "250 fps sppedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=351s",
+        route: "250",
+        id: 4,
       },
     ],
   },
@@ -740,15 +777,18 @@ export const MAPS_VIDEOS = [
   {
     mapName: "ultra_gap_training",
     mapsIds: [6082],
+    mapHasRoutes: true,
     videos: [
       {
         type: "125 tutorial",
         videoUrl: "https://www.youtube.com/watch?v=Hk52T2-ASoY&t=659s",
+        route: "251",
         id: 1,
       },
       {
-        type: "125 fps showcase",
+        type: "125 fps no grenades",
         videoUrl: "https://www.youtube.com/watch?v=myeGvLWFrKI",
+        route: "251",
         id: 2,
       },
     ],
@@ -1085,7 +1125,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_cards",
-    mapsIds: [22339],
+    mapsIds: [22339, 22361, 22390],
     mapHasRoutes: true,
     videos: [
       {
