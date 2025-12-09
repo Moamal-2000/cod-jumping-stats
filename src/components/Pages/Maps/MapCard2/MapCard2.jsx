@@ -2,6 +2,7 @@ import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { formateReleaseDate, getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
 import { memo } from "react";
+import CompletionRate from "../MapCard/CompletionRate/CompletionRate";
 import MapDifficulties from "../MapCard/MapDifficulties/MapDifficulties";
 import s from "./MapCard2.module.scss";
 
@@ -56,23 +57,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
       </div>
 
       <div className={s.rightSide}>
-        <div className={s.completionRate}>
-          <div className={s.textWrapper}>
-            <span className={s.text}>Completion Rate</span>
-            <span className={s.rate}>{completionRate + "%"}</span>
-          </div>
-
-          <div className={s.progressBar}>
-            <div className={s.progressLine} />
-            <div
-              className={s.hideLine}
-              style={{
-                left: completionRate + "%",
-                width: 100 - completionRate + "%",
-              }}
-            />
-          </div>
-        </div>
+        <CompletionRate completionRate={completionRate} />
 
         <div className={s.authorAndRelease}>
           <span className={s.authorName}>{Author}</span>
