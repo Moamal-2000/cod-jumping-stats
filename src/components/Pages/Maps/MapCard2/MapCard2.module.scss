@@ -53,6 +53,11 @@
   }
 }
 
+.mapCard .imgHolder [data-type=img-holder] {
+  height: inherit;
+  border-radius: 14px;
+}
+
 .leftSide {
   display: flex;
   flex-direction: column;
