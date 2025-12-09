@@ -58,6 +58,12 @@
   border-radius: 14px;
 }
 
+.mapCard .imgHolder [data-type=img-holder] [data-loader] {
+  display: block;
+  width: 94px;
+  height: 94px;
+}
+
 .leftSide {
   display: flex;
   flex-direction: column;
