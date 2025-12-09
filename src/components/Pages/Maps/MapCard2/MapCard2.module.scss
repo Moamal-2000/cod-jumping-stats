@@ -204,18 +204,19 @@
 
 .rightSide .authorAndRelease {
   display: flex;
+  gap: 10px;
 }
 
 .rightSide .authorAndRelease .authorName {
   font-size: 14px;
   color: #9ca8c0;
   font-weight: 500;
-  width: 120px;
+  width: 200px;
 }
 
 .rightSide .authorAndRelease .releaseDate {
-  width: 110px;
   font-size: 14px;
   color: #8292af;
   text-align: right;
+  width: 150px;
 }
