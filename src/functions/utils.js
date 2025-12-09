@@ -137,20 +137,11 @@ export function modifyMapsData(mapsData = []) {
 }
 
 export function getRequiredMapVideos(mapData) {
-  return MAPS_VIDEOS.find((video) => {
-    const hasMatchedMap =
-      video.mapName === mapData.Name && video.mapId === mapData.CpID;
+  const requiredVideos = MAPS_VIDEOS.find((item) =>
+    item.mapsIds.includes(mapData.CpID)
+  )?.videos;
 
-    if (video.mapHasRoutes) {
-      const hasMatchRoute = video.videos.find(
-        ({ route }) => route === mapData.Ender
-      );
-
-      return hasMatchedMap && hasMatchRoute;
-    }
-
-    return hasMatchedMap;
-  })?.videos;
+  return requiredVideos || [];
 }
 
 export function getStarsText(text) {
