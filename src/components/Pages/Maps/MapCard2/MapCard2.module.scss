@@ -17,7 +17,7 @@
   }
 }
 
-@include m.small {
+@include m.medium {
   .mapCard {
     flex-direction: column;
     gap: 24px;
@@ -49,7 +49,6 @@
   .mapCard .imgHolder {
     aspect-ratio: 16 / 9;
     width: 100%;
-    height: auto;
   }
 }
 
@@ -212,6 +211,12 @@
   color: #9ca8c0;
   font-weight: 500;
   width: 200px;
+}
+
+@include m.large {
+  .rightSide .authorAndRelease .authorName {
+    width: 150px;
+  }
 }
 
 .rightSide .authorAndRelease .releaseDate {
