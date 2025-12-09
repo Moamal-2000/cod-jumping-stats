@@ -459,7 +459,7 @@ const MapDetailPage = () => {
               selectedFps={selectedFps}
               onFpsChange={setSelectedFps}
             />
-            {mapData && <MapVideos mapId={mapData.CpID} />}
+            {mapData && <MapVideos mapData={mapData} />}
           </div>
 
           <TabsSection

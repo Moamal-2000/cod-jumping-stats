@@ -1,7 +1,7 @@
 export const MAPS_VIDEOS = [
   {
     mapName: "mp_chilli",
-    mapId: 8705,
+    mapsIds: [8705],
     videos: [
       {
         type: "125 fps showcase",
@@ -17,7 +17,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "1m9055186e",
-    mapId: 15515,
+    mapsIds: [15515],
     videos: [
       {
         type: "250 fps speedrun",
@@ -28,7 +28,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_bhop_hell_easy",
-    mapId: 15966,
+    mapsIds: [15966],
     videos: [
       {
         type: "250 fps showcase",
@@ -39,7 +39,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_lost",
-    mapId: 4305,
+    mapsIds: [4305],
     videos: [
       {
         type: "125 no grenade",
@@ -50,7 +50,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_memento",
-    mapId: 16307,
+    mapsIds: [16307],
     videos: [
       {
         type: "125 fps showcase",
@@ -66,7 +66,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_descend_full",
-    mapId: 1706,
+    mapsIds: [1706],
     videos: [
       {
         type: "250 fps speedrun",
@@ -77,7 +77,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_yka",
-    mapId: 1791,
+    mapsIds: [1791],
     videos: [
       {
         type: "250 fps speedrun",
@@ -88,7 +88,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_canyon",
-    mapId: 9163,
+    mapsIds: [9163],
     videos: [
       {
         type: "125 fps speedrun",
@@ -99,7 +99,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "defrag_portal",
-    mapId: 1851,
+    mapsIds: [1851],
     videos: [
       {
         type: "125 fps showcase",
@@ -110,7 +110,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_kuwehr2",
-    mapId: 2318,
+    mapsIds: [2318],
     videos: [
       {
         type: "125 fps showcase",
@@ -121,7 +121,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_kuwehr",
-    mapId: 1714,
+    mapsIds: [1714],
     videos: [
       {
         type: "125 fps showcase",
@@ -132,7 +132,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_pier_2",
-    mapId: 2582,
+    mapsIds: [2582],
     videos: [
       {
         type: "125 fps showcase",
@@ -148,7 +148,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "Jm_jumpers_heaven",
-    mapId: 2170,
+    mapsIds: [2170],
     videos: [
       {
         type: "125 fps showcase",
@@ -159,7 +159,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_carentan",
-    mapId: 3268,
+    mapsIds: [3268],
     videos: [
       {
         type: "125 fps no save",
@@ -170,7 +170,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_glass",
-    mapId: 4094,
+    mapsIds: [4094],
     videos: [
       {
         type: "125 fps speedrun",
@@ -185,7 +185,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_lost_easy",
-    mapId: 4227,
+    mapsIds: [4227],
     videos: [
       {
         type: "125 fps speedrun",
@@ -196,7 +196,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_glassy",
-    mapId: 11012,
+    mapsIds: [11012],
     videos: [
       {
         type: "125 fps showcase",
@@ -207,7 +207,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "1st_easy",
-    mapId: 3730,
+    mapsIds: [3730],
     videos: [
       {
         type: "125 fps speedrun",
@@ -223,7 +223,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_pier_2_pro",
-    mapId: 5891,
+    mapsIds: [5891],
     videos: [
       {
         type: "125 fps speedrun",
@@ -239,7 +239,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_lostinice",
-    mapId: 11863,
+    mapsIds: [11863],
     videos: [
       {
         type: "trailer",
@@ -250,7 +250,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_paprika",
-    mapId: 7888,
+    mapsIds: [7888],
     videos: [
       {
         type: "125 fps showcase",
@@ -261,7 +261,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_g1ng3r",
-    mapId: 12622,
+    mapsIds: [12622],
     videos: [
       {
         type: "250 fps showcase",
@@ -272,7 +272,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_snowland",
-    mapId: 15375,
+    mapsIds: [15375],
     videos: [
       {
         type: "250 fps showcase",
@@ -288,7 +288,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "sp_eldaba",
-    mapId: 23284,
+    mapsIds: [23284],
     videos: [
       {
         type: "250 fps showcase part 1",
@@ -304,7 +304,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "sp_toujane",
-    mapId: 15186,
+    mapsIds: [15186],
     videos: [
       {
         type: "mix fps showcase",
@@ -315,7 +315,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_rats",
-    mapId: 16575,
+    mapsIds: [16575],
     videos: [
       {
         type: "250 fps showcase",
@@ -326,7 +326,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_sht_ladder_hard",
-    mapId: 19956,
+    mapsIds: [19956],
     videos: [
       {
         type: "250 fps showcase",
@@ -337,7 +337,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "sp_tankhunt",
-    mapId: 573456,
+    mapsIds: [573456],
     videos: [
       {
         type: "mix fps low grenades",
@@ -348,7 +348,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_paskvil_easy",
-    mapId: 14809,
+    mapsIds: [14809],
     videos: [
       {
         type: "125 fps showcase",
@@ -369,7 +369,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_space_250",
-    mapId: 14977,
+    mapsIds: [14977],
     videos: [
       {
         type: "250 fps showcase",
@@ -380,7 +380,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_fracture",
-    mapId: 15009,
+    mapsIds: [15009],
     videos: [
       {
         type: "125 fps showcase",
@@ -396,7 +396,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_prestige",
-    mapId: 9291,
+    mapsIds: [9291],
     videos: [
       {
         type: "125 fps showcase",
@@ -407,7 +407,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_flee",
-    mapId: 7544,
+    mapsIds: [7544],
     videos: [
       {
         type: "125 fps showcase",
@@ -418,7 +418,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_ddl",
-    mapId: 9480,
+    mapsIds: [9480],
     videos: [
       {
         type: "125 fps showcase",
@@ -429,7 +429,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "j4l_real_artist",
-    mapId: 9073,
+    mapsIds: [9073],
     videos: [
       {
         type: "125 fps showcase",
@@ -445,7 +445,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_lighthouse_hard",
-    mapId: 15713,
+    mapsIds: [15713],
     videos: [
       {
         type: "125 fps showcase",
@@ -456,7 +456,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_ontherocks_v1.0",
-    mapId: 1771,
+    mapsIds: [1771],
     videos: [
       {
         type: "125 fps fps no grenade",
@@ -467,7 +467,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_dark_portal_250",
-    mapId: 15577,
+    mapsIds: [15577],
     videos: [
       {
         type: "250 fps showcase",
@@ -478,7 +478,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_phil",
-    mapId: 17097,
+    mapsIds: [17097, 17154],
     mapHasRoutes: true,
     videos: [
       {
@@ -497,7 +497,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "7th_jump",
-    mapId: 6545,
+    mapsIds: [6545],
     videos: [
       {
         type: "125 fps showcase",
@@ -508,7 +508,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "kanyewest",
-    mapId: 6265,
+    mapsIds: [6265],
     videos: [
       {
         type: "trailer",
@@ -519,7 +519,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_contrast",
-    mapId: 1702,
+    mapsIds: [1702],
     videos: [
       {
         type: "125 fps tutorial",
@@ -530,7 +530,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_paskvil",
-    mapId: 14606,
+    mapsIds: [14606],
     videos: [
       {
         type: "125 fps showcase",
@@ -541,7 +541,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_pier_250",
-    mapId: 12884,
+    mapsIds: [12884],
     videos: [
       {
         type: "250 fps showcase",
@@ -552,7 +552,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "bitch",
-    mapId: 3778,
+    mapsIds: [3778],
     videos: [
       {
         type: "125 fps no grenade",
@@ -563,7 +563,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_plazma",
-    mapId: 7594,
+    mapsIds: [7594],
     videos: [
       {
         type: "125 fps no grenade",
@@ -574,7 +574,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_plazma",
-    mapId: 16403,
+    mapsIds: [16403],
     videos: [
       {
         type: "125 fps no grenade",
@@ -585,7 +585,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_glass_hard",
-    mapId: 11136,
+    mapsIds: [11136],
     videos: [
       {
         type: "125 fps showcase",
@@ -596,7 +596,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_offices_hard",
-    mapId: 16066,
+    mapsIds: [16066],
     videos: [
       {
         type: "125 fps showcase",
@@ -607,7 +607,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_mega",
-    mapId: 13328,
+    mapsIds: [13328],
     videos: [
       {
         type: "125 fps showcase",
@@ -618,7 +618,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_arch",
-    mapId: 17078,
+    mapsIds: [17078],
     videos: [
       {
         type: "125 fps showcase",
@@ -629,7 +629,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_portal2",
-    mapId: 11880,
+    mapsIds: [11880],
     videos: [
       {
         type: "125 fps showcase",
@@ -640,7 +640,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_residual",
-    mapId: 9714,
+    mapsIds: [9714],
     videos: [
       {
         type: "125 fps showcase",
@@ -651,7 +651,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_jumpers_heaven_hard",
-    mapId: 13283,
+    mapsIds: [13283],
     videos: [
       {
         type: "125 fps showcase",
@@ -662,7 +662,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_contrast_pro",
-    mapId: 22435,
+    mapsIds: [22435],
     videos: [
       {
         type: "125 fps showcase",
@@ -673,7 +673,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_hellrun_hard",
-    mapId: 10191,
+    mapsIds: [10191],
     videos: [
       {
         type: "125 fps showcase",
@@ -684,7 +684,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_alexandria_hard",
-    mapId: 6747,
+    mapsIds: [6747],
     videos: [
       {
         type: "125 fps showcase",
@@ -695,7 +695,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_heaven_and_hell",
-    mapId: 10064,
+    mapsIds: [10064],
     videos: [
       {
         type: "125 fps showcase",
@@ -706,7 +706,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_cruise_hard",
-    mapId: 15831,
+    mapsIds: [15831],
     videos: [
       {
         type: "125 fps showcase",
@@ -717,7 +717,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_warmup",
-    mapId: 23698,
+    mapsIds: [23698],
     videos: [
       {
         type: "125 fps showcase",
@@ -728,7 +728,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_pier_pro",
-    mapId: 12304,
+    mapsIds: [12304],
     videos: [
       {
         type: "125 fps showcase",
@@ -739,7 +739,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "ultra_gap_training",
-    mapId: 6082,
+    mapsIds: [6082],
     videos: [
       {
         type: "125 tutorial",
@@ -755,7 +755,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_legomania",
-    mapId: 14556,
+    mapsIds: [14556],
     videos: [
       {
         type: "125 fps showcase",
@@ -766,7 +766,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "j4l_raceland",
-    mapId: 2040,
+    mapsIds: [2040],
     videos: [
       {
         type: "125 fps showcase",
@@ -777,7 +777,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_pyramid",
-    mapId: 1775,
+    mapsIds: [1775],
     videos: [
       {
         type: "125 fps showcase",
@@ -788,7 +788,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_unique",
-    mapId: 2683,
+    mapsIds: [2683],
     videos: [
       {
         type: "125 fps showcase",
@@ -799,7 +799,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_blowed_easy",
-    mapId: 2805,
+    mapsIds: [2805],
     videos: [
       {
         type: "125 fps showcase",
@@ -810,7 +810,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "eplay_house",
-    mapId: 2100,
+    mapsIds: [2100],
     videos: [
       {
         type: "125 fps showcase",
@@ -821,7 +821,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "svt_stronghold_easy",
-    mapId: 1798,
+    mapsIds: [1798],
     videos: [
       {
         type: "125 fps showcase",
@@ -832,7 +832,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_unique",
-    mapId: 2683,
+    mapsIds: [2683],
     videos: [
       {
         type: "125 fps showcase",
@@ -843,7 +843,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_d-jump",
-    mapId: 1749,
+    mapsIds: [1749],
     videos: [
       {
         type: "125 fps showcase",
@@ -854,7 +854,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_fastend",
-    mapId: 1754,
+    mapsIds: [1754],
     videos: [
       {
         type: "125 fps showcase",
@@ -865,7 +865,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_jump_arena",
-    mapId: 6317,
+    mapsIds: [6317],
     videos: [
       {
         type: "125 fps showcase",
@@ -876,7 +876,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "sc_telijump",
-    mapId: 1797,
+    mapsIds: [1797],
     videos: [
       {
         type: "125 fps showcase",
@@ -887,7 +887,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "railyard_jump_light",
-    mapId: 1794,
+    mapsIds: [1794],
     videos: [
       {
         type: "125 fps showcase",
@@ -898,7 +898,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_highgrass",
-    mapId: 3639,
+    mapsIds: [3639],
     videos: [
       {
         type: "125 fps showcase",
@@ -909,7 +909,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_free_fall",
-    mapId: 1755,
+    mapsIds: [1755],
     videos: [
       {
         type: "125 fps showcase",
@@ -920,7 +920,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "railyard_jump_hard",
-    mapId: 1793,
+    mapsIds: [1793],
     videos: [
       {
         type: "125 fps showcase",
@@ -931,7 +931,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_strange_ways",
-    mapId: 3244,
+    mapsIds: [3244],
     videos: [
       {
         type: "125 fps showcase",
@@ -942,7 +942,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_state",
-    mapId: 1737,
+    mapsIds: [1737],
     videos: [
       {
         type: "125 fps showcase",
@@ -953,7 +953,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "j4l_baseton",
-    mapId: 8598,
+    mapsIds: [8598],
     videos: [
       {
         type: "125 fps touchpad showcase",
@@ -964,7 +964,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_renaissance_hard",
-    mapId: 11109,
+    mapsIds: [11109],
     videos: [
       {
         type: "125 fps speedrun",
@@ -975,7 +975,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_jump",
-    mapId: 4928,
+    mapsIds: [4928],
     videos: [
       {
         type: "125 fps showcase",
@@ -986,7 +986,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_bouncejump_hard",
-    mapId: 3940,
+    mapsIds: [3940],
     videos: [
       {
         type: "125 fps showcase",
@@ -997,7 +997,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_ssirhc_easy",
-    mapId: 1735,
+    mapsIds: [1735],
     videos: [
       {
         type: "125 fps showcase",
@@ -1008,7 +1008,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_toilet",
-    mapId: 1788,
+    mapsIds: [1788],
     videos: [
       {
         type: "125 fps showcase",
@@ -1019,7 +1019,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_prisonbreak",
-    mapId: 1773,
+    mapsIds: [1773],
     videos: [
       {
         type: "125 fps showcase",
@@ -1030,7 +1030,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_race_easy",
-    mapId: 5768,
+    mapsIds: [5768],
     videos: [
       {
         type: "125 fps showcase",
@@ -1041,7 +1041,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_bouncejump_easy",
-    mapId: 3924,
+    mapsIds: [3924],
     videos: [
       {
         type: "125 fps showcase",
@@ -1052,7 +1052,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "jm_gardenv2",
-    mapId: 4038,
+    mapsIds: [4038],
     videos: [
       {
         type: "125 fps showcase",
@@ -1063,7 +1063,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "fun_playhouse",
-    mapId: 3788,
+    mapsIds: [3788],
     videos: [
       {
         type: "125 fps showcase",
@@ -1074,7 +1074,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_scjump",
-    mapId: 1776,
+    mapsIds: [1776],
     videos: [
       {
         type: "125 fps showcase",
@@ -1085,7 +1085,7 @@ export const MAPS_VIDEOS = [
   },
   {
     mapName: "mp_cards",
-    mapId: 22339,
+    mapsIds: [22339],
     mapHasRoutes: true,
     videos: [
       {
@@ -1108,15 +1108,4 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
-  // {
-  //   mapName: "",
-  //   mapId: 0,
-  //   videos: [
-  //     {
-  //       type: "125 fps showcase",
-  //       videoUrl: "",
-  //       id: 1,
-  //     },
-  //   ],
-  // },
 ];
