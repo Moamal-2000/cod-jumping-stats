@@ -324,7 +324,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "250 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=JV8nSUvxuig&t=9s",
+        videoUrl: "https://www.youtube.com/watch?v=JV8nSUvxuig",
         id: 1,
       },
     ],
@@ -653,7 +653,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=qrldbVYi2zA&t=1s",
+        videoUrl: "https://www.youtube.com/watch?v=qrldbVYi2zA",
         id: 1,
       },
     ],
@@ -664,7 +664,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=-PTeYyyPYOs&t=53s",
+        videoUrl: "https://www.youtube.com/watch?v=-PTeYyyPYOs",
         id: 1,
       },
     ],
@@ -675,7 +675,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=PZCjbTDAVSY&t=616s",
+        videoUrl: "https://www.youtube.com/watch?v=PZCjbTDAVSY",
         id: 1,
       },
     ],
@@ -697,7 +697,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=Ikm3L_1BX5E&t=22s",
+        videoUrl: "https://www.youtube.com/watch?v=Ikm3L_1BX5E",
         id: 1,
       },
     ],
@@ -721,7 +721,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=4ORBHw2Trxo&t=318s",
+        videoUrl: "https://www.youtube.com/watch?v=4ORBHw2Trxo",
         id: 1,
       },
     ],
@@ -769,7 +769,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=X9cGJEVShAI&t=40s",
+        videoUrl: "https://www.youtube.com/watch?v=X9cGJEVShAI",
         id: 1,
       },
     ],
@@ -781,7 +781,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 tutorial",
-        videoUrl: "https://www.youtube.com/watch?v=Hk52T2-ASoY&t=659s",
+        videoUrl: "https://www.youtube.com/watch?v=Hk52T2-ASoY",
         route: "251",
         id: 1,
       },
@@ -799,7 +799,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=yAd044053Gg&t=260s",
+        videoUrl: "https://www.youtube.com/watch?v=yAd044053Gg",
         id: 1,
       },
     ],
@@ -810,7 +810,7 @@ export const MAPS_VIDEOS = [
     videos: [
       {
         type: "125 fps showcase",
-        videoUrl: "https://www.youtube.com/watch?v=YyqatvmCWhs&t=339s",
+        videoUrl: "https://www.youtube.com/watch?v=YyqatvmCWhs",
         id: 1,
       },
     ],
