@@ -8,6 +8,22 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=_EOjiEGgqGE",
         id: 1,
       },
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=_cH-JyqFdRM",
+        id: 2,
+      },
+    ],
+  },
+  {
+    mapName: "1m9055186e",
+    mapId: 15515,
+    videos: [
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=ENiscEDy1ug",
+        id: 1,
+      },
     ],
   },
   {
@@ -344,6 +360,11 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=p2kWnrkG0xc",
         id: 2,
       },
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=9c2FxgOQNdM",
+        id: 3,
+      },
     ],
   },
   {
@@ -365,6 +386,11 @@ export const MAPS_VIDEOS = [
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=7mK_3V8ZpFo",
         id: 1,
+      },
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=J_iwd6sYloM",
+        id: 2,
       },
     ],
   },
@@ -460,6 +486,12 @@ export const MAPS_VIDEOS = [
         route: "Easy",
         videoUrl: "https://www.youtube.com/watch?v=8RCGO-UwGxo",
         id: 1,
+      },
+      {
+        type: "250 fps speedrun",
+        route: "Extreme",
+        videoUrl: "https://www.youtube.com/watch?v=3IH8R_6yUJU",
+        id: 2,
       },
     ],
   },
@@ -1048,6 +1080,31 @@ export const MAPS_VIDEOS = [
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=BXCZFykGO7g",
         id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_cards",
+    mapId: 22339,
+    mapHasRoutes: true,
+    videos: [
+      {
+        type: "250 fps speedrun",
+        route: "Easy",
+        videoUrl: "https://www.youtube.com/watch?v=uDFVFTtAUs4",
+        id: 1,
+      },
+      {
+        type: "250 fps speedrun",
+        route: "Hard",
+        videoUrl: "https://www.youtube.com/watch?v=uDFVFTtAUs4&t=292s",
+        id: 2,
+      },
+      {
+        type: "250 fps speedrun",
+        route: "Insane",
+        videoUrl: "https://www.youtube.com/watch?v=uDFVFTtAUs4&t=462s",
+        id: 3,
       },
     ],
   },
