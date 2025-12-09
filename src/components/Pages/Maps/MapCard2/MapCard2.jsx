@@ -1,8 +1,8 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
-import { JUMP_FPS } from "@/data/constants";
 import { formateReleaseDate, getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
 import { memo } from "react";
+import MapDifficulties from "../MapCard/MapDifficulties/MapDifficulties";
 import s from "./MapCard2.module.scss";
 
 const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
@@ -44,23 +44,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           )}
         </Link>
 
-        <div className={s.difficultySection}>
-          <span className={s.difficultyLabel}>Difficulties</span>
-          <div className={s.fpsDifficulties}>
-            {JUMP_FPS.map((fps) => {
-              return (
-                <div key={fps} className={s.fpsDifficulty}>
-                  <span className={s.fps}>{fps}</span>
-                  <span className={s.difficulty}>
-                    {Difficulty?.[fps]?.Difficulty < 0
-                      ? "???"
-                      : Number(Difficulty?.[fps]?.Difficulty)?.toFixed(2)}
-                  </span>
-                </div>
-              );
-            })}
-          </div>
-        </div>
+        <MapDifficulties Difficulty={Difficulty} />
 
         <div className={s.classifications}>
           {Classifications?.map((text, index) => (
