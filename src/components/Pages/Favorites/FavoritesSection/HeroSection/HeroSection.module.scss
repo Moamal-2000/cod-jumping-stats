@@ -1,16 +1,9 @@
 @use "@/styles/mixins" as m;
 
 .hero {
-  position: relative;
   text-align: center;
-  padding: 48px 24px;
-  margin-bottom: 32px;
-  background: linear-gradient(135deg,
-      rgba(17, 24, 39, 0.8) 0%,
-      rgba(17, 24, 39, 0.4) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  border-radius: 20px;
-  overflow: hidden;
+  max-width: 480px;
+  margin: 0 auto 32px;
 
   @include m.small {
     padding: 32px 20px;
@@ -19,36 +12,17 @@
   }
 }
 
-.content {
-  position: relative;
-  z-index: 1;
-}
-
-.iconWrapper {
-  display: inline-flex;
+.titleWrapper {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 72px;
-  height: 72px;
-  background: linear-gradient(135deg,
-      rgba(250, 204, 21, 0.15) 0%,
-      rgba(250, 204, 21, 0.05) 100%);
-  border: 1px solid rgba(250, 204, 21, 0.2);
-  border-radius: 18px;
-  margin-bottom: 20px;
-
-  @include m.small {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    margin-bottom: 16px;
-  }
+  gap: 16px;
 }
 
 .icon {
-  width: 32px;
-  height: 32px;
-  color: #facc15;
+  width: 30px;
+  height: 30px;
+  translate: 0 -3px;
   fill: #facc15;
 
   @include m.small {
@@ -81,23 +55,5 @@
   @include m.small {
     font-size: 0.95rem;
     margin-bottom: 24px;
-  }
-}
-
-.backgroundGlow {
-  position: absolute;
-  top: -50%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 600px;
-  height: 400px;
-  background: radial-gradient(ellipse at center,
-      rgba(250, 204, 21, 0.08) 0%,
-      transparent 70%);
-  pointer-events: none;
-
-  @include m.small {
-    width: 400px;
-    height: 300px;
   }
 }
