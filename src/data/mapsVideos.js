@@ -685,9 +685,14 @@ export const MAPS_VIDEOS = [
     mapsIds: [10191],
     videos: [
       {
-        type: "125 fps showcase",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=MvWbuDB66OA",
         id: 1,
+      },
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=ihok1BWQ3r8",
+        id: 2,
       },
     ],
   },
@@ -1145,6 +1150,17 @@ export const MAPS_VIDEOS = [
         route: "Insane",
         videoUrl: "https://www.youtube.com/watch?v=uDFVFTtAUs4&t=462s",
         id: 3,
+      },
+    ],
+  },
+  {
+    mapName: "mp_jump_hard",
+    mapsIds: [12995],
+    videos: [
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=kvOL96Ju4F4",
+        id: 1,
       },
     ],
   },
