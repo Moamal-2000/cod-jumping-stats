@@ -15,7 +15,7 @@ const EmptyState = ({ type }) => {
       <h3 className={s.title}>{title}</h3>
       <p className={s.description}>{description}</p>
 
-      <Link href={linkHref} className={s.ctaButton}>
+      <Link href={linkHref} className={s.browseLink}>
         <svg className={s.ctaIcon} aria-hidden="true">
           <use href={`/icons-sprite.svg#${icon}`} />
         </svg>
