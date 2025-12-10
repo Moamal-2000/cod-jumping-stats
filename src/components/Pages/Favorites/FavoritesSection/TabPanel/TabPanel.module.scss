@@ -1,0 +1,34 @@
+.panel {
+  position: relative;
+  min-height: 400px;
+  animation: fadeIn 0.25s ease-out;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgba(250, 204, 21, 0.3);
+    outline-offset: 4px;
+    border-radius: 8px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}

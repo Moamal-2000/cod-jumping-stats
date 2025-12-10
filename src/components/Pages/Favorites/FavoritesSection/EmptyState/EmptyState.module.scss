@@ -1,0 +1,133 @@
+@use "@/styles/mixins" as m;
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 64px 24px;
+  min-height: 400px;
+  background: linear-gradient(135deg, rgba(17, 24, 39, 0.6) 0%, rgba(17, 24, 39, 0.3) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+
+  @include m.small {
+    padding: 48px 20px;
+    min-height: 320px;
+  }
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(250, 204, 21, 0.05) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.15);
+  border-radius: 20px;
+  margin-bottom: 24px;
+
+  @include m.small {
+    width: 64px;
+    height: 64px;
+    border-radius: 16px;
+    margin-bottom: 20px;
+  }
+}
+
+.icon {
+  width: 36px;
+  height: 36px;
+  color: #facc15;
+  fill: #facc15;
+  opacity: 0.9;
+
+  @include m.small {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #f9fafb;
+  margin: 0 0 12px;
+  line-height: 1.3;
+
+  @include m.small {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+}
+
+.description {
+  font-size: 1rem;
+  color: #9ca3af;
+  max-width: 320px;
+  margin: 0 0 32px;
+  line-height: 1.6;
+
+  @include m.small {
+    font-size: 0.9rem;
+    margin-bottom: 24px;
+  }
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 28px;
+  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  color: #0f172a;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: 10px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(250, 204, 21, 0.2);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(250, 204, 21, 0.3);
+  }
+
+  &:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+
+  @include m.small {
+    padding: 12px 24px;
+    font-size: 0.9rem;
+  }
+}
+
+.ctaIcon {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+
+  @include m.small {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .ctaButton {
+    transition: none;
+
+    &:hover {
+      transform: none;
+    }
+  }
+}

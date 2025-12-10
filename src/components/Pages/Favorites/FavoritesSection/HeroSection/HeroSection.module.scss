@@ -1,0 +1,175 @@
+@use "@/styles/mixins" as m;
+
+.hero {
+  position: relative;
+  text-align: center;
+  padding: 48px 24px;
+  margin-bottom: 32px;
+  background: linear-gradient(135deg,
+      rgba(17, 24, 39, 0.8) 0%,
+      rgba(17, 24, 39, 0.4) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  overflow: hidden;
+
+  @include m.small {
+    padding: 32px 20px;
+    margin-bottom: 24px;
+    border-radius: 16px;
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+}
+
+.iconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: linear-gradient(135deg,
+      rgba(250, 204, 21, 0.15) 0%,
+      rgba(250, 204, 21, 0.05) 100%);
+  border: 1px solid rgba(250, 204, 21, 0.2);
+  border-radius: 18px;
+  margin-bottom: 20px;
+
+  @include m.small {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    margin-bottom: 16px;
+  }
+}
+
+.icon {
+  width: 32px;
+  height: 32px;
+  color: #facc15;
+  fill: #facc15;
+
+  @include m.small {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #f9fafb;
+  margin: 0 0 12px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+
+  @include m.small {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+  }
+}
+
+.description {
+  font-size: 1.05rem;
+  color: #9ca3af;
+  max-width: 480px;
+  margin: 0 auto 32px;
+  line-height: 1.6;
+
+  @include m.small {
+    font-size: 0.95rem;
+    margin-bottom: 24px;
+  }
+}
+
+.stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 32px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+
+  @include m.small {
+    gap: 16px;
+    padding: 12px 20px;
+    border-radius: 12px;
+  }
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.statIcon {
+  width: 20px;
+  height: 20px;
+  color: #facc15;
+  fill: #facc15;
+  margin-bottom: 4px;
+
+  @include m.small {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f9fafb;
+  line-height: 1;
+
+  @include m.small {
+    font-size: 1.25rem;
+  }
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+
+  @include m.small {
+    font-size: 0.7rem;
+  }
+}
+
+.divider {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(180deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.1) 50%,
+      transparent 100%);
+
+  @include m.small {
+    height: 32px;
+  }
+}
+
+.backgroundGlow {
+  position: absolute;
+  top: -50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse at center,
+      rgba(250, 204, 21, 0.08) 0%,
+      transparent 70%);
+  pointer-events: none;
+
+  @include m.small {
+    width: 400px;
+    height: 300px;
+  }
+}
