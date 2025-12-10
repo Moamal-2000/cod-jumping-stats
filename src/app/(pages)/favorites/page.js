@@ -1,4 +1,5 @@
 import FavoritesSection from "@/components/Pages/Favorites/FavoritesSection/FavoritesSection";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Favorites | JumpersHeaven",
@@ -6,7 +7,11 @@ export const metadata = {
 };
 
 const FavoritesPage = () => {
-  return <FavoritesSection />;
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <FavoritesSection />
+    </Suspense>
+  );
 };
 
 export default FavoritesPage;
