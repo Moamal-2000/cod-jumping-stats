@@ -6,16 +6,12 @@
   margin: 0 auto 32px;
 
   @include m.small {
-    padding: 32px 20px;
     margin-bottom: 24px;
-    border-radius: 16px;
   }
 }
 
 .titleWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.center-x-y;
   gap: 16px;
 }
 
@@ -35,9 +31,9 @@
   font-size: 2rem;
   font-weight: 700;
   color: #f9fafb;
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   line-height: 1.2;
-  letter-spacing: -0.02em;
+  letter-spacing: -.02em;
 
   @include m.small {
     font-size: 1.5rem;
@@ -48,12 +44,11 @@
 .description {
   font-size: 1.05rem;
   color: #9ca3af;
-  max-width: 480px;
   margin: 0 auto 32px;
   line-height: 1.6;
 
   @include m.small {
-    font-size: 0.95rem;
+    font-size: .95rem;
     margin-bottom: 24px;
   }
 }
