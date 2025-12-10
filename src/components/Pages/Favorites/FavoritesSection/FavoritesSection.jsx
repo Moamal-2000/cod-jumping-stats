@@ -70,7 +70,7 @@ const FavoritesSection = () => {
   ];
 
   return (
-    <div className={s.favorites}>
+    <main className={s.favorites}>
       <div className="container" data-container>
         <HeroSection
           mapsCount={favMaps.length}
@@ -123,7 +123,7 @@ const FavoritesSection = () => {
           )}
         </TabPanel>
       </div>
-    </div>
+    </main>
   );
 };
 
