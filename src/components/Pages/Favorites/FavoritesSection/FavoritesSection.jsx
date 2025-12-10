@@ -1,7 +1,7 @@
 "use client";
 
 import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
-import { createQueryString } from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -34,8 +34,11 @@ const FavoritesSection = () => {
   const mapsCount = favMaps.length;
   const playersCount = favPlayers.length;
 
-  const handleTabChange = (tabId) => {
+  function handleTabChange(tabId) {
     createQueryString("tab", tabId, searchParams, router, pathname);
+
+    if (tabId === "maps")
+      removeQueryString("tab", searchParams, router, pathname);
   };
 
   useEffect(() => {
