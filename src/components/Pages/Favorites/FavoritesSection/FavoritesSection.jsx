@@ -59,7 +59,7 @@ const FavoritesSection = () => {
   return (
     <main className={s.favorites}>
       <div className="container" data-container>
-        <HeroSection mapsCount={mapsCount} playersCount={playersCount} />
+        <HeroSection />
 
         <Tabs
           tabs={tabs({ mapsCount, playersCount })}
