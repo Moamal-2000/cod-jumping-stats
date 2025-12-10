@@ -1,33 +1,7 @@
 import Link from "next/link";
 import s from "./EmptyState.module.scss";
 
-/**
- * Empty state component for when no favorites exist.
- * Displays a friendly message with a call-to-action link.
- *
- * @param {Object} props
- * @param {string} props.type - Either 'maps' or 'players'
- */
 const EmptyState = ({ type }) => {
-  const config = {
-    maps: {
-      icon: "map",
-      title: "No favorite maps yet",
-      description:
-        "Start exploring maps and add your favorites to see them here.",
-      linkText: "Browse Maps",
-      linkHref: "/maps",
-    },
-    players: {
-      icon: "users",
-      title: "No favorite players yet",
-      description:
-        "Discover players and add your favorites to track them here.",
-      linkText: "Browse Players",
-      linkHref: "/players",
-    },
-  };
-
   const { icon, title, description, linkText, linkHref } = config[type];
 
   return (
@@ -52,3 +26,21 @@ const EmptyState = ({ type }) => {
 };
 
 export default EmptyState;
+
+const config = {
+  maps: {
+    icon: "map",
+    title: "No favorite maps yet",
+    description:
+      "Start exploring maps and add your favorites to see them here.",
+    linkText: "Browse Maps",
+    linkHref: "/maps",
+  },
+  players: {
+    icon: "users",
+    title: "No favorite players yet",
+    description: "Discover players and add your favorites to track them here.",
+    linkText: "Browse Players",
+    linkHref: "/players",
+  },
+};
