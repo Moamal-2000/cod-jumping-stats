@@ -1,6 +1,7 @@
 .panel {
   position: relative;
   min-height: 400px;
+  margin-bottom: 64px;
   animation: fadeIn 0.25s ease-out;
 
   &:focus {
