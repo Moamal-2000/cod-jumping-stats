@@ -39,21 +39,13 @@ const FavoritesSection = () => {
   };
 
   useEffect(() => {
-    if (allMaps.length <= 0) dispatch(fetchMaps());
-    if (allPlayersData.length <= 0) dispatch(fetchAllPlayers());
-
-    const favoritesLocal = localStorage.getItem("favorites");
-    const favorites = JSON.parse(favoritesLocal);
-
-    const filteredFavMaps = allMaps.filter((map) =>
-      favorites.mapsIds.includes(map.CpID)
-    );
-    const filteredFavPlayers = allPlayersData.filter((player) => {
-      return favorites.playersIds.includes(player.PlayerID);
+    loadFavorites({
+      allMaps,
+      allPlayersData,
+      setFavMaps,
+      setFavPlayers,
+      dispatch,
     });
-
-    setFavMaps(filteredFavMaps);
-    setFavPlayers(filteredFavPlayers);
   }, [allMaps, allPlayersData]);
 
   return (
@@ -122,3 +114,27 @@ const tabs = ({ mapsCount, playersCount }) => [
   { id: "maps", label: "Maps", icon: "map", count: mapsCount },
   { id: "players", label: "Players", icon: "users", count: playersCount },
 ];
+
+function loadFavorites({
+  allMaps,
+  allPlayersData,
+  setFavMaps,
+  setFavPlayers,
+  dispatch,
+} = {}) {
+  if (allMaps.length <= 0) dispatch(fetchMaps());
+  if (allPlayersData.length <= 0) dispatch(fetchAllPlayers());
+
+  const favoritesLocal = localStorage.getItem("favorites");
+  const favorites = JSON.parse(favoritesLocal);
+
+  const filteredFavMaps = allMaps.filter((map) =>
+    favorites.mapsIds.includes(map.CpID)
+  );
+  const filteredFavPlayers = allPlayersData.filter((player) =>
+    favorites.playersIds.includes(player.PlayerID)
+  );
+
+  setFavMaps(filteredFavMaps);
+  setFavPlayers(filteredFavPlayers);
+}
