@@ -1,56 +1,10 @@
 "use client";
 
-import { useCallback, useRef } from "react";
+import { useRef } from "react";
 import s from "./Tabs.module.scss";
 
-/**
- * Accessible tabs component with keyboard navigation.
- * Follows WAI-ARIA Tabs Pattern for full accessibility.
- *
- * @param {Object} props
- * @param {Array} props.tabs - Array of tab objects with id, label, icon, and count
- * @param {string} props.activeTab - Currently active tab id
- * @param {Function} props.onTabChange - Callback when tab changes
- * @param {string} props.ariaLabel - Accessible label for the tablist
- */
 const Tabs = ({ tabs, activeTab, onTabChange, ariaLabel = "Content tabs" }) => {
   const tabRefs = useRef({});
-
-  /**
-   * Handle keyboard navigation between tabs
-   */
-  const handleKeyDown = useCallback(
-    (event, currentIndex) => {
-      const tabIds = tabs.map((tab) => tab.id);
-      let newIndex = currentIndex;
-
-      switch (event.key) {
-        case "ArrowLeft":
-          event.preventDefault();
-          newIndex = currentIndex > 0 ? currentIndex - 1 : tabs.length - 1;
-          break;
-        case "ArrowRight":
-          event.preventDefault();
-          newIndex = currentIndex < tabs.length - 1 ? currentIndex + 1 : 0;
-          break;
-        case "Home":
-          event.preventDefault();
-          newIndex = 0;
-          break;
-        case "End":
-          event.preventDefault();
-          newIndex = tabs.length - 1;
-          break;
-        default:
-          return;
-      }
-
-      const newTabId = tabIds[newIndex];
-      onTabChange(newTabId);
-      tabRefs.current[newTabId]?.focus();
-    },
-    [tabs, onTabChange]
-  );
 
   return (
     <nav className={s.tabsNav} role="tablist" aria-label={ariaLabel}>
@@ -59,16 +13,18 @@ const Tabs = ({ tabs, activeTab, onTabChange, ariaLabel = "Content tabs" }) => {
 
         return (
           <button
+            className={`${s.tab} ${isActive ? s.active : ""}`}
             key={tab.id}
-            ref={(el) => (tabRefs.current[tab.id] = el)}
-            role="tab"
             id={`tab-${tab.id}`}
+            role="tab"
             aria-selected={isActive}
             aria-controls={`panel-${tab.id}`}
             tabIndex={isActive ? 0 : -1}
-            className={`${s.tab} ${isActive ? s.active : ""}`}
+            ref={(el) => (tabRefs.current[tab.id] = el)}
             onClick={() => onTabChange(tab.id)}
-            onKeyDown={(e) => handleKeyDown(e, index)}
+            onKeyDown={(event) =>
+              handleKeyDown({ event, index, tabs, tabRefs, onTabChange })
+            }
           >
             {tab.icon && (
               <svg className={s.icon} aria-hidden="true">
@@ -89,3 +45,31 @@ const Tabs = ({ tabs, activeTab, onTabChange, ariaLabel = "Content tabs" }) => {
 };
 
 export default Tabs;
+
+function handleKeyDown({ event, index, tabs, tabRefs, onTabChange } = {}) {
+  const tabIds = tabs.map((tab) => tab.id);
+  let newIndex = index;
+
+  event.preventDefault();
+
+  switch (event.key) {
+    case "ArrowLeft":
+      newIndex = index > 0 ? index - 1 : tabs.length - 1;
+      break;
+    case "ArrowRight":
+      newIndex = index < tabs.length - 1 ? index + 1 : 0;
+      break;
+    case "Home":
+      newIndex = 0;
+      break;
+    case "End":
+      newIndex = tabs.length - 1;
+      break;
+    default:
+      return;
+  }
+
+  const newTabId = tabIds[newIndex];
+  onTabChange(newTabId);
+  tabRefs.current[newTabId]?.focus();
+}
