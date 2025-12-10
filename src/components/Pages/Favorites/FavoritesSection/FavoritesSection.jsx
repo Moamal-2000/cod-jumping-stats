@@ -17,10 +17,10 @@ import TabPanel from "./TabPanel/TabPanel";
 import Tabs from "./Tabs/Tabs";
 
 const FavoritesSection = () => {
-  const allMaps = useSelector((s) => s.maps.allMaps);
-  const mapsLoading = useSelector((s) => s.maps.loading);
-  const allPlayersData = useSelector((s) => s.players.allPlayersData);
-  const playersLoading = useSelector((s) => s.players.loading);
+  const { allMaps, loading: mapsLoading } = useSelector((s) => s.maps);
+  const { allPlayersData, loading: playersLoading } = useSelector(
+    (s) => s.players
+  );
 
   const [favMaps, setFavMaps] = useState([]);
   const [favPlayers, setFavPlayers] = useState([]);
@@ -31,6 +31,8 @@ const FavoritesSection = () => {
   const dispatch = useDispatch();
 
   const activeTab = searchParams.get("tab") || "maps";
+  const mapsCount = favMaps.length;
+  const playersCount = favPlayers.length;
 
   const handleTabChange = (tabId) => {
     createQueryString("tab", tabId, searchParams, router, pathname);
@@ -54,45 +56,28 @@ const FavoritesSection = () => {
     setFavPlayers(filteredFavPlayers);
   }, [allMaps, allPlayersData]);
 
-  const tabs = [
-    {
-      id: "maps",
-      label: "Maps",
-      icon: "map",
-      count: favMaps.length,
-    },
-    {
-      id: "players",
-      label: "Players",
-      icon: "users",
-      count: favPlayers.length,
-    },
-  ];
-
   return (
     <main className={s.favorites}>
       <div className="container" data-container>
-        <HeroSection
-          mapsCount={favMaps.length}
-          playersCount={favPlayers.length}
-        />
+        <HeroSection mapsCount={mapsCount} playersCount={playersCount} />
 
         <Tabs
-          tabs={tabs}
+          tabs={tabs({ mapsCount, playersCount })}
           activeTab={activeTab}
           onTabChange={handleTabChange}
           ariaLabel="Favorites navigation"
         />
 
         <TabPanel id="maps" isActive={activeTab === "maps"}>
-          {mapsLoading ? (
+          {mapsLoading && (
             <SpinnerLoader
               title="Loading Maps"
               description="Fetching your favorite maps..."
             />
-          ) : favMaps.length === 0 ? (
-            <EmptyState type="maps" />
-          ) : (
+          )}
+          {!mapsLoading && favMaps.length === 0 && <EmptyState type="maps" />}
+
+          {!mapsLoading && favMaps.length > 0 && (
             <FavoritesGrid variant="maps">
               {favMaps.map((map, index) => (
                 <MapCard
@@ -107,14 +92,18 @@ const FavoritesSection = () => {
         </TabPanel>
 
         <TabPanel id="players" isActive={activeTab === "players"}>
-          {playersLoading ? (
+          {playersLoading && (
             <SpinnerLoader
               title="Loading Players"
               description="Fetching your favorite players..."
             />
-          ) : favPlayers.length === 0 ? (
+          )}
+
+          {!playersLoading && favPlayers.length === 0 && (
             <EmptyState type="players" />
-          ) : (
+          )}
+
+          {!playersLoading && favPlayers.length > 0 && (
             <FavoritesGrid variant="players">
               {favPlayers.map((player) => (
                 <PlayerCard key={player.PlayerID} {...player} />
@@ -128,3 +117,8 @@ const FavoritesSection = () => {
 };
 
 export default FavoritesSection;
+
+const tabs = ({ mapsCount, playersCount }) => [
+  { id: "maps", label: "Maps", icon: "map", count: mapsCount },
+  { id: "players", label: "Players", icon: "users", count: playersCount },
+];
