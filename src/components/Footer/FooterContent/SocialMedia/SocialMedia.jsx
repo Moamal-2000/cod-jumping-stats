@@ -14,7 +14,7 @@ const SocialMedia = () => {
             <a
               href={link}
               target="_blank"
-              title={iconName}
+              title={iconName === "github" ? 'Star us on GitHub' : iconName}
               data-icon={iconName}
             >
               <svg aria-hidden="true">
