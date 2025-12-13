@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/readme-logo.png" alt="Golden Jumpers Heaven Logo" width="460" height="460" />
+  <img src="public/readme-logo.webp" alt="Golden Jumpers Heaven Logo" width="460" height="460" />
   <br />
 </div>
 
