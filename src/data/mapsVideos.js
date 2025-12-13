@@ -1180,4 +1180,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "mp_d-cow_v2_hard",
+    mapsIds: [10448],
+    videos: [
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=ZA2Xq8Xr5_U",
+        id: 1,
+      },
+    ],
+  },
 ];
