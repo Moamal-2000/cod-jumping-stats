@@ -1164,4 +1164,20 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "macitest2",
+    mapsIds: [15590],
+    videos: [
+      {
+        type: "250 fps no grenades",
+        videoUrl: "https://www.youtube.com/watch?v=Tjqj1EzTdIs",
+        id: 1,
+      },
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=0e32aU0W_I4",
+        id: 2,
+      },
+    ],
+  },
 ];
