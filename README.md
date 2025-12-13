@@ -1,12 +1,13 @@
 <div align="center">
-  <img src="public/readme-logo.png" alt="Golden Jumpers Heaven Logo" />
+  <img src="public/readme-logo.png" alt="Golden Jumpers Heaven Logo" width="460" height="460" />
   <br />
   <br />
 </div>
 
-# Jumpers Heaven Statistics
+<h1 align="center" >Jumpers Heaven Statistics</h1>
+<br />
 
-**Jumpers Heaven Statistics** is a modern, high-performance web application designed to track and display statistics for the <a href="https://jumpersheaven.com">Jumpers Heaven</a> community. Built with Next.js and React, it provides real-time insights into server status, player rankings, map records, and more.
+**Jumpers Heaven Statistics** is a modern, high-performance web application designed to track and display statistics for the <a href="https://jumpersheaven.com">Jumpers Heaven</a> community. Built with Next.js, it provides real-time insights into server status, player rankings, map records, and more.
 
 ---
 
@@ -15,7 +16,7 @@
 - **Server Browser**: View active servers, current players, and map details in real-time.
 - **Global Leaderboards**: comprehensive rankings for players across all maps and modes.
 - **Map Statistics**: Detailed records and best times for individual maps.
-- **Player Profiles**: In-depth player stats, including personal bests, recent activity, and favorites.
+- **Player Profiles**: In-depth player stats, including personal bests, recent activity.
 - **Favorites System**: Personalized tracking for favorite maps and players.
 - **Scoring System**: Transparent explanation of how points and ranks are calculated.
 - **Responsive Design**: Optimized for a seamless experience on both desktop and mobile devices.
@@ -23,7 +24,6 @@
 ## Tech Stack
 
 - **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
-- **UI Library**: [React 19](https://react.dev/)
 - **State Management**: [Redux Toolkit](https://redux-toolkit.js.org/)
 - **Styling**: [Sass](https://sass-lang.com/) (SCSS)
 - **Data Serialization**: [MessagePack](https://msgpack.org/) (via `@msgpack/msgpack` & `msgpackr`)
