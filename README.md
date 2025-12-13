@@ -1,7 +1,6 @@
 <div align="center">
   <img src="public/readme-logo.png" alt="Golden Jumpers Heaven Logo" width="460" height="460" />
   <br />
-  <br />
 </div>
 
 <h1 align="center" >Jumpers Heaven Statistics</h1>
