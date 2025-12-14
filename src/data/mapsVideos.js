@@ -1201,5 +1201,16 @@ export const MAPS_VIDEOS = [
         id: 1,
       },
     ],
-  }
+  },
+  {
+    mapName: "mp_colors",
+    mapsIds: [24270],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=gtobkYbf-Ec",
+        id: 1,
+      },
+    ],
+  },
 ];
