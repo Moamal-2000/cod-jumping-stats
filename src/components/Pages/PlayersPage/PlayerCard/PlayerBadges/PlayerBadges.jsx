@@ -1,10 +1,12 @@
 import {
   bugHunterIds,
   contentCreatorIds,
+  contentCreators,
   eventWinnerIds,
   mappersIds,
 } from "@/data/manualBadges";
 import { isActiveWithinWeek } from "@/functions/validation";
+import Link from "next/link";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 
@@ -29,8 +31,25 @@ const PlayerBadges = ({
   return (
     <div className={s.badges}>
       {playerBadgesData.map(
-        ({ id, displayCondition, classes, icon, label, tooltipText }) => {
+        ({ id, displayCondition, classes, icon, label, tooltipText, href }) => {
           if (!displayCondition) return null;
+
+          if (href)
+            return (
+              <Link
+                key={id}
+                className={`${s.badge} ${classes}`}
+                href={href}
+                target="_blank"
+                rel="noopener"
+              >
+                <ToolTip>Visit youtube channel</ToolTip>
+                <svg aria-hidden="true">
+                  <use href={`/icons-sprite.svg#${icon}`}></use>
+                </svg>
+                <span>{label}</span>
+              </Link>
+            );
 
           return (
             <div key={id} className={`${s.badge} ${classes}`}>
@@ -117,6 +136,7 @@ export function getPlayerBadges({
       classes: cssModule.contentCreator,
       icon: "youtube",
       label: "Creator",
+      href: contentCreators.find((c) => c.playerId === PlayerID)?.channelUrl,
       id: 14,
     },
     {
