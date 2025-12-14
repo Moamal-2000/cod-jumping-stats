@@ -4,10 +4,6 @@ export const eventWinnerIds = [
 
 export const bugHunterIds = [1, 7, 108468, 127596];
 
-export const contentCreatorIds = [
-  1, 2, 46, 50, 30216, 46077, 125382, 29950, 123104,
-];
-
 export const mappersIds = [
   1, 2, 6, 7, 10, 33, 34, 46, 201, 625, 318, 545, 550, 2416, 6381, 13694, 2059,
   10159, 19128, 20314, 41299, 46077, 127596, 113380, 115092, 123104, 122405,
@@ -54,3 +50,5 @@ export const contentCreators = [
     channelUrl: "https://www.youtube.com/@deres2358",
   },
 ];
+
+export const contentCreatorIds = contentCreators.map((c) => c.playerId);
