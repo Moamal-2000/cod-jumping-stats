@@ -1191,4 +1191,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "4dmaze",
+    mapsIds: [8452],
+    videos: [
+      {
+        type: "250 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=bBrcWfHvAas",
+        id: 1,
+      },
+    ],
+  }
 ];
