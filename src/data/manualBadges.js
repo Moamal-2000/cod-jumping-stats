@@ -61,6 +61,10 @@ export const contentCreators = [
     playerId: 123318,
     channelUrl: "https://www.youtube.com/@azizmandiraci",
   },
+  {
+    playerId: 109442,
+    channelUrl: "https://www.youtube.com/@neverlucky346",
+  },
 ];
 
 export const contentCreatorIds = contentCreators.map((c) => c.playerId);
