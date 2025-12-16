@@ -40,7 +40,7 @@
   height: 42px;
   border-radius: 6px;
   background-color: #1A202C;
-  @include m.center-x-y;
+  @include m.flex-center;
   border: 1px solid rgba(255, 215, 0, .15);
   transition:
     translate .2s ease,

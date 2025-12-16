@@ -1,7 +1,7 @@
 @use "@/styles/mixins" as m;
 
 .emptyState {
-  @include m.center-x-y;
+  @include m.flex-center;
   flex-direction: column;
   padding: 64px 24px;
   min-height: 400px;
@@ -18,7 +18,7 @@
 }
 
 .iconWrapper {
-  @include m.center-x-y;
+  @include m.flex-center;
   width: 80px;
   height: 80px;
   background: linear-gradient(135deg,

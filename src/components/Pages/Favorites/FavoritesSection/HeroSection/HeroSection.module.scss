@@ -11,7 +11,7 @@
 }
 
 .titleWrapper {
-  @include m.center-x-y;
+  @include m.flex-center;
   gap: 16px;
 }
 
