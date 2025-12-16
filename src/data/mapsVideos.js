@@ -1240,4 +1240,28 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "jm_nostop",
+    mapsIds: [19889],
+    mapHasRoutes: true,
+    videos: [
+      {
+        type: "250 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=dW2_bsvyFRY",
+        route: "Hard",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_special",
+    mapsIds: [5911],
+    videos: [
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Vq7LtDgk9bA",
+        id: 1,
+      },
+    ],
+  },
 ];
