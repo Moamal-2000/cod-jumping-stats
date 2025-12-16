@@ -678,6 +678,11 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=PZCjbTDAVSY",
         id: 1,
       },
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=DjLzkRQlnIw&t=359s",
+        id: 2,
+      },
     ],
   },
   {
@@ -1209,6 +1214,28 @@ export const MAPS_VIDEOS = [
       {
         type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=gtobkYbf-Ec",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "gaap",
+    mapsIds: [7602],
+    videos: [
+      {
+        type: "tutorial",
+        videoUrl: "https://www.youtube.com/watch?v=iFjz_8dPmpA",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_dunnoifposs",
+    mapsIds: [8516],
+    videos: [
+      {
+        type: "250 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=Ew1b82wSPVs",
         id: 1,
       },
     ],
