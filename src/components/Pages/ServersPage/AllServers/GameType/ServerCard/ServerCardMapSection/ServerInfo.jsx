@@ -22,7 +22,7 @@ const ServerInfo = ({ server }) => {
       <div className={s.infoItem}>
         <span className={s.label}>
           <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#globe" />
+            <use href="/icons-sprite.svg#map" />
           </svg>{" "}
           Map
         </span>

@@ -295,7 +295,7 @@
       d="M0 0h1v15h15v1H0zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07" />
   </symbol>
 
-  <symbol id="joystick" width="16" height="16" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
+  <symbol id="joystick" fill="currentColor" class="bi bi-joystick" viewBox="0 0 16 16">
     <path
       d="M10 2a2 2 0 0 1-1.5 1.937v5.087c.863.083 1.5.377 1.5.726 0 .414-.895.75-2 .75s-2-.336-2-.75c0-.35.637-.643 1.5-.726V3.937A2 2 0 1 1 10 2" />
     <path
