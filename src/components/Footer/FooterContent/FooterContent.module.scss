@@ -13,12 +13,8 @@
 }
 
 @include m.small {
-  .contentSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
 
+  .contentSection,
   .contentSection .leftSide {
     display: flex;
     flex-direction: column;
@@ -29,9 +25,8 @@
 .contentSection .leftSide .description {
   font-size: .9rem;
   color: #9CA3AF;
-  margin-bottom: 24px;
-  max-width: 390px;
-  margin-top: 16px;
+  max-width: 400px;
+  margin-block: 16px 24px;
 }
 
 @include m.medium {
