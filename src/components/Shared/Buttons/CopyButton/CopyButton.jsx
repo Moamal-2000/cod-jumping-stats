@@ -4,7 +4,7 @@ import { COPY_BUTTON_DELAY_MS } from "@/data/constants";
 import { useState } from "react";
 import s from "./CopyButton.module.scss";
 
-const CopyButton = ({ copyText, title }) => {
+const CopyButton = ({ textToCopy, title }) => {
   const [isCopied, setIsCopied] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const CopyButton = ({ copyText, title }) => {
       className={s.copyButton}
       title={title}
       type="button"
-      onClick={() => handleClick({ copyText, isCopied, setIsCopied })}
+      onClick={() => handleClick({ textToCopy, isCopied, setIsCopied })}
     >
       <svg aria-hidden="true">
         <use href={`icons-sprite.svg#${isCopied ? "checked" : "copy"}`} />
@@ -23,11 +23,11 @@ const CopyButton = ({ copyText, title }) => {
 
 export default CopyButton;
 
-async function handleClick({ copyText, isCopied, setIsCopied } = {}) {
+async function handleClick({ textToCopy, isCopied, setIsCopied } = {}) {
   if (isCopied) return;
 
   try {
-    navigator.clipboard.writeText(copyText);
+    navigator.clipboard.writeText(textToCopy);
     setIsCopied(true);
 
     setTimeout(() => setIsCopied(false), COPY_BUTTON_DELAY_MS);

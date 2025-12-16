@@ -14,7 +14,7 @@ const ServerCardIp = ({ server }) => {
         </p>
         <CopyButton
           title="Copy server address"
-          copyText={`${server.IP}:${server.Port}`}
+          textToCopy={`${server.IP}:${server.Port}`}
         />
       </div>
     </div>
