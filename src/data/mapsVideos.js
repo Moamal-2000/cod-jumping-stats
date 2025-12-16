@@ -742,31 +742,31 @@ export const MAPS_VIDEOS = [
     mapHasRoutes: true,
     videos: [
       {
-        type: "125 fps sppedrun",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ",
         route: "Easy",
         id: 1,
       },
       {
-        type: "125 fps sppedrun",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=45s",
         route: "Inter",
         id: 5,
       },
       {
-        type: "125 fps sppedrun",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=105s",
         route: "Hard",
         id: 2,
       },
       {
-        type: "125 fps sppedrun",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=214s",
         route: "Extreme",
         id: 3,
       },
       {
-        type: "250 fps sppedrun",
+        type: "250 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Sn2Yn2BVlNQ&t=351s",
         route: "250",
         id: 4,
