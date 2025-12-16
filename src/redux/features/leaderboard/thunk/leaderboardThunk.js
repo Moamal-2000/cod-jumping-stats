@@ -10,10 +10,7 @@ export const fetchLeaderboard = createAsyncThunk(
   async (paramsObject) => {
     try {
       const leaderboardUrl = getLeaderboardUrl(paramsObject);
-      const response = await fetchMsgPackResponse({
-        url: leaderboardUrl,
-        cache: "no-cache",
-      });
+      const response = await fetchMsgPackResponse({ url: leaderboardUrl });
       const leaderboardData = await decodeAsyncData(response);
 
       return { leaderboardData, paramsObject };

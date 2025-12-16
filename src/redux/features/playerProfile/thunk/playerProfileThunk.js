@@ -8,7 +8,6 @@ export const fetchPlayerProfile = createAsyncThunk(
     try {
       const response = await fetchMsgPackResponse({
         url: jhApis({ playerid }).player.getPerformanceStats,
-        cache: "no-cache",
       });
 
       if (!response.ok) {
@@ -38,7 +37,6 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
     try {
       const response = await fetchMsgPackResponse({
         url: jhApis({ playerid }).player.getLeaderboardPositions,
-        cache: "no-cache",
       });
 
       if (!response.ok) {
@@ -69,7 +67,6 @@ export const fetchPlayerJumpScores = createAsyncThunk(
       fps === "mix" ? 0 : fps;
       const response = await fetchMsgPackResponse({
         url: jhApis({ playerid, fps }).player.getJumpScores,
-        cache: "no-cache",
       });
 
       if (!response.ok) {
@@ -131,7 +128,6 @@ export const fetchMapRuns = createAsyncThunk(
     try {
       const response = await fetchMsgPackResponse({
         url: jhApis({ playerid, cpid, fps }).player.getMapRuns,
-        cache: "no-cache",
       });
 
       if (!response.ok) {

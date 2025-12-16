@@ -75,7 +75,7 @@ export function getIsLastPagination(data, paginationNumber) {
   return paginationNumber > lastPagination;
 }
 
-export function fetchMsgPackResponse({ url, cache } = {}) {
+export function fetchMsgPackResponse({ url, cache = "no-store" } = {}) {
   return fetch(url, {
     headers: { Accept: "application/msgpack", "Accept-Encoding": "gzip" },
     cache,
@@ -239,10 +239,7 @@ export async function getMapByCpId(cpid) {
     return null;
   }
 
-  const response = await fetchMsgPackResponse({
-    url: jhApis().map.getAllMaps,
-    cache: "no-cache",
-  });
+  const response = await fetchMsgPackResponse({ url: jhApis().map.getAllMaps });
   const maps = await decodeAsyncData(response);
 
   return maps.find((map) => +map.CpID === +cpid);
@@ -254,10 +251,7 @@ export async function getPlayerById({ playerId }) {
     return null;
   }
 
-  const response = await fetchMsgPackResponse({
-    url: jhApis().player.getAll,
-    cache: "no-cache",
-  });
+  const response = await fetchMsgPackResponse({ url: jhApis().player.getAll });
   const players = await decodeAsyncData(response);
 
   return players.find((player) => +player.PlayerID === +playerId);

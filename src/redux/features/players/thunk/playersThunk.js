@@ -8,7 +8,7 @@ export const fetchAllPlayers = createAsyncThunk(
   async (paramsObject) => {
     try {
       const url = jhApis({ sort: paramsObject?.sort }).player.getAll;
-      const response = await fetchMsgPackResponse({ url, cache: "no-cache" });
+      const response = await fetchMsgPackResponse({ url });
 
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
