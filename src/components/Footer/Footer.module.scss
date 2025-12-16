@@ -3,38 +3,33 @@
 .footer {
   margin-top: 40px;
   padding-block: 48px 80px;
+  background-color: #101828;
   position: relative;
-  background-color: oklch(21% .034 264.665);
 }
 
 .footer .line {
   border: none;
-  outline: none;
   position: absolute;
   top: 0;
   left: 0;
   height: 4px;
-  opacity: 60%;
+  opacity: .6;
   width: 100%;
+  background-image: linear-gradient(to right, transparent 0, #f0b100 50%, transparent 100%);
+}
 
-  background-image: linear-gradient(to right,
-      transparent 0,
-      oklch(79.5% 0.184 86.047) 50%,
-      transparent 100%);
+.footer [data-container] {
+  padding-inline: 16px;
 }
 
 .sectionsLine {
   border: none;
   border-top: 1px solid #2a3346;
-  margin: 40px 0;
+  margin-block: 40px;
 }
 
 @include m.small {
   .sectionsLine {
-    margin: 20px 0;
+    margin-block: 20px;
   }
-}
-
-.footer [data-container] {
-  padding-inline: 16px;
 }
