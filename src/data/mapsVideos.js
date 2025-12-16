@@ -680,7 +680,7 @@ export const MAPS_VIDEOS = [
       },
       {
         type: "250 fps speedrun",
-        videoUrl: "https://www.youtube.com/watch?v=DjLzkRQlnIw&t=359s",
+        videoUrl: "https://www.youtube.com/watch?v=DjLzkRQlnIw",
         id: 2,
       },
     ],
