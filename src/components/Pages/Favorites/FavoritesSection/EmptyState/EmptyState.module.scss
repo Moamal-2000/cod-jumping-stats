@@ -1,15 +1,14 @@
 @use "@/styles/mixins" as m;
 
 .emptyState {
-  display: flex;
+  @include m.center-x-y;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
   padding: 64px 24px;
   min-height: 400px;
-  background: linear-gradient(135deg, rgba(17, 24, 39, 0.6) 0%, rgba(17, 24, 39, 0.3) 100%);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: linear-gradient(135deg,
+      rgba(17, 24, 39, .6) 0,
+      rgba(17, 24, 39, .3) 100%);
+  border: 1px solid #1b1d21;
   border-radius: 16px;
 
   @include m.small {
@@ -19,17 +18,19 @@
 }
 
 .iconWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.center-x-y;
   width: 80px;
   height: 80px;
-  background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(250, 204, 21, 0.05) 100%);
-  border: 1px solid rgba(250, 204, 21, 0.15);
+  background: linear-gradient(135deg,
+      rgba(250, 204, 21, .1) 0,
+      rgba(250, 204, 21, .05) 100%);
+  border: 1px solid #413a1b;
   border-radius: 20px;
   margin-bottom: 24px;
+}
 
-  @include m.small {
+@include m.small {
+  .iconWrapper {
     width: 64px;
     height: 64px;
     border-radius: 16px;
@@ -37,12 +38,14 @@
   }
 }
 
-.icon {
+.iconWrapper>svg {
   width: 36px;
   height: 36px;
   color: #facc15;
+}
 
-  @include m.small {
+@include m.small {
+  .iconWrapper>svg {
     width: 28px;
     height: 28px;
   }
@@ -52,10 +55,12 @@
   font-size: 1.5rem;
   font-weight: 600;
   color: #f9fafb;
-  margin: 0 0 12px;
+  margin-bottom: 12px;
   line-height: 1.3;
+}
 
-  @include m.small {
+@include m.small {
+  .title {
     font-size: 1.25rem;
     margin-bottom: 8px;
   }
@@ -65,10 +70,12 @@
   font-size: 1rem;
   color: #9ca3af;
   max-width: 460px;
-  margin: 0 0 32px;
+  margin-bottom: 32px;
   line-height: 1.6;
+}
 
-  @include m.small {
+@include m.small {
+  .description {
     font-size: 0.9rem;
     margin-bottom: 24px;
   }
@@ -79,35 +86,37 @@
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #facc15 0%, #eab308 100%);
+  background: linear-gradient(135deg, #facc15 0, #eab308 100%);
   color: #0f172a;
-  font-size: 0.95rem;
+  font-size: .95rem;
   font-weight: 600;
   border-radius: 10px;
-  text-decoration: none;
-  transition: all 0.2s ease;
+  transition: box-shadow .2s ease;
 
   &:hover {
-    box-shadow: 0 2px 10px rgba(250, 204, 21, 0.3);
+    box-shadow: 0 2px 10px rgba(250, 204, 21, .3);
   }
 
   &:focus-visible {
-    outline: 2px solid #facc15;
-    outline-offset: 2px;
-  }
-
-  @include m.small {
-    padding: 12px 24px;
-    font-size: 0.9rem;
+    outline: 2px solid #fff;
+    outline-offset: 4px;
   }
 }
 
-.ctaIcon {
+@include m.small {
+  .browseLink {
+    padding: 12px 24px;
+    font-size: .9rem;
+  }
+}
+
+.browseLink>svg {
   width: 18px;
   height: 18px;
-  fill: currentColor;
+}
 
-  @include m.small {
+@include m.small {
+  .browseLink>svg {
     width: 16px;
     height: 16px;
   }
