@@ -4,7 +4,6 @@ export const jhApis = ({
   fps = 125,
   limit = 50,
   mapid = 173824,
-  ender = "",
   name = "SAD",
   playerid = 108468,
   cpid = 14606,
