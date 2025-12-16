@@ -23,7 +23,7 @@
 }
 
 .socialMediaNav ul {
-  margin: 20px 0;
+  margin-block: 20px;
   display: flex;
   justify-content: center;
   gap: 16px;
@@ -40,15 +40,13 @@
   height: 42px;
   border-radius: 6px;
   background-color: #1A202C;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.center-x-y;
+  border: 1px solid rgba(255, 215, 0, .15);
   transition:
     translate .2s ease,
     background-color .2s ease,
     border-color .2s ease,
     box-shadow .2s ease;
-  border: 1px solid rgba(255, 215, 0, .15);
 
   &:hover {
     translate: 0 -1px;
@@ -74,8 +72,4 @@
   top: 1px;
   width: 32px;
   height: 32px;
-}
-
-.socialMediaNav ul li a[data-icon=jumpersHeaven]:hover svg {
-  fill: #FFD700 !important;
 }
