@@ -39,7 +39,7 @@ const FavoritesSection = () => {
 
     if (tabId === "maps")
       removeQueryString("tab", searchParams, router, pathname);
-  };
+  }
 
   useEffect(() => {
     loadFavorites({
@@ -119,8 +119,8 @@ const tabs = ({ mapsCount, playersCount }) => [
 ];
 
 function loadFavorites({
-  allMaps,
-  allPlayersData,
+  allMaps = [],
+  allPlayersData = [],
   setFavMaps,
   setFavPlayers,
   dispatch,
