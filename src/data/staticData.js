@@ -23,12 +23,12 @@ export const NAV_LINKS_DATA = [
     iconName: "users",
     id: 4,
   },
-  {
-    name: "Scoring",
-    href: "/scoring",
-    iconName: "calculator",
-    id: 5,
-  },
+  // {
+  //   name: "Scoring",
+  //   href: "/scoring",
+  //   iconName: "calculator",
+  //   id: 5,
+  // },
   {
     name: "About",
     href: "/about",
