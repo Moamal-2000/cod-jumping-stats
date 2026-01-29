@@ -11,6 +11,8 @@ const MapDetailHeader = ({ mapData }) => {
   const allMaps = useSelector((s) => s.maps.allMaps);
   const dispatch = useDispatch();
 
+  const releaseDate = Released ? new Date(Released).getTime() : "Unknown";
+
   useEffect(() => {
     if (allMaps.length < 0) dispatch(fetchMaps());
   }, []);
@@ -34,9 +36,7 @@ const MapDetailHeader = ({ mapData }) => {
 
             <div className={s.metaItem}>
               <span className={s.label}>Released:</span>
-              <span className={s.value}>
-                {new Date(Released).toLocaleDateString()}
-              </span>
+              <span className={s.value}>{releaseDate}</span>
             </div>
 
             <div className={s.metaItem}>
