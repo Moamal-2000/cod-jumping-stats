@@ -59,12 +59,12 @@ export function paginateData(items, pageNumber = 1) {
 export function getLeaderboardUrl(paramsObject) {
   const leaderboardType = paramsObject?.["leaderboard"] || "speedrun";
   const leaderboardUrls = {
-    speedrun: jhApis(paramsObject).leaderboard.getSpeedRunLeaderboard,
-    skilled: jhApis(paramsObject).leaderboard.getSkilledLeaderboard,
-    defrag: jhApis(paramsObject).leaderboard.getDefragLeaderboard,
-    surf: jhApis(paramsObject).leaderboard.getSurfLeaderboard,
+    speedrun: jhApis(paramsObject).leaderboard.speedRunLeaderboard,
+    skilled: jhApis(paramsObject).leaderboard.skilledLeaderboard,
+    defrag: jhApis(paramsObject).leaderboard.defragLeaderboard,
+    surf: jhApis(paramsObject).leaderboard.surfLeaderboard,
     routescompleted:
-      jhApis(paramsObject).leaderboard.getRoutesCompletedLeaderboard,
+      jhApis(paramsObject).leaderboard.routesCompletedLeaderboard,
   };
 
   return leaderboardUrls[leaderboardType];
@@ -88,7 +88,7 @@ export async function decodeAsyncData(response) {
       console.warn(
         "Invalid response in decodeAsyncData:",
         response?.status,
-        response?.statusText
+        response?.statusText,
       );
       return null;
     }
@@ -138,7 +138,7 @@ export function modifyMapsData(mapsData = []) {
 
 export function getRequiredMapVideos(mapData) {
   const requiredVideos = MAPS_VIDEOS.find((item) =>
-    item.mapsIds.includes(mapData.CpID)
+    item.mapsIds.includes(mapData.CpID),
   )?.videos;
 
   return requiredVideos || [];
@@ -194,7 +194,7 @@ export function getCountryFlag(domain) {
 
 export function getGameTypes(groupedServers) {
   return Object.keys(groupedServers).sort(
-    (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, "")
+    (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""),
   );
 }
 
@@ -239,7 +239,7 @@ export async function getMapByCpId(cpid) {
     return null;
   }
 
-  const response = await fetchMsgPackResponse({ url: jhApis().map.getAllMaps });
+  const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
   const maps = await decodeAsyncData(response);
 
   return maps.find((map) => +map.CpID === +cpid);
@@ -251,7 +251,7 @@ export async function getPlayerById({ playerId }) {
     return null;
   }
 
-  const response = await fetchMsgPackResponse({ url: jhApis().player.getAll });
+  const response = await fetchMsgPackResponse({ url: jhApis().player.all });
   const players = await decodeAsyncData(response);
 
   return players.find((player) => +player.PlayerID === +playerId);
@@ -345,6 +345,6 @@ export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
 
 export function mapHasDifficulties(Difficulty) {
   return JUMP_FPS.some(
-    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?"
+    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?",
   );
 }

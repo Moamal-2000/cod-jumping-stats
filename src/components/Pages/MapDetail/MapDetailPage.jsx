@@ -75,7 +75,7 @@ const MapDetailPage = () => {
       setError(false);
 
       const response = await fetchMsgPackResponse({
-        url: jhApis().map.getAllMaps,
+        url: jhApis().map.allMaps,
       });
 
       mapsLocal = await decodeAsyncData(response);
@@ -100,7 +100,7 @@ const MapDetailPage = () => {
       if (selectedFps === "All") {
         if (!isLoadMore) {
           const promises = JUMP_FPS.map((fps) =>
-            fetch(jhApis({ fps, cpid }).map.getTops)
+            fetch(jhApis({ fps, cpid }).map.tops)
               .then((res) => res.json())
               .then((data) => {
                 if (Array.isArray(data)) {
@@ -111,7 +111,7 @@ const MapDetailPage = () => {
               .catch((err) => {
                 console.warn(`Error fetching tops for ${fps} FPS:`, err);
                 return [];
-              })
+              }),
           );
 
           const results = await Promise.all(promises);
@@ -123,7 +123,7 @@ const MapDetailPage = () => {
                 item &&
                 typeof item === "object" &&
                 item.time_played !== null &&
-                item.time_played !== undefined
+                item.time_played !== undefined,
             )
             .sort((a, b) => a.time_played - b.time_played);
 
@@ -144,7 +144,7 @@ const MapDetailPage = () => {
         }
       } else if (selectedFps === "mix") {
         if (!isLoadMore) {
-          const response = await fetch(jhApis({ fps: "0", cpid }).map.getTops);
+          const response = await fetch(jhApis({ fps: "0", cpid }).map.tops);
           const data = await response.json();
 
           setAllTopsData(data);
@@ -165,7 +165,7 @@ const MapDetailPage = () => {
       } else {
         if (!isLoadMore) {
           const response = await fetch(
-            jhApis({ fps: selectedFps, cpid }).map.getTops
+            jhApis({ fps: selectedFps, cpid }).map.tops,
           );
           const data = await response.json();
 
@@ -207,7 +207,7 @@ const MapDetailPage = () => {
       if (selectedFps === "All") {
         if (!isLoadMore) {
           const promises = JUMP_FPS.map((fps) =>
-            fetch(jhApis({ fps, mapid: mapData?.ID }).player.getPlayersPlayTime)
+            fetch(jhApis({ fps, mapid: mapData?.ID }).player.playersPlayTime)
               .then((res) => res.json())
               .then((data) => {
                 if (Array.isArray(data)) {
@@ -218,7 +218,7 @@ const MapDetailPage = () => {
               .catch((err) => {
                 console.warn(`Error fetching players for ${fps} FPS:`, err);
                 return [];
-              })
+              }),
           );
 
           const results = await Promise.all(promises);
@@ -231,7 +231,7 @@ const MapDetailPage = () => {
                 typeof player === "object" &&
                 player.player_id &&
                 player.time_played !== null &&
-                player.time_played !== undefined
+                player.time_played !== undefined,
             );
 
           const playerMap = new Map();
@@ -255,7 +255,7 @@ const MapDetailPage = () => {
           });
 
           const allData = Array.from(playerMap.values()).sort(
-            (a, b) => b.time_played - a.time_played
+            (a, b) => b.time_played - a.time_played,
           );
 
           setAllPlayersData(allData);
@@ -276,7 +276,7 @@ const MapDetailPage = () => {
       } else if (selectedFps === "mix") {
         if (!isLoadMore) {
           const response = await fetch(
-            jhApis({ fps: "0", mapid: mapData?.ID }).player.getPlayersPlayTime
+            jhApis({ fps: "0", mapid: mapData?.ID }).player.playersPlayTime,
           );
           const data = await response.json();
 
@@ -299,7 +299,7 @@ const MapDetailPage = () => {
         if (!isLoadMore) {
           const response = await fetch(
             jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
-              .getPlayersPlayTime
+              .playersPlayTime,
           );
           const data = await response.json();
 
@@ -370,7 +370,7 @@ const MapDetailPage = () => {
           entries[0].isIntersecting && hasMoreTops && !loadingMoreTops;
         if (shouldLoadMore) loadMoreTops();
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const timeoutId = setTimeout(() => {
@@ -397,7 +397,7 @@ const MapDetailPage = () => {
           entries[0].isIntersecting && hasMorePlayers && !loadingMorePlayers;
         if (shouldLoadMore) loadMorePlayers();
       },
-      { threshold: 0.1 }
+      { threshold: 0.1 },
     );
 
     const timeoutId = setTimeout(() => {

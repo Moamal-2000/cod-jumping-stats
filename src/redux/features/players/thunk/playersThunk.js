@@ -7,7 +7,7 @@ export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
   async (paramsObject) => {
     try {
-      const url = jhApis({ sort: paramsObject?.sort }).player.getAll;
+      const url = jhApis({ sort: paramsObject?.sort }).player.all;
       const response = await fetchMsgPackResponse({ url });
 
       if (!response.ok) {
@@ -25,5 +25,5 @@ export const fetchAllPlayers = createAsyncThunk(
       console.error("Error in fetchAllPlayers:", error);
       throw error;
     }
-  }
+  },
 );

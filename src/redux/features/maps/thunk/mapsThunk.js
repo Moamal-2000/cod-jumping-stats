@@ -24,7 +24,7 @@ export const fetchMaps = createAsyncThunk(
 
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis().map.getAllMaps,
+        url: jhApis().map.allMaps,
       });
       const mapsData = await decodeAsyncData(response);
       cacheMapsLocally(mapsData);
@@ -33,5 +33,5 @@ export const fetchMaps = createAsyncThunk(
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 );
