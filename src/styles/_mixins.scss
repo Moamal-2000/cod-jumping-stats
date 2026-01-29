@@ -14,30 +14,24 @@
 
 @mixin large {
   @media (max-width: 1200px) {
-    @content
+    @content;
   }
 }
-
-;
 
 @mixin medium {
   @media (max-width: 992px) {
-    @content
+    @content;
   }
 }
-
-;
 
 @mixin small {
   @media (max-width: 768px) {
-    @content
+    @content;
   }
 }
 
-;
-
 @mixin very-small {
   @media (max-width: 376px) {
-    @content
+    @content;
   }
 }
