@@ -459,6 +459,11 @@ export const MAPS_VIDEOS = [
         videoUrl: "https://www.youtube.com/watch?v=H4fq21gyKqc",
         id: 1,
       },
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=td2krbuvL-4",
+        id: 2,
+      },
     ],
   },
   {
@@ -622,6 +627,11 @@ export const MAPS_VIDEOS = [
         type: "125 fps showcase",
         videoUrl: "https://www.youtube.com/watch?v=IJzE1nPek84",
         id: 1,
+      },
+      {
+        type: "250 fps no grenades short",
+        videoUrl: "https://www.youtube.com/watch?v=W6QIh-zDwTo",
+        id: 2,
       },
     ],
   },
@@ -1013,6 +1023,17 @@ export const MAPS_VIDEOS = [
     ],
   },
   {
+    mapName: "jm_renaissance",
+    mapsIds: [4452],
+    videos: [
+      {
+        type: "333 fps no grenades short",
+        videoUrl: "https://www.youtube.com/watch?v=2Mh-rS56Ll4",
+        id: 1,
+      },
+    ],
+  },
+  {
     mapName: "jm_renaissance_hard",
     mapsIds: [11109],
     videos: [
@@ -1260,6 +1281,39 @@ export const MAPS_VIDEOS = [
       {
         type: "250 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=Vq7LtDgk9bA",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_simplewicked_full",
+    mapsIds: [9958],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=DNR_VtM1gE8",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "jm_tower_of_hate",
+    mapsIds: [8650],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=1z1AeiQSQxI",
+        id: 1,
+      },
+    ],
+  },
+    {
+    mapName: "jm_tower_of_hates",
+    mapsIds: [13197],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=1z1AeiQSQxI&t=43s",
         id: 1,
       },
     ],
