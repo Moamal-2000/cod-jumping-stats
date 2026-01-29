@@ -4,14 +4,6 @@
   align-items: center;
 }
 
-@mixin prefix($property, $value) {
-  -webkit-#{$property}: $value;
-  -moz-#{$property}: $value;
-  -o-#{$property}: $value;
-  -ms-#{$property}: $value;
-  $property: $value;
-}
-
 @mixin large {
   @media (max-width: 1200px) {
     @content;
