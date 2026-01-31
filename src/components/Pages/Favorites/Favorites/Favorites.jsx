@@ -15,7 +15,7 @@ import HeroSection from "./HeroSection/HeroSection";
 import TabPanel from "./TabPanel/TabPanel";
 import Tabs from "./Tabs/Tabs";
 
-const FavoritesSection = () => {
+const Favorites = () => {
   const { allMaps, loading: mapsLoading } = useSelector((s) => s.maps);
   const { allPlayersData, loading: playersLoading } = useSelector(
     (s) => s.players,
@@ -110,7 +110,7 @@ const FavoritesSection = () => {
   );
 };
 
-export default FavoritesSection;
+export default Favorites;
 
 const tabs = ({ mapsCount, playersCount }) => [
   { id: "maps", label: "Maps", icon: "map", count: mapsCount },

@@ -1,4 +1,4 @@
-import FavoritesSection from "@/components/Pages/Favorites/FavoritesSection/FavoritesSection";
+import Favorites from "@/components/Pages/Favorites/Favorites/Favorites";
 import { Suspense } from "react";
 
 export const metadata = {
@@ -9,7 +9,7 @@ export const metadata = {
 const FavoritesPage = () => {
   return (
     <Suspense fallback={<div>Loading...</div>}>
-      <FavoritesSection />
+      <Favorites />
     </Suspense>
   );
 };
