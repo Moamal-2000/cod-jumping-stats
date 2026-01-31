@@ -443,8 +443,8 @@ const MapDetailPage = () => {
   }
 
   return (
-    <main className={s.mapDetailPage}>
-      <div className="container">
+    <div className="container">
+      <main className={s.mapDetailPage}>
         <Breadcrumbs
           breadcrumbLabels={breadcrumbLabels(mapData?.Name)}
           breadcrumbPaths={breadcrumbPaths}
@@ -482,8 +482,8 @@ const MapDetailPage = () => {
             allPlayersData={allPlayersData}
           />
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 

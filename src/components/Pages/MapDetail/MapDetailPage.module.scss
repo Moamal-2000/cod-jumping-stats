@@ -1,9 +1,5 @@
 @use "@/styles/mixins" as m;
 
-.mapDetailPage {
-  min-height: 100vh;
-}
-
 .contentGrid {
   display: grid;
   grid-template-columns: 1fr 1fr;
