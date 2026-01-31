@@ -9,9 +9,9 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerCard from "../../PlayersPage/PlayerCard/PlayerCard";
 import EmptyState from "./EmptyState/EmptyState";
-import FavMaps from "./FavoritesGrid/FavMaps/FavMaps";
 import FavoritesGrid from "./FavoritesGrid/FavoritesGrid";
 import HeroSection from "./HeroSection/HeroSection";
+import FavMaps from "./TabPanel/FavMaps/FavMaps";
 import TabPanel from "./TabPanel/TabPanel";
 import Tabs from "./Tabs/Tabs";
 
