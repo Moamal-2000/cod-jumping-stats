@@ -1,0 +1,23 @@
+@use "@/styles/mixins" as m;
+
+.maps {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(360px, 1fr));
+  gap: 20px;
+
+  @media (max-width: 1280px) {
+    grid-template-columns: repeat(2, minmax(340px, 1fr));
+  }
+
+  @include m.large {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+
+  @media (max-width: 812px) {
+    grid-template-columns: 1fr;
+  }
+
+  @include m.small {
+    gap: 16px;
+  }
+}

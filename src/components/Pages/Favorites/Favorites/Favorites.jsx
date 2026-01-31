@@ -7,9 +7,9 @@ import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import MapCard from "../../Maps/MapCard/MapCard";
 import PlayerCard from "../../PlayersPage/PlayerCard/PlayerCard";
 import EmptyState from "./EmptyState/EmptyState";
+import FavMapsPanel from "./FavoritesGrid/FavMapsPanel/FavMapsPanel";
 import FavoritesGrid from "./FavoritesGrid/FavoritesGrid";
 import HeroSection from "./HeroSection/HeroSection";
 import TabPanel from "./TabPanel/TabPanel";
@@ -63,26 +63,11 @@ const Favorites = () => {
         />
 
         <TabPanel id="maps" isActive={activeTab === "maps"}>
-          {mapsLoading && (
-            <SpinnerLoader
-              title="Loading Maps"
-              description="Fetching your favorite maps..."
-            />
-          )}
-          {!mapsLoading && favMaps.length === 0 && <EmptyState type="maps" />}
-
-          {!mapsLoading && favMaps.length > 0 && (
-            <FavoritesGrid variant="maps">
-              {favMaps.map((map, index) => (
-                <MapCard
-                  key={map.CpID}
-                  mapData={map}
-                  allMaps={allMaps}
-                  index={index}
-                />
-              ))}
-            </FavoritesGrid>
-          )}
+          <FavMapsPanel
+            favMaps={favMaps}
+            allMaps={allMaps}
+            mapsLoading={mapsLoading}
+          />
         </TabPanel>
 
         <TabPanel id="players" isActive={activeTab === "players"}>
