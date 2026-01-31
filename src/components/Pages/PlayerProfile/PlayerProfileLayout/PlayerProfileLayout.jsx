@@ -28,11 +28,11 @@ const PlayerProfileLayout = ({ children }) => {
   const playerid = +searchParams.get("playerid");
 
   const playerData = allPlayersData.find(
-    (player) => player.PlayerID === playerid
+    (player) => player.PlayerID === playerid,
   );
 
   const purePlayerName = stripColorCodes(
-    playerData?.PrefName || playerData?.PlayerName || jumpScores?.PlayerName
+    playerData?.PrefName || playerData?.PlayerName || jumpScores?.PlayerName,
   );
 
   useEffect(() => {
@@ -46,13 +46,13 @@ const PlayerProfileLayout = ({ children }) => {
     dispatch(fetchAllPlayers());
 
     dispatch(
-      updatePlayerProfileState({ key: "currentFetchingFps", value: "125" })
+      updatePlayerProfileState({ key: "currentFetchingFps", value: "125" }),
     );
   }, [dispatch, playerid]);
 
   return (
-    <main className={s.playerPage}>
-      <div className={s.playerProfile}>
+    <div className="container">
+      <main className={s.playerPage}>
         <Breadcrumbs
           breadcrumbLabels={breadcrumbLabels(purePlayerName)}
           breadcrumbPaths={breadcrumbPaths}
@@ -63,8 +63,8 @@ const PlayerProfileLayout = ({ children }) => {
           <PlayerProfileTabs />
           {children}
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
