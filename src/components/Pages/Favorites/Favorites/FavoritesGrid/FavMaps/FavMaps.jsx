@@ -1,9 +1,9 @@
 import MapCard from "@/components/Pages/Maps/MapCard/MapCard";
 import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import EmptyState from "../../EmptyState/EmptyState";
-import s from "./FavMapsPanel.module.scss";
+import s from "./FavMaps.module.scss";
 
-const FavMapsPanel = ({ favMaps, allMaps, mapsLoading }) => {
+const FavMaps = ({ favMaps, allMaps, mapsLoading }) => {
   if (mapsLoading && favMaps.length === 0)
     return (
       <SpinnerLoader
@@ -23,4 +23,4 @@ const FavMapsPanel = ({ favMaps, allMaps, mapsLoading }) => {
   );
 };
 
-export default FavMapsPanel;
+export default FavMaps;

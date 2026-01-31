@@ -9,7 +9,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerCard from "../../PlayersPage/PlayerCard/PlayerCard";
 import EmptyState from "./EmptyState/EmptyState";
-import FavMapsPanel from "./FavoritesGrid/FavMapsPanel/FavMapsPanel";
+import FavMaps from "./FavoritesGrid/FavMaps/FavMaps";
 import FavoritesGrid from "./FavoritesGrid/FavoritesGrid";
 import HeroSection from "./HeroSection/HeroSection";
 import TabPanel from "./TabPanel/TabPanel";
@@ -63,7 +63,7 @@ const Favorites = () => {
         />
 
         <TabPanel id="maps" isActive={activeTab === "maps"}>
-          <FavMapsPanel
+          <FavMaps
             favMaps={favMaps}
             allMaps={allMaps}
             mapsLoading={mapsLoading}
