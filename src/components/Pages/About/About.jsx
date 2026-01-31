@@ -4,8 +4,8 @@ import AboutSection from "./AboutSection/AboutSection";
 
 const About = () => {
   return (
-    <main className={s.aboutPage}>
-      <div className="container">
+    <div className="container">
+      <main className={s.aboutPage}>
         <AboutSection title="Project Overview">
           <p className={s.description}>
             <Link
@@ -135,8 +135,8 @@ const About = () => {
             </p>
           </AboutSection>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 

@@ -19,7 +19,7 @@ import Tabs from "./Tabs/Tabs";
 const FavoritesSection = () => {
   const { allMaps, loading: mapsLoading } = useSelector((s) => s.maps);
   const { allPlayersData, loading: playersLoading } = useSelector(
-    (s) => s.players
+    (s) => s.players,
   );
 
   const [favMaps, setFavMaps] = useState([]);
@@ -52,8 +52,8 @@ const FavoritesSection = () => {
   }, [allMaps, allPlayersData]);
 
   return (
-    <main className={s.favorites}>
-      <div className="container" data-container>
+    <div className="container" data-container>
+      <main className={s.favorites}>
         <HeroSection />
 
         <Tabs
@@ -106,8 +106,8 @@ const FavoritesSection = () => {
             </FavoritesGrid>
           )}
         </TabPanel>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 };
 
@@ -132,10 +132,10 @@ function loadFavorites({
   const favorites = JSON.parse(favoritesLocal);
 
   const filteredFavMaps = allMaps.filter((map) =>
-    favorites.mapsIds.includes(map.CpID)
+    favorites.mapsIds.includes(map.CpID),
   );
   const filteredFavPlayers = allPlayersData.filter((player) =>
-    favorites.playersIds.includes(player.PlayerID)
+    favorites.playersIds.includes(player.PlayerID),
   );
 
   setFavMaps(filteredFavMaps);

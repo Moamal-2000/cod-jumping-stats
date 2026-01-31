@@ -1,17 +1,10 @@
 @use "@/styles/mixins" as m;
 
-.favorites [data-container] {
-  display: flex;
-  flex-direction: column;
-  gap: 32px;
-}
-
 .mapsSection {
   width: 100%;
   min-height: 480px;
   display: grid;
   grid-template-columns: repeat(3, minmax(390px, 1fr));
-  gap: 16px;
   position: relative;
 
   &.collapse>* {
