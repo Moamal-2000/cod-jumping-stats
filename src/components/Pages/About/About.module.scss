@@ -4,6 +4,13 @@
   min-height: calc(100vh - 128px);
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
   padding-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 74px;
+}
+
+.aboutPage strong {
+  font-weight: 600;
 }
 
 .techGrid {
@@ -15,6 +22,7 @@
 .description {
   font-size: 1.05rem;
   line-height: 1.6;
+  max-width: 1180px;
   color: #f9fafb;
   margin-bottom: 24px;
 
@@ -58,31 +66,19 @@ a.highlight:hover::after {
 }
 
 .teamGrid {
-  display: grid;
-  gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  display: flex;
+  gap: 28px;
 }
 
 @include m.small {
   .teamGrid {
-    grid-template-columns: 1fr;
     gap: 20px;
   }
 }
 
-.teamMember {
-  padding: 24px;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  position: relative;
-  overflow: hidden;
-  outline: none;
-}
-
 .memberInfo {
   display: flex;
-  gap: 14px;
+  gap: 12px;
 }
 
 .memberInfo>a {
@@ -106,15 +102,9 @@ a.highlight:hover::after {
 
 .memberName {
   font-size: 1.125rem;
-  font-weight: 700;
+  font-weight: 600;
   color: #fff;
   margin-bottom: 8px;
-}
-
-.memberDescription {
-  font-size: .875rem;
-  line-height: 1.6;
-  color: #f9fafb;
 }
 
 .techGrid {
@@ -132,8 +122,8 @@ a.highlight:hover::after {
 
 .techItem {
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  background: #14161a;
+  border: 1px solid #222427;
   border-radius: 8px;
 }
 
@@ -148,11 +138,4 @@ a.highlight:hover::after {
   font-size: .875rem;
   line-height: 1.6;
   color: #f9fafb;
-}
-
-.wrapper {
-  display: flex;
-  gap: 24px;
-  align-items: stretch;
-  height: 100%;
 }

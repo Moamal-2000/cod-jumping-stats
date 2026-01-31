@@ -9,7 +9,6 @@
 .sectionTitle {
   font-size: 1.75rem;
   font-weight: 700;
-  margin-block: 24px;
   color: #fff;
   letter-spacing: -0.01em;
   position: relative;
@@ -35,16 +34,5 @@
 }
 
 .card {
-  background-color: #0d1117;
-  border: solid 1px #30363d;
-  border-radius: 6px;
-  padding: 32px;
-  position: relative;
-  flex: 1;
-}
-
-@include m.small {
-  .card {
-    padding: 16px;
-  }
+  padding-block: 16px;
 }

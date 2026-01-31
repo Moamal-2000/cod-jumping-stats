@@ -28,13 +28,11 @@ const About = () => {
             mod created by <strong>IzNoGoD</strong>, featuring custom servers
             maintained by the mod creator. <strong>JH Stats</strong> is an
             independent leaderboard system that retrieves and displays data from
-            the <strong>JumpersHeaven</strong> database.
-          </p>
-          <p className={s.description}>
-            JH Stats provides players with comprehensive statistics, rankings,
-            and achievements within the <strong>JumpersHeaven</strong>{" "}
-            community, offering a modern web interface to explore player
-            performance and map completion data.
+            the <strong>JumpersHeaven</strong> database. JH Stats provides
+            players with comprehensive statistics, rankings, and achievements
+            within the <strong>JumpersHeaven</strong> community, offering a
+            modern web interface to explore player performance and map
+            completion data.
           </p>
         </AboutSection>
 
@@ -48,9 +46,8 @@ const About = () => {
                 </p>
               </div>
 
-              <p className={s.memberDescription}>
-                Did the backend and worked on the frontend development of the
-                leaderboard system.
+              <p className={s.description}>
+                Implemented the backend and supported the frontend development.
               </p>
             </div>
 
@@ -67,8 +64,9 @@ const About = () => {
                 <p className={s.memberRole}>Frontend Developer</p>
               </div>
 
-              <p className={s.memberDescription}>
-                Worked on the frontend development of the leaderboard platform.
+              <p className={s.description}>
+                Responsible for the full frontend development and user interface
+                implementation.
               </p>
             </div>
           </div>
@@ -107,34 +105,28 @@ const About = () => {
           </div>
         </AboutSection>
 
-        <div className={s.wrapper}>
-          <AboutSection title="Community">
-            <p className={s.description}>
-              <strong>JH Stats</strong> serves the{" "}
-              <strong>JumpersHeaven</strong> community by providing easy access
-              to <strong>player statistics</strong>,{" "}
-              <strong>map completion records</strong>, and competitive rankings.
-              Whether you&apos;re a casual player or a competitive jumper, our
-              platform helps you <strong>track your progress</strong> and
-              compare your achievements with others.
-            </p>
-            <p className={s.description}>
-              We&apos;re committed to maintaining an accurate, up-to-date, and
-              user-friendly platform that enhances the{" "}
-              <strong>JumpersHeaven</strong> gaming experience.
-            </p>
-          </AboutSection>
+        <AboutSection title="Community">
+          <p className={s.description}>
+            <strong>JH Stats</strong> serves the <strong>JumpersHeaven</strong>{" "}
+            community by providing easy access to{" "}
+            <strong>player statistics</strong>,{" "}
+            <strong>map completion records</strong>, and competitive rankings.
+            Whether you&apos;re a casual player or a competitive jumper, our
+            platform helps you <strong>track your progress</strong> and compare
+            your achievements with others. We&apos;re committed to maintaining
+            an accurate, up-to-date, and user-friendly platform that enhances
+            the <strong>JumpersHeaven</strong> gaming experience.
+          </p>
+        </AboutSection>
 
-          <AboutSection title="Special Thanks">
-            <p className={s.description}>
-              Special thanks to <strong>IzNoGoD</strong> for creating the
-              original <strong>JumpersHeaven Call of Duty 2 mod</strong> and
-              maintaining the servers. Without his work and the database access
-              he provided, this leaderboard project would not have been
-              possible.
-            </p>
-          </AboutSection>
-        </div>
+        <AboutSection title="Special Thanks">
+          <p className={s.description}>
+            Special thanks to <strong>IzNoGoD</strong> for creating the original{" "}
+            <strong>JumpersHeaven Call of Duty 2 mod</strong> and maintaining
+            the servers. Without his work and the database access he provided,
+            this leaderboard project would not have been possible.
+          </p>
+        </AboutSection>
       </main>
     </div>
   );
