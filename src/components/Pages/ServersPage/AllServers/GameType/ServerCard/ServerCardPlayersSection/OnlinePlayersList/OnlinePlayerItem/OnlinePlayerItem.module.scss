@@ -46,8 +46,27 @@
 }
 
 .playerAdminLevel {
-  color: #facc15;
   min-width: 46px;
+  color: #facc15;
+
+  svg {
+    filter: drop-shadow(0 0 2px #facc1566);
+  }
+}
+
+.admin100 {
+  background: linear-gradient(45deg, #00ffff, #4186e1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(65, 156, 225, .5);
+  color: #41bee1;
+
+  svg {
+    fill: #41bee1;
+    filter: drop-shadow(0 0 3px rgba(0, 255, 255, .6));
+    scale: 1.08;
+  }
 }
 
 :where(.playerPing, .playerAdminLevel)>svg {

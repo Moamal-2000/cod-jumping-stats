@@ -14,6 +14,11 @@ const OnlinePlayerItem = ({ player, server }) => {
   const coloredName = getColoredName(player.Name || "Unknown Player");
   const pureName = stripColorCodes(player.Name);
 
+  const adminClass = getAdminShieldClass({
+    cssModule: s,
+    adminLevel: player?.Admin,
+  });
+
   function handleClick(event) {
     if (isCod4) event.preventDefault();
   }
@@ -35,7 +40,7 @@ const OnlinePlayerItem = ({ player, server }) => {
       </strong>
 
       <div className={s.playerInfo}>
-        <span className={s.playerAdminLevel}>
+        <span className={`${s.playerAdminLevel} ${adminClass}`}>
           <svg aria-hidden="true">
             <use href="/icons-sprite.svg#shield" />
           </svg>{" "}
@@ -55,3 +60,14 @@ const OnlinePlayerItem = ({ player, server }) => {
 };
 
 export default OnlinePlayerItem;
+
+function getAdminShieldClass({ cssModule, adminLevel }) {
+  const isLevelUndefined =
+    adminLevel === undefined || adminLevel === null || adminLevel === "N/A";
+  if (isLevelUndefined) return null;
+
+  const level = Number(adminLevel) || 0;
+  if (level >= 100) return cssModule.admin100;
+
+  return null;
+}
