@@ -1,17 +1,14 @@
 "use client";
 
-import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PlayerCard from "../../PlayersPage/PlayerCard/PlayerCard";
-import EmptyState from "./EmptyState/EmptyState";
-import FavoritesGrid from "./FavoritesGrid/FavoritesGrid";
 import HeroSection from "./HeroSection/HeroSection";
 import FavMaps from "./TabPanel/FavMaps/FavMaps";
+import FavPlayers from "./TabPanel/FavPlayers/FavPlayers";
 import TabPanel from "./TabPanel/TabPanel";
 import Tabs from "./Tabs/Tabs";
 
@@ -71,24 +68,7 @@ const Favorites = () => {
         </TabPanel>
 
         <TabPanel id="players" isActive={activeTab === "players"}>
-          {playersLoading && (
-            <SpinnerLoader
-              title="Loading Players"
-              description="Fetching your favorite players..."
-            />
-          )}
-
-          {!playersLoading && favPlayers.length === 0 && (
-            <EmptyState type="players" />
-          )}
-
-          {!playersLoading && favPlayers.length > 0 && (
-            <FavoritesGrid variant="players">
-              {favPlayers.map((player) => (
-                <PlayerCard key={player.PlayerID} {...player} />
-              ))}
-            </FavoritesGrid>
-          )}
+          <FavPlayers favPlayers={favPlayers} playersLoading={playersLoading} />
         </TabPanel>
       </main>
     </div>

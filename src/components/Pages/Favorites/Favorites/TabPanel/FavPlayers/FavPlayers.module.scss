@@ -1,0 +1,16 @@
+@use "@/styles/mixins" as m;
+
+.players {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 20px;
+
+  @include m.large {
+    grid-template-columns: repeat(2, minmax(300px, 1fr));
+  }
+
+  @include m.small {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
