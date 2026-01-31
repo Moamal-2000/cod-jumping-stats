@@ -11,7 +11,6 @@ import MapCard from "../../Maps/MapCard/MapCard";
 import PlayerCard from "../../PlayersPage/PlayerCard/PlayerCard";
 import EmptyState from "./EmptyState/EmptyState";
 import FavoritesGrid from "./FavoritesGrid/FavoritesGrid";
-import s from "./FavoritesSection.module.scss";
 import HeroSection from "./HeroSection/HeroSection";
 import TabPanel from "./TabPanel/TabPanel";
 import Tabs from "./Tabs/Tabs";
@@ -52,8 +51,8 @@ const FavoritesSection = () => {
   }, [allMaps, allPlayersData]);
 
   return (
-    <div className="container" data-container>
-      <main className={s.favorites}>
+    <div className="container">
+      <main>
         <HeroSection />
 
         <Tabs
