@@ -22,15 +22,11 @@
 .buttons button {
   background-color: #1e2029;
   border: 1px solid #ffcc33;
-  color: #ffcc33;
-  padding: 8px 16px;
-  min-width: 102px;
   border-radius: 4px;
-  font-weight: 500;
-  font-size: .87rem;
   cursor: pointer;
-  position: relative;
-  top: 2px;
+  width: 36px;
+  height: 36px;
+  @include m.flex-center;
   transition: background-color .2s;
 
   &:not(:disabled):hover {
@@ -42,4 +38,10 @@
     -webkit-filter: grayscale(1);
     cursor: not-allowed;
   }
+}
+
+.buttons button svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffcc33;
 }

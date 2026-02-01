@@ -1,13 +1,13 @@
 .button {
   background-color: #1e2029;
   border: 1px solid #ffcc33;
-  color: #ffcc33;
-  padding: 8px 16px;
-  min-width: 102px;
   border-radius: 4px;
-  font-weight: 500;
-  font-size: .87rem;
   cursor: pointer;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   transition: background-color .2s;
 
   &:not(:disabled):hover {
@@ -19,4 +19,10 @@
     -webkit-filter: grayscale(1);
     cursor: not-allowed;
   }
+}
+
+.button svg {
+  width: 16px;
+  height: 16px;
+  fill: #ffcc33;
 }

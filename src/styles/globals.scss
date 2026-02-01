@@ -87,6 +87,10 @@ main {
   color: #8080FE;
 }
 
+.flip {
+  rotate: 180deg;
+}
+
 .visually-hidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

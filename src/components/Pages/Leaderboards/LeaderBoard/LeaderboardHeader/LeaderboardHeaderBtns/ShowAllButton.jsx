@@ -19,12 +19,8 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   const dispatch = useDispatch();
   const isLeaderboardUnavailable =
     loading || error || leaderboardData?.length === 0;
-  const showAllBtnNoun =
-    leaderboardData?.length === 0
-      ? "Show All"
-      : allDataDisplayed
-      ? "Show Less"
-      : "Show All";
+  const flipButton =
+    leaderboardData?.length === 0 ? false : allDataDisplayed ? true : false;
 
   function handleShowAllBtn() {
     if (allDataDisplayed) {
@@ -39,14 +35,14 @@ const ShowAllButton = ({ setPaginationNumber }) => {
     if (leaderboardData?.length <= 0 || allDataDisplayed) return;
 
     const lastLeaderboardPagination = Math.ceil(
-      leaderboardData?.length / PAGINATION_ITEMS_PER_PAGE
+      leaderboardData?.length / PAGINATION_ITEMS_PER_PAGE,
     );
 
     dispatch(
       updateLeaderboardState({
         key: "leaderboardScroll",
         value: leaderboardData,
-      })
+      }),
     );
 
     setPaginationNumber(lastLeaderboardPagination);
@@ -59,7 +55,7 @@ const ShowAllButton = ({ setPaginationNumber }) => {
       updateLeaderboardState({
         key: "leaderboardScroll",
         value: firstChunkLeaderboard,
-      })
+      }),
     );
     dispatch(updateGlobalState({ key: "isLeaderboardReversed", value: false }));
 
@@ -76,8 +72,11 @@ const ShowAllButton = ({ setPaginationNumber }) => {
       type="button"
       onClick={handleShowAllBtn}
       disabled={isLeaderboardUnavailable}
+      className={flipButton ? "flip" : ""}
     >
-      {showAllBtnNoun}
+      <svg aria-hidden="true">
+        <use href="/icons-sprite.svg#angles-down" />
+      </svg>
     </button>
   );
 };

@@ -16,7 +16,7 @@ const ExpandButton = () => {
       updateGlobalState({
         key: "isLeaderboardExpanded",
         value: !isLeaderboardExpanded,
-      })
+      }),
     );
   }
 
@@ -26,7 +26,11 @@ const ExpandButton = () => {
       onClick={handleExpandBtn}
       disabled={isLeaderboardUnavailable}
     >
-      {isLeaderboardExpanded ? "Minimize" : "Maximize"}
+      <svg aria-hidden="true">
+        <use
+          href={`/icons-sprite.svg#${isLeaderboardExpanded ? "minus" : "plus"}`}
+        />
+      </svg>
     </button>
   );
 };
