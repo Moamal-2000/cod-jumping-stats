@@ -10,12 +10,8 @@ const ShowAllButton = ({ setPaginationNumber }) => {
     useSelector((s) => s.maps);
   const dispatch = useDispatch();
   const isMapsUnavailable = loading || error || mapsData?.length === 0;
-  const showAllBtnNoun =
-    mapsData?.length === 0
-      ? "Show All"
-      : allDataDisplayed
-      ? "Show Less"
-      : "Show All";
+  const flipButton =
+    mapsData?.length === 0 ? false : allDataDisplayed ? true : false;
 
   function handleShowAllBtn() {
     if (allDataDisplayed) {
@@ -30,7 +26,7 @@ const ShowAllButton = ({ setPaginationNumber }) => {
     if (mapsData?.length <= 0 || allDataDisplayed) return;
 
     const lastMapsPagination = Math.ceil(
-      mapsData?.length / PAGINATION_ITEMS_PER_PAGE
+      mapsData?.length / PAGINATION_ITEMS_PER_PAGE,
     );
 
     dispatch(updateMapsState({ key: "mapsScroll", value: mapsData }));
@@ -47,11 +43,13 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   return (
     <button
       type="button"
-      className={s.showAllBtn}
+      className={`${s.showAllBtn} ${flipButton ? s.active : ""}`}
       onClick={handleShowAllBtn}
       disabled={isMapsUnavailable}
     >
-      {showAllBtnNoun}
+      <svg aria-hidden="true">
+        <use href="/icons-sprite.svg#angles-down" />
+      </svg>
     </button>
   );
 };

@@ -13,18 +13,22 @@ const ExpandButton = () => {
 
   function handleExpandBtn() {
     dispatch(
-      updateGlobalState({ key: "isMapsExpanded", value: !isMapsExpanded })
+      updateGlobalState({ key: "isMapsExpanded", value: !isMapsExpanded }),
     );
   }
 
   return (
     <button
       type="button"
-      className={s.expandButton}
+      className={`${s.expandButton} ${isMapsExpanded ? s.active : ""}`}
       onClick={handleExpandBtn}
       disabled={isMapsUnavailable}
     >
-      {isMapsExpanded ? "Hide Maps" : "Show Maps"}
+      <svg aria-hidden="true">
+        <use
+          href={`/icons-sprite.svg#${isMapsExpanded ? "eye" : "eye-slash"}`}
+        />
+      </svg>
     </button>
   );
 };
