@@ -1,5 +1,6 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
+import { formateReleaseDate } from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -34,7 +35,7 @@ const MapDetailHeader = ({ mapData }) => {
 
             <div className={s.metaItem}>
               <span className={s.label}>Released:</span>
-              <span className={s.value}>{Released || "Unknown"}</span>
+              <span className={s.value}>{formateReleaseDate(Released)}</span>
             </div>
 
             <div className={s.metaItem}>
