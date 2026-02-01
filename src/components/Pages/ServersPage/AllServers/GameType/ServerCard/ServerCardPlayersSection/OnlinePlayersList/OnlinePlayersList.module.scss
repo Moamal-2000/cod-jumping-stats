@@ -7,8 +7,11 @@
   flex-grow: 1;
   padding-right: 4px;
   border-radius: 0 0 12px 12px;
-  overscroll-behavior: contain;
   padding: 12px;
+
+  &.scrollable {
+    overscroll-behavior-y: contain;
+  }
 
   /* For Firefox */
   scrollbar-width: thin;

@@ -10,12 +10,15 @@ const OnlinePlayersList = ({ server }) => {
   const players = [...server?.Players];
   const sortBAdminPlayers = players.sort((a, b) => b.Admin - a.Admin);
 
+  const hasManyPlayers = players.length >= 10;
+  const playersListClasses = `${s.playersList} ${hasManyPlayers ? s.scrollable : ""}`;
+
   function handleMouseLeave() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
   }
 
   return (
-    <div className={s.playersList} onMouseLeave={handleMouseLeave}>
+    <div className={playersListClasses} onMouseLeave={handleMouseLeave}>
       {sortBAdminPlayers.map((player, index) => (
         <OnlinePlayerItem key={index} player={player} server={server} />
       ))}
