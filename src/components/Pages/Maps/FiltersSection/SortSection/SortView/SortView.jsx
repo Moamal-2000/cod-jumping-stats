@@ -25,32 +25,28 @@ const SortView = ({ setPaginationNumber }) => {
 
   return (
     <div className={s.sortViewWrapper}>
-      <div className={s.buttonsWrapper}>
-        <ShowAllButton setPaginationNumber={setPaginationNumber} />
-        <ExpandButton />
-      </div>
+      <ShowAllButton setPaginationNumber={setPaginationNumber} />
+      <ExpandButton />
 
-      <div className={s.buttonsWrapper}>
-        {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
-          const activeClass = urlQuery === value ? s.active : "";
+      {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
+        const activeClass = urlQuery === value ? s.active : "";
 
-          return (
-            <button
-              key={id}
-              type="button"
-              className={`${s.sortViewBtn} ${activeClass}`}
-              onClick={() => changeView(value)}
-              title={`Change maps view to ${value}`}
-            >
-              <span>
-                <svg aria-hidden="true">
-                  <use href={`/icons-sprite.svg#${icon}`} />
-                </svg>
-              </span>
-            </button>
-          );
-        })}
-      </div>
+        return (
+          <button
+            key={id}
+            type="button"
+            className={`${s.sortViewBtn} ${activeClass}`}
+            onClick={() => changeView(value)}
+            title={`Change maps view to ${value}`}
+          >
+            <span>
+              <svg aria-hidden="true">
+                <use href={`/icons-sprite.svg#${icon}`} />
+              </svg>
+            </span>
+          </button>
+        );
+      })}
     </div>
   );
 };
