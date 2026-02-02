@@ -67,6 +67,9 @@ function getAdminShieldClass({ cssModule, adminLevel }) {
   if (isLevelUndefined) return null;
 
   const level = Number(adminLevel) || 0;
+
+  if (level >= 90 && level <= 97) return cssModule.admin90;
+  if (level >= 98 && level <= 99) return cssModule.admin98;
   if (level >= 100) return cssModule.admin100;
 
   return null;
