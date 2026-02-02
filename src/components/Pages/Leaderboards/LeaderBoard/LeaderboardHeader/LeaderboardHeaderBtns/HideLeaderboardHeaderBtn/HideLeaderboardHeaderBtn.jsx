@@ -5,10 +5,12 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./HideLeaderboardHeaderBtn.module.scss";
 
 const HideLeaderboardHeaderBtn = () => {
-  const isLeaderboardHeaderVisible = useSelector(
-    (s) => s.leaderboard.isLeaderboardHeaderVisible,
-  );
+  const { isLeaderboardHeaderVisible, loading, error, leaderboardData } =
+    useSelector((s) => s.leaderboard);
   const dispatch = useDispatch();
+
+  const isLeaderboardUnavailable =
+    loading || error || leaderboardData?.length === 0;
 
   function handleToggleHeader() {
     const value = !isLeaderboardHeaderVisible;
@@ -23,6 +25,7 @@ const HideLeaderboardHeaderBtn = () => {
     <button
       type="button"
       className={`${s.button} ${!isLeaderboardHeaderVisible ? s.active : ""}`}
+      disabled={isLeaderboardUnavailable}
       onClick={handleToggleHeader}
     >
       <svg aria-hidden="true">
