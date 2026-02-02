@@ -7,6 +7,9 @@ import s from "./HideLeaderboardHeaderBtn.module.scss";
 const HideLeaderboardHeaderBtn = () => {
   const { isLeaderboardHeaderVisible, loading, error, leaderboardData } =
     useSelector((s) => s.leaderboard);
+  const isLeaderboardExpanded = useSelector(
+    (s) => s.global.isLeaderboardExpanded,
+  );
   const dispatch = useDispatch();
 
   const isLeaderboardUnavailable =
@@ -25,7 +28,7 @@ const HideLeaderboardHeaderBtn = () => {
     <button
       type="button"
       className={`${s.button} ${!isLeaderboardHeaderVisible ? s.active : ""}`}
-      disabled={isLeaderboardUnavailable}
+      disabled={isLeaderboardUnavailable || !isLeaderboardExpanded}
       onClick={handleToggleHeader}
     >
       <svg aria-hidden="true">
