@@ -1,17 +1,37 @@
 .button {
-  background-color: #1e2029;
-  border: 1px solid #ffcc33;
-  border-radius: 4px;
+  background-color: #21262d;
+  color: #fbbf24;
+  border: 1px solid #30363d;
+  border-radius: 6px;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color .2s;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  transition:
+    background-color .15s ease-in-out,
+    color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
 
-  &:not(:disabled):hover {
-    background-color: #2a2b36;
+  &.active {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    color: #ffffff;
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, .35);
+
+    svg {
+      fill: #000;
+    }
+  }
+
+  &:not(:disabled):not(.active):hover,
+  &:not(:disabled):not(.active):focus-visible {
+    background-color: #374151;
+    color: #f3f4f6;
+    border-color: #9ca3af;
   }
 
   &:disabled {
@@ -24,5 +44,5 @@
 .button svg {
   width: 16px;
   height: 16px;
-  fill: #ffcc33;
+  fill: currentColor;
 }

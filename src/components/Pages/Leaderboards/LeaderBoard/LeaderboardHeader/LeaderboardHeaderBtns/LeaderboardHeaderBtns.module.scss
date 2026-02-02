@@ -20,18 +20,20 @@
 }
 
 .buttons button {
-  background-color: #1e2029;
-  border: 1px solid #ffcc33;
-  border-radius: 4px;
+  background-color: #21262d;
+  color: #fbbf24;
+  border: 1px solid #30363d;
+  border-radius: 6px;
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 40px;
+  height: 40px;
   @include m.flex-center;
-  transition: background-color .2s;
-
-  &:not(:disabled):hover {
-    background-color: #2a2b36;
-  }
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  transition:
+    background-color .15s ease-in-out,
+    color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
 
   &:disabled {
     filter: grayscale(1);
@@ -43,5 +45,5 @@
 .buttons button svg {
   width: 16px;
   height: 16px;
-  fill: #ffcc33;
+  fill: currentColor;
 }

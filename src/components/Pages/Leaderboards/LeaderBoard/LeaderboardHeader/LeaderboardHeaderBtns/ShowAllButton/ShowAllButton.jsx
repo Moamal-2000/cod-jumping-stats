@@ -5,6 +5,7 @@ import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import s from "./ShowAllButton.module.scss";
 
 const ShowAllButton = ({ setPaginationNumber }) => {
   const {
@@ -72,7 +73,7 @@ const ShowAllButton = ({ setPaginationNumber }) => {
       type="button"
       onClick={handleShowAllBtn}
       disabled={isLeaderboardUnavailable}
-      className={flipButton ? "flip" : ""}
+      className={`${s.button} ${flipButton ? s.active : ""}`}
     >
       <svg aria-hidden="true">
         <use href="/icons-sprite.svg#angles-down" />

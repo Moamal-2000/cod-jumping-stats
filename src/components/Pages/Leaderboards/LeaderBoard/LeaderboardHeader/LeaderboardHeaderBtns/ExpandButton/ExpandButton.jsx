@@ -2,10 +2,13 @@
 
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import s from "./ExpandButton.module.scss";
 
 const ExpandButton = () => {
   const { loading, error, leaderboardData } = useSelector((s) => s.leaderboard);
-  const { isLeaderboardExpanded } = useSelector((s) => s.global);
+  const isLeaderboardExpanded = useSelector(
+    (s) => s.global.isLeaderboardExpanded,
+  );
 
   const dispatch = useDispatch();
   const isLeaderboardUnavailable =
@@ -24,6 +27,7 @@ const ExpandButton = () => {
     <button
       type="button"
       onClick={handleExpandBtn}
+      className={`${s.button} ${!isLeaderboardExpanded ? s.active : ""}`}
       disabled={isLeaderboardUnavailable}
     >
       <svg aria-hidden="true">

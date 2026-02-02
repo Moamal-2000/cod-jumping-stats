@@ -1,9 +1,9 @@
 "use client";
 
-import ExpandButton from "./ExpandButton";
+import ExpandButton from "./ExpandButton/ExpandButton";
 import HideLeaderboardHeaderBtn from "./HideLeaderboardHeaderBtn/HideLeaderboardHeaderBtn";
 import s from "./LeaderboardHeaderBtns.module.scss";
-import ShowAllButton from "./ShowAllButton";
+import ShowAllButton from "./ShowAllButton/ShowAllButton";
 
 const LeaderboardHeaderBtns = ({ setPaginationNumber }) => {
   return (

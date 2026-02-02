@@ -20,7 +20,11 @@ const HideLeaderboardHeaderBtn = () => {
   }
 
   return (
-    <button type="button" className={s.button} onClick={handleToggleHeader}>
+    <button
+      type="button"
+      className={`${s.button} ${!isLeaderboardHeaderVisible ? s.active : ""}`}
+      onClick={handleToggleHeader}
+    >
       <svg aria-hidden="true">
         <use
           href={`/icons-sprite.svg#${isLeaderboardHeaderVisible ? "eye" : "eye-slash"}`}

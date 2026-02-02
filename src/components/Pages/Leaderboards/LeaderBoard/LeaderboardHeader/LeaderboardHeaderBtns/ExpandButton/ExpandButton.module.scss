@@ -1,0 +1,19 @@
+.button {
+
+  &.active {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    border-color: #f59e0b;
+    box-shadow: 0 0 0 2px rgba(251, 191, 36, .35);
+
+    svg {
+      fill: #000;
+    }
+  }
+
+  &:not(:disabled):not(.active):not(.flip):hover,
+  &:not(:disabled):not(.active):not(.flip):focus-visible {
+    background-color: #374151;
+    color: #f3f4f6;
+    border-color: #9ca3af;
+  }
+}
