@@ -33,7 +33,7 @@ const PlayerRouteCompletion = () => {
       const result = await dispatch(
         fetchPlayerRouteCompletionNew({
           playerId: parseInt(playerId),
-        })
+        }),
       );
 
       if (result.payload) {
@@ -154,7 +154,7 @@ const PlayerRouteCompletion = () => {
 
   const completedRoutes = getSortedData(completionData?.completedMaps || []);
   const notCompletedRoutes = getSortedData(
-    completionData?.notCompletedMaps || []
+    completionData?.notCompletedMaps || [],
   );
 
   return (
@@ -181,9 +181,6 @@ const PlayerRouteCompletion = () => {
               style={{
                 color: getCompletionRateInfo(completionData.completionRate)
                   .color,
-                textShadow: `0 0 8px ${
-                  getCompletionRateInfo(completionData.completionRate).glow
-                }`,
               }}
             >
               {completionData.completionRate}
