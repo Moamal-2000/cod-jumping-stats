@@ -12,8 +12,12 @@ const HideLeaderboardHeaderBtn = () => {
   );
   const dispatch = useDispatch();
 
-  const isLeaderboardUnavailable =
-    loading || error || leaderboardData?.length === 0;
+  const disableButton = shouldDisableButton({
+    loading,
+    error,
+    leaderboardData,
+    isLeaderboardExpanded,
+  });
 
   function handleToggleHeader() {
     const value = !isLeaderboardHeaderVisible;
@@ -28,7 +32,7 @@ const HideLeaderboardHeaderBtn = () => {
     <button
       type="button"
       className={`${s.button} ${!isLeaderboardHeaderVisible ? s.active : ""}`}
-      disabled={isLeaderboardUnavailable || !isLeaderboardExpanded}
+      disabled={disableButton}
       onClick={handleToggleHeader}
     >
       <svg aria-hidden="true">
@@ -41,3 +45,19 @@ const HideLeaderboardHeaderBtn = () => {
 };
 
 export default HideLeaderboardHeaderBtn;
+
+function shouldDisableButton({
+  loading,
+  error,
+  leaderboardData,
+  isLeaderboardExpanded,
+} = {}) {
+  const isLeaderboardUnavailable =
+    loading || error || leaderboardData?.length === 0;
+
+  const isViewportBelow1300px = matchMedia("(max-width: 1300px)").matches;
+
+  return (
+    isLeaderboardUnavailable || !isLeaderboardExpanded || isViewportBelow1300px
+  );
+}
