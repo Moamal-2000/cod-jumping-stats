@@ -7,7 +7,7 @@ import s from "./playerProfileTabs.module.scss";
 const tabs = [
   { id: "overview", label: "Overview", icon: "chart-bar" },
   { id: "tops", label: "Top Runs", icon: "star" },
-  { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
+  // { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
   { id: "routes", label: "Route Completion", icon: "check-circle" },
   { id: "runs-analytics", label: "Runs Analytics", icon: "line-chart" },
 ];
