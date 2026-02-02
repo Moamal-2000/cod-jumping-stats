@@ -21,7 +21,6 @@
 
 .buttons button {
   background-color: #21262d;
-  color: #fbbf24;
   border: 1px solid #30363d;
   border-radius: 6px;
   cursor: pointer;
@@ -45,5 +44,6 @@
 .buttons button svg {
   width: 16px;
   height: 16px;
-  fill: currentColor;
+  fill: #8b949e;
+  transition: fill .15s ease-in-out;
 }

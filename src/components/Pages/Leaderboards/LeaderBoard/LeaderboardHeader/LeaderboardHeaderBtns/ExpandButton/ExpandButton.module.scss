@@ -17,3 +17,7 @@
     border-color: #9ca3af;
   }
 }
+
+.button:not(.active):hover svg {
+  fill: #fff;
+}
