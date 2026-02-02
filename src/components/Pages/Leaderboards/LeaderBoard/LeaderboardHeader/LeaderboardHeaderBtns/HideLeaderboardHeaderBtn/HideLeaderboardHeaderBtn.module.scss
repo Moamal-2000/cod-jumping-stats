@@ -46,6 +46,6 @@
   fill: #8b949e;
 }
 
-.button:not(.active):hover svg {
+.button:not(.active):not(:disabled):hover svg {
   fill: #fff;
 }
