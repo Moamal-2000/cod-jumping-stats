@@ -12,10 +12,10 @@ const LeaderboardsTab = () => {
 
   const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState(125);
   const [visibleLeaderboards, setVisibleLeaderboards] = useState({
+    skilled: false,
+    speed: true,
     defrag: false,
     surf: false,
-    jump: true,
-    speed: true,
   });
 
   // Process and group leaderboard data by FPS
@@ -24,14 +24,19 @@ const LeaderboardsTab = () => {
 
     const otherPositions = leaderboardPositions.filter((pos) => {
       if (pos.LeaderboardType === "howmany") return false;
+
       if (pos.LeaderboardType === "defrag" && !visibleLeaderboards.defrag)
         return false;
+
       if (pos.LeaderboardType === "surf" && !visibleLeaderboards.surf)
         return false;
-      if (pos.LeaderboardType === "jump" && !visibleLeaderboards.jump)
+
+      if (pos.LeaderboardType === "jump" && !visibleLeaderboards.skilled)
         return false;
+
       if (pos.LeaderboardType === "speed" && !visibleLeaderboards.speed)
         return false;
+
       return true;
     });
 
@@ -69,6 +74,11 @@ const LeaderboardsTab = () => {
     if (rank <= 3) return s[`rank${rank}`];
 
     return "";
+  }
+
+  function getLeaderboardType(type) {
+    if (type === "jump") return "skilled";
+    return type;
   }
 
   return (
@@ -112,7 +122,7 @@ const LeaderboardsTab = () => {
                 aria-label="Leaderboard toggles"
               >
                 {[
-                  { key: "jump", label: "Jump" },
+                  { key: "skilled", label: "Skilled" },
                   { key: "speed", label: "Speed" },
                   { key: "defrag", label: "Defrag" },
                   { key: "surf", label: "Surf" },
@@ -185,10 +195,7 @@ const LeaderboardsTab = () => {
 
                             <div className={s.leaderboardInfo}>
                               <h3>
-                                {position.LeaderboardType.charAt(
-                                  0,
-                                ).toUpperCase() +
-                                  position.LeaderboardType.slice(1)}
+                                {getLeaderboardType(position.LeaderboardType)}
                               </h3>
                               <div className={s.leaderboardDetails}>
                                 <span className={s.leaderboardFps}>
