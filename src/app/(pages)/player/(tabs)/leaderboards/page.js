@@ -10,7 +10,7 @@ const LeaderboardsTab = () => {
     (s) => s.playerProfile,
   );
 
-  const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState("125");
+  const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState(125);
   const [visibleLeaderboards, setVisibleLeaderboards] = useState({
     defrag: false,
     surf: false,
@@ -36,11 +36,11 @@ const LeaderboardsTab = () => {
     });
 
     const filteredPositions = otherPositions.filter(
-      (pos) => pos.FPS === selectedLeaderboardFps,
+      (pos) => +pos.FPS === selectedLeaderboardFps,
     );
 
     const groupedByFps = filteredPositions.reduce((acc, position) => {
-      const fps = position.FPS;
+      const fps = +position.FPS;
       if (!acc[fps]) acc[fps] = [];
       acc[fps].push(position);
       return acc;
@@ -83,7 +83,7 @@ const LeaderboardsTab = () => {
                 role="tablist"
                 aria-label="FPS selector"
               >
-                {["125", "250", "mix", "333", "76", "43"].map((fps) => (
+                {[43, 76, 125, 250, 333, "mix"].map((fps) => (
                   <button
                     key={fps}
                     type="button"
@@ -112,10 +112,10 @@ const LeaderboardsTab = () => {
                 aria-label="Leaderboard toggles"
               >
                 {[
-                  { key: "defrag", label: "Defrag" },
-                  { key: "surf", label: "Surf" },
                   { key: "jump", label: "Jump" },
                   { key: "speed", label: "Speed" },
+                  { key: "defrag", label: "Defrag" },
+                  { key: "surf", label: "Surf" },
                 ].map(({ key, label }) => (
                   <button
                     key={key}
