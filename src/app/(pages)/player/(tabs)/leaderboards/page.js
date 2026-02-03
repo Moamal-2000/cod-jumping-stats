@@ -1,12 +1,13 @@
 "use client";
 
 import s from "@/components/Pages/PlayerProfile/leaderboardsTab.module.scss";
+import { getModifiedRank } from "@/functions/components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 
 const LeaderboardsTab = () => {
   const { leaderboardPositionsLoading, leaderboardPositions } = useSelector(
-    (s) => s.playerProfile
+    (s) => s.playerProfile,
   );
 
   const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState("125");
@@ -35,7 +36,7 @@ const LeaderboardsTab = () => {
     });
 
     const filteredPositions = otherPositions.filter(
-      (pos) => pos.FPS === selectedLeaderboardFps
+      (pos) => pos.FPS === selectedLeaderboardFps,
     );
 
     const groupedByFps = filteredPositions.reduce((acc, position) => {
@@ -47,7 +48,7 @@ const LeaderboardsTab = () => {
 
     Object.keys(groupedByFps).forEach((fps) => {
       groupedByFps[fps].sort((a, b) =>
-        a.LeaderboardType.localeCompare(b.LeaderboardType)
+        a.LeaderboardType.localeCompare(b.LeaderboardType),
       );
     });
 
@@ -59,6 +60,15 @@ const LeaderboardsTab = () => {
       ...prev,
       [leaderboard]: !prev[leaderboard],
     }));
+  }
+
+  function getRankClass(rankValue) {
+    const rank = Number(rankValue);
+
+    if (!Number.isFinite(rank) || rank <= 0) return "";
+    if (rank <= 3) return s[`rank${rank}`];
+
+    return "";
   }
 
   return (
@@ -163,7 +173,11 @@ const LeaderboardsTab = () => {
                           className={s.leaderboardCard}
                         >
                           <div className={s.leaderboardCardHeader}>
-                            <div className={s.leaderboardRank}>
+                            <div
+                              className={`${s.leaderboardRank} ${getRankClass(
+                                position.Rank,
+                              )}`}
+                            >
                               <span className={s.rankNumber}>
                                 {position.Rank}
                               </span>
@@ -172,7 +186,7 @@ const LeaderboardsTab = () => {
                             <div className={s.leaderboardInfo}>
                               <h3>
                                 {position.LeaderboardType.charAt(
-                                  0
+                                  0,
                                 ).toUpperCase() +
                                   position.LeaderboardType.slice(1)}
                               </h3>
@@ -182,6 +196,12 @@ const LeaderboardsTab = () => {
                                 </span>
                               </div>
                             </div>
+
+                            {position.Rank <= 3 && (
+                              <div className={s.leaderboardIcon}>
+                                {getModifiedRank(position.Rank)}
+                              </div>
+                            )}
                           </div>
 
                           <div className={s.leaderboardStats}>
