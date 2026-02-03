@@ -12,10 +12,11 @@ const LeaderboardsTab = () => {
 
   const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState(125);
   const [visibleLeaderboards, setVisibleLeaderboards] = useState({
-    skilled: false,
+    skilled: true,
     speed: true,
     defrag: false,
     surf: false,
+    howmany: false,
   });
 
   // Process and group leaderboard data by FPS
@@ -23,7 +24,8 @@ const LeaderboardsTab = () => {
     if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
 
     const otherPositions = leaderboardPositions.filter((pos) => {
-      if (pos.LeaderboardType === "howmany") return false;
+      if (pos.LeaderboardType === "howmany" && !visibleLeaderboards.howmany)
+        return false;
 
       if (pos.LeaderboardType === "defrag" && !visibleLeaderboards.defrag)
         return false;
@@ -78,6 +80,7 @@ const LeaderboardsTab = () => {
 
   function getLeaderboardType(type) {
     if (type === "jump") return "skilled";
+    if (type === "howmany") return "Route Completion"
     return type;
   }
 
@@ -126,6 +129,7 @@ const LeaderboardsTab = () => {
                   { key: "speed", label: "Speed" },
                   { key: "defrag", label: "Defrag" },
                   { key: "surf", label: "Surf" },
+                  { key: "howmany", label: "Route Completion" },
                 ].map(({ key, label }) => (
                   <button
                     key={key}
