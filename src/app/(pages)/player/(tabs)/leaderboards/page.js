@@ -11,38 +11,12 @@ const LeaderboardsTab = () => {
   );
 
   const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState(125);
-  const [visibleLeaderboards, setVisibleLeaderboards] = useState({
-    skilled: true,
-    speed: true,
-    defrag: false,
-    surf: false,
-    howmany: false,
-  });
 
   // Process and group leaderboard data by FPS
   function getProcessedLeaderboards() {
     if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
 
-    const otherPositions = leaderboardPositions.filter((pos) => {
-      if (pos.LeaderboardType === "howmany" && !visibleLeaderboards.howmany)
-        return false;
-
-      if (pos.LeaderboardType === "defrag" && !visibleLeaderboards.defrag)
-        return false;
-
-      if (pos.LeaderboardType === "surf" && !visibleLeaderboards.surf)
-        return false;
-
-      if (pos.LeaderboardType === "jump" && !visibleLeaderboards.skilled)
-        return false;
-
-      if (pos.LeaderboardType === "speed" && !visibleLeaderboards.speed)
-        return false;
-
-      return true;
-    });
-
-    const filteredPositions = otherPositions.filter(
+    const filteredPositions = leaderboardPositions.filter(
       (pos) => +pos.FPS === selectedLeaderboardFps,
     );
 
@@ -62,13 +36,6 @@ const LeaderboardsTab = () => {
     return groupedByFps;
   }
 
-  function toggleLeaderboard(leaderboard) {
-    setVisibleLeaderboards((prev) => ({
-      ...prev,
-      [leaderboard]: !prev[leaderboard],
-    }));
-  }
-
   function getRankClass(rankValue) {
     const rank = Number(rankValue);
 
@@ -80,7 +47,7 @@ const LeaderboardsTab = () => {
 
   function getLeaderboardType(type) {
     if (type === "jump") return "skilled";
-    if (type === "howmany") return "Route Completion"
+    if (type === "howmany") return "Route Completion";
     return type;
   }
 
@@ -112,36 +79,6 @@ const LeaderboardsTab = () => {
                     onClick={() => setSelectedLeaderboardFps(fps)}
                   >
                     {fps === "mix" ? "Mixed" : fps}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div className={s.leaderboardToggleGroup}>
-              <label>Show Leaderboards:</label>
-              <div
-                className={s.leaderboardToggleButtons}
-                role="toolbar"
-                aria-label="Leaderboard toggles"
-              >
-                {[
-                  { key: "skilled", label: "Skilled" },
-                  { key: "speed", label: "Speed" },
-                  { key: "defrag", label: "Defrag" },
-                  { key: "surf", label: "Surf" },
-                  { key: "howmany", label: "Route Completion" },
-                ].map(({ key, label }) => (
-                  <button
-                    key={key}
-                    type="button"
-                    aria-pressed={!!visibleLeaderboards[key]}
-                    aria-label={`Toggle ${label} leaderboards`}
-                    className={`${s.leaderboardToggleButton} ${
-                      visibleLeaderboards[key] ? s.active : ""
-                    }`}
-                    onClick={() => toggleLeaderboard(key)}
-                  >
-                    {label}
                   </button>
                 ))}
               </div>

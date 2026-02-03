@@ -1608,24 +1608,6 @@
   }
 }
 
-.leaderboardToggleGroup {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
-  flex: 1;
-  min-width: 0;
-
-  label {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #f9fafb;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-}
-
 .howManyCard {
   display: flex;
   flex-direction: column;
@@ -1846,8 +1828,7 @@
   font-size: 0.8rem;
 }
 
-.fpsToggleButtons,
-.leaderboardToggleButtons {
+.fpsToggleButtons {
   display: flex;
   flex-wrap: wrap;
   gap: 0.375rem;
@@ -2601,15 +2582,13 @@
 }
 
 // Leaderboard Controls - Match Top Runs styling
-.leaderboardControls .fpsToggleButtons,
-.leaderboardControls .leaderboardToggleButtons {
+.leaderboardControls .fpsToggleButtons {
   display: flex;
   flex-wrap: wrap;
   gap: 0.375rem;
 }
 
-.leaderboardControls .fpsToggleButton,
-.leaderboardControls .leaderboardToggleButton {
+.leaderboardControls .fpsToggleButton {
   flex: 1;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
