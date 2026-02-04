@@ -1,12 +1,12 @@
 "use client";
 
+import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import { getColoredName } from "@/functions/components";
 import { stripColorCodes } from "@/functions/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./OnlinePlayerItem.module.scss";
-import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 
 const OnlinePlayerItem = ({ player, server }) => {
   const dispatch = useDispatch();
@@ -41,13 +41,7 @@ const OnlinePlayerItem = ({ player, server }) => {
       </strong>
 
       <div className={s.playerInfo}>
-        <span className={`${s.playerAdminLevel} ${adminClass}`}>
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#shield" />
-          </svg>{" "}
-          {player?.Admin || "N/A"}
-          <span className="visually-hidden">Admin Level</span>
-        </span>
+        <AdminLevel adminLevel={player?.Admin} />
 
         <span className={s.playerPing}>
           <svg aria-hidden="true">
