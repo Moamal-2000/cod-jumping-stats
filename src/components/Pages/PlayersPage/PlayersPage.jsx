@@ -2,17 +2,17 @@
 
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
 import { getPlayersByParams } from "@/functions/filters";
-import { removeQueryString } from "@/functions/utils";
-import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import {
-  loadMorePlayersAction,
-  resetPagination,
-  setIsLoadingMore,
-  updatePlayersState,
-} from "@/redux/features/players/slice/playersSlice";
+  getIsLastPagination,
+  paginateData,
+  removeQueryString,
+} from "@/functions/utils";
+import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
+import { updatePlayersState } from "@/redux/features/players/slice/playersSlice";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useCallback, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
@@ -25,17 +25,15 @@ const PlayersPage = () => {
   const {
     allPlayersData,
     playersData,
+    playersScroll,
+    allDataDisplayed,
     loading,
     error,
-    displayedCount,
-    hasMore,
-    isLoadingMore,
   } = useSelector((s) => s.players);
+  const { pageVisits } = useSelector((s) => s.global);
 
-  const playersToDisplay = getPlayersToDisplay({
-    displayedCount,
-    playersData,
-  });
+  const [lastPlayerRef, paginationNumber, setPaginationNumber] =
+    useInfiniteScroll(playersData, null, PLAYERS_BATCH_SIZE);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -46,14 +44,13 @@ const PlayersPage = () => {
   const sortBy = searchParams.get("sort");
 
   const searchInputRef = useRef(null);
-  const loadMoreRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
-  const noResults = playersToDisplay.length === 0;
+  const noResults = playersScroll.length === 0;
 
   useEffect(() => {
-    dispatch(resetPagination());
     dispatch(fetchAllPlayers(paramsObject));
+    setPaginationNumber(1);
   }, [sortBy]);
 
   useEffect(() => {
@@ -63,10 +60,25 @@ const PlayersPage = () => {
       allPlayersData,
       paramsObject,
     });
+    const paginationPlayers = paginateData(
+      filteredPlayers,
+      1,
+      PLAYERS_BATCH_SIZE,
+    );
 
     dispatch(
-      updatePlayersState({ key: "playersData", value: filteredPlayers })
+      updatePlayersState({ key: "playersData", value: filteredPlayers }),
     );
+    dispatch(
+      updatePlayersState({ key: "playersScroll", value: paginationPlayers }),
+    );
+    dispatch(
+      updatePlayersState({
+        key: "firstChunkPlayers",
+        value: paginationPlayers,
+      }),
+    );
+    setPaginationNumber(1);
   }, [searchByName]);
 
   function handleClearSearch() {
@@ -75,29 +87,28 @@ const PlayersPage = () => {
     removeQueryString("name", searchParams, router, pathname);
   }
 
-  const loadMore = useCallback(() => {
-    if (!hasMore && isLoadingMore && loading && searchByName) return;
-
-    dispatch(setIsLoadingMore(true));
-    setTimeout(() => dispatch(loadMorePlayersAction()), 300);
-  }, [hasMore, isLoadingMore, loading, searchByName]);
-
   function handleMouseLeave() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
   }
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries[0].isIntersecting && loadMore(),
-      { threshold: 0.1 }
-    );
+    checkAndLoadMoreData({
+      playersData,
+      paginationNumber,
+      playersScroll,
+      allDataDisplayed,
+      pageVisits,
+      dispatch,
+    });
+  }, [paginationNumber]);
 
-    if (loadMoreRef.current) observer.observe(loadMoreRef.current);
-
-    return () => {
-      if (loadMoreRef.current) observer.unobserve(loadMoreRef.current);
-    };
-  }, [loadMore]);
+  useEffect(() => {
+    updateAllDataDisplayedStatus({
+      playersData,
+      paginationNumber,
+      dispatch,
+    });
+  }, [playersScroll]);
 
   useEffect(() => {
     return () => {
@@ -119,10 +130,9 @@ const PlayersPage = () => {
 
       {!noResults && (
         <PlayersCardsSection
-          playersToDisplay={playersToDisplay}
-          hasMore={hasMore}
-          isLoadingMore={isLoadingMore}
-          loadMoreRef={loadMoreRef}
+          playersScroll={playersScroll}
+          allDataDisplayed={allDataDisplayed}
+          lastPlayerRef={lastPlayerRef}
           searchByName={searchByName}
         />
       )}
@@ -132,9 +142,70 @@ const PlayersPage = () => {
 
 export default PlayersPage;
 
-function getPlayersToDisplay({
-  displayedCount = PLAYERS_BATCH_SIZE,
+function checkAndLoadMoreData({
   playersData,
+  paginationNumber,
+  playersScroll,
+  allDataDisplayed,
+  pageVisits,
+  dispatch,
 } = {}) {
-  return playersData.slice(0, Math.min(displayedCount, playersData.length));
+  const isLastPage = getIsLastPagination(
+    playersData,
+    paginationNumber,
+    PLAYERS_BATCH_SIZE,
+  );
+  const previousPage = pageVisits.at(-1);
+  const cameFromDifferentPage = previousPage !== "/players";
+
+  // In this case the handleShowAll() is invoked already
+  const isSameArrayReference = playersScroll === playersData;
+
+  const shouldLoadMoreData =
+    !isLastPage &&
+    !allDataDisplayed &&
+    !isSameArrayReference &&
+    !cameFromDifferentPage;
+
+  if (shouldLoadMoreData)
+    addDataOnScroll({
+      playersData,
+      paginationNumber,
+      playersScroll,
+      dispatch,
+    });
+}
+
+function addDataOnScroll({
+  playersData,
+  paginationNumber,
+  playersScroll,
+  dispatch,
+} = {}) {
+  const paginationPlayersData = paginateData(
+    playersData,
+    paginationNumber,
+    PLAYERS_BATCH_SIZE,
+  );
+  const value = playersScroll.concat(paginationPlayersData);
+
+  dispatch(updatePlayersState({ key: "playersScroll", value }));
+}
+
+function updateAllDataDisplayedStatus({
+  playersData,
+  paginationNumber,
+  dispatch,
+} = {}) {
+  const lastPlayersPagination = Math.ceil(
+    playersData?.length / PLAYERS_BATCH_SIZE,
+  );
+  const isLastPagination = paginationNumber >= lastPlayersPagination;
+
+  dispatch(
+    updatePlayersState({
+      key: "allDataDisplayed",
+      value: isLastPagination,
+    }),
+  );
 }

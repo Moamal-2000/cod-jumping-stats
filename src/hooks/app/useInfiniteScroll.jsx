@@ -3,14 +3,22 @@
 import { getIsLastPagination } from "@/functions/utils";
 import { useCallback, useRef, useState } from "react";
 
-const useInfiniteScroll = (data, isTableElementReversed = null) => {
+const useInfiniteScroll = (
+  data,
+  isTableElementReversed = null,
+  itemsPerPage = undefined
+) => {
   const [paginationNumber, setPaginationNumber] = useState(1);
   const observer = useRef();
 
   const lastElementRef = useCallback((node) => {
     if (isTableElementReversed && isTableElementReversed !== null) return;
 
-    const isLastPagination = getIsLastPagination(data, paginationNumber);
+    const isLastPagination = getIsLastPagination(
+      data,
+      paginationNumber,
+      itemsPerPage
+    );
 
     if (isLastPagination) return;
 

@@ -2,30 +2,19 @@ import PlayerCard from "../PlayerCard/PlayerCard";
 import s from "./PlayersCardsSection.module.scss";
 
 const PlayersCardsSection = ({
-  playersToDisplay,
-  hasMore,
-  isLoadingMore,
-  loadMoreRef,
+  playersScroll,
+  allDataDisplayed,
+  lastPlayerRef,
   searchByName,
 }) => {
   return (
     <section className={s.playersSection}>
-      {playersToDisplay.map((player) => (
-        <PlayerCard key={player.PlayerID} {...player} />
-      ))}
+      {playersScroll.map((player, index) => {
+        const ref = playersScroll.length === index + 1 ? lastPlayerRef : null;
+        return <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />;
+      })}
 
-      {isLoadingMore && (
-        <div className={s.loadingMoreContainer}>
-          <div className={s.loadingSpinner}></div>
-          <p>Loading more players...</p>
-        </div>
-      )}
-
-      {hasMore && !isLoadingMore && !searchByName && (
-        <div ref={loadMoreRef} className={s.loadMoreTrigger} />
-      )}
-
-      {!hasMore && playersToDisplay.length > 0 && !searchByName && (
+      {allDataDisplayed && playersScroll.length > 0 && !searchByName && (
         <div className={s.endOfResults}>
           <p>You've reached the end of the players list!</p>
         </div>

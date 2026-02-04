@@ -1,10 +1,14 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
+import { paginateData } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers } from "../thunk/playersThunk";
 
 const initialState = {
   allPlayersData: [],
   playersData: [],
+  playersScroll: [],
+  firstChunkPlayers: [],
+  allDataDisplayed: false,
   loading: false,
   error: false,
   displayedCount: PLAYERS_BATCH_SIZE,
@@ -48,9 +52,16 @@ export const playersSlice = createSlice({
     })
       .addCase(fetchAllPlayers.fulfilled, (state, { payload }) => {
         const { allPlayersData, filteredPlayersData } = payload;
+        const paginationPlayers = paginateData(
+          filteredPlayersData,
+          1,
+          PLAYERS_BATCH_SIZE
+        );
 
         state.allPlayersData = allPlayersData;
         state.playersData = filteredPlayersData;
+        state.playersScroll = paginationPlayers;
+        state.firstChunkPlayers = paginationPlayers;
         state.displayedCount = PLAYERS_BATCH_SIZE;
         state.hasMore = filteredPlayersData.length > PLAYERS_BATCH_SIZE;
         state.isLoadingMore = false;

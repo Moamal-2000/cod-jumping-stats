@@ -48,10 +48,14 @@ export function getStatsBarStyles({
   return { backgroundColor, height };
 }
 
-export function paginateData(items, pageNumber = 1) {
+export function paginateData(
+  items,
+  pageNumber = 1,
+  itemsPerPage = PAGINATION_ITEMS_PER_PAGE
+) {
   const page = Math.max(1, parseInt(pageNumber, 10) || 1);
-  const startIndex = PAGINATION_ITEMS_PER_PAGE * (page - 1);
-  const endIndex = startIndex + PAGINATION_ITEMS_PER_PAGE;
+  const startIndex = itemsPerPage * (page - 1);
+  const endIndex = startIndex + itemsPerPage;
 
   return items?.slice(startIndex, endIndex);
 }
@@ -70,8 +74,12 @@ export function getLeaderboardUrl(paramsObject) {
   return leaderboardUrls[leaderboardType];
 }
 
-export function getIsLastPagination(data, paginationNumber) {
-  const lastPagination = Math.ceil(data?.length / PAGINATION_ITEMS_PER_PAGE);
+export function getIsLastPagination(
+  data,
+  paginationNumber,
+  itemsPerPage = PAGINATION_ITEMS_PER_PAGE
+) {
+  const lastPagination = Math.ceil(data?.length / itemsPerPage);
   return paginationNumber > lastPagination;
 }
 

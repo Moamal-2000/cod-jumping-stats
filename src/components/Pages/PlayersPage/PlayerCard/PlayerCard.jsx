@@ -13,9 +13,10 @@ const PlayerCard = ({
   Country,
   Banned,
   Donated,
+  cardRef,
 }) => {
   return (
-    <div className={s.playerCard}>
+    <div className={s.playerCard} ref={cardRef}>
       <div className={s.topSection}>
         <CardHeader
           PlayerName={PlayerName}
