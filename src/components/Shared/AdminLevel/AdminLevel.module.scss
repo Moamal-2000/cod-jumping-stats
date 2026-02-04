@@ -1,0 +1,59 @@
+.playerAdminLevel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: .9rem;
+  font-weight: 600;
+  user-select: text;
+  min-width: 46px;
+  color: #facc15;
+  text-shadow: 0 0 14px #facc1566;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    filter: drop-shadow(0 0 2px #facc1566);
+  }
+}
+
+.admin90 {
+  background: linear-gradient(45deg, #facc15, #ff9100);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 14px #ff910099;
+  color: #ff9100;
+
+  svg {
+    scale: 1.03;
+    filter: drop-shadow(0 0 2px #ff910066);
+  }
+}
+
+.admin98 {
+  background: linear-gradient(45deg, #60a5fa, #2563eb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 14px rgba(59, 130, 246, .5);
+  color: #60a5fa;
+
+  svg {
+    scale: 1.05;
+    filter: drop-shadow(0 0 2px rgba(59, 130, 246, .6));
+  }
+}
+
+.admin100 {
+  background: linear-gradient(45deg, #00ffff, #4186e1);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(65, 156, 225, .5);
+  color: #41bee1;
+
+  svg {
+    filter: drop-shadow(0 0 2px rgba(0, 255, 255, .6));
+    scale: 1.08;
+  }
+}

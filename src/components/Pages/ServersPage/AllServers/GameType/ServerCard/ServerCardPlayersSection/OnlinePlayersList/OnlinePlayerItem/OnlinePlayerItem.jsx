@@ -6,6 +6,7 @@ import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./OnlinePlayerItem.module.scss";
+import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 
 const OnlinePlayerItem = ({ player, server }) => {
   const dispatch = useDispatch();
