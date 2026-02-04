@@ -130,21 +130,6 @@
   }
 }
 
-.statsSection {
-  h3 {
-    color: #f9fafb;
-    font-size: 1.125rem;
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-}
-
-.statsGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.75rem;
-}
-
 @include m.small {
   .cardHeader {
     flex-direction: column;
@@ -158,9 +143,5 @@
 
   .fpsButtons {
     flex-wrap: wrap;
-  }
-
-  .statsGrid {
-    grid-template-columns: 1fr;
   }
 }

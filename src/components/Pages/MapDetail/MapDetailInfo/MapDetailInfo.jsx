@@ -6,7 +6,6 @@ const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 
 const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
   const Difficulty = mapData?.Difficulty;
-  const currentStats = getStatsForFps({ selectedFps, Difficulty });
   const hasDifficulty = mapHasDifficulties(Difficulty);
 
   return (
@@ -54,19 +53,6 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
           </div>
         )}
       </div>
-
-      {/* Hide, until dcoy fix it */}
-      {currentStats && selectedFps !== "All" && true === false && (
-        <div className={s.statsSection}>
-          <h3>Statistics ({selectedFps} FPS)</h3>
-          <div className={s.statsGrid}>
-            <div className={s.statItem}>
-              <span className={s.statLabel}>Number of Tops</span>
-              <span className={s.statValue}>{currentStats.NbTops}</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
