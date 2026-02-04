@@ -1,5 +1,6 @@
 "use client";
 
+import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import { getColoredName } from "@/functions/components";
 import { stripColorCodes } from "@/functions/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
@@ -27,13 +28,7 @@ const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
 
       <div className={s.wrapper}>
         <span className={s.playerId}>#{PlayerID}</span>
-
-        <div className={s.adminLevel}>
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#shield" />
-          </svg>
-          <span>{Admin}</span>
-        </div>
+        <AdminLevel adminLevel={Admin} />
       </div>
     </div>
   );

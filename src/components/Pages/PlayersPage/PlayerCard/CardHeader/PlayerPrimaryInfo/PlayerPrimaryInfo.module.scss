@@ -39,27 +39,3 @@
   opacity: .9;
   letter-spacing: .02em;
 }
-
-.wrapper .adminLevel {
-  gap: 2px;
-  display: inline-flex;
-  align-items: center;
-  font-size: .875rem;
-  font-weight: 500;
-  position: relative;
-}
-
-.wrapper .adminLevel>svg {
-  width: 16px;
-  height: 16px;
-}
-
-.wrapper .adminLevel {
-  color: #facc15;
-  text-shadow: 0 0 15px rgba(255, 215, 0, .3);
-
-  svg {
-    color: #ffd700;
-    filter: drop-shadow(0 0 2px rgba(255, 215, 0, .5));
-  }
-}
