@@ -34,7 +34,7 @@ const LeaderboardsTab = () => {
   }
 
   function getLeaderboardType(type) {
-    if (type === "jump") return "skilled";
+    if (type === "jump") return "raw skill";
     if (type === "howmany") return "Route Completion";
     return type;
   }
