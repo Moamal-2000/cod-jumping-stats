@@ -41,36 +41,32 @@ const LeaderboardsTab = () => {
 
   return (
     <div className={s.leaderboardTab}>
-      <div className={s.leaderboardHeader}>
-        <div className={s.leaderboardHeaderRow}>
-          <div className={s.leaderboardControls}>
-            <div className={s.fpsToggleGroup}>
-              <label>Show FPS:</label>
-              <div
-                className={s.fpsToggleButtons}
-                role="tablist"
-                aria-label="FPS selector"
+      <div className={s.leaderboardControls}>
+        <div className={s.fpsToggleGroup}>
+          <label>Show FPS:</label>
+          <div
+            className={s.fpsToggleButtons}
+            role="tablist"
+            aria-label="FPS selector"
+          >
+            {[43, 76, 125, 250, 333, "mix"].map((fps) => (
+              <button
+                key={fps}
+                type="button"
+                role="tab"
+                aria-selected={selectedFps === fps}
+                aria-pressed={selectedFps === fps}
+                aria-label={`Show ${
+                  fps === "mix" ? "Mixed" : fps
+                } FPS leaderboards`}
+                className={`${s.fpsToggleButton} ${
+                  selectedFps === fps ? s.active : ""
+                }`}
+                onClick={() => setSelectedFps(fps)}
               >
-                {[43, 76, 125, 250, 333, "mix"].map((fps) => (
-                  <button
-                    key={fps}
-                    type="button"
-                    role="tab"
-                    aria-selected={selectedFps === fps}
-                    aria-pressed={selectedFps === fps}
-                    aria-label={`Show ${
-                      fps === "mix" ? "Mixed" : fps
-                    } FPS leaderboards`}
-                    className={`${s.fpsToggleButton} ${
-                      selectedFps === fps ? s.active : ""
-                    }`}
-                    onClick={() => setSelectedFps(fps)}
-                  >
-                    {fps === "mix" ? "Mixed" : fps}
-                  </button>
-                ))}
-              </div>
-            </div>
+                {fps === "mix" ? "Mixed" : fps}
+              </button>
+            ))}
           </div>
         </div>
       </div>
