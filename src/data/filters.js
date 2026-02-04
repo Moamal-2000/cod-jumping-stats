@@ -5,7 +5,7 @@ export const LEADERBOARDS_FILTERS_DATA = [
     defaultUrlQuery: "speedrun",
     filtersData: [
       { text: "Speedrun", id: 1 },
-      { text: "Skilled", queryValue: "skilled", id: 2 },
+      { text: "Raw Skill", queryValue: "skilled", id: 2 },
       { text: "Defrag", id: 3 },
       { text: "Surf", id: 4 },
       { text: "Route Completion", queryValue: "routescompleted", id: 5 },
