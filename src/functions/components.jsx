@@ -14,7 +14,10 @@ export function getModifiedRank(rank) {
       <use href="/icons-sprite.svg#trophy"></use>
     </svg>
   ) : (
-    <svg style={{ stroke: medalType === "bronze" ? "#d97706" : "#9ca3af" }}>
+    <svg
+      style={{ stroke: medalType === "bronze" ? "#d97706" : "#9ca3af" }}
+      data-type={medalType}
+    >
       <use href="/icons-sprite.svg#medal"></use>
     </svg>
   );

@@ -102,7 +102,9 @@ const LeaderboardsTab = () => {
                   }, Score ${leaderboard.Score.toLocaleString()}, ${
                     leaderboard.FPS
                   } FPS`}
-                  className={s.leaderboardCard}
+                  className={`${s.leaderboardCard} ${getRankClass(
+                    leaderboard.Rank,
+                  )}`}
                 >
                   <div className={s.leaderboardCardHeader}>
                     <div
