@@ -10,30 +10,18 @@ const LeaderboardsTab = () => {
     (s) => s.playerProfile,
   );
 
-  const [selectedLeaderboardFps, setSelectedLeaderboardFps] = useState(125);
+  const [selectedFps, setSelectedFps] = useState(125);
 
-  // Process and group leaderboard data by FPS
+  const leaderboards = getProcessedLeaderboards();
+
   function getProcessedLeaderboards() {
     if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
 
     const filteredPositions = leaderboardPositions.filter(
-      (pos) => +pos.FPS === selectedLeaderboardFps,
+      (position) => +position.FPS === selectedFps,
     );
 
-    const groupedByFps = filteredPositions.reduce((acc, position) => {
-      const fps = +position.FPS;
-      if (!acc[fps]) acc[fps] = [];
-      acc[fps].push(position);
-      return acc;
-    }, {});
-
-    Object.keys(groupedByFps).forEach((fps) => {
-      groupedByFps[fps].sort((a, b) =>
-        a.LeaderboardType.localeCompare(b.LeaderboardType),
-      );
-    });
-
-    return groupedByFps;
+    return filteredPositions;
   }
 
   function getRankClass(rankValue) {
@@ -68,15 +56,15 @@ const LeaderboardsTab = () => {
                     key={fps}
                     type="button"
                     role="tab"
-                    aria-selected={selectedLeaderboardFps === fps}
-                    aria-pressed={selectedLeaderboardFps === fps}
+                    aria-selected={selectedFps === fps}
+                    aria-pressed={selectedFps === fps}
                     aria-label={`Show ${
                       fps === "mix" ? "Mixed" : fps
                     } FPS leaderboards`}
                     className={`${s.fpsToggleButton} ${
-                      selectedLeaderboardFps === fps ? s.active : ""
+                      selectedFps === fps ? s.active : ""
                     }`}
-                    onClick={() => setSelectedLeaderboardFps(fps)}
+                    onClick={() => setSelectedFps(fps)}
                   >
                     {fps === "mix" ? "Mixed" : fps}
                   </button>
@@ -94,95 +82,80 @@ const LeaderboardsTab = () => {
         </div>
       ) : (
         <div className={s.leaderboardContent}>
-          {(() => {
-            const processedGroups = getProcessedLeaderboards();
-            const visibleGroups = Object.keys(processedGroups);
+          <h3 className={s.fpsGroupTitle}>
+            {selectedFps === "mix"
+              ? "Mixed FPS Leaderboards"
+              : `${selectedFps} FPS Leaderboards`}
+          </h3>
 
-            return visibleGroups.length > 0 ? (
-              <>
-                {visibleGroups.map((fps) => (
-                  <div key={fps} className={s.fpsGroup}>
-                    <h3 className={s.fpsGroupTitle}>
-                      {fps === "mix"
-                        ? "Mixed FPS Leaderboards"
-                        : `${fps} FPS Leaderboards`}
-                    </h3>
+          {leaderboards.length > 0 && (
+            <div className={s.leaderboardList}>
+              {leaderboards.map((leaderboard) => (
+                <div
+                  key={leaderboard.Rank + leaderboard.FPS + leaderboard.Rating}
+                  role="listitem"
+                  tabIndex={0}
+                  aria-label={`Leaderboard ${
+                    leaderboard.LeaderboardType
+                  } — Rank ${
+                    leaderboard.Rank
+                  }, Score ${leaderboard.Score.toLocaleString()}, ${
+                    leaderboard.FPS
+                  } FPS`}
+                  className={s.leaderboardCard}
+                >
+                  <div className={s.leaderboardCardHeader}>
+                    <div
+                      className={`${s.leaderboardRank} ${getRankClass(
+                        leaderboard.Rank,
+                      )}`}
+                    >
+                      <span className={s.rankNumber}>{leaderboard.Rank}</span>
+                    </div>
 
-                    <div className={s.leaderboardList} role="list">
-                      {processedGroups[fps].map((position, index) => (
-                        <div
-                          key={`${fps}-${index}`}
-                          role="listitem"
-                          tabIndex={0}
-                          aria-label={`Leaderboard ${
-                            position.LeaderboardType
-                          } — Rank ${
-                            position.Rank
-                          }, Score ${position.Score.toLocaleString()}, ${
-                            position.FPS
-                          } FPS`}
-                          className={s.leaderboardCard}
-                        >
-                          <div className={s.leaderboardCardHeader}>
-                            <div
-                              className={`${s.leaderboardRank} ${getRankClass(
-                                position.Rank,
-                              )}`}
-                            >
-                              <span className={s.rankNumber}>
-                                {position.Rank}
-                              </span>
-                            </div>
+                    <div className={s.leaderboardInfo}>
+                      <h3>{getLeaderboardType(leaderboard.LeaderboardType)}</h3>
+                      <div className={s.leaderboardDetails}>
+                        <span className={s.leaderboardFps}>
+                          {leaderboard.FPS} FPS
+                        </span>
+                      </div>
+                    </div>
 
-                            <div className={s.leaderboardInfo}>
-                              <h3>
-                                {getLeaderboardType(position.LeaderboardType)}
-                              </h3>
-                              <div className={s.leaderboardDetails}>
-                                <span className={s.leaderboardFps}>
-                                  {position.FPS} FPS
-                                </span>
-                              </div>
-                            </div>
+                    {leaderboard.Rank <= 3 && (
+                      <div className={s.leaderboardIcon}>
+                        {getModifiedRank(leaderboard.Rank)}
+                      </div>
+                    )}
+                  </div>
 
-                            {position.Rank <= 3 && (
-                              <div className={s.leaderboardIcon}>
-                                {getModifiedRank(position.Rank)}
-                              </div>
-                            )}
-                          </div>
-
-                          <div className={s.leaderboardStats}>
-                            <div className={s.leaderboardScore}>
-                              <span className={s.statLabel}>Score:</span>
-                              <span className={s.statValue}>
-                                {position.Score.toLocaleString()}
-                              </span>
-                            </div>
-                            <div className={s.leaderboardRating}>
-                              <span className={s.statLabel}>Rating:</span>
-                              <span className={s.statValue}>
-                                {position.Rating.toFixed(2)}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
+                  <div className={s.leaderboardStats}>
+                    <div className={s.leaderboardScore}>
+                      <span className={s.statLabel}>Score:</span>
+                      <span className={s.statValue}>
+                        {leaderboard.Score.toLocaleString()}
+                      </span>
+                    </div>
+                    <div className={s.leaderboardRating}>
+                      <span className={s.statLabel}>Rating:</span>
+                      <span className={s.statValue}>
+                        {leaderboard.Rating.toFixed(2)}
+                      </span>
                     </div>
                   </div>
-                ))}
-              </>
-            ) : (
-              <div className={s.emptyState}>
-                <svg aria-hidden="true">
-                  <use href="/icons-sprite.svg#trophy" />
-                </svg>
-                <p>
-                  No leaderboard positions found for the selected FPS filters.
-                </p>
-              </div>
-            );
-          })()}
+                </div>
+              ))}
+            </div>
+          )}
+
+          {leaderboards.length === 0 && (
+            <div className={s.emptyState}>
+              <svg aria-hidden="true">
+                <use href="/icons-sprite.svg#trophy" />
+              </svg>
+              <p>No leaderboard positions found for the selected FPS.</p>
+            </div>
+          )}
         </div>
       )}
     </div>
