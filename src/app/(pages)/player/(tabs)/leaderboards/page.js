@@ -86,9 +86,9 @@ const LeaderboardsTab = () => {
 
           {leaderboards.length > 0 && (
             <div className={s.leaderboardList}>
-              {leaderboards.map((leaderboard) => (
+              {leaderboards.map((leaderboard, index) => (
                 <div
-                  key={leaderboard.Rank + leaderboard.FPS + leaderboard.Rating}
+                  key={leaderboard.Rating + index}
                   role="listitem"
                   tabIndex={0}
                   aria-label={`Leaderboard ${
