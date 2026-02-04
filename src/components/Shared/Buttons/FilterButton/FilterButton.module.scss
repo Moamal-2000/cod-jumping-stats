@@ -1,9 +1,11 @@
 .button {
+  --shadow: .35px;
+  --negative-shadow: calc(-1 * var(--shadow));
   border: none;
   background-color: #1F2534;
   color: #9AA3B2;
   border-radius: 10px;
-  min-width: 33px;
+  min-width: 50px;
   padding: 8px 12px;
   cursor: pointer;
   font-size: .9rem;
@@ -18,10 +20,14 @@
   }
 
   &.active {
-    font-weight: 600;
     background: linear-gradient(135deg, #FFB800, #FF9000);
     box-shadow: 0 4px 10px rgba(255, 184, 0, .3);
     color: #000;
+    text-shadow:
+      var(--shadow) 0 0 currentColor,
+      var(--negative-shadow) 0 0 currentColor,
+      0 var(--shadow) 0 currentColor,
+      0 var(--negative-shadow) 0 currentColor;
   }
 
   &:focus-visible {
