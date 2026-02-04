@@ -13,7 +13,7 @@ const MapDetailHeader = ({ mapData }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (allMaps.length < 0) dispatch(fetchMaps());
+    if (allMaps.length <= 0) dispatch(fetchMaps());
   }, []);
 
   return (
