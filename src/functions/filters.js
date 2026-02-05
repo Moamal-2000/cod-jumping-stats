@@ -209,9 +209,9 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   let filteredPlayers = allPlayersData;
 
   if (searchByName)
-    filteredPlayers = filterPlayersByName(allPlayersData, searchByName);
+    filteredPlayers = filterPlayersByName(filteredPlayers, searchByName);
   if (searchById)
-    filteredPlayers = filterPlayersById(allPlayersData, searchById);
+    filteredPlayers = filterPlayersById(filteredPlayers, searchById);
   if (badge !== "all")
     filteredPlayers = filterPlayersByBadge(filteredPlayers, badge);
 
