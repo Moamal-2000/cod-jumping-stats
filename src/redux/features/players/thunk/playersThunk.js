@@ -15,12 +15,8 @@ export const fetchAllPlayers = createAsyncThunk(
       }
 
       const allPlayersData = await decodeAsyncData(response);
-      const filteredPlayersData = getPlayersByParams({
-        allPlayersData,
-        paramsObject,
-      });
 
-      return { allPlayersData, filteredPlayersData };
+      return { allPlayersData, paramsObject };
     } catch (error) {
       console.error("Error in fetchAllPlayers:", error);
       throw error;

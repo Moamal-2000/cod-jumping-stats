@@ -124,7 +124,7 @@ export function filterMapsByAuthor(maps, authorQuery) {
   const normalizedAuthor = authorQuery.toLowerCase();
 
   return maps.filter((map) =>
-    map?.Author?.toLowerCase()?.includes(normalizedAuthor)
+    map?.Author?.toLowerCase()?.includes(normalizedAuthor),
   );
 }
 
@@ -136,34 +136,34 @@ export function sortMaps(maps, sortBy) {
   switch (sortBy) {
     case "newest":
       return sortedMaps.sort(
-        (a, b) => new Date(b.Released) - new Date(a.Released)
+        (a, b) => new Date(b.Released) - new Date(a.Released),
       );
 
     case "oldest":
       return sortedMaps.sort(
-        (a, b) => new Date(a.Released) - new Date(b.Released)
+        (a, b) => new Date(a.Released) - new Date(b.Released),
       );
 
     case "name-a-z":
       return sortedMaps.sort((a, b) =>
-        (a.Name || "").localeCompare(b.Name || "")
+        (a.Name || "").localeCompare(b.Name || ""),
       );
 
     case "name-z-a":
       return sortedMaps.sort((a, b) =>
-        (b.Name || "").localeCompare(a.Name || "")
+        (b.Name || "").localeCompare(a.Name || ""),
       );
 
     case "completions-high-to-low":
       return sortedMaps.sort(
         (a, b) =>
-          (b.IndividualFinishCount || 0) - (a.IndividualFinishCount || 0)
+          (b.IndividualFinishCount || 0) - (a.IndividualFinishCount || 0),
       );
 
     case "completions-low-to-high":
       return sortedMaps.sort(
         (a, b) =>
-          (a.IndividualFinishCount || 0) - (b.IndividualFinishCount || 0)
+          (a.IndividualFinishCount || 0) - (b.IndividualFinishCount || 0),
       );
 
     default:
@@ -201,15 +201,24 @@ export function filterMapsByVideos(maps, filterBy = "all") {
 }
 
 export function getPlayersByParams({ allPlayersData, paramsObject }) {
-  if (paramsObject?.name === undefined) return allPlayersData;
+  const searchByName = paramsObject?.name || "";
 
+  let filteredPlayers = allPlayersData;
+
+  if (searchByName)
+    filteredPlayers = filterPlayersByName(allPlayersData, searchByName);
+
+  return filteredPlayers;
+}
+
+export function filterPlayersByName(allPlayersData, nameQuery) {
   return allPlayersData.filter((player) => {
     const playerPrefName = player.PrefName?.toLowerCase();
     const playerName = player.PlayerName?.toLowerCase();
 
     return (
-      stripColorCodes(playerName).includes(paramsObject.name) ||
-      stripColorCodes(playerPrefName).includes(paramsObject.name)
+      stripColorCodes(playerName).includes(nameQuery) ||
+      stripColorCodes(playerPrefName).includes(nameQuery)
     );
   });
 }
@@ -248,7 +257,7 @@ export function getSortedTopRuns(topRuns = [], sort) {
   if (sort === "date") {
     return topRuns.toSorted(
       (a, b) =>
-        new Date(b.TimeCreated).getTime() - new Date(a.TimeCreated).getTime()
+        new Date(b.TimeCreated).getTime() - new Date(a.TimeCreated).getTime(),
     );
   }
 

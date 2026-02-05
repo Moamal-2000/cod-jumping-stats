@@ -1,7 +1,6 @@
 "use client";
 
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
-import { getPlayersByParams } from "@/functions/filters";
 import {
   getIsLastPagination,
   paginateData,
@@ -22,14 +21,8 @@ import s from "./PlayersPage.module.scss";
 
 const PlayersPage = () => {
   const dispatch = useDispatch();
-  const {
-    allPlayersData,
-    playersData,
-    playersScroll,
-    allDataDisplayed,
-    loading,
-    error,
-  } = useSelector((s) => s.players);
+  const { playersData, playersScroll, allDataDisplayed, loading, error } =
+    useSelector((s) => s.players);
   const { pageVisits } = useSelector((s) => s.global);
 
   const [lastPlayerRef, paginationNumber, setPaginationNumber] =
@@ -48,39 +41,6 @@ const PlayersPage = () => {
 
   const noResults = playersScroll.length === 0;
 
-  useEffect(() => {
-    dispatch(fetchAllPlayers(paramsObject));
-    setPaginationNumber(1);
-  }, [sortBy]);
-
-  useEffect(() => {
-    if (allPlayersData.length === 0) return;
-
-    const filteredPlayers = getPlayersByParams({
-      allPlayersData,
-      paramsObject,
-    });
-    const paginationPlayers = paginateData(
-      filteredPlayers,
-      1,
-      PLAYERS_BATCH_SIZE,
-    );
-
-    dispatch(
-      updatePlayersState({ key: "playersData", value: filteredPlayers }),
-    );
-    dispatch(
-      updatePlayersState({ key: "playersScroll", value: paginationPlayers }),
-    );
-    dispatch(
-      updatePlayersState({
-        key: "firstChunkPlayers",
-        value: paginationPlayers,
-      }),
-    );
-    setPaginationNumber(1);
-  }, [searchByName]);
-
   function handleClearSearch() {
     if (searchInputRef.current) searchInputRef.current.value = "";
     if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
@@ -90,6 +50,11 @@ const PlayersPage = () => {
   function handleMouseLeave() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: null }));
   }
+
+  useEffect(() => {
+    dispatch(fetchAllPlayers(paramsObject));
+    setPaginationNumber(1);
+  }, [searchParams]);
 
   useEffect(() => {
     checkAndLoadMoreData({

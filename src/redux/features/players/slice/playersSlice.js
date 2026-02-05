@@ -1,4 +1,5 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
+import { getPlayersByParams } from "@/functions/filters";
 import { paginateData } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers } from "../thunk/playersThunk";
@@ -38,7 +39,7 @@ export const playersSlice = createSlice({
       const newDisplayedCount = state.displayedCount + PLAYERS_BATCH_SIZE;
       state.displayedCount = Math.min(
         newDisplayedCount,
-        state.playersData.length
+        state.playersData.length,
       );
       state.isLoadingMore = false;
       // Update hasMore based on whether we've shown all players
@@ -51,19 +52,23 @@ export const playersSlice = createSlice({
       state.error = false;
     })
       .addCase(fetchAllPlayers.fulfilled, (state, { payload }) => {
-        const { allPlayersData, filteredPlayersData } = payload;
+        const { allPlayersData, paramsObject } = payload;
+        const processedPlayers = getPlayersByParams({
+          allPlayersData,
+          paramsObject,
+        });
         const paginationPlayers = paginateData(
-          filteredPlayersData,
+          processedPlayers,
           1,
-          PLAYERS_BATCH_SIZE
+          PLAYERS_BATCH_SIZE,
         );
 
         state.allPlayersData = allPlayersData;
-        state.playersData = filteredPlayersData;
+        state.playersData = processedPlayers;
         state.playersScroll = paginationPlayers;
         state.firstChunkPlayers = paginationPlayers;
         state.displayedCount = PLAYERS_BATCH_SIZE;
-        state.hasMore = filteredPlayersData.length > PLAYERS_BATCH_SIZE;
+        state.hasMore = processedPlayers.length > PLAYERS_BATCH_SIZE;
         state.isLoadingMore = false;
         state.loading = false;
         state.error = false;
