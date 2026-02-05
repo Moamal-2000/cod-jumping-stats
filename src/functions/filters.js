@@ -202,11 +202,14 @@ export function filterMapsByVideos(maps, filterBy = "all") {
 
 export function getPlayersByParams({ allPlayersData, paramsObject }) {
   const searchByName = paramsObject?.name || "";
+  const searchById = paramsObject?.id || "";
 
   let filteredPlayers = allPlayersData;
 
   if (searchByName)
     filteredPlayers = filterPlayersByName(allPlayersData, searchByName);
+  if (searchById)
+    filteredPlayers = filterPlayersById(allPlayersData, searchById);
 
   return filteredPlayers;
 }
@@ -221,6 +224,13 @@ export function filterPlayersByName(allPlayersData, nameQuery) {
       stripColorCodes(playerPrefName).includes(nameQuery)
     );
   });
+}
+
+export function filterPlayersById(allPlayersData, playerId) {
+  if (playerId === undefined) return allPlayersData;
+  return allPlayersData.filter((player) =>
+    `${player.PlayerID}`.includes(playerId),
+  );
 }
 
 export function getProcessedTopRuns(topRuns, paramsObject) {
