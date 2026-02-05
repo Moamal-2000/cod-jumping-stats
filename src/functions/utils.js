@@ -51,7 +51,7 @@ export function getStatsBarStyles({
 export function paginateData(
   items,
   pageNumber = 1,
-  itemsPerPage = PAGINATION_ITEMS_PER_PAGE
+  itemsPerPage = PAGINATION_ITEMS_PER_PAGE,
 ) {
   const page = Math.max(1, parseInt(pageNumber, 10) || 1);
   const startIndex = itemsPerPage * (page - 1);
@@ -77,7 +77,7 @@ export function getLeaderboardUrl(paramsObject) {
 export function getIsLastPagination(
   data,
   paginationNumber,
-  itemsPerPage = PAGINATION_ITEMS_PER_PAGE
+  itemsPerPage = PAGINATION_ITEMS_PER_PAGE,
 ) {
   const lastPagination = Math.ceil(data?.length / itemsPerPage);
   return paginationNumber > lastPagination;
@@ -355,4 +355,8 @@ export function mapHasDifficulties(Difficulty) {
   return JUMP_FPS.some(
     (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?",
   );
+}
+
+export function kebabCase(str) {
+  return str.toLowerCase().split(" ").join("-");
 }

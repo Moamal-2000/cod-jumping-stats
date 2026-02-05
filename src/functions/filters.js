@@ -1,4 +1,5 @@
-import { modifyMapsData, stripColorCodes } from "./utils";
+import { getPlayerBadges } from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
+import { kebabCase, modifyMapsData, stripColorCodes } from "./utils";
 
 export function getLastSeenCategories(lastSeen) {
   const now = new Date();
@@ -203,6 +204,7 @@ export function filterMapsByVideos(maps, filterBy = "all") {
 export function getPlayersByParams({ allPlayersData, paramsObject }) {
   const searchByName = paramsObject?.name || "";
   const searchById = paramsObject?.id || "";
+  const badge = paramsObject?.badge || "all";
 
   let filteredPlayers = allPlayersData;
 
@@ -210,6 +212,8 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
     filteredPlayers = filterPlayersByName(allPlayersData, searchByName);
   if (searchById)
     filteredPlayers = filterPlayersById(allPlayersData, searchById);
+  if (badge !== "all")
+    filteredPlayers = filterPlayersByBadge(filteredPlayers, badge);
 
   return filteredPlayers;
 }
@@ -230,6 +234,29 @@ export function filterPlayersById(allPlayersData, playerId) {
   if (playerId === undefined) return allPlayersData;
   return allPlayersData.filter((player) =>
     `${player.PlayerID}`.includes(playerId),
+  );
+}
+
+export function filterPlayersByBadge(allPlayersData, nameQuery) {
+  if (nameQuery === "all" || nameQuery === undefined) return allPlayersData;
+
+  return allPlayersData.filter(
+    ({ PlayerID, Banned, Donated, Admin, LastSeen }) => {
+      const playerBadges = getPlayerBadges({
+        cssModule: {},
+        PlayerID,
+        Banned,
+        Donated,
+        Admin,
+        LastSeen,
+      });
+
+      const selectedBadge = playerBadges.find(
+        (badge) => kebabCase(badge.label) === nameQuery,
+      );
+
+      return selectedBadge?.displayCondition || false;
+    },
   );
 }
 
