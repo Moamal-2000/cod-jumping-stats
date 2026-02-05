@@ -113,3 +113,16 @@ export const SORT_PLAYERS_OPTIONS = [
   { label: "Last Seen", value: "last-seen", id: 2 },
   { label: "Visit Count", value: "visits", id: 3 },
 ];
+
+export const FILTER_PLAYERS_BADGES = [
+  { label: "All", value: "all", id: 0 },
+  { label: "Banned", value: "banned", id: 1 },
+  { label: "Donator", value: "donator", id: 2 },
+  { label: "Active", value: "active", id: 3 },
+  { label: "Mapper", value: "mapper", id: 4 },
+  { label: "Winner", value: "winner", id: 5 },
+  { label: "Bug Hunter", value: "bug-hunter", id: 6 },
+  { label: "Creator", value: "creator", id: 7 },
+  { label: "Admin", value: "admin", id: 8 },
+  { label: "Owner", value: "owner", id: 9 },
+];

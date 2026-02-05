@@ -5,21 +5,31 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useRef, useState } from "react";
 import s from "./SearchInput.module.scss";
 
-const SearchInput = ({ queryName, placeholder, label, id }) => {
+const SearchInput = ({
+  queryName,
+  placeholder,
+  label,
+  id,
+  inputMode = "none",
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
 
   const [searchValue, setSearchValue] = useState(
-    searchParams.get(queryName) || ""
+    searchParams.get(queryName) || "",
   );
 
   const debounceRef = useRef(null);
 
   function handleOnChange(event) {
-    const inputValue = event.target.value;
-    setSearchValue(inputValue);
+    let inputValue = event.target.value;
 
+    if (inputMode === "numeric") {
+      inputValue = inputValue.replace(/\D/g, "");
+    }
+
+    setSearchValue(inputValue);
     clearTimeout(debounceRef?.current);
     debounceRef.current = setTimeout(() => performSearch(inputValue), 300);
   }
@@ -35,7 +45,7 @@ const SearchInput = ({ queryName, placeholder, label, id }) => {
       searchValue.toLowerCase(),
       searchParams,
       router,
-      pathname
+      pathname,
     );
   }
 
@@ -55,7 +65,7 @@ const SearchInput = ({ queryName, placeholder, label, id }) => {
 
       <input
         className={s.searchInput}
-        type="text"
+        inputMode={inputMode}
         placeholder={placeholder}
         onChange={handleOnChange}
         value={searchValue}
