@@ -2,7 +2,7 @@
 
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import s from "./SearchInput.module.scss";
 
 const SearchInput = ({
@@ -16,9 +16,8 @@ const SearchInput = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const [searchValue, setSearchValue] = useState(
-    searchParams.get(queryName) || "",
-  );
+  const currentValue = searchParams.get(queryName) || "";
+  const [searchValue, setSearchValue] = useState(currentValue);
 
   const debounceRef = useRef(null);
 
@@ -54,6 +53,10 @@ const SearchInput = ({
     removeQueryString(queryName, searchParams, router, pathname);
     clearTimeout(debounceRef?.current);
   }
+
+  useEffect(() => {
+    if (currentValue === "") setSearchValue("");
+  }, [currentValue]);
 
   return (
     <div className={s.searchContainer}>
