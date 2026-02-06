@@ -11,7 +11,7 @@ import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { updatePlayersState } from "@/redux/features/players/slice/playersSlice";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
@@ -36,17 +36,12 @@ const PlayersPage = () => {
   const searchByName = searchParams.get("name") || "";
   const searchById = searchParams.get("id") || "";
 
-  const searchInputRef = useRef(null);
-  const searchTimeoutRef = useRef(null);
-
   const hasPlayers = playersScroll.length > 0;
   const showNoPlayersUI =
     (searchByName !== "" || searchById !== "") && !hasPlayers;
 
   function handleClearSearch() {
-    if (searchInputRef.current) searchInputRef.current.value = "";
-    if (searchTimeoutRef.current) clearTimeout(searchTimeoutRef.current);
-    removeQueryString("name", searchParams, router, pathname);
+    removeQueryString(["name", "id"], searchParams, router, pathname);
   }
 
   function handleMouseLeave() {
@@ -76,12 +71,6 @@ const PlayersPage = () => {
       dispatch,
     });
   }, [playersScroll]);
-
-  useEffect(() => {
-    return () => {
-      clearTimeout(searchTimeoutRef?.current);
-    };
-  }, []);
 
   return (
     <div className={s.playersContainer} onMouseLeave={handleMouseLeave}>
