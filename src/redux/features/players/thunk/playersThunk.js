@@ -11,9 +11,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
   async (paramsObject) => {
-    const cachedData = getCachedPlayers();
+    const dataType = paramsObject?.sort || "admin";
+    const cachedData = getCachedPlayers(dataType);
 
-    if (cachedData !== null) {
+    if (cachedData !== null && dataType === cachedData.dataType) {
       const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
       const isCacheExpire = cacheAge > PLAYER_CACHE_EXPIRATION_TIME;
 
@@ -31,7 +32,7 @@ export const fetchAllPlayers = createAsyncThunk(
       }
 
       const allPlayersData = await decodeAsyncData(response);
-      cachePlayersLocally(allPlayersData);
+      cachePlayersLocally(allPlayersData, dataType);
 
       return { allPlayersData, paramsObject };
     } catch (error) {
