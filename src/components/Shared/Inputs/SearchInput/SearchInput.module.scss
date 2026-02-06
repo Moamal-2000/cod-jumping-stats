@@ -31,10 +31,11 @@
   background: #1a1e24;
   border: 1px solid #2a313a;
   border-radius: 6px;
-  padding: 10px 10px 7px;
+  padding: 10px;
   color: #e5e7eb;
   font-size: .875rem;
   width: 100%;
+  max-height: 36px;
   transition: all 0.2s ease;
 
   &:hover {

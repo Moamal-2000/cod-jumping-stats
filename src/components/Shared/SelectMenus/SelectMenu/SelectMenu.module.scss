@@ -4,6 +4,7 @@
   gap: 8px;
   width: fit-content;
   position: relative;
+  max-height: 36px;
 }
 
 .selectMenuWrapper>svg {
@@ -22,6 +23,7 @@
 }
 
 .selectMenuWrapper>select {
+  max-height: inherit;
   background: #1a1e24;
   border: 1px solid #2a313a;
   border-radius: 6px;

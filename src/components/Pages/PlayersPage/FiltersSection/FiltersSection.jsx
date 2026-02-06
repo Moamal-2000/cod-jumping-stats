@@ -25,21 +25,8 @@ const FiltersSection = () => {
 
   return (
     <div className={s.filtersSection}>
-      <div className={s.filtersContainer}>
-        <SearchInput
-          queryName="name"
-          placeholder="Search players by name..."
-          id="player-name-search"
-        />
-
-        <SearchInput
-          queryName="id"
-          placeholder="Search players by ID..."
-          id="player-id-search"
-          inputMode="numeric"
-        />
-
-        <div className={s.filterGroup}>
+      <div className={s.controls}>
+        <div className={`${s.filterGroup} ${s.sortGroup}`}>
           <span className={s.filterLabel}>Sort By</span>
           <div className={s.sortButtons} role="group" aria-label="Sort players">
             {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
@@ -60,13 +47,36 @@ const FiltersSection = () => {
           </div>
         </div>
 
-        <SelectMenu
-          optionsData={FILTER_PLAYERS_BADGES}
-          onChange={handleFilterChange}
-          value={filterBy}
-          label="Filter By Badges"
-          id="players-filter-badges"
-        />
+        <div className={`${s.filterGroup} ${s.selectGroup}`}>
+          <label className={s.filterLabel} htmlFor="players-filter-badges">
+            Filter By Badges
+          </label>
+          <SelectMenu
+            optionsData={FILTER_PLAYERS_BADGES}
+            onChange={handleFilterChange}
+            value={filterBy}
+            id="players-filter-badges"
+          />
+        </div>
+      </div>
+
+      <div className={`${s.filterGroup} ${s.searchGroup}`}>
+        <span className={s.filterLabel}>Search With</span>
+
+        <div className={s.fields}>
+          <SearchInput
+            queryName="name"
+            placeholder="Player Name"
+            id="player-name-search"
+          />
+
+          <SearchInput
+            queryName="id"
+            placeholder="Player ID"
+            id="player-id-search"
+            inputMode="numeric"
+          />
+        </div>
       </div>
     </div>
   );

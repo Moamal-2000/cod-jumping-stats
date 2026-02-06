@@ -1,15 +1,11 @@
 @use "@/styles/mixins" as m;
 
 .filtersSection {
-  background-color: #0e1217;
-  border: 1px solid #2a313a;
-  border-radius: 12px;
-  padding: 24px;
   margin-bottom: 32px;
   width: 100%;
   display: flex;
-  align-items: center;
-  gap: 32px;
+  align-items: flex-end;
+  gap: 26px;
   position: relative;
   transition: border-color .2s ease;
 
@@ -24,51 +20,10 @@
   }
 }
 
-.sortContainer {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-
-.searchButton {
-  background-color: #facc15;
-  border: solid 1px #facc15;
-  border-left: none;
-  border-radius: 0 8px 8px 0;
-  padding: 12px 16px;
-  color: #000;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color .2s, border-color .2s;
-  min-width: 48px;
-
-  &:hover:not(:disabled) {
-    background-color: #eab308;
-    border-color: #eab308;
-  }
-
-  &:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-  }
-}
-
-.searchSpinner {
-  width: 16px;
-  height: 16px;
-  border: 2px solid #374151;
-  border-top: 2px solid #000;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
 .sortButtons {
   display: grid;
-  grid-template-columns: repeat(3, minmax(120px, 1fr));
-  gap: 8px 6px;
+  grid-template-columns: repeat(3, minmax(110px, 1fr));
+  gap: 6px;
 }
 
 @include m.large {
@@ -112,6 +67,7 @@
   &.active {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
     color: #fff;
+    border-color: #2563eb;
   }
 
   &.active:hover {
@@ -125,28 +81,56 @@
   }
 }
 
-.filtersContainer {
+.searchGroup {
+  flex: 1;
+}
+
+.fields {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  gap: 8px;
   width: 100%;
+}
+
+.controls {
+  display: flex;
+  gap: 10px 26px;
+  align-items: center;
 }
 
 .filterGroup {
   display: flex;
-  align-items: center;
-  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 @include m.small {
+  .fields {
+    grid-template-columns: 1fr;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
   .filterGroup {
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
   }
+
+  .selectGroup {
+    margin-left: 0;
+  }
 }
 
 .filterLabel {
-  width: 64px;
-  cursor: pointer;
+  min-width: 64px;
+  text-wrap: nowrap;
+  color: #9ca3af;
+  font-size: .75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
 }
