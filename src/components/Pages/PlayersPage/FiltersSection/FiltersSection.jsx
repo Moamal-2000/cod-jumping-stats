@@ -14,8 +14,7 @@ const FiltersSection = () => {
   const sortBy = searchParams?.get("sort") || "admin";
   const filterBy = searchParams?.get("badge") || "all";
 
-  function handleSortChange(event) {
-    const newValue = event.target.value;
+  function handleSortChange(newValue) {
     createQueryString("sort", newValue, searchParams, router, pathname);
   }
 
@@ -40,13 +39,26 @@ const FiltersSection = () => {
           inputMode="numeric"
         />
 
-        <SelectMenu
-          optionsData={SORT_PLAYERS_OPTIONS}
-          onChange={handleSortChange}
-          value={sortBy}
-          label="Sort By"
-          id="players-sort"
-        />
+        <div className={s.filterGroup}>
+          <span className={s.filterLabel}>Sort By</span>
+          <div className={s.sortButtons} role="group" aria-label="Sort players">
+            {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
+              const isActive = sortBy === value;
+
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => handleSortChange(value)}
+                  className={`${s.sortButton} ${isActive ? s.active : ""}`}
+                  aria-pressed={isActive}
+                >
+                  {label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
 
         <SelectMenu
           optionsData={FILTER_PLAYERS_BADGES}
