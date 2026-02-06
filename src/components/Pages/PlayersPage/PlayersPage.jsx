@@ -34,12 +34,14 @@ const PlayersPage = () => {
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const searchByName = searchParams.get("name") || "";
-  const sortBy = searchParams.get("sort");
+  const searchById = searchParams.get("id") || "";
 
   const searchInputRef = useRef(null);
   const searchTimeoutRef = useRef(null);
 
-  const noResults = playersScroll.length === 0;
+  const hasPlayers = playersScroll.length > 0;
+  const showNoPlayersUI =
+    (searchByName !== "" || searchById !== "") && !hasPlayers;
 
   function handleClearSearch() {
     if (searchInputRef.current) searchInputRef.current.value = "";
@@ -81,19 +83,19 @@ const PlayersPage = () => {
     };
   }, []);
 
-  if (loading || error) {
-    return <PlayersLoadingError error={error} dispatch={dispatch} />;
-  }
-
   return (
     <div className={s.playersContainer} onMouseLeave={handleMouseLeave}>
       <FiltersSection />
-      <NoPlayersFound
-        noResults={noResults}
-        handleClearSearch={handleClearSearch}
-      />
 
-      {!noResults && (
+      {showNoPlayersUI && (
+        <NoPlayersFound handleClearSearch={handleClearSearch} />
+      )}
+
+      {(loading || error) && (
+        <PlayersLoadingError error={error} dispatch={dispatch} />
+      )}
+
+      {hasPlayers && !loading && !error && (
         <PlayersCardsSection
           playersScroll={playersScroll}
           allDataDisplayed={allDataDisplayed}

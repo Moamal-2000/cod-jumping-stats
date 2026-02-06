@@ -1,8 +1,6 @@
 import s from "./NoPlayersFound.module.scss";
 
-const NoPlayersFound = ({ noResults, handleClearSearch }) => {
-  if (!noResults) return null;
-
+const NoPlayersFound = ({ handleClearSearch }) => {
   return (
     <section className={s.notFoundSection}>
       <div className={s.noResults}>
