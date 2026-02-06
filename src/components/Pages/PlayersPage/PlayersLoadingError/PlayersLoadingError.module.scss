@@ -5,6 +5,7 @@
   justify-content: center;
   min-height: 300px;
   gap: 16px;
+  text-align: center;
 }
 
 .loadingSpinner {
@@ -16,6 +17,12 @@
   animation: spin 1s linear infinite;
 }
 
+.loadingContainer p {
+  color: #94a3b8;
+  margin: 0;
+  font-size: 1rem;
+}
+
 .errorContainer {
   display: flex;
   flex-direction: column;
@@ -24,43 +31,43 @@
   min-height: 300px;
   gap: 16px;
   text-align: center;
+  padding: 40px;
+  background: #151a21;
+  border: 1px solid #24303a;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
 }
 
 .errorContainer h2 {
-  color: #ef4444;
-  font-size: 1.5rem;
-  margin-bottom: 8px;
+  color: #EF4444;
+  font-size: 1.75rem;
+  font-weight: 600;
 }
 
 .errorContainer p {
-  color: #9ca3af;
-  margin-bottom: 16px;
+  color: #94a3b8;
+  font-size: 1.1rem;
+  margin-bottom: 8px;
   max-width: 500px;
 }
 
 .retryButton {
-  background-color: #facc15;
-  color: #000;
   border: none;
-  padding: 14px 32px;
+  background: var(--players-accent);
+  color: #fff;
+  padding: 10px 18px;
   border-radius: 8px;
   font-weight: 600;
-  font-size: 1rem;
   cursor: pointer;
-  position: relative;
-  z-index: 1;
-  transition: all .2s ease;
+  transition:
+    box-shadow .2s ease,
+    translate .2s ease,
+    filter .2s ease;
 
   &:hover {
-    background-color: #3db341;
-    transform: translateY(-1px);
-  }
-
-  &:active {
-    transform: translateY(0);
+    filter: brightness(1.05);
   }
 }
-
 
 @keyframes spin {
   0% {
