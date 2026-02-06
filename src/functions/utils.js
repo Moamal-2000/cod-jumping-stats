@@ -330,6 +330,18 @@ export function cacheMapsLocally(mapsLocal) {
   localStorage.setItem("mapsData", compressed);
 }
 
+export function cachePlayersLocally(playersLocal) {
+  if (typeof window === "undefined") return;
+
+  const dataToCache = { allPlayersData: playersLocal, timeStamp: Date.now() };
+
+  const encoded = encode(dataToCache);
+  const base64 = Buffer.from(encoded).toString("base64");
+  const compressed = LZString.compressToUTF16(base64);
+
+  localStorage.setItem("playersData", compressed);
+}
+
 export function getCachedMaps() {
   if (typeof window === "undefined") return null;
 
@@ -362,4 +374,22 @@ export function mapHasDifficulties(Difficulty) {
 
 export function kebabCase(str) {
   return str.toLowerCase().split(" ").join("-");
+}
+
+export function getCachedPlayers() {
+  if (typeof window === "undefined") return null;
+
+  const compressed = localStorage.getItem("playersData");
+  if (!compressed) return null;
+
+  try {
+    const base64 = LZString.decompressFromUTF16(compressed);
+    const bytes = new Uint8Array(Buffer.from(base64, "base64"));
+    const data = decode(bytes);
+
+    return data;
+  } catch (err) {
+    console.error(`Failed to decompress or decode playersData: ${err}`);
+    return null;
+  }
 }

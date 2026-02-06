@@ -53,6 +53,7 @@ export const playersSlice = createSlice({
     })
       .addCase(fetchAllPlayers.fulfilled, (state, { payload }) => {
         const { allPlayersData, paramsObject } = payload;
+
         const processedPlayers = getPlayersByParams({
           allPlayersData,
           paramsObject,
