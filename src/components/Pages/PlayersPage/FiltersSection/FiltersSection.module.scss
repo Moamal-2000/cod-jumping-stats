@@ -80,13 +80,15 @@
   }
 
   &.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg,
+        var(--players-accent) 0%,
+        var(--players-accent-strong) 100%);
     color: #fff;
-    border-color: #2563eb;
+    border-color: var(--players-accent-strong);
   }
 
   &.active:hover {
-    box-shadow: 0 0 15px rgba(37, 99, 235, .5);
+    box-shadow: 0 0 15px var(--players-accent-soft);
   }
 }
 

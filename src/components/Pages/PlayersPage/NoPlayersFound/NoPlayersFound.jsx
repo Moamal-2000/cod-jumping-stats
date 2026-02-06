@@ -12,7 +12,7 @@ const NoPlayersFound = ({ handleClearSearch }) => {
           className={s.clearSearchButton}
           onClick={handleClearSearch}
         >
-          Clear search
+          Clear Search
         </button>
       </div>
     </section>
