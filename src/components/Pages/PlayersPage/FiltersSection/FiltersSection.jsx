@@ -24,7 +24,7 @@ const FiltersSection = () => {
   }
 
   return (
-    <div className={s.filtersSection}>
+    <section className={s.filtersSection}>
       <div className={s.controls}>
         <div className={`${s.filterGroup} ${s.sortGroup}`}>
           <span className={s.filterLabel}>Sort By</span>
@@ -78,7 +78,7 @@ const FiltersSection = () => {
           />
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
