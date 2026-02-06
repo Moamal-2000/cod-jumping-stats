@@ -1,3 +1,5 @@
+import { resetPagination } from "@/redux/features/players/slice/playersSlice";
+import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import s from "./PlayersLoadingError.module.scss";
 
 const PlayersLoadingError = ({ error, dispatch }) => {
