@@ -124,5 +124,4 @@ export const FILTER_PLAYERS_BADGES = [
   { label: "Bug Hunter", value: "bug-hunter", id: 6 },
   { label: "Creator", value: "creator", id: 7 },
   { label: "Admin", value: "admin", id: 8 },
-  { label: "Owner", value: "owner", id: 9 },
 ];
