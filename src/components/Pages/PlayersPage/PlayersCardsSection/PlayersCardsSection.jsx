@@ -16,7 +16,7 @@ const PlayersCardsSection = ({
 
       {allDataDisplayed && playersScroll.length > 0 && !searchByName && (
         <div className={s.endOfResults}>
-          <p>You've reached the end of the players list!</p>
+          <p>You've reached the end of the players list.</p>
         </div>
       )}
     </section>
