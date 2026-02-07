@@ -23,5 +23,19 @@ export const MAPS_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
 export const JUMP_FPS = [125, 250, 333, 43, 76];
-export const SERVERS_REFRESH_OPTIONS = [10, 30, 60, 120, 300];
 export const TABS_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
+
+export const SERVERS_REFRESH_OPTIONS = [10, 30, 60, 120, 300];
+export const SERVERS_GAME_FILTER_OPTIONS = [
+  { id: "all", label: "All" },
+  { id: "cod2", label: "COD2" },
+  { id: "cod4", label: "COD4" },
+];
+export const SERVER_STATUS_FILTER = [
+  { id: "all", label: "All" },
+  { id: "withPlayers", label: "With Players" },
+];
+export const SERVERS_VIEW_MODE = [
+  { id: "grid", label: "Grid" },
+  { id: "list", label: "List" },
+];

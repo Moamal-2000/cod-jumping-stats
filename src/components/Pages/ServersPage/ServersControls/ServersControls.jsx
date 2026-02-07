@@ -1,6 +1,11 @@
 "use client";
 
-import { SERVERS_REFRESH_OPTIONS } from "@/data/constants";
+import {
+  SERVER_STATUS_FILTER,
+  SERVERS_GAME_FILTER_OPTIONS,
+  SERVERS_REFRESH_OPTIONS,
+  SERVERS_VIEW_MODE,
+} from "@/data/constants";
 import s from "./ServersControls.module.scss";
 
 const ServersControls = ({
@@ -58,11 +63,7 @@ const ServersControls = ({
       <div className={s.controlGroup}>
         <span className={s.groupLabel}>Show</span>
         <div className={s.toggleButtons} role="group" aria-label="Game filter">
-          {[
-            { id: "all", label: "All" },
-            { id: "cod2", label: "COD2" },
-            { id: "cod4", label: "COD4" },
-          ].map((option) => (
+          {SERVERS_GAME_FILTER_OPTIONS.map((option) => (
             <button
               key={option.id}
               type="button"
@@ -84,10 +85,7 @@ const ServersControls = ({
           role="group"
           aria-label="Online filter"
         >
-          {[
-            { id: "all", label: "All" },
-            { id: "online", label: "Online Only" },
-          ].map((option) => (
+          {SERVER_STATUS_FILTER.map((option) => (
             <button
               key={option.id}
               type="button"
@@ -105,10 +103,7 @@ const ServersControls = ({
       <div className={s.controlGroup}>
         <span className={s.groupLabel}>View</span>
         <div className={s.toggleButtons} role="group" aria-label="View mode">
-          {[
-            { id: "grid", label: "Grid" },
-            { id: "list", label: "List" },
-          ].map((option) => (
+          {SERVERS_VIEW_MODE.map((option) => (
             <button
               key={option.id}
               type="button"
