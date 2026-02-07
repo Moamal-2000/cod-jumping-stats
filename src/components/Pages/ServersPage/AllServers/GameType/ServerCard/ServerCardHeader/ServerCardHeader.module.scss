@@ -8,6 +8,10 @@
   position: relative;
 }
 
+.serverHeader.list {
+  padding: 12px 16px 8px;
+}
+
 @media (max-width: 420px) {
   .serverHeader {
     display: grid;
@@ -53,4 +57,8 @@
   background-color: rgba(0, 0, 0, 0.6);
   border-radius: 12px 12px 0 0;
   z-index: 2;
+}
+
+.serverHeader.list::before {
+  display: none;
 }

@@ -2,7 +2,14 @@ import { getCodServers, getGameTypes } from "@/functions/utils";
 import GameType from "./GameType/GameType";
 import ServersLoadingError from "./ServersLoadingError/ServersLoadingError";
 
-const AllServers = ({ servers, loading, error, gameFilter, viewMode }) => {
+const AllServers = ({
+  servers,
+  loading,
+  error,
+  gameFilter,
+  viewMode,
+  statusFilter,
+}) => {
   const normalizedFilter = gameFilter?.toLowerCase();
   const filteredServers =
     normalizedFilter && normalizedFilter !== "all"
@@ -13,7 +20,17 @@ const AllServers = ({ servers, loading, error, gameFilter, viewMode }) => {
         )
       : servers;
 
-  const groupedServers = getCodServers(filteredServers);
+  const statusFilteredServers =
+    statusFilter === "online"
+      ? filteredServers?.filter(
+          (server) =>
+            server?.Online &&
+            ((server?.Players && server.Players.length > 0) ||
+              (server?.PlayerCount || 0) > 0),
+        )
+      : filteredServers;
+
+  const groupedServers = getCodServers(statusFilteredServers);
   const gameTypes = getGameTypes(groupedServers);
 
   if (loading || error) {

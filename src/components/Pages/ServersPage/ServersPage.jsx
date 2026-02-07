@@ -8,22 +8,28 @@ import ServersControls from "./ServersControls/ServersControls";
 
 const ServersPage = () => {
   const [refreshSeconds, setRefreshSeconds] = useState(30);
+  const [autoRefreshEnabled, setAutoRefreshEnabled] = useState(true);
   const [gameFilter, setGameFilter] = useState("all");
   const [viewMode, setViewMode] = useState("grid");
+  const [statusFilter, setStatusFilter] = useState("all");
 
   const { data, isLoading, isError } = useGetServersQuery(undefined, {
-    pollingInterval: refreshSeconds * 1000,
+    pollingInterval: autoRefreshEnabled ? refreshSeconds * 1000 : 0,
   });
 
   return (
-    <main>
+    <>
       <ServersControls
         refreshSeconds={refreshSeconds}
         onRefreshSecondsChange={setRefreshSeconds}
+        autoRefreshEnabled={autoRefreshEnabled}
+        onAutoRefreshEnabledChange={setAutoRefreshEnabled}
         gameFilter={gameFilter}
         onGameFilterChange={setGameFilter}
         viewMode={viewMode}
         onViewModeChange={setViewMode}
+        statusFilter={statusFilter}
+        onStatusFilterChange={setStatusFilter}
       />
       <AllServers
         servers={data?.Servers}
@@ -31,9 +37,10 @@ const ServersPage = () => {
         error={isError}
         gameFilter={gameFilter}
         viewMode={viewMode}
+        statusFilter={statusFilter}
       />
       <PlayerToolTip />
-    </main>
+    </>
   );
 };
 

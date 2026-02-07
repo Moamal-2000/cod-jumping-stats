@@ -7,11 +7,12 @@ import s from "./ServerCardHeader.module.scss";
 import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
-const ServerCardHeader = ({ server, index }) => {
+const ServerCardHeader = ({ server, index, viewMode }) => {
   const [src, setSrc] = useState(`/maps/512/${server.Map}.webp`);
+  const isList = viewMode === "list";
 
   return (
-    <header className={s.serverHeader}>
+    <header className={`${s.serverHeader} ${isList ? s.list : ""}`}>
       <div className={s.countryFlag}>
         <Image
           src={getCountryFlag(server.Domain)}
@@ -25,17 +26,19 @@ const ServerCardHeader = ({ server, index }) => {
       <ServerCardIp server={server} />
       <ServerCardIndicator server={server} />
 
-      <Image
-        src={src}
-        alt={server.Map}
-        fill={true}
-        sizes="383px"
-        className={s.mapBackground}
-        onError={() => setSrc("/placeholders/blank-black.svg")}
-        loading={index < 3 ? "eager" : "lazy"}
-        priority={index < 3}
-        fetchPriority={index < 3 ? "high" : "low"}
-      />
+      {!isList && (
+        <Image
+          src={src}
+          alt={server.Map}
+          fill={true}
+          sizes="383px"
+          className={s.mapBackground}
+          onError={() => setSrc("/placeholders/blank-black.svg")}
+          loading={index < 3 ? "eager" : "lazy"}
+          priority={index < 3}
+          fetchPriority={index < 3 ? "high" : "low"}
+        />
+      )}
     </header>
   );
 };

@@ -7,10 +7,14 @@ const REFRESH_OPTIONS = [10, 30, 60, 120, 300];
 const ServersControls = ({
   refreshSeconds,
   onRefreshSecondsChange,
+  autoRefreshEnabled,
+  onAutoRefreshEnabledChange,
   gameFilter,
   onGameFilterChange,
   viewMode,
   onViewModeChange,
+  statusFilter,
+  onStatusFilterChange,
 }) => {
   return (
     <section className={s.controls} aria-label="Server options">
@@ -18,21 +22,36 @@ const ServersControls = ({
         <label htmlFor="servers-refresh" className={s.groupLabel}>
           Refresh servers after
         </label>
-        <div className={s.selectWrap}>
-          <select
-            id="servers-refresh"
-            value={refreshSeconds}
-            onChange={(event) =>
-              onRefreshSecondsChange(Number(event.target.value))
-            }
-          >
-            {REFRESH_OPTIONS.map((seconds) => (
-              <option key={seconds} value={seconds}>
-                {seconds}
-              </option>
-            ))}
-          </select>
-          <span className={s.unit}>sec</span>
+        <div className={s.refreshRow}>
+          <div className={s.selectWrap}>
+            <select
+              id="servers-refresh"
+              value={refreshSeconds}
+              onChange={(event) =>
+                onRefreshSecondsChange(Number(event.target.value))
+              }
+              disabled={!autoRefreshEnabled}
+            >
+              {REFRESH_OPTIONS.map((seconds) => (
+                <option key={seconds} value={seconds}>
+                  {seconds} sec
+                </option>
+              ))}
+            </select>
+          </div>
+          <label className={s.switch}>
+            <input
+              type="checkbox"
+              checked={autoRefreshEnabled}
+              onChange={(event) =>
+                onAutoRefreshEnabledChange(event.target.checked)
+              }
+            />
+            <span className={s.slider} />
+            <span className={s.switchLabel}>
+              {autoRefreshEnabled ? "On" : "Off"}
+            </span>
+          </label>
         </div>
       </div>
 
@@ -40,9 +59,9 @@ const ServersControls = ({
         <span className={s.groupLabel}>Show</span>
         <div className={s.toggleButtons} role="group" aria-label="Game filter">
           {[
-            { id: "all", label: "Show all" },
-            { id: "cod2", label: "Only COD2" },
-            { id: "cod4", label: "Only COD4" },
+            { id: "all", label: "All" },
+            { id: "cod2", label: "COD2" },
+            { id: "cod4", label: "COD4" },
           ].map((option) => (
             <button
               key={option.id}
@@ -51,6 +70,31 @@ const ServersControls = ({
                 gameFilter === option.id ? s.active : ""
               }`}
               onClick={() => onGameFilterChange(option.id)}
+            >
+              {option.label}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={s.controlGroup}>
+        <span className={s.groupLabel}>Filters</span>
+        <div
+          className={s.toggleButtons}
+          role="group"
+          aria-label="Online filter"
+        >
+          {[
+            { id: "all", label: "All" },
+            { id: "online", label: "Online Only" },
+          ].map((option) => (
+            <button
+              key={option.id}
+              type="button"
+              className={`${s.toggleButton} ${
+                statusFilter === option.id ? s.active : ""
+              }`}
+              onClick={() => onStatusFilterChange(option.id)}
             >
               {option.label}
             </button>

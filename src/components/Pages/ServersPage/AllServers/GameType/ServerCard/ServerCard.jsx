@@ -8,8 +8,8 @@ import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlaye
 const ServerCard = ({ server, index, viewMode }) => {
   return (
     <div className={`${s.serverCard} ${viewMode === "list" ? s.list : ""}`}>
-      <ServerCardHeader server={server} index={index} />
-      <ServerInfo server={server} />
+      <ServerCardHeader server={server} index={index} viewMode={viewMode} />
+      <ServerInfo server={server} viewMode={viewMode} />
       <ServerCardPlayersSection server={server} />
     </div>
   );

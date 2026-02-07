@@ -6,10 +6,20 @@
   top: 10px;
 }
 
+.serverInfo.list {
+  padding: 8px 16px 12px;
+  top: 0;
+}
+
 .serverInfo .infoItem {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.serverInfo.list .infoItem {
+  justify-content: flex-start;
+  gap: 8px;
 }
 
 .label {
@@ -60,4 +70,9 @@
       -1px 0 2px #e78f3199,
       0 0 3px #ffffff6c;
   }
+}
+
+.serverInfo.list .mapName {
+  font-size: 1.05rem;
+  color: #f9fafb;
 }
