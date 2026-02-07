@@ -28,11 +28,6 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  padding: 0.4rem 0.6rem;
-  border-radius: 8px;
-  min-width: 140px;
   justify-content: space-between;
 }
 
@@ -43,16 +38,43 @@
   flex-wrap: wrap;
 }
 
+.selectWrap {
+  position: relative;
+}
+
+.selectWrap::after {
+  content: "sec";
+  position: absolute;
+  color: #f8fafc;
+  font-weight: 600;
+  font-size: 0.9rem;
+  top: calc(50% - 2px);
+  right: 9px;
+  translate: 0 -50%;
+  pointer-events: none;
+}
+
+.selectWrap:has(select:disabled)::after {
+  color: #4f5560;
+}
+
 .selectWrap select {
   background: transparent;
   border: none;
   color: #f8fafc;
+  background: #272e39;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 5px 9px;
+  border-radius: 8px;
+  cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
   outline: none;
   appearance: none;
   padding-right: 0.75rem;
   width: 100%;
+  min-width: 74px;
+
 }
 
 .selectWrap select:disabled {
@@ -60,17 +82,10 @@
   cursor: not-allowed;
 }
 
-.selectWrap select:focus-visible {
-  outline: 2px solid rgba(250, 204, 21, 0.5);
-  outline-offset: 2px;
-  border-radius: 6px;
-}
-
 .selectWrap select option {
   background: #111827;
   color: #f9fafb;
 }
-
 
 .switch {
   display: inline-flex;

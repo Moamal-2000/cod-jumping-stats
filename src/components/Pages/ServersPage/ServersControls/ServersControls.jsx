@@ -34,11 +34,12 @@ const ServersControls = ({
             >
               {REFRESH_OPTIONS.map((seconds) => (
                 <option key={seconds} value={seconds}>
-                  {seconds} sec
+                  {seconds}
                 </option>
               ))}
             </select>
           </div>
+
           <label className={s.switch}>
             <input
               type="checkbox"
