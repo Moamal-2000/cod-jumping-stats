@@ -1,4 +1,5 @@
 import ServersPage from "@/components/Pages/ServersPage/ServersPage";
+import { Suspense } from "react";
 
 export const metadata = {
   title: "Servers | JumpersHeaven",
@@ -9,7 +10,9 @@ export default async function Servers() {
   return (
     <div className="container">
       <main>
-        <ServersPage />
+        <Suspense>
+          <ServersPage />
+        </Suspense>
       </main>
     </div>
   );
