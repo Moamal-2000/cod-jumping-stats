@@ -1,8 +1,7 @@
 "use client";
 
+import { SERVERS_REFRESH_OPTIONS } from "@/data/constants";
 import s from "./ServersControls.module.scss";
-
-const REFRESH_OPTIONS = [10, 30, 60, 120, 300];
 
 const ServersControls = ({
   refreshSeconds,
@@ -32,7 +31,7 @@ const ServersControls = ({
               }
               disabled={!autoRefreshEnabled}
             >
-              {REFRESH_OPTIONS.map((seconds) => (
+              {SERVERS_REFRESH_OPTIONS.map((seconds) => (
                 <option key={seconds} value={seconds}>
                   {seconds}
                 </option>
