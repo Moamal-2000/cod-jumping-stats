@@ -24,7 +24,7 @@ const ServersControls = ({
     <section className={s.controls} aria-label="Server options">
       <div className={s.controlGroup}>
         <label htmlFor="servers-refresh" className={s.groupLabel}>
-          Refresh servers after
+          Refresh servers
         </label>
         <div className={s.refreshRow}>
           <div className={s.selectWrap}>
