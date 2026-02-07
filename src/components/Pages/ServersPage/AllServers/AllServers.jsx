@@ -21,7 +21,7 @@ const AllServers = ({
       : servers;
 
   const statusFilteredServers =
-    statusFilter === "online"
+    statusFilter === "with-players"
       ? filteredServers?.filter(
           (server) =>
             server?.Online &&

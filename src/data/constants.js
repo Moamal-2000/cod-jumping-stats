@@ -33,7 +33,7 @@ export const SERVERS_GAME_FILTER_OPTIONS = [
 ];
 export const SERVER_STATUS_FILTER = [
   { id: "all", label: "All" },
-  { id: "withPlayers", label: "With Players" },
+  { id: "with-players", label: "With Players" },
 ];
 export const SERVERS_VIEW_MODE = [
   { id: "grid", label: "Grid" },
