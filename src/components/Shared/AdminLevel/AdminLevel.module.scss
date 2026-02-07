@@ -5,7 +5,7 @@
   font-size: .9rem;
   font-weight: 600;
   user-select: text;
-  min-width: 38px;
+  min-width: 42px;
   color: #facc15;
   text-shadow: 0 0 14px #facc1566;
 
@@ -54,6 +54,6 @@
 
   svg {
     filter: drop-shadow(0 0 2px rgba(0, 255, 255, .6));
-    scale: 1.08;
+    // scale: 1.08;
   }
 }
