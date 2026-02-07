@@ -7,17 +7,32 @@
   margin-bottom: 100px;
 }
 
+.serversList {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-bottom: 60px;
+}
+
 @include m.large {
   .serversGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;
     margin-bottom: 40px;
   }
+
+  .serversList {
+    margin-bottom: 32px;
+  }
 }
 
 @media (max-width: 820px) {
   .serversGrid {
     grid-template-columns: 1fr;
+    margin-bottom: 16px;
+  }
+
+  .serversList {
     margin-bottom: 16px;
   }
 }

@@ -5,9 +5,9 @@ import ServerCardHeader from "./ServerCardHeader/ServerCardHeader";
 import ServerInfo from "./ServerCardMapSection/ServerInfo";
 import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlayersSection";
 
-const ServerCard = ({ server, index }) => {
+const ServerCard = ({ server, index, viewMode }) => {
   return (
-    <div className={s.serverCard}>
+    <div className={`${s.serverCard} ${viewMode === "list" ? s.list : ""}`}>
       <ServerCardHeader server={server} index={index} />
       <ServerInfo server={server} />
       <ServerCardPlayersSection server={server} />
