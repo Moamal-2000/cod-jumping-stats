@@ -25,7 +25,38 @@ const FiltersSection = () => {
 
   return (
     <section className={s.filtersSection}>
+      <div className={`${s.filterGroup} ${s.searchGroup}`}>
+        <span className={s.filterLabel}>Search With</span>
+
+        <div className={s.fields}>
+          <SearchInput
+            queryName="name"
+            placeholder="Player Name"
+            id="player-name-search"
+          />
+
+          <SearchInput
+            queryName="id"
+            placeholder="Player ID"
+            id="player-id-search"
+            inputMode="numeric"
+          />
+        </div>
+      </div>
+
       <div className={s.controls}>
+        <div className={`${s.filterGroup} ${s.selectGroup}`}>
+          <label className={s.filterLabel} htmlFor="players-filter-badges">
+            Filter By Badges
+          </label>
+          <SelectMenu
+            optionsData={FILTER_PLAYERS_BADGES}
+            onChange={handleFilterChange}
+            value={filterBy}
+            id="players-filter-badges"
+          />
+        </div>
+
         <div className={`${s.filterGroup} ${s.sortGroup}`}>
           <span className={s.filterLabel}>Sort By</span>
           <div className={s.sortButtons} role="group" aria-label="Sort players">
@@ -45,37 +76,6 @@ const FiltersSection = () => {
               );
             })}
           </div>
-        </div>
-
-        <div className={`${s.filterGroup} ${s.selectGroup}`}>
-          <label className={s.filterLabel} htmlFor="players-filter-badges">
-            Filter By Badges
-          </label>
-          <SelectMenu
-            optionsData={FILTER_PLAYERS_BADGES}
-            onChange={handleFilterChange}
-            value={filterBy}
-            id="players-filter-badges"
-          />
-        </div>
-      </div>
-
-      <div className={`${s.filterGroup} ${s.searchGroup}`}>
-        <span className={s.filterLabel}>Search With</span>
-
-        <div className={s.fields}>
-          <SearchInput
-            queryName="name"
-            placeholder="Player Name"
-            id="player-name-search"
-          />
-
-          <SearchInput
-            queryName="id"
-            placeholder="Player ID"
-            id="player-id-search"
-            inputMode="numeric"
-          />
         </div>
       </div>
     </section>
