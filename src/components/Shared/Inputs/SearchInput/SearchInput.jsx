@@ -9,6 +9,7 @@ const SearchInput = ({
   queryName,
   placeholder,
   label,
+  type = "text",
   id,
   inputMode = "none",
   autoFocus = false,
@@ -84,6 +85,7 @@ const SearchInput = ({
         placeholder={placeholder}
         onChange={handleOnChange}
         value={searchValue}
+        type={type}
         id={id}
         ref={inputRef}
       />
