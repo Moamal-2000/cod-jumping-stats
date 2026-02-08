@@ -23,44 +23,6 @@ const ServersControls = ({
   return (
     <section className={s.controls} aria-label="Server options">
       <div className={s.controlGroup}>
-        <label htmlFor="servers-refresh" className={s.groupLabel}>
-          Refresh servers
-        </label>
-        <div className={s.refreshRow}>
-          <div className={s.selectWrap}>
-            <select
-              id="servers-refresh"
-              value={refreshSeconds}
-              onChange={(event) =>
-                onRefreshSecondsChange(Number(event.target.value))
-              }
-              disabled={!autoRefreshEnabled}
-            >
-              {SERVERS_REFRESH_OPTIONS.map((seconds) => (
-                <option key={seconds} value={seconds}>
-                  {seconds}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          <label className={s.switch}>
-            <input
-              type="checkbox"
-              checked={autoRefreshEnabled}
-              onChange={(event) =>
-                onAutoRefreshEnabledChange(event.target.checked)
-              }
-            />
-            <span className={s.slider} />
-            <span className={s.switchLabel}>
-              {autoRefreshEnabled ? "On" : "Off"}
-            </span>
-          </label>
-        </div>
-      </div>
-
-      <div className={s.controlGroup}>
         <span className={s.groupLabel}>Show</span>
         <div className={s.toggleButtons} role="group" aria-label="Game filter">
           {SERVERS_GAME_FILTER_OPTIONS.map((option) => (
@@ -115,6 +77,44 @@ const ServersControls = ({
               {option.label}
             </button>
           ))}
+        </div>
+      </div>
+
+      <div className={s.controlGroup}>
+        <label htmlFor="servers-refresh" className={s.groupLabel}>
+          Refresh servers
+        </label>
+        <div className={s.refreshRow}>
+          <div className={s.selectWrap}>
+            <select
+              id="servers-refresh"
+              value={refreshSeconds}
+              onChange={(event) =>
+                onRefreshSecondsChange(Number(event.target.value))
+              }
+              disabled={!autoRefreshEnabled}
+            >
+              {SERVERS_REFRESH_OPTIONS.map((seconds) => (
+                <option key={seconds} value={seconds}>
+                  {seconds}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <label className={s.switch}>
+            <input
+              type="checkbox"
+              checked={autoRefreshEnabled}
+              onChange={(event) =>
+                onAutoRefreshEnabledChange(event.target.checked)
+              }
+            />
+            <span className={s.slider} />
+            <span className={s.switchLabel}>
+              {autoRefreshEnabled ? "On" : "Off"}
+            </span>
+          </label>
         </div>
       </div>
     </section>
