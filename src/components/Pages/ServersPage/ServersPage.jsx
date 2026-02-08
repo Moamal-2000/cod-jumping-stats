@@ -3,6 +3,7 @@
 import {
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
+  SERVERS_REFRESH_OPTIONS,
   SERVERS_VIEW_MODE,
 } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/functions/utils";
@@ -23,14 +24,16 @@ const ServersPage = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const refreshParam =
-    Number(searchParams.get("refresh")) || DEFAULT_REFRESH_SECONDS;
+  const refreshParam = +searchParams.get("refresh") || DEFAULT_REFRESH_SECONDS;
   const autoRefreshParam =
     searchParams.get("auto-refresh") || DEFAULT_AUTO_REFRESH;
   const gameParam = searchParams.get("game") || DEFAULT_GAME_FILTER;
   const viewParam = searchParams.get("view") || DEFAULT_VIEW_MODE;
   const statusParam = searchParams.get("status") || DEFAULT_STATUS_SERVER;
 
+  const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(+refreshParam)
+    ? refreshParam
+    : DEFAULT_REFRESH_SECONDS;
   const autoRefreshEnabled = autoRefreshParam === "true" ? true : false;
 
   const gameFilter = SERVERS_GAME_FILTER_OPTIONS.some(
@@ -50,7 +53,7 @@ const ServersPage = () => {
     : DEFAULT_STATUS_SERVER;
 
   const { data, isLoading, isError } = useGetServersQuery(undefined, {
-    pollingInterval: autoRefreshEnabled ? refreshParam * 1000 : 0,
+    pollingInterval: autoRefreshEnabled ? refreshSeconds * 1000 : 0,
   });
 
   function handlerefreshParamChange(value) {
@@ -101,7 +104,7 @@ const ServersPage = () => {
   return (
     <>
       <ServersControls
-        refreshParam={refreshParam}
+        refreshSeconds={refreshSeconds}
         onRefreshSecondsChange={handlerefreshParamChange}
         autoRefreshEnabled={autoRefreshEnabled}
         onAutoRefreshEnabledChange={handleAutoRefreshEnabledChange}
