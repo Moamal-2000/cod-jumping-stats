@@ -9,7 +9,7 @@ import {
 import s from "./ServersControls.module.scss";
 
 const ServersControls = ({
-  refreshSeconds,
+  refreshParam,
   onRefreshSecondsChange,
   autoRefreshEnabled,
   onAutoRefreshEnabledChange,
@@ -30,7 +30,7 @@ const ServersControls = ({
           <div className={s.selectWrap}>
             <select
               id="servers-refresh"
-              value={refreshSeconds}
+              value={refreshParam}
               onChange={(event) =>
                 onRefreshSecondsChange(Number(event.target.value))
               }

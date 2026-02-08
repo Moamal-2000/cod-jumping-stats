@@ -3,7 +3,6 @@
 import {
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
-  SERVERS_REFRESH_OPTIONS,
   SERVERS_VIEW_MODE,
 } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/functions/utils";
@@ -13,47 +12,49 @@ import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 import ServersControls from "./ServersControls/ServersControls";
 
+const DEFAULT_REFRESH_SECONDS = 30;
+const DEFAULT_GAME_FILTER = "all";
+const DEFAULT_VIEW_MODE = "grid";
+const DEFAULT_STATUS_SERVER = "all";
+const DEFAULT_AUTO_REFRESH = "true";
+
 const ServersPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const refreshParam = Number(searchParams.get("refresh"));
-  const autoRefreshParam = searchParams.get("auto-refresh");
-  const gameParam = searchParams.get("game");
-  const viewParam = searchParams.get("view");
-  const statusParam = searchParams.get("status");
+  const refreshParam =
+    Number(searchParams.get("refresh")) || DEFAULT_REFRESH_SECONDS;
+  const autoRefreshParam =
+    searchParams.get("auto-refresh") || DEFAULT_AUTO_REFRESH;
+  const gameParam = searchParams.get("game") || DEFAULT_GAME_FILTER;
+  const viewParam = searchParams.get("view") || DEFAULT_VIEW_MODE;
+  const statusParam = searchParams.get("status") || DEFAULT_STATUS_SERVER;
 
-  const defaultRefreshSeconds = 30;
-  const defaultGameFilter = "all";
-  const defaultViewMode = "grid";
-  const defaultStatusFilter = "all";
+  const autoRefreshEnabled = autoRefreshParam === "true" ? true : false;
 
-  const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(refreshParam)
-    ? refreshParam
-    : defaultRefreshSeconds;
-  const autoRefreshEnabled =
-    autoRefreshParam === null ? true : autoRefreshParam !== "false";
   const gameFilter = SERVERS_GAME_FILTER_OPTIONS.some(
     (option) => option.id === gameParam,
   )
     ? gameParam
-    : defaultGameFilter;
+    : DEFAULT_GAME_FILTER;
+
   const viewMode = SERVERS_VIEW_MODE.some((option) => option.id === viewParam)
     ? viewParam
-    : defaultViewMode;
+    : DEFAULT_VIEW_MODE;
+
   const statusFilter = SERVER_STATUS_FILTER.some(
     (option) => option.id === statusParam,
   )
     ? statusParam
-    : defaultStatusFilter;
+    : DEFAULT_STATUS_SERVER;
 
   const { data, isLoading, isError } = useGetServersQuery(undefined, {
-    pollingInterval: autoRefreshEnabled ? refreshSeconds * 1000 : 0,
+    pollingInterval: autoRefreshEnabled ? refreshParam * 1000 : 0,
   });
 
-  function handleRefreshSecondsChange(value) {
-    if (value === defaultRefreshSeconds) {
+  function handlerefreshParamChange(value) {
+    if (value === DEFAULT_REFRESH_SECONDS) {
       removeQueryString("refresh", searchParams, router, pathname);
       return;
     }
@@ -71,7 +72,7 @@ const ServersPage = () => {
   }
 
   function handleGameFilterChange(value) {
-    if (value === defaultGameFilter) {
+    if (value === DEFAULT_GAME_FILTER) {
       removeQueryString("game", searchParams, router, pathname);
       return;
     }
@@ -80,7 +81,7 @@ const ServersPage = () => {
   }
 
   function handleViewModeChange(value) {
-    if (value === defaultViewMode) {
+    if (value === DEFAULT_VIEW_MODE) {
       removeQueryString("view", searchParams, router, pathname);
       return;
     }
@@ -89,7 +90,7 @@ const ServersPage = () => {
   }
 
   function handleStatusFilterChange(value) {
-    if (value === defaultStatusFilter) {
+    if (value === DEFAULT_STATUS_SERVER) {
       removeQueryString("status", searchParams, router, pathname);
       return;
     }
@@ -100,8 +101,8 @@ const ServersPage = () => {
   return (
     <>
       <ServersControls
-        refreshSeconds={refreshSeconds}
-        onRefreshSecondsChange={handleRefreshSecondsChange}
+        refreshParam={refreshParam}
+        onRefreshSecondsChange={handlerefreshParamChange}
         autoRefreshEnabled={autoRefreshEnabled}
         onAutoRefreshEnabledChange={handleAutoRefreshEnabledChange}
         gameFilter={gameFilter}
