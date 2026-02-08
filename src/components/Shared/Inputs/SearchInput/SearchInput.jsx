@@ -11,6 +11,7 @@ const SearchInput = ({
   label,
   id,
   inputMode = "none",
+  autoFocus = false,
 }) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
@@ -20,6 +21,7 @@ const SearchInput = ({
   const [searchValue, setSearchValue] = useState(currentValue);
 
   const debounceRef = useRef(null);
+  const inputRef = useRef(null);
 
   function handleOnChange(event) {
     let inputValue = event.target.value;
@@ -58,6 +60,16 @@ const SearchInput = ({
     if (currentValue === "") setSearchValue("");
   }, [currentValue]);
 
+  useEffect(() => {
+    if (typeof window === "undefined" || !autoFocus) return;
+
+    const isDesktop =
+      window.matchMedia("(hover: hover)").matches &&
+      window.matchMedia("(pointer: fine)").matches;
+
+    if (isDesktop) inputRef.current.focus();
+  }, []);
+
   return (
     <div className={s.searchContainer}>
       {label !== undefined && (
@@ -73,6 +85,7 @@ const SearchInput = ({
         onChange={handleOnChange}
         value={searchValue}
         id={id}
+        ref={inputRef}
       />
 
       <button

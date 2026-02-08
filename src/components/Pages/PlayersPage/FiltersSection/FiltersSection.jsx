@@ -33,6 +33,7 @@ const FiltersSection = () => {
             queryName="name"
             placeholder="Player Name"
             id="player-name-search"
+            autoFocus={true}
           />
 
           <SearchInput
