@@ -11,7 +11,7 @@ const SearchInput = ({
   label,
   type = "text",
   id,
-  inputMode = "none",
+  inputMode = "text",
   autoFocus = false,
 }) => {
   const searchParams = useSearchParams();
