@@ -34,7 +34,13 @@ const AllServers = ({
   const gameTypes = getGameTypes(groupedServers);
 
   if (loading || error) {
-    return <ServersLoadingError loading={loading} error={error} />;
+    return (
+      <ServersLoadingError
+        loading={loading}
+        error={error}
+        viewMode={viewMode}
+      />
+    );
   }
 
   return gameTypes.map((gameType) => (
