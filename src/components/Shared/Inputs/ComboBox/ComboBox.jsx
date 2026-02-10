@@ -41,13 +41,18 @@ const ComboBox = ({
 
   function handleInputChange(event) {
     if (disabled) return;
+    if (!isOpen) setIsOpen(true);
     clearTimeout(debounceRef?.current);
 
-    const value = event.target.value;
+    const value = event.target.value.toLowerCase().trim();
+    setInputValue(value);
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
-    setInputValue(value);
-    if (!isOpen) setIsOpen(true);
+    const optionsValues = normalizedOptions.map(({ value }) => value);
+    const isInOptionsList = optionsValues.includes(value);
+
+    if (isInOptionsList) setSelectedValue(value);
+    if (!isInOptionsList) setSelectedValue("");
   }
 
   function updateUrlQuery(searchValue) {
