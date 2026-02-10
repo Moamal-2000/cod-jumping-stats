@@ -160,6 +160,12 @@
     background-color: rgba(32, 40, 50, 0.4);
     color: #58a6ff;
   }
+
+  &:focus-visible {
+    outline-offset:-2px;
+    background-color: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
+  }
 }
 
 .emptyState {
