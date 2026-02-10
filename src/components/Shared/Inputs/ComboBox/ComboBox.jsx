@@ -111,6 +111,11 @@ const ComboBox = ({
     const optionValues = normalizedOptions.map(({ value }) => value);
     const isInOptionsList = optionValues.includes(inputValue);
 
+    if (isOpen && !isInOptionsList) {
+      handleSelect(normalizedOptions[0], { closeMenu: false });
+      return;
+    }
+
     if (!isOpen || !isInOptionsList) return;
 
     const selectedOptionIndex = optionValues.indexOf(selectedValue);
