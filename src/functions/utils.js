@@ -405,45 +405,51 @@ export function capitalize(str) {
 }
 
 export function getMapsAuthors(maps) {
-  const authors = maps.reduce(
-    (authors, { Author }) => [...authors, Author],
-    [],
-  );
+  const seen = new Map();
 
-  const authorsSet = [...new Set(authors)].reduce((acc, author) => {
-    if (author === undefined || author === null) return acc;
-    return [...acc, author.toLowerCase()];
-  }, []);
-  const filteredByScore = authorsSet.filter((author) => isLikelyAuthor(author));
+  maps.forEach(({ Author }) => {
+    if (!Author) return;
 
-  const filteredByScoreSet = [...new Set(filteredByScore)];
-  const filteredAuthors = filteredByScoreSet.filter(
-    (author) => !isDuplicateItem(filteredByScoreSet, author),
-  );
+    const author = Author.trim();
+    if (!isLikelyAuthor(author)) return;
 
-  return [...new Set(filteredAuthors)];
+    const normalizedKey = normalizeAuthor(author);
+    const isNew = !seen.has(normalizedKey);
+    const isLonger = author?.length < seen.get(normalizedKey)?.length;
+
+    if (isNew || isLonger) seen.set(normalizedKey, author.toLowerCase());
+  });
+
+  return Array.from(seen.values());
+}
+
+function normalizeAuthor(author) {
+  return author
+    .toLowerCase()
+    .trim()
+    .split("&")[0]
+    .replace(/[?!.,#'"]+$/g, "")
+    .replace(/\s+/g, " ")
+    .replace(/\s/g, "");
 }
 
 function isLikelyAuthor(author) {
+  const hasAnd = /&|\band\b/i.test(author);
+  if (hasAnd) return false;
+
   let score = 0;
 
   const has15Char = author.length >= 15;
   const has3Words = author.split(/\s+/).length >= 3;
   const hasNumber = /\d/.test(author);
   const hasParenthesis = /[()]/.test(author);
-  const hasAnd = /(&|\band\b)/i.test(author);
   const hasKeywords = /\b(by|version|reworked|ported|finished)\b/i.test(author);
 
   if (has15Char) score += 1;
   if (has3Words) score += 2;
   if (hasNumber) score += 1;
   if (hasParenthesis) score += 2;
-  if (hasAnd) score += 1;
   if (hasKeywords) score += 2;
 
   return score < 3;
-}
-
-function isDuplicateItem(data, item) {
-  return !data.includes(item.toLowerCase());
 }
