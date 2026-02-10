@@ -29,6 +29,7 @@ const ComboBox = ({
   const clearButtonRef = useRef(null);
   const inputRef = useRef(null);
   const debounceRef = useRef(null);
+  const autoSelectRef = useRef(false);
 
   const normalizedOptions = normalizeOptions(options);
 
@@ -53,6 +54,7 @@ const ComboBox = ({
 
     if (isInOptionsList) setSelectedValue(value);
     if (!isInOptionsList) setSelectedValue("");
+    autoSelectRef.current = isInOptionsList;
   }
 
   function updateUrlQuery(searchValue) {
@@ -153,6 +155,19 @@ const ComboBox = ({
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isOpen]);
 
+  useEffect(() => {
+    if (!isOpen || !autoSelectRef.current) return;
+    autoSelectRef.current = false;
+
+    const target = wrapperRef.current?.querySelector(
+      `[data-combobox-value="${selectedValue}"]`,
+    );
+
+    if (target) {
+      target.scrollIntoView({ block: "nearest" });
+    }
+  }, [selectedValue, isOpen]);
+
   return (
     <div className={s.comboBox} ref={wrapperRef}>
       <div
@@ -227,6 +242,7 @@ const ComboBox = ({
                 aria-selected={isActive}
                 className={`${s.optionButton} ${isActive ? s.active : ""}`}
                 onClick={() => handleSelect(option)}
+                data-combobox-value={option.value}
               >
                 {option.label}
               </button>
