@@ -31,9 +31,10 @@ const SortSection = ({ setPaginationNumber, allMaps }) => {
         <SearchInput placeholder="Search maps by name..." queryName="name" />
         <ComboBox
           placeholder="Maps by author name..."
-          options={getMapsAuthors(allMaps)}
           id="author"
           queryName="author"
+          options={getMapsAuthors(allMaps)}
+          alphaOrder={true}
         />
       </div>
 

@@ -13,6 +13,7 @@ const ComboBox = ({
   emptyText = "No results",
   clearLabel = "Clear field",
   queryName,
+  alphaOrder = false,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -31,7 +32,7 @@ const ComboBox = ({
   const debounceRef = useRef(null);
   const autoSelectRef = useRef(false);
 
-  const normalizedOptions = normalizeOptions(options);
+  const normalizedOptions = normalizeOptions(options, alphaOrder);
 
   function handleToggle() {
     if (disabled) return;
@@ -256,14 +257,15 @@ const ComboBox = ({
 
 export default ComboBox;
 
-function normalizeOptions(options) {
-  return options.map((option) => {
-    const optionObj = {
-      id: option?.id ?? option?.value ?? option?.label ?? String(option),
-      label: option?.label ?? String(option?.value ?? option),
-      value: option?.value ?? option?.label ?? option,
-    };
+function normalizeOptions(options, alphaOrder = false) {
+  let normalizedOptions = options.map((option) => ({
+    id: option?.id ?? option?.value ?? option?.label ?? String(option),
+    label: option?.label ?? String(option?.value ?? option),
+    value: option?.value ?? option?.label ?? option,
+  }));
 
-    return optionObj;
-  });
+  if (alphaOrder)
+    normalizedOptions.sort((a, b) => a.label.localeCompare(b.label));
+
+  return normalizedOptions;
 }
