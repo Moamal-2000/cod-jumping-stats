@@ -48,15 +48,15 @@ const ComboBox = ({
     setInputValue(value);
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
-    const optionsValues = normalizedOptions.map(({ value }) => value);
-    const isInOptionsList = optionsValues.includes(value);
+    const optionValues = normalizedOptions.map(({ value }) => value);
+    const isInOptionsList = optionValues.includes(value);
 
     if (isInOptionsList) setSelectedValue(value);
     if (!isInOptionsList) setSelectedValue("");
   }
 
   function updateUrlQuery(searchValue) {
-    if (!searchValue.trim()) {
+    if (searchValue.trim() === "") {
       removeQueryString(queryName, searchParams, router, pathname);
       return;
     }
@@ -70,14 +70,14 @@ const ComboBox = ({
     );
   }
 
-  function handleSelect(option) {
+  function handleSelect(option, { closeMenu = true } = {}) {
     const { label, value } = option;
 
     setInputValue(label);
     setSelectedValue(value);
     createQueryString(queryName, value, searchParams, router, pathname);
 
-    setIsOpen(false);
+    setIsOpen(!closeMenu);
   }
 
   function handleClear() {
@@ -92,8 +92,37 @@ const ComboBox = ({
   }
 
   function handleKeyDown(event) {
+    const isArrowDown = event.key === "ArrowDown";
+    const isArrowUp = event.key === "ArrowUp";
+
     if (event.key === "Escape") setIsOpen(false);
-    if (event.key === "ArrowDown") setIsOpen(true);
+    if (isArrowDown) setIsOpen(true);
+
+    if (isArrowDown || isArrowUp)
+      handleArrowNavigation({ isArrowDown, isArrowUp });
+  }
+
+  function handleArrowNavigation({ isArrowDown, isArrowUp } = {}) {
+    const optionValues = normalizedOptions.map(({ value }) => value);
+    const isInOptionsList = optionValues.includes(inputValue);
+
+    if (!isOpen || !isInOptionsList) return;
+
+    const selectedOptionIndex = optionValues.indexOf(selectedValue);
+    const isLast = selectedOptionIndex >= optionValues.length - 1;
+    const isFirst = selectedOptionIndex === 0;
+
+    let optionIndex = selectedOptionIndex;
+
+    if (isArrowDown && !isLast) optionIndex += 1;
+    if (isArrowUp && !isFirst) optionIndex -= 1;
+
+    if (isArrowDown && isLast) optionIndex = 0;
+    if (isArrowUp && isFirst) optionIndex = normalizedOptions.length - 1;
+
+    const newSelectValue = normalizedOptions[optionIndex];
+    if (newSelectValue !== undefined)
+      handleSelect(newSelectValue, { closeMenu: false });
   }
 
   useEffect(() => {
