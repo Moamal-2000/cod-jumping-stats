@@ -141,8 +141,12 @@ const ComboBox = ({
     function handleClickOutside(event) {
       const isComboClicked = wrapperRef.current?.contains(event.target);
       const isClearButtonRemoved = clearButtonRef.current === null;
+      const isInputFocused = document.activeElement === inputRef.current;
 
-      setIsOpen(isComboClicked || isClearButtonRemoved);
+      const openMenu =
+        (isComboClicked && isClearButtonRemoved) || isInputFocused;
+
+      setIsOpen(openMenu);
     }
 
     document.addEventListener("click", handleClickOutside);
