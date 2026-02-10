@@ -33,6 +33,7 @@ const ComboBox = ({
   const autoSelectRef = useRef(false);
 
   const normalizedOptions = normalizeOptions(options, alphaOrder);
+  const filteredOptions = getFilteredOptions(normalizedOptions, inputValue);
 
   function handleToggle() {
     if (disabled) return;
@@ -227,12 +228,12 @@ const ComboBox = ({
         id={listId}
         role="listbox"
       >
-        {normalizedOptions.length === 0 && (
+        {filteredOptions.length === 0 && (
           <div className={s.emptyState}>{emptyText}</div>
         )}
 
         <div className={s.options}>
-          {normalizedOptions.map((option) => {
+          {filteredOptions.map((option) => {
             const isActive = option.value === selectedValue;
 
             return (
@@ -268,4 +269,17 @@ function normalizeOptions(options, alphaOrder = false) {
     normalizedOptions.sort((a, b) => a.label.localeCompare(b.label));
 
   return normalizedOptions;
+}
+
+function getFilteredOptions(options, inputValue) {
+  const query = inputValue.trim().toLowerCase();
+
+  if (!query) return options;
+
+  return options.filter(({ label, value }) => {
+    const labelValue = String(label).toLowerCase();
+    const rawValue = String(value).toLowerCase();
+
+    return labelValue.includes(query) || rawValue.includes(query);
+  });
 }
