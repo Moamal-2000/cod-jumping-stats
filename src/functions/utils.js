@@ -403,3 +403,47 @@ export function getCachedPlayers(dataType) {
 export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
+
+export function getMapsAuthors(maps) {
+  const authors = maps.reduce(
+    (authors, { Author }) => [...authors, Author],
+    [],
+  );
+
+  const authorsSet = [...new Set(authors)].reduce((acc, author) => {
+    if (author === undefined || author === null) return acc;
+    return [...acc, author.toLowerCase()];
+  }, []);
+  const filteredByScore = authorsSet.filter((author) => isLikelyAuthor(author));
+
+  const filteredByScoreSet = [...new Set(filteredByScore)];
+  const filteredAuthors = filteredByScoreSet.filter(
+    (author) => !isDuplicateItem(filteredByScoreSet, author),
+  );
+
+  return [...new Set(filteredAuthors)];
+}
+
+function isLikelyAuthor(author) {
+  let score = 0;
+
+  const has15Char = author.length >= 15;
+  const has3Words = author.split(/\s+/).length >= 3;
+  const hasNumber = /\d/.test(author);
+  const hasParenthesis = /[()]/.test(author);
+  const hasAnd = /(&|\band\b)/i.test(author);
+  const hasKeywords = /\b(by|version|reworked|ported|finished)\b/i.test(author);
+
+  if (has15Char) score += 1;
+  if (has3Words) score += 2;
+  if (hasNumber) score += 1;
+  if (hasParenthesis) score += 2;
+  if (hasAnd) score += 1;
+  if (hasKeywords) score += 2;
+
+  return score < 3;
+}
+
+function isDuplicateItem(data, item) {
+  return !data.includes(item.toLowerCase());
+}

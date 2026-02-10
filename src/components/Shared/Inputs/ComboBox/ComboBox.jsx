@@ -121,6 +121,7 @@ const ComboBox = ({
           aria-controls={listId}
           aria-expanded={isOpen}
           aria-autocomplete="list"
+          autoComplete="off"
           disabled={disabled}
           placeholder={placeholder}
           value={inputValue}

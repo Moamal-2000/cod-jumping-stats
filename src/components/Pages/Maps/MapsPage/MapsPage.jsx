@@ -17,7 +17,7 @@ const MapsPage = () => {
 
   function updateAllDataDisplayedStatus() {
     const lastMapsPagination = Math.ceil(
-      mapsData?.length / PAGINATION_ITEMS_PER_PAGE
+      mapsData?.length / PAGINATION_ITEMS_PER_PAGE,
     );
     const isLastPagination = paginationNumber >= lastMapsPagination;
 
@@ -25,7 +25,7 @@ const MapsPage = () => {
       updateMapsState({
         key: "allDataDisplayed",
         value: isLastPagination,
-      })
+      }),
     );
   }
 
@@ -37,7 +37,10 @@ const MapsPage = () => {
     <div className="container">
       <main className={s.mapsPage}>
         <Suspense>
-          <FiltersSection setPaginationNumber={setPaginationNumber} />
+          <FiltersSection
+            setPaginationNumber={setPaginationNumber}
+            mapsData={mapsData}
+          />
           <Maps
             paginationNumber={paginationNumber}
             setPaginationNumber={setPaginationNumber}

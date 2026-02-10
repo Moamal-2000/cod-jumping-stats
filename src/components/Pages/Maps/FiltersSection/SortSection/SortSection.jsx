@@ -1,9 +1,11 @@
+import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import CustomSelectMenu from "@/components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
+import { getMapsAuthors } from "@/functions/utils";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
 
-const SortSection = ({ setPaginationNumber }) => {
+const SortSection = ({ setPaginationNumber, mapsData }) => {
   return (
     <section className={s.sortSection}>
       <div className={s.leftSide}>
@@ -29,6 +31,12 @@ const SortSection = ({ setPaginationNumber }) => {
         <SearchInput placeholder="Search maps by name..." queryName="name" />
         <SearchInput
           placeholder="Search maps by author name..."
+          queryName="author"
+        />
+        <ComboBox
+          placeholder="maps by author name..."
+          options={getMapsAuthors(mapsData)}
+          id="author"
           queryName="author"
         />
       </div>
