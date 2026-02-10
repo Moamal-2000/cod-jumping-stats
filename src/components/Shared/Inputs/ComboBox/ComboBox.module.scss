@@ -1,0 +1,159 @@
+@use "@/styles/mixins" as m;
+
+.comboBox {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+.inputRow {
+  display: flex;
+  align-items: center;
+  background-color: #1a1e24;
+  color: #c9d1d9;
+  border: 1px solid #2a313a;
+  border-radius: 6px;
+  min-width: 200px;
+  width: 100%;
+  padding-right: 10px;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition:
+    background-color .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    box-shadow .2s ease;
+
+  &.open {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 1px #3b82f6;
+  }
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  &:hover {
+    border-color: #374151;
+  }
+}
+
+@include m.very-small {
+  .inputRow {
+    min-width: auto;
+  }
+}
+
+.input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: inherit;
+  padding: 7px 10px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  min-height: 36px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &::placeholder {
+    color: #6b7280;
+  }
+}
+
+.inputRow>button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: #6b7280;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background-color: rgba(55, 65, 81, 0.6);
+    color: #e5e7eb;
+  }
+}
+
+.inputRow>button>svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
+}
+
+.toggleButton>svg {
+  scale: 1.7;
+  transition: rotate .1s ease-in-out;
+}
+
+.inputRow.open .toggleButton svg {
+  rotate: 180deg;
+}
+
+.optionsList {
+  max-height: calc(45px * 6);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
+  min-width: 240px;
+  z-index: 20;
+  border-radius: 6px;
+  display: none;
+  overflow-y: auto;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.optionButton {
+  color: #c9d1d9;
+  padding: 11.6px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  width: 100%;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color .2s ease,
+    color .2s ease;
+
+  &.active {
+    color: #58a6ff;
+    font-weight: 600;
+    background-color: rgba(88, 166, 255, 0.1);
+  }
+
+  &:not(.active):hover {
+    background-color: rgba(32, 40, 50, 0.4);
+    color: #58a6ff;
+  }
+}
+
+.emptyState {
+  padding: 11.6px 16px;
+  color: #8b949e;
+  font-size: 0.875rem;
+}

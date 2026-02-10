@@ -1,9 +1,212 @@
-import s from './ComboBox.module.scss'
+﻿"use client";
 
-const ComboBox = () => {
+import { createQueryString, removeQueryString } from "@/functions/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
+import s from "./ComboBox.module.scss";
+
+const ComboBox = ({
+  id,
+  placeholder = "Select...",
+  options = [],
+  disabled = false,
+  emptyText = "No results",
+  clearLabel = "Clear field",
+  queryName,
+}) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+
+  const currentValue = searchParams.get(queryName) || "";
+  const listId = id ? `${id}-listbox` : "combobox-listbox";
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(currentValue);
+  const [selectedValue, setSelectedValue] = useState(currentValue);
+
+  const wrapperRef = useRef(null);
+  const clearButtonRef = useRef(null);
+  const inputRef = useRef(null);
+  const debounceRef = useRef(null);
+
+  const normalizedOptions = normalizeOptions(options);
+  const filteredOptions = filterOptions(normalizedOptions, inputValue);
+
+  function handleToggle() {
+    if (disabled) return;
+
+    setIsOpen((prev) => !prev);
+    if (!isOpen) inputRef.current?.focus();
+  }
+
+  function handleInputChange(event) {
+    if (disabled) return;
+    clearTimeout(debounceRef?.current);
+
+    const value = event.target.value;
+    debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
+
+    setInputValue(value);
+    if (!isOpen) setIsOpen(true);
+  }
+
+  function updateUrlQuery(searchValue) {
+    if (!searchValue.trim()) {
+      removeQueryString(queryName, searchParams, router, pathname);
+      return;
+    }
+
+    createQueryString(
+      queryName,
+      searchValue.toLowerCase(),
+      searchParams,
+      router,
+      pathname,
+    );
+  }
+
+  function handleSelect(option) {
+    const { label, value } = option;
+
+    setInputValue(label);
+    setSelectedValue(value);
+    createQueryString(queryName, value, searchParams, router, pathname);
+
+    setIsOpen(false);
+  }
+
+  function handleClear() {
+    if (disabled) return;
+    inputRef.current?.focus();
+
+    setInputValue("");
+    setSelectedValue("");
+    removeQueryString(queryName, searchParams, router, pathname);
+
+    setIsOpen(true);
+  }
+
+  function handleKeyDown(event) {
+    if (event.key === "Escape") setIsOpen(false);
+    if (event.key === "ArrowDown") setIsOpen(true);
+  }
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    function handleClickOutside(event) {
+      const isComboClicked = wrapperRef.current?.contains(event.target);
+      const isClearButtonRemoved = clearButtonRef.current === null;
+
+      setIsOpen(isComboClicked || isClearButtonRemoved);
+    }
+
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, [isOpen]);
+
   return (
-    <div>ComboBox</div>
-  )
+    <div className={s.comboBox} ref={wrapperRef}>
+      <div
+        className={`${s.inputRow} ${isOpen ? s.open : ""} ${
+          disabled ? s.disabled : ""
+        }`}
+      >
+        <input
+          ref={inputRef}
+          id={id}
+          type="text"
+          role="combobox"
+          aria-controls={listId}
+          aria-expanded={isOpen}
+          aria-autocomplete="list"
+          disabled={disabled}
+          placeholder={placeholder}
+          value={inputValue}
+          onChange={handleInputChange}
+          onFocus={() => !disabled && setIsOpen(true)}
+          onKeyDown={handleKeyDown}
+          className={s.input}
+        />
+
+        {inputValue !== "" && (
+          <button
+            type="button"
+            aria-label={clearLabel}
+            onClick={handleClear}
+            disabled={disabled}
+            className={s.clearButton}
+            ref={clearButtonRef}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#xMark" />
+            </svg>
+          </button>
+        )}
+
+        <button
+          type="button"
+          aria-label="Toggle options"
+          onClick={handleToggle}
+          disabled={disabled}
+          className={s.toggleButton}
+        >
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#solidArrow" />
+          </svg>
+        </button>
+      </div>
+
+      <div
+        className={`${s.optionsList} ${isOpen ? s.visible : ""}`}
+        id={listId}
+        role="listbox"
+      >
+        {filteredOptions.length === 0 && (
+          <div className={s.emptyState}>{emptyText}</div>
+        )}
+
+        <div className={s.options}>
+          {filteredOptions.map((option) => {
+            const isActive = option.value === selectedValue;
+
+            return (
+              <button
+                key={option.id}
+                type="button"
+                role="option"
+                aria-selected={isActive}
+                className={`${s.optionButton} ${isActive ? s.active : ""}`}
+                onClick={() => handleSelect(option)}
+              >
+                {option.label}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default ComboBox;
+
+function normalizeOptions(options) {
+  return options.map((option) => {
+    const optionObj = {
+      id: option?.id ?? option?.value ?? option?.label ?? String(option),
+      label: option?.label ?? String(option?.value ?? option),
+      value: option?.value ?? option?.label ?? option,
+    };
+
+    return optionObj;
+  });
 }
 
-export default ComboBox
+function filterOptions(options, inputValue) {
+  const query = inputValue.trim().toLowerCase();
+  if (!query) return options;
+
+  return options.filter((option) => option.label.toLowerCase().includes(query));
+}
