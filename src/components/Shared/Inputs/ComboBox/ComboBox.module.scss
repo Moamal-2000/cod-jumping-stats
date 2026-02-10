@@ -131,6 +131,7 @@
   border-radius: 6px;
   display: none;
   overflow-y: auto;
+  overscroll-behavior-y: contain;
 
   &.visible {
     display: block;
