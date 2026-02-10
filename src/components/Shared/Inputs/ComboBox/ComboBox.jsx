@@ -31,7 +31,6 @@ const ComboBox = ({
   const debounceRef = useRef(null);
 
   const normalizedOptions = normalizeOptions(options);
-  const filteredOptions = filterOptions(normalizedOptions, inputValue);
 
   function handleToggle() {
     if (disabled) return;
@@ -164,12 +163,12 @@ const ComboBox = ({
         id={listId}
         role="listbox"
       >
-        {filteredOptions.length === 0 && (
+        {normalizedOptions.length === 0 && (
           <div className={s.emptyState}>{emptyText}</div>
         )}
 
         <div className={s.options}>
-          {filteredOptions.map((option) => {
+          {normalizedOptions.map((option) => {
             const isActive = option.value === selectedValue;
 
             return (
@@ -203,11 +202,4 @@ function normalizeOptions(options) {
 
     return optionObj;
   });
-}
-
-function filterOptions(options, inputValue) {
-  const query = inputValue.trim().toLowerCase();
-  if (!query) return options;
-
-  return options.filter((option) => option.label.toLowerCase().includes(query));
 }

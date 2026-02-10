@@ -10,7 +10,7 @@ import Maps from "../Maps/Maps";
 import s from "./MapsPage.module.scss";
 
 const MapsPage = () => {
-  const { mapsData, mapsScroll } = useSelector((s) => s.maps);
+  const { allMaps, mapsData, mapsScroll } = useSelector((s) => s.maps);
   const [lastMapRef, paginationNumber, setPaginationNumber] =
     useInfiniteScroll(mapsData);
   const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const MapsPage = () => {
         <Suspense>
           <FiltersSection
             setPaginationNumber={setPaginationNumber}
-            mapsData={mapsData}
+            allMaps={allMaps}
           />
           <Maps
             paginationNumber={paginationNumber}

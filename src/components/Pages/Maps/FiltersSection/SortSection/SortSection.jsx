@@ -5,7 +5,7 @@ import { getMapsAuthors } from "@/functions/utils";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
 
-const SortSection = ({ setPaginationNumber, mapsData }) => {
+const SortSection = ({ setPaginationNumber, allMaps }) => {
   return (
     <section className={s.sortSection}>
       <div className={s.leftSide}>
@@ -35,7 +35,7 @@ const SortSection = ({ setPaginationNumber, mapsData }) => {
         />
         <ComboBox
           placeholder="maps by author name..."
-          options={getMapsAuthors(mapsData)}
+          options={getMapsAuthors(allMaps)}
           id="author"
           queryName="author"
         />
