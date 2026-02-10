@@ -178,20 +178,20 @@ const ComboBox = ({
           className={s.input}
         />
 
-        {inputValue !== "" && (
-          <button
-            type="button"
-            aria-label={clearLabel}
-            onClick={handleClear}
-            disabled={disabled}
-            className={s.clearButton}
-            ref={clearButtonRef}
-          >
-            <svg aria-hidden="true">
-              <use href="/icons-sprite.svg#xMark" />
-            </svg>
-          </button>
-        )}
+        <button
+          type="button"
+          aria-label={clearLabel}
+          onClick={handleClear}
+          disabled={disabled || inputValue === ""}
+          className={`${s.clearButton} ${inputValue === "" ? s.hide : ""}`}
+          ref={clearButtonRef}
+          aria-hidden={inputValue === ""}
+          tabIndex={inputValue === "" ? -1 : 0}
+        >
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#xMark" />
+          </svg>
+        </button>
 
         <button
           type="button"

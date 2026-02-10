@@ -100,6 +100,11 @@
     background-color: rgba(55, 65, 81, 0.6);
     color: #e5e7eb;
   }
+
+  &.hide {
+    visibility: hidden;
+    pointer-events: none;
+  }
 }
 
 .inputRow>button>svg {
@@ -163,7 +168,7 @@
   }
 
   &:focus-visible {
-    outline-offset:-2px;
+    outline-offset: -2px;
     background-color: rgba(88, 166, 255, 0.1);
     color: #58a6ff;
   }
