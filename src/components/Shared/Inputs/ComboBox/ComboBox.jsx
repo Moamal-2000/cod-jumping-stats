@@ -92,11 +92,16 @@ const ComboBox = ({
   }
 
   function handleKeyDown(event) {
-    const isArrowDown = event.key === "ArrowDown";
-    const isArrowUp = event.key === "ArrowUp";
+    const key = event.key;
+    const isArrowDown = key === "ArrowDown";
+    const isArrowUp = key === "ArrowUp";
+    const isClosingKeyPressed =
+      key === "Escape" || (key === "Enter" && inputValue !== "");
 
-    if (event.key === "Escape") setIsOpen(false);
-    if (isArrowDown) setIsOpen(true);
+    if (isClosingKeyPressed) {
+      setIsOpen(false);
+      inputRef.current?.blur();
+    }
 
     if (isArrowDown || isArrowUp)
       handleArrowNavigation({ isArrowDown, isArrowUp });
