@@ -136,13 +136,9 @@
   background: none;
   text-align: left;
   cursor: pointer;
-  transition:
-    background-color .2s ease,
-    color .2s ease;
 
   &.active {
     color: #58a6ff;
-    font-weight: 600;
     background-color: rgba(88, 166, 255, 0.1);
   }
 
