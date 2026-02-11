@@ -33,8 +33,8 @@ const ComboBox = ({
   const debounceRef = useRef(null);
   const autoSelectRef = useRef(false);
 
-  const normalizedOptions = normalizeOptions(options, alphaOrder);
-  const filteredOptions = getFilteredOptions(normalizedOptions, filterQuery);
+  const sortedOptions = sortOptions(options, alphaOrder);
+  const filteredOptions = getFilteredOptions(sortedOptions, filterQuery);
 
   function handleToggle() {
     if (disabled) return;
@@ -53,7 +53,7 @@ const ComboBox = ({
     setFilterQuery(value);
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
-    const optionValues = normalizedOptions.map(({ value }) => value);
+    const optionValues = sortedOptions.map(({ value }) => value);
     const isInOptionsList = optionValues.includes(value);
 
     if (isInOptionsList) setSelectedValue(value);
@@ -285,13 +285,8 @@ const ComboBox = ({
 
 export default ComboBox;
 
-function normalizeOptions(options, alphaOrder = false) {
-  let normalizedOptions = options.map((option) => ({
-    id: option?.id ?? option?.value ?? option?.label ?? String(option),
-    label: option?.label ?? String(option?.value ?? option),
-    value: option?.value ?? option?.label ?? option,
-    madeMapsCount: option?.madeMapsCount ?? 0,
-  }));
+function sortOptions(options, alphaOrder = false) {
+  let normalizedOptions = options;
 
   if (alphaOrder)
     normalizedOptions.sort((a, b) => a.label.localeCompare(b.label));
