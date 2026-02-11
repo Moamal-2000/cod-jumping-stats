@@ -256,6 +256,7 @@ const ComboBox = ({
         <div className={s.options}>
           {filteredOptions.map((option) => {
             const isActive = option.value === selectedValue;
+            console.log(option);
 
             return (
               <button
@@ -268,6 +269,11 @@ const ComboBox = ({
                 data-combobox-value={option.value}
               >
                 {option.label}
+                {option?.madeMapsCount > 0 && (
+                  <span className={s.madeMapsCount}>
+                    {option.madeMapsCount}
+                  </span>
+                )}
               </button>
             );
           })}
@@ -284,6 +290,7 @@ function normalizeOptions(options, alphaOrder = false) {
     id: option?.id ?? option?.value ?? option?.label ?? String(option),
     label: option?.label ?? String(option?.value ?? option),
     value: option?.value ?? option?.label ?? option,
+    madeMapsCount: option?.madeMapsCount ?? 0,
   }));
 
   if (alphaOrder)

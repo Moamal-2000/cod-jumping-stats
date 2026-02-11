@@ -404,30 +404,78 @@ export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export function getMapsAuthors(maps) {
+export function getMapsAuthors(maps = []) {
   const seen = new Map();
 
   maps.forEach(({ Author }) => {
     if (!Author) return;
 
-    const author = Author.trim();
-    if (!isLikelyAuthor(author)) return;
+    const authors = extractAuthorNames(Author);
+    if (authors.length === 0) return;
 
-    const normalizedKey = normalizeAuthor(author);
-    const isNew = !seen.has(normalizedKey);
-    const isLonger = author?.length < seen.get(normalizedKey)?.length;
+    const mapAuthorKeys = new Set();
 
-    if (isNew || isLonger) seen.set(normalizedKey, author.toLowerCase());
+    authors.forEach((authorName) => {
+      const normalizedKey = normalizeAuthor(authorName);
+      if (!normalizedKey || mapAuthorKeys.has(normalizedKey)) return;
+
+      mapAuthorKeys.add(normalizedKey);
+      const existingAuthor = seen.get(normalizedKey);
+      const isNew = !existingAuthor;
+      const isShorterLabel =
+        authorName.length < (existingAuthor?.label?.length ?? Infinity);
+
+      if (isNew) {
+        seen.set(normalizedKey, {
+          id: normalizedKey,
+          label: authorName,
+          value: authorName,
+          madeMapsCount: 1,
+        });
+        return;
+      }
+
+      if (isShorterLabel) {
+        existingAuthor.label = authorName;
+        existingAuthor.value = authorName;
+      }
+
+      existingAuthor.madeMapsCount += 1;
+    });
   });
 
   return Array.from(seen.values());
+}
+
+function extractAuthorNames(authorText = "") {
+  const text = String(authorText).trim();
+  if (!text) return [];
+
+  const hasByKeyword = text.toLowerCase().includes("by");
+  const byMatches = hasByKeyword
+    ? Array.from(text.matchAll(/\bby\b\s*:?\s*([^()]+)/gi), (match) =>
+        match[1]?.trim(),
+      ).filter(Boolean)
+    : [];
+
+  const sourceChunks = byMatches.length > 0 ? byMatches : [text];
+  const authors = sourceChunks.flatMap(splitAuthorChunk).filter(isLikelyAuthor);
+
+  return Array.from(new Set(authors));
+}
+
+function splitAuthorChunk(chunk = "") {
+  return chunk
+    .replace(/[()[\]]/g, " ")
+    .split(/\s*(?:,|&|\/|\+|\band\b|\bfeat\.?\b|\bft\.?\b)\s*/i)
+    .map((value) => value.trim())
+    .filter(Boolean);
 }
 
 function normalizeAuthor(author) {
   return author
     .toLowerCase()
     .trim()
-    .split("&")[0]
     .replace(/[?!.,#'"]+$/g, "")
     .replace(/\s+/g, " ")
     .replace(/\s/g, "");
