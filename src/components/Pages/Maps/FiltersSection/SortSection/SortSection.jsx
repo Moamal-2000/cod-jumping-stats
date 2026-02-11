@@ -28,7 +28,11 @@ const SortSection = ({ setPaginationNumber, allMaps }) => {
           <CustomSelectMenu id="sort-by" />
         </div>
 
-        <SearchInput placeholder="Search maps by name..." queryName="name" />
+        <SearchInput
+          placeholder="Search maps by name..."
+          queryName="name"
+          autoFocus={true}
+        />
         <ComboBox
           placeholder="Maps by author name..."
           id="author"

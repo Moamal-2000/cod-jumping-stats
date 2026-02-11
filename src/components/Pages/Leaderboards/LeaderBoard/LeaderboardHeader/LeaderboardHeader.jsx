@@ -33,7 +33,7 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
 
   function updateAllDataDisplayedStatus() {
     const lastLeaderboardPagination = Math.ceil(
-      leaderboardData?.length / PAGINATION_ITEMS_PER_PAGE
+      leaderboardData?.length / PAGINATION_ITEMS_PER_PAGE,
     );
     const isLastPagination = paginationNumber >= lastLeaderboardPagination;
 
@@ -41,7 +41,7 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
       updateLeaderboardState({
         key: "allDataDisplayed",
         value: isLastPagination,
-      })
+      }),
     );
   }
 
@@ -68,6 +68,7 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
           <SearchInput
             placeholder="Search by player name..."
             queryName="query"
+            autoFocus={true}
           />
         </div>
 
@@ -101,7 +102,7 @@ function searchByPlayerName({
       updateLeaderboardState({
         key: "leaderboardScroll",
         value: filteredPlayers,
-      })
+      }),
     );
 
     setPaginationNumber(1);
