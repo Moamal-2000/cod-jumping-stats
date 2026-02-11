@@ -24,6 +24,7 @@ const ComboBox = ({
 
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(currentValue);
+  const [filterQuery, setFilterQuery] = useState(currentValue);
   const [selectedValue, setSelectedValue] = useState(currentValue);
 
   const wrapperRef = useRef(null);
@@ -33,7 +34,7 @@ const ComboBox = ({
   const autoSelectRef = useRef(false);
 
   const normalizedOptions = normalizeOptions(options, alphaOrder);
-  const filteredOptions = getFilteredOptions(normalizedOptions, inputValue);
+  const filteredOptions = getFilteredOptions(normalizedOptions, filterQuery);
 
   function handleToggle() {
     if (disabled) return;
@@ -49,6 +50,7 @@ const ComboBox = ({
 
     const value = event.target.value.toLowerCase().trim();
     setInputValue(value);
+    setFilterQuery(value);
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
     const optionValues = normalizedOptions.map(({ value }) => value);
@@ -74,10 +76,15 @@ const ComboBox = ({
     );
   }
 
-  function handleSelect(option, { closeMenu = true } = {}) {
+  function handleSelect(
+    option,
+    { closeMenu = true, preserveFilterQuery = false } = {},
+  ) {
     const { label, value } = option;
 
     setInputValue(label);
+    if (!preserveFilterQuery) setFilterQuery(label);
+
     setSelectedValue(value);
     createQueryString(queryName, value, searchParams, router, pathname);
 
@@ -89,6 +96,7 @@ const ComboBox = ({
     inputRef.current?.focus();
 
     setInputValue("");
+    setFilterQuery("");
     setSelectedValue("");
     removeQueryString(queryName, searchParams, router, pathname);
 
@@ -116,7 +124,13 @@ const ComboBox = ({
     const isInOptionsList = optionValues.includes(inputValue);
 
     if (isOpen && !isInOptionsList) {
-      handleSelect(normalizedOptions[0], { closeMenu: false });
+      autoSelectRef.current = true;
+      setFilterQuery("");
+
+      handleSelect(normalizedOptions[0], {
+        closeMenu: false,
+        preserveFilterQuery: true,
+      });
       return;
     }
 
@@ -135,8 +149,15 @@ const ComboBox = ({
     if (isArrowUp && isFirst) optionIndex = normalizedOptions.length - 1;
 
     const newSelectValue = normalizedOptions[optionIndex];
-    if (newSelectValue !== undefined)
-      handleSelect(newSelectValue, { closeMenu: false });
+    if (newSelectValue !== undefined) {
+      autoSelectRef.current = true;
+      setFilterQuery("");
+
+      handleSelect(newSelectValue, {
+        closeMenu: false,
+        preserveFilterQuery: true,
+      });
+    }
   }
 
   useEffect(() => {
