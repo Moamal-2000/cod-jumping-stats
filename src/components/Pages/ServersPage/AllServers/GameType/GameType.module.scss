@@ -43,6 +43,12 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+@include m.small {
+  .serversTable thead th:last-child {
+    display: none;
+  }
+}
+
 .serversTable tbody td {
   padding: 10px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
@@ -102,11 +108,18 @@
   }
 }
 
+@include m.small {
+  .addressCell {
+    display: none;
+  }
+}
+
 @media (max-width: 820px) {
   .serversGrid {
     grid-template-columns: 1fr;
     margin-bottom: 16px;
   }
+
   .listWrapper {
     margin-bottom: 24px;
   }
