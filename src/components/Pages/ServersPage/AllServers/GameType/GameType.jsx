@@ -15,7 +15,7 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
           <table className={s.serversTable}>
             <thead>
               <tr>
-                <th>Country</th>
+                <th>Server</th>
                 <th>Map</th>
                 <th>Player</th>
                 <th>Address</th>
