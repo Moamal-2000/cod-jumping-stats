@@ -59,7 +59,13 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
                           </Link>
                         )}
                       </td>
-                      <td className={s.playerCell}>{playerName}</td>
+                      <td className={s.playerCell}>
+                        <Link
+                          href={`/player?playerid=${player?.PlayerID || -1}`}
+                        >
+                          {playerName}
+                        </Link>
+                      </td>
                       <td className={s.addressCell}>
                         <span>{address}</span>
                         <CopyButton

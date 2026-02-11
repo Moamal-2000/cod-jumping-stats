@@ -93,6 +93,10 @@
   font-weight: 600;
 }
 
+.playerCell>a:hover {
+  text-decoration: underline;
+}
+
 .addressCell {
   display: flex;
   align-items: center;
