@@ -120,24 +120,27 @@ const ComboBox = ({
   }
 
   function handleArrowNavigation({ isArrowDown, isArrowUp } = {}) {
-    const optionValues = normalizedOptions.map(({ value }) => value);
-    const isInOptionsList = optionValues.includes(inputValue);
+    const optionsForNavigation = filteredOptions;
+    if (!isOpen || optionsForNavigation.length === 0) return;
 
-    if (isOpen && !isInOptionsList) {
+    const optionValues = optionsForNavigation.map(({ value }) => value);
+    const hasSelectedValue = optionValues.includes(selectedValue);
+
+    if (!hasSelectedValue) {
+      const edgeIndex = isArrowUp ? optionsForNavigation.length - 1 : 0;
+      const edgeOption = optionsForNavigation[edgeIndex];
+      if (!edgeOption) return;
+
       autoSelectRef.current = true;
-      setFilterQuery("");
-
-      handleSelect(normalizedOptions[0], {
+      handleSelect(edgeOption, {
         closeMenu: false,
         preserveFilterQuery: true,
       });
       return;
     }
 
-    if (!isOpen || !isInOptionsList) return;
-
     const selectedOptionIndex = optionValues.indexOf(selectedValue);
-    const isLast = selectedOptionIndex >= optionValues.length - 1;
+    const isLast = selectedOptionIndex >= optionsForNavigation.length - 1;
     const isFirst = selectedOptionIndex === 0;
 
     let optionIndex = selectedOptionIndex;
@@ -146,13 +149,11 @@ const ComboBox = ({
     if (isArrowUp && !isFirst) optionIndex -= 1;
 
     if (isArrowDown && isLast) optionIndex = 0;
-    if (isArrowUp && isFirst) optionIndex = normalizedOptions.length - 1;
+    if (isArrowUp && isFirst) optionIndex = optionsForNavigation.length - 1;
 
-    const newSelectValue = normalizedOptions[optionIndex];
+    const newSelectValue = optionsForNavigation[optionIndex];
     if (newSelectValue !== undefined) {
       autoSelectRef.current = true;
-      setFilterQuery("");
-
       handleSelect(newSelectValue, {
         closeMenu: false,
         preserveFilterQuery: true,
@@ -256,7 +257,6 @@ const ComboBox = ({
         <div className={s.options}>
           {filteredOptions.map((option) => {
             const isActive = option.value === selectedValue;
-            console.log(option);
 
             return (
               <button
