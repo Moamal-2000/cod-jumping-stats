@@ -25,7 +25,7 @@ const SortSection = ({ setPaginationNumber, allMaps }) => {
             </div>
           </label>
 
-          <CustomSelectMenu />
+          <CustomSelectMenu id="sort-by" />
         </div>
 
         <SearchInput placeholder="Search maps by name..." queryName="name" />

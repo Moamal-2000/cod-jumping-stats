@@ -6,7 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import s from "./CustomSelectMenu.module.scss";
 import DropDownMenu from "./DropDownMenu/DropDownMenu";
 
-const CustomSelectMenu = () => {
+const CustomSelectMenu = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef(null);
 
@@ -33,7 +33,12 @@ const CustomSelectMenu = () => {
   return (
     <div className={s.selectWrapper}>
       <div ref={menuRef} className={`${s.selectMenu} ${visibleClass}`}>
-        <button type="button" className={s.selectButton} onClick={handleClick}>
+        <button
+          type="button"
+          className={s.selectButton}
+          onClick={handleClick}
+          id={id}
+        >
           <span>{currentSortBy}</span>
           <svg aria-hidden="true">
             <use href="/icons-sprite.svg#solidArrow" />
