@@ -3,7 +3,7 @@
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import ClearButton from "./ClearButton/ClearButton";
+import ClearButton from "../../Buttons/ClearButton/ClearButton";
 import s from "./ComboBox.module.scss";
 
 const ComboBox = ({
