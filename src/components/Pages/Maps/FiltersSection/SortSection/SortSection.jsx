@@ -38,7 +38,7 @@ const SortSection = ({ setPaginationNumber, allMaps }) => {
           id="author"
           queryName="author"
           options={getMapsAuthors(allMaps)}
-          alphaOrder={true}
+          orderByMapsCount={true}
         />
       </div>
 

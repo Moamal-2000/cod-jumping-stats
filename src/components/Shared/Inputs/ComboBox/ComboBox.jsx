@@ -14,6 +14,7 @@ const ComboBox = ({
   clearLabel = "Clear field",
   queryName,
   alphaOrder = false,
+  orderByMapsCount = false,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -33,7 +34,11 @@ const ComboBox = ({
   const debounceRef = useRef(null);
   const autoSelectRef = useRef(false);
 
-  const sortedOptions = sortOptions(options, alphaOrder);
+  const sortedOptions = sortOptions({
+    options,
+    alphaOrder,
+    orderByMapsCount,
+  });
   const filteredOptions = getFilteredOptions(sortedOptions, filterQuery);
 
   function handleToggle() {
@@ -285,11 +290,18 @@ const ComboBox = ({
 
 export default ComboBox;
 
-function sortOptions(options, alphaOrder = false) {
+function sortOptions({
+  options,
+  alphaOrder = false,
+  orderByMapsCount = false,
+} = {}) {
   let normalizedOptions = options;
 
-  if (alphaOrder)
+  if (alphaOrder && !orderByMapsCount)
     normalizedOptions.sort((a, b) => a.label.localeCompare(b.label));
+
+  if (orderByMapsCount)
+    normalizedOptions.sort((a, b) => b.madeMapsCount - a.madeMapsCount);
 
   return normalizedOptions;
 }
