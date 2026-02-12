@@ -452,13 +452,14 @@ function extractAuthorNames(authorText = "") {
   if (!text) return [];
 
   const hasByKeyword = text.toLowerCase().includes("by");
-  const byMatches = hasByKeyword
-    ? Array.from(text.matchAll(/\bby\b\s*:?\s*([^()]+)/gi), (match) =>
-        match[1]?.trim(),
-      ).filter(Boolean)
-    : [];
+  let byKeyWordMatches = [];
 
-  const sourceChunks = byMatches.length > 0 ? byMatches : [text];
+  if (hasByKeyword) {
+    const matches = text.matchAll(/\bby\b\s*:?\s*([^()]+)/gi);
+    byKeyWordMatches = Array.from(matches, (match) => match[1]?.trim());
+  }
+
+  const sourceChunks = byKeyWordMatches.length > 0 ? byKeyWordMatches : [text];
   const authors = sourceChunks.flatMap(splitAuthorChunk).filter(isLikelyAuthor);
 
   return Array.from(new Set(authors));
