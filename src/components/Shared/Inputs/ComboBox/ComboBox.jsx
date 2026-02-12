@@ -92,10 +92,11 @@ const ComboBox = ({
 
     setInputValue(label);
     if (!preserveFilterQuery) setFilterQuery(label);
+    clearTimeout(debounceRef?.current);
+
+    debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
     setSelectedValue(value);
-    createQueryString(queryName, value, searchParams, router, pathname);
-
     setIsOpen(!closeMenu);
   }
 
