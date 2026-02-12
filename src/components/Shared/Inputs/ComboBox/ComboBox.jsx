@@ -3,6 +3,7 @@
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import ClearButton from "./ClearButton/ClearButton";
 import s from "./ComboBox.module.scss";
 
 const ComboBox = ({
@@ -222,20 +223,13 @@ const ComboBox = ({
           className={s.input}
         />
 
-        <button
-          type="button"
-          aria-label={clearLabel}
-          onClick={handleClear}
-          disabled={disabled || inputValue === ""}
-          className={`${s.clearButton} ${inputValue === "" ? s.hide : ""}`}
+        <ClearButton
+          label={clearLabel}
+          handleClear={handleClear}
+          disabled={disabled}
+          inputValue={inputValue}
           ref={clearButtonRef}
-          aria-hidden={inputValue === ""}
-          tabIndex={inputValue === "" ? -1 : 0}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#xMark" />
-          </svg>
-        </button>
+        />
 
         <button
           type="button"
