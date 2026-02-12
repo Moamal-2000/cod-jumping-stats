@@ -1,9 +1,43 @@
-import s from './OptionsList.module.scss'
+import s from "./OptionsList.module.scss";
 
-const OptionsList = () => {
+const OptionsList = ({
+  options,
+  selectedValue,
+  handleSelect,
+  isOpen,
+  listId,
+  emptyText,
+}) => {
+  const classes = `${s.optionsList} ${isOpen ? s.visible : ""}`;
+
   return (
-    <div>OptionsList</div>
-  )
-}
+    <div className={classes} id={listId} role="listbox">
+      {options.length === 0 && <div className={s.emptyState}>{emptyText}</div>}
 
-export default OptionsList
+      <div className={s.options}>
+        {options.map((option) => {
+          const isActive = option.value === selectedValue;
+
+          return (
+            <button
+              key={option.id}
+              type="button"
+              role="option"
+              aria-selected={isActive}
+              className={`${s.optionButton} ${isActive ? s.active : ""}`}
+              onClick={() => handleSelect(option)}
+              data-combobox-value={option.value}
+            >
+              {option.label}
+              {option?.madeMapsCount > 0 && (
+                <span className={s.madeMapsCount}>{option.madeMapsCount}</span>
+              )}
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
+
+export default OptionsList;

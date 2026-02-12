@@ -1,0 +1,57 @@
+.optionsList {
+  max-height: calc(40px * 7);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 4px);
+  background-color: #161b22;
+  border: 1px solid #30363d;
+  box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
+  min-width: 240px;
+  z-index: 20;
+  border-radius: 6px;
+  display: none;
+  overflow-y: auto;
+  overscroll-behavior-y: contain;
+
+  &.visible {
+    display: block;
+  }
+}
+
+.optionButton {
+  color: #c9d1d9;
+  padding: 11.6px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: none;
+  width: 100%;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+
+  &.active {
+    color: #58a6ff;
+    background-color: rgba(88, 166, 255, 0.1);
+  }
+
+  &:not(.active):hover {
+    background-color: rgba(32, 40, 50, 0.4);
+    color: #58a6ff;
+  }
+
+  &:focus-visible {
+    outline-offset: -2px;
+    background-color: rgba(88, 166, 255, 0.1);
+    color: #58a6ff;
+  }
+}
+
+.emptyState {
+  padding: 11.6px 16px;
+  color: #8b949e;
+  font-size: 0.875rem;
+}

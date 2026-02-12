@@ -5,6 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import ClearButton from "../../Buttons/ClearButton/ClearButton";
 import s from "./ComboBox.module.scss";
+import OptionsList from "./OptionsList/OptionsList";
 
 const ComboBox = ({
   id,
@@ -244,40 +245,14 @@ const ComboBox = ({
         </button>
       </div>
 
-      <div
-        className={`${s.optionsList} ${isOpen ? s.visible : ""}`}
-        id={listId}
-        role="listbox"
-      >
-        {filteredOptions.length === 0 && (
-          <div className={s.emptyState}>{emptyText}</div>
-        )}
-
-        <div className={s.options}>
-          {filteredOptions.map((option) => {
-            const isActive = option.value === selectedValue;
-
-            return (
-              <button
-                key={option.id}
-                type="button"
-                role="option"
-                aria-selected={isActive}
-                className={`${s.optionButton} ${isActive ? s.active : ""}`}
-                onClick={() => handleSelect(option)}
-                data-combobox-value={option.value}
-              >
-                {option.label}
-                {option?.madeMapsCount > 0 && (
-                  <span className={s.madeMapsCount}>
-                    {option.madeMapsCount}
-                  </span>
-                )}
-              </button>
-            );
-          })}
-        </div>
-      </div>
+      <OptionsList
+        options={filteredOptions}
+        selectedValue={selectedValue}
+        handleSelect={handleSelect}
+        isOpen={isOpen}
+        listId={listId}
+        emptyText={emptyText}
+      />
     </div>
   );
 };
