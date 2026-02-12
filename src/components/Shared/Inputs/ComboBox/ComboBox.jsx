@@ -6,6 +6,7 @@ import { useEffect, useRef, useState } from "react";
 import ClearButton from "../../Buttons/ClearButton/ClearButton";
 import s from "./ComboBox.module.scss";
 import OptionsList from "./OptionsList/OptionsList";
+import ToggleButton from "./ToggleButton/ToggleButton";
 
 const ComboBox = ({
   id,
@@ -234,17 +235,7 @@ const ComboBox = ({
           ref={clearButtonRef}
         />
 
-        <button
-          type="button"
-          aria-label="Toggle options"
-          onClick={handleToggle}
-          disabled={disabled}
-          className={s.toggleButton}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#solidArrow" />
-          </svg>
-        </button>
+        <ToggleButton handleToggle={handleToggle} disabled={disabled} />
       </div>
 
       <OptionsList

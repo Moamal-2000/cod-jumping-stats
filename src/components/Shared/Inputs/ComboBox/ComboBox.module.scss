@@ -108,11 +108,6 @@
   fill: currentColor;
 }
 
-.toggleButton>svg {
-  scale: 1.7;
-  transition: rotate .1s ease-in-out;
-}
-
-.inputRow.open .toggleButton svg {
+.inputRow.open [data-type=toggle-button] svg {
   rotate: 180deg;
 }
