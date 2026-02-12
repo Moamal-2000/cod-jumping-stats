@@ -459,7 +459,8 @@ function extractAuthorNames(authorText = "") {
     byKeyWordMatches = Array.from(matches, (match) => match[1]?.trim());
   }
 
-  const sourceChunks = byKeyWordMatches.length > 0 ? byKeyWordMatches : [text];
+  const sourceChunks =
+    byKeyWordMatches.length > 0 ? [text, ...byKeyWordMatches] : [text];
   const authors = sourceChunks.flatMap(splitAuthorChunk).filter(isLikelyAuthor);
 
   return Array.from(new Set(authors));
@@ -467,7 +468,7 @@ function extractAuthorNames(authorText = "") {
 
 function splitAuthorChunk(chunk = "") {
   return chunk
-    .replace(/[()[\]]/g, " ")
+    .replace(/\([^)]*\)|\[[^\]]*\]/g, " ")
     .split(/\s*(?:,|&|\/|\+|\band\b|\bfeat\.?\b|\bft\.?\b)\s*/i)
     .map((value) => value.trim())
     .filter(Boolean);
