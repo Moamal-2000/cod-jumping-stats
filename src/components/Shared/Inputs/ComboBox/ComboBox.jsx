@@ -56,11 +56,12 @@ const ComboBox = ({
     clearTimeout(debounceRef?.current);
 
     const value = event.target.value.toLowerCase().trim();
+
     setInputValue(value);
     setFilterQuery(value);
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
 
-    const optionValues = sortedOptions.map(({ value }) => value);
+    const optionValues = sortedOptions.map(({ value }) => value.toLowerCase());
     const isInOptionsList = optionValues.includes(value);
 
     if (isInOptionsList) setSelectedValue(value);

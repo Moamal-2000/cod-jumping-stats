@@ -16,7 +16,8 @@ const OptionsList = ({
 
       <div className={s.options}>
         {options.map((option) => {
-          const isActive = option.value === selectedValue;
+          const isActive =
+            option.value.toLowerCase() === selectedValue.toLowerCase();
 
           return (
             <button
