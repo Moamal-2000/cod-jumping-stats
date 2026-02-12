@@ -3,6 +3,7 @@
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import ClearButton from "../../Buttons/ClearButton/ClearButton";
 import s from "./SearchInput.module.scss";
 
 const SearchInput = ({
@@ -90,15 +91,12 @@ const SearchInput = ({
         ref={inputRef}
       />
 
-      <button
-        onClick={handleClearSearch}
-        className={s.clearButton}
-        title="Clear search"
-      >
-        <svg aria-hidden="true">
-          <use href="/icons-sprite.svg#xMark" />
-        </svg>
-      </button>
+      <ClearButton
+        label="Clear search"
+        handleClear={handleClearSearch}
+        disabled={searchValue === ""}
+        inputValue={searchValue}
+      />
     </div>
   );
 };
