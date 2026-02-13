@@ -2,6 +2,7 @@ import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavB
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
 import CompletionRate from "./CompletionRate/CompletionRate";
@@ -26,21 +27,31 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
   });
 
+  const searchParams = useSearchParams();
+  const {
+    hideMapImage,
+    hideDifficulties,
+    hideCompletionRate,
+    hideAuthorAndRelease,
+  } = getHideMapInfo(searchParams);
+
   return (
     <div className={s.mapCard} ref={ref}>
-      <Link href={`/map?mapid=${CpID}`} className={s.imgHolder}>
-        <MapImage mapName={Name} />
+      {!hideMapImage && (
+        <Link href={`/map?mapid=${CpID}`} className={s.imgHolder}>
+          <MapImage mapName={Name} />
 
-        <div className={s.layer}>
-          <div className={s.classifications}>
-            {Classifications?.map((text, index) => (
-              <span className={`${s.classification} ${s[text]}`} key={index}>
-                {text}
-              </span>
-            ))}
+          <div className={s.layer}>
+            <div className={s.classifications}>
+              {Classifications?.map((text, index) => (
+                <span className={`${s.classification} ${s[text]}`} key={index}>
+                  {text}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      </Link>
+        </Link>
+      )}
 
       <section className={s.content}>
         <div className={s.nameAndRating}>
@@ -61,12 +72,33 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           <AddToFavButton id={CpID} groupKey="mapsIds" />
         </div>
 
-        <MapDifficulties Difficulty={mapData?.Difficulty} />
-        <CompletionRate completionRate={completionRate} />
-        <AuthorAndRelease author={Author} release={Released} />
+        {!hideDifficulties && (
+          <MapDifficulties Difficulty={mapData?.Difficulty} />
+        )}
+        {!hideCompletionRate && (
+          <CompletionRate completionRate={completionRate} />
+        )}
+        {!hideAuthorAndRelease && (
+          <AuthorAndRelease author={Author} release={Released} />
+        )}
       </section>
     </div>
   );
 };
 
 export default memo(MapCard);
+
+export function getHideMapInfo(searchParams) {
+  const hideParams = searchParams.getAll("hide");
+  const hideMapImage = hideParams.includes("map-image");
+  const hideDifficulties = hideParams.includes("difficulties");
+  const hideCompletionRate = hideParams.includes("completion-rate");
+  const hideAuthorAndRelease = hideParams.includes("author-release-date");
+
+  return {
+    hideMapImage,
+    hideDifficulties,
+    hideCompletionRate,
+    hideAuthorAndRelease,
+  };
+}

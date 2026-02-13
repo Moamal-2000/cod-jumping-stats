@@ -1,8 +1,10 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { formateReleaseDate, getMapCompletionRate } from "@/functions/utils";
 import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import CompletionRate from "../MapCard/CompletionRate/CompletionRate";
+import { getHideMapInfo } from "../MapCard/MapCard";
 import MapDifficulties from "../MapCard/MapDifficulties/MapDifficulties";
 import s from "./MapCard2.module.scss";
 
@@ -24,11 +26,21 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
   });
 
+  const searchParams = useSearchParams();
+  const {
+    hideMapImage,
+    hideDifficulties,
+    hideCompletionRate,
+    hideAuthorAndRelease,
+  } = getHideMapInfo(searchParams);
+
   return (
     <div className={s.mapCard} ref={ref}>
-      <Link href={`/map?mapid=${CpID}`} className={s.imgHolder}>
-        <MapImage mapName={Name} />
-      </Link>
+      {!hideMapImage && (
+        <Link href={`/map?mapid=${CpID}`} className={s.imgHolder}>
+          <MapImage mapName={Name} />
+        </Link>
+      )}
 
       <div className={s.leftSide}>
         <Link href={`/map?mapid=${CpID}`}>
@@ -45,7 +57,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           )}
         </Link>
 
-        <MapDifficulties Difficulty={Difficulty} />
+        {!hideDifficulties && <MapDifficulties Difficulty={Difficulty} />}
 
         <div className={s.classifications}>
           {Classifications?.map((text, index) => (
@@ -57,12 +69,18 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
       </div>
 
       <div className={s.rightSide}>
-        <CompletionRate completionRate={completionRate} />
+        {!hideCompletionRate && (
+          <CompletionRate completionRate={completionRate} />
+        )}
 
-        <div className={s.authorAndRelease}>
-          <span className={s.authorName}>{Author}</span>
-          <span className={s.releaseDate}>{formateReleaseDate(Released)}</span>
-        </div>
+        {!hideAuthorAndRelease && (
+          <div className={s.authorAndRelease}>
+            <span className={s.authorName}>{Author}</span>
+            <span className={s.releaseDate}>
+              {formateReleaseDate(Released)}
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );
