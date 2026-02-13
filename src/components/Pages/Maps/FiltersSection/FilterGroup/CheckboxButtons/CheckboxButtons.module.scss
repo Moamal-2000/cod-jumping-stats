@@ -1,32 +1,31 @@
 @use "@/styles/mixins" as m;
 
-.filterButtons {
+.checkboxButtons {
   display: flex;
   align-items: center;
   gap: 8px 6px;
 }
 
 @include m.large {
-  .filterButtons {
+  .checkboxButtons {
     grid-template-columns: repeat(4, minmax(90px, 1fr));
   }
 }
 
 @include m.small {
-  .filterButtons {
+  .checkboxButtons {
     display: flex;
     flex-wrap: wrap;
   }
 }
 
 @include m.very-small {
-  .filterButtons {
+  .checkboxButtons {
     grid-template-columns: repeat(2, minmax(90px, 1fr));
   }
 }
 
-.filterButtons button {
-  cursor: pointer;
+.checkboxLabel {
   height: 36px;
   max-height: 36px;
   min-width: 70px;
@@ -37,10 +36,11 @@
   color: #9ca3af;
   border: 1px solid #374151;
   border-radius: 6px;
-  padding-inline: 12px;
+  padding-inline: 8px;
   font-size: .875rem;
-  font-weight: 500;
+  font-weight: 400;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15);
+  position: relative;
   transition:
     background-color .2s cubic-bezier(.4, 0, .2, 1),
     color .2s cubic-bezier(.4, 0, .2, 1);
@@ -70,13 +70,24 @@
 }
 
 @include m.small {
-  .filterButtons button {
+  .checkboxLabel {
     min-width: 100px;
   }
 }
 
 @include m.very-small {
-  .filterButtons button {
+  .checkboxLabel {
     flex: 1;
   }
+}
+
+.checkboxLabel>input {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  opacity: 0;
+  cursor: pointer;
 }

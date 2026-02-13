@@ -1,5 +1,6 @@
 import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import CustomSelectMenu from "@/components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
 import { TOTAL_MAPS_PLACEHOLDER } from "@/data/constants";
 import { getMapsAuthors } from "@/functions/utils";
 import s from "./SortSection.module.scss";
@@ -17,6 +18,8 @@ const SortSection = ({
   return (
     <section className={s.sortSection}>
       <div className={s.leftSide}>
+        <CustomSelectMenu id="sort-by" />
+
         <SearchInput
           placeholder="Search maps by name..."
           queryName="name"

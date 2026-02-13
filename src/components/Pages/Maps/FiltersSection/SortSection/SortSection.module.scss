@@ -50,6 +50,7 @@
 
 .totalMapsText {
   color: #9ca3af;
+  text-wrap: nowrap;
 }
 
 @include m.small {

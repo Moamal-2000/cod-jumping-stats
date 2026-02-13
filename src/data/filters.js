@@ -71,6 +71,7 @@ export const MAPS_FILTERS_DATA = [
     label: "Map Type",
     queryName: "type",
     defaultUrlQuery: "all",
+    groupType: "select",
     filtersData: [
       { text: "All", queryValue: "all", id: 1 },
       { text: "Jump", queryValue: "jump", id: 2 },
@@ -84,12 +85,31 @@ export const MAPS_FILTERS_DATA = [
     label: "Filter Maps By",
     queryName: "filter-by",
     defaultUrlQuery: "all",
+    groupType: "select",
     filtersData: [
       { text: "All", queryValue: "all", id: 1 },
       { text: "Has videos", queryValue: "has-videos", id: 2 },
       { text: "No videos", queryValue: "no-videos", id: 3 },
     ],
     tooltipText: "Select a filter to narrow down results",
+    id: 2,
+  },
+  {
+    label: "Hide Maps Info",
+    queryName: "hide",
+    defaultUrlQuery: "",
+    groupType: "checkbox",
+    filtersData: [
+      { text: "Map Image", queryValue: "map-image", id: 1 },
+      { text: "Difficulties", queryValue: "difficulties", id: 2 },
+      { text: "Completion Rate", queryValue: "completion-rate", id: 3 },
+      {
+        text: "Author and Release Date",
+        queryValue: "author-release-date",
+        id: 4,
+      },
+    ],
+    tooltipText: "Enable/Disable map information",
     id: 2,
   },
 ];
