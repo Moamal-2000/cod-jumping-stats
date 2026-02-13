@@ -1,7 +1,7 @@
 "use client";
-import s from "@/components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
 import { getColoredName } from "@/functions/components";
 import { useEffect, useRef, useState } from "react";
+import s from "./Graph.module.scss"
 
 const LoadingSpinner = () => (
   <svg

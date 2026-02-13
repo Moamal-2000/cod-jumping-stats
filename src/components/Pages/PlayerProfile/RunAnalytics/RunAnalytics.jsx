@@ -7,7 +7,7 @@ import { fetchMapRuns } from "@/redux/features/playerProfile/thunk/playerProfile
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Graph from "./Graph";
+import Graph from "./Graph/Graph";
 import MapList from "./MapList";
 import MapRoutes from "./MapRoutes/MapRoutes";
 import s from "./RunAnalytics.module.scss";
