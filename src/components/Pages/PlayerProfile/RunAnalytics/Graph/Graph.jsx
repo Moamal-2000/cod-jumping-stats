@@ -9,6 +9,7 @@ const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
 const SCALE_MAX = 10.0; // Maximum zoom scale
 const EDGE_AUTOPAN_THRESHOLD_MIN_PX = 100; // Minimum pixel distance from edge to trigger auto-pan
 const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for auto-pan threshold
+const EDGE_AUTOPAN_TRIGGER_SCALE = 0.5; // Reduce trigger area to 50% of the computed width
 const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
 const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
 
@@ -36,7 +37,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const edgeAutopanThresholdPx = Math.max(
     EDGE_AUTOPAN_THRESHOLD_MIN_PX,
     EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth,
-  );
+  ) * EDGE_AUTOPAN_TRIGGER_SCALE;
   const mapName = runData?.[0]?.MapName;
 
   function getGraphPoints() {
@@ -94,6 +95,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
       dragStartPanOffsetRef.current,
       dragDeltaX,
     );
+    panRef.current = nextPan;
     setPanOffsetPx(nextPan);
   };
 
@@ -106,6 +108,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
       dragStartPanOffsetRef.current,
       dragDeltaX,
     );
+    panRef.current = nextPan;
     setPanOffsetPx(nextPan);
     touchEvent.preventDefault();
   };
@@ -175,33 +178,44 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const autoPanStep = () => {
     const cursorX = mouseXLocalRef.current;
     if (cursorX == null || isDraggingRef.current) {
-      rafAutoPanRef.current = requestAnimationFrame(autoPanStep);
+      rafAutoPanRef.current = null;
       return;
     }
 
-    const { minPan, maxPan } = getPanBounds();
-    let nextPan = panOffsetPx;
+    const { minPan, maxPan } = getPanBounds(scaleRef.current);
+    const currentPan = panRef.current;
+    let nextPan = currentPan;
 
     const leftEdgeLimit = edgeAutopanThresholdPx;
     const rightEdgeLimit = chartWidth - edgeAutopanThresholdPx;
+    const isNearEdge = cursorX < leftEdgeLimit || cursorX > rightEdgeLimit;
+
+    if (!isNearEdge) {
+      rafAutoPanRef.current = null;
+      return;
+    }
 
     if (cursorX < leftEdgeLimit) {
       // Pan left
       const speedFactor = (leftEdgeLimit - cursorX) / leftEdgeLimit; // 0..1
       nextPan = Math.max(
         minPan,
-        panOffsetPx - Math.ceil(AUTOPAN_SPEED_BASE_PX * speedFactor),
+        currentPan - Math.ceil(AUTOPAN_SPEED_BASE_PX * speedFactor),
       );
     } else if (cursorX > rightEdgeLimit) {
       // Pan right
       const speedFactor = (cursorX - rightEdgeLimit) / edgeAutopanThresholdPx; // >0
       nextPan = Math.min(
         maxPan,
-        panOffsetPx + Math.ceil(AUTOPAN_SPEED_BASE_PX * speedFactor),
+        currentPan + Math.ceil(AUTOPAN_SPEED_BASE_PX * speedFactor),
       );
     }
 
-    if (nextPan !== panOffsetPx) setPanOffsetPx(nextPan);
+    if (nextPan !== currentPan) {
+      panRef.current = nextPan;
+      setPanOffsetPx(nextPan);
+    }
+
     rafAutoPanRef.current = requestAnimationFrame(autoPanStep);
   };
 
