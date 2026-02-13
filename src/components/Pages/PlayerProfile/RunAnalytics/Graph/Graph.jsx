@@ -4,60 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 
-// Icons
-const ZoomInIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="11" cy="11" r="8"></circle>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-    <line x1="11" y1="8" x2="11" y2="14"></line>
-    <line x1="8" y1="11" x2="14" y2="11"></line>
-  </svg>
-);
-
-const ZoomOutIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <circle cx="11" cy="11" r="8"></circle>
-    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-    <line x1="8" y1="11" x2="14" y2="11"></line>
-  </svg>
-);
-
-const ResetIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-  >
-    <path d="M3 2v6h6"></path>
-    <path d="M21 12A9 9 0 0 0 6 5.3L3 8"></path>
-    <path d="M21 22v-6h-6"></path>
-    <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7"></path>
-  </svg>
-);
-
 const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
 const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
 const SCALE_MAX = 10.0; // Maximum zoom scale
@@ -89,7 +35,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   // Pixels from edge to trigger auto-pan
   const edgeAutopanThresholdPx = Math.max(
     EDGE_AUTOPAN_THRESHOLD_MIN_PX,
-    EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth
+    EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth,
   );
   const mapName = runData?.[0]?.MapName;
 
@@ -144,7 +90,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     const deltaX = event.clientX - dragStartXRef.current;
     const nextPan = calculateNewPanOffset(
       dragStartPanOffsetRef.current,
-      deltaX
+      deltaX,
     );
     setPanOffsetPx(nextPan);
   };
@@ -156,7 +102,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     const deltaX = touch.clientX - dragStartXRef.current;
     const nextPan = calculateNewPanOffset(
       dragStartPanOffsetRef.current,
-      deltaX
+      deltaX,
     );
     setPanOffsetPx(nextPan);
     event.preventDefault();
@@ -241,14 +187,14 @@ const Graph = ({ data: runData, isLoading = false }) => {
       const factor = (leftEdgeLimit - mouseX) / leftEdgeLimit; // 0..1
       nextPan = Math.max(
         minPan,
-        panOffsetPx - Math.ceil(AUTOPAN_SPEED_BASE_PX * factor)
+        panOffsetPx - Math.ceil(AUTOPAN_SPEED_BASE_PX * factor),
       );
     } else if (mouseX > rightEdgeLimit) {
       // Pan right
       const factor = (mouseX - rightEdgeLimit) / edgeAutopanThresholdPx; // >0
       nextPan = Math.min(
         maxPan,
-        panOffsetPx + Math.ceil(AUTOPAN_SPEED_BASE_PX * factor)
+        panOffsetPx + Math.ceil(AUTOPAN_SPEED_BASE_PX * factor),
       );
     }
 
@@ -296,12 +242,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const onSvgKeyDown = (event) => {
     if (event.key === "ArrowLeft") {
       setPanOffsetPx((prevPan) =>
-        Math.max(getPanBounds().minPan, prevPan - 40)
+        Math.max(getPanBounds().minPan, prevPan - 40),
       );
       event.preventDefault();
     } else if (event.key === "ArrowRight") {
       setPanOffsetPx((prevPan) =>
-        Math.min(getPanBounds().maxPan, prevPan + 40)
+        Math.min(getPanBounds().maxPan, prevPan + 40),
       );
       event.preventDefault();
     } else if (event.key === "+" || event.key === "=") {
@@ -349,7 +295,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
       const factor = Math.exp(-event.deltaY * ZOOM_SENSITIVITY);
       const nextScale = Math.max(
         SCALE_MIN,
-        Math.min(SCALE_MAX, scaleRef.current * factor)
+        Math.min(SCALE_MAX, scaleRef.current * factor),
       );
       setScaleAround(nextScale, localX);
     };
@@ -373,20 +319,8 @@ const Graph = ({ data: runData, isLoading = false }) => {
     return (
       <div className={s.graphContainer} ref={containerRef}>
         <div className={s.emptyState}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-            <line x1="8" y1="10" x2="16" y2="10"></line>
-            <line x1="8" y1="14" x2="14" y2="14"></line>
+          <svg>
+            <use href="/icons-sprite.svg#message" />
           </svg>
           <p>No run data available for the selected map</p>
         </div>
@@ -435,9 +369,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
     .join(" ");
 
   const areaPathD = `${linePathD} L ${xScale(graphPoints.at(-1).x).toFixed(
-    2
+    2,
   )} ${chartHeight - chartPadding.bottom} L ${xScale(graphPoints[0].x).toFixed(
-    2
+    2,
   )} ${chartHeight - chartPadding.bottom} Z`;
 
   // Format tooltip content
@@ -485,7 +419,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
           className={s.controlButton}
           disabled={zoomScale <= SCALE_MIN}
         >
-          <ZoomOutIcon />
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#zoom-out" />
+          </svg>
         </button>
         <button
           aria-label="Reset zoom"
@@ -496,7 +432,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
           className={s.controlButton}
           disabled={zoomScale === 1 && panOffsetPx === 0}
         >
-          <ResetIcon />
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#infinite-circles" />
+          </svg>
         </button>
         <button
           aria-label="Zoom in"
@@ -504,7 +442,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
           className={s.controlButton}
           disabled={zoomScale >= SCALE_MAX}
         >
-          <ZoomInIcon />
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#zoom-in" />
+          </svg>
         </button>
       </div>
 
@@ -604,7 +544,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
             >
               {value}
             </text>
-          )
+          ),
         )}
       </svg>
     </div>

@@ -335,4 +335,24 @@
     <path
       d="M39 5A24 24 0 0 0 9 43l592 464a24 24 0 0 0 30-38l-105-82c39-41 66-86 80-119q4.5-12 0-24c-15-36-47-88-93-131-47-44-112-81-193-81-68 0-125 26-169 61zm151 118c36-25 80-43 130-43 65 0 119 30 160 68 38 36 65 78 79 108-13 28-37 67-71 101l-54-42a128 128 0 0 0-198-155zm205 161-82-64a64 64 0 0 0 5-44h2a80 80 0 0 1 75 108m51 164-42-33c-25 10-53 17-84 17-65 0-119-30-160-68-38-35-65-78-79-108 9-18 22-41 40-65l-38-29c-23 29-39 59-48 82q-6 12 0 24c14 36 46 88 93 131a263 263 0 0 0 319 48zm-88-70-56-44c-23-5-43-21-54-42l-56-45v9a128 128 0 0 0 166 122" />
   </symbol>
+
+  <symbol id="zoom-in" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35M11 8v6m-3-3h6" />
+  </symbol>
+
+  <symbol id="zoom-out" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <circle cx="11" cy="11" r="8" />
+    <path d="m21 21-4.35-4.35M8 11h6" />
+  </symbol>
+
+  <symbol id="infinite-circles" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+    <path d="M3 2v6h6" />
+    <path d="M21 12A9 9 0 0 0 6 5.3L3 8m18 14v-6h-6" />
+    <path d="M3 12a9 9 0 0 0 15 6.7l3-2.7" />
+  </symbol>
+
+  <symbol id="message" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2zM8 10h8m-8 4h6" />
+  </symbol>
 </svg>
