@@ -30,7 +30,7 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
   }
 
   return (
-    <div className={s.checkboxButtons}>
+    <div className={s.checkboxes}>
       {filtersData?.map(({ text, queryValue, id }) => {
         const isNumber = !Number.isNaN(+text);
         const modifiedText = isNumber ? getStarsText(text) : text;
@@ -48,7 +48,12 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
               onChange={() => handleChange(queryValue)}
               checked={isActive}
             />
-            {modifiedText}
+            <span className={s.checkboxMark} aria-hidden="true">
+              <svg>
+                <use href="/icons-sprite.svg#checked" />
+              </svg>
+            </span>
+            <span className={s.checkboxText}>{modifiedText}</span>
           </label>
         );
       })}

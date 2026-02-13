@@ -1,93 +1,115 @@
 @use "@/styles/mixins" as m;
 
-.checkboxButtons {
+.checkboxes {
   display: flex;
   align-items: center;
-  gap: 8px 6px;
+  gap: 8px;
+  width: 100%;
 }
 
 @include m.large {
-  .checkboxButtons {
-    grid-template-columns: repeat(4, minmax(90px, 1fr));
+  .checkboxes {
+    grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 }
 
 @include m.small {
-  .checkboxButtons {
-    display: flex;
-    flex-wrap: wrap;
+  .checkboxes {
+    grid-template-columns: 1fr;
   }
 }
 
 @include m.very-small {
-  .checkboxButtons {
-    grid-template-columns: repeat(2, minmax(90px, 1fr));
+  .checkboxes {
+    grid-template-columns: 1fr;
   }
 }
 
 .checkboxLabel {
-  height: 36px;
-  max-height: 36px;
-  min-width: 70px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  gap: 10px;
   background-color: #1f2937;
   color: #9ca3af;
   border: 1px solid #374151;
-  border-radius: 6px;
-  padding-inline: 8px;
+  min-height: 36px;
+  flex: 1;
+  border-radius: 8px;
+  padding: 8px 10px;
   font-size: .875rem;
-  font-weight: 400;
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, .15);
+  font-weight: 500;
   position: relative;
   transition:
     background-color .2s cubic-bezier(.4, 0, .2, 1),
+    border-color .2s cubic-bezier(.4, 0, .2, 1),
     color .2s cubic-bezier(.4, 0, .2, 1);
 
   &.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: #fff;
-  }
-
-  &.active.stars {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
-    color: #fff;
-    border: none;
-    font-weight: normal;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, .25);
+    background: #18263c;
+    border-color: #3b82f6;
+    color: #dbeafe;
   }
 
   &:not(.active):hover {
-    background-color: #374151;
+    background-color: #1f2e45;
     color: #f3f4f6;
-    border-color: #9ca3af;
+    border-color: #456086;
   }
 
   &.active:hover {
-    box-shadow: 0 0 15px rgba(37, 99, 235, .5);
+    background-color: #1d2d46;
   }
 }
 
-@include m.small {
-  .checkboxLabel {
-    min-width: 100px;
-  }
+.checkboxText {
+  text-wrap: nowrap;
 }
 
-@include m.very-small {
-  .checkboxLabel {
-    flex: 1;
-  }
+.checkboxMark {
+  width: 17px;
+  height: 17px;
+  min-width: 17px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  border: 1px solid #485466;
+  background-color: #161f2c;
+  transition:
+    border-color .2s cubic-bezier(.4, 0, .2, 1),
+    background-color .2s cubic-bezier(.4, 0, .2, 1);
+}
+
+.checkboxMark>svg {
+  width: 12px;
+  height: 12px;
+  fill: #fff;
+  opacity: 0;
+  scale: .8;
+  transition: opacity .15s ease, scale .15s ease;
+}
+
+.checkboxLabel.active .checkboxMark {
+  border-color: #60a5fa;
+  background: linear-gradient(160deg, #3b82f6, #2563eb);
+}
+
+.checkboxLabel.active .checkboxMark>svg {
+  opacity: 1;
+  scale: 1;
 }
 
 .checkboxLabel>input {
-  width: 100%;
-  height: 100%;
+  width: 1px;
+  height: 1px;
   position: absolute;
-  left: 0;
-  top: 0;
-  z-index: 1;
+  left: 8px;
+  top: 8px;
   opacity: 0;
   cursor: pointer;
+}
+
+.checkboxLabel>input:focus-visible+.checkboxMark {
+  outline: 2px solid #60a5fa;
+  outline-offset: 2px;
 }
