@@ -40,6 +40,8 @@ const MapsPage = () => {
           <FiltersSection
             setPaginationNumber={setPaginationNumber}
             allMaps={allMaps}
+            mapsData={mapsData}
+            mapsScroll={mapsScroll}
           />
           <Maps
             paginationNumber={paginationNumber}

@@ -1,3 +1,26 @@
+@use "@/styles/mixins" as m;
+
 .filtersSection {
   margin-bottom: 30px;
+}
+
+.totalMapsText {
+  color: #9ca3af;
+}
+
+@include m.small {
+  .totalMapsText {
+    font-size: .9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .totalMapsText {
+    max-width: 166px;
+  }
+}
+
+.totalMapsText>span {
+  color: #cdd4de;
+  font-weight: 500;
 }
