@@ -109,7 +109,7 @@ export const MAPS_FILTERS_DATA = [
         id: 4,
       },
     ],
-    tooltipText: "Enable/Disable map information",
+    tooltipText: "Enable/Disable maps information",
     id: 2,
   },
 ];
