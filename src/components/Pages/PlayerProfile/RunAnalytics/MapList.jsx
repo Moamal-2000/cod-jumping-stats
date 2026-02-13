@@ -11,6 +11,8 @@ const MapList = ({
   selectedMapId,
   selectMapRoute,
   isLoading = false,
+  isCollapsed = false,
+  onToggleCollapse = () => {},
 }) => {
   const [filteredMaps, setFilteredMaps] = useState(allMaps);
 
@@ -34,104 +36,135 @@ const MapList = ({
 
     if (mapName !== "") {
       filteredMaps = filteredMaps.filter((map) =>
-        map.Name.toLowerCase().includes(mapName.toLowerCase())
+        map.Name.toLowerCase().includes(mapName.toLowerCase()),
       );
     }
 
     setFilteredMaps(filteredMaps);
   }, [allMaps, mapName, mapType]);
 
-  if (isLoading) {
-    return (
-      <div className={s.leftPanel}>
-        <div className={s.searchContainer}>
-          <SearchInput
-            placeholder="Search map by name"
-            queryName="mapname"
-            disabled={true}
-          />
-        </div>
-
-        <div className={s.loadingState}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-          </svg>
-          <p>Loading maps...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
-    <div className={s.leftPanel}>
-      <div className={s.searchContainer}>
-        <SearchInput placeholder="Search map by name" queryName="mapname" />
-      </div>
+    <div className={s.leftPanelWrapper}>
+      <button
+        type="button"
+        className={s.collapseButton}
+        onClick={onToggleCollapse}
+        aria-label={isCollapsed ? "Show map list" : "Hide map list"}
+        aria-expanded={!isCollapsed}
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          {isCollapsed ? (
+            <path d="M9 6l6 6-6 6" />
+          ) : (
+            <path d="M15 6l-6 6 6 6" />
+          )}
+        </svg>
+      </button>
 
-      <div className={s.mapsTypes}>
-        {["All", "Jump", "Defrag", "Surf"].map((type) => (
-          <button
-            key={type}
-            className={`${s.mapType} ${
-              mapType === type.toLowerCase() ? s.active : ""
-            }`}
-            onClick={() => handleSelectMapType(type)}
-          >
-            {type}
-          </button>
-        ))}
-      </div>
+      <div
+        className={`${s.leftPanel} ${isCollapsed ? s.leftPanelCollapsed : ""}`}
+      >
+        <div
+          className={`${s.leftPanelContent} ${
+            isCollapsed ? s.leftPanelContentCollapsed : ""
+          }`}
+        >
+          {isLoading ? (
+            <>
+              <div className={s.searchContainer}>
+                <SearchInput
+                  placeholder="Search map by name"
+                  queryName="mapname"
+                  disabled={true}
+                />
+              </div>
 
-      <div className={s.mapsList} role="list">
-        {filteredMaps.length === 0 && mapName ? (
-          <div className={s.emptyState}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <p>No maps found matching "{mapName}"</p>
-          </div>
-        ) : (
-          filteredMaps.map((map) => {
-            const isActive = selectedMapId === map.CpID;
+              <div className={s.loadingState}>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                </svg>
+                <p>Loading maps...</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={s.searchContainer}>
+                <SearchInput
+                  placeholder="Search map by name"
+                  queryName="mapname"
+                />
+              </div>
 
-            return (
-              <button
-                key={map.CpID}
-                className={`${s.mapButton} ${isActive ? s.active : ""} ${
-                  s.fadeIn
-                }`}
-                onClick={() => selectMapRoute(map.CpID)}
-                role="listitem"
-                aria-pressed={isActive}
-                aria-label={`Select ${map.Name} map`}
-              >
-                <span>{map.Name}</span>
-                {map.Ender && <span className={s.mapRoute}>{map.Ender}</span>}
-              </button>
-            );
-          })
-        )}
+              <div className={s.mapsTypes}>
+                {["All", "Jump", "Defrag", "Surf"].map((type) => (
+                  <button
+                    key={type}
+                    className={`${s.mapType} ${
+                      mapType === type.toLowerCase() ? s.active : ""
+                    }`}
+                    onClick={() => handleSelectMapType(type)}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
+
+              <div className={s.mapsList} role="list">
+                {filteredMaps.length === 0 && mapName ? (
+                  <div className={s.emptyState}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    >
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <p>No maps found matching "{mapName}"</p>
+                  </div>
+                ) : (
+                  filteredMaps.map((map) => {
+                    const isActive = selectedMapId === map.CpID;
+
+                    return (
+                      <button
+                        key={map.CpID}
+                        className={`${s.mapButton} ${isActive ? s.active : ""} ${
+                          s.fadeIn
+                        }`}
+                        onClick={() => selectMapRoute(map.CpID)}
+                        role="listitem"
+                        aria-pressed={isActive}
+                        aria-label={`Select ${map.Name} map`}
+                      >
+                        <span>{map.Name}</span>
+                        {map.Ender && (
+                          <span className={s.mapRoute}>{map.Ender}</span>
+                        )}
+                      </button>
+                    );
+                  })
+                )}
+              </div>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

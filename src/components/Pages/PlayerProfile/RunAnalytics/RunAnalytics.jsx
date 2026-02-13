@@ -5,7 +5,7 @@ import { createQueryString } from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchMapRuns } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Graph from "./Graph/Graph";
 import MapList from "./MapList";
@@ -23,6 +23,7 @@ const fpsOptions = [
 const RunAnalytics = () => {
   const { mapRuns, mapRunsLoading } = useSelector((s) => s.playerProfile);
   const { allMaps, loading } = useSelector((s) => s.maps);
+  const [isMapListCollapsed, setIsMapListCollapsed] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -56,12 +57,14 @@ const RunAnalytics = () => {
 
   return (
     <div>
-      <div className={s.container}>
+      <div className={`${s.container} ${isMapListCollapsed ? s.containerCollapsed : ""}`}>
         <MapList
           allMaps={allMaps}
           selectedMapId={selectedMapId}
           selectMapRoute={selectMapRoute}
           isLoading={loading}
+          isCollapsed={isMapListCollapsed}
+          onToggleCollapse={() => setIsMapListCollapsed((previous) => !previous)}
         />
 
         <div className={s.rightPanel}>
