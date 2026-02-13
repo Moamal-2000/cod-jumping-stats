@@ -10,12 +10,12 @@ const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
   return (
-    <div className={s.playerStatsOverview}>
+    <div className={s.overview}>
       <div className={s.statsHeader}>
         <h2>Player Information</h2>
       </div>
 
-      <div className={s.playerInfoContainer}>
+      <div className={s.infoContainer}>
         {performanceStats && (
           <div className={s.infoGrid}>
             <RoutesCard performanceStats={performanceStats} />
@@ -31,8 +31,8 @@ const PlayerInfo = () => {
                 {performanceStats.DaysSinceLastSeen === 0
                   ? "Today"
                   : performanceStats.DaysSinceLastSeen === 1
-                  ? "Yesterday"
-                  : `${performanceStats.DaysSinceLastSeen} days ago`}
+                    ? "Yesterday"
+                    : `${performanceStats.DaysSinceLastSeen} days ago`}
               </div>
               <div className={s.infoSubtext}>
                 Last seen: {formatLastSeen(jumpScores?.LastSeen)}
