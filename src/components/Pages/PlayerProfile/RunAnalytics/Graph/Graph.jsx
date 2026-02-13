@@ -19,7 +19,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const [containerWidth, setContainerWidth] = useState(800);
   const chartWidth = containerWidth || 800; // Final width used for calculations
   const chartHeight = 382;
-  const chartPadding = { left: 40, right: 12, top: 12, bottom: 28 };
+  const chartPadding = { left: 64, right: 12, top: 12, bottom: 28 };
 
   const [hoveredPoint, setHoveredPoint] = useState(null);
   // Horizontal zoom level. 1 = default spacing, >1 increases spacing.
@@ -575,10 +575,10 @@ const Graph = ({ data: runData, isLoading = false }) => {
         {yAxisData.map(({ seconds, formattedTime }, axisIndex) => (
           <text
             key={axisIndex}
-            x={8}
+            x={chartPadding.left - 16}
             y={scaleRunTimeToY(seconds)}
-            fontSize={10}
-            fill="#9ca3af"
+            textAnchor="end"
+            className={s.yAxisLabel}
           >
             {formattedTime}
           </text>

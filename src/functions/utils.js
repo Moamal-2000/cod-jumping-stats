@@ -571,11 +571,11 @@ export function getGraphRunTimes(graphPoints = []) {
 
   return [
     {
-      seconds: 0,
+      seconds: 50,
       formattedTime: "0:00",
     },
     {
-      seconds: maxRunSeconds / 2,
+      seconds: biggestTimeSeconds / 2,
       formattedTime: averageRun,
     },
     {
