@@ -7,12 +7,7 @@
   gap: 16px;
   margin-bottom: 16px;
   width: 100%;
-}
-
-@include m.small {
-  .filtersSection {
-    flex-wrap: wrap;
-  }
+  flex-wrap: wrap;
 }
 
 @include m.very-small {
@@ -37,7 +32,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .sortWrapper {
     position: static;
     translate: 0;

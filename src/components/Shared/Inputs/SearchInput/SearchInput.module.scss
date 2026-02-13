@@ -6,13 +6,14 @@
   gap: 8px;
   position: relative;
   max-width: 280px;
+  min-width: 220px;
   width: 100%;
 }
 
 @include m.small {
   .searchContainer {
+    max-width: 320px;
     min-width: 240px;
-    max-width: 360px;
   }
 }
 

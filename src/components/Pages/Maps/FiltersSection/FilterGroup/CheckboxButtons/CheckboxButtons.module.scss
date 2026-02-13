@@ -7,19 +7,14 @@
   width: 100%;
 }
 
-@include m.large {
+@include m.small {
   .checkboxes {
+    display: grid;
     grid-template-columns: repeat(2, minmax(120px, 1fr));
   }
 }
 
-@include m.small {
-  .checkboxes {
-    grid-template-columns: 1fr;
-  }
-}
-
-@include m.very-small {
+@media (max-width: 500px) {
   .checkboxes {
     grid-template-columns: 1fr;
   }

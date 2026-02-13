@@ -6,13 +6,14 @@
   flex-direction: column;
   gap: 6px;
   max-width: 280px;
+  min-width: 220px;
   width: 100%;
 }
 
 @include m.small {
   .comboBox {
+    max-width: 320px;
     min-width: 240px;
-    max-width: 360px;
   }
 }
 

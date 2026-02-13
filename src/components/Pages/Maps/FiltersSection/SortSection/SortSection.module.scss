@@ -7,7 +7,7 @@
   gap: 26px;
 }
 
-@include m.medium {
+@include m.large {
   .sortSection {
     flex-direction: column;
     justify-content: flex-start;
@@ -15,7 +15,7 @@
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .sortSection {
     gap: 10px;
   }
@@ -30,13 +30,14 @@
   z-index: 1;
 }
 
-@media (max-width: 560px) {
+@include m.small {
   .sortSection .leftSide {
-    flex-wrap: wrap;
+    flex-direction: column-reverse;
+    align-items: flex-start;
   }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
   .sortSection .leftSide {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -53,15 +54,18 @@
   text-wrap: nowrap;
 }
 
-@include m.small {
+@include m.large {
   .totalMapsText {
-    font-size: .9rem;
+    position: absolute;
+    bottom: -56px;
+    left: 200px;
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
   .totalMapsText {
-    max-width: 166px;
+    bottom: -80px;
+    left: 0;
   }
 }
 

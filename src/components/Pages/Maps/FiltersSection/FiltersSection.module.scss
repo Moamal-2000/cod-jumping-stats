@@ -3,3 +3,9 @@
 .filtersSection {
   margin-bottom: 30px;
 }
+
+@media (max-width: 500px) {
+  .filtersSection {
+    margin-bottom: 50px;
+  }
+}

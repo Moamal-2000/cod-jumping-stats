@@ -1,7 +1,15 @@
+@use "@/styles/mixins" as m;
+
 .filterGroup {
   border: none;
   display: flex;
   flex-direction: column;
   gap: 12px;
   min-width: 200px;
+}
+
+@include m.very-small {
+  .filterGroup.checkbox {
+    width: 100%;
+  }
 }
