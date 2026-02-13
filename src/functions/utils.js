@@ -503,3 +503,84 @@ function isLikelyAuthor(author) {
 
   return score < 3;
 }
+
+export function getTimeObj(getSeconds) {
+  const totalMinutes = Math.floor(getSeconds / 60);
+  const totalHours = Math.floor(totalMinutes / 60);
+
+  const days = Math.floor(totalHours / 24);
+  const hours = totalHours % 24;
+  const minutes = totalMinutes % 60;
+  const seconds = getSeconds % 60;
+
+  return {
+    days,
+    hours,
+    minutes,
+    seconds,
+  };
+}
+
+export function formateTimeBySeconds(seconds) {
+  const { days, hours, minutes, seconds: sec } = getTimeObj(seconds);
+
+  if (days > 0) return `${days}:${hours}:${minutes}:${sec}`;
+  if (hours > 0) return `${hours}:${minutes}:${sec}`;
+  if (minutes > 0) return `${minutes}:${sec}`;
+  if (seconds > 0) return `${sec}`;
+
+  return seconds || 0;
+}
+
+export function toSecondsFlexible(timeStr = "") {
+  const parts = timeStr.split(":").map(Number);
+  let seconds = 0;
+
+  for (let i = 0; i < parts.length; i++) {
+    const indexFromRight = parts.length - 1 - i;
+    if (i === 0) {
+      seconds += parts[indexFromRight];
+    } else if (i === 1) {
+      seconds += parts[indexFromRight] * 60;
+    } else if (i === 2) {
+      seconds += parts[indexFromRight] * 3600;
+    } else if (i === 3) {
+      seconds += parts[indexFromRight] * 3600 * 24;
+    }
+  }
+
+  return seconds;
+}
+
+export function getGraphRunTimes(graphPoints = []) {
+  const maxRunSeconds = graphPoints[0]?.rawData?.TimePlayed || 0;
+  const averageRun = formateTimeBySeconds(maxRunSeconds / 2);
+
+  const allTimePlayed = graphPoints.map(
+    (point) => point?.rawData?.TimePlayedString,
+  );
+
+  const biggestTime =
+    allTimePlayed.toSorted(
+      (a, b) => toSecondsFlexible(b) - toSecondsFlexible(a),
+    )[0] || "";
+
+  const biggestTimeSeconds = toSecondsFlexible(biggestTime);
+  const maxRunString = graphPoints[0]?.rawData?.TimePlayedString || "0";
+  const formattedMaxRunString = maxRunString.replace(/\.\d+/g, "");
+
+  return [
+    {
+      seconds: 0,
+      formattedTime: "0:00",
+    },
+    {
+      seconds: maxRunSeconds / 2,
+      formattedTime: averageRun,
+    },
+    {
+      seconds: biggestTimeSeconds - 5,
+      formattedTime: formattedMaxRunString,
+    },
+  ];
+}

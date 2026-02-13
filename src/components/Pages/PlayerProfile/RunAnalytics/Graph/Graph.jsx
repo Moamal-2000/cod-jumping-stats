@@ -1,5 +1,6 @@
 "use client";
 import { getColoredName } from "@/functions/components";
+import { getGraphRunTimes } from "@/functions/utils";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
@@ -34,10 +35,11 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const rafAutoPanRef = useRef(null); // Animation frame ID for auto-pan loop
 
   // Pixels from edge to trigger auto-pan
-  const edgeAutopanThresholdPx = Math.max(
-    EDGE_AUTOPAN_THRESHOLD_MIN_PX,
-    EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth,
-  ) * EDGE_AUTOPAN_TRIGGER_SCALE;
+  const edgeAutopanThresholdPx =
+    Math.max(
+      EDGE_AUTOPAN_THRESHOLD_MIN_PX,
+      EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth,
+    ) * EDGE_AUTOPAN_TRIGGER_SCALE;
   const mapName = runData?.[0]?.MapName;
 
   function getGraphPoints() {
@@ -55,6 +57,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   }
 
   const graphPoints = getGraphPoints();
+  const yAxisData = getGraphRunTimes(graphPoints);
 
   const handleMouseDown = (mouseEvent) => {
     if (zoomScale <= SCALE_MIN) return;
@@ -569,19 +572,17 @@ const Graph = ({ data: runData, isLoading = false }) => {
         })()}
 
         {/* y axis labels */}
-        {[0, Math.round(maxRunTime / 2), Math.round(maxRunTime)].map(
-          (axisValue, axisIndex) => (
-            <text
-              key={axisIndex}
-              x={8}
-              y={scaleRunTimeToY(axisValue)}
-              fontSize={10}
-              fill="#9ca3af"
-            >
-              {axisValue}
-            </text>
-          ),
-        )}
+        {yAxisData.map(({ seconds, formattedTime }, axisIndex) => (
+          <text
+            key={axisIndex}
+            x={8}
+            y={scaleRunTimeToY(seconds)}
+            fontSize={10}
+            fill="#9ca3af"
+          >
+            {formattedTime}
+          </text>
+        ))}
       </svg>
     </div>
   );
