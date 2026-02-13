@@ -1,20 +1,10 @@
 @use "@/styles/mixins" as m;
 
 .filtersSection {
-  background-color: #151a25;
-  border: 1px solid #374151;
-  border-radius: 10px;
-  padding: 20px 24px;
   position: relative;
   display: flex;
-  justify-content: space-between;
-  gap: 24px;
-  margin-bottom: 36px;
-  transition: background-color .3s, border-color .3s;
-
-  &:hover {
-    border-color: #007bff;
-  }
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 @include m.small {
@@ -26,5 +16,34 @@
 @include m.very-small {
   .filtersSection {
     justify-content: center;
+  }
+}
+
+.sortWrapper {
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+@include m.small {
+  .sortWrapper {
+    position: absolute;
+    bottom: -64px;
+    left: 0;
+    translate: 100% 0;
+  }
+}
+
+@media (max-width: 450px) {
+  .sortWrapper {
+    position: static;
+    translate: 0;
+  }
+}
+
+@media (max-width: 410px) {
+  .sortWrapper {
+    flex-wrap: wrap;
   }
 }

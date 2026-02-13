@@ -1,8 +1,8 @@
 @use "@/styles/mixins" as m;
 
 .filterButtons {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(110px, 1fr));
+  display: flex;
+  align-items: center;
   gap: 8px 6px;
 }
 
@@ -29,6 +29,7 @@
   cursor: pointer;
   height: 36px;
   max-height: 36px;
+  min-width: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
