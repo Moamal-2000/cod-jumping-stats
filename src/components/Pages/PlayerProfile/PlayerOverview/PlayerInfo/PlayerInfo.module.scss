@@ -1,11 +1,10 @@
+@use "@/styles/mixins" as m;
+
 .overview {
-  background: rgba(17, 24, 39, 0.8);
-  backdrop-filter: blur(10px);
+  border: 1px solid #1d2431;
   border-radius: 16px;
-  padding: 1.75rem;
-  margin-bottom: 2.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 28px;
+  margin-bottom: 40px;
 }
 
 .overview .statsHeader {
@@ -13,48 +12,41 @@
 }
 
 .overview .statsHeader h2 {
-  margin: 0 0 0.5rem 0;
+  margin-bottom: 8px;
   font-size: 1.5rem;
   font-weight: 600;
   color: #f9fafb;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.overview .infoContainer {
-  width: 100%;
 }
 
 .overview .infoGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.25rem;
+  gap: 20px;
 }
 
-@media (max-width: 640px) {
+@include m.small {
   .overview .infoGrid {
     grid-template-columns: 1fr;
   }
 }
 
 .overview .infoItem {
-  background: rgba(31, 41, 55, 0.6);
+  background: #1a2331;
   border-radius: 12px;
-  padding: 1.5rem;
+  padding: 24px;
   position: relative;
 }
 
 .overview .infoLabel {
-  font-size: 0.75rem;
+  font-size: .75rem;
   color: #9ca3af;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: .05em;
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 8px;
 }
 
 .overview .infoLabel svg {
@@ -67,31 +59,27 @@
   font-size: 1.75rem;
   font-weight: 700;
   color: #f9fafb;
-  margin: 0.5rem 0 1rem;
+  margin-block: 8px 16px;
   line-height: 1.2;
-  font-family: 'Inter', -apple-system, sans-serif;
-  letter-spacing: -0.5px;
+  letter-spacing: -.5px;
 }
 
 .overview .infoSubtext {
-  font-size: 0.875rem;
+  font-size: .875rem;
   color: #9ca3af;
-  line-height: 1.5;
-  margin: 0.5rem 0 0;
 }
 
 .overview .mapName {
   display: inline-block;
-  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-weight: 600;
   color: #f3f4f6;
   font-size: 1.1rem;
-  margin: 0.5rem 0 0.75rem;
+  margin-block: 8px 12px;
+  padding-left: 20px;
   position: relative;
-  padding-left: 1.25rem;
 }
 
 .overview .mapName::before {
@@ -99,19 +87,18 @@
   position: absolute;
   left: 0;
   top: 50%;
-  transform: translateY(-50%);
+  translate: 0 -50%;
   width: 8px;
   height: 8px;
-  background: currentColor;
+  background: #9ca0a8;
   border-radius: 50%;
-  opacity: 0.6;
 }
 
 .overview .metaInfo {
   display: flex;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-  font-size: 0.8rem;
+  gap: 12px;
+  margin-top: 12px;
+  font-size: .8rem;
   color: #9ca3af;
   flex-wrap: wrap;
 }
@@ -119,12 +106,12 @@
 .overview .metaInfo span {
   display: inline-flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 5px;
 }
 
 .overview .metaInfo>span>svg {
   width: 15px;
   height: 15px;
-  opacity: 0.7;
+  color: #767c8a;
   flex-shrink: 0;
 }

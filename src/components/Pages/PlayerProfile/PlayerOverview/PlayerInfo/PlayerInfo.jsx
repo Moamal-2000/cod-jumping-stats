@@ -10,7 +10,7 @@ const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
   return (
-    <div className={s.overview}>
+    <section className={s.overview}>
       <div className={s.statsHeader}>
         <h2>Player Information</h2>
       </div>
@@ -60,12 +60,14 @@ const PlayerInfo = () => {
                     </svg>
                     Rank #{performanceStats.OldestTop.Rank}
                   </span>
+
                   <span>
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#gauge"></use>
                     </svg>
                     {performanceStats.OldestTop.FPS} FPS
                   </span>
+
                   <span>
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#calendar"></use>
@@ -80,7 +82,7 @@ const PlayerInfo = () => {
 
         {!performanceStats && <LimitedDataCard />}
       </div>
-    </div>
+    </section>
   );
 };
 
