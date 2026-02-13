@@ -571,7 +571,7 @@ export function getGraphRunTimes(graphPoints = []) {
 
   return [
     {
-      seconds: 50,
+      seconds: 7,
       formattedTime: "0:00",
     },
     {
