@@ -1,9 +1,11 @@
 "use client";
+import { CHART_HEIGHT, CHART_PADDING } from "@/data/constants";
 import { getColoredName } from "@/functions/components";
 import { getGraphRunTimes } from "@/functions/utils";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import YAxisLabels from "./YAxisLabels/YAxisLabels";
 
 const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
 const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
@@ -17,9 +19,7 @@ const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zo
 const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
-  const chartWidth = containerWidth || 800; // Final width used for calculations
-  const chartHeight = 382;
-  const chartPadding = { left: 64, right: 12, top: 12, bottom: 28 };
+  const CHART_WIDTH = containerWidth || 800; // Final width used for calculations
 
   const [hoveredPoint, setHoveredPoint] = useState(null);
   // Horizontal zoom level. 1 = default spacing, >1 increases spacing.
@@ -38,7 +38,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const edgeAutopanThresholdPx =
     Math.max(
       EDGE_AUTOPAN_THRESHOLD_MIN_PX,
-      EDGE_AUTOPAN_THRESHOLD_RATIO * chartWidth,
+      EDGE_AUTOPAN_THRESHOLD_RATIO * CHART_WIDTH,
     ) * EDGE_AUTOPAN_TRIGGER_SCALE;
   const mapName = runData?.[0]?.MapName;
 
@@ -80,11 +80,11 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   const calculateNewPanOffset = (currentPanOffset, dragDeltaX) => {
     // Focal point for scaling/panning (center of the chart)
-    const focalPointX = chartWidth / 2;
+    const focalPointX = CHART_WIDTH / 2;
     // Pan bounds calculation (based on center-of-chart panning logic)
-    const minPan = (chartPadding.left - focalPointX) * (zoomScale - 1);
+    const minPan = (CHART_PADDING.left - focalPointX) * (zoomScale - 1);
     const maxPan =
-      (chartWidth - chartPadding.right - focalPointX) * (zoomScale - 1);
+      (CHART_WIDTH - CHART_PADDING.right - focalPointX) * (zoomScale - 1);
 
     const nextPan = currentPanOffset - dragDeltaX;
     // Clamp between minPan and maxPan
@@ -133,7 +133,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   }, [panOffsetPx]);
 
   const setScaleAround = (nextScale, localCursorX) => {
-    const focalPointX = chartWidth / 2;
+    const focalPointX = CHART_WIDTH / 2;
     const currentScale = scaleRef.current;
     const currentPan = panRef.current;
 
@@ -169,12 +169,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
   };
 
   const getPanBounds = (scaleLevel = zoomScale) => {
-    const focalPointX = chartWidth / 2;
+    const focalPointX = CHART_WIDTH / 2;
     // The min pan offset occurs when the far left of the data is aligned with the left padding boundary.
-    const minPan = (chartPadding.left - focalPointX) * (scaleLevel - 1);
+    const minPan = (CHART_PADDING.left - focalPointX) * (scaleLevel - 1);
     // The max pan offset occurs when the far right of the data is aligned with the right padding boundary.
     const maxPan =
-      (chartWidth - chartPadding.right - focalPointX) * (scaleLevel - 1);
+      (CHART_WIDTH - CHART_PADDING.right - focalPointX) * (scaleLevel - 1);
     return { minPan, maxPan };
   };
 
@@ -190,7 +190,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     let nextPan = currentPan;
 
     const leftEdgeLimit = edgeAutopanThresholdPx;
-    const rightEdgeLimit = chartWidth - edgeAutopanThresholdPx;
+    const rightEdgeLimit = CHART_WIDTH - edgeAutopanThresholdPx;
     const isNearEdge = cursorX < leftEdgeLimit || cursorX > rightEdgeLimit;
 
     if (!isNearEdge) {
@@ -229,7 +229,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     mouseXLocalRef.current = localCursorX;
 
     const leftEdgeLimit = edgeAutopanThresholdPx;
-    const rightEdgeLimit = chartWidth - edgeAutopanThresholdPx;
+    const rightEdgeLimit = CHART_WIDTH - edgeAutopanThresholdPx;
 
     const isNearEdge =
       localCursorX < leftEdgeLimit || localCursorX > rightEdgeLimit;
@@ -317,7 +317,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
       const svgRect = svgRef.current?.getBoundingClientRect();
       const localCursorX = svgRect
         ? wheelEvent.clientX - svgRect.left
-        : chartWidth / 2;
+        : CHART_WIDTH / 2;
       const zoomFactor = Math.exp(-wheelEvent.deltaY * ZOOM_SENSITIVITY);
       const nextScale = Math.max(
         SCALE_MIN,
@@ -365,30 +365,30 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   // Time-to-Pixel X Scale function
   const scaleTimestampToX = (timestamp) => {
-    if (maxTimestamp === minTimestamp) return chartPadding.left;
+    if (maxTimestamp === minTimestamp) return CHART_PADDING.left;
     // 1. Calculate base (unscaled) X position
     const graphRange = maxTimestamp - minTimestamp;
-    const pixelRange = chartWidth - chartPadding.left - chartPadding.right;
+    const pixelRange = CHART_WIDTH - CHART_PADDING.left - CHART_PADDING.right;
     const baseUnscaledX =
-      chartPadding.left +
+      CHART_PADDING.left +
       ((timestamp - minTimestamp) / graphRange) * pixelRange;
 
     // 2. Apply scale and pan offset (centered on focalPointX)
-    const focalPointX = chartWidth / 2;
+    const focalPointX = CHART_WIDTH / 2;
     return (
       (baseUnscaledX - focalPointX) * zoomScale + focalPointX - panOffsetPx
     );
   };
 
   // Value-to-Pixel Y Scale function
-  const scaleRunTimeToY = (runTime) => {
-    const graphHeight = chartHeight - chartPadding.top - chartPadding.bottom;
+  function scaleRunTimeToY(runTime) {
+    const graphHeight = CHART_HEIGHT - CHART_PADDING.top - CHART_PADDING.bottom;
     const dataRange = maxRunTime - minRunTime;
     // Y-axis is inverted (0 at top), so we subtract from 1
     const normalizedY =
       dataRange === 0 ? 0 : (runTime - minRunTime) / dataRange;
-    return chartPadding.top + (1 - normalizedY) * graphHeight;
-  };
+    return CHART_PADDING.top + (1 - normalizedY) * graphHeight;
+  }
 
   const linePathD = graphPoints
     .map((graphPoint, pointIndex) => {
@@ -400,9 +400,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   const areaPathD = `${linePathD} L ${scaleTimestampToX(
     graphPoints.at(-1).timestamp,
-  ).toFixed(2)} ${chartHeight - chartPadding.bottom} L ${scaleTimestampToX(
+  ).toFixed(2)} ${CHART_HEIGHT - CHART_PADDING.bottom} L ${scaleTimestampToX(
     graphPoints[0].timestamp,
-  ).toFixed(2)} ${chartHeight - chartPadding.bottom} Z`;
+  ).toFixed(2)} ${CHART_HEIGHT - CHART_PADDING.bottom} Z`;
 
   // Format tooltip content
   const renderTooltip = () => {
@@ -493,9 +493,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
           handleSvgTouchMove(touchEvent); // Handle auto-pan trigger
         }}
         onTouchEnd={handleDragEnd}
-        viewBox={`0 0 ${Math.max(300, chartWidth)} ${chartHeight}`}
+        viewBox={`0 0 ${Math.max(300, CHART_WIDTH)} ${CHART_HEIGHT}`}
         width="100%"
-        height={chartHeight}
+        height={CHART_HEIGHT}
         role="img"
         aria-label="Runs timeline graph"
       >
@@ -560,7 +560,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
               <text
                 key={year}
                 x={labelX}
-                y={chartHeight - 6}
+                y={CHART_HEIGHT - 6}
                 fontSize={11}
                 fill="#9ca3af"
                 textAnchor="middle"
@@ -571,18 +571,10 @@ const Graph = ({ data: runData, isLoading = false }) => {
           });
         })()}
 
-        {/* y axis labels */}
-        {yAxisData.map(({ seconds, formattedTime }, axisIndex) => (
-          <text
-            key={axisIndex}
-            x={chartPadding.left - 16}
-            y={scaleRunTimeToY(seconds)}
-            textAnchor="end"
-            className={s.yAxisLabel}
-          >
-            {formattedTime}
-          </text>
-        ))}
+        <YAxisLabels
+          graphPoints={graphPoints}
+          scaleRunTimeToY={scaleRunTimeToY}
+        />
       </svg>
     </div>
   );
