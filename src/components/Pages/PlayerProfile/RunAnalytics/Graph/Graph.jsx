@@ -5,6 +5,7 @@ import { getGraphRunTimes } from "@/functions/utils";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import Points from "./Points/Points";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
 
@@ -520,33 +521,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
           strokeLinejoin="round"
         />
 
-        {/* points */}
-        {graphPoints.map((graphPoint, pointIndex) => {
-          const pointX = scaleTimestampToX(graphPoint.timestamp);
-          const pointY = scaleRunTimeToY(graphPoint.runTime);
-          return (
-            <g
-              key={pointIndex}
-              onMouseEnter={() =>
-                setHoveredPoint({
-                  point: graphPoint,
-                  tooltipX: pointX,
-                  tooltipY: pointY,
-                })
-              }
-              onMouseLeave={() => setHoveredPoint(null)}
-            >
-              <circle
-                cx={pointX}
-                cy={pointY}
-                r={4}
-                fill="#1e40af"
-                stroke="#a5b4fc"
-                strokeWidth={1}
-              />
-            </g>
-          );
-        })}
+        <Points
+          graphPoints={graphPoints}
+          scaleTimestampToX={scaleTimestampToX}
+          scaleRunTimeToY={scaleRunTimeToY}
+          setHoveredPoint={setHoveredPoint}
+        />
 
         <XAxisLabels
           allTimestamps={allTimestamps}
