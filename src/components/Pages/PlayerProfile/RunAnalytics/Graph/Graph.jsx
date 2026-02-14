@@ -503,23 +503,15 @@ const Graph = ({ data: runData, isLoading = false }) => {
       >
         <defs>
           <linearGradient id="areaGrad" x1="0" x2="0" y1="0" y2="1">
-            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.28" />
+            <stop offset="0%" stopColor="#60a5fa" stopOpacity="0.3" />
             <stop offset="100%" stopColor="#2563eb" stopOpacity="0.06" />
           </linearGradient>
         </defs>
 
         {/* area */}
-        <path d={areaPathD} fill="url(#areaGrad)" stroke="none" />
-
+        <path d={areaPathD} fill="url(#areaGrad)" stroke="#none" />
         {/* line */}
-        <path
-          d={linePathD}
-          fill="none"
-          stroke="#60a5fa"
-          strokeWidth={2.5}
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
+        <path d={linePathD} fill="none" stroke="#60a5fa" strokeWidth={2.5} />
 
         <Points
           graphPoints={graphPoints}
