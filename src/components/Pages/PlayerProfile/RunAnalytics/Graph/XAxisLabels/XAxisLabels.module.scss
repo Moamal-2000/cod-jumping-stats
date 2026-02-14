@@ -1,4 +1,12 @@
+@use "@/styles/mixins" as m;
+
 .label {
   fill: #9ca3af;
   font-size: .7rem;
+}
+
+@include m.small {
+  .label {
+    display: none;
+  }
 }

@@ -17,11 +17,16 @@ const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for 
 const EDGE_AUTOPAN_TRIGGER_SCALE = 0.5; // Reduce trigger area to 50% of the computed width
 const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
 const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
+const MOBILE_BREAKPOINT_PX = 768;
 
 const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
   const CHART_WIDTH = containerWidth || 800; // Final width used for calculations
+  const isMobileChart = CHART_WIDTH <= MOBILE_BREAKPOINT_PX;
+  const chartPadding = isMobileChart
+    ? { ...CHART_PADDING, left: 12, right: 12 }
+    : CHART_PADDING;
 
   const [hoveredPoint, setHoveredPoint] = useState(null);
   // Horizontal zoom level. 1 = default spacing, >1 increases spacing.
@@ -83,9 +88,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
     // Focal point for scaling/panning (center of the chart)
     const focalPointX = CHART_WIDTH / 2;
     // Pan bounds calculation (based on center-of-chart panning logic)
-    const minPan = (CHART_PADDING.left - focalPointX) * (zoomScale - 1);
+    const minPan = (chartPadding.left - focalPointX) * (zoomScale - 1);
     const maxPan =
-      (CHART_WIDTH - CHART_PADDING.right - focalPointX) * (zoomScale - 1);
+      (CHART_WIDTH - chartPadding.right - focalPointX) * (zoomScale - 1);
 
     const nextPan = currentPanOffset - dragDeltaX;
     // Clamp between minPan and maxPan
@@ -172,10 +177,10 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const getPanBounds = (scaleLevel = zoomScale) => {
     const focalPointX = CHART_WIDTH / 2;
     // The min pan offset occurs when the far left of the data is aligned with the left padding boundary.
-    const minPan = (CHART_PADDING.left - focalPointX) * (scaleLevel - 1);
+    const minPan = (chartPadding.left - focalPointX) * (scaleLevel - 1);
     // The max pan offset occurs when the far right of the data is aligned with the right padding boundary.
     const maxPan =
-      (CHART_WIDTH - CHART_PADDING.right - focalPointX) * (scaleLevel - 1);
+      (CHART_WIDTH - chartPadding.right - focalPointX) * (scaleLevel - 1);
     return { minPan, maxPan };
   };
 
@@ -366,12 +371,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   // Time-to-Pixel X Scale function
   const scaleTimestampToX = (timestamp) => {
-    if (maxTimestamp === minTimestamp) return CHART_PADDING.left;
+    if (maxTimestamp === minTimestamp) return chartPadding.left;
     // 1. Calculate base (unscaled) X position
     const graphRange = maxTimestamp - minTimestamp;
-    const pixelRange = CHART_WIDTH - CHART_PADDING.left - CHART_PADDING.right;
+    const pixelRange = CHART_WIDTH - chartPadding.left - chartPadding.right;
     const baseUnscaledX =
-      CHART_PADDING.left +
+      chartPadding.left +
       ((timestamp - minTimestamp) / graphRange) * pixelRange;
 
     // 2. Apply scale and pan offset (centered on focalPointX)
@@ -383,12 +388,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   // Value-to-Pixel Y Scale function
   function scaleRunTimeToY(runTime) {
-    const graphHeight = CHART_HEIGHT - CHART_PADDING.top - CHART_PADDING.bottom;
+    const graphHeight = CHART_HEIGHT - chartPadding.top - chartPadding.bottom;
     const dataRange = maxRunTime - minRunTime;
     // Y-axis is inverted (0 at top), so we subtract from 1
     const normalizedY =
       dataRange === 0 ? 0 : (runTime - minRunTime) / dataRange;
-    return CHART_PADDING.top + (1 - normalizedY) * graphHeight;
+    return chartPadding.top + (1 - normalizedY) * graphHeight;
   }
 
   const linePathD = graphPoints
@@ -401,9 +406,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   const areaPathD = `${linePathD} L ${scaleTimestampToX(
     graphPoints.at(-1).timestamp,
-  ).toFixed(2)} ${CHART_HEIGHT - CHART_PADDING.bottom} L ${scaleTimestampToX(
+  ).toFixed(2)} ${CHART_HEIGHT - chartPadding.bottom} L ${scaleTimestampToX(
     graphPoints[0].timestamp,
-  ).toFixed(2)} ${CHART_HEIGHT - CHART_PADDING.bottom} Z`;
+  ).toFixed(2)} ${CHART_HEIGHT - chartPadding.bottom} Z`;
 
   return (
     <div className={s.graphContainer} ref={containerRef}>
@@ -490,10 +495,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
           scaleTimestampToX={scaleTimestampToX}
         />
 
-        <YAxisLabels
-          graphPoints={graphPoints}
-          scaleRunTimeToY={scaleRunTimeToY}
-        />
+        {!isMobileChart && (
+          <YAxisLabels
+            graphPoints={graphPoints}
+            scaleRunTimeToY={scaleRunTimeToY}
+          />
+        )}
       </svg>
     </div>
   );

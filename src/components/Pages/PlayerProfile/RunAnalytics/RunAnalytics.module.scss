@@ -12,7 +12,7 @@
   transition: grid-template-columns 0.28s ease;
 }
 
-@include m.small {
+@include m.large {
   .container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
@@ -46,10 +46,13 @@
   transition: padding 0.28s ease;
 }
 
-@include m.small {
+@include m.very-small {
   .leftPanel {
-    max-height: none;
-    padding: 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 1.25rem 0;
+    backdrop-filter: none;
   }
 }
 
@@ -112,6 +115,12 @@
   }
 }
 
+@include m.small {
+  .collapseButton {
+    display: none;
+  }
+}
+
 .panelHeader {
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
@@ -145,6 +154,26 @@
       border-color: var(--accent-color, #6366f1);
       box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
     }
+  }
+}
+
+@include m.large {
+
+  .searchContainer,
+  .searchContainer input,
+  .mapsTypes {
+    max-width: 320px;
+    min-width: 320px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .searchContainer,
+  .searchContainer input,
+  .mapsTypes {
+    min-width: auto;
   }
 }
 
@@ -187,7 +216,7 @@
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
-  margin: 0 -0.75rem;
+  margin-inline-start: -0.75rem;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -209,9 +238,29 @@
   }
 }
 
+@include m.large {
+  .mapsList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 12px;
+  }
+}
+
+@include m.medium {
+  .mapsList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 @include m.small {
   .mapsList {
-    max-height: 400px;
+    grid-template-columns: 1fr;
+  }
+}
+
+@include m.very-small {
+  .mapsList {
+    margin: 0;
   }
 }
 
@@ -219,7 +268,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 12px;
+  padding-inline: 12px;
   min-height: 30px;
   background: transparent;
   border: none;
@@ -227,98 +276,43 @@
   font-size: 0.95rem;
   font-weight: 500;
   text-align: left;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   cursor: pointer;
   width: 100%;
   position: relative;
   overflow: hidden;
   border-left: 3px solid transparent;
 
-  &.active {
-    color: #60a5fa;
-  }
-
-  .mapIcon {
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
+  &:hover {
+    color: #fff;
     background: rgba(255, 255, 255, 0.05);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    transition: all 0.2s ease;
-  }
-
-  .mapInfo {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .mapName {
-    font-weight: 500;
-    margin: 0;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    color: #f9fafb;
-    font-size: 0.9rem;
-    letter-spacing: 0.01em;
-    transition: color 0.2s ease;
-    text-align: left;
-    width: 100%;
-    padding: 0.2rem 0;
-
-    .mapButton:hover & {
-      color: #fff;
-    }
-
-    .mapButton.active & {
-      font-weight: 600;
-    }
-  }
-
-  .mapDetails {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    font-size: 0.75rem;
-    color: #94a3b8;
-    padding-top: 0.1rem;
-
-    span {
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      font-size: 0.7rem;
-      white-space: nowrap;
-      transition: color 0.2s ease;
-
-      .mapButton:hover & {
-        color: #cbd5e1;
-      }
-
-      svg {
-        width: 12px;
-        height: 12px;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
-      }
-
-      .mapButton:hover & svg {
-        opacity: 0.9;
-      }
-    }
   }
 
   &:active {
-    transform: none;
-    transition: none;
+    background: rgba(255, 255, 255, 0.08);
   }
+
+  &.active {
+    background: rgba(96, 165, 250, 0.15);
+  }
+}
+
+.mapButton .mapName {
+  font-weight: 500;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #f9fafb;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  transition: color 0.2s ease;
+  text-align: left;
+  width: 100%;
+  padding: 0.2rem 0;
+}
+
+.mapButton.active .mapName {
+  color: #60a5fa;
 }
 
 .mapRoute {
@@ -339,6 +333,16 @@
   backdrop-filter: blur(8px);
 }
 
+@include m.small {
+  .rightPanel {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    backdrop-filter: none;
+  }
+}
+
 // Graph Header
 .graphHeader {
   display: flex;
@@ -347,23 +351,42 @@
   margin-bottom: 0.5rem;
 }
 
-.graphTitleContainer {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+@include m.medium {
+  .graphHeader {
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 450px) {
+  .graphHeader {
+    justify-content: flex-end;
+  }
 }
 
 .graphTitle {
   font-size: 1.25rem;
   font-weight: 700;
   color: #f8fafc;
-  margin: 0;
+  text-wrap: nowrap;
+}
+
+@media (max-width: 450px) {
+  .graphTitle {
+    display: none;
+  }
 }
 
 .options {
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+
+@include m.medium {
+  .options {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+  }
 }
 
 // Graph Container
@@ -501,14 +524,6 @@
 @include m.small {
   .container {
     padding: 1rem 0;
-  }
-
-  .leftPanel {
-    padding: 1rem;
-  }
-
-  .rightPanel {
-    padding: 1.25rem;
   }
 
   .graphTitle {

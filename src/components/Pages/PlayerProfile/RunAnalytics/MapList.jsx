@@ -105,7 +105,7 @@ const MapList = ({
                 />
               </div>
 
-              <div className={s.mapsTypes}>
+              {/* <div className={s.mapsTypes}>
                 {["All", "Jump", "Defrag", "Surf"].map((type) => (
                   <button
                     key={type}
@@ -117,7 +117,7 @@ const MapList = ({
                     {type}
                   </button>
                 ))}
-              </div>
+              </div> */}
 
               <div className={s.mapsList} role="list">
                 {filteredMaps.length === 0 && mapName ? (
@@ -153,7 +153,7 @@ const MapList = ({
                         aria-pressed={isActive}
                         aria-label={`Select ${map.Name} map`}
                       >
-                        <span>{map.Name}</span>
+                        <span className={s.mapName}>{map.Name}</span>
                         {map.Ender && (
                           <span className={s.mapRoute}>{map.Ender}</span>
                         )}
