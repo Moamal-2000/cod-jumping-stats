@@ -440,13 +440,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
   };
 
   return (
-    <div
-      className={s.graphContainer}
-      ref={containerRef}
-      tabIndex={0}
-      onKeyDown={handleSvgKeyDown}
-      style={{ userSelect: "none", touchAction: "none" }}
-    >
+    <div className={s.graphContainer} ref={containerRef}>
       <div className={s.graphControls}>
         <button
           aria-label="Zoom out"
@@ -486,6 +480,8 @@ const Graph = ({ data: runData, isLoading = false }) => {
       {hoveredPoint && renderTooltip()}
       <svg
         ref={svgRef}
+        tabIndex={0}
+        onKeyDown={handleSvgKeyDown}
         onMouseDown={handleMouseDown}
         onMouseMove={handleSvgMouseMove}
         onMouseLeave={handleSvgMouseLeave}
