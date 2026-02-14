@@ -1,11 +1,11 @@
 "use client";
+
 import { CHART_HEIGHT, CHART_PADDING } from "@/data/constants";
-import { getColoredName } from "@/functions/components";
-import { getGraphRunTimes } from "@/functions/utils";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
 import Points from "./Points/Points";
+import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
 
@@ -405,39 +405,6 @@ const Graph = ({ data: runData, isLoading = false }) => {
     graphPoints[0].timestamp,
   ).toFixed(2)} ${CHART_HEIGHT - CHART_PADDING.bottom} Z`;
 
-  // Format tooltip content
-  const renderTooltip = () => {
-    if (!hoveredPoint) return null;
-
-    const { tooltipX, tooltipY } = hoveredPoint;
-    const hoveredRunData = hoveredPoint.point.rawData;
-    const coloredPlayerName = getColoredName(hoveredRunData.PlayerName);
-
-    const date = new Date(hoveredRunData.TimeCreated);
-    const formattedDate = date.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-      hour: "2-digit",
-      minute: "2-digit",
-    });
-
-    return (
-      <div
-        className={s.tooltip}
-        style={{ left: tooltipX + 10, top: tooltipY - 10 }}
-      >
-        <div className={s.header}>
-          <strong>{coloredPlayerName || "Unknown Player"}</strong> /
-          <strong>{mapName}</strong>
-        </div>
-
-        <div>Time: {hoveredRunData.TimePlayedString}</div>
-        <div className={s.tooltipDate}>{formattedDate}</div>
-      </div>
-    );
-  };
-
   return (
     <div className={s.graphContainer} ref={containerRef}>
       <div className={s.graphControls}>
@@ -476,7 +443,9 @@ const Graph = ({ data: runData, isLoading = false }) => {
         </button>
       </div>
 
-      {hoveredPoint && renderTooltip()}
+      {hoveredPoint && (
+        <ToolTip hoveredPoint={hoveredPoint} mapName={mapName} />
+      )}
 
       <svg
         ref={svgRef}

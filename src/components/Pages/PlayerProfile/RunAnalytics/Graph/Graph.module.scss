@@ -362,45 +362,6 @@
   }
 }
 
-// Tooltip
-.tooltip {
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
-  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(8px);
-  pointer-events: none;
-  z-index: 100;
-  min-width: 200px;
-  font-size: 0.85rem;
-  line-height: 1.5;
-  position: absolute;
-
-  & .header {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  strong {
-    color: #f8fafc;
-    font-weight: 500;
-  }
-
-  div {
-    color: #cbd5e1;
-  }
-
-  .tooltipDate {
-    color: #94a3b8;
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-  }
-}
-
 // Responsive Adjustments
 @include m.small {
   .container {
