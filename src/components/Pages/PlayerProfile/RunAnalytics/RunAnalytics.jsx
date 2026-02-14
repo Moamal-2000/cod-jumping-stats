@@ -41,7 +41,7 @@ const RunAnalytics = () => {
       event.target.value,
       searchParams,
       router,
-      pathname
+      pathname,
     );
   }
 
@@ -56,39 +56,39 @@ const RunAnalytics = () => {
   }, [selectedMapId, selectedFps]);
 
   return (
-    <div>
-      <div className={`${s.container} ${isMapListCollapsed ? s.containerCollapsed : ""}`}>
-        <MapList
-          allMaps={allMaps}
-          selectedMapId={selectedMapId}
-          selectMapRoute={selectMapRoute}
-          isLoading={loading}
-          isCollapsed={isMapListCollapsed}
-          onToggleCollapse={() => setIsMapListCollapsed((previous) => !previous)}
-        />
+    <div
+      className={`${s.container} ${isMapListCollapsed ? s.containerCollapsed : ""}`}
+    >
+      <MapList
+        allMaps={allMaps}
+        selectedMapId={selectedMapId}
+        selectMapRoute={selectMapRoute}
+        isLoading={loading}
+        isCollapsed={isMapListCollapsed}
+        onToggleCollapse={() => setIsMapListCollapsed((previous) => !previous)}
+      />
 
-        <div className={s.rightPanel}>
-          <div className={s.graphHeader}>
-            <h2 className={s.graphTitle}>
-              {mapRuns?.length >= 1 ? `${mapRuns?.length || 0} Runs` : ""}
-            </h2>
+      <div className={s.rightPanel}>
+        <div className={s.graphHeader}>
+          <h2 className={s.graphTitle}>
+            {mapRuns?.length >= 1 ? `${mapRuns?.length || 0} Runs` : ""}
+          </h2>
 
-            <div className={s.options}>
-              <MapRoutes
-                allMaps={allMaps}
-                selectedMapId={selectedMapId}
-                selectMapRoute={selectMapRoute}
-              />
-              <SelectMenu
-                label="FPS"
-                onChange={handleFpsChange}
-                optionsData={fpsOptions}
-                value={selectedFps}
-              />
-            </div>
+          <div className={s.options}>
+            <MapRoutes
+              allMaps={allMaps}
+              selectedMapId={selectedMapId}
+              selectMapRoute={selectMapRoute}
+            />
+            <SelectMenu
+              label="FPS"
+              onChange={handleFpsChange}
+              optionsData={fpsOptions}
+              value={selectedFps}
+            />
           </div>
-          <Graph data={mapRuns} isLoading={mapRunsLoading} />
         </div>
+        <Graph data={mapRuns} isLoading={mapRunsLoading} />
       </div>
     </div>
   );
