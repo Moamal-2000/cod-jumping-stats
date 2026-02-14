@@ -449,7 +449,12 @@ const Graph = ({ data: runData, isLoading = false }) => {
       </div>
 
       {hoveredPoint && (
-        <ToolTip hoveredPoint={hoveredPoint} mapName={mapName} />
+        <ToolTip
+          hoveredPoint={hoveredPoint}
+          mapName={mapName}
+          chartWidth={CHART_WIDTH}
+          chartHeight={CHART_HEIGHT}
+        />
       )}
 
       <svg

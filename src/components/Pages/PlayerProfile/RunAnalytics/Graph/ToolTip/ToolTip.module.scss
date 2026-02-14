@@ -8,9 +8,11 @@
   pointer-events: none;
   z-index: 100;
   min-width: 200px;
+  max-width: min(320px, calc(100vw - 24px));
   font-size: 0.85rem;
   line-height: 1.5;
   position: absolute;
+  overflow-wrap: anywhere;
 
   & .header {
     margin-bottom: 0.5rem;
