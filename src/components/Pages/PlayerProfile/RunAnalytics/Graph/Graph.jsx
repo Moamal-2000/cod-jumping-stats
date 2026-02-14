@@ -5,6 +5,7 @@ import { getGraphRunTimes } from "@/functions/utils";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
 
 const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
@@ -547,29 +548,10 @@ const Graph = ({ data: runData, isLoading = false }) => {
           );
         })}
 
-        {/* x axis labels: show years from min run year to max run year */}
-        {(() => {
-          const minYear = new Date(minTimestamp).getFullYear();
-          const maxYear = new Date(maxTimestamp).getFullYear();
-          const years = [];
-          for (let year = minYear; year <= maxYear; year++) years.push(year);
-          return years.map((year) => {
-            const yearStartTimestamp = new Date(year, 0, 1).getTime();
-            const labelX = scaleTimestampToX(yearStartTimestamp);
-            return (
-              <text
-                key={year}
-                x={labelX}
-                y={CHART_HEIGHT - 6}
-                fontSize={11}
-                fill="#9ca3af"
-                textAnchor="middle"
-              >
-                {year}
-              </text>
-            );
-          });
-        })()}
+        <XAxisLabels
+          allTimestamps={allTimestamps}
+          scaleTimestampToX={scaleTimestampToX}
+        />
 
         <YAxisLabels
           graphPoints={graphPoints}
