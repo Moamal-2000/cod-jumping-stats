@@ -10,8 +10,10 @@
   grid-template-columns: 320px 1fr;
   gap: 1.5rem;
   transition: grid-template-columns 0.28s ease;
+}
 
-  @include m.small {
+@include m.small {
+  .container {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
@@ -19,8 +21,10 @@
 
 .containerCollapsed {
   grid-template-columns: 0 1fr;
+}
 
-  @include m.small {
+@include m.small {
+  .containerCollapsed {
     grid-template-columns: 1fr;
   }
 }
@@ -40,8 +44,10 @@
   min-height: 525.6px;
   max-height: 525.6px;
   transition: padding 0.28s ease;
+}
 
-  @include m.small {
+@include m.small {
+  .leftPanel {
     max-height: none;
     padding: 1.5rem;
   }
@@ -183,10 +189,6 @@
   scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
   margin: 0 -0.75rem;
 
-  @include m.small {
-    max-height: 400px;
-  }
-
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -204,6 +206,12 @@
     &:hover {
       background-color: rgba(255, 255, 255, 0.15);
     }
+  }
+}
+
+@include m.small {
+  .mapsList {
+    max-height: 400px;
   }
 }
 
