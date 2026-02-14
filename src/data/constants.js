@@ -39,6 +39,3 @@ export const SERVERS_VIEW_MODE = [
   { id: "grid", label: "Grid" },
   { id: "list", label: "List" },
 ];
-
-export const CHART_HEIGHT = 382;
-export const CHART_PADDING = { left: 64, right: 12, top: 12, bottom: 28 };

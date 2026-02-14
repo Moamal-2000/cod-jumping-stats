@@ -1,4 +1,4 @@
-import { CHART_HEIGHT } from "@/data/constants";
+import { CHART_HEIGHT } from "@/data/graphConstants";
 import s from "./XAxisLabels.module.scss";
 
 const XAxisLabels = ({ allTimestamps, scaleTimestampToX }) => {

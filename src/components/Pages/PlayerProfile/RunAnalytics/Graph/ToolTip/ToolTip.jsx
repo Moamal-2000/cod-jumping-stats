@@ -1,3 +1,4 @@
+import { TOOLTIP_EDGE_PADDING_PX, TOOLTIP_GAP_PX } from "@/data/graphConstants";
 import { getColoredName } from "@/functions/components";
 import { useLayoutEffect, useRef, useState } from "react";
 import s from "./ToolTip.module.scss";
@@ -44,9 +45,6 @@ const ToolTip = ({ hoveredPoint, mapName, chartWidth, chartHeight }) => {
 };
 
 export default ToolTip;
-
-const TOOLTIP_GAP_PX = 10;
-const TOOLTIP_EDGE_PADDING_PX = 8;
 
 function calcToolTipPosition({
   tooltipX,

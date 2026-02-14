@@ -1,4 +1,4 @@
-import { CHART_PADDING } from "@/data/constants";
+import { CHART_PADDING } from "@/data/graphConstants";
 import { getGraphRunTimes } from "@/functions/utils";
 import s from "./YAxisLabels.module.scss";
 

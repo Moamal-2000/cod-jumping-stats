@@ -1,6 +1,18 @@
 "use client";
 
-import { CHART_HEIGHT, CHART_PADDING } from "@/data/constants";
+import {
+  AUTOPAN_SPEED_BASE_PX,
+  CHART_HEIGHT,
+  CHART_PADDING,
+  EDGE_AUTOPAN_THRESHOLD_MIN_PX,
+  EDGE_AUTOPAN_THRESHOLD_RATIO,
+  EDGE_AUTOPAN_TRIGGER_SCALE,
+  MOBILE_BREAKPOINT_PX,
+  SCALE_MAX,
+  SCALE_MIN,
+  SCALE_MULTIPLIER,
+  ZOOM_SENSITIVITY,
+} from "@/data/graphConstants";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
 import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
@@ -8,16 +20,6 @@ import Points from "./Points/Points";
 import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
-
-const SCALE_MULTIPLIER = 1.15; // Multiplicative step for zooming
-const SCALE_MIN = 1; // Minimum zoom scale (no zoom)
-const SCALE_MAX = 10.0; // Maximum zoom scale
-const EDGE_AUTOPAN_THRESHOLD_MIN_PX = 100; // Minimum pixel distance from edge to trigger auto-pan
-const EDGE_AUTOPAN_THRESHOLD_RATIO = 0.08; // Percent of chart width to use for auto-pan threshold
-const EDGE_AUTOPAN_TRIGGER_SCALE = 0.5; // Reduce trigger area to 50% of the computed width
-const AUTOPAN_SPEED_BASE_PX = 8; // Max pixels per frame for auto-pan
-const ZOOM_SENSITIVITY = 0.01; // Smaller value results in slower mouse wheel zoom
-const MOBILE_BREAKPOINT_PX = 768;
 
 const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
