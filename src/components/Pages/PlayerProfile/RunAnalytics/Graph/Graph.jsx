@@ -59,7 +59,6 @@ const Graph = ({ data: runData, isLoading = false }) => {
   }
 
   const graphPoints = getGraphPoints();
-  const yAxisData = getGraphRunTimes(graphPoints);
 
   const handleMouseDown = (mouseEvent) => {
     if (zoomScale <= SCALE_MIN) return;
@@ -478,6 +477,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
       </div>
 
       {hoveredPoint && renderTooltip()}
+
       <svg
         ref={svgRef}
         tabIndex={0}
