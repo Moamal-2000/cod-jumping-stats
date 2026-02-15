@@ -17,7 +17,7 @@
     "@reduxjs/toolkit": "^2.11.2",
     "lz-string": "^1.5.0",
     "msgpackr": "^1.11.8",
-    "next": "16.1.5",
+    "next": "16.1.6",
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-redux": "^9.2.0"
@@ -26,9 +26,10 @@
     "@eslint/eslintrc": "^3",
     "babel-plugin-react-compiler": "^1.0.0",
     "browserslist-config-baseline": "^0.5.0",
-    "eslint": "^9",
+    "eslint": "^10",
     "eslint-config-next": "16.1.6",
     "npm-check-updates": "^19.3.2",
     "sass": "^1.97.3"
-  }
+  },
+  "packageManager": "pnpm@10.29.3+sha512.498e1fb4cca5aa06c1dcf2611e6fafc50972ffe7189998c409e90de74566444298ffe43e6cd2acdc775ba1aa7cc5e092a8b7054c811ba8c5770f84693d33d2dc"
 }
