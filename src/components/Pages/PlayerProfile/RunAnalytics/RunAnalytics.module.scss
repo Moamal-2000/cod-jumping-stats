@@ -53,6 +53,7 @@
     border: none;
     border-radius: 0;
     padding: 1.25rem 0;
+    padding-top: 0;
     backdrop-filter: none;
   }
 }
@@ -89,7 +90,14 @@
   z-index: 3;
   background: #111827;
   padding: 1.25rem 1rem 0;
-  margin: -1.25rem -1rem 1.25rem;
+  margin: 0 -1rem 0;
+}
+
+@include m.very-small {
+  .leftPanelContent .header {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 .collapseButton {
