@@ -1,13 +1,7 @@
-import { jhApis } from "@/api/jumpersHeaven";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
-import { JUMP_FPS } from "@/data/constants";
 import { getColoredName } from "@/functions/components";
-import {
-  decodeAsyncData,
-  fetchMsgPackResponse,
-  formateReleaseDate,
-} from "@/functions/utils";
+import { fetchAllTopRuns, formateReleaseDate } from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -22,66 +16,30 @@ const MapDetailHeader = ({ mapData }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (allMaps.length <= 0) {
-      dispatch(fetchMaps());
-    }
-  }, [allMaps.length, dispatch]);
+    if (allMaps.length <= 0) dispatch(fetchMaps());
 
-  useEffect(() => {
-    if (!CpID) {
-      setBestPlayer(null);
-      return;
-    }
+    if (!CpID || bestPlayer?.PlayerID) return;
 
     let cancelled = false;
-    setBestPlayer(null);
 
     async function fetchBestPlayer() {
-      const results = await Promise.all(
-        JUMP_FPS.map(async (fps) => {
-          const response = await fetchMsgPackResponse({
-            url: jhApis({ fps, cpid: CpID, limit: 50 }).map.tops,
-          });
+      if (cancelled) return;
 
-          const data = await decodeAsyncData(response);
+      try {
+        const results = await fetchAllTopRuns({ mapId: CpID });
 
-          if (Array.isArray(data)) return data.map((run) => ({ ...run, fps }));
+        const allRuns = results
+          .filter((result) => Array.isArray(result))
+          .flat();
 
-          return [];
-        }),
-      );
+        const bestPlayerRun = allRuns?.sort(
+          (a, b) => a.TimePlayed - b.TimePlayed,
+        )?.[0];
 
-      if (cancelled) {
-        return;
+        if (bestPlayerRun) setBestPlayer(bestPlayerRun);
+      } catch (error) {
+        console.error(`Error fetching best player :${error}`);
       }
-
-      const allRuns = results
-        .filter((result) => Array.isArray(result))
-        .flat()
-        .filter(
-          (item) =>
-            item &&
-            typeof item === "object" &&
-            item.TimePlayed !== null &&
-            item.TimePlayed !== undefined,
-        )
-        .sort((a, b) => a.TimePlayed - b.TimePlayed);
-
-      if (allRuns.length === 0) {
-        setBestPlayer(null);
-        return;
-      }
-
-      const bestPlayerRun = allRuns[0];
-
-      setBestPlayer(
-        bestPlayerRun
-          ? {
-              playerId: bestPlayerRun.PlayerID,
-              playerName: bestPlayerRun.PlayerName,
-            }
-          : null,
-      );
     }
 
     fetchBestPlayer();
@@ -89,7 +47,7 @@ const MapDetailHeader = ({ mapData }) => {
     return () => {
       cancelled = true;
     };
-  }, [CpID]);
+  }, [allMaps.length, CpID, dispatch]);
 
   return (
     <div className={s.header}>
@@ -120,12 +78,12 @@ const MapDetailHeader = ({ mapData }) => {
               </span>
             </div>
 
-            {bestPlayer?.playerName && (
+            {bestPlayer?.PlayerName && (
               <div className={s.metaItem}>
                 <span className={s.label}>Best player:</span>
                 <span className={`${s.value} ${s.bestPlayerValue}`}>
-                  <Link href={`/player?playerid=${bestPlayer.playerId}`}>
-                    {getColoredName(bestPlayer.playerName)}
+                  <Link href={`/player?playerid=${bestPlayer.PlayerID}`}>
+                    {getColoredName(bestPlayer.PlayerName)}
                   </Link>{" "}
                   is the best on this map
                 </span>

@@ -584,3 +584,23 @@ export function getGraphRunTimes(graphPoints = []) {
     },
   ];
 }
+
+export async function fetchAllTopRuns({ mapId }) {
+  try {
+    const topRunsPromises = JUMP_FPS.map(async (fps) => {
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ fps, cpid: mapId }).map.tops,
+      });
+      const topRunsByFps = await decodeAsyncData(response);
+
+      if (Array.isArray(topRunsByFps))
+        return topRunsByFps.map((run) => ({ ...run, fps }));
+
+      return [];
+    });
+
+    return await Promise.all(topRunsPromises);
+  } catch (error) {
+    console.error(`Error fetching top runs: ${error}`);
+  }
+}
