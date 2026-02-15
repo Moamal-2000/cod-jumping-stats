@@ -105,7 +105,7 @@ const MapList = ({
                 />
               </div>
 
-              {/* <div className={s.mapsTypes}>
+              <div className={s.mapsTypes}>
                 {["All", "Jump", "Defrag", "Surf"].map((type) => (
                   <button
                     key={type}
@@ -117,7 +117,7 @@ const MapList = ({
                     {type}
                   </button>
                 ))}
-              </div> */}
+              </div>
 
               <div className={s.mapsList} role="list">
                 {filteredMaps.length === 0 && mapName ? (
