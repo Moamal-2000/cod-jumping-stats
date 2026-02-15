@@ -20,6 +20,7 @@ import Points from "./Points/Points";
 import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
+import EmptyGraphState from "./EmptyGraphState/EmptyGraphState";
 
 const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
@@ -340,20 +341,8 @@ const Graph = ({ data: runData, isLoading = false }) => {
     // Intentionally empty deps: handler reads current values from refs
   }, []);
 
-  if (!isLoading) return <LoadingUI />;
-
-  if (graphPoints.length === 0) {
-    return (
-      <div className={s.graphContainer} ref={containerRef}>
-        <div className={s.emptyState}>
-          <svg>
-            <use href="/icons-sprite.svg#message" />
-          </svg>
-          <p>No run data available for the selected map</p>
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingUI />;
+  if (graphPoints.length === 0) return <EmptyGraphState />
 
   const allTimestamps = graphPoints.map((point) => point.timestamp);
   const allRunTimes = graphPoints.map((point) => point.runTime);
