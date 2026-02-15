@@ -108,15 +108,13 @@
   width: 100%;
 }
 
-@include m.very-small {
+@include m.small {
   .fields {
     flex-wrap: wrap;
-  }
-}
 
-@include m.small {
-  .fields>* {
-    min-width: auto;
+    &>* {
+      min-width: auto;
+    }
   }
 }
 
