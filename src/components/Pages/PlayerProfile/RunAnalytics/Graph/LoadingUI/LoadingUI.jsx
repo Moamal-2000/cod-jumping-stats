@@ -1,4 +1,4 @@
-import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import LoadingSpinner from "./LoadingRadar/LoadingRadar";
 import s from "./LoadingUI.module.scss";
 
 const LoadingUI = () => {
