@@ -41,6 +41,7 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 1.25rem 1rem;
+  padding-top: 0;
   min-height: 525.6px;
   max-height: 525.6px;
   transition: padding 0.28s ease;
@@ -79,6 +80,16 @@
   transform: translateX(-10px);
   visibility: hidden;
   pointer-events: none;
+}
+
+.leftPanelContent .header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  background: #111827;
+  padding: 1.25rem 1rem 0;
+  margin: -1.25rem -1rem 1.25rem;
 }
 
 .collapseButton {
