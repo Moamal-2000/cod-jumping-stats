@@ -3,7 +3,11 @@ import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
 import { JUMP_FPS } from "@/data/constants";
 import { getColoredName } from "@/functions/components";
-import { formateReleaseDate } from "@/functions/utils";
+import {
+  decodeAsyncData,
+  fetchMsgPackResponse,
+  formateReleaseDate,
+} from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -34,17 +38,17 @@ const MapDetailHeader = ({ mapData }) => {
 
     async function fetchBestPlayer() {
       const results = await Promise.all(
-        JUMP_FPS.map((fps) =>
-          fetch(jhApis({ fps, cpid: CpID, limit: 50 }).map.tops)
-            .then((res) => res.json())
-            .then((data) => {
-              if (Array.isArray(data)) {
-                return data.map((run) => ({ ...run, fps }));
-              }
-              return [];
-            })
-            .catch(() => []),
-        ),
+        JUMP_FPS.map(async (fps) => {
+          const response = await fetchMsgPackResponse({
+            url: jhApis({ fps, cpid: CpID, limit: 50 }).map.tops,
+          });
+
+          const data = await decodeAsyncData(response);
+
+          if (Array.isArray(data)) return data.map((run) => ({ ...run, fps }));
+
+          return [];
+        }),
       );
 
       if (cancelled) {
@@ -58,10 +62,10 @@ const MapDetailHeader = ({ mapData }) => {
           (item) =>
             item &&
             typeof item === "object" &&
-            item.time_played !== null &&
-            item.time_played !== undefined,
+            item.TimePlayed !== null &&
+            item.TimePlayed !== undefined,
         )
-        .sort((a, b) => a.time_played - b.time_played);
+        .sort((a, b) => a.TimePlayed - b.TimePlayed);
 
       if (allRuns.length === 0) {
         setBestPlayer(null);
@@ -73,8 +77,8 @@ const MapDetailHeader = ({ mapData }) => {
       setBestPlayer(
         bestPlayerRun
           ? {
-              playerId: bestPlayerRun.player_id,
-              playerName: bestPlayerRun.playername,
+              playerId: bestPlayerRun.PlayerID,
+              playerName: bestPlayerRun.PlayerName,
             }
           : null,
       );
