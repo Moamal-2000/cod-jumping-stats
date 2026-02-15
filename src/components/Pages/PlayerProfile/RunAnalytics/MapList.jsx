@@ -61,7 +61,7 @@ const MapList = ({
         </svg>
       </button>
 
-      <div
+      <section
         className={`${s.leftPanel} ${isCollapsed ? s.leftPanelCollapsed : ""}`}
       >
         <div
@@ -69,103 +69,95 @@ const MapList = ({
             isCollapsed ? s.leftPanelContentCollapsed : ""
           }`}
         >
-          {isLoading ? (
-            <>
-              <div className={s.searchContainer}>
-                <SearchInput
-                  placeholder="Search map by name"
-                  queryName="mapname"
-                  disabled={true}
-                />
-              </div>
+          <header className={s.header}>
+            <div className={s.searchContainer}>
+              <SearchInput
+                placeholder="Search map by name"
+                queryName="mapname"
+              />
+            </div>
 
-              <div className={s.loadingState}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
+            <div className={s.mapsTypes}>
+              {["All", "Jump", "Defrag", "Surf"].map((type) => (
+                <button
+                  key={type}
+                  className={`${s.mapType} ${
+                    mapType === type.toLowerCase() ? s.active : ""
+                  }`}
+                  onClick={() => handleSelectMapType(type)}
                 >
-                  <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-                </svg>
-                <p>Loading maps...</p>
-              </div>
-            </>
-          ) : (
-            <>
-              <div className={s.searchContainer}>
-                <SearchInput
-                  placeholder="Search map by name"
-                  queryName="mapname"
-                />
-              </div>
+                  {type}
+                </button>
+              ))}
+            </div>
+          </header>
 
-              <div className={s.mapsTypes}>
-                {["All", "Jump", "Defrag", "Surf"].map((type) => (
-                  <button
-                    key={type}
-                    className={`${s.mapType} ${
-                      mapType === type.toLowerCase() ? s.active : ""
-                    }`}
-                    onClick={() => handleSelectMapType(type)}
+          {isLoading && (
+            <div className={s.loadingState}>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+              </svg>
+              <p>Loading maps...</p>
+            </div>
+          )}
+
+          {!isLoading && (
+            <div className={s.mapsList} role="list">
+              {filteredMaps.length === 0 && mapName ? (
+                <div className={s.emptyState}>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                   >
-                    {type}
-                  </button>
-                ))}
-              </div>
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  </svg>
+                  <p>No maps found matching "{mapName}"</p>
+                </div>
+              ) : (
+                filteredMaps.map((map) => {
+                  const isActive = selectedMapId === map.CpID;
 
-              <div className={s.mapsList} role="list">
-                {filteredMaps.length === 0 && mapName ? (
-                  <div className={s.emptyState}>
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="24"
-                      height="24"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="2"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  return (
+                    <button
+                      key={map.CpID}
+                      className={`${s.mapButton} ${isActive ? s.active : ""} ${
+                        s.fadeIn
+                      }`}
+                      onClick={() => selectMapRoute(map.CpID)}
+                      role="listitem"
+                      aria-pressed={isActive}
+                      aria-label={`Select ${map.Name} map`}
                     >
-                      <circle cx="11" cy="11" r="8"></circle>
-                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-                    </svg>
-                    <p>No maps found matching "{mapName}"</p>
-                  </div>
-                ) : (
-                  filteredMaps.map((map) => {
-                    const isActive = selectedMapId === map.CpID;
-
-                    return (
-                      <button
-                        key={map.CpID}
-                        className={`${s.mapButton} ${isActive ? s.active : ""} ${
-                          s.fadeIn
-                        }`}
-                        onClick={() => selectMapRoute(map.CpID)}
-                        role="listitem"
-                        aria-pressed={isActive}
-                        aria-label={`Select ${map.Name} map`}
-                      >
-                        <span className={s.mapName}>{map.Name}</span>
-                        {map.Ender && (
-                          <span className={s.mapRoute}>{map.Ender}</span>
-                        )}
-                      </button>
-                    );
-                  })
-                )}
-              </div>
-            </>
+                      <span className={s.mapName}>{map.Name}</span>
+                      {map.Ender && (
+                        <span className={s.mapRoute}>{map.Ender}</span>
+                      )}
+                    </button>
+                  );
+                })
+              )}
+            </div>
           )}
         </div>
-      </div>
+      </section>
     </div>
   );
 };
