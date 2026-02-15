@@ -1,9 +1,15 @@
-import s from './LoadingUI.module.scss'
+import LoadingSpinner from "../LoadingSpinner/LoadingSpinner";
+import s from "./LoadingUI.module.scss";
 
 const LoadingUI = () => {
   return (
-    <div>LoadingUI</div>
-  )
-}
+    <div className={s.graphContainer}>
+      <div className={s.loadingState}>
+        <LoadingSpinner />
+        <p>Loading graph data...</p>
+      </div>
+    </div>
+  );
+};
 
-export default LoadingUI
+export default LoadingUI;

@@ -15,7 +15,7 @@ import {
 } from "@/data/graphConstants";
 import { useEffect, useRef, useState } from "react";
 import s from "./Graph.module.scss";
-import LoadingSpinner from "./LoadingSpinner/LoadingSpinner";
+import LoadingUI from "./LoadingUI/LoadingUI";
 import Points from "./Points/Points";
 import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
@@ -340,16 +340,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     // Intentionally empty deps: handler reads current values from refs
   }, []);
 
-  if (isLoading) {
-    return (
-      <div className={s.graphContainer} ref={containerRef}>
-        <div className={s.loadingState}>
-          <LoadingSpinner />
-          <p>Loading graph data...</p>
-        </div>
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingUI />;
 
   if (graphPoints.length === 0) {
     return (

@@ -1,4 +1,5 @@
 @use './colors' as *;
+@use "./variables" as *;
 
 html {
   scrollbar-color: rgba(255, 255, 255, .3) transparent;

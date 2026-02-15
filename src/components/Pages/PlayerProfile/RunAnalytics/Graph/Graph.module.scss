@@ -341,8 +341,7 @@
 }
 
 // Empty State
-.emptyState,
-.loadingState {
+.emptyState {
   display: flex;
   flex-direction: column;
   align-items: center;
