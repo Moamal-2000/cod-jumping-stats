@@ -340,7 +340,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     // Intentionally empty deps: handler reads current values from refs
   }, []);
 
-  if (isLoading) return <LoadingUI />;
+  if (!isLoading) return <LoadingUI />;
 
   if (graphPoints.length === 0) {
     return (
