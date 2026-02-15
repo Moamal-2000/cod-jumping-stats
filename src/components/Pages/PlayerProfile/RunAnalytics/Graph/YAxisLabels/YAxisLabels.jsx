@@ -11,7 +11,7 @@ const YAxisLabels = ({ graphPoints, scaleRunTimeToY }) => {
       x={CHART_PADDING.left - 16}
       y={scaleRunTimeToY(seconds)}
       textAnchor="end"
-      className={s.yAxisLabel}
+      className={s.label}
     >
       {formattedTime}
     </text>

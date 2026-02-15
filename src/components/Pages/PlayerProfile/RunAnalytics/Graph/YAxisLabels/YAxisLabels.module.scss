@@ -1,6 +1,14 @@
-.yAxisLabel {
+@use "@/styles/mixins" as m;
+
+.label {
   pointer-events: none;
   font-size: .75rem;
   fill: #9ca3af;
   dominant-baseline: central;
+}
+
+@include m.small {
+  .label {
+    display: none;
+  }
 }
