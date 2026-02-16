@@ -3,6 +3,7 @@
 import s from "@/components/Pages/PlayerProfile/RunAnalytics/RunAnalytics.module.scss";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import { createQueryString } from "@/functions/utils";
+import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -134,23 +135,37 @@ const MapList = ({
               ) : (
                 filteredMaps.map((map) => {
                   const isActive = selectedMapId === map.CpID;
+                  const mapDetailsHref = `/map?mapid=${map.CpID}`;
 
                   return (
-                    <button
+                    <div
                       key={map.CpID}
-                      className={`${s.mapButton} ${isActive ? s.active : ""} ${
-                        s.fadeIn
-                      }`}
-                      onClick={() => selectMapRoute(map.CpID)}
                       role="listitem"
-                      aria-pressed={isActive}
-                      aria-label={`Select ${map.Name} map`}
+                      className={`${s.mapButtonWrapper} ${s.fadeIn}`}
                     >
-                      <span className={s.mapName}>{map.Name}</span>
-                      {map.Ender && (
-                        <span className={s.mapRoute}>{map.Ender}</span>
-                      )}
-                    </button>
+                      <button
+                        type="button"
+                        className={`${s.mapButton} ${isActive ? s.active : ""}`}
+                        onClick={() => selectMapRoute(map.CpID)}
+                        aria-pressed={isActive}
+                        aria-label={`Select ${map.Name} map`}
+                      >
+                        <span className={s.mapName}>{map.Name}</span>
+                        {map.Ender && (
+                          <span className={s.mapRoute}>{map.Ender}</span>
+                        )}
+                      </button>
+
+                      <Link
+                        href={mapDetailsHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={s.mapTooltip}
+                        role="tooltip"
+                      >
+                        Map details
+                      </Link>
+                    </div>
                   );
                 })
               )}

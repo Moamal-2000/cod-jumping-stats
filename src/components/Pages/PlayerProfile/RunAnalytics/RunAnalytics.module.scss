@@ -315,6 +315,10 @@
   }
 }
 
+.mapButtonWrapper {
+  position: relative;
+}
+
 .mapButton .mapName {
   font-weight: 500;
   margin: 0;
@@ -338,6 +342,39 @@
   font-size: 0.75rem;
   font-weight: 600;
   color: #facc15;
+}
+
+.mapTooltip {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  translate: 0 -50%;
+  background: #0f172a;
+  border: 1px solid #424b57;
+  border-radius: 6px;
+  padding: 6px 10px;
+  color: #93c5fd;
+  font-size: .75rem;
+  line-height: 1.2;
+  white-space: nowrap;
+  z-index: 10;
+  display: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #bfdbfe;
+  }
+}
+
+.mapButtonWrapper:hover .mapTooltip,
+.mapButtonWrapper:focus-within .mapTooltip {
+  display: block;
+}
+
+@include m.large {
+  .mapTooltip {
+    display: none;
+  }
 }
 
 // Right Panel
