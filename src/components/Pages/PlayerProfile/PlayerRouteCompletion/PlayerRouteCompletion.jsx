@@ -4,7 +4,7 @@ import { fetchPlayerRouteCompletionNew } from "@/redux/features/playerProfile/th
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
 
 const PlayerRouteCompletion = () => {
@@ -17,6 +17,9 @@ const PlayerRouteCompletion = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [completionData, setCompletionData] = useState(null);
+
+  const allPlayersData = useSelector((s) => s.players.allPlayersData);
+  const allPlayersLength = allPlayersData.length || 0;
 
   const searchParams = useSearchParams();
   const playerId = +searchParams.get("playerid");
@@ -86,12 +89,12 @@ const PlayerRouteCompletion = () => {
   function getRarityInfo(finishCount) {
     const level = getRarityLevel(finishCount);
     const rarityMap = {
-      mythical: { label: "MYTHICAL", color: "#ff0080", glow: "#ff0080" },
-      legendary: { label: "LEGENDARY", color: "#ff6b35", glow: "#ff6b35" },
-      epic: { label: "EPIC", color: "#9d4edd", glow: "#9d4edd" },
-      rare: { label: "RARE", color: "#3a86ff", glow: "#3a86ff" },
-      uncommon: { label: "UNCOMMON", color: "#06ffa5", glow: "#06ffa5" },
-      common: { label: "COMMON", color: "#9ca3af", glow: "#9ca3af" },
+      mythical: { label: "MYTHICAL", color: "#ff0080" },
+      legendary: { label: "LEGENDARY", color: "#ff6b35" },
+      epic: { label: "EPIC", color: "#a73bff" },
+      rare: { label: "RARE", color: "#3a86ff" },
+      uncommon: { label: "UNCOMMON", color: "#06ffa5" },
+      common: { label: "COMMON", color: "#cacfd8" },
     };
     return rarityMap[level];
   }
@@ -110,14 +113,43 @@ const PlayerRouteCompletion = () => {
   function getCompletionRateInfo(completionRate) {
     const rarity = getCompletionRateRarity(completionRate);
     const rarityMap = {
-      mythical: { color: "#ff0080", glow: "#ff0080" },
-      legendary: { color: "#ff6b35", glow: "#ff6b35" },
-      epic: { color: "#9d4edd", glow: "#9d4edd" },
-      rare: { color: "#3a86ff", glow: "#3a86ff" },
-      uncommon: { color: "#06ffa5", glow: "#06ffa5" },
-      common: { color: "#9ca3af", glow: "#9ca3af" },
+      mythical: { color: "#ff0080" },
+      legendary: { color: "#ff6b35" },
+      epic: { color: "#a73bff" },
+      rare: { color: "#3a86ff" },
+      uncommon: { color: "#06ffa5" },
+      common: { color: "#9ca3af" },
     };
     return rarityMap[rarity];
+  }
+
+  function renderMapCard(map, index, isCompleted) {
+    const rarityInfo = getRarityInfo(map.individual_finish_count);
+    const rarityLevel = getRarityLevel(map.individual_finish_count);
+
+    return (
+      <Link
+        href={`/map?mapid=${map.cp_id}`}
+        key={`${map.mapid}-${map.mapname}-${index}`}
+        className={`${s.mapCard} ${isCompleted ? s.completed : s.notCompleted} ${
+          s[rarityLevel] || ""
+        }`}
+      >
+        <div className={s.mapContent}>
+          <div className={s.mapRow}>
+            <h3 className={s.mapName}>{map.mapname}</h3>
+            <span className={s.finisherBadge}>
+              {map.individual_finish_count} / {allPlayersLength}
+            </span>
+          </div>
+
+          <div className={`${s.mapRow} ${s.mapSubRow}`}>
+            <span className={s.mapAuthor}>by {map.author}</span>
+            <span className={s.mapReleased}>{map.released}</span>
+          </div>
+        </div>
+      </Link>
+    );
   }
 
   if (loading) {
@@ -277,41 +309,7 @@ const PlayerRouteCompletion = () => {
       <div className={s.routesList}>
         {activeList === "completed" ? (
           completedRoutes.length > 0 ? (
-            completedRoutes.map((map, index) => {
-              const rarityInfo = getRarityInfo(map.individual_finish_count);
-              const rarityLevel = getRarityLevel(map.individual_finish_count);
-              return (
-                <Link
-                  href={`/map?mapid=${map.cp_id}`}
-                  key={`${map.mapid}-${map.mapname}-${index}`}
-                  className={`${s.mapCard} ${s.completed} ${
-                    s[rarityLevel] || ""
-                  }`}
-                >
-                  <div className={s.mapInfo}>
-                    <div className={s.mapHeader}>
-                      <h3 className={s.mapName}>{map.mapname}</h3>
-                      <div className={s.mapMeta}>
-                        <span className={s.mapAuthor}>by {map.author}</span>
-                        <span className={s.mapReleased}>{map.released}</span>
-                      </div>
-                    </div>
-
-                    <div className={s.mapDetails}>
-                      <div className={s.finisherCount}>
-                        <span className={s.finisherLabel}>Finishers:</span>
-                        <span
-                          className={s.finisherValue}
-                          style={{ color: rarityInfo.color }}
-                        >
-                          {map.individual_finish_count}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </Link>
-              );
-            })
+            completedRoutes.map((map, index) => renderMapCard(map, index, true))
           ) : (
             <div className={s.emptyState}>
               <svg aria-hidden="true">
@@ -321,41 +319,9 @@ const PlayerRouteCompletion = () => {
             </div>
           )
         ) : notCompletedRoutes.length > 0 ? (
-          notCompletedRoutes.map((map, index) => {
-            const rarityInfo = getRarityInfo(map.individual_finish_count);
-            const rarityLevel = getRarityLevel(map.individual_finish_count);
-            return (
-              <Link
-                href={`/map?mapid=${map.cp_id}`}
-                key={`${map.mapid}-${map.mapname}-${index}`}
-                className={`${s.mapCard} ${s.notCompleted} ${
-                  s[rarityLevel] || ""
-                }`}
-              >
-                <div className={s.mapInfo}>
-                  <div className={s.mapHeader}>
-                    <h3 className={s.mapName}>{map.mapname}</h3>
-                    <div className={s.mapMeta}>
-                      <span className={s.mapAuthor}>by {map.author}</span>
-                      <span className={s.mapReleased}>{map.released}</span>
-                    </div>
-                  </div>
-
-                  <div className={s.mapDetails}>
-                    <div className={s.finisherCount}>
-                      <span className={s.finisherLabel}>Finishers:</span>
-                      <span
-                        className={s.finisherValue}
-                        style={{ color: rarityInfo.color }}
-                      >
-                        {map.individual_finish_count}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            );
-          })
+          notCompletedRoutes.map((map, index) =>
+            renderMapCard(map, index, false),
+          )
         ) : (
           <div className={s.emptyState}>
             <svg aria-hidden="true">
