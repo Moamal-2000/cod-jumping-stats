@@ -1,5 +1,4 @@
 import PlayerOverview from "@/components/Pages/PlayerProfile/PlayerOverview/PlayerOverview";
-import { Suspense } from "react";
 
 export const metadata = {
   title: "Player | JumpersHeaven",
@@ -7,11 +6,7 @@ export const metadata = {
 };
 
 async function PlayerPage() {
-  return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <PlayerOverview />
-    </Suspense>
-  );
+  return <PlayerOverview />;
 }
 
 export default PlayerPage;
