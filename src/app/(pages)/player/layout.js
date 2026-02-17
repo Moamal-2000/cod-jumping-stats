@@ -9,7 +9,7 @@ import { Suspense } from "react";
 function PlayerLayoutContent({ children }) {
   const searchParams = useSearchParams();
   const playerId = searchParams.get("playerid");
-  const isPlayerIdExist = playerId !== null;
+  const isPlayerIdExist = !isNaN(+playerId);
 
   return (
     <>
