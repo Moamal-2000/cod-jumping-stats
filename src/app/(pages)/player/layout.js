@@ -35,7 +35,7 @@ function PlayerLayoutContent({ children }) {
 
 export default function PlayerLayout({ children }) {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense>
       <PlayerLayoutContent>{children}</PlayerLayoutContent>
     </Suspense>
   );
