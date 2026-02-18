@@ -11,18 +11,21 @@ const PlayerProfilePanels = ({ playerId }) => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") || "overview";
 
-  const panelsObj = panels(playerId);
-  const activePanel = panelsObj[activeTab] || panelsObj.overview;
+  const tabKey = activeTab in PANEL_COMPONENTS ? activeTab : "overview";
+  const ActivePanel = PANEL_COMPONENTS[tabKey];
+  const props = PANELS_WITH_PLAYER_ID.has(tabKey) ? { playerId } : {};
 
-  return activePanel;
+  return <ActivePanel {...props} />;
 };
 
 export default PlayerProfilePanels;
 
-const panels = (playerId) => ({
-  overview: <PlayerOverview />,
-  tops: <TopRuns playerId={playerId} />,
-  leaderboards: <LeaderboardRanks />,
-  routes: <PlayerRouteCompletion playerId={playerId} />,
-  "runs-analytics": <RunAnalytics playerId={playerId} />,
-});
+const PANEL_COMPONENTS = {
+  overview: PlayerOverview,
+  tops: TopRuns,
+  leaderboards: LeaderboardRanks,
+  routes: PlayerRouteCompletion,
+  "runs-analytics": RunAnalytics,
+};
+
+const PANELS_WITH_PLAYER_ID = new Set(["tops", "routes", "runs-analytics"]);
