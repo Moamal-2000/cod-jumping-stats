@@ -638,7 +638,7 @@ export async function fetchPlayers({ sort }) {
   }
 }
 export function buildPlayerDescription(player = {}) {
-  if (!player?.PlayedID) return "Player profile and statistics.";
+  if (!player?.PlayerID) return "Player profile and statistics.";
 
   const parts = [];
   const purePlayerName = stripColorCodes(player.PrefName || player.PlayerName);
