@@ -56,11 +56,13 @@ const MapDetailPage = () => {
     let mapsLocal = getCachedMaps();
 
     if (mapsLocal !== null) {
-      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp);
+      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp, 10);
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
-        const map = mapsLocal.maps.find((map) => map.CpID === parseInt(cpid));
+        const map = mapsLocal.maps.find(
+          (map) => map.CpID === parseInt(cpid, 10),
+        );
 
         setMapData(map);
         setError(false);
@@ -81,7 +83,7 @@ const MapDetailPage = () => {
       mapsLocal = await decodeAsyncData(response);
       cacheMapsLocally(mapsLocal);
 
-      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
+      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid, 10));
 
       map ? setMapData(map) : setError(true);
     } catch (err) {

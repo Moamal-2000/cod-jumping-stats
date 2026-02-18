@@ -30,9 +30,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
 
     try {
       const result = await dispatch(
-        fetchPlayerRouteCompletionNew({
-          playerId: parseInt(playerId),
-        }),
+        fetchPlayerRouteCompletionNew({ playerId: parseInt(playerId, 10) }),
       );
 
       if (result.payload) {

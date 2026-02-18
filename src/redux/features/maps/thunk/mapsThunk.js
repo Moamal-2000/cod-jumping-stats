@@ -14,7 +14,7 @@ export const fetchMaps = createAsyncThunk(
     const cachedData = getCachedMaps();
 
     if (cachedData !== null) {
-      const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
+      const cacheAge = Date.now() - parseInt(cachedData.timeStamp, 10);
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {

@@ -47,7 +47,7 @@ export function getFilteredMaps(mapsData, paramsObject) {
 
 export function getSortedMaps(mapsData, paramsObject) {
   const sortType = paramsObject?.["sort-by"] || "125 difficulty";
-  const difficultyByFps = parseInt(sortType);
+  const difficultyByFps = parseInt(sortType, 10);
   const isDifficultyByFps = !isNaN(difficultyByFps);
 
   let filteredMaps = mapsData;
@@ -169,8 +169,9 @@ export function sortMaps(maps, sortBy) {
 
     default:
       // If sortBy is a number, treat it as FPS difficulty
-      if (parseInt(sortBy))
-        return getMapsByFpsDifficulty({ sortedMaps, fps: parseInt(sortBy) });
+      const sortByNumber = parseInt(sortBy, 10);
+      if (sortByNumber)
+        return getMapsByFpsDifficulty({ sortedMaps, fps: sortByNumber });
 
       return sortedMaps;
   }
