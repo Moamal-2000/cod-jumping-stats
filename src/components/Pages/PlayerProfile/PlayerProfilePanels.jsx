@@ -7,14 +7,6 @@ import PlayerRouteCompletion from "./PlayerRouteCompletion/PlayerRouteCompletion
 import RunAnalytics from "./RunAnalytics/RunAnalytics";
 import TopRuns from "./TopRuns/TopRuns";
 
-const panels = (playerId) => ({
-  overview: <PlayerOverview playerId={playerId} />,
-  tops: <TopRuns playerId={playerId} />,
-  leaderboards: <LeaderboardRanks playerId={playerId} />,
-  routes: <PlayerRouteCompletion playerId={playerId} />,
-  "runs-analytics": <RunAnalytics playerId={playerId} />,
-});
-
 const PlayerProfilePanels = ({ playerId }) => {
   const searchParams = useSearchParams();
   const activeTab = searchParams.get("tab") || "overview";
@@ -26,3 +18,11 @@ const PlayerProfilePanels = ({ playerId }) => {
 };
 
 export default PlayerProfilePanels;
+
+const panels = (playerId) => ({
+  overview: <PlayerOverview />,
+  tops: <TopRuns playerId={playerId} />,
+  leaderboards: <LeaderboardRanks />,
+  routes: <PlayerRouteCompletion playerId={playerId} />,
+  "runs-analytics": <RunAnalytics playerId={playerId} />,
+});
