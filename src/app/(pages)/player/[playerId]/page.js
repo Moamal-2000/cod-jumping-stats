@@ -6,7 +6,7 @@ import {
 } from "@/functions/utils";
 import { Suspense } from "react";
 
-export const revalidate = 1000 * 60 * 60 * 24; // 1 day
+export const revalidate = 86400; // 1 day
 
 export async function generateMetadata({ params }) {
   const { playerId } = await params;
