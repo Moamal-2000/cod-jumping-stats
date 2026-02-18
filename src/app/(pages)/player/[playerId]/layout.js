@@ -1,3 +1,4 @@
+import PlayerPage from "@/components/Pages/PlayerProfile/PlayerPage/PlayerPage";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
 import { fetchPlayers } from "@/functions/utils";
 
@@ -15,21 +16,7 @@ function PlayerLayoutContent({ children, playerId }) {
 
   return (
     <>
-      {!isPlayerIdNumber && (
-        <main>Not found</main>
-        // <main>
-        //   <div className="container">
-        //     <section className={s.heroSection}>
-        //       <h1>Players Overview</h1>
-        //       <p>
-        //         Explore all Jumpers Heaven <Link href="/players">players</Link>.
-        //         Click on a player to view detailed statistics, performance
-        //         history, and records.
-        //       </p>
-        //     </section>
-        //   </div>
-        // </main>
-      )}
+      {!isPlayerIdNumber && <PlayerPage />}
 
       {isPlayerIdNumber && (
         <PlayerProfileLayout playerId={+playerId}>
