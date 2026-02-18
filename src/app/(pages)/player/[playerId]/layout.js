@@ -14,16 +14,10 @@ export async function generateStaticParams() {
 function PlayerLayoutContent({ children, playerId }) {
   const isPlayerIdNumber = Number.isInteger(Number(playerId));
 
-  return (
-    <>
-      {!isPlayerIdNumber && <PlayerPageFallback />}
-
-      {isPlayerIdNumber && (
-        <PlayerProfileLayout playerId={+playerId}>
-          {children}
-        </PlayerProfileLayout>
-      )}
-    </>
+  return isPlayerIdNumber ? (
+    <PlayerProfileLayout playerId={+playerId}>{children}</PlayerProfileLayout>
+  ) : (
+    <PlayerPageFallback />
   );
 }
 
