@@ -64,7 +64,6 @@ export const fetchPlayerJumpScores = createAsyncThunk(
   "playerProfile/fetchPlayerJumpScores",
   async ({ playerId, fps = 125 }) => {
     try {
-      fps === "mix" ? 0 : fps;
       const response = await fetchMsgPackResponse({
         url: jhApis({ playerId, fps }).player.jumpScores,
       });
