@@ -658,7 +658,7 @@ export function buildPlayerDescription(player = {}) {
 
   let mainSentence = `${purePlayerName} is a player`;
 
-  if (countryName) {
+  if (player.Country) {
     mainSentence += ` from ${countryName}`;
   }
 
