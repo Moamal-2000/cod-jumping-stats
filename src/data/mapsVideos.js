@@ -1307,13 +1307,24 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
-    {
+  {
     mapName: "jm_tower_of_hates",
     mapsIds: [13197],
     videos: [
       {
         type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=1z1AeiQSQxI&t=43s",
+        id: 1,
+      },
+    ],
+  },
+  {
+    mapName: "mp_3dmazekruskalbig",
+    mapsIds: [8994],
+    videos: [
+      {
+        type: "250 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=zJA4t397uLw",
         id: 1,
       },
     ],
