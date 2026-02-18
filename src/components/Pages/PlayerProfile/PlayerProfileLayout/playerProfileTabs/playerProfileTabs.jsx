@@ -12,11 +12,22 @@ const tabs = [
   { id: "runs-analytics", label: "Runs Analytics", icon: "line-chart" },
 ];
 
+const tabIds = tabs.map((tab) => tab.id);
+
 const playerProfileTabs = ({ playerId }) => {
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab");
+  const activeTab = tabIds.includes(currentTab) ? currentTab : "overview";
+
   return (
     <nav className={s.tabs}>
       {tabs.map((tab) => (
-        <PlayerProfileTab key={tab.id} tab={tab} playerId={playerId} />
+        <PlayerProfileTab
+          key={tab.id}
+          tab={tab}
+          playerId={playerId}
+          activeTab={activeTab}
+        />
       ))}
     </nav>
   );
@@ -24,16 +35,8 @@ const playerProfileTabs = ({ playerId }) => {
 
 export default playerProfileTabs;
 
-const PlayerProfileTab = ({ tab, playerId }) => {
-  const searchParams = useSearchParams();
-  const currentTab = searchParams.get("tab");
-
-  const tabPath = tab.id === "overview" ? "" : tab.id;
-  const href = `/player/${playerId}${tabPath === "" ? "" : `?tab=${tab.id}`}`;
-
-  const tabIds = tabs.map((tab) => tab.id);
-  const activeTab = tabIds.includes(currentTab) ? currentTab : "overview";
-
+const PlayerProfileTab = ({ tab, playerId, activeTab }) => {
+  const href = `/player/${playerId}${tab.id === "overview" ? "" : `?tab=${tab.id}`}`;
   const classes = `${s.tabButton} ${tab.id === activeTab ? s.active : ""}`;
 
   return (
