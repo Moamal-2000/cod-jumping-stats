@@ -83,7 +83,7 @@ const MapDetailPlayers = ({
 
           return (
             <Link
-              href={`/player?playerid=${player.player_id}`}
+              href={`/player/${player.player_id}`}
               key={`${player.player_id}-${index}`}
               className={s.playerItem}
             >

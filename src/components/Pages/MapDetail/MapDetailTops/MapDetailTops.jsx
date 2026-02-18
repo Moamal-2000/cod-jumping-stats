@@ -73,7 +73,7 @@ const MapDetailTops = ({
 
           return (
             <Link
-              href={`/player?playerid=${run.player_id}`}
+              href={`/player/${run.player_id}`}
               key={`${run.run_id}-${index}`}
               className={s.topRun}
             >

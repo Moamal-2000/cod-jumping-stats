@@ -19,7 +19,7 @@ const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
   return (
     <div className={s.primaryInfo}>
       <Link
-        href={`/player?playerid=${PlayerID}`}
+        href={`/player/${PlayerID}`}
         className={s.playerName}
         onMouseEnter={handleMouseEnter}
       >
