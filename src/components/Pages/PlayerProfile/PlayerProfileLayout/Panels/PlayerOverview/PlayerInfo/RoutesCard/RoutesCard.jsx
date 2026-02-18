@@ -13,7 +13,7 @@ const RoutesCard = ({ performanceStats }) => {
       </div>
 
       <div className={s.infoValue}>
-        {performanceStats.TotalMapsCompleted.toLocaleString()}
+        {performanceStats?.TotalMapsCompleted?.toLocaleString()}
       </div>
 
       <h2 className={s.infoSubtext}>
@@ -26,7 +26,7 @@ const RoutesCard = ({ performanceStats }) => {
       <div className={s.progressBar} role="progressbar">
         <div
           className={`${s.progressBarFill} ${getCompletionRateClass(
-            completionRatio
+            completionRatio,
           )}`}
           style={{ width: `${completionRatio}%` }}
         />
