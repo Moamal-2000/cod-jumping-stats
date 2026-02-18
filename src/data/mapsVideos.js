@@ -957,6 +957,17 @@ export const MAPS_VIDEOS = [
     ],
   },
   {
+    mapName: "railyard_jump_ultra_250",
+    mapsIds: [1796],
+    videos: [
+      {
+        type: "250 fps no grenades",
+        videoUrl: "https://www.youtube.com/watch?v=OaQoWxfomZY",
+        id: 1,
+      },
+    ],
+  },
+  {
     mapName: "mp_highgrass",
     mapsIds: [3639],
     videos: [
