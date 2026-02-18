@@ -1,11 +1,11 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-import LeaderboardRanks from "./LeaderboardRanks/LeaderboardRanks";
-import PlayerOverview from "./PlayerOverview/PlayerOverview";
-import PlayerRouteCompletion from "./PlayerRouteCompletion/PlayerRouteCompletion";
-import RunAnalytics from "./RunAnalytics/RunAnalytics";
-import TopRuns from "./TopRuns/TopRuns";
+import LeaderboardRanks from "./PlayerProfileLayout/Panels/LeaderboardRanks/LeaderboardRanks";
+import PlayerOverview from "./PlayerProfileLayout/Panels/PlayerOverview/PlayerOverview";
+import PlayerRouteCompletion from "./PlayerProfileLayout/Panels/PlayerRouteCompletion/PlayerRouteCompletion";
+import RunAnalytics from "./PlayerProfileLayout/Panels/RunAnalytics/RunAnalytics";
+import TopRuns from "./PlayerProfileLayout/Panels/TopRuns/TopRuns";
 
 const PlayerProfilePanels = ({ playerId }) => {
   const searchParams = useSearchParams();
