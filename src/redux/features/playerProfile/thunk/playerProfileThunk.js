@@ -4,10 +4,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerProfile = createAsyncThunk(
   "playerProfile/fetchPlayerProfile",
-  async ({ playerid }) => {
+  async ({ playerId }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid }).player.performanceStats,
+        url: jhApis({ playerId }).player.performanceStats,
       });
 
       if (!response.ok) {
@@ -16,7 +16,7 @@ export const fetchPlayerProfile = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with ID \`${playerid}\` has insufficient data for performance stats, returning empty data`,
+          `Player with ID \`${playerId}\` has insufficient data for performance stats, returning empty data`,
         );
         return { performanceStats: null };
       }
@@ -33,10 +33,10 @@ export const fetchPlayerProfile = createAsyncThunk(
 
 export const fetchPlayerLeaderboardPositions = createAsyncThunk(
   "playerProfile/fetchPlayerLeaderboardPositions",
-  async ({ playerid }) => {
+  async ({ playerId }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid }).player.leaderboardPositions,
+        url: jhApis({ playerId }).player.leaderboardPositions,
       });
 
       if (!response.ok) {
@@ -45,7 +45,7 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with Id \`${playerid}\` has insufficient data for leaderboard positions, returning empty data`,
+          `Player with Id \`${playerId}\` has insufficient data for leaderboard positions, returning empty data`,
         );
         return [];
       }
@@ -62,11 +62,11 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
 
 export const fetchPlayerJumpScores = createAsyncThunk(
   "playerProfile/fetchPlayerJumpScores",
-  async ({ playerid, fps = 125 }) => {
+  async ({ playerId, fps = 125 }) => {
     try {
       fps === "mix" ? 0 : fps;
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid, fps }).player.jumpScores,
+        url: jhApis({ playerId, fps }).player.jumpScores,
       });
 
       if (!response.ok) {
@@ -75,7 +75,7 @@ export const fetchPlayerJumpScores = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with ID \`${playerid}\` has insufficient data for jump scores (${fps} FPS), returning empty data`,
+          `Player with ID \`${playerId}\` has insufficient data for jump scores (${fps} FPS), returning empty data`,
         );
         return null;
       }
@@ -93,12 +93,12 @@ export const fetchPlayerJumpScores = createAsyncThunk(
 export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
   async (paramsObject) => {
-    const playerid = paramsObject.playerid;
+    const playerId = paramsObject.playerId;
     const fps = paramsObject.fps || "125";
 
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid, fps }).player.tops,
+        url: jhApis({ playerId, fps }).player.tops,
       });
 
       if (!response.ok) {
@@ -107,7 +107,7 @@ export const fetchPlayerTops = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with ID \`${playerid}\` has insufficient data for top runs, returning empty data`,
+          `Player with ID \`${playerId}\` has insufficient data for top runs, returning empty data`,
         );
         return {};
       }
@@ -124,10 +124,10 @@ export const fetchPlayerTops = createAsyncThunk(
 
 export const fetchMapRuns = createAsyncThunk(
   "playerProfile/fetchPlayerRuns",
-  async ({ playerid, cpid, fps }) => {
+  async ({ playerId, cpid, fps }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerid, cpid, fps }).player.mapRuns,
+        url: jhApis({ playerId, cpid, fps }).player.mapRuns,
       });
 
       if (!response.ok) {
@@ -136,7 +136,7 @@ export const fetchMapRuns = createAsyncThunk(
 
       if (response.status === 500) {
         console.warn(
-          `Player with ID \`${playerid}\` has insufficient data for runs, returning empty data`,
+          `Player with ID \`${playerId}\` has insufficient data for runs, returning empty data`,
         );
         return [];
       }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import s from "./playerProfileTabs.module.scss";
 
 const tabs = [
@@ -12,20 +12,11 @@ const tabs = [
   { id: "runs-analytics", label: "Runs Analytics", icon: "line-chart" },
 ];
 
-const playerProfileTabs = () => {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerid");
-
+const playerProfileTabs = ({ playerId }) => {
   return (
     <nav className={s.tabs}>
       {tabs.map((tab) => (
-        <PlayerProfileTab
-          key={tab.id}
-          tab={tab}
-          playerId={playerId}
-          pathname={pathname}
-        />
+        <PlayerProfileTab key={tab.id} tab={tab} playerId={playerId} />
       ))}
     </nav>
   );
@@ -33,11 +24,17 @@ const playerProfileTabs = () => {
 
 export default playerProfileTabs;
 
-const PlayerProfileTab = ({ tab, playerId, pathname }) => {
+const PlayerProfileTab = ({ tab, playerId }) => {
+  const searchParams = useSearchParams();
+  const currentTab = searchParams.get("tab");
+
   const tabPath = tab.id === "overview" ? "" : tab.id;
-  const href = `/player/${tabPath}?playerid=${playerId}`;
-  const currentTab = pathname.split("/player")[1].slice(1) || tabs[0].id;
-  const classes = `${s.tabButton} ${tab.id === currentTab ? s.active : ""}`;
+  const href = `/player/${playerId}${tabPath === "" ? "" : `?tab=${tab.id}`}`;
+
+  const tabIds = tabs.map((tab) => tab.id);
+  const activeTab = tabIds.includes(currentTab) ? currentTab : "overview";
+
+  const classes = `${s.tabButton} ${tab.id === activeTab ? s.active : ""}`;
 
   return (
     <Link href={href} key={tab.id} className={classes}>

@@ -12,23 +12,19 @@ import {
   fetchPlayerProfile,
 } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
-import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerProfileHeader from "./PlayerProfileHeader/PlayerProfileHeader";
 import s from "./PlayerProfileLayout.module.scss";
 import PlayerProfileTabs from "./playerProfileTabs/playerProfileTabs";
 
-const PlayerProfileLayout = ({ children }) => {
+const PlayerProfileLayout = ({ children, playerId }) => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
   const dispatch = useDispatch();
 
-  const searchParams = useSearchParams();
-  const playerid = +searchParams.get("playerid");
-
   const playerData = allPlayersData.find(
-    (player) => player.PlayerID === playerid,
+    (player) => player.PlayerID === playerId,
   );
 
   const purePlayerName = stripColorCodes(
@@ -36,19 +32,19 @@ const PlayerProfileLayout = ({ children }) => {
   );
 
   useEffect(() => {
-    if (!playerid) return;
+    if (!playerId) return;
 
     dispatch(clearPlayerProfile());
 
-    dispatch(fetchPlayerProfile({ playerid }));
-    dispatch(fetchPlayerLeaderboardPositions({ playerid }));
-    dispatch(fetchPlayerJumpScores({ playerid, fps: "125" }));
+    dispatch(fetchPlayerProfile({ playerId }));
+    dispatch(fetchPlayerLeaderboardPositions({ playerId }));
+    dispatch(fetchPlayerJumpScores({ playerId, fps: "125" }));
     dispatch(fetchAllPlayers());
 
     dispatch(
       updatePlayerProfileState({ key: "currentFetchingFps", value: "125" }),
     );
-  }, [dispatch, playerid]);
+  }, [dispatch, playerId]);
 
   return (
     <div className="container">
@@ -59,8 +55,8 @@ const PlayerProfileLayout = ({ children }) => {
         />
 
         <div className={s.profileContainer}>
-          <PlayerProfileHeader playerData={playerData} />
-          <PlayerProfileTabs />
+          <PlayerProfileHeader playerData={playerData} playerId={playerId} />
+          <PlayerProfileTabs playerId={playerId} />
           {children}
         </div>
       </main>

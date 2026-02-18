@@ -20,7 +20,7 @@ const fpsOptions = [
   { label: "333 FPS", value: "333", id: 5 },
 ];
 
-const RunAnalytics = () => {
+const RunAnalytics = ({ playerId }) => {
   const { mapRuns, mapRunsLoading } = useSelector((s) => s.playerProfile);
   const { allMaps, loading } = useSelector((s) => s.maps);
   const [isMapListCollapsed, setIsMapListCollapsed] = useState(false);
@@ -30,7 +30,6 @@ const RunAnalytics = () => {
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
-  const playerid = searchParams.get("playerid");
   const selectedFps = searchParams.get("fps") || 125;
   const firstMapId = parseInt(allMaps[0]?.CpID);
   const selectedMapId = parseInt(searchParams.get("mapid")) || firstMapId;
@@ -52,7 +51,7 @@ const RunAnalytics = () => {
   useEffect(() => {
     if (allMaps.length <= 0) dispatch(fetchMaps());
 
-    dispatch(fetchMapRuns({ playerid, cpid: selectedMapId, fps: selectedFps }));
+    dispatch(fetchMapRuns({ playerId, cpid: selectedMapId, fps: selectedFps }));
   }, [selectedMapId, selectedFps]);
 
   return (

@@ -1,11 +1,10 @@
 "use client";
-
-import s from "@/components/Pages/PlayerProfile/leaderboardsTab.module.scss";
 import { getModifiedRank } from "@/functions/components";
 import { useState } from "react";
 import { useSelector } from "react-redux";
+import s from "./LeaderboardRanks.module.scss";
 
-const LeaderboardsTab = () => {
+const LeaderboardRanks = () => {
   const { leaderboardPositionsLoading, leaderboardPositions } = useSelector(
     (s) => s.playerProfile,
   );
@@ -160,4 +159,4 @@ const LeaderboardsTab = () => {
   );
 };
 
-export default LeaderboardsTab;
+export default LeaderboardRanks;
