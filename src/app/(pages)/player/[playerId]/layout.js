@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 }
 
 function PlayerLayoutContent({ children, playerId }) {
-  const isPlayerIdNumber = !isNaN(+playerId);
+  const isPlayerIdNumber = Number.isInteger(Number(playerId));
 
   return (
     <>
