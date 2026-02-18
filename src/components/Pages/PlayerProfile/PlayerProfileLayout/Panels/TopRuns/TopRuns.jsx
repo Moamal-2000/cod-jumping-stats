@@ -26,7 +26,7 @@ const TopRuns = ({ playerId }) => {
 
   useEffect(() => {
     dispatch(fetchPlayerTops(paramsObject));
-  }, [selectedFps]);
+  }, [selectedFps, playerId]);
 
   return (
     <div className={s.topRunsTab}>
