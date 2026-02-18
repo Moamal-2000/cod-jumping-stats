@@ -52,7 +52,7 @@ const RunAnalytics = ({ playerId }) => {
     if (allMaps.length <= 0) dispatch(fetchMaps());
 
     dispatch(fetchMapRuns({ playerId, cpid: selectedMapId, fps: selectedFps }));
-  }, [selectedMapId, selectedFps]);
+  }, [selectedMapId, selectedFps, playerId]);
 
   return (
     <div
