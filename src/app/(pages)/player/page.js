@@ -7,11 +7,21 @@ const PlayerPage = () => {
       <main>
         <section className={s.heroSection}>
           <h1>Players Overview</h1>
-          <p>
+
+          <p className={s.description}>
             Explore all Jumpers Heaven <Link href="/players">players</Link>.
             Click on a player to view detailed statistics, performance history,
             and records.
           </p>
+
+          <div className={s.buttons}>
+            <Link href="/players" className={s.primaryAction}>
+              Browse Players
+            </Link>
+            <Link href="/leaderboards" className={s.secondaryAction}>
+              View Leaderboards
+            </Link>
+          </div>
         </section>
       </main>
     </div>
