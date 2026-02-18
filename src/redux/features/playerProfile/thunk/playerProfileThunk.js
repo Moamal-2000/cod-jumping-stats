@@ -18,7 +18,7 @@ export const fetchPlayerProfile = createAsyncThunk(
         console.warn(
           `Player with ID \`${playerId}\` has insufficient data for performance stats, returning empty data`,
         );
-        return { performanceStats: null };
+        return { performanceStats: {} };
       }
 
       const performanceStats = await decodeAsyncData(response);
@@ -26,7 +26,7 @@ export const fetchPlayerProfile = createAsyncThunk(
       return { performanceStats };
     } catch (error) {
       console.error(`Error fetching player profile: ${error}`);
-      return { performanceStats: null };
+      return { performanceStats: {} };
     }
   },
 );
@@ -146,7 +146,7 @@ export const fetchMapRuns = createAsyncThunk(
       return runs;
     } catch (error) {
       console.error(`Error fetching player runs: ${error}`);
-      return {};
+      return [];
     }
   },
 );

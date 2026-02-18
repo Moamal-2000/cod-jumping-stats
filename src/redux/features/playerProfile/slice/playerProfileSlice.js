@@ -8,7 +8,7 @@ import {
 } from "../thunk/playerProfileThunk";
 
 const initialState = {
-  performanceStats: null,
+  performanceStats: {},
   performanceStatsLoading: false,
   performanceStatsError: false,
 
@@ -20,7 +20,7 @@ const initialState = {
   topRunsLoading: false,
   topRunsError: false,
 
-  jumpScores: null,
+  jumpScores: [],
   jumpScoresLoading: false,
   jumpScoresError: false,
 
@@ -40,10 +40,10 @@ export const playerProfileSlice = createSlice({
       state[payload.key] = payload.value;
     },
     clearPlayerProfile: (state) => {
-      state.performanceStats = null;
+      state.performanceStats = {};
       state.leaderboardPositions = [];
       state.topRuns = [];
-      state.jumpScores = null;
+      state.jumpScores = [];
       state.loading = false;
       state.error = false;
       state.performanceStatsLoading = false;
@@ -81,7 +81,7 @@ export const playerProfileSlice = createSlice({
           state.leaderboardPositions = payload;
           state.leaderboardPositionsLoading = false;
           state.leaderboardPositionsError = false;
-        }
+        },
       )
       .addCase(fetchPlayerLeaderboardPositions.rejected, (state) => {
         state.leaderboardPositionsError = true;
