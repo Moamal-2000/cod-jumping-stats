@@ -1,7 +1,7 @@
-import PlayerPage from "@/components/Pages/PlayerProfile/PlayerPage/PlayerPage";
+import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 
 const PlayerRoute = () => {
-  return <PlayerPage />;
+  return <PlayerPageFallback />;
 };
 
 export default PlayerRoute;

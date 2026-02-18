@@ -1,7 +1,7 @@
 import Link from "next/link";
-import s from "./PlayerPage.module.scss";
+import s from "./PlayerPageFallback.module.scss";
 
-const PlayerPage = () => {
+const PlayerPageFallback = () => {
   return (
     <div className="container">
       <main>
@@ -28,4 +28,4 @@ const PlayerPage = () => {
   );
 };
 
-export default PlayerPage;
+export default PlayerPageFallback;

@@ -1,4 +1,4 @@
-import PlayerPage from "@/components/Pages/PlayerProfile/PlayerPage/PlayerPage";
+import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
 import { fetchPlayers } from "@/functions/utils";
 
@@ -16,7 +16,7 @@ function PlayerLayoutContent({ children, playerId }) {
 
   return (
     <>
-      {!isPlayerIdNumber && <PlayerPage />}
+      {!isPlayerIdNumber && <PlayerPageFallback />}
 
       {isPlayerIdNumber && (
         <PlayerProfileLayout playerId={+playerId}>
