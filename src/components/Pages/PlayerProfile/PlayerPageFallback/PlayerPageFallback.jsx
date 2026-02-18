@@ -6,7 +6,7 @@ const PlayerPageFallback = () => {
     <div className="container">
       <main>
         <section className={s.heroSection}>
-          <h1>Players Overview</h1>
+          <h1>Jumpers Heaven Players</h1>
 
           <p className={s.description}>
             Explore all Jumpers Heaven <Link href="/players">players</Link>.
