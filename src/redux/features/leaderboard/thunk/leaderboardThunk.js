@@ -11,11 +11,11 @@ export const fetchLeaderboard = createAsyncThunk(
     try {
       const leaderboardUrl = getLeaderboardUrl(paramsObject);
       const response = await fetchMsgPackResponse({ url: leaderboardUrl });
-      const leaderboardData = await decodeAsyncData(response);
+      const leaderboardData = (await decodeAsyncData(response)) ?? [];
 
       return { leaderboardData, paramsObject };
     } catch (error) {
       console.error(error);
     }
-  }
+  },
 );

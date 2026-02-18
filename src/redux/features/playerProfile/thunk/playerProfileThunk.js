@@ -21,7 +21,7 @@ export const fetchPlayerProfile = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const performanceStats = await decodeAsyncData(response);
+      const performanceStats = (await decodeAsyncData(response)) ?? {};
 
       return { performanceStats };
     } catch (error) {
@@ -50,7 +50,7 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const leaderboardPositions = await decodeAsyncData(response);
+      const leaderboardPositions = (await decodeAsyncData(response)) ?? [];
 
       return leaderboardPositions;
     } catch (error) {
@@ -80,7 +80,7 @@ export const fetchPlayerJumpScores = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const jumpScores = await decodeAsyncData(response);
+      const jumpScores = (await decodeAsyncData(response)) ?? {};
 
       return jumpScores;
     } catch (error) {
@@ -112,7 +112,7 @@ export const fetchPlayerTops = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const topRuns = await decodeAsyncData(response);
+      const topRuns = (await decodeAsyncData(response)) ?? [];
 
       return topRuns;
     } catch (error) {
@@ -141,7 +141,7 @@ export const fetchMapRuns = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const runs = await decodeAsyncData(response);
+      const runs = (await decodeAsyncData(response)) ?? [];
 
       return runs;
     } catch (error) {

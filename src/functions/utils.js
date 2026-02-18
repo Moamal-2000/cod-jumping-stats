@@ -252,7 +252,7 @@ export async function getMapByCpId(cpid) {
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
-  const maps = await decodeAsyncData(response);
+  const maps = (await decodeAsyncData(response)) ?? [];
 
   return maps.find((map) => +map.CpID === +cpid);
 }
@@ -264,7 +264,7 @@ export async function getPlayerById({ playerId }) {
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().player.all });
-  const players = await decodeAsyncData(response);
+  const players = (await decodeAsyncData(response)) ?? [];
 
   return players.find((player) => +player.PlayerID === +playerId);
 }
@@ -631,7 +631,7 @@ export async function fetchPlayers({ sort }) {
     const response = await fetchMsgPackResponse({
       url: jhApis({ sort }).player.all,
     });
-    return await decodeAsyncData(response);
+    return (await decodeAsyncData(response)) ?? [];
   } catch (error) {
     console.error(`Error fetching players: ${error}`);
     return [];

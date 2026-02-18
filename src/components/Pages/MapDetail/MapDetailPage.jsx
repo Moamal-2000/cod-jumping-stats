@@ -80,7 +80,7 @@ const MapDetailPage = () => {
         url: jhApis().map.allMaps,
       });
 
-      mapsLocal = await decodeAsyncData(response);
+      mapsLocal = (await decodeAsyncData(response)) ?? [];
       cacheMapsLocally(mapsLocal);
 
       const map = mapsLocal.find((map) => map.CpID === parseInt(cpid, 10));

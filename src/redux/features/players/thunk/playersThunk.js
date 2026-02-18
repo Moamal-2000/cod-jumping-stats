@@ -15,7 +15,7 @@ export const fetchAllPlayers = createAsyncThunk(
     const cachedData = getCachedPlayers(dataType);
 
     if (cachedData !== null && dataType === cachedData.dataType) {
-      const cacheAge = Date.now() - parseInt(cachedData.timeStamp, );
+      const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
       const isCacheExpire = cacheAge > PLAYER_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
@@ -31,7 +31,7 @@ export const fetchAllPlayers = createAsyncThunk(
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
-      const allPlayersData = await decodeAsyncData(response);
+      const allPlayersData = (await decodeAsyncData(response)) ?? [];
       cachePlayersLocally(allPlayersData, dataType);
 
       return { allPlayersData, paramsObject };
