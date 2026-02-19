@@ -86,11 +86,16 @@ const PlayerRouteCompletion = ({ playerId }) => {
 
   if (error) {
     return (
-      <div className={s.errorContainer}>
-        <h2>Error Loading Route Completion</h2>
-        <p>{error}</p>
+      <div className={s.errorContainer} role="alert" aria-live="polite">
+        <div className={s.errorIcon} />
+        <h2 className={s.errorTitle}>Route Completion Unavailable</h2>
+        <p className={s.errorMessage}>{error}</p>
+        <p className={s.errorHint}>
+          The profile data service may be temporarily unavailable. Retry in a
+          moment.
+        </p>
         <button onClick={fetchData} className={s.retryButton}>
-          Try Again
+          Retry Loading
         </button>
       </div>
     );
