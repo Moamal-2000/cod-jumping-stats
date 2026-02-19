@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
 
 const PlayerRouteCompletion = ({ playerId }) => {
-  const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState("mapname"); // "mapname", "finishers"
   const [sortOrder, setSortOrder] = useState("asc"); // "asc", "desc"
   const [activeList, setActiveList] = useState("completed"); // "completed", "not_completed"
@@ -19,6 +18,8 @@ const PlayerRouteCompletion = ({ playerId }) => {
 
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const allPlayersLength = allPlayersData.length || 0;
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (playerId) fetchData();
@@ -80,19 +81,6 @@ const PlayerRouteCompletion = ({ playerId }) => {
     return "common";
   }
 
-  function getRarityInfo(finishCount) {
-    const level = getRarityLevel(finishCount);
-    const rarityMap = {
-      mythical: { label: "MYTHICAL", color: "#ff0080" },
-      legendary: { label: "LEGENDARY", color: "#ff6b35" },
-      epic: { label: "EPIC", color: "#a73bff" },
-      rare: { label: "RARE", color: "#3a86ff" },
-      uncommon: { label: "UNCOMMON", color: "#06ffa5" },
-      common: { label: "COMMON", color: "#cacfd8" },
-    };
-    return rarityMap[level];
-  }
-
   function getCompletionRateRarity(completionRate) {
     // Remove % sign and convert to number
     const rate = parseFloat(completionRate.replace("%", ""));
@@ -118,7 +106,6 @@ const PlayerRouteCompletion = ({ playerId }) => {
   }
 
   function renderMapCard(map, index, isCompleted) {
-    const rarityInfo = getRarityInfo(map.individual_finish_count);
     const rarityLevel = getRarityLevel(map.individual_finish_count);
 
     return (
