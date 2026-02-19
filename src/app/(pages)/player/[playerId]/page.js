@@ -20,7 +20,7 @@ export async function generateMetadata({ params }) {
     const player = players.find((player) => +player.PlayerID === +playerId);
 
     const purePlayerName =
-      stripColorCodes(player?.PlayerName || player?.PrefName) ||
+      stripColorCodes(player?.PrefName || player?.PlayerName) ||
       `Player ${playerId}`;
     const playerDescription = buildPlayerDescription(player);
 

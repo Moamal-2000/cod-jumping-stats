@@ -20,7 +20,7 @@ const initialState = {
   topRunsLoading: false,
   topRunsError: false,
 
-  jumpScores: [],
+  jumpScores: {},
   jumpScoresLoading: false,
   jumpScoresError: false,
 

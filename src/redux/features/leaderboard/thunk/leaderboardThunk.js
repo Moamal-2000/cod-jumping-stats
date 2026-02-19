@@ -16,6 +16,7 @@ export const fetchLeaderboard = createAsyncThunk(
       return { leaderboardData, paramsObject };
     } catch (error) {
       console.error(error);
+      return { leaderboardData: [], paramsObject };
     }
   },
 );

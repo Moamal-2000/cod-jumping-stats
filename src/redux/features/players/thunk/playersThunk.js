@@ -32,7 +32,8 @@ export const fetchAllPlayers = createAsyncThunk(
       }
 
       const allPlayersData = (await decodeAsyncData(response)) ?? [];
-      cachePlayersLocally(allPlayersData, dataType);
+      if (allPlayersData.length > 0)
+        cachePlayersLocally(allPlayersData, dataType);
 
       return { allPlayersData, paramsObject };
     } catch (error) {

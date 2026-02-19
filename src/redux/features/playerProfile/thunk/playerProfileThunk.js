@@ -72,7 +72,7 @@ export const fetchPlayerJumpScores = createAsyncThunk(
         console.warn(
           `Player with ID \`${playerId}\` has insufficient data for jump scores (${fps} FPS), returning empty data`,
         );
-        return null;
+        return {};
       }
 
       if (!response.ok) {
@@ -84,7 +84,7 @@ export const fetchPlayerJumpScores = createAsyncThunk(
       return jumpScores;
     } catch (error) {
       console.error(`Error fetching player jump scores: ${error}`);
-      return null;
+      return {};
     }
   },
 );
@@ -104,7 +104,7 @@ export const fetchPlayerTops = createAsyncThunk(
         console.warn(
           `Player with ID \`${playerId}\` has insufficient data for top runs, returning empty data`,
         );
-        return {};
+        return [];
       }
 
       if (!response.ok) {
@@ -116,7 +116,7 @@ export const fetchPlayerTops = createAsyncThunk(
       return topRuns;
     } catch (error) {
       console.error(`Error fetching player tops: ${error}`);
-      return {};
+      return [];
     }
   },
 );
