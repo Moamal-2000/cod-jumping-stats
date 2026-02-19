@@ -7,6 +7,19 @@
   margin-bottom: 40px;
 }
 
+@include m.small {
+  .overview {
+    padding: 20px;
+  }
+}
+
+@include m.very-small {
+  .overview {
+    padding: 0;
+    border: none;
+  }
+}
+
 .overview .statsHeader {
   margin-bottom: 24px;
 }

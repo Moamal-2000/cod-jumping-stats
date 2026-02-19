@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .sectionDescription {
   color: #9ca3af;
   margin: 0.5rem 0 1.5rem;
@@ -14,18 +16,6 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
   position: relative;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.03) 0%, rgba(168, 85, 247, 0.03) 100%);
-    z-index: 0;
-    pointer-events: none;
-  }
 
   h2 {
     position: relative;
@@ -55,6 +45,19 @@
     font-size: 0.95rem;
     position: relative;
     z-index: 1;
+  }
+}
+
+@include m.small {
+  .recentActivitySection {
+    padding: 20px;
+  }
+}
+
+@include m.very-small {
+  .recentActivitySection {
+    padding: 0;
+    border: none;
   }
 }
 
@@ -225,8 +228,7 @@
 @media (max-width: 768px) {
 
   .playerStatsOverview,
-  .fpsPerformanceSection,
-  .recentActivitySection {
+  .fpsPerformanceSection {
     padding: 1.5rem;
   }
 
