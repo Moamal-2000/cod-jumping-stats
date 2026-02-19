@@ -15,7 +15,7 @@ const TopRunsPerFps = () => {
   const FpsAndRuns = Object.entries(topsPerFps);
 
   return (
-    <div className={s.fpsPerformanceSection}>
+    <section className={s.fpsPerformanceSection}>
       <div className={s.fpsHeader}>
         <h2>Top Runs Per FPS</h2>
         <div className={s.totalRuns}>
@@ -61,7 +61,7 @@ const TopRunsPerFps = () => {
           );
         })}
       </div>
-    </div>
+    </section>
   );
 };
 

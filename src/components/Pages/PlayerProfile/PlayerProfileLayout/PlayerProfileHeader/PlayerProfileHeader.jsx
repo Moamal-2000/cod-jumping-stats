@@ -13,7 +13,7 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
     getPlayerInfo({ playerData, jumpScores });
 
   return (
-    <div className={s.profileHeader}>
+    <section className={s.profileHeader}>
       <div className={s.playerInfo}>
         <div className={s.avatarContainer}>
           <div className={s.avatar}>
@@ -54,7 +54,7 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 

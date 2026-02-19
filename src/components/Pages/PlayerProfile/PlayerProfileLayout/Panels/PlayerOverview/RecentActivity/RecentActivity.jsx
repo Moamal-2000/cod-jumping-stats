@@ -13,7 +13,7 @@ const RecentActivity = () => {
   if (!recentTops && topRunsCount <= 0) return null;
 
   return (
-    <div className={s.recentActivitySection}>
+    <section className={s.recentActivitySection}>
       <h2>Recent Activity</h2>
       <p className={s.sectionDescription}>
         Latest top {topRunsCount} finishes and achievements
@@ -44,7 +44,7 @@ const RecentActivity = () => {
           </Link>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
