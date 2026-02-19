@@ -47,64 +47,6 @@ const PlayerRouteCompletion = ({ playerId }) => {
     }
   }
 
-  function getSortedData(data) {
-    if (!data) return [];
-
-    const sorted = [...data];
-
-    sorted.sort((a, b) => {
-      let comparison = 0;
-
-      switch (sortBy) {
-        case "mapname":
-          comparison = a.mapname.localeCompare(b.mapname);
-          break;
-        case "finishers":
-          comparison = a.individual_finish_count - b.individual_finish_count;
-          break;
-        default:
-          comparison = 0;
-      }
-
-      return sortOrder === "asc" ? comparison : -comparison;
-    });
-
-    return sorted;
-  }
-
-  function getRarityLevel(finishCount) {
-    if (finishCount <= 2) return "mythical";
-    if (finishCount <= 10) return "legendary";
-    if (finishCount <= 20) return "epic";
-    if (finishCount <= 30) return "rare";
-    if (finishCount <= 50) return "uncommon";
-    return "common";
-  }
-
-  function getCompletionRateRarity(completionRate) {
-    // Remove % sign and convert to number
-    const rate = parseFloat(completionRate.replace("%", ""));
-    if (rate >= 95) return "mythical";
-    if (rate >= 85) return "legendary";
-    if (rate >= 70) return "epic";
-    if (rate >= 50) return "rare";
-    if (rate >= 25) return "uncommon";
-    return "common";
-  }
-
-  function getCompletionRateInfo(completionRate) {
-    const rarity = getCompletionRateRarity(completionRate);
-    const rarityMap = {
-      mythical: { color: "#ff0080" },
-      legendary: { color: "#ff6b35" },
-      epic: { color: "#a73bff" },
-      rare: { color: "#3a86ff" },
-      uncommon: { color: "#06ffa5" },
-      common: { color: "#9ca3af" },
-    };
-    return rarityMap[rarity];
-  }
-
   function renderMapCard(map, index, isCompleted) {
     const rarityLevel = getRarityLevel(map.individual_finish_count);
 
@@ -165,10 +107,16 @@ const PlayerRouteCompletion = ({ playerId }) => {
     );
   }
 
-  const completedRoutes = getSortedData(completionData?.completedMaps || []);
-  const notCompletedRoutes = getSortedData(
-    completionData?.notCompletedMaps || [],
-  );
+  const completedRoutes = getSortedData({
+    data: completionData?.completedMaps || [],
+    sortBy,
+    sortOrder,
+  });
+  const notCompletedRoutes = getSortedData({
+    data: completionData?.notCompletedMaps || [],
+    sortBy,
+    sortOrder,
+  });
 
   return (
     <div className={s.routeCompletionContainer}>
@@ -317,3 +265,62 @@ const PlayerRouteCompletion = ({ playerId }) => {
 };
 
 export default PlayerRouteCompletion;
+
+const rarityMap = {
+  mythical: { color: "#ff0080" },
+  legendary: { color: "#ff6b35" },
+  epic: { color: "#a73bff" },
+  rare: { color: "#3a86ff" },
+  uncommon: { color: "#06ffa5" },
+  common: { color: "#9ca3af" },
+};
+
+function getRarityLevel(finishCount) {
+  if (finishCount <= 2) return "mythical";
+  if (finishCount <= 10) return "legendary";
+  if (finishCount <= 20) return "epic";
+  if (finishCount <= 30) return "rare";
+  if (finishCount <= 50) return "uncommon";
+  return "common";
+}
+
+function getCompletionRateRarity(completionRate) {
+  // Remove % sign and convert to number
+  const rate = parseFloat(completionRate.replace("%", ""));
+  if (rate >= 95) return "mythical";
+  if (rate >= 85) return "legendary";
+  if (rate >= 70) return "epic";
+  if (rate >= 50) return "rare";
+  if (rate >= 25) return "uncommon";
+  return "common";
+}
+
+function getCompletionRateInfo(completionRate) {
+  const rarity = getCompletionRateRarity(completionRate);
+  return rarityMap[rarity];
+}
+
+function getSortedData({ data, sortBy, sortOrder }) {
+  if (!data) return [];
+
+  const sorted = [...data];
+
+  sorted.sort((a, b) => {
+    let comparison = 0;
+
+    switch (sortBy) {
+      case "mapname":
+        comparison = a.mapname.localeCompare(b.mapname);
+        break;
+      case "finishers":
+        comparison = a.individual_finish_count - b.individual_finish_count;
+        break;
+      default:
+        comparison = 0;
+    }
+
+    return sortOrder === "asc" ? comparison : -comparison;
+  });
+
+  return sorted;
+}
