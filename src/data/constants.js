@@ -39,3 +39,25 @@ export const SERVERS_VIEW_MODE = [
   { id: "grid", label: "Grid" },
   { id: "list", label: "List" },
 ];
+
+export const COUNTRIES_WITH_THE = new Set([
+  "Bahamas",
+  "Gambia",
+  "Netherlands",
+  "Philippines",
+  "United States",
+  "United Kingdom",
+  "Czech Republic",
+  "United Arab Emirates",
+  "Solomon Islands",
+  "Maldives",
+  "Seychelles",
+  "Comoros",
+  "Marshall Islands",
+  "Federated States of Micronesia",
+  "Central African Republic",
+  "Democratic Republic of the Congo",
+  "Republic of the Congo",
+  "Lao People's Democratic Republic",
+  "Syrian Arab Republic",
+]);

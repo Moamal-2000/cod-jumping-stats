@@ -8,22 +8,25 @@ import s from "./TopRuns.module.scss";
 import TopRunsContent from "./TopRunsContent/TopRunsContent";
 import TopRunsOptions from "./TopRunsOptions/TopRunsOptions";
 
-const TopRuns = () => {
+const TopRuns = ({ playerId }) => {
   const { topRunsLoading, jumpScoresLoading } = useSelector(
-    (s) => s.playerProfile
+    (s) => s.playerProfile,
   );
 
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
-  const paramsObject = Object.fromEntries(searchParams.entries());
+  const paramsObject = {
+    ...Object.fromEntries(searchParams.entries()),
+    playerId,
+  };
   const selectedFps = searchParams.get("fps") || 125;
 
   const isLoading = topRunsLoading || jumpScoresLoading;
 
   useEffect(() => {
     dispatch(fetchPlayerTops(paramsObject));
-  }, [selectedFps]);
+  }, [selectedFps, playerId]);
 
   return (
     <div className={s.topRunsTab}>

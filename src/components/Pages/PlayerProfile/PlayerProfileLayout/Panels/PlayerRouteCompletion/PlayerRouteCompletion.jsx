@@ -2,12 +2,11 @@
 
 import { fetchPlayerRouteCompletionNew } from "@/redux/features/playerProfile/thunk/playerRouteCompletionThunk";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
 
-const PlayerRouteCompletion = () => {
+const PlayerRouteCompletion = ({ playerId }) => {
   const dispatch = useDispatch();
   const [sortBy, setSortBy] = useState("mapname"); // "mapname", "finishers"
   const [sortOrder, setSortOrder] = useState("asc"); // "asc", "desc"
@@ -21,9 +20,6 @@ const PlayerRouteCompletion = () => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const allPlayersLength = allPlayersData.length || 0;
 
-  const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerid");
-
   useEffect(() => {
     if (playerId) fetchData();
   }, [playerId]);
@@ -34,9 +30,7 @@ const PlayerRouteCompletion = () => {
 
     try {
       const result = await dispatch(
-        fetchPlayerRouteCompletionNew({
-          playerId: parseInt(playerId),
-        }),
+        fetchPlayerRouteCompletionNew({ playerId: parseInt(playerId, 10) }),
       );
 
       if (result.payload) {

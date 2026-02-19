@@ -14,7 +14,7 @@ export const fetchMaps = createAsyncThunk(
     const cachedData = getCachedMaps();
 
     if (cachedData !== null) {
-      const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
+      const cacheAge = Date.now() - parseInt(cachedData.timeStamp, 10);
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
@@ -26,7 +26,7 @@ export const fetchMaps = createAsyncThunk(
       const response = await fetchMsgPackResponse({
         url: jhApis().map.allMaps,
       });
-      const mapsData = await decodeAsyncData(response);
+      const mapsData = (await decodeAsyncData(response)) ?? [];
       cacheMapsLocally(mapsData);
 
       return { mapsData, paramsObject };

@@ -1,5 +1,6 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import {
+  COUNTRIES_WITH_THE,
   JUMP_FPS,
   MONTHS,
   NUMBER_OF_RATING_STARS,
@@ -251,7 +252,7 @@ export async function getMapByCpId(cpid) {
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
-  const maps = await decodeAsyncData(response);
+  const maps = (await decodeAsyncData(response)) ?? [];
 
   return maps.find((map) => +map.CpID === +cpid);
 }
@@ -263,7 +264,7 @@ export async function getPlayerById({ playerId }) {
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().player.all });
-  const players = await decodeAsyncData(response);
+  const players = (await decodeAsyncData(response)) ?? [];
 
   return players.find((player) => +player.PlayerID === +playerId);
 }
@@ -277,6 +278,11 @@ export function getCountryName(countryCode) {
   } catch (e) {
     return "Unknown Country";
   }
+}
+
+export function getFormattedCountryName(code) {
+  const name = getCountryName(code);
+  return COUNTRIES_WITH_THE.has(name) ? `the ${name}` : name;
 }
 
 export function getMostFinishedMap(mapsData) {
@@ -603,4 +609,89 @@ export async function fetchAllTopRuns({ mapId }) {
   } catch (error) {
     console.error(`Error fetching top runs: ${error}`);
   }
+}
+
+export function formateDateExcludeTime(dateString) {
+  if (!dateString) return null;
+
+  const isoString = dateString.replace(" ", "T");
+  const date = new Date(isoString);
+
+  if (isNaN(date)) return null;
+
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+export async function fetchPlayers({ sort }) {
+  try {
+    const response = await fetchMsgPackResponse({
+      url: jhApis({ sort }).player.all,
+    });
+    return (await decodeAsyncData(response)) ?? [];
+  } catch (error) {
+    console.error(`Error fetching players: ${error}`);
+    return [];
+  }
+}
+export function buildPlayerDescription(player = {}) {
+  if (!player?.PlayerID) return "Player profile and statistics.";
+
+  const parts = [];
+  const purePlayerName = stripColorCodes(player.PrefName || player.PlayerName);
+  const countryName = player.Country
+    ? getFormattedCountryName(player.Country)
+    : "Unknown Country";
+
+  if (player.Banned) {
+    parts.push(
+      `${purePlayerName} is currently banned from the JumpersHeaven server.`,
+    );
+  }
+
+  if (player.PlayerID === 1) {
+    parts.push(`${purePlayerName} is the owner of JumpersHeaven.`);
+  }
+
+  let mainSentence = `${purePlayerName} is a player`;
+
+  if (player.Country) {
+    mainSentence += ` from ${countryName}`;
+  }
+
+  mainSentence += ` with ID ${player.PlayerID}`;
+
+  if (player.Admin && player.Admin > 0) {
+    mainSentence += ` and an admin level of ${player.Admin}`;
+  }
+
+  mainSentence += ".";
+
+  parts.push(mainSentence);
+
+  if (player.Donated) {
+    parts.push(
+      `${purePlayerName} is a supporter who has donated to the JumpersHeaven servers.`,
+    );
+  }
+
+  if (player.Visits) {
+    parts.push(
+      `${purePlayerName} has visited the server ${player.Visits.toLocaleString()} times.`,
+    );
+  }
+
+  if (player.LastSeen) {
+    const lastSeenPureDate = formateDateExcludeTime(player.LastSeen);
+    parts.push(`${purePlayerName} was last seen on ${lastSeenPureDate}.`);
+  }
+
+  if (!player.Banned) {
+    parts.push(`${purePlayerName} is currently not banned.`);
+  }
+
+  return parts.join(" ");
 }

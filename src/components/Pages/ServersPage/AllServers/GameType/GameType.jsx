@@ -60,9 +60,7 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
                         )}
                       </td>
                       <td className={s.playerCell}>
-                        <Link
-                          href={`/player?playerid=${player?.PlayerID || -1}`}
-                        >
+                        <Link href={`/player/${player?.PlayerID || -1}`}>
                           {playerName}
                         </Link>
                       </td>

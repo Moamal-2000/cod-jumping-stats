@@ -2,6 +2,8 @@ import s from "./RoutesCard.module.scss";
 
 const RoutesCard = ({ performanceStats }) => {
   const completionRatio = (performanceStats?.MapsCompletedRatio || 0) * 100;
+  const totalMapsCompleted =
+    performanceStats?.TotalMapsCompleted?.toLocaleString() || "0";
 
   return (
     <div className={s.card}>
@@ -12,9 +14,7 @@ const RoutesCard = ({ performanceStats }) => {
         Routes Completed
       </div>
 
-      <div className={s.infoValue}>
-        {performanceStats.TotalMapsCompleted.toLocaleString()}
-      </div>
+      <div className={s.infoValue}>{totalMapsCompleted}</div>
 
       <h2 className={s.infoSubtext}>
         <svg aria-hidden="true">
@@ -25,9 +25,7 @@ const RoutesCard = ({ performanceStats }) => {
 
       <div className={s.progressBar} role="progressbar">
         <div
-          className={`${s.progressBarFill} ${getCompletionRateClass(
-            completionRatio
-          )}`}
+          className={`${s.progressBarFill} ${getCompletionRateClass(completionRatio)}`}
           style={{ width: `${completionRatio}%` }}
         />
       </div>

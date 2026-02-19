@@ -17,16 +17,13 @@ const PlayerNameCell = ({ playerData }) => {
 
   function handleMouseEnter() {
     dispatch(
-      updateGlobalState({ key: "hoveredPlayer", value: purePlayerName })
+      updateGlobalState({ key: "hoveredPlayer", value: purePlayerName }),
     );
   }
 
   return (
     <td className={`${s.player} ${rankClass}`}>
-      <Link
-        href={`/player?playerid=${PlayerID}`}
-        onMouseEnter={handleMouseEnter}
-      >
+      <Link href={`/player/${PlayerID}`} onMouseEnter={handleMouseEnter}>
         <span className={s.playerCountry}>
           <CountryImage countryCode={CountryCode} countryName={Country} />
         </span>

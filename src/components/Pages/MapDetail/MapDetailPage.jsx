@@ -20,7 +20,7 @@ import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = () => {
   const searchParams = useSearchParams();
-  const cpid = +searchParams.get("mapid");
+  const cpid = parseInt(searchParams.get("mapid"), 10);
 
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
@@ -56,11 +56,11 @@ const MapDetailPage = () => {
     let mapsLocal = getCachedMaps();
 
     if (mapsLocal !== null) {
-      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp);
+      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp, 10);
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
-        const map = mapsLocal.maps.find((map) => map.CpID === parseInt(cpid));
+        const map = mapsLocal.maps.find((map) => map.CpID === +cpid);
 
         setMapData(map);
         setError(false);
@@ -78,10 +78,10 @@ const MapDetailPage = () => {
         url: jhApis().map.allMaps,
       });
 
-      mapsLocal = await decodeAsyncData(response);
-      cacheMapsLocally(mapsLocal);
+      mapsLocal = (await decodeAsyncData(response)) ?? [];
+      if (mapsLocal.length > 0) cacheMapsLocally(mapsLocal);
 
-      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid));
+      const map = mapsLocal.find((map) => map.CpID === +cpid);
 
       map ? setMapData(map) : setError(true);
     } catch (err) {

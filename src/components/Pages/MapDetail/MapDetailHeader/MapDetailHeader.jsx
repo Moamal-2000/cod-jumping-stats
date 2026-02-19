@@ -82,7 +82,7 @@ const MapDetailHeader = ({ mapData }) => {
               <div className={s.metaItem}>
                 <span className={s.label}>Best player:</span>
                 <span className={`${s.value} ${s.bestPlayerValue}`}>
-                  <Link href={`/player?playerid=${bestPlayer.PlayerID}`}>
+                  <Link href={`/player/${bestPlayer.PlayerID}`}>
                     {getColoredName(bestPlayer.PlayerName)}
                   </Link>{" "}
                   is the best on this map

@@ -83,7 +83,7 @@ const MapDetailPlayers = ({
 
           return (
             <Link
-              href={`/player?playerid=${player.player_id}`}
+              href={`/player/${player.player_id}`}
               key={`${player.player_id}-${index}`}
               className={s.playerItem}
             >
@@ -97,7 +97,7 @@ const MapDetailPlayers = ({
                     player.fps_list.length > 0 && (
                       <span className={s.fpsDisplay}>
                         {player.fps_list
-                          .sort((a, b) => parseInt(a) - parseInt(b))
+                          .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
                           .join(", ")}{" "}
                         FPS
                       </span>

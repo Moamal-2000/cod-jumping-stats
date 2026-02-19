@@ -3,15 +3,11 @@
 import PlayerBadges from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
 import { getColoredName } from "@/functions/components";
-import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";
 
-const PlayerProfileHeader = ({ playerData }) => {
+const PlayerProfileHeader = ({ playerData, playerId }) => {
   const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
-
-  const searchParams = useSearchParams();
-  const playerId = +searchParams.get("playerid");
 
   const { countryCode, playerName, lastSeen, adminLevel, isBanned, isDonated } =
     getPlayerInfo({ playerData, jumpScores });
@@ -52,7 +48,7 @@ const PlayerProfileHeader = ({ playerData }) => {
                 Banned={isBanned}
                 Donated={isDonated}
                 LastSeen={lastSeen}
-                PlayerID={playerId}
+                PlayerID={+playerId}
               />
             </div>
           </div>
