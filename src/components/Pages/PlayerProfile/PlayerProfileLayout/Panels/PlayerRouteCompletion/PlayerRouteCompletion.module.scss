@@ -499,6 +499,59 @@
   border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
+.emptyState {
+  gap: 0.8rem;
+  color: #f1f5f9;
+}
+
+.emptyStateCompact {
+  min-height: 180px;
+  padding: 1.5rem;
+}
+
+.emptyIcon {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #38bdf8;
+  background: rgba(56, 189, 248, 0.14);
+  box-shadow: 0 0 0 6px rgba(56, 189, 248, 0.08);
+  margin-bottom: 0.25rem;
+
+  svg {
+    width: 1.4rem;
+    height: 1.4rem;
+  }
+}
+
+.emptyTitle {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+}
+
+.emptyHint {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 0.88rem;
+  line-height: 1.45;
+  color: #cbd5e1;
+}
+
+.emptyStateCompact .emptyIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.08);
+}
+
+.emptyStateCompact .emptyMessage {
+  font-size: 0.9rem;
+}
+
 .errorContainer {
   display: flex;
   flex-direction: column;

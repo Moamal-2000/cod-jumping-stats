@@ -104,10 +104,15 @@ const PlayerRouteCompletion = ({ playerId }) => {
   if (!completionData) {
     return (
       <div className={s.emptyState}>
-        <svg aria-hidden="true">
-          <use href="/icons-sprite.svg#map" />
-        </svg>
-        <p>No route completion data available.</p>
+        <div className={s.emptyIcon}>
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#map" />
+          </svg>
+        </div>
+        <h2 className={s.emptyTitle}>No Route Data Yet</h2>
+        <p className={s.emptyHint}>
+          This player does not have route completion records yet.
+        </p>
       </div>
     );
   }
@@ -245,11 +250,13 @@ const PlayerRouteCompletion = ({ playerId }) => {
           completedRoutes.length > 0 ? (
             completedRoutes.map((map, index) => renderMapCard(map, index, true))
           ) : (
-            <div className={s.emptyState}>
-              <svg aria-hidden="true">
-                <use href="/icons-sprite.svg#check-circle" />
-              </svg>
-              <p>No completed routes found.</p>
+            <div className={`${s.emptyState} ${s.emptyStateCompact}`}>
+              <div className={s.emptyIcon}>
+                <svg aria-hidden="true">
+                  <use href="/icons-sprite.svg#check-circle" />
+                </svg>
+              </div>
+              <p className={s.emptyMessage}>No completed routes found.</p>
             </div>
           )
         ) : notCompletedRoutes.length > 0 ? (
@@ -257,11 +264,13 @@ const PlayerRouteCompletion = ({ playerId }) => {
             renderMapCard(map, index, false),
           )
         ) : (
-          <div className={s.emptyState}>
-            <svg aria-hidden="true">
-              <use href="/icons-sprite.svg#x-circle" />
-            </svg>
-            <p>No uncompleted routes found.</p>
+          <div className={`${s.emptyState} ${s.emptyStateCompact}`}>
+            <div className={s.emptyIcon}>
+              <svg aria-hidden="true">
+                <use href="/icons-sprite.svg#x-circle" />
+              </svg>
+            </div>
+            <p className={s.emptyMessage}>No uncompleted routes found.</p>
           </div>
         )}
       </div>
