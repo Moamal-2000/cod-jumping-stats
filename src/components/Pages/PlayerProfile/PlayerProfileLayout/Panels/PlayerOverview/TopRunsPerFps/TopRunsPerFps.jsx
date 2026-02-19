@@ -42,7 +42,9 @@ const TopRunsPerFps = () => {
                 }`}
               >
                 <div className={s.fpsOverviewLabel}>
-                  <span className={s.fpsValue}>{fps}</span>
+                  <span className={s.fpsValue}>
+                    {fps === "0" ? "Mixed" : fps}
+                  </span>
                   <span className={s.fpsText}>FPS</span>
                 </div>
                 <div className={s.fpsOverviewValue}>
