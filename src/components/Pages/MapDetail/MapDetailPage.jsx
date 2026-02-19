@@ -20,7 +20,7 @@ import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = () => {
   const searchParams = useSearchParams();
-  const cpid = +searchParams.get("mapid");
+  const cpid = parseInt(searchParams.get("mapid"), 10);
 
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
@@ -60,9 +60,7 @@ const MapDetailPage = () => {
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
-        const map = mapsLocal.maps.find(
-          (map) => map.CpID === parseInt(cpid, 10),
-        );
+        const map = mapsLocal.maps.find((map) => map.CpID === +cpid);
 
         setMapData(map);
         setError(false);
@@ -81,9 +79,9 @@ const MapDetailPage = () => {
       });
 
       mapsLocal = (await decodeAsyncData(response)) ?? [];
-      cacheMapsLocally(mapsLocal);
+      if (mapsLocal.length > 0) cacheMapsLocally(mapsLocal);
 
-      const map = mapsLocal.find((map) => map.CpID === parseInt(cpid, 10));
+      const map = mapsLocal.find((map) => map.CpID === +cpid);
 
       map ? setMapData(map) : setError(true);
     } catch (err) {

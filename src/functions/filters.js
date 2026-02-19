@@ -167,13 +167,14 @@ export function sortMaps(maps, sortBy) {
           (a.IndividualFinishCount || 0) - (b.IndividualFinishCount || 0),
       );
 
-    default:
+    default: {
       // If sortBy is a number, treat it as FPS difficulty
       const sortByNumber = parseInt(sortBy, 10);
-      if (sortByNumber)
+      if (!isNaN(sortByNumber))
         return getMapsByFpsDifficulty({ sortedMaps, fps: sortByNumber });
 
       return sortedMaps;
+    }
   }
 }
 

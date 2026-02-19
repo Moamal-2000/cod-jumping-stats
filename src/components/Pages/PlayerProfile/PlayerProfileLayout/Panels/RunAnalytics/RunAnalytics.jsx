@@ -31,8 +31,8 @@ const RunAnalytics = ({ playerId }) => {
 
   const searchParams = useSearchParams();
   const selectedFps = searchParams.get("fps") || 125;
-  const firstMapId = parseInt(allMaps[0]?.CpID);
-  const selectedMapId = parseInt(searchParams.get("mapid")) || firstMapId;
+  const firstMapId = parseInt(allMaps[0]?.CpID, 10);
+  const selectedMapId = parseInt(searchParams.get("mapid"), 10) || firstMapId;
 
   function handleFpsChange(event) {
     createQueryString(
