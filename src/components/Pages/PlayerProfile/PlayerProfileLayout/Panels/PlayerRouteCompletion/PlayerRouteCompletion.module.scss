@@ -144,101 +144,341 @@
 }
 
 .routesList {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 0.65rem;
+  display: none;
+  /* Hide old grid layout */
 }
 
-.mapCard {
-  background: rgba(31, 41, 55, 0.6);
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 0.75rem 0.85rem;
-  display: flex;
-  align-items: center;
-  transition: all 0.22s ease;
-  text-decoration: none;
-  color: inherit;
-
-  &.completed {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(31, 41, 55, 0.6);
-
-    &:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      background: rgba(51, 65, 85, 0.55);
-    }
-  }
-
-  &.notCompleted {
-    border-color: rgba(255, 255, 255, 0.1);
-    background: rgba(31, 41, 55, 0.6);
-
-    &:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      background: rgba(51, 65, 85, 0.55);
-    }
-  }
+.routesTableWrapper {
+  width: 100%;
+  overflow-y: visible;
 }
 
-.mapName {
-  font-size: 0.95rem;
-  font-weight: 650;
-  color: #f9fafb;
-  margin: 0;
-  line-height: 1.2;
-  flex: 1;
-  min-width: 0;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #131d33;
+  border: 1px solid #334155;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-x: auto;
+}
+
+.table thead {
+  background: linear-gradient(160deg, #1b2a41 0, #0f1b2e 50%, #1b2a41 100%);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  position: sticky;
+  top: 60px;
+  z-index: 10;
+  box-shadow: 0 1px 0 #facc15;
+}
+
+.table th {
+  padding: 1.25rem 1.25rem;
+  text-align: left;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #fef08a;
+  text-transform: uppercase;
   white-space: nowrap;
+  position: relative;
 }
 
-.mapContent {
-  width: 100%;
-  min-width: 0;
+.table tbody tr {
+  border-bottom: 1px solid rgba(71, 85, 105, 0.5);
+  transition: background-color 0.2s ease;
 }
 
-.mapSubRow {
-  margin-top: 0.25rem;
+.table tbody tr:last-child {
+  border-bottom: none;
 }
 
-.mapSubRow .mapAuthor,
-.mapSubRow .mapReleased {
-  font-size: 0.75rem;
-  color: #c5ccd6;
+.table tbody tr:hover {
+  background-color: rgba(51, 65, 85, 0.3);
 }
 
-.mapSubRow .mapReleased {
-  text-align: right;
-  text-wrap: nowrap;
+.tableRow td {
+  padding: 1rem 1.25rem;
+  font-size: 0.95rem;
+  color: #f9fafb;
 }
 
-.mapAuthor {
-  font-weight: 500;
+.mapNameCell {
+  font-weight: 600;
+  min-width: 200px;
 }
 
-.mapReleased {
-  opacity: 0.8;
+.mapLink {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #facc15;
+  }
 }
 
-.mapRow {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  width: 100%;
-  min-width: 0;
+.authorCell {
+  color: #d1d5db;
+  min-width: 150px;
+}
+
+.releasedCell {
+  color: #9ca3af;
+  min-width: 100px;
+}
+
+.finisherCell {
+  text-align: center;
+  min-width: 120px;
 }
 
 .finisherBadge {
   display: inline-flex;
   align-items: center;
-  font-size: 0.9rem;
   font-weight: 600;
-  line-height: 1;
   white-space: nowrap;
 }
+
+.statusCell {
+  text-align: center;
+  min-width: 140px;
+}
+
+.completedBadge,
+.notCompletedBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+.completedBadge {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+}
+
+.notCompletedBadge {
+  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
+}
+
+/* Rarity-based text coloring for table rows */
+.tableRow {
+
+  &.mythical .mapNameCell,
+  &.mythical .finisherBadge {
+    color: #ff0080;
+    text-shadow: 0 0 6px rgba(255, 0, 128, 0.3);
+  }
+
+  &.legendary .mapNameCell,
+  &.legendary .finisherBadge {
+    color: #ff6b35;
+    text-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
+  }
+
+  &.epic .mapNameCell,
+  &.epic .finisherBadge {
+    color: #a73bff;
+    text-shadow: 0 0 4px rgba(157, 78, 221, 0.3);
+  }
+
+  &.rare .mapNameCell,
+  &.rare .finisherBadge {
+    color: #3a86ff;
+    text-shadow: 0 0 3px rgba(58, 134, 255, 0.25);
+  }
+
+  &.uncommon .mapNameCell,
+  &.uncommon .finisherBadge {
+    color: #06ffa5;
+    text-shadow: 0 0 2px rgba(6, 255, 165, 0.2);
+  }
+
+  &.common .mapNameCell,
+  &.common .finisherBadge {
+    color: #f9fafb;
+  }
+}
+
+@media (max-width: 1024px) {
+
+  .table th,
+  .tableRow td {
+    padding: 0.75rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .authorCell,
+  .releasedCell {
+    display: none;
+  }
+
+  .table th:nth-child(2),
+  .table th:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .routesTableWrapper {
+    border-radius: 8px;
+  }
+
+  .table {
+    border-radius: 8px;
+  }
+
+  .table th,
+  .tableRow td {
+    padding: 0.75rem 0.65rem;
+    font-size: 0.75rem;
+  }
+
+  .table th {
+    font-size: 0.65rem;
+  }
+
+  .mapNameCell {
+    min-width: 140px;
+  }
+
+  .releasedCell {
+    display: none;
+  }
+
+  .table th:nth-child(3) {
+    display: none;
+  }
+}
+
+@media (max-width: 512px) {
+  .routesTableWrapper {
+    border-radius: 6px;
+  }
+
+  .table {
+    border-radius: 6px;
+    border: 1px solid #2d3a47;
+  }
+
+  .table th,
+  .tableRow td {
+    padding: 0.6rem 0.5rem;
+    font-size: 0.7rem;
+  }
+
+  .table th {
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+  }
+
+  .mapNameCell {
+    min-width: 120px;
+  }
+
+  .statusCell {
+    min-width: 110px;
+  }
+
+  .completedBadge,
+  .notCompletedBadge {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.65rem;
+  }
+
+  .completedBadge svg,
+  .notCompletedBadge svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+}
+
+@media (max-width: 376px) {
+  .routesTableWrapper {
+    border-radius: 4px;
+  }
+
+  .table {
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .table th,
+  .tableRow td {
+    padding: 0.5rem 0.35rem;
+    font-size: 0.65rem;
+  }
+
+  .table th {
+    font-size: 0.55rem;
+    letter-spacing: 0.08em;
+  }
+
+  .mapNameCell {
+    min-width: 100px;
+  }
+
+  .authorCell {
+    min-width: 80px;
+  }
+
+  .releasedCell {
+    min-width: 70px;
+  }
+
+  .finisherCell {
+    min-width: 80px;
+  }
+
+  .statusCell {
+    min-width: 90px;
+  }
+
+  .finisherBadge {
+    font-size: 0.65rem;
+  }
+
+  .completedBadge,
+  .notCompletedBadge {
+    padding: 0.3rem 0.6rem;
+    font-size: 0.6rem;
+  }
+
+  .completedBadge svg,
+  .notCompletedBadge svg {
+    width: 0.65rem;
+    height: 0.65rem;
+  }
+
+  .table thead {
+    border-bottom: 1px solid #facc15;
+  }
+
+  .table tbody tr {
+    border-bottom: 1px solid rgba(71, 85, 105, 0.3);
+  }
+
+  .tableRow td {
+    color: #e5e7eb;
+  }
+}
+
+
 
 .mapDetails {
   display: flex;
@@ -385,106 +625,6 @@
   }
 }
 
-// Rarity-based text styling only
-.mapCard {
-
-  // Rarity-specific text colors only
-  &.mythical {
-
-    .mapName,
-    .finisherBadge {
-      color: #ff0080;
-      text-shadow: 0 0 6px rgba(255, 0, 128, 0.3);
-    }
-  }
-
-  &.legendary {
-
-    .mapName,
-    .finisherBadge {
-      color: #ff6b35;
-      text-shadow: 0 0 5px rgba(255, 107, 53, 0.3);
-    }
-  }
-
-  &.epic {
-
-    .mapName,
-    .finisherBadge {
-      color: #a73bff;
-      text-shadow: 0 0 4px rgba(157, 78, 221, 0.3);
-    }
-  }
-
-  &.rare {
-
-    .mapName,
-    .finisherBadge {
-      color: #3a86ff;
-      text-shadow: 0 0 3px rgba(58, 134, 255, 0.25);
-    }
-  }
-
-  &.uncommon {
-
-    .mapName,
-    .finisherBadge {
-      color: #06ffa5;
-      text-shadow: 0 0 2px rgba(6, 255, 165, 0.2);
-    }
-  }
-
-  &.common {
-
-    .mapName,
-    .finisherBadge {
-      color: #f9fafb;
-    }
-  }
-}
-
-.time {
-  font-size: 0.8rem;
-  color: #f9fafb;
-  font-weight: 500;
-}
-
-.date {
-  font-size: 0.8rem;
-  color: #9ca3af;
-}
-
-.mapStatus {
-  display: flex;
-  align-items: center;
-  margin-left: 1rem;
-}
-
-.completedBadge,
-.notCompletedBadge {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.completedBadge {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
-}
-
-.notCompletedBadge {
-  background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(107, 114, 128, 0.3);
-}
-
 .loadingContainer,
 .emptyState {
   display: flex;
@@ -502,11 +642,6 @@
 .emptyState {
   gap: 0.8rem;
   color: #f1f5f9;
-}
-
-.emptyStateCompact {
-  min-height: 180px;
-  padding: 1.5rem;
 }
 
 .emptyIcon {
@@ -540,16 +675,6 @@
   font-size: 0.88rem;
   line-height: 1.45;
   color: #cbd5e1;
-}
-
-.emptyStateCompact .emptyIcon {
-  width: 2.5rem;
-  height: 2.5rem;
-  box-shadow: 0 0 0 5px rgba(56, 189, 248, 0.08);
-}
-
-.emptyStateCompact .emptyMessage {
-  font-size: 0.9rem;
 }
 
 .errorContainer {

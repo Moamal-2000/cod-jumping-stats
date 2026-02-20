@@ -47,31 +47,44 @@ const PlayerRouteCompletion = ({ playerId }) => {
     }
   }
 
-  function renderMapCard(map, index, isCompleted) {
+  function renderMapRow(map, index, isCompleted) {
     const rarityLevel = getRarityLevel(map.individual_finish_count);
 
     return (
-      <Link
-        href={`/map?mapid=${map.cp_id}`}
+      <tr
         key={`${map.mapid}-${map.mapname}-${index}`}
-        className={`${s.mapCard} ${isCompleted ? s.completed : s.notCompleted} ${
-          s[rarityLevel] || ""
-        }`}
+        className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
-        <div className={s.mapContent}>
-          <div className={s.mapRow}>
-            <h3 className={s.mapName}>{map.mapname}</h3>
-            <span className={s.finisherBadge}>
-              {map.individual_finish_count} / {allPlayersLength}
+        <td className={s.mapNameCell}>
+          <Link href={`/map?mapid=${map.cp_id}`} className={s.mapLink}>
+            {map.mapname}
+          </Link>
+        </td>
+        <td className={s.authorCell}>{map.author}</td>
+        <td className={s.releasedCell}>{map.released}</td>
+        <td className={s.finisherCell}>
+          <span className={s.finisherBadge}>
+            {map.individual_finish_count} / {allPlayersLength}
+          </span>
+        </td>
+        <td className={s.statusCell}>
+          {isCompleted ? (
+            <span className={s.completedBadge}>
+              <svg aria-hidden="true">
+                <use href="/icons-sprite.svg#check-circle" />
+              </svg>
+              Completed
             </span>
-          </div>
-
-          <div className={`${s.mapRow} ${s.mapSubRow}`}>
-            <span className={s.mapAuthor}>by {map.author}</span>
-            <span className={s.mapReleased}>{map.released}</span>
-          </div>
-        </div>
-      </Link>
+          ) : (
+            <span className={s.notCompletedBadge}>
+              <svg aria-hidden="true">
+                <use href="/icons-sprite.svg#x-circle" />
+              </svg>
+              Not Completed
+            </span>
+          )}
+        </td>
+      </tr>
     );
   }
 
@@ -127,6 +140,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
     sortBy,
     sortOrder,
   });
+
+  const activeListData =
+    activeList === "completed" ? completedRoutes : notCompletedRoutes;
 
   return (
     <div className={s.routeCompletionContainer}>
@@ -244,35 +260,22 @@ const PlayerRouteCompletion = ({ playerId }) => {
         </div>
       </div>
 
-      {/* Routes List */}
-      <div className={s.routesList}>
-        {activeList === "completed" ? (
-          completedRoutes.length > 0 ? (
-            completedRoutes.map((map, index) => renderMapCard(map, index, true))
-          ) : (
-            <div className={`${s.emptyState} ${s.emptyStateCompact}`}>
-              <div className={s.emptyIcon}>
-                <svg aria-hidden="true">
-                  <use href="/icons-sprite.svg#check-circle" />
-                </svg>
-              </div>
-              <p className={s.emptyMessage}>No completed routes found.</p>
-            </div>
-          )
-        ) : notCompletedRoutes.length > 0 ? (
-          notCompletedRoutes.map((map, index) =>
-            renderMapCard(map, index, false),
-          )
-        ) : (
-          <div className={`${s.emptyState} ${s.emptyStateCompact}`}>
-            <div className={s.emptyIcon}>
-              <svg aria-hidden="true">
-                <use href="/icons-sprite.svg#x-circle" />
-              </svg>
-            </div>
-            <p className={s.emptyMessage}>No uncompleted routes found.</p>
-          </div>
-        )}
+      {/* Routes Table */}
+      <div className={s.routesTableWrapper}>
+        <table className={s.table}>
+          <thead>
+            <tr>
+              <th>Map Name</th>
+              <th>Author</th>
+              <th>Released</th>
+              <th>Finishers</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {activeListData.map((map, index) => renderMapRow(map, index, true))}
+          </tbody>
+        </table>
       </div>
     </div>
   );
