@@ -1,5 +1,3 @@
-"use client";
-
 import { SOCIAL_MEDIA_DATA } from "@/data/staticData";
 import s from "./GitHubStarBtn.module.scss";
 
@@ -12,10 +10,11 @@ const GitHubStarBtn = () => {
       target="_blank"
       rel="noopener noreferrer"
     >
-      <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+      <svg aria-hidden="true">
+        <use href="/icons-sprite.svg#solid-star" />
       </svg>
-      <div className={s.tooltip}>
+
+      <div className={s.tooltip} role="tooltip">
         Star us on GitHub
         <div className={s.borderEffect} />
         <div className={s.effectHover} />
