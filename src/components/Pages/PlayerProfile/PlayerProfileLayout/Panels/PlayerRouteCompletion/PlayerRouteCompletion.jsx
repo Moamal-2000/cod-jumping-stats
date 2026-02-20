@@ -204,11 +204,12 @@ const PlayerRouteCompletion = ({ playerId }) => {
         </div>
 
         <div className={s.controlGroup}>
-          <label>Sort By:</label>
+          <label htmlFor="sort-by">Sort By:</label>
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
             className={s.sortSelect}
+            id="sort-by"
           >
             <option value="mapname">Route Name</option>
             <option value="finishers">Finisher Count</option>
@@ -216,11 +217,12 @@ const PlayerRouteCompletion = ({ playerId }) => {
         </div>
 
         <div className={s.controlGroup}>
-          <label>Order:</label>
+          <label htmlFor="order">Order:</label>
           <select
             value={sortOrder}
             onChange={(e) => setSortOrder(e.target.value)}
             className={s.orderSelect}
+            id="order"
           >
             <option value="asc">Ascending</option>
             <option value="desc">Descending</option>
