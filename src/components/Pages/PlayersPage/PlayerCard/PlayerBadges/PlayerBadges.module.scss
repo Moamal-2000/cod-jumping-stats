@@ -144,37 +144,11 @@
   background-clip: text;
   -webkit-text-fill-color: transparent;
   text-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
-  animation: contentCreatorPulse 2s ease-in-out infinite;
 
   svg {
     color: #ff4d4d !important;
     fill: #ff4d4d !important;
     filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7));
-    animation: contentCreatorIconPulse 2s ease-in-out infinite;
-  }
-
-  @keyframes contentCreatorPulse {
-
-    0%,
-    100% {
-      text-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
-    }
-
-    50% {
-      text-shadow: 0 0 20px rgba(255, 77, 77, 0.5);
-    }
-  }
-
-  @keyframes contentCreatorIconPulse {
-
-    0%,
-    100% {
-      filter: drop-shadow(0 0 4px rgba(255, 0, 0, 0.7));
-    }
-
-    50% {
-      filter: drop-shadow(0 0 8px rgba(255, 0, 0, 0.9));
-    }
   }
 }
 

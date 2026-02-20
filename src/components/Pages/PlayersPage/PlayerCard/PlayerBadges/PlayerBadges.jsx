@@ -60,7 +60,7 @@ const PlayerBadges = ({
               <span>{label}</span>
             </div>
           );
-        }
+        },
       )}
     </div>
   );
