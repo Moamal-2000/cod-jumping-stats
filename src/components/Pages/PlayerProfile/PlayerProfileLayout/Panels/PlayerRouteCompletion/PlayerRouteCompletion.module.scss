@@ -173,6 +173,18 @@
   box-shadow: 0 1px 0 #facc15;
 }
 
+@include m.large {
+  .table thead {
+    top: 128px;
+  }
+}
+
+@include m.small {
+  .table thead {
+    top: 67px;
+  }
+}
+
 .table th {
   padding: 1.25rem 1.25rem;
   text-align: left;
@@ -560,16 +572,33 @@
   background: rgba(17, 24, 39);
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 14px;
   position: sticky;
   top: 60px;
   left: 0;
 }
 
+@include m.large {
+  .legendItems {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+}
+
+@include m.small {
+  .legendItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    position: static;
+  }
+}
+
 .legendItem {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 4px;
   font-size: 0.8rem;
   color: #d1d5db;
 }
