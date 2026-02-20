@@ -47,55 +47,54 @@
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.listToggle {
-  display: flex;
-  gap: 0.5rem;
-  margin-bottom: 2rem;
-  background: rgba(31, 41, 55, 0.6);
-  padding: 0.5rem;
-  border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.toggleButton {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 1rem 1.5rem;
-  background: transparent;
-  border: none;
-  border-radius: 10px;
-  color: #9ca3af;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.25s ease;
-  flex: 1;
-  justify-content: center;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.06);
-    color: #f9fafb;
-  }
-
-  &.active {
-    background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(234, 179, 8, 0.95));
-    color: #111827;
-    box-shadow: 0 6px 16px rgba(250, 204, 21, 0.35);
-  }
-
-  svg {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-}
-
 .controls {
   display: flex;
   gap: 1.5rem;
   margin-bottom: 2rem;
   flex-wrap: wrap;
   align-items: flex-end;
+}
+
+.filterButtons {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.filterButton {
+  font-family: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0.75rem 1rem;
+  background: rgba(31, 41, 55, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  color: #9ca3af;
+  font-size: 0.9rem;
+  letter-spacing: -0.5px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.25s ease;
+
+  svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  &:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    background: rgba(51, 65, 85, 0.5);
+    color: #f9fafb;
+  }
+
+  &.active {
+    background: linear-gradient(135deg, rgba(250, 204, 21, 0.95), rgba(234, 179, 8, 0.95));
+    color: #111827;
+    border-color: #facc15;
+    box-shadow: 0 4px 12px rgba(250, 204, 21, 0.3);
+  }
 }
 
 .controlGroup {

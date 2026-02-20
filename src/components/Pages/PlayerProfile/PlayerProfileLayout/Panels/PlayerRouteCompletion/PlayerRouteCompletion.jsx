@@ -176,34 +176,33 @@ const PlayerRouteCompletion = ({ playerId }) => {
         </div>
       </div>
 
-      {/* List Toggle */}
-      <div className={s.listToggle}>
-        <button
-          className={`${s.toggleButton} ${
-            activeList === "completed" ? s.active : ""
-          }`}
-          onClick={() => setActiveList("completed")}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#check-circle" />
-          </svg>
-          <span>Completed Routes ({completedRoutes.length})</span>
-        </button>
-        <button
-          className={`${s.toggleButton} ${
-            activeList === "not_completed" ? s.active : ""
-          }`}
-          onClick={() => setActiveList("not_completed")}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#x-circle" />
-          </svg>
-          <span>Not Completed Routes ({notCompletedRoutes.length})</span>
-        </button>
-      </div>
-
       {/* Controls */}
       <div className={s.controls}>
+        <div className={s.filterButtons}>
+          <button
+            className={`${s.filterButton} ${
+              activeList === "completed" ? s.active : ""
+            }`}
+            onClick={() => setActiveList("completed")}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#check-circle" />
+            </svg>
+            <span>Completed {completedRoutes.length}</span>
+          </button>
+          <button
+            className={`${s.filterButton} ${
+              activeList === "not_completed" ? s.active : ""
+            }`}
+            onClick={() => setActiveList("not_completed")}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#x-circle" />
+            </svg>
+            <span>Not Completed {notCompletedRoutes.length}</span>
+          </button>
+        </div>
+
         <div className={s.controlGroup}>
           <label>Sort By:</label>
           <select
