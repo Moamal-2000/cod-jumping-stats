@@ -65,7 +65,7 @@ export const SOCIAL_MEDIA_DATA = [
   },
   {
     iconName: "github",
-    link: "https://github.com/Moamal-2000/JHLeaderboard",
+    link: "https://github.com/Moamal-2000/jumpers-heaven-statistics",
     id: 3,
   },
   {
