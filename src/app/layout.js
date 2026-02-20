@@ -1,5 +1,6 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
+import GitHubStarBtn from "@/components/Shared/Buttons/GitHubStarBtn/GitHubStarBtn";
 import ScrollToTopBtn from "@/components/Shared/Buttons/ScrollToTopBtn/ScrollToTopBtn";
 import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
 import LayoutLayer from "@/components/Shared/LayoutLayer/LayoutLayer";
@@ -22,6 +23,7 @@ export default function RootLayout({ children }) {
             {children}
             <Footer />
             <ScrollToTopBtn />
+            <GitHubStarBtn />
             <GlobalOverlay />
           </LayoutLayer>
         </body>
