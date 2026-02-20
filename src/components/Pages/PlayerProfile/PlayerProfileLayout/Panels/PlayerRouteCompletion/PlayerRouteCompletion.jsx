@@ -230,33 +230,30 @@ const PlayerRouteCompletion = ({ playerId }) => {
       </div>
 
       {/* Rarity Legend */}
-      <div className={s.legend}>
-        <h4>Rarity Legend:</h4>
-        <div className={s.legendItems}>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.mythical}`}></div>
-            <span>Mythical (0-2 finishers)</span>
-          </div>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.legendary}`}></div>
-            <span>Legendary (3-10 finishers)</span>
-          </div>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.epic}`}></div>
-            <span>Epic (11-20 finishers)</span>
-          </div>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.rare}`}></div>
-            <span>Rare (21-30 finishers)</span>
-          </div>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.uncommon}`}></div>
-            <span>Uncommon (31-50 finishers)</span>
-          </div>
-          <div className={s.legendItem}>
-            <div className={`${s.legendColor} ${s.common}`}></div>
-            <span>Common (50+ finishers)</span>
-          </div>
+      <div className={s.legendItems}>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.mythical}`}></div>
+          <span>Mythical (0-2 finishers)</span>
+        </div>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.legendary}`}></div>
+          <span>Legendary (3-10 finishers)</span>
+        </div>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.epic}`}></div>
+          <span>Epic (11-20 finishers)</span>
+        </div>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.rare}`}></div>
+          <span>Rare (21-30 finishers)</span>
+        </div>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.uncommon}`}></div>
+          <span>Uncommon (31-50 finishers)</span>
+        </div>
+        <div className={s.legendItem}>
+          <div className={`${s.legendColor} ${s.common}`}></div>
+          <span>Common (50+ finishers)</span>
         </div>
       </div>
 
