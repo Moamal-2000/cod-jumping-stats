@@ -9,6 +9,10 @@
   .playerPage {
     padding-inline: 0;
   }
+
+  .playerPage [data-type=breadcrumbs] {
+    margin-left: 16px;
+  }
 }
 
 .profileContainer {
