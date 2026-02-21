@@ -4,6 +4,7 @@ import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import GitHubStarBtn from "@/components/Shared/Buttons/GitHubStarBtn/GitHubStarBtn";
 import ScrollToTopBtn from "@/components/Shared/Buttons/ScrollToTopBtn/ScrollToTopBtn";
+import GitHubNotice from "@/components/Shared/GitHubNotice/GitHubNotice";
 import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
 import LayoutLayer from "@/components/Shared/LayoutLayer/LayoutLayer";
 import { store } from "@/redux/store";
@@ -24,6 +25,7 @@ const RootProviders = ({ children }) => {
             <Footer />
             <ScrollToTopBtn />
             <GitHubStarBtn />
+            <GitHubNotice />
             <GlobalOverlay />
           </LayoutLayer>
         </body>

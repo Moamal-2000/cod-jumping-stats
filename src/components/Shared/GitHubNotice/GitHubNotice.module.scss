@@ -1,0 +1,115 @@
+@use "@/styles/mixins" as m;
+
+.notice {
+  position: fixed;
+  bottom: -120px;
+  left: 50%;
+  translate: -50% 0;
+  background-color: #1a202c;
+  border: 1px solid #ffd700;
+  border-radius: 8px;
+  padding: 16px 20px;
+  max-width: 740px;
+  width: 100%;
+  margin-inline: 16px;
+  z-index: 100;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+  transition: bottom 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  &.visible {
+    bottom: 24px;
+  }
+}
+
+@include m.medium {
+  .notice {
+    width: 420px;
+    padding: 12px 16px;
+  }
+}
+
+@include m.small {
+  .notice {
+    max-width: none;
+    width: 100%;
+    left: 0;
+    translate: 0;
+    border: none;
+    border-radius: 0;
+    margin: 0;
+
+    &.visible {
+      bottom: 0;
+    }
+  }
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  p {
+    margin: 0;
+    color: #e2e8f0;
+    font-size: 0.95rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+}
+
+.content p>a {
+  color: #eab308;
+  text-decoration: underline;
+
+  &:hover {
+    color: #ffbf00;
+  }
+}
+
+.closeBtn {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: #9ea3b0;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+
+  &:focus-visible {
+    outline: 2px solid #ffd700;
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+}
+
+.closeBtn>svg {
+  width: 18px;
+  height: 18px;
+  fill: #fff;
+}
+
+.closeBtn:hover>svg,
+.closeBtn:focus-visible>svg {
+  fill: #ffd700;
+}
+
+@include m.small {
+  .content p {
+    font-size: 0.9rem;
+  }
+}
+
+.closeBtn {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}

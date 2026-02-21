@@ -1,0 +1,52 @@
+"use client";
+
+import { useEffect, useState } from "react";
+import { gitHubRepoUrl } from "../Buttons/GitHubStarBtn/GitHubStarBtn";
+import s from "./GitHubNotice.module.scss";
+
+const GitHubNotice = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const isClosed = localStorage.getItem("github-notice-closed") === "true";
+
+    if (!isClosed) {
+      const timer = setTimeout(() => {
+        setIsVisible(true);
+      }, 10000);
+
+      return () => clearTimeout(timer);
+    }
+  }, []);
+
+  const handleClose = () => {
+    localStorage.setItem("github-notice-closed", "true");
+    setIsVisible(false);
+  };
+
+  return (
+    <div className={`${s.notice} ${isVisible ? s.visible : ""}`}>
+      <div className={s.content}>
+        <p>
+          If this project helps you, please consider giving it a ⭐ on{" "}
+          <a href={gitHubRepoUrl} target="_blank" rel="noopener noreferrer">
+            GitHub
+          </a>
+          . It helps the project grow.
+        </p>
+
+        <button
+          className={s.closeBtn}
+          onClick={handleClose}
+          aria-label="Close notification"
+        >
+          <svg aria-hidden="true">
+            <use href="/icons-sprite.svg#xMark" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default GitHubNotice;

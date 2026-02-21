@@ -25,6 +25,6 @@ const GitHubStarBtn = () => {
 
 export default GitHubStarBtn;
 
-const gitHubRepoUrl = SOCIAL_MEDIA_DATA.find(
+export const gitHubRepoUrl = SOCIAL_MEDIA_DATA.find(
   ({ iconName }) => iconName === "github",
 ).link;
