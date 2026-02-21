@@ -3,9 +3,9 @@ import { getColoredName } from "@/functions/components";
 import Link from "next/link";
 import PlayerBadges from "../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../PlayerCard/PlayerStats/PlayerStats";
-import s from "./PlayersCardsSection.module.scss";
+import s from "./PlayersSection.module.scss";
 
-const PlayersCardsSection = ({
+const PlayersSection = ({
   playersScroll,
   allDataDisplayed,
   lastPlayerRef,
@@ -26,7 +26,7 @@ const PlayersCardsSection = ({
   //   </section>
   // );
 
-    return (
+  return (
     <section className={s.playersSection}>
       <table className={s.playersTable}>
         <thead>
@@ -101,4 +101,4 @@ const PlayersCardsSection = ({
   );
 };
 
-export default PlayersCardsSection;
+export default PlayersSection;

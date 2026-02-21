@@ -15,9 +15,9 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
-import PlayersCardsSection from "./PlayersCardsSection/PlayersCardsSection";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
+import PlayersSection from "./PlayersSection/PlayersSection";
 
 const PlayersPage = () => {
   const dispatch = useDispatch();
@@ -85,7 +85,7 @@ const PlayersPage = () => {
       )}
 
       {hasPlayers && !loading && !error && (
-        <PlayersCardsSection
+        <PlayersSection
           playersScroll={playersScroll}
           allDataDisplayed={allDataDisplayed}
           lastPlayerRef={lastPlayerRef}
