@@ -1,8 +1,32 @@
+@use "@/styles/mixins" as m;
+
 .playersSection {
   padding-top: 4px;
   margin: 0 auto 32px;
   max-width: 1600px;
   width: 100%;
+}
+
+.playersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+  padding-top: 4px;
+  margin: 0 auto 32px;
+  max-width: 1600px;
+  width: 100%;
+}
+
+@include m.large {
+  .playersGrid {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+}
+
+@include m.small {
+  .playersGrid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .loadingMoreContainer {

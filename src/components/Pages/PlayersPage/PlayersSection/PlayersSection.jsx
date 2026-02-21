@@ -16,11 +16,17 @@ const PlayersSection = ({
 
   return (
     <section className={s.playersSection}>
-      {viewBy === "grid" &&
-        playersScroll.map((player, index) => {
-          const ref = playersScroll.length === index + 1 ? lastPlayerRef : null;
-          return <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />;
-        })}
+      {viewBy === "grid" && (
+        <div className={s.playersGrid}>
+          {playersScroll.map((player, index) => {
+            const ref =
+              playersScroll.length === index + 1 ? lastPlayerRef : null;
+            return (
+              <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />
+            );
+          })}
+        </div>
+      )}
 
       {viewBy === "list" && (
         <PlayersTable
