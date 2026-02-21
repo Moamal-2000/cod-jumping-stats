@@ -18,7 +18,7 @@ const PlayerStats = ({ Visits, LastSeen }) => {
 
 export default PlayerStats;
 
-function formatLastSeen(lastSeen) {
+export function formatLastSeen(lastSeen) {
   if (!lastSeen) return "Unknown";
 
   const date = new Date(lastSeen);
