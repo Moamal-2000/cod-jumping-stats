@@ -10,13 +10,7 @@ import Link from "next/link";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 
-const PlayerBadges = ({
-  Admin,
-  Banned,
-  Donated,
-  PlayerID,
-  LastSeen,
-}) => {
+const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
   const playerBadgesData = getPlayerBadges({
     cssModule: s,
     Admin,
@@ -80,14 +74,14 @@ export function getPlayerBadges({
       classes: cssModule.Banned,
       icon: "ban",
       label: "Banned",
-      id: 2,
+      id: 1,
     },
     {
       displayCondition: Donated,
       classes: cssModule.donator,
       icon: "crown",
       label: "Donator",
-      id: 3,
+      id: 2,
     },
     {
       displayCondition: isActiveWithinWeek(LastSeen),
@@ -95,14 +89,14 @@ export function getPlayerBadges({
       icon: "activeStatus",
       label: "Active",
       tooltipText: "Player was active within the last 7 days",
-      id: 4,
+      id: 3,
     },
     {
       displayCondition: mappersIds.includes(PlayerID),
       classes: cssModule.mapper,
       icon: "special-mapper",
       label: "Mapper",
-      id: 7,
+      id: 4,
     },
     {
       displayCondition: eventWinnerIds.includes(PlayerID),
@@ -110,7 +104,7 @@ export function getPlayerBadges({
       icon: "trophy",
       label: "Winner",
       tooltipText: "Event winner",
-      id: 11,
+      id: 5,
     },
     {
       displayCondition: bugHunterIds.includes(PlayerID),
@@ -118,7 +112,7 @@ export function getPlayerBadges({
       icon: "exclamation-mark",
       label: "Bug Hunter",
       tooltipText: "Helped fix bugs",
-      id: 12,
+      id: 6,
     },
     {
       displayCondition: contentCreatorIds.includes(PlayerID),
@@ -126,21 +120,21 @@ export function getPlayerBadges({
       icon: "youtube",
       label: "Creator",
       href: contentCreators.find((c) => c.playerId === PlayerID)?.channelUrl,
-      id: 14,
+      id: 7,
     },
     {
       displayCondition: Admin >= 100,
       classes: cssModule.highLevel,
       icon: "star",
       label: "Admin",
-      id: 5,
+      id: 8,
     },
     {
       displayCondition: PlayerID === 1,
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",
-      id: 6,
+      id: 9,
     },
   ];
 }
