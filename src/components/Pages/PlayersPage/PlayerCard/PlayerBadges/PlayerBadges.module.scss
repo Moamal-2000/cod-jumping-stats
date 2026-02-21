@@ -95,20 +95,6 @@
   }
 }
 
-.topScorer {
-  color: #ffd700;
-  background: linear-gradient(to right, #ffd700, #ffa500);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 0 0 15px rgba(255, 215, 0, 0.2);
-
-  svg {
-    color: #ffd700;
-    filter: drop-shadow(0 0 3px rgba(255, 215, 0, 0.6));
-  }
-}
-
 .eventWinner {
   color: #9370db;
   background: linear-gradient(to right, #9370db, #8a2be2);

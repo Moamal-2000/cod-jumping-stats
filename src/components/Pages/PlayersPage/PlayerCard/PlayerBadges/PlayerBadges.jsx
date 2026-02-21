@@ -16,7 +16,6 @@ const PlayerBadges = ({
   Donated,
   PlayerID,
   LastSeen,
-  top10Ids,
 }) => {
   const playerBadgesData = getPlayerBadges({
     cssModule: s,
@@ -25,7 +24,6 @@ const PlayerBadges = ({
     Donated,
     PlayerID,
     LastSeen,
-    top10Ids,
   });
 
   return (
@@ -75,7 +73,6 @@ export function getPlayerBadges({
   Donated,
   PlayerID,
   LastSeen,
-  top10Ids,
 }) {
   return [
     {
@@ -106,14 +103,6 @@ export function getPlayerBadges({
       icon: "special-mapper",
       label: "Mapper",
       id: 7,
-    },
-    {
-      displayCondition: Array.isArray(top10Ids) && top10Ids.includes(PlayerID),
-      classes: cssModule.topScorer,
-      icon: "trophy",
-      label: "Top Scorer",
-      tooltipText: "Top 10",
-      id: 9,
     },
     {
       displayCondition: eventWinnerIds.includes(PlayerID),
