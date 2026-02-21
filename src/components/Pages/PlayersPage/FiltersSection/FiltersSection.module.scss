@@ -4,8 +4,8 @@
   margin-bottom: 32px;
   width: 100%;
   display: flex;
-  align-items: flex-end;
-  gap: 26px;
+  flex-direction: column;
+  gap: 16px;
   position: relative;
   transition: border-color .2s ease;
 
@@ -26,6 +26,19 @@
     align-items: flex-start;
     gap: 26px;
   }
+}
+
+.filtersSection .row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  position: relative;
+}
+
+.filtersSection .row.secondRow {
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 @include m.very-small {
@@ -98,14 +111,9 @@
   }
 }
 
-.searchGroup {
-  flex: 1;
-}
-
 .fields {
   display: flex;
   gap: 8px;
-  width: 100%;
 }
 
 @include m.small {
@@ -115,25 +123,6 @@
     &>* {
       min-width: auto;
     }
-  }
-}
-
-.controls {
-  display: flex;
-  gap: 10px 26px;
-  align-items: center;
-}
-
-@include m.large {
-  .controls {
-    gap: 10px;
-  }
-}
-
-@include m.small {
-  .controls {
-    flex-wrap: wrap;
-    row-gap: 26px;
   }
 }
 
@@ -151,4 +140,72 @@
   font-size: .9rem;
   font-weight: 600;
   text-transform: capitalize;
+}
+
+.sortGroup {
+  display: flex;
+  gap: 8px;
+}
+
+@include m.very-small {
+  .sortGroup {
+    flex-wrap: wrap;
+  }
+}
+
+.sortGroup .sortViewBtn {
+  cursor: pointer;
+  background-color: #21262d;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  transition:
+    background-color .15s ease-in-out,
+    color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+
+  &.active {
+    background: linear-gradient(135deg,
+        var(--players-accent) 0%,
+        var(--players-accent-strong) 100%);
+    color: #fff;
+    border-color: var(--players-accent-strong);
+    box-shadow: 0 0 0 2px var(--players-accent-soft);
+  }
+
+  &:not(.active):hover {
+    background-color: #374151;
+    color: #f3f4f6;
+    border-color: #9ca3af;
+  }
+}
+
+.sortGroup .sortViewBtn span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.sortGroup .sortViewBtn.active span {
+  color: #fff;
+}
+
+.sortGroup .sortViewBtn span svg {
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+
+.sortGroup button {
+  min-height: 40px;
 }

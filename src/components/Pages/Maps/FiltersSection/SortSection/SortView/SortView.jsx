@@ -1,5 +1,6 @@
 "use client";
 
+import { VIEW_OPTIONS_DATA } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ExpandButton from "./ExpandButton/ExpandButton";
@@ -52,16 +53,3 @@ const SortView = ({ setPaginationNumber }) => {
 };
 
 export default SortView;
-
-const VIEW_OPTIONS_DATA = [
-  {
-    value: "grid",
-    icon: "window",
-    id: 1,
-  },
-  {
-    value: "list",
-    icon: "list",
-    id: 2,
-  },
-];

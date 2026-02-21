@@ -2,8 +2,9 @@
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
+import { VIEW_OPTIONS_DATA } from "@/data/constants";
 import { FILTER_PLAYERS_BADGES, SORT_PLAYERS_OPTIONS } from "@/data/staticData";
-import { createQueryString } from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 
@@ -13,6 +14,7 @@ const FiltersSection = () => {
   const searchParams = useSearchParams();
   const sortBy = searchParams?.get("sort") || "admin";
   const filterBy = searchParams?.get("badge") || "all";
+  const viewBy = searchParams.get("view") || "grid";
 
   function handleSortChange(newValue) {
     createQueryString("sort", newValue, searchParams, router, pathname);
@@ -23,29 +25,40 @@ const FiltersSection = () => {
     createQueryString("badge", newValue, searchParams, router, pathname);
   }
 
+  function changeView(value) {
+    const isDefault = value === "grid";
+
+    if (isDefault) {
+      removeQueryString("view", searchParams, router, pathname);
+      return;
+    }
+
+    createQueryString("view", value, searchParams, router, pathname);
+  }
+
   return (
     <section className={s.filtersSection}>
-      <div className={`${s.filterGroup} ${s.searchGroup}`}>
-        <span className={s.filterLabel}>Search With</span>
+      <div className={s.row}>
+        <div className={`${s.filterGroup} ${s.searchGroup}`}>
+          <span className={s.filterLabel}>Search With</span>
 
-        <div className={s.fields}>
-          <SearchInput
-            queryName="name"
-            placeholder="Player Name"
-            id="player-name-search"
-            autoFocus={true}
-          />
+          <div className={s.fields}>
+            <SearchInput
+              queryName="name"
+              placeholder="Player Name"
+              id="player-name-search"
+              autoFocus={true}
+            />
 
-          <SearchInput
-            queryName="id"
-            placeholder="Player ID"
-            id="player-id-search"
-            inputMode="numeric"
-          />
+            <SearchInput
+              queryName="id"
+              placeholder="Player ID"
+              id="player-id-search"
+              inputMode="numeric"
+            />
+          </div>
         </div>
-      </div>
 
-      <div className={s.controls}>
         <div className={`${s.filterGroup} ${s.selectGroup}`}>
           <label className={s.filterLabel} htmlFor="players-filter-badges">
             Filter By Badges
@@ -57,26 +70,56 @@ const FiltersSection = () => {
             id="players-filter-badges"
           />
         </div>
+      </div>
 
-        <div className={`${s.filterGroup} ${s.sortGroup}`}>
-          <span className={s.filterLabel}>Sort By</span>
-          <div className={s.sortButtons} role="group" aria-label="Sort players">
-            {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
-              const isActive = sortBy === value;
+      <div className={`${s.row} ${s.secondRow}`}>
+        <div className={s.options}>
+          <div className={`${s.filterGroup} ${s.sortGroup}`}>
+            <span className={s.filterLabel}>Sort By</span>
+            <div
+              className={s.sortButtons}
+              role="group"
+              aria-label="Sort players"
+            >
+              {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
+                const isActive = sortBy === value;
 
-              return (
-                <button
-                  key={id}
-                  type="button"
-                  onClick={() => handleSortChange(value)}
-                  className={`${s.sortButton} ${isActive ? s.active : ""}`}
-                  aria-pressed={isActive}
-                >
-                  {label}
-                </button>
-              );
-            })}
+                return (
+                  <button
+                    key={id}
+                    type="button"
+                    onClick={() => handleSortChange(value)}
+                    className={`${s.sortButton} ${isActive ? s.active : ""}`}
+                    aria-pressed={isActive}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
           </div>
+        </div>
+
+        <div className={s.sortGroup}>
+          {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
+            const activeClass = viewBy === value ? s.active : "";
+
+            return (
+              <button
+                key={id}
+                type="button"
+                className={`${s.sortViewBtn} ${activeClass}`}
+                onClick={() => changeView(value)}
+                title={`Change maps view to ${value}`}
+              >
+                <span>
+                  <svg aria-hidden="true">
+                    <use href={`/icons-sprite.svg#${icon}`} />
+                  </svg>
+                </span>
+              </button>
+            );
+          })}
         </div>
       </div>
     </section>

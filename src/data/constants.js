@@ -61,3 +61,16 @@ export const COUNTRIES_WITH_THE = new Set([
   "Lao People's Democratic Republic",
   "Syrian Arab Republic",
 ]);
+
+export const VIEW_OPTIONS_DATA = [
+  {
+    value: "grid",
+    icon: "window",
+    id: 1,
+  },
+  {
+    value: "list",
+    icon: "list",
+    id: 2,
+  },
+];

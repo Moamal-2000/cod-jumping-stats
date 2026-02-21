@@ -1,8 +1,9 @@
+"use client";
+
+import { useSearchParams } from "next/navigation";
 import PlayerCard from "../PlayerCard/PlayerCard";
 import s from "./PlayersSection.module.scss";
 import PlayersTable from "./PlayersTable/PlayersTable";
-
-const viewType = "grid";
 
 const PlayersSection = ({
   playersScroll,
@@ -10,15 +11,18 @@ const PlayersSection = ({
   lastPlayerRef,
   searchByName,
 }) => {
+  const searchParams = useSearchParams();
+  const viewBy = searchParams.get("view") || "grid";
+
   return (
     <section className={s.playersSection}>
-      {viewType === "grid" &&
+      {viewBy === "grid" &&
         playersScroll.map((player, index) => {
           const ref = playersScroll.length === index + 1 ? lastPlayerRef : null;
           return <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />;
         })}
 
-      {viewType === "list" && (
+      {viewBy === "list" && (
         <PlayersTable
           playersScroll={playersScroll}
           lastPlayerRef={lastPlayerRef}
