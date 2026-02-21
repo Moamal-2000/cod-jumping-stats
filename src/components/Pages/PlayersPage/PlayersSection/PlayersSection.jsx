@@ -1,5 +1,8 @@
+import PlayerCard from "../PlayerCard/PlayerCard";
 import s from "./PlayersSection.module.scss";
 import PlayersTable from "./PlayersTable/PlayersTable";
+
+const viewType = "grid";
 
 const PlayersSection = ({
   playersScroll,
@@ -7,27 +10,20 @@ const PlayersSection = ({
   lastPlayerRef,
   searchByName,
 }) => {
-  // return (
-  //   <section className={s.playersSection}>
-  //     {playersScroll.map((player, index) => {
-  //       const ref = playersScroll.length === index + 1 ? lastPlayerRef : null;
-  //       return <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />;
-  //     })}
-
-  //     {allDataDisplayed && playersScroll.length > 0 && !searchByName && (
-  //       <div className={s.endOfResults}>
-  //         <p>You've reached the end of the players list.</p>
-  //       </div>
-  //     )}
-  //   </section>
-  // );
-
   return (
     <section className={s.playersSection}>
-      <PlayersTable
-        playersScroll={playersScroll}
-        lastPlayerRef={lastPlayerRef}
-      />
+      {viewType === "grid" &&
+        playersScroll.map((player, index) => {
+          const ref = playersScroll.length === index + 1 ? lastPlayerRef : null;
+          return <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />;
+        })}
+
+      {viewType === "list" && (
+        <PlayersTable
+          playersScroll={playersScroll}
+          lastPlayerRef={lastPlayerRef}
+        />
+      )}
 
       {allDataDisplayed && playersScroll.length > 0 && !searchByName && (
         <div className={s.endOfResults}>
