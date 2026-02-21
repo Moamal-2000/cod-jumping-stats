@@ -1,6 +1,7 @@
 "use client";
 
 import PlayerBadges from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
+import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
 import { getColoredName } from "@/functions/components";
 import { useSelector } from "react-redux";
@@ -32,15 +33,13 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
         </div>
 
         <div className={s.playerDetails}>
-          <h1 className={s.playerName}>
-            {getColoredName(playerName)}
-            {adminLevel >= 0 && (
-              <span className={s.adminBadge}>Admin {adminLevel}</span>
-            )}
-          </h1>
+          <h1 className={s.playerName}>{getColoredName(playerName)}</h1>
 
           <div className={s.playerMeta}>
             <span className={s.playerSteamId}>ID: {playerId}</span>
+            <span className={s.adminBadge}>
+              <AdminLevel adminLevel={adminLevel} />
+            </span>
 
             <div className={s.playerBadges}>
               <PlayerBadges
