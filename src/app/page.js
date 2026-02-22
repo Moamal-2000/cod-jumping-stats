@@ -1,8 +1,10 @@
 import ServersPage from "@/components/Pages/ServersPage/ServersPage";
-import { METADATA } from "@/data/metadata";
+import { getOpenGraphMetadata } from "@/data/metadata";
 import { Suspense } from "react";
 
-export const metadata = METADATA;
+export function generateMetadata() {
+  return getOpenGraphMetadata();
+}
 
 export default async function Servers() {
   return (
