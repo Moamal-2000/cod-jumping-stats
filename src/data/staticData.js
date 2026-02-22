@@ -1,3 +1,5 @@
+import { GITHUB_REPO_URL } from "./constants";
+
 export const NAV_LINKS_DATA = [
   {
     name: "Servers",
@@ -65,7 +67,7 @@ export const SOCIAL_MEDIA_DATA = [
   },
   {
     iconName: "github",
-    link: "https://github.com/Moamal-2000/jumpers-heaven-statistics",
+    link: GITHUB_REPO_URL,
     id: 3,
   },
   {

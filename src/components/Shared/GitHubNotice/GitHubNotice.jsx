@@ -1,7 +1,7 @@
 "use client";
 
+import { GITHUB_REPO_URL } from "@/data/constants";
 import { useEffect, useState } from "react";
-import { gitHubRepoUrl } from "../Buttons/GitHubStarBtn/GitHubStarBtn";
 import s from "./GitHubNotice.module.scss";
 
 const GitHubNotice = () => {
@@ -29,7 +29,7 @@ const GitHubNotice = () => {
       <div className={s.content}>
         <p>
           If this project helps you, please consider giving it a ⭐ on{" "}
-          <a href={gitHubRepoUrl} target="_blank" rel="noopener noreferrer">
+          <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
             GitHub
           </a>
           . It helps the project grow.

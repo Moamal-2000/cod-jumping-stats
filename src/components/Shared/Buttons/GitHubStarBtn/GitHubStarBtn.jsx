@@ -1,10 +1,10 @@
-import { SOCIAL_MEDIA_DATA } from "@/data/staticData";
+import { GITHUB_REPO_URL } from "@/data/constants";
 import s from "./GitHubStarBtn.module.scss";
 
 const GitHubStarBtn = () => {
   return (
     <a
-      href={gitHubRepoUrl}
+      href={GITHUB_REPO_URL}
       className={s.githubStarBtn}
       aria-label="Star us on GitHub"
       target="_blank"
@@ -24,7 +24,3 @@ const GitHubStarBtn = () => {
 };
 
 export default GitHubStarBtn;
-
-export const gitHubRepoUrl = SOCIAL_MEDIA_DATA.find(
-  ({ iconName }) => iconName === "github",
-).link;
