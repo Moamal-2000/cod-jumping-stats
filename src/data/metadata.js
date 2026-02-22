@@ -1,4 +1,4 @@
-export const BASE_URL = process.env.SITE_MAP;
+export const SITE_URL = process.env.SITE_URL;
 const title = "Servers | JumpersHeaven";
 
 const keywords = [
@@ -23,5 +23,30 @@ const keywords = [
 
 const description =
   "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.";
+
+export function getOpenGraphMetadata(pagePath = "") {
+  const url = pagePath ? `${SITE_URL}/${pagePath}` : SITE_URL;
+
+  return {
+    openGraph: {
+      title,
+      description,
+      url,
+      type: "website",
+      locale: "en_US",
+      siteName: "Moamal Alaa Portfolio",
+      authors: ["Moamal Alaa"],
+      images: [
+        {
+          url: `${SITE_URL}/og-image.webp`,
+          type: "image/webp",
+          alt: "Moamal Alaa Front-End Engineer Portfolio OG Image",
+          width: 1200,
+          height: 634,
+        },
+      ],
+    },
+  };
+}
 
 export const METADATA = { title, description, keywords };
