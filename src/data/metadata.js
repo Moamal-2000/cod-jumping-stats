@@ -28,7 +28,7 @@ export function getOpenGraphMetadata({
   pagePath = "",
   title,
   description,
-  imageUrl = `${SITE_URL}/og-image.webp`,
+  imageUrl = `${SITE_URL}/openGraph/og-image.webp`,
   imageType = "image/webp",
   imageAlt = "",
   imageSize = { width: 1300, height: 520 },

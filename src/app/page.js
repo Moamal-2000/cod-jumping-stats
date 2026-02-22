@@ -13,7 +13,7 @@ export const metadata = {
   ...getOpenGraphMetadata({
     title,
     description,
-    imageUrl: `${SITE_URL}/og-image-servers.webp`,
+    imageUrl: `${SITE_URL}/openGraph/og-image-servers.webp`,
     imageAlt: "Jumpers Heaven Servers",
   }),
 };
