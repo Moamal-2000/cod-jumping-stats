@@ -1,5 +1,5 @@
 export const SITE_URL = process.env.SITE_URL;
-const title = "Servers | JumpersHeaven";
+const title = "Statistics | JumpersHeaven";
 
 const keywords = [
   "Jumpers Heaven",
@@ -22,7 +22,7 @@ const keywords = [
 ];
 
 const description =
-  "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.";
+  "JumpersHeaven statistics platform for tracking servers, players, maps, favorites, and leaderboard performance.";
 
 export function getOpenGraphMetadata({
   pagePath = "",
@@ -31,7 +31,7 @@ export function getOpenGraphMetadata({
   imageUrl = `${SITE_URL}/og-image.webp`,
   imageType = "image/webp",
   imageAlt = "",
-  imageSize = { width: 1010, height: 407 },
+  imageSize = { width: 1300, height: 520 },
 } = {}) {
   const url = pagePath ? `${SITE_URL}/${pagePath}` : SITE_URL;
 
@@ -56,4 +56,9 @@ export function getOpenGraphMetadata({
   };
 }
 
-export const METADATA = { title, description, keywords };
+export const METADATA = {
+  title,
+  description,
+  keywords,
+  ...getOpenGraphMetadata(),
+};
