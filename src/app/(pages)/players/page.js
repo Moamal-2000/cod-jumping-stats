@@ -14,7 +14,7 @@ export const metadata = {
   ...getOpenGraphMetadata({
     title,
     description,
-    imageUrl: `${SITE_URL}/og-image-players.webp`,
+    imageUrl: `${SITE_URL}/openGraph/og-image-players.webp`,
     imageAlt: "Jumpers Heaven Players",
   }),
 };
