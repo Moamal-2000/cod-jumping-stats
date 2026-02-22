@@ -9,20 +9,17 @@ const GitHubNotice = () => {
 
   useEffect(() => {
     const isClosed = localStorage.getItem("github-notice-closed") === "true";
+    if (isClosed) return;
 
-    if (!isClosed) {
-      const timer = setTimeout(() => {
-        setIsVisible(true);
-      }, 10000);
+    const timer = setTimeout(() => setIsVisible(true), 10000);
 
-      return () => clearTimeout(timer);
-    }
+    return () => clearTimeout(timer);
   }, []);
 
-  const handleClose = () => {
+  function handleClose() {
     localStorage.setItem("github-notice-closed", "true");
     setIsVisible(false);
-  };
+  }
 
   return (
     <div className={`${s.notice} ${isVisible ? s.visible : ""}`}>
