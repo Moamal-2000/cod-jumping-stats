@@ -1,5 +1,22 @@
 import ServersPage from "@/components/Pages/ServersPage/ServersPage";
+import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
 import { Suspense } from "react";
+
+const title = "Servers | JumpersHeaven";
+const description =
+  "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.";
+
+export const metadata = {
+  title,
+  description,
+  keyword: METADATA.keywords,
+  ...getOpenGraphMetadata({
+    title,
+    description,
+    imageUrl: `${SITE_URL}/og-image-servers.webp`,
+    imageAlt: "Jumpers Heaven Servers",
+  }),
+};
 
 export default async function Servers() {
   return (

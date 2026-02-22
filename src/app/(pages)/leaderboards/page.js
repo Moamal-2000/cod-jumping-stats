@@ -1,12 +1,23 @@
 import FiltersSection from "@/components/Pages/Leaderboards/FiltersSection/FiltersSection";
 import LeaderBoard from "@/components/Pages/Leaderboards/LeaderBoard/LeaderBoard";
 import PlayerToolTip from "@/components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
+import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
 import { Suspense } from "react";
 
+const title = "Leaderboards | JumpersHeaven";
+const description =
+  "View filtered JumpersHeaven leaderboards to compare top runs, rankings, and player performance across categories.";
+
 export const metadata = {
-  title: "Leaderboards | JumpersHeaven",
-  description:
-    "View filtered JumpersHeaven leaderboards to compare top runs, rankings, and player performance across categories.",
+  title,
+  description,
+  keyword: METADATA.keywords,
+  ...getOpenGraphMetadata({
+    title,
+    description,
+    imageUrl: `${SITE_URL}/og-image-leaderboards.webp`,
+    imageAlt: "Jumpers Heaven Leaderboards",
+  }),
 };
 
 const LeaderboardsPage = () => {
