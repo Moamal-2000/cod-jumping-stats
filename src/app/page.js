@@ -1,11 +1,8 @@
 import ServersPage from "@/components/Pages/ServersPage/ServersPage";
+import { METADATA } from "@/data/metadata";
 import { Suspense } from "react";
 
-export const metadata = {
-  title: "Servers | JumpersHeaven",
-  description:
-    "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.",
-};
+export const metadata = METADATA;
 
 export default async function Servers() {
   return (
