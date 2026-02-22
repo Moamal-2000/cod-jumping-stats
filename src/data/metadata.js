@@ -24,7 +24,15 @@ const keywords = [
 const description =
   "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.";
 
-export function getOpenGraphMetadata(pagePath = "") {
+export function getOpenGraphMetadata({
+  pagePath = "",
+  title,
+  description,
+  imageUrl = `${SITE_URL}/og-image.webp`,
+  imageType = "image/webp",
+  imageAlt = "",
+  imageSize = { width: 1200, height: 620 },
+} = {}) {
   const url = pagePath ? `${SITE_URL}/${pagePath}` : SITE_URL;
 
   return {
@@ -34,15 +42,14 @@ export function getOpenGraphMetadata(pagePath = "") {
       url,
       type: "website",
       locale: "en_US",
-      siteName: "Moamal Alaa Portfolio",
-      authors: ["Moamal Alaa"],
+      siteName: "Jumpers Heaven Stats",
+      authors: ["Moamal Alaa", "Dcoy"],
       images: [
         {
-          url: `${SITE_URL}/og-image.webp`,
-          type: "image/webp",
-          alt: "Moamal Alaa Front-End Engineer Portfolio OG Image",
-          width: 1200,
-          height: 634,
+          url: imageUrl,
+          type: imageType,
+          alt: imageAlt,
+          ...imageSize,
         },
       ],
     },
