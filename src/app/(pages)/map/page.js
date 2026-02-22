@@ -10,7 +10,7 @@ const description = "View JumpersHeaven map details and statistics.";
 export const metadata = {
   title,
   description,
-  keyword: METADATA.keywords,
+  keywords: METADATA.keywords,
   ...getOpenGraphMetadata({
     title,
     description,

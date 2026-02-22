@@ -7,7 +7,7 @@ const description = "View JumpersHeaven player details and statistics.";
 export const metadata = {
   title,
   description,
-  keyword: METADATA.keywords,
+  keywords: METADATA.keywords,
   ...getOpenGraphMetadata({
     title,
     description,

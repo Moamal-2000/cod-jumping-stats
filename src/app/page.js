@@ -9,7 +9,7 @@ const description =
 export const metadata = {
   title,
   description,
-  keyword: METADATA.keywords,
+  keywords: METADATA.keywords,
   ...getOpenGraphMetadata({
     title,
     description,
