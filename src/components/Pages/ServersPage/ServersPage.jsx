@@ -14,7 +14,7 @@ import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 import ServersControls from "./ServersControls/ServersControls";
 
 const DEFAULT_REFRESH_SECONDS = 30;
-const DEFAULT_GAME_FILTER = "all";
+const DEFAULT_GAME_FILTER = "cod2";
 const DEFAULT_VIEW_MODE = "grid";
 const DEFAULT_STATUS_SERVER = "all";
 const DEFAULT_AUTO_REFRESH = "true";
