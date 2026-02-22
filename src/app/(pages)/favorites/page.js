@@ -1,10 +1,21 @@
 import Favorites from "@/components/Pages/Favorites/Favorites/Favorites";
+import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
 import { Suspense } from "react";
 
+const title = "Favorites | JumpersHeaven";
+const description =
+  "Access your saved JumpersHeaven players and maps in one place to quickly revisit the profiles and content you follow.";
+
 export const metadata = {
-  title: "Favorites | JumpersHeaven",
-  description:
-    "Access your saved JumpersHeaven players and maps in one place to quickly revisit the profiles and content you follow.",
+  title,
+  description,
+  keyword: METADATA.keywords,
+  ...getOpenGraphMetadata({
+    title,
+    description,
+    imageUrl: `${SITE_URL}/og-image-favorites.webp`,
+    imageAlt: "Jumpers Heaven Favorites",
+  }),
 };
 
 const FavoritesPage = () => {
