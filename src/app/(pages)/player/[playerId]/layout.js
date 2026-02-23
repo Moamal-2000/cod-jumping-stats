@@ -1,6 +1,6 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
-import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
+import { getOpenGraphMetadata } from "@/data/metadata";
 import {
   buildPlayerDescription,
   getPlayerById,
@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
     ...getOpenGraphMetadata({
       title,
       description,
-      imageUrl: `${SITE_URL}/player/${playerId}/opengraph-image`,
+      imageUrl: `https://stats.jumpersheaven.com/player/${playerId}/opengraph-image`,
       imageAlt: "Jumpers Heaven Player Profile",
       pagePath: `/player/${playerId}`,
       imageType: "image/png",
