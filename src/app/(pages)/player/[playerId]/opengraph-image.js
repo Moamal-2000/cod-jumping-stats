@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/data/metadata";
 import { getColoredNameForOG } from "@/functions/components";
-import { getPlayerById } from "@/functions/utils";
+import { getCountryName, getPlayerById } from "@/functions/utils";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 1300, height: 740 };
@@ -8,16 +8,28 @@ export const contentType = "image/png";
 export const revalidate = 60;
 
 const logoSize = 400;
+const countryWidth = 240;
+const countryHeight = 140;
 
 export default async function Image({ params }) {
   const { playerId } = await params;
   const player = await getPlayerById({ playerId });
+
+  const playerCountryCode = player?.Country?.toLowerCase();
   const coloredPlayerName = getColoredNameForOG(
     player?.PrefName || player?.PlayerName,
   );
 
   const playerOpenGraphElement = (
     <div style={s.container}>
+      <img
+        src={`${SITE_URL}/countryFlags/${playerCountryCode}.svg`}
+        alt={`${getCountryName(playerCountryCode)} flag`}
+        width={countryWidth}
+        height={countryHeight}
+        style={s.countryImg}
+      />
+
       <img
         src={`${SITE_URL}/logo.png`}
         alt="Jumpers Heaven Logo"
@@ -45,11 +57,20 @@ const s = {
   },
 
   logoImg: {
-    margin: "0 auto",
     width: logoSize,
     height: logoSize,
     filter: "brightness(1.5) saturate(1.5)",
+    margin: "0 auto",
     marginBottom: -50,
+  },
+
+  countryImg: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    width: countryWidth,
+    height: countryHeight,
+    filter: "brightness(1.5) saturate(1.5)",
   },
 
   playerName: {
