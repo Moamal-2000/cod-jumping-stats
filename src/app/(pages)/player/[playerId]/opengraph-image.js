@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/data/metadata";
 import { getColoredNameForOG } from "@/functions/components";
 import { getPlayerById } from "@/functions/utils";
 import { ImageResponse } from "next/og";
@@ -18,8 +19,8 @@ export default async function Image({ params }) {
   const playerOpenGraphElement = (
     <div style={s.container}>
       <img
-        src="http://localhost:3000/logo.png"
-        alt="Jumpers Heaven"
+        src={`${SITE_URL}/logo.png`}
+        alt="Jumpers Heaven Logo"
         width={logoSize}
         height={logoSize}
         style={s.logoImg}
