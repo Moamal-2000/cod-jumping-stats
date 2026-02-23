@@ -27,11 +27,13 @@ export async function generateMetadata({ params }) {
       description,
       imageUrl: `https://stats.jumpersheaven.com/player/${playerId}/opengraph-image`,
       imageAlt: "Jumpers Heaven Player Profile",
-      pagePath: `/player/${playerId}`,
+      pagePath: `player/${playerId}`,
       imageType: "image/png",
       imageSize: size,
     }),
   };
+
+  console.log(generatedMetadata);
 
   return generatedMetadata;
 }
