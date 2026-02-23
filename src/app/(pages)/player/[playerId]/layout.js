@@ -18,9 +18,10 @@ export async function generateMetadata({ params }) {
   const title = `${purePlayerName} Profile | JumpersHeaven`;
   const description = buildPlayerDescription(player);
 
-  return {
+  const generatedMetadata = {
     title,
     description,
+    metadataBase: new URL("https://stats.jumpersheaven.com"),
     ...getOpenGraphMetadata({
       title,
       description,
@@ -31,6 +32,8 @@ export async function generateMetadata({ params }) {
       imageSize: size,
     }),
   };
+
+  return generatedMetadata;
 }
 
 function PlayerLayoutContent({ children, playerId }) {
