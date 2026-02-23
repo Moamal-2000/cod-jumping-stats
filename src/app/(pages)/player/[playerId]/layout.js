@@ -1,6 +1,5 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
-import { getOpenGraphMetadata } from "@/data/metadata";
 import {
   buildPlayerDescription,
   getPlayerById,
@@ -20,7 +19,14 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    ...getOpenGraphMetadata({ title, description }),
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      locale: "en_US",
+      siteName: "Jumpers Heaven Stats",
+      authors: ["Moamal Alaa", "Dcoy"],
+    },
   };
 }
 
