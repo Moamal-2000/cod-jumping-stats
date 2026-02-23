@@ -24,7 +24,7 @@ export async function generateMetadata({ params }) {
     ...getOpenGraphMetadata({
       title,
       description,
-      imageUrl: `${SITE_URL}/player/${playerId}/opengraph-image-nzpjte?4dce0101f930f29f`,
+      imageUrl: `${SITE_URL}/player/${playerId}/opengraph-image`,
       imageAlt: "Jumpers Heaven Player Profile",
       pagePath: `/player/${playerId}`,
       imageType: "image/png",
