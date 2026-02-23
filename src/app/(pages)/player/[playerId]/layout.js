@@ -1,10 +1,12 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
+import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
 import {
   buildPlayerDescription,
   getPlayerById,
   stripColorCodes,
 } from "@/functions/utils";
+import { size } from "./opengraph-image";
 
 export async function generateMetadata({ params }) {
   const { playerId } = await params;
@@ -19,14 +21,15 @@ export async function generateMetadata({ params }) {
   return {
     title,
     description,
-    openGraph: {
+    ...getOpenGraphMetadata({
       title,
       description,
-      type: "website",
-      locale: "en_US",
-      siteName: "Jumpers Heaven Stats",
-      authors: ["Moamal Alaa", "Dcoy"],
-    },
+      imageUrl: `${SITE_URL}/player/${playerId}/opengraph-image-nzpjte?4dce0101f930f29f`,
+      imageAlt: "Jumpers Heaven Player Profile",
+      pagePath: `/player/${playerId}`,
+      imageType: "image/png",
+      imageSize: size,
+    }),
   };
 }
 
