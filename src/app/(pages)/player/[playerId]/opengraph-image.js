@@ -55,11 +55,9 @@ const s = {
   playerName: {
     fontSize: 90,
     fontWeight: 700,
-    marginRight: 40,
     color: "#fff",
     display: "flex",
     alignSelf: "center",
-    width: size.width - 200,
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
