@@ -1,5 +1,28 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
+import { getOpenGraphMetadata } from "@/data/metadata";
+import {
+  buildPlayerDescription,
+  getPlayerById,
+  stripColorCodes,
+} from "@/functions/utils";
+
+export async function generateMetadata({ params }) {
+  const { playerId } = await params;
+  const player = await getPlayerById({ playerId });
+
+  const playerName = player?.PrefName || player?.PlayerName;
+  const purePlayerName = stripColorCodes(playerName);
+
+  const title = `${purePlayerName} Profile | JumpersHeaven`;
+  const description = buildPlayerDescription(player);
+
+  return {
+    title,
+    description,
+    ...getOpenGraphMetadata({ title, description }),
+  };
+}
 
 function PlayerLayoutContent({ children, playerId }) {
   const isPlayerIdNumber = Number.isInteger(Number(playerId));

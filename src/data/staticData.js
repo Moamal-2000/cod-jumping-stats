@@ -52,6 +52,19 @@ export const COD2_COLORS = {
   0: "black",
 };
 
+export const COD2_HEX_COLORS = {
+  red: "#da0120",
+  green: "#00b906",
+  yellow: "#e8ff19",
+  blue: "#170bdb",
+  cyan: "#23c2c6",
+  magenta: "#e201db",
+  white: "#eee",
+  purple: "#8080FE",
+  gray: "#757575",
+  black: "#000",
+};
+
 export const TOP_STATS_COLOR = ["#facc15", "#c0c0c0", "#cd7f32"];
 
 export const SOCIAL_MEDIA_DATA = [
