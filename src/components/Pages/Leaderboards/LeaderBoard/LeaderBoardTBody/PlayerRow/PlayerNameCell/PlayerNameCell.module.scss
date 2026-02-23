@@ -35,6 +35,28 @@
   user-select: none;
 }
 
+.player a {
+  max-width: 240px;
+}
+
+@media (max-width: 1300px) {
+  .player a {
+    max-width: none;
+  }
+}
+
+@include m.very-small {
+  .player a {
+    max-width: 240px;
+  }
+}
+
+.player .playerName {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 @include m.small {
   .player .playerName {
     position: relative;
