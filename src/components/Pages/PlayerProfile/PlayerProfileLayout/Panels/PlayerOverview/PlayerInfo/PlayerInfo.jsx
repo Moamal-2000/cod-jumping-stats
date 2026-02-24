@@ -9,6 +9,8 @@ import RoutesCard from "./RoutesCard/RoutesCard";
 const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
+  const lastSeenText = getLastSeenText(performanceStats.DaysSinceLastSeen);
+
   return (
     <section className={s.overview}>
       <div className={s.statsHeader}>
@@ -27,13 +29,7 @@ const PlayerInfo = () => {
                 </svg>
                 Last Active
               </div>
-              <div className={s.infoValue}>
-                {performanceStats.DaysSinceLastSeen === 0
-                  ? "Today"
-                  : performanceStats.DaysSinceLastSeen === 1
-                    ? "Yesterday"
-                    : `${performanceStats.DaysSinceLastSeen} days ago`}
-              </div>
+              <div className={s.infoValue}>{lastSeenText}</div>
               <div className={s.infoSubtext}>
                 Last seen: {formatLastSeen(jumpScores?.LastSeen)}
               </div>
@@ -100,4 +96,12 @@ function formatLastSeen(lastSeen) {
   if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
 
   return date.toLocaleDateString();
+}
+
+function getLastSeenText(daysSinceLastSeen) {
+  if (daysSinceLastSeen === 0) return "Today";
+  if (daysSinceLastSeen === 1) return "Yesterday";
+  if (daysSinceLastSeen > 1) return `${daysSinceLastSeen} days ago`;
+
+  return "Unknown";
 }
