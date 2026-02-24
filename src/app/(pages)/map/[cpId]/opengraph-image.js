@@ -48,7 +48,6 @@ const s = {
     width: size.width - 100,
     padding: 20,
     right: 50,
-    zIndex: -1,
   },
 
   mapContainer: {
