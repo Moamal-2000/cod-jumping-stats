@@ -10,17 +10,14 @@ export default async function Image({ params }) {
   const { cpId } = await params;
   const map = await getMapByCpId(cpId, "uint8Array");
   const cleanMapName = getCleanMapName(map.Name);
-  const mapImagePath = `${"http://localhost:3000"}/maps/${cleanMapName}.jpeg`;
-
-  const mapName = map.Name;
-  const mapAuthor = map.Author;
-  const releaseMapDate = map.Release;
-  const mapType = map.Type;
-  const mapDifficulties = map.Difficulty;
+  const mapImagePath = `${"http://localhost:3000"}/maps/1920/jpeg/${cleanMapName}.jpeg`;
 
   const MapOpenGraphElement = (
     <div style={s.container}>
-      <img src={mapImagePath} width="100%" height="100%" style={s.mapImage} />
+      <div style={s.mapContainer}>
+        <img src={mapImagePath} width="100%" height="100%" style={s.mapImage} />
+        <span style={s.mapName}>By: {map.Author}</span>
+      </div>
     </div>
   );
 
@@ -36,10 +33,26 @@ const s = {
     background: "linear-gradient(135deg, #020617, #0f172a)",
   },
 
+  mapContainer: {
+    width: "100%",
+    height: "100%",
+    display: "flex",
+  },
+
   mapImage: {
     width: size.width,
     height: size.height,
     filter: "brightness(1.2)",
     objectFit: "cover",
+  },
+
+  mapName: {
+    fontSize: 60,
+    fontWeight: 600,
+    color: "white",
+    position: "absolute",
+    backgroundColor: "rgba(0, 0, 0, 0.5)",
+    bottom: 50,
+    left: 50,
   },
 };
