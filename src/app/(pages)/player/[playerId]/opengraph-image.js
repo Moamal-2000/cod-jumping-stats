@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/data/metadata";
 import { getColoredNameForOG } from "@/functions/components";
-import { getCountryName, getPlayerById } from "@/functions/utils";
+import { getPlayerById } from "@/functions/utils";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 1300, height: 740 };
@@ -25,7 +25,6 @@ export default async function Image({ params }) {
     <div style={s.container}>
       <img
         src={`${SITE_URL}/countryFlags/${playerCountryCode}.svg`}
-        alt={`${getCountryName(playerCountryCode)} flag`}
         width={countryWidth}
         height={countryHeight}
         style={s.countryImg}
@@ -33,7 +32,6 @@ export default async function Image({ params }) {
 
       <img
         src={`${SITE_URL}/logo.png`}
-        alt="Jumpers Heaven Logo"
         width={logoSize}
         height={logoSize}
         style={s.logoImg}
