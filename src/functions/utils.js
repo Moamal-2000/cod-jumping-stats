@@ -1,6 +1,7 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import {
   COUNTRIES_WITH_THE,
+  GITHUB_REPO_API_URL,
   JUMP_FPS,
   MONTHS,
   NUMBER_OF_RATING_STARS,
@@ -701,4 +702,16 @@ export function buildPlayerDescription(player = {}) {
 export function getCleanMapName(mapName) {
   if (!mapName) return "unknown";
   return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
+}
+
+export async function fetchProjectRepo() {
+  try {
+    const response = await fetch(GITHUB_REPO_API_URL);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(` Error fetching repo stars: ${error}`);
+    return [];
+  }
 }

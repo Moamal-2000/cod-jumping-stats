@@ -68,6 +68,12 @@
   }
 }
 
+.content>p>span {
+  color: #eab308;
+  letter-spacing: .1em;
+  font-weight: 700;
+}
+
 .closeBtn {
   flex-shrink: 0;
   background: none;
