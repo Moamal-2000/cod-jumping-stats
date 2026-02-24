@@ -26,9 +26,9 @@ const GitHubNotice = () => {
       <div className={s.content}>
         <p>
           This project is built for the JumpersHeaven community. If you want to
-          support its development, a ⭐ on{" "}
+          support its development, a
           <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
-            GitHub
+            ⭐ Star on GitHub
           </a>{" "}
           really helps.
         </p>
