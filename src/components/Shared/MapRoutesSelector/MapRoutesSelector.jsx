@@ -12,7 +12,7 @@ const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
 
       <div className={s.otherRoutesList}>
         {otherRoutes.map((route) => (
-          <Link key={route.CpID} href={`/map?mapid=${route.CpID}`}>
+          <Link key={route.CpID} href={`/map/${route.CpID}`}>
             {route.Ender}
           </Link>
         ))}

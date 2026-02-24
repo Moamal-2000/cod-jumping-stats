@@ -18,9 +18,8 @@ import MapVideos from "./MapVideos/MapVideos";
 import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
-const MapDetailPage = () => {
+const MapDetailPage = ({ cpId }) => {
   const searchParams = useSearchParams();
-  const cpid = parseInt(searchParams.get("mapid"), 10);
 
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
@@ -60,7 +59,7 @@ const MapDetailPage = () => {
       const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
 
       if (!isCacheExpire) {
-        const map = mapsLocal.maps.find((map) => map.CpID === +cpid);
+        const map = mapsLocal.maps.find((map) => map.CpID === +cpId);
 
         setMapData(map);
         setError(false);
@@ -81,7 +80,7 @@ const MapDetailPage = () => {
       mapsLocal = (await decodeAsyncData(response)) ?? [];
       if (mapsLocal.length > 0) cacheMapsLocally(mapsLocal);
 
-      const map = mapsLocal.find((map) => map.CpID === +cpid);
+      const map = mapsLocal.find((map) => map.CpID === +cpId);
 
       map ? setMapData(map) : setError(true);
     } catch (err) {
@@ -100,7 +99,7 @@ const MapDetailPage = () => {
       if (selectedFps === "All") {
         if (!isLoadMore) {
           const promises = JUMP_FPS.map((fps) =>
-            fetch(jhApis({ fps, cpid }).map.tops)
+            fetch(jhApis({ fps, cpId }).map.tops)
               .then((res) => res.json())
               .then((data) => {
                 if (Array.isArray(data)) {
@@ -144,7 +143,7 @@ const MapDetailPage = () => {
         }
       } else if (selectedFps === "mix") {
         if (!isLoadMore) {
-          const response = await fetch(jhApis({ fps: "0", cpid }).map.tops);
+          const response = await fetch(jhApis({ fps: "0", cpId }).map.tops);
           const data = await response.json();
 
           setAllTopsData(data);
@@ -165,7 +164,7 @@ const MapDetailPage = () => {
       } else {
         if (!isLoadMore) {
           const response = await fetch(
-            jhApis({ fps: selectedFps, cpid }).map.tops,
+            jhApis({ fps: selectedFps, cpId }).map.tops,
           );
           const data = await response.json();
 
@@ -415,8 +414,8 @@ const MapDetailPage = () => {
   }, [hasMorePlayers, loadingMorePlayers, activeTab, playersData]);
 
   useEffect(() => {
-    if (cpid) fetchMapData();
-  }, [cpid]);
+    if (cpId) fetchMapData();
+  }, [cpId]);
 
   useEffect(() => {
     if (!mapData) return;

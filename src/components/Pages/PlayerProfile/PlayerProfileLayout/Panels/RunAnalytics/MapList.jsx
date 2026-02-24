@@ -135,7 +135,7 @@ const MapList = ({
               ) : (
                 filteredMaps.map((map) => {
                   const isActive = selectedMapId === map.CpID;
-                  const mapDetailsHref = `/map?mapid=${map.CpID}`;
+                  const mapDetailsHref = `/map/${map.CpID}`;
 
                   return (
                     <div

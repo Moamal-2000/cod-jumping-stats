@@ -123,10 +123,10 @@ export const fetchPlayerTops = createAsyncThunk(
 
 export const fetchMapRuns = createAsyncThunk(
   "playerProfile/fetchPlayerRuns",
-  async ({ playerId, cpid, fps }) => {
+  async ({ playerId, cpId, fps }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId, cpid, fps }).player.mapRuns,
+        url: jhApis({ playerId, cpId, fps }).player.mapRuns,
       });
 
       if (response.status === 500) {

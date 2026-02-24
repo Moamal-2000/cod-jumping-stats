@@ -54,7 +54,7 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
                         {isCod4 ? (
                           <span>{server.Map}</span>
                         ) : (
-                          <Link href={`/map?mapid=${server.MapID}`}>
+                          <Link href={`/map/${server.MapID}`}>
                             {server.Map}
                           </Link>
                         )}
