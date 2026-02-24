@@ -1340,4 +1340,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "jm_switchjump",
+    mapsIds: [15957],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=WkHO6XWi6hQ",
+        id: 1,
+      },
+    ],
+  },
 ];
