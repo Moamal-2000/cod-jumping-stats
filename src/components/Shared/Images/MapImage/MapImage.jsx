@@ -1,5 +1,6 @@
 "use client";
 
+import { getCleanMapName } from "@/functions/utils";
 import Image from "next/image";
 import { useState } from "react";
 import SpinnerLoader from "../../Loaders/SpinnerLoader/SpinnerLoader";
@@ -42,8 +43,3 @@ const MapImage = ({ mapName, resolution = "512" }) => {
 export default MapImage;
 
 const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
-
-function getCleanMapName(mapName) {
-  if (!mapName) return "unknown";
-  return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
-}
