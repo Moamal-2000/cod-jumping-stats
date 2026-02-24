@@ -25,11 +25,12 @@ const GitHubNotice = () => {
     <div className={`${s.notice} ${isVisible ? s.visible : ""}`}>
       <div className={s.content}>
         <p>
-          If this project helps you, please consider giving it a ⭐ on{" "}
+          This project is built for the JumpersHeaven community. If you want to
+          support its development, a ⭐ on{" "}
           <a href={GITHUB_REPO_URL} target="_blank" rel="noopener noreferrer">
             GitHub
-          </a>
-          . It helps the project grow.
+          </a>{" "}
+          really helps.
         </p>
 
         <button
