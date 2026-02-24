@@ -1,3 +1,4 @@
+import { SITE_URL } from "@/data/metadata";
 import { getCleanMapName, getMapByCpId } from "@/functions/utils";
 import { ImageResponse } from "next/og";
 
@@ -10,7 +11,7 @@ export default async function Image({ params }) {
   const { cpId } = await params;
   const map = await getMapByCpId(cpId, "uint8Array");
   const cleanMapName = getCleanMapName(map.Name);
-  const mapImagePath = `${"http://localhost:3000"}/maps/1920/jpeg/${cleanMapName}.jpeg`;
+  const mapImagePath = `${SITE_URL}/maps/1920/jpeg/${cleanMapName}.jpeg`;
 
   const MapOpenGraphElement = (
     <div style={s.container}>
