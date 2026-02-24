@@ -597,7 +597,7 @@ export async function fetchAllTopRuns({ mapId }) {
   try {
     const topRunsPromises = JUMP_FPS.map(async (fps) => {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ fps, cpid: mapId }).map.tops,
+        url: jhApis({ fps, cpId: mapId }).map.tops,
       });
       const topRunsByFps = await decodeAsyncData(response);
 

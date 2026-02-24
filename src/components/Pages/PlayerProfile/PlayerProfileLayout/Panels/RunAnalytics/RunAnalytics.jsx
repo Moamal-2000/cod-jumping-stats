@@ -51,7 +51,7 @@ const RunAnalytics = ({ playerId }) => {
   useEffect(() => {
     if (allMaps.length <= 0) dispatch(fetchMaps());
 
-    dispatch(fetchMapRuns({ playerId, cpid: selectedMapId, fps: selectedFps }));
+    dispatch(fetchMapRuns({ playerId, cpId: selectedMapId, fps: selectedFps }));
   }, [selectedMapId, selectedFps, playerId]);
 
   return (
