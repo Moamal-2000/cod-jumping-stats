@@ -1,8 +1,6 @@
-import MapDetailPage from "@/components/Pages/MapDetail/MapDetailPage";
 import s from "@/components/Pages/MapDetail/MapPage.module.scss";
 import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
 import Link from "next/link";
-import { Suspense } from "react";
 
 const title = "Map | JumpersHeaven";
 const description = "View JumpersHeaven map details and statistics.";
@@ -19,32 +17,19 @@ export const metadata = {
   }),
 };
 
-async function MapPage({ searchParams }) {
-  const { mapid } = await searchParams;
-  const mapIdExist = mapid !== undefined;
-
+function MapPage() {
   return (
-    <>
-      {!mapIdExist && (
-        <main>
-          <div className="container">
-            <section className={s.heroSection}>
-              <h1>Maps Overview</h1>
-              <p>
-                Explore all jumpers heaven <Link href="/maps">maps</Link>. Click
-                on a map to see detailed statistics and information.
-              </p>
-            </section>
-          </div>
-        </main>
-      )}
-
-      {mapIdExist && (
-        <Suspense fallback={<div>Loading...</div>}>
-          <MapDetailPage />
-        </Suspense>
-      )}
-    </>
+    <main>
+      <div className="container">
+        <section className={s.heroSection}>
+          <h1>Maps Overview</h1>
+          <p>
+            Explore all jumpers heaven <Link href="/maps">maps</Link>. Click on
+            a map to see detailed statistics and information.
+          </p>
+        </section>
+      </div>
+    </main>
   );
 }
 
