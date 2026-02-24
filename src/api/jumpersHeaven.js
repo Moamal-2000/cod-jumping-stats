@@ -6,7 +6,7 @@ export const jhApis = ({
   mapid = 173824,
   name = "SAD",
   playerId: playerid = 108468,
-  cpid = 14606,
+  cpId: cpid = 14606,
   sort = "",
   gametype = "jump",
 } = {}) => {
