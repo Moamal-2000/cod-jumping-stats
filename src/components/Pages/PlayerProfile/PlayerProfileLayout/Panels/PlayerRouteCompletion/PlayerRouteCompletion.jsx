@@ -56,7 +56,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
         className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
         <td className={s.mapNameCell}>
-          <Link href={`/map?mapid=${map.cp_id}`} className={s.mapLink}>
+          <Link href={`/map/${map.cp_id}`} className={s.mapLink}>
             {map.mapname}
           </Link>
         </td>

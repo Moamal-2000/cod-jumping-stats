@@ -22,7 +22,7 @@ const RecentActivity = () => {
       <div className={s.recentActivityList}>
         {recentTops.map((run, index) => (
           <Link
-            href={`/map?mapid=${run.Cpid}`}
+            href={`/map/${run.Cpid}`}
             className={s.recentActivityItem}
             key={index}
           >

@@ -13,7 +13,7 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td className={s.mapNameCell}>
-              <Link href={`/map?mapid=${run.CpID}`}>{run.MapName}</Link>
+              <Link href={`/map/${run.CpID}`}>{run.MapName}</Link>
             </td>
 
             <td className={s.fpsCell}>{run.FPS}</td>
