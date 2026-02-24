@@ -94,7 +94,7 @@ export function fetchMsgPackResponse({ url, cache = "no-store" } = {}) {
   });
 }
 
-export async function decodeAsyncData(response) {
+export async function decodeAsyncData(response, datatype = "arraybuffer") {
   try {
     if (!response || !response.ok) {
       console.warn(
@@ -105,8 +105,10 @@ export async function decodeAsyncData(response) {
       return null;
     }
 
-    const buffer = await response.arrayBuffer();
-    return decode(buffer);
+    const arrayBuffer = await response.arrayBuffer();
+    return decode(
+      datatype === "arraybuffer" ? arrayBuffer : new Uint8Array(arrayBuffer),
+    );
   } catch (error) {
     console.error("Error decoding data:", error);
     console.error("Buffer length:", uint8Array?.length || "unknown");
@@ -257,14 +259,14 @@ export async function getMapByCpId(cpid) {
   return maps.find((map) => +map.CpID === +cpid);
 }
 
-export async function getPlayerById({ playerId }) {
+export async function getPlayerById({ playerId, datatype }) {
   if (playerId === undefined) {
     console.error("playerId is undefined");
     return null;
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().player.all });
-  const players = (await decodeAsyncData(response)) ?? [];
+  const players = (await decodeAsyncData(response, datatype)) ?? [];
 
   return players.find((player) => +player.PlayerID === +playerId);
 }

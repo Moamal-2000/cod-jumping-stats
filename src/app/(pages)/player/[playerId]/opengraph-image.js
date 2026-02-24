@@ -6,6 +6,7 @@ import { ImageResponse } from "next/og";
 export const size = { width: 1300, height: 740 };
 export const contentType = "image/png";
 export const revalidate = 60;
+export const runtime = "edge";
 
 const logoSize = 400;
 const countryWidth = 240;
@@ -13,7 +14,7 @@ const countryHeight = 140;
 
 export default async function Image({ params }) {
   const { playerId } = await params;
-  const player = await getPlayerById({ playerId });
+  const player = await getPlayerById({ playerId, datatype: "uint8Array" });
 
   const playerCountryCode = player?.Country?.toLowerCase();
   const coloredPlayerName = getColoredNameForOG(
