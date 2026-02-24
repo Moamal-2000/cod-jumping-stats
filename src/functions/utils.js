@@ -247,14 +247,14 @@ export async function generatePlayerMetadata({ playerId }) {
   }
 }
 
-export async function getMapByCpId(cpid) {
+export async function getMapByCpId(cpid, datatype) {
   if (cpid === undefined) {
     console.error("map cpid is undefined");
     return null;
   }
 
   const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
-  const maps = (await decodeAsyncData(response)) ?? [];
+  const maps = (await decodeAsyncData(response, datatype)) ?? [];
 
   return maps.find((map) => +map.CpID === +cpid);
 }
@@ -696,4 +696,9 @@ export function buildPlayerDescription(player = {}) {
   }
 
   return parts.join(" ");
+}
+
+export function getCleanMapName(mapName) {
+  if (!mapName) return "unknown";
+  return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
 }
