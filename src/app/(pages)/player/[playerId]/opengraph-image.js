@@ -5,7 +5,7 @@ import { ImageResponse } from "next/og";
 
 export const size = { width: 1300, height: 740 };
 export const contentType = "image/png";
-export const revalidate = 60;
+export const revalidate = 3600 * 6; // 6 hours
 export const runtime = "edge";
 
 const logoSize = 400;
