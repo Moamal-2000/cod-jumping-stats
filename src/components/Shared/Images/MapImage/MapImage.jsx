@@ -29,7 +29,6 @@ const MapImage = ({ mapName, resolution = "512" }) => {
         height={272}
         src={src || PLACEHOLDER_PATH}
         alt={mapName}
-        title={mapName}
         style={{ scale, objectFit }}
         quality={100}
         priority

@@ -22,6 +22,8 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   } = mapData;
 
   const ref = mapsScroll?.length === index + 1 ? lastMapRef : null;
+  const mapDetailsLabel = `View ${Name}${Ender ? ` ${Ender} ` : " "}details`;
+
   const completionRate = getMapCompletionRate({
     allMaps,
     IndividualFinishCount,
@@ -38,7 +40,12 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   return (
     <div className={s.mapCard} ref={ref}>
       {!hideMapImage && (
-        <Link href={`/map/${CpID}`} className={s.imgHolder}>
+        <Link
+          href={`/map/${CpID}`}
+          className={s.imgHolder}
+          aria-label={mapDetailsLabel}
+          title={mapDetailsLabel}
+        >
           <MapImage mapName={Name} />
 
           <div className={s.layer}>
