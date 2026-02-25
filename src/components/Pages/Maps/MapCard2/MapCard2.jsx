@@ -20,13 +20,17 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     Ender,
     CpID,
   } = mapData;
+
+  const searchParams = useSearchParams();
+
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
+  const mapDetailsLabel = `View ${Name}${Ender ? ` ${Ender} ` : " "}details`;
+
   const completionRate = getMapCompletionRate({
     allMaps,
     IndividualFinishCount,
   });
 
-  const searchParams = useSearchParams();
   const {
     hideMapImage,
     hideDifficulties,
@@ -37,7 +41,12 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   return (
     <div className={s.mapCard} ref={ref}>
       {!hideMapImage && (
-        <Link href={`/map/${CpID}`} className={s.imgHolder}>
+        <Link
+          href={`/map/${CpID}`}
+          className={s.imgHolder}
+          ari-label={mapDetailsLabel}
+          title={mapDetailsLabel}
+        >
           <MapImage mapName={Name} />
         </Link>
       )}
