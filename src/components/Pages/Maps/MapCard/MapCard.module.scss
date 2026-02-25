@@ -67,34 +67,24 @@
   font-weight: 500;
   text-transform: uppercase;
 
-  &.jump,
-  &.new,
-  &.speedrun {
-    background-color: #3a86ff;
+  &.jump {
+    background: linear-gradient(135deg, #3b82f6, #2563eb);
   }
 
   &.defrag {
-    background-color: #994ee0;
+    background: linear-gradient(135deg, #a855f7, #7e22ce);
   }
 
   &.surf {
-    background-color: #13a797;
+    background: linear-gradient(135deg, #14b8a6, #0f766e);
   }
 
   &.expert {
-    background-color: #d93e3e;
+    background: linear-gradient(135deg, #ef4444, #b91c1c);
   }
 
-  &.hard {
-    background-color: #ef4444;
-  }
-
-  &.medium {
-    background-color: #e7af07;
-  }
-
-  &.easy {
-    background-color: #20b356;
+  &.new {
+    background: linear-gradient(135deg, #ffc001, #ca8a04);
   }
 }
 
