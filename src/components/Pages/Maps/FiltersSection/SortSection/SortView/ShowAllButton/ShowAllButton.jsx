@@ -9,9 +9,11 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   const { mapsData, firstChunkMaps, allDataDisplayed, loading, error } =
     useSelector((s) => s.maps);
   const dispatch = useDispatch();
+
   const isMapsUnavailable = loading || error || mapsData?.length === 0;
   const flipButton =
     mapsData?.length === 0 ? false : allDataDisplayed ? true : false;
+  const title = flipButton ? "Show less" : "Show all";
 
   function handleShowAllBtn() {
     if (allDataDisplayed) {
@@ -46,6 +48,8 @@ const ShowAllButton = ({ setPaginationNumber }) => {
       className={`${s.showAllBtn} ${flipButton ? s.active : ""}`}
       onClick={handleShowAllBtn}
       disabled={isMapsUnavailable}
+      aria-label={title}
+      title={title}
     >
       <svg aria-hidden="true">
         <use href="/icons-sprite.svg#angles-down" />

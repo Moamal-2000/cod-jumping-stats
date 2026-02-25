@@ -10,7 +10,12 @@ const HideLeaderboardHeaderBtn = () => {
   const isLeaderboardExpanded = useSelector(
     (s) => s.global.isLeaderboardExpanded,
   );
+
   const dispatch = useDispatch();
+
+  const title = isLeaderboardHeaderVisible
+    ? "Hide leaderboard header"
+    : "Show leaderboard header";
 
   const disableButton = shouldDisableButton({
     loading,
@@ -34,6 +39,8 @@ const HideLeaderboardHeaderBtn = () => {
       className={`${s.button} ${!isLeaderboardHeaderVisible ? s.active : ""}`}
       disabled={disableButton}
       onClick={handleToggleHeader}
+      aria-label={title}
+      title={title}
     >
       <svg aria-hidden="true">
         <use

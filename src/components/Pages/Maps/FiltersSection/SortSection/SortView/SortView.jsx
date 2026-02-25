@@ -31,6 +31,7 @@ const SortView = ({ setPaginationNumber }) => {
 
       {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
         const activeClass = urlQuery === value ? s.active : "";
+        const title = `Change maps view to ${value}`;
 
         return (
           <button
@@ -38,7 +39,8 @@ const SortView = ({ setPaginationNumber }) => {
             type="button"
             className={`${s.sortViewBtn} ${activeClass}`}
             onClick={() => changeView(value)}
-            title={`Change maps view to ${value}`}
+            aria-label={title}
+            title={title}
           >
             <span>
               <svg aria-hidden="true">

@@ -11,8 +11,12 @@ const ExpandButton = () => {
   );
 
   const dispatch = useDispatch();
+
   const isLeaderboardUnavailable =
     loading || error || leaderboardData?.length === 0;
+  const title = isLeaderboardExpanded
+    ? "Collapse leaderboard"
+    : "Expand leaderboard";
 
   function handleExpandBtn() {
     dispatch(
@@ -29,6 +33,8 @@ const ExpandButton = () => {
       onClick={handleExpandBtn}
       className={`${s.button} ${!isLeaderboardExpanded ? s.active : ""}`}
       disabled={isLeaderboardUnavailable}
+      aria-label={title}
+      title={title}
     >
       <svg aria-hidden="true">
         <use

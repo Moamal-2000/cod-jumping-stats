@@ -16,12 +16,17 @@ const ShowAllButton = ({ setPaginationNumber }) => {
     loading,
     error,
   } = useSelector((s) => s.leaderboard);
-  const { isLeaderboardReversed } = useSelector((s) => s.global);
+  const { isLeaderboardReversed } = useSelector(
+    (s) => s.global.isLeaderboardReversed,
+  );
+
   const dispatch = useDispatch();
+
   const isLeaderboardUnavailable =
     loading || error || leaderboardData?.length === 0;
   const flipButton =
     leaderboardData?.length === 0 ? false : allDataDisplayed ? true : false;
+  const title = flipButton ? "Show less" : "Show all";
 
   function handleShowAllBtn() {
     if (allDataDisplayed) {
@@ -74,6 +79,8 @@ const ShowAllButton = ({ setPaginationNumber }) => {
       onClick={handleShowAllBtn}
       disabled={isLeaderboardUnavailable}
       className={`${s.button} ${flipButton ? s.active : ""}`}
+      aria-label={title}
+      title={title}
     >
       <svg aria-hidden="true">
         <use href="/icons-sprite.svg#angles-down" />

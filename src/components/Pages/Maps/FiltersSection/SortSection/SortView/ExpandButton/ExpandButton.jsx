@@ -9,7 +9,9 @@ const ExpandButton = () => {
   const { isMapsExpanded } = useSelector((s) => s.global);
 
   const dispatch = useDispatch();
+
   const isMapsUnavailable = loading || error || mapsData?.length === 0;
+  const title = isMapsExpanded ? "Hide all maps" : "Show all maps";
 
   function handleExpandBtn() {
     dispatch(
@@ -23,6 +25,8 @@ const ExpandButton = () => {
       className={`${s.expandButton} ${isMapsExpanded ? s.active : ""}`}
       onClick={handleExpandBtn}
       disabled={isMapsUnavailable}
+      aria-label={title}
+      title={title}
     >
       <svg aria-hidden="true">
         <use
