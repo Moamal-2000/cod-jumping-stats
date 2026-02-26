@@ -1351,4 +1351,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "jm_qubed",
+    mapsIds: [8441],
+    videos: [
+      {
+        type: "125 fps no nade",
+        videoUrl: "https://www.youtube.com/watch?v=hwKABJLogog",
+        id: 1,
+      },
+    ],
+  },
 ];
