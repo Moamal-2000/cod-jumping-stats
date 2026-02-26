@@ -1,5 +1,9 @@
 import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
-import { getMapByCpId, getMapSeoDescription } from "@/functions/utils";
+import {
+  getMapByCpId,
+  getMapOgDescription,
+  getMapSeoDescription,
+} from "@/functions/utils";
 import { size } from "./opengraph-image";
 
 export const revalidate = 86400; // 1 day
@@ -11,8 +15,8 @@ export async function generateMetadata({ params }) {
   const mapName = map.Name;
 
   const title = `${mapName} Map | JumpersHeaven`;
-  const description = `View JumpersHeaven map details and statistics for ${mapName}`;
   const seoDescription = getMapSeoDescription(map);
+  const ogDescription = getMapOgDescription(map);
 
   const generatedMetadata = {
     title,
@@ -20,7 +24,7 @@ export async function generateMetadata({ params }) {
     metadataBase: new URL(SITE_URL),
     ...getOpenGraphMetadata({
       title,
-      description,
+      description: ogDescription,
       imageUrl: `${SITE_URL}/map/${cpId}/opengraph-image`,
       imageAlt: `Jumpers Heaven ${mapName} Map`,
       pagePath: `map/${cpId}`,

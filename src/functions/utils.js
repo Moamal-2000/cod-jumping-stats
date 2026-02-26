@@ -761,7 +761,7 @@ export function isNewMap(releaseDate) {
 
 export function getMapSeoDescription(map = {}) {
   if (!map?.ID)
-    return "Explore map statistics, difficulty, and player records on JumpersHeaven Stats.";
+    return "Explore map statistics, difficulty, and player records on JumpersHeaven.";
 
   const mapName = getCleanMapName(map.Name || "Unknown Map");
   const author = map.Author || "Unknown author";
@@ -782,14 +782,10 @@ export function getMapSeoDescription(map = {}) {
   const difficulties = map.Difficulty ? Object.values(map.Difficulty) : [];
 
   if (difficulties.length > 0) {
-    const allDifficultiesSummed = difficulties.reduce(
-      (sum, d) => sum + (d.Difficulty || 0),
-      0,
-    );
-    const avgDifficulty = allDifficultiesSummed / difficulties.length;
+    const avgDifficulty = getMapAverageDifficulty(map);
 
     parts.push(
-      `The average difficulty is approximately ${avgDifficulty.toFixed(2)}.`,
+      `The average difficulty is${avgDifficulty <= 0 ? " unknown yet." : ` approximately ${avgDifficulty.toFixed(2)}.`}`,
     );
   }
 
@@ -800,10 +796,59 @@ export function getMapSeoDescription(map = {}) {
   }
 
   parts.push(
-    `View records, rankings, and player statistics for ${mapName} on JumpersHeaven Stats.`,
+    `View records, rankings, and player statistics for ${mapName} on JumpersHeaven.`,
   );
 
   return parts.join(" ");
+}
+
+export function getMapOgDescription(map = {}) {
+  if (!map?.ID) return "Discover maps, records, and rankings on JumpersHeaven.";
+
+  const mapName = getCleanMapName(map.Name || "This map");
+  const author = map.Author || null;
+
+  const parts = [];
+
+  let sentence = `Explore ${mapName}`;
+
+  if (author) sentence += ` by ${author}`;
+  sentence += ` on JumpersHeaven.`;
+  parts.push(sentence);
+
+  const difficulties = map.Difficulty ? Object.values(map.Difficulty) : [];
+  if (difficulties.length > 0) {
+    const avgDifficulty = getMapAverageDifficulty(map);
+
+    parts.push(
+      `Difficulty${avgDifficulty <= 0 ? " is unknown yet." : ` around ${avgDifficulty.toFixed(2)}.`}`,
+    );
+  }
+
+  if (map.IndividualFinishCount) {
+    parts.push(
+      `${map.IndividualFinishCount.toLocaleString()} players completed this map.`,
+    );
+  }
+
+  parts.push("View records, stats, and rankings now.");
+
+  return parts.join(" ");
+}
+
+export function getMapAverageDifficulty(map = {}) {
+  const difficulties = map.Difficulty ? Object.values(map.Difficulty) : [];
+
+  if (difficulties.length > 0) {
+    const allDifficultiesSummed = difficulties.reduce(
+      (sum, d) => sum + (d.Difficulty || 0),
+      0,
+    );
+
+    return allDifficultiesSummed / difficulties.length;
+  }
+
+  return 0;
 }
 
 export function getCleanMapName(mapName) {
