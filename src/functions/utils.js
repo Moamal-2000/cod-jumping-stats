@@ -119,15 +119,6 @@ export function getRequiredMapVideos(mapData) {
   return requiredVideos || [];
 }
 
-export function openVideo(videos, videoIndex) {
-  if (typeof window === "undefined") return;
-
-  const videoUrl = videos[videoIndex]?.videoUrl;
-  if (!videoUrl) return;
-
-  window.open(videoUrl, "_blank");
-}
-
 export function stripColorCodes(name) {
   if (!name) return "";
   // Remove color codes like ^1, ^2, etc. from player names
