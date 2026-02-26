@@ -1,4 +1,4 @@
-import { getStatsBarStyles } from "@/functions/utils";
+import { TOP_STATS_COLOR } from "@/data/staticData";
 import s from "./TopStatBar.module.scss";
 
 const TopStatBar = ({ top, times, maxFinishTimes, isSkilledLeaderboard }) => {
@@ -26,3 +26,17 @@ const TopStatBar = ({ top, times, maxFinishTimes, isSkilledLeaderboard }) => {
 };
 
 export default TopStatBar;
+
+function getStatsBarStyles({
+  isSkilledLeaderboard,
+  top,
+  times,
+  maxFinishTimes,
+}) {
+  const backgroundColor = isSkilledLeaderboard
+    ? TOP_STATS_COLOR[9 - top]
+    : TOP_STATS_COLOR[top - 1];
+  const height = `${(times / maxFinishTimes) * 100}%`;
+
+  return { backgroundColor, height };
+}

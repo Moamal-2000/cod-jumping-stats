@@ -1,26 +1,15 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import {
   COUNTRIES_WITH_THE,
-  GITHUB_REPO_API_URL,
-  JUMP_FPS,
   MONTHS,
   NUMBER_OF_RATING_STARS,
   PAGINATION_ITEMS_PER_PAGE,
 } from "@/data/constants";
 import { MAPS_VIDEOS } from "@/data/mapsVideos";
-import { SORT_MAPS_OPTIONS, TOP_STATS_COLOR } from "@/data/staticData";
 import { encode } from "@msgpack/msgpack";
 import { Buffer } from "buffer";
 import LZString from "lz-string";
 import { decode } from "msgpackr";
-
-export function getMaxFinishTimesFrom(bestPlayer) {
-  const topList = bestPlayer?.TopList;
-  if (topList === undefined || topList === null) return 0;
-
-  const maxFinishTimes = Math.max(...Object.values(topList));
-  return maxFinishTimes;
-}
 
 export function createQueryString(name, value, searchParams, router, pathname) {
   const params = new URLSearchParams(searchParams.toString());
@@ -39,20 +28,6 @@ export function removeQueryString(queryName, searchParams, router, pathname) {
   router.push(`${pathname}?${params.toString()}`, { scroll: false });
 }
 
-export function getStatsBarStyles({
-  isSkilledLeaderboard,
-  top,
-  times,
-  maxFinishTimes,
-}) {
-  const backgroundColor = isSkilledLeaderboard
-    ? TOP_STATS_COLOR[9 - top]
-    : TOP_STATS_COLOR[top - 1];
-  const height = `${(times / maxFinishTimes) * 100}%`;
-
-  return { backgroundColor, height };
-}
-
 export function paginateData(
   items,
   pageNumber = 1,
@@ -63,20 +38,6 @@ export function paginateData(
   const endIndex = startIndex + itemsPerPage;
 
   return items?.slice(startIndex, endIndex);
-}
-
-export function getLeaderboardUrl(paramsObject) {
-  const leaderboardType = paramsObject?.["leaderboard"] || "speedrun";
-  const leaderboardUrls = {
-    speedrun: jhApis(paramsObject).leaderboard.speedRunLeaderboard,
-    skilled: jhApis(paramsObject).leaderboard.skilledLeaderboard,
-    defrag: jhApis(paramsObject).leaderboard.defragLeaderboard,
-    surf: jhApis(paramsObject).leaderboard.surfLeaderboard,
-    routescompleted:
-      jhApis(paramsObject).leaderboard.routesCompletedLeaderboard,
-  };
-
-  return leaderboardUrls[leaderboardType];
 }
 
 export function getIsLastPagination(
@@ -165,17 +126,6 @@ export function getStarsText(text) {
   return solidStars + emptyStars;
 }
 
-export function getSortByLabel(value) {
-  if (!value) return "Newest First";
-
-  for (const group of SORT_MAPS_OPTIONS) {
-    const option = group.groupOptions.find((opt) => opt.value === value);
-    if (option) return option.label;
-  }
-
-  return "Newest First";
-}
-
 export function openVideo(videos, videoIndex) {
   if (typeof window === "undefined") return;
 
@@ -191,26 +141,10 @@ export function stripColorCodes(name) {
   return name.replace(/\^\d/g, "");
 }
 
-export function getCodServers(servers = []) {
-  return servers.reduce((groups, server) => {
-    const gameType = server.GameType;
-    if (!groups[gameType]) groups[gameType] = [];
-
-    groups[gameType].push(server);
-    return groups;
-  }, {});
-}
-
 export function getCountryFlag(domain) {
   let country = domain.split(".")[0];
   if (country === "uk") country = "gb";
   return `/countryFlags/${country}.svg`;
-}
-
-export function getGameTypes(groupedServers) {
-  return Object.keys(groupedServers).sort(
-    (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""),
-  );
 }
 
 export async function generateMapMetadata({ cpid }) {
@@ -380,12 +314,6 @@ export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
   return Number(diff.Difficulty).toFixed(2);
 }
 
-export function mapHasDifficulties(Difficulty) {
-  return JUMP_FPS.some(
-    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?",
-  );
-}
-
 export function kebabCase(str) {
   return str.toLowerCase().split(" ").join("-");
 }
@@ -411,106 +339,6 @@ export function getCachedPlayers(dataType) {
 
 export function capitalize(str) {
   return str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-export function getMapsAuthors(maps = []) {
-  const seen = new Map();
-
-  maps.forEach(({ Author }) => {
-    if (!Author) return;
-
-    const authors = extractAuthorNames(Author);
-    if (authors.length === 0) return;
-
-    const mapAuthorKeys = new Set();
-
-    authors.forEach((authorName) => {
-      const normalizedKey = normalizeAuthor(authorName);
-      if (!normalizedKey || mapAuthorKeys.has(normalizedKey)) return;
-
-      mapAuthorKeys.add(normalizedKey);
-      const existingAuthor = seen.get(normalizedKey);
-      const isNew = !existingAuthor;
-      const isShorterLabel =
-        authorName.length < (existingAuthor?.label?.length ?? Infinity);
-
-      if (isNew) {
-        seen.set(normalizedKey, {
-          id: normalizedKey,
-          label: authorName,
-          value: authorName,
-          madeMapsCount: 1,
-        });
-        return;
-      }
-
-      if (isShorterLabel) {
-        existingAuthor.label = authorName;
-        existingAuthor.value = authorName;
-      }
-
-      existingAuthor.madeMapsCount += 1;
-    });
-  });
-
-  return Array.from(seen.values());
-}
-
-function extractAuthorNames(authorText = "") {
-  const text = String(authorText).trim();
-  if (!text) return [];
-
-  const hasByKeyword = text.toLowerCase().includes("by");
-  let byKeyWordMatches = [];
-
-  if (hasByKeyword) {
-    const matches = text.matchAll(/\bby\b\s*:?\s*([^()]+)/gi);
-    byKeyWordMatches = Array.from(matches, (match) => match[1]?.trim());
-  }
-
-  const sourceChunks =
-    byKeyWordMatches.length > 0 ? [text, ...byKeyWordMatches] : [text];
-  const authors = sourceChunks.flatMap(splitAuthorChunk).filter(isLikelyAuthor);
-
-  return Array.from(new Set(authors));
-}
-
-function splitAuthorChunk(chunk = "") {
-  return chunk
-    .replace(/\([^)]*\)|\[[^\]]*\]/g, " ")
-    .split(/\s*(?:,|&|\/|\+|\band\b|\bfeat\.?\b|\bft\.?\b)\s*/i)
-    .map((value) => value.trim())
-    .filter(Boolean);
-}
-
-function normalizeAuthor(author) {
-  return author
-    .toLowerCase()
-    .trim()
-    .replace(/[?!.,#'"]+$/g, "")
-    .replace(/\s+/g, " ")
-    .replace(/\s/g, "");
-}
-
-function isLikelyAuthor(author) {
-  const hasAnd = /&|\band\b/i.test(author);
-  if (hasAnd) return false;
-
-  let score = 0;
-
-  const has15Char = author.length >= 15;
-  const has3Words = author.split(/\s+/).length >= 3;
-  const hasNumber = /\d/.test(author);
-  const hasParenthesis = /[()]/.test(author);
-  const hasKeywords = /\b(by|version|reworked|ported|finished)\b/i.test(author);
-
-  if (has15Char) score += 1;
-  if (has3Words) score += 2;
-  if (hasNumber) score += 1;
-  if (hasParenthesis) score += 2;
-  if (hasKeywords) score += 2;
-
-  return score < 3;
 }
 
 export function getTimeObj(getSeconds) {
@@ -559,59 +387,6 @@ export function toSecondsFlexible(timeStr = "") {
   }
 
   return seconds;
-}
-
-export function getGraphRunTimes(graphPoints = []) {
-  const maxRunSeconds = graphPoints[0]?.rawData?.TimePlayed || 0;
-  const averageRun = formateTimeBySeconds(maxRunSeconds / 2);
-
-  const allTimePlayed = graphPoints.map(
-    (point) => point?.rawData?.TimePlayedString,
-  );
-
-  const biggestTime =
-    allTimePlayed.toSorted(
-      (a, b) => toSecondsFlexible(b) - toSecondsFlexible(a),
-    )[0] || "";
-
-  const biggestTimeSeconds = toSecondsFlexible(biggestTime);
-  const maxRunString = graphPoints[0]?.rawData?.TimePlayedString || "0";
-  const formattedMaxRunString = maxRunString.replace(/\.\d+/g, "");
-
-  return [
-    {
-      seconds: 7,
-      formattedTime: "0:00",
-    },
-    {
-      seconds: biggestTimeSeconds / 2,
-      formattedTime: averageRun,
-    },
-    {
-      seconds: biggestTimeSeconds - 5,
-      formattedTime: formattedMaxRunString,
-    },
-  ];
-}
-
-export async function fetchAllTopRuns({ mapId }) {
-  try {
-    const topRunsPromises = JUMP_FPS.map(async (fps) => {
-      const response = await fetchMsgPackResponse({
-        url: jhApis({ fps, cpId: mapId }).map.tops,
-      });
-      const topRunsByFps = await decodeAsyncData(response);
-
-      if (Array.isArray(topRunsByFps))
-        return topRunsByFps.map((run) => ({ ...run, fps }));
-
-      return [];
-    });
-
-    return await Promise.all(topRunsPromises);
-  } catch (error) {
-    console.error(`Error fetching top runs: ${error}`);
-  }
 }
 
 export function formateDateExcludeTime(dateString) {
@@ -671,16 +446,4 @@ export function getMapAverageDifficulty(map = {}) {
 export function getCleanMapName(mapName) {
   if (!mapName) return "unknown";
   return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
-}
-
-export async function fetchProjectRepo() {
-  try {
-    const response = await fetch(GITHUB_REPO_API_URL);
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    console.log(` Error fetching repo stars: ${error}`);
-    return [];
-  }
 }

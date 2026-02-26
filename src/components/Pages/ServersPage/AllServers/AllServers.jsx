@@ -1,4 +1,3 @@
-import { getCodServers, getGameTypes } from "@/functions/utils";
 import GameType from "./GameType/GameType";
 import ServersLoadingError from "./ServersLoadingError/ServersLoadingError";
 
@@ -54,3 +53,19 @@ const AllServers = ({
 };
 
 export default AllServers;
+
+function getCodServers(servers = []) {
+  return servers.reduce((groups, server) => {
+    const gameType = server.GameType;
+    if (!groups[gameType]) groups[gameType] = [];
+
+    groups[gameType].push(server);
+    return groups;
+  }, {});
+}
+
+function getGameTypes(groupedServers) {
+  return Object.keys(groupedServers).sort(
+    (a, b) => a.replace(/\D/g, "") - b.replace(/\D/g, ""),
+  );
+}

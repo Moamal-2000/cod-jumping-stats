@@ -1,5 +1,5 @@
 import { JUMP_FPS } from "@/data/constants";
-import { getFpsDifficultyValue, mapHasDifficulties } from "@/functions/utils";
+import { getFpsDifficultyValue } from "@/functions/utils";
 import s from "./MapDetailInfo.module.scss";
 
 const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
@@ -65,4 +65,10 @@ function getStatsForFps({ selectedFps, Difficulty } = {}) {
   if (!fpsData || fpsData.Difficulty < 0) return null;
 
   return fpsData;
+}
+
+function mapHasDifficulties(Difficulty) {
+  return JUMP_FPS.some(
+    (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?",
+  );
 }

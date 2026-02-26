@@ -1,7 +1,6 @@
 "use client";
 
-import { GITHUB_REPO_URL } from "@/data/constants";
-import { fetchProjectRepo } from "@/functions/utils";
+import { GITHUB_REPO_API_URL, GITHUB_REPO_URL } from "@/data/constants";
 import { useEffect, useState } from "react";
 import s from "./GitHubNotice.module.scss";
 
@@ -53,3 +52,15 @@ const GitHubNotice = () => {
 };
 
 export default GitHubNotice;
+
+async function fetchProjectRepo() {
+  try {
+    const response = await fetch(GITHUB_REPO_API_URL);
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log(` Error fetching repo stars: ${error}`);
+    return [];
+  }
+}

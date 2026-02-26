@@ -1,6 +1,5 @@
 "use client";
 
-import { getMaxFinishTimesFrom } from "@/functions/utils";
 import { useSearchParams } from "next/navigation";
 import TopStatBar from "./TopStatBar/TopStatBar";
 import s from "./TopsVisualization.module.scss";
@@ -32,3 +31,10 @@ const TopsVisualization = ({ topsList, leaderboardData }) => {
 };
 
 export default TopsVisualization;
+
+function getMaxFinishTimesFrom(bestPlayer) {
+  const topList = bestPlayer?.TopList;
+  if (topList === undefined || topList === null) return 0;
+
+  return Math.max(...Object.values(topList));
+}

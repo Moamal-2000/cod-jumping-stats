@@ -1,6 +1,6 @@
 "use client";
 
-import { getSortByLabel } from "@/functions/utils";
+import { SORT_MAPS_OPTIONS } from "@/data/staticData";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import s from "./CustomSelectMenu.module.scss";
@@ -57,3 +57,14 @@ const CustomSelectMenu = ({ id }) => {
 };
 
 export default CustomSelectMenu;
+
+function getSortByLabel(value) {
+  if (!value) return "Newest First";
+
+  for (const group of SORT_MAPS_OPTIONS) {
+    const option = group.groupOptions.find((opt) => opt.value === value);
+    if (option) return option.label;
+  }
+
+  return "Newest First";
+}

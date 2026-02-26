@@ -1,7 +1,13 @@
+import { jhApis } from "@/api/jumpersHeaven";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
+import { JUMP_FPS } from "@/data/constants";
 import { getColoredName } from "@/functions/components";
-import { fetchAllTopRuns, formateReleaseDate } from "@/functions/utils";
+import {
+  decodeAsyncData,
+  fetchMsgPackResponse,
+  formateReleaseDate,
+} from "@/functions/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -99,3 +105,24 @@ const MapDetailHeader = ({ mapData }) => {
 };
 
 export default MapDetailHeader;
+
+export async function fetchAllTopRuns({ mapId }) {
+  try {
+    const topRunsPromises = JUMP_FPS.map(async (fps) => {
+      const response = await fetchMsgPackResponse({
+        url: jhApis({ fps, cpId: mapId }).map.tops,
+      });
+      const topRunsByFps = await decodeAsyncData(response);
+
+      if (Array.isArray(topRunsByFps))
+        return topRunsByFps.map((run) => ({ ...run, fps }));
+
+      return [];
+    });
+
+    return await Promise.all(topRunsPromises);
+  } catch (error) {
+    console.error(`Error fetching top runs: ${error}`);
+    return [];
+  }
+}

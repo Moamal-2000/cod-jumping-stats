@@ -1,8 +1,5 @@
-import {
-  decodeAsyncData,
-  fetchMsgPackResponse,
-  getLeaderboardUrl,
-} from "@/functions/utils";
+import { jhApis } from "@/api/jumpersHeaven";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/functions/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchLeaderboard = createAsyncThunk(
@@ -20,3 +17,17 @@ export const fetchLeaderboard = createAsyncThunk(
     }
   },
 );
+
+function getLeaderboardUrl(paramsObject) {
+  const leaderboardType = paramsObject?.["leaderboard"] || "speedrun";
+  const leaderboardUrls = {
+    speedrun: jhApis(paramsObject).leaderboard.speedRunLeaderboard,
+    skilled: jhApis(paramsObject).leaderboard.skilledLeaderboard,
+    defrag: jhApis(paramsObject).leaderboard.defragLeaderboard,
+    surf: jhApis(paramsObject).leaderboard.surfLeaderboard,
+    routescompleted:
+      jhApis(paramsObject).leaderboard.routesCompletedLeaderboard,
+  };
+
+  return leaderboardUrls[leaderboardType];
+}
