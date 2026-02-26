@@ -1,6 +1,5 @@
 "use client";
 
-import { getStarsText } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./CheckboxButtons.module.scss";
 
@@ -32,9 +31,6 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
   return (
     <div className={s.checkboxes}>
       {filtersData?.map(({ text, queryValue, id }) => {
-        const isNumber = !Number.isNaN(+text);
-        const modifiedText = isNumber ? getStarsText(text) : text;
-
         const isActive = selectedCheckboxes.includes(queryValue);
 
         return (
@@ -53,7 +49,7 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
                 <use href="/icons-sprite.svg#checked" />
               </svg>
             </span>
-            <span className={s.checkboxText}>{modifiedText}</span>
+            <span className={s.checkboxText}>{text}</span>
           </label>
         );
       })}

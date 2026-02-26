@@ -1,10 +1,6 @@
 "use client";
 
-import {
-  createQueryString,
-  getStarsText,
-  removeQueryString,
-} from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/functions/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FilterButtons.module.scss";
 
@@ -29,9 +25,7 @@ const FilterButtons = ({ filtersData, queryName, defaultUrlQuery }) => {
     <div className={s.filterButtons}>
       {filtersData?.map(({ text, queryValue, id }) => {
         const isNumber = !Number.isNaN(+text);
-        const modifiedText = isNumber ? getStarsText(text) : text;
         const currentValue = urlQuery || defaultUrlQuery;
-        const starsClass = isNumber ? s.stars : "";
         const title = getFilterBtnTitle(queryName, queryValue);
 
         const isActive = isNumber
@@ -43,10 +37,10 @@ const FilterButtons = ({ filtersData, queryName, defaultUrlQuery }) => {
             type="button"
             key={id}
             onClick={() => handleClick(queryValue)}
-            className={`${isActive ? s.active : ""} ${starsClass}`}
+            className={`${isActive ? s.active : ""}`}
             title={title}
           >
-            {modifiedText}
+            {text}
           </button>
         );
       })}

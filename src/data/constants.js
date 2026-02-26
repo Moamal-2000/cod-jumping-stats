@@ -5,7 +5,6 @@ export const GITHUB_REPO_API_URL =
   "https://api.github.com/repos/Moamal-2000/jumpers-heaven-statistics";
 export const PAGINATION_ITEMS_PER_PAGE = 10;
 export const PLAYERS_BATCH_SIZE = 50;
-export const NUMBER_OF_RATING_STARS = 5;
 export const MONTHS = {
   1: "January",
   2: "February",

@@ -2,7 +2,6 @@ import { jhApis } from "@/api/jumpersHeaven";
 import {
   COUNTRIES_WITH_THE,
   MONTHS,
-  NUMBER_OF_RATING_STARS,
   PAGINATION_ITEMS_PER_PAGE,
 } from "@/data/constants";
 import { MAPS_VIDEOS } from "@/data/mapsVideos";
@@ -118,12 +117,6 @@ export function getRequiredMapVideos(mapData) {
   )?.videos;
 
   return requiredVideos || [];
-}
-
-export function getStarsText(text) {
-  const solidStars = "★".repeat(text);
-  const emptyStars = "☆".repeat(NUMBER_OF_RATING_STARS - text);
-  return solidStars + emptyStars;
 }
 
 export function openVideo(videos, videoIndex) {
