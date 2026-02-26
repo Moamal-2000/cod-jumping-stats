@@ -1,3 +1,15 @@
+export async function testApi(url) {
+  try {
+    const res = await fetch(url);
+    const data = await res.json();
+
+    console.log("Testing success", data);
+    return data;
+  } catch (err) {
+    console.log(`Error while fetching data from ${url} due to ${err}`);
+  }
+}
+
 export function getLocalStorageUsage() {
   let total = 0;
   const details = [];
