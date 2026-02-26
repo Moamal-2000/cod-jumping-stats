@@ -1,9 +1,10 @@
-import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
+import { SITE_URL } from "@/data/metadata";
 import {
-  getMapByCpId,
   getMapOgDescription,
   getMapSeoDescription,
-} from "@/functions/utils";
+  getOpenGraphMetadata,
+} from "@/functions/metadata";
+import { getMapByCpId } from "@/functions/utils";
 import { size } from "./opengraph-image";
 
 export const revalidate = 86400; // 1 day

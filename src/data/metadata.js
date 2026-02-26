@@ -1,3 +1,5 @@
+import { getOpenGraphMetadata } from "@/functions/metadata";
+
 export const SITE_URL = process.env.SITE_URL;
 const title = "Statistics | JumpersHeaven";
 
@@ -23,38 +25,6 @@ const keywords = [
 
 const description =
   "JumpersHeaven statistics platform for tracking servers, players, maps, favorites, and leaderboard performance.";
-
-export function getOpenGraphMetadata({
-  pagePath = "",
-  title,
-  description,
-  imageUrl = `${SITE_URL}/openGraph/og-image.webp`,
-  imageType = "image/webp",
-  imageAlt = "",
-  imageSize = { width: 1300, height: 520 },
-} = {}) {
-  const url = pagePath ? `${SITE_URL}/${pagePath}` : SITE_URL;
-
-  return {
-    openGraph: {
-      title,
-      description,
-      url,
-      type: "website",
-      locale: "en_US",
-      siteName: "Jumpers Heaven Stats",
-      authors: ["Moamal Alaa", "Dcoy"],
-      images: [
-        {
-          url: imageUrl,
-          type: imageType,
-          alt: imageAlt,
-          ...imageSize,
-        },
-      ],
-    },
-  };
-}
 
 export const METADATA = {
   title,

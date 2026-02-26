@@ -1,5 +1,6 @@
 import Favorites from "@/components/Pages/Favorites/Favorites/Favorites";
-import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
+import { METADATA, SITE_URL } from "@/data/metadata";
+import { getOpenGraphMetadata } from "@/functions/metadata";
 import { Suspense } from "react";
 
 const title = "Favorites | JumpersHeaven";

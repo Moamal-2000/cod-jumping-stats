@@ -1,12 +1,12 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
-import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
+import { SITE_URL } from "@/data/metadata";
 import {
-  getPlayerById,
+  getOpenGraphMetadata,
   getPlayerOgDescription,
   getPlayerSeoDescription,
-  stripColorCodes,
-} from "@/functions/utils";
+} from "@/functions/metadata";
+import { getPlayerById, stripColorCodes } from "@/functions/utils";
 import { size } from "./opengraph-image";
 
 export async function generateMetadata({ params }) {

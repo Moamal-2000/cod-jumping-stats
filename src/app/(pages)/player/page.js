@@ -1,5 +1,6 @@
 import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallback/PlayerPageFallback";
-import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
+import { METADATA, SITE_URL } from "@/data/metadata";
+import { getOpenGraphMetadata } from "@/functions/metadata";
 
 const title = "Player | JumpersHeaven";
 const description = "View JumpersHeaven player details and statistics.";

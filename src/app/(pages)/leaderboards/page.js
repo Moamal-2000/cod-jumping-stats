@@ -1,7 +1,8 @@
 import FiltersSection from "@/components/Pages/Leaderboards/FiltersSection/FiltersSection";
 import LeaderBoard from "@/components/Pages/Leaderboards/LeaderBoard/LeaderBoard";
 import PlayerToolTip from "@/components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
-import { getOpenGraphMetadata, METADATA, SITE_URL } from "@/data/metadata";
+import { METADATA, SITE_URL } from "@/data/metadata";
+import { getOpenGraphMetadata } from "@/functions/metadata";
 import { Suspense } from "react";
 
 const title = "Leaderboards | JumpersHeaven";
