@@ -8,10 +8,10 @@ const baseDir = "src/app/(pages)";
 const excludeDirs = ["api", "fonts"];
 
 export default function sitemap() {
-  return getRoutes();
+  return getSiteMapRoutes();
 }
 
-async function getRoutes() {
+async function getSiteMapRoutes() {
   const fullPath = path.join(process.cwd(), baseDir);
   const entries = readdirSync(fullPath, { withFileTypes: true });
   const routes = ["/"];
