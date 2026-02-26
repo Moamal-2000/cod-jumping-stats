@@ -640,7 +640,8 @@ export async function fetchPlayers({ sort }) {
     return [];
   }
 }
-export function buildPlayerDescription(player = {}) {
+
+export function getPlayerSeoDescription(player = {}) {
   if (!player?.PlayerID) return "Player profile and statistics.";
 
   const parts = [];

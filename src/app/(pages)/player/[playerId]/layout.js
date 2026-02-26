@@ -2,8 +2,8 @@ import PlayerPageFallback from "@/components/Pages/PlayerProfile/PlayerPageFallb
 import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileLayout/PlayerProfileLayout";
 import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
 import {
-  buildPlayerDescription,
   getPlayerById,
+  getPlayerSeoDescription,
   stripColorCodes,
 } from "@/functions/utils";
 import { size } from "./opengraph-image";
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   const purePlayerName = stripColorCodes(playerName);
 
   const title = `${purePlayerName} Profile | JumpersHeaven`;
-  const description = buildPlayerDescription(player);
+  const description = getPlayerSeoDescription(player);
 
   const generatedMetadata = {
     title,
