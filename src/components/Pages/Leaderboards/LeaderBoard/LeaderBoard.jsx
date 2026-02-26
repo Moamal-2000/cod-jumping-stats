@@ -1,6 +1,6 @@
 "use client";
 
-import { getIsLastPagination, paginateData } from "@/functions/utils";
+import { getIsLastPagination, paginateData } from "@/functions/filters";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { fetchLeaderboard } from "@/redux/features/leaderboard/thunk/leaderboardThunk";
@@ -14,7 +14,7 @@ import LeaderBoardTHead from "./LeaderBoardTHead/LeaderBoardTHead";
 
 const LeaderBoard = () => {
   const { leaderboardData, leaderboardScroll, allDataDisplayed } = useSelector(
-    (s) => s.leaderboard
+    (s) => s.leaderboard,
   );
   const {
     tryFetchAgain,
@@ -95,7 +95,7 @@ function checkAndLoadMoreData({
 } = {}) {
   const isLastPagination = getIsLastPagination(
     leaderboardData,
-    paginationNumber
+    paginationNumber,
   );
 
   // In this case the handleShowAll() is invoked already
@@ -129,7 +129,7 @@ function addDataOnScroll({
 } = {}) {
   const paginationLeaderboardData = paginateData(
     leaderboardData,
-    paginationNumber
+    paginationNumber,
   );
   const value = leaderboardScroll.concat(paginationLeaderboardData);
 

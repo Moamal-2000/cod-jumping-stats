@@ -1,6 +1,6 @@
 import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
-import { getMapCompletionRate } from "@/functions/utils";
+import { getMapCompletionRate } from "@/functions/filters";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";

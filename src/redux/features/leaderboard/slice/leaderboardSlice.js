@@ -1,5 +1,5 @@
-import { getFilteredLeaderboard } from "@/functions/filters";
-import { getValueFromLocalStorage, paginateData } from "@/functions/utils";
+import { getFilteredLeaderboard, paginateData } from "@/functions/filters";
+import { getValueFromLocalStorage } from "@/functions/utils";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchLeaderboard } from "../thunk/leaderboardThunk";
 
@@ -36,7 +36,7 @@ export const leaderboardSlice = createSlice({
         const { leaderboardData, paramsObject } = payload;
         const filteredLeaderboard = getFilteredLeaderboard(
           leaderboardData,
-          paramsObject
+          paramsObject,
         );
         const paginationLeaderboard = paginateData(filteredLeaderboard, 1);
 

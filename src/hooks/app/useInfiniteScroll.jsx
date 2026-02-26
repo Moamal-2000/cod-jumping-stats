@@ -1,12 +1,12 @@
 "use client";
 
-import { getIsLastPagination } from "@/functions/utils";
+import { getIsLastPagination } from "@/functions/filters";
 import { useCallback, useRef, useState } from "react";
 
 const useInfiniteScroll = (
   data,
   isTableElementReversed = null,
-  itemsPerPage = undefined
+  itemsPerPage = undefined,
 ) => {
   const [paginationNumber, setPaginationNumber] = useState(1);
   const observer = useRef();
@@ -17,7 +17,7 @@ const useInfiniteScroll = (
     const isLastPagination = getIsLastPagination(
       data,
       paginationNumber,
-      itemsPerPage
+      itemsPerPage,
     );
 
     if (isLastPagination) return;

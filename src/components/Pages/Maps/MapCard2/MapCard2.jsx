@@ -1,5 +1,6 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
-import { formateReleaseDate, getMapCompletionRate } from "@/functions/utils";
+import { getMapCompletionRate } from "@/functions/filters";
+import { formateReleaseDate } from "@/functions/utils";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";

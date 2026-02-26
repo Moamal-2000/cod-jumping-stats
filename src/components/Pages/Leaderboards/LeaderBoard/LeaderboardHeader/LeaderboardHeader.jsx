@@ -5,7 +5,8 @@ import {
   PAGINATION_ITEMS_PER_PAGE,
   TOTAL_MAPS_PLACEHOLDER,
 } from "@/data/constants";
-import { paginateData, stripColorCodes } from "@/functions/utils";
+import { paginateData } from "@/functions/filters";
+import { stripColorCodes } from "@/functions/utils";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";

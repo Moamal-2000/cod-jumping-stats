@@ -1,10 +1,5 @@
 import { jhApis } from "@/api/jumpersHeaven";
-import {
-  COUNTRIES_WITH_THE,
-  MONTHS,
-  PAGINATION_ITEMS_PER_PAGE,
-} from "@/data/constants";
-import { MAPS_VIDEOS } from "@/data/mapsVideos";
+import { COUNTRIES_WITH_THE, MONTHS } from "@/data/constants";
 import { encode } from "@msgpack/msgpack";
 import { Buffer } from "buffer";
 import LZString from "lz-string";
@@ -25,27 +20,6 @@ export function removeQueryString(queryName, searchParams, router, pathname) {
   if (!multiDelete) params.delete(queryName?.toLowerCase());
 
   router.push(`${pathname}?${params.toString()}`, { scroll: false });
-}
-
-export function paginateData(
-  items,
-  pageNumber = 1,
-  itemsPerPage = PAGINATION_ITEMS_PER_PAGE,
-) {
-  const page = Math.max(1, parseInt(pageNumber, 10) || 1);
-  const startIndex = itemsPerPage * (page - 1);
-  const endIndex = startIndex + itemsPerPage;
-
-  return items?.slice(startIndex, endIndex);
-}
-
-export function getIsLastPagination(
-  data,
-  paginationNumber,
-  itemsPerPage = PAGINATION_ITEMS_PER_PAGE,
-) {
-  const lastPagination = Math.ceil(data?.length / itemsPerPage);
-  return paginationNumber > lastPagination;
 }
 
 export function fetchMsgPackResponse({ url, cache = "no-store" } = {}) {
@@ -83,40 +57,6 @@ export function formateReleaseDate(dateStr) {
   if (!dateStr) return "Unknown";
   const [year, month, day] = dateStr.split("-");
   return `${MONTHS[+month]} ${day}, ${year}`;
-}
-
-export function modifyMapsData(mapsData = []) {
-  const now = Date.now();
-  const dateBeforeMonth = now - 30 * 24 * 60 * 60 * 1000;
-  const currentYear = new Date().getFullYear();
-
-  return mapsData.map((mapData) => {
-    const requiredVideos = getRequiredMapVideos(mapData);
-    const isReleasedInThisYear = mapData?.Released?.startsWith(currentYear);
-
-    mapData.Classifications = mapData?.Type
-      ? [mapData?.Type?.toLowerCase()]
-      : [];
-    if (requiredVideos) mapData.Videos = requiredVideos;
-
-    if (mapData?.Released && isReleasedInThisYear) {
-      const releaseDate = new Date(mapData.Released).getTime();
-
-      if (releaseDate >= dateBeforeMonth) {
-        mapData.Classifications.push("new");
-      }
-    }
-
-    return mapData;
-  });
-}
-
-export function getRequiredMapVideos(mapData) {
-  const requiredVideos = MAPS_VIDEOS.find((item) =>
-    item.mapsIds.includes(mapData.CpID),
-  )?.videos;
-
-  return requiredVideos || [];
 }
 
 export function stripColorCodes(name) {
@@ -169,26 +109,6 @@ export function getCountryName(countryCode) {
 export function getFormattedCountryName(code) {
   const name = getCountryName(code);
   return COUNTRIES_WITH_THE.has(name) ? `the ${name}` : name;
-}
-
-export function getMostFinishedMap(mapsData) {
-  return mapsData.reduce((map, currentMap) => {
-    if (map.IndividualFinishCount > currentMap.IndividualFinishCount)
-      return map;
-
-    return currentMap;
-  });
-}
-
-export function getMapCompletionRate({ allMaps, IndividualFinishCount }) {
-  const mostFinishedMap = getMostFinishedMap(allMaps);
-  const mostFinishedCount = mostFinishedMap.IndividualFinishCount;
-  const completionRate = (
-    (IndividualFinishCount / mostFinishedCount) *
-    100
-  ).toFixed(2);
-
-  return +completionRate || 0;
 }
 
 export function getValueFromLocalStorage({ key, defaultValue }) {

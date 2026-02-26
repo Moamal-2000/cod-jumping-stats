@@ -1,11 +1,8 @@
 "use client";
 
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
-import {
-  getIsLastPagination,
-  paginateData,
-  removeQueryString,
-} from "@/functions/utils";
+import { getIsLastPagination, paginateData } from "@/functions/filters";
+import { removeQueryString } from "@/functions/utils";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { updatePlayersState } from "@/redux/features/players/slice/playersSlice";

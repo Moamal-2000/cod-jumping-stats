@@ -1,6 +1,5 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
-import { getPlayersByParams } from "@/functions/filters";
-import { paginateData } from "@/functions/utils";
+import { getPlayersByParams, paginateData } from "@/functions/filters";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchAllPlayers } from "../thunk/playersThunk";
 

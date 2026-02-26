@@ -1,6 +1,6 @@
 "use client";
 
-import { getIsLastPagination, paginateData } from "@/functions/utils";
+import { getIsLastPagination, paginateData } from "@/functions/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
