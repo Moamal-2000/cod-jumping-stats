@@ -747,6 +747,65 @@ export function getPlayerOgDescription(player = {}) {
   return parts.join(" ");
 }
 
+export function isNewMap(releaseDate) {
+  const now = Date.now();
+  const dateBeforeMonth = now - 30 * 24 * 60 * 60 * 1000;
+  const currentYear = new Date().getFullYear();
+  const isReleasedInThisYear = releaseDate?.startsWith(currentYear);
+
+  if (!releaseDate && !isReleasedInThisYear) return false;
+
+  const releaseDateMilliSeconds = new Date(releaseDate).getTime();
+  return releaseDateMilliSeconds >= dateBeforeMonth;
+}
+
+export function getMapSeoDescription(map = {}) {
+  if (!map?.ID)
+    return "Explore map statistics, difficulty, and player records on JumpersHeaven Stats.";
+
+  const mapName = getCleanMapName(map.Name || "Unknown Map");
+  const author = map.Author || "Unknown author";
+  const type = map.Type || "jump";
+  const newMap = isNewMap(map.Released);
+
+  const parts = [];
+
+  let mainSentence = `${mapName} is a${newMap ? " new" : ""} ${type} map created by ${author}`;
+
+  if (map.CpID) {
+    mainSentence += ` with ID ${map.CpID}`;
+  }
+
+  mainSentence += ".";
+  parts.push(mainSentence);
+
+  const difficulties = map.Difficulty ? Object.values(map.Difficulty) : [];
+
+  if (difficulties.length > 0) {
+    const allDifficultiesSummed = difficulties.reduce(
+      (sum, d) => sum + (d.Difficulty || 0),
+      0,
+    );
+    const avgDifficulty = allDifficultiesSummed / difficulties.length;
+
+    parts.push(
+      `The average difficulty is approximately ${avgDifficulty.toFixed(2)}.`,
+    );
+  }
+
+  if (map.IndividualFinishCount) {
+    parts.push(
+      `${mapName} has been completed by ${map.IndividualFinishCount.toLocaleString()} players.`,
+    );
+  }
+
+  parts.push(
+    `View records, rankings, and player statistics for ${mapName} on JumpersHeaven Stats.`,
+  );
+
+  return parts.join(" ");
+}
+
 export function getCleanMapName(mapName) {
   if (!mapName) return "unknown";
   return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
