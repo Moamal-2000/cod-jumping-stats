@@ -143,6 +143,8 @@ export function getPlayerOgDescription(player = {}) {
     parts.push(`Last active on ${lastSeenPureDate}.`);
   }
 
+  parts.push("View full profile and records.");
+
   return parts.join(" ");
 }
 
