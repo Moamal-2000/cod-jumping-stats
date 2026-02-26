@@ -125,7 +125,7 @@ export function stripColorCodes(name) {
   return name.replace(/\^\d/g, "");
 }
 
-export function getCountryFlag(domain) {
+export function domainToCountryFlag(domain) {
   let country = domain.split(".")[0];
   if (country === "uk") country = "gb";
   return `/countryFlags/${country}.svg`;

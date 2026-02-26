@@ -1,6 +1,6 @@
 "use client";
 
-import { getCountryFlag } from "@/functions/utils";
+import { domainToCountryFlag } from "@/functions/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./ServerCardHeader.module.scss";
@@ -15,7 +15,7 @@ const ServerCardHeader = ({ server, index, viewMode }) => {
     <header className={`${s.serverHeader} ${isList ? s.list : ""}`}>
       <div className={s.countryFlag}>
         <Image
-          src={getCountryFlag(server.Domain)}
+          src={domainToCountryFlag(server.Domain)}
           alt="Country flag"
           width="30"
           height="26"

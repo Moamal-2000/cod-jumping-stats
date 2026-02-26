@@ -1,6 +1,6 @@
 import CopyButton from "@/components/Shared/Buttons/CopyButton/CopyButton";
 import { getColoredName } from "@/functions/components";
-import { getCountryFlag } from "@/functions/utils";
+import { domainToCountryFlag } from "@/functions/utils";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./GameType.module.scss";
@@ -44,7 +44,7 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
                     >
                       <td className={s.serverCell}>
                         <Image
-                          src={getCountryFlag(server.Domain)}
+                          src={domainToCountryFlag(server.Domain)}
                           alt="Country flag"
                           width="26"
                           height="20"
