@@ -3,6 +3,7 @@ import PlayerProfileLayout from "@/components/Pages/PlayerProfile/PlayerProfileL
 import { getOpenGraphMetadata, SITE_URL } from "@/data/metadata";
 import {
   getPlayerById,
+  getPlayerOgDescription,
   getPlayerSeoDescription,
   stripColorCodes,
 } from "@/functions/utils";
@@ -16,15 +17,16 @@ export async function generateMetadata({ params }) {
   const purePlayerName = stripColorCodes(playerName);
 
   const title = `${purePlayerName} Profile | JumpersHeaven`;
-  const description = getPlayerSeoDescription(player);
+  const seoDescription = getPlayerSeoDescription(player);
+  const ogDescription = getPlayerOgDescription(player);
 
   const generatedMetadata = {
     title,
-    description,
+    description: seoDescription,
     metadataBase: new URL(SITE_URL),
     ...getOpenGraphMetadata({
       title,
-      description,
+      description: ogDescription,
       imageUrl: `${SITE_URL}/player/${playerId}/opengraph-image`,
       imageAlt: `Jumpers Heaven ${purePlayerName} Profile`,
       pagePath: `player/${playerId}`,

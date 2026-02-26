@@ -700,6 +700,53 @@ export function getPlayerSeoDescription(player = {}) {
   return parts.join(" ");
 }
 
+export function getPlayerOgDescription(player = {}) {
+  if (!player?.PlayerID) {
+    return "View player stats, rankings, and achievements on JumpersHeaven.";
+  }
+
+  const purePlayerName = stripColorCodes(
+    player.PrefName || player.PlayerName || "This player",
+  );
+
+  const parts = [];
+
+  if (player.Banned) {
+    parts.push(`${purePlayerName} is currently banned.`);
+  }
+
+  if (player.PlayerID === 1) {
+    parts.push(`${purePlayerName} is the owner of JumpersHeaven.`);
+  }
+
+  let sentence = `Explore ${purePlayerName}'s stats, rankings, and achievements`;
+
+  if (player.Country) {
+    const countryName = getFormattedCountryName(player.Country);
+    sentence += ` from ${countryName}`;
+  }
+
+  sentence += ".";
+  parts.push(sentence);
+
+  if (player.Visits) {
+    parts.push(
+      `Visited ${player.Visits.toLocaleString()} times on the server.`,
+    );
+  }
+
+  if (player.Admin && player.Admin > 0) {
+    parts.push(`Server admin level ${player.Admin}.`);
+  }
+
+  if (player.LastSeen) {
+    const lastSeenPureDate = formateDateExcludeTime(player.LastSeen);
+    parts.push(`Last active on ${lastSeenPureDate}.`);
+  }
+
+  return parts.join(" ");
+}
+
 export function getCleanMapName(mapName) {
   if (!mapName) return "unknown";
   return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
