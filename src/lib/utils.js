@@ -1,5 +1,4 @@
 import { COUNTRIES_WITH_THE, MONTHS } from "@/data/constants";
-import { encode } from "@msgpack/msgpack";
 import { Buffer } from "buffer";
 import LZString from "lz-string";
 import { decode } from "msgpackr";
@@ -38,13 +37,6 @@ export function getFormattedCountryName(code) {
   return COUNTRIES_WITH_THE.has(name) ? `the ${name}` : name;
 }
 
-export function getValueFromLocalStorage({ key, defaultValue }) {
-  if (typeof window === "undefined") return defaultValue;
-
-  const value = localStorage.getItem(key);
-  return value ? JSON.parse(value) : defaultValue;
-}
-
 export function formatDate(dateStr, fallback) {
   if (!dateStr) return fallback;
 
@@ -57,53 +49,6 @@ export function formatDate(dateStr, fallback) {
   return date.toLocaleDateString();
 }
 
-export function cacheMapsLocally(mapsLocal) {
-  if (typeof window === "undefined") return;
-
-  const dataToCache = { maps: mapsLocal, timeStamp: Date.now() };
-
-  const encoded = encode(dataToCache);
-  const base64 = Buffer.from(encoded).toString("base64");
-  const compressed = LZString.compressToUTF16(base64);
-
-  localStorage.setItem("mapsData", compressed);
-}
-
-export function cachePlayersLocally(playersLocal, dataType) {
-  if (typeof window === "undefined") return;
-
-  const dataToCache = {
-    allPlayersData: playersLocal,
-    timeStamp: Date.now(),
-    dataType,
-  };
-
-  const encoded = encode(dataToCache);
-  const base64 = Buffer.from(encoded).toString("base64");
-  const compressed = LZString.compressToUTF16(base64);
-
-  const key = `playersData${capitalize(dataType)}`;
-  localStorage.setItem(key, compressed);
-}
-
-export function getCachedMaps() {
-  if (typeof window === "undefined") return null;
-
-  const compressed = localStorage.getItem("mapsData");
-  if (!compressed) return null;
-
-  try {
-    const base64 = LZString.decompressFromUTF16(compressed);
-    const bytes = new Uint8Array(Buffer.from(base64, "base64"));
-    const data = decode(bytes);
-
-    return data;
-  } catch (err) {
-    console.error(`Failed to decompress or decode mapsData: ${err}`);
-    return null;
-  }
-}
-
 export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
   const diff = Difficulty?.[fps];
   if (!diff || diff?.Difficulty < 0) return "?";
@@ -112,25 +57,6 @@ export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
 
 export function kebabCase(str) {
   return str.toLowerCase().split(" ").join("-");
-}
-
-export function getCachedPlayers(dataType) {
-  if (typeof window === "undefined") return null;
-
-  const key = `playersData${capitalize(dataType)}`;
-  const compressed = localStorage.getItem(key);
-  if (!compressed) return null;
-
-  try {
-    const base64 = LZString.decompressFromUTF16(compressed);
-    const bytes = new Uint8Array(Buffer.from(base64, "base64"));
-    const data = decode(bytes);
-
-    return data;
-  } catch (err) {
-    console.error(`Failed to decompress or decode playersData: ${err}`);
-    return null;
-  }
 }
 
 export function capitalize(str) {
