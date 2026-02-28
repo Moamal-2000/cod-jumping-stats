@@ -14,13 +14,13 @@ import {
   ZOOM_SENSITIVITY,
 } from "@/data/graphConstants";
 import { useEffect, useRef, useState } from "react";
+import EmptyGraphState from "./EmptyGraphState/EmptyGraphState";
 import s from "./Graph.module.scss";
 import LoadingUI from "./LoadingUI/LoadingUI";
 import Points from "./Points/Points";
 import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
-import EmptyGraphState from "./EmptyGraphState/EmptyGraphState";
 
 const Graph = ({ data: runData, isLoading = false }) => {
   const containerRef = useRef(null);
@@ -270,6 +270,25 @@ const Graph = ({ data: runData, isLoading = false }) => {
     }
   };
 
+  const handleSvgWheel = (wheelEvent) => {
+    // Keep zoom interaction scoped to the graph surface itself.
+    wheelEvent.preventDefault();
+    wheelEvent.stopPropagation();
+
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    const localCursorX = svgRect
+      ? wheelEvent.clientX - svgRect.left
+      : CHART_WIDTH / 2;
+
+    const zoomFactor = Math.exp(-wheelEvent.deltaY * ZOOM_SENSITIVITY);
+    const nextScale = Math.max(
+      SCALE_MIN,
+      Math.min(SCALE_MAX, scaleRef.current * zoomFactor),
+    );
+
+    setScaleAround(nextScale, localCursorX);
+  };
+
   const handleSvgKeyDown = (keyboardEvent) => {
     if (keyboardEvent.key === "ArrowLeft") {
       setPanOffsetPx((prevPan) =>
@@ -300,13 +319,24 @@ const Graph = ({ data: runData, isLoading = false }) => {
     };
   }, [zoomScale, panOffsetPx]); // Depend on state to get latest pan bounds in handleMouseMove
 
+  // Use native non-passive wheel listener to reliably prevent browser/page zoom.
+  useEffect(() => {
+    const svgElement = svgRef.current;
+    if (!svgElement) return;
+
+    svgElement.addEventListener("wheel", handleSvgWheel, { passive: false });
+    return () => svgElement.removeEventListener("wheel", handleSvgWheel);
+  });
+
   // Resize observer to make chart responsive
   useEffect(() => {
     const targetElement = containerRef.current;
     if (!targetElement || typeof ResizeObserver === "undefined") return;
 
     // Sync immediately so first painted SVG uses actual container width.
-    const immediateWidth = Math.floor(targetElement.getBoundingClientRect().width);
+    const immediateWidth = Math.floor(
+      targetElement.getBoundingClientRect().width,
+    );
     if (immediateWidth > 0) {
       setContainerWidth(immediateWidth);
     }
@@ -323,33 +353,8 @@ const Graph = ({ data: runData, isLoading = false }) => {
     return () => resizeObserver.disconnect();
   }, [isLoading, graphPoints.length]);
 
-  // Add a native, non-passive wheel listener for zooming towards the cursor.
-  useEffect(() => {
-    const wheelTargetElement = svgRef.current || containerRef.current;
-    if (!wheelTargetElement) return;
-    const wheelHandler = (wheelEvent) => {
-      // Prevent browser/OS pinch-zoom or page zoom
-      wheelEvent.preventDefault();
-      const svgRect = svgRef.current?.getBoundingClientRect();
-      const localCursorX = svgRect
-        ? wheelEvent.clientX - svgRect.left
-        : CHART_WIDTH / 2;
-      const zoomFactor = Math.exp(-wheelEvent.deltaY * ZOOM_SENSITIVITY);
-      const nextScale = Math.max(
-        SCALE_MIN,
-        Math.min(SCALE_MAX, scaleRef.current * zoomFactor),
-      );
-      setScaleAround(nextScale, localCursorX);
-    };
-    wheelTargetElement.addEventListener("wheel", wheelHandler, {
-      passive: false,
-    });
-    return () => wheelTargetElement.removeEventListener("wheel", wheelHandler);
-    // Intentionally empty deps: handler reads current values from refs
-  }, []);
-
   if (isLoading) return <LoadingUI />;
-  if (graphPoints.length === 0) return <EmptyGraphState />
+  if (graphPoints.length === 0) return <EmptyGraphState />;
 
   const allTimestamps = graphPoints.map((point) => point.timestamp);
   const allRunTimes = graphPoints.map((point) => point.runTime);
