@@ -1,10 +1,8 @@
-import { jhApis } from "@/api/jumpersHeaven";
 import { COUNTRIES_WITH_THE, MONTHS } from "@/data/constants";
 import { encode } from "@msgpack/msgpack";
 import { Buffer } from "buffer";
 import LZString from "lz-string";
 import { decode } from "msgpackr";
-import { decodeAsyncData, fetchMsgPackResponse } from "./msgpackClient";
 
 export function formateReleaseDate(dateStr) {
   if (!dateStr) return "Unknown";
@@ -22,30 +20,6 @@ export function domainToCountryFlag(domain) {
   let country = domain.split(".")[0];
   if (country === "uk") country = "gb";
   return `/countryFlags/${country}.svg`;
-}
-
-export async function getMapByCpId(cpid, datatype) {
-  if (cpid === undefined) {
-    console.error("map cpid is undefined");
-    return null;
-  }
-
-  const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
-  const maps = (await decodeAsyncData(response, datatype)) ?? [];
-
-  return maps.find((map) => +map.CpID === +cpid);
-}
-
-export async function getPlayerById({ playerId, datatype }) {
-  if (playerId === undefined) {
-    console.error("playerId is undefined");
-    return null;
-  }
-
-  const response = await fetchMsgPackResponse({ url: jhApis().player.all });
-  const players = (await decodeAsyncData(response, datatype)) ?? [];
-
-  return players.find((player) => +player.PlayerID === +playerId);
 }
 
 export function getCountryName(countryCode) {
@@ -224,18 +198,6 @@ export function formatDateExcludeTime(dateString) {
     month: "long",
     day: "numeric",
   });
-}
-
-export async function fetchPlayers({ sort }) {
-  try {
-    const response = await fetchMsgPackResponse({
-      url: jhApis({ sort }).player.all,
-    });
-    return (await decodeAsyncData(response)) ?? [];
-  } catch (error) {
-    console.error(`Error fetching players: ${error}`);
-    return [];
-  }
 }
 
 export function isNewMap(releaseDate) {

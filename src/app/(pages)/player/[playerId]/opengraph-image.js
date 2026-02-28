@@ -1,6 +1,6 @@
 import { getColoredNameForOG } from "@/components/Helper/playerNameColor";
 import { SITE_URL } from "@/data/metadata";
-import { getPlayerById } from "@/lib/utils";
+import { getPlayerById } from "@/lib/playersApi";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 1300, height: 740 };
