@@ -1,8 +1,7 @@
 import { COUNTRIES_WITH_THE } from "@/data/constants";
 
 export function stripColorCodes(name) {
-  if (!name) return "";
-  // Remove color codes like ^1, ^2, etc. from player names
+  if (name === undefined) return "";
   return name.replace(/\^\d/g, "");
 }
 
