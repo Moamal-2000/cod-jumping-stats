@@ -1,5 +1,5 @@
 import { CHART_PADDING } from "@/data/graphConstants";
-import { formateTimeBySeconds, toSecondsFlexible } from "@/functions/utils";
+import { formatTimeBySeconds, toSecondsFlexible } from "@/functions/utils";
 import s from "./YAxisLabels.module.scss";
 
 const YAxisLabels = ({ graphPoints, scaleRunTimeToY }) => {
@@ -22,7 +22,7 @@ export default YAxisLabels;
 
 function getGraphRunTimes(graphPoints = []) {
   const maxRunSeconds = graphPoints[0]?.rawData?.TimePlayed || 0;
-  const averageRun = formateTimeBySeconds(maxRunSeconds / 2);
+  const averageRun = formatTimeBySeconds(maxRunSeconds / 2);
 
   const allTimePlayed = graphPoints.map(
     (point) => point?.rawData?.TimePlayedString,

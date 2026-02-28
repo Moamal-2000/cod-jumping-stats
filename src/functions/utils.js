@@ -227,7 +227,7 @@ export function getTimeObj(getSeconds) {
   };
 }
 
-export function formateTimeBySeconds(seconds) {
+export function formatTimeBySeconds(seconds) {
   const { days, hours, minutes, seconds: sec } = getTimeObj(seconds);
 
   if (days > 0) return `${days}:${hours}:${minutes}:${sec}`;
@@ -258,7 +258,7 @@ export function toSecondsFlexible(timeStr = "") {
   return seconds;
 }
 
-export function formateDateExcludeTime(dateString) {
+export function formatDateExcludeTime(dateString) {
   if (!dateString) return null;
 
   const isoString = dateString.replace(" ", "T");

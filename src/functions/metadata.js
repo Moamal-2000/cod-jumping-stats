@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/data/metadata";
 import {
-  formateDateExcludeTime,
+  formatDateExcludeTime,
   getCleanMapName,
   getFormattedCountryName,
   getMapAverageDifficulty,
@@ -88,7 +88,7 @@ export function getPlayerSeoDescription(player = {}) {
   }
 
   if (player.LastSeen) {
-    const lastSeenPureDate = formateDateExcludeTime(player.LastSeen);
+    const lastSeenPureDate = formatDateExcludeTime(player.LastSeen);
     parts.push(`${purePlayerName} was last seen on ${lastSeenPureDate}.`);
   }
 
@@ -139,7 +139,7 @@ export function getPlayerOgDescription(player = {}) {
   }
 
   if (player.LastSeen) {
-    const lastSeenPureDate = formateDateExcludeTime(player.LastSeen);
+    const lastSeenPureDate = formatDateExcludeTime(player.LastSeen);
     parts.push(`Last active on ${lastSeenPureDate}.`);
   }
 
