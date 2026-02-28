@@ -1,4 +1,4 @@
-import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/utils";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
 
 export const baseQueryMsgPack = async ({ url }) => {
   try {

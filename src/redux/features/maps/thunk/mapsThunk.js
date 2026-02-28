@@ -1,11 +1,7 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import { MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
-import {
-  cacheMapsLocally,
-  decodeAsyncData,
-  fetchMsgPackResponse,
-  getCachedMaps,
-} from "@/lib/utils";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
+import { cacheMapsLocally, getCachedMaps } from "@/lib/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMaps = createAsyncThunk(

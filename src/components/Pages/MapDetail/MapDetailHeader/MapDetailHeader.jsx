@@ -3,11 +3,8 @@ import { getColoredName } from "@/components/Helper/playerNameColor";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
 import { JUMP_FPS } from "@/data/constants";
-import {
-  decodeAsyncData,
-  fetchMsgPackResponse,
-  formateReleaseDate,
-} from "@/lib/utils";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
+import { formateReleaseDate } from "@/lib/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";

@@ -1,11 +1,7 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import { PLAYER_CACHE_EXPIRATION_TIME } from "@/data/constants";
-import {
-  cachePlayersLocally,
-  decodeAsyncData,
-  fetchMsgPackResponse,
-  getCachedPlayers,
-} from "@/lib/utils";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
+import { cachePlayersLocally, getCachedPlayers } from "@/lib/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPlayers = createAsyncThunk(
