@@ -1,4 +1,5 @@
-import { getColoredName, getModifiedRank } from "@/functions/components";
+import { getColoredName } from "@/components/Helper/playerNameColor";
+import { getModifiedRank } from "@/components/Helper/rankBadge";
 import Link from "next/link";
 import s from "./MapDetailTops.module.scss";
 

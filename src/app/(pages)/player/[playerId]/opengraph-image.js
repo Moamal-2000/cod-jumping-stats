@@ -1,5 +1,5 @@
+import { getColoredNameForOG } from "@/components/Helper/playerNameColor";
 import { SITE_URL } from "@/data/metadata";
-import { getColoredNameForOG } from "@/functions/components";
 import { getPlayerById } from "@/functions/utils";
 import { ImageResponse } from "next/og";
 

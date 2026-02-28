@@ -1,9 +1,9 @@
 "use client";
 
+import { getColoredName } from "@/components/Helper/playerNameColor";
 import PlayerBadges from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { getColoredName } from "@/functions/components";
 import { useSelector } from "react-redux";
 import s from "./PlayerProfileHeader.module.scss";
 

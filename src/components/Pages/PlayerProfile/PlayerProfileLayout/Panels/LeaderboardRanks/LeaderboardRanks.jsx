@@ -1,5 +1,5 @@
 "use client";
-import { getModifiedRank } from "@/functions/components";
+import { getModifiedRank } from "@/components/Helper/rankBadge";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./LeaderboardRanks.module.scss";

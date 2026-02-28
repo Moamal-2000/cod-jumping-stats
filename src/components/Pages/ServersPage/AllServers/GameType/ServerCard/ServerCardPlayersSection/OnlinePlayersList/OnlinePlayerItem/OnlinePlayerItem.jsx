@@ -1,7 +1,7 @@
 "use client";
 
+import { getColoredName } from "@/components/Helper/playerNameColor";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
-import { getColoredName } from "@/functions/components";
 import { stripColorCodes } from "@/functions/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";

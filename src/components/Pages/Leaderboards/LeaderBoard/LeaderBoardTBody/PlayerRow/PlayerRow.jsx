@@ -1,6 +1,6 @@
 "use client";
 
-import { getModifiedRank } from "@/functions/components";
+import { getModifiedRank } from "@/components/Helper/rankBadge";
 import { useSearchParams } from "next/navigation";
 import PlayerNameCell from "./PlayerNameCell/PlayerNameCell";
 import s from "./PlayerRow.module.scss";

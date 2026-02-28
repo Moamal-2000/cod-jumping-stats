@@ -1,8 +1,8 @@
 import { jhApis } from "@/api/jumpersHeaven";
+import { getColoredName } from "@/components/Helper/playerNameColor";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
 import { JUMP_FPS } from "@/data/constants";
-import { getColoredName } from "@/functions/components";
 import {
   decodeAsyncData,
   fetchMsgPackResponse,

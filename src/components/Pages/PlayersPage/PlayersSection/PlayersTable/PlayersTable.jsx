@@ -1,5 +1,5 @@
+import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { getColoredName } from "@/functions/components";
 import Link from "next/link";
 import PlayerBadges from "../../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../../PlayerCard/PlayerStats/PlayerStats";
