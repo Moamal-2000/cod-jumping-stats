@@ -5,7 +5,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
   getCachedPlayers,
-} from "@/functions/utils";
+} from "@/lib/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchAllPlayers = createAsyncThunk(

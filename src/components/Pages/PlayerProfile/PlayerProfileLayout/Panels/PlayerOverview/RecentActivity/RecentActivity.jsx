@@ -1,6 +1,6 @@
 "use client";
 
-import { formatDate } from "@/functions/utils";
+import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import s from "./RecentActivity.module.scss";

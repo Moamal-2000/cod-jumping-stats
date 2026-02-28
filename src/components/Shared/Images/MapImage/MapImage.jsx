@@ -1,6 +1,6 @@
 "use client";
 
-import { getCleanMapName } from "@/functions/utils";
+import { getCleanMapName } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 import SpinnerLoader from "../../Loaders/SpinnerLoader/SpinnerLoader";

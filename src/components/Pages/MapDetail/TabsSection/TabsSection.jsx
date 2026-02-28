@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString } from "@/functions/utils";
+import { createQueryString } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import MapDetailPlayers from "../MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "../MapDetailTops/MapDetailTops";

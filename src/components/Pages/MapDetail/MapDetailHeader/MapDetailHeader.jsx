@@ -7,7 +7,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
   formateReleaseDate,
-} from "@/functions/utils";
+} from "@/lib/utils";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import Link from "next/link";
 import { useEffect, useState } from "react";

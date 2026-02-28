@@ -1,6 +1,6 @@
 import s from "@/components/Pages/MapDetail/MapPage.module.scss";
 import { METADATA, SITE_URL } from "@/data/metadata";
-import { getOpenGraphMetadata } from "@/functions/metadata";
+import { getOpenGraphMetadata } from "@/lib/metadata";
 import Link from "next/link";
 
 const title = "Map | JumpersHeaven";

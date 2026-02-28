@@ -1,7 +1,7 @@
 "use client";
 
 import { VIEW_OPTIONS_DATA } from "@/data/constants";
-import { createQueryString, removeQueryString } from "@/functions/utils";
+import { createQueryString, removeQueryString } from "@/lib/utils";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import ExpandButton from "./ExpandButton/ExpandButton";
 import ShowAllButton from "./ShowAllButton/ShowAllButton";

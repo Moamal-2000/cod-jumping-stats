@@ -5,7 +5,7 @@ import {
   eventWinnerIds,
   mappersIds,
 } from "@/data/manualBadges";
-import { isActiveWithinWeek } from "@/functions/validation";
+import { isActiveWithinWeek } from "@/lib/validation";
 import Link from "next/link";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";

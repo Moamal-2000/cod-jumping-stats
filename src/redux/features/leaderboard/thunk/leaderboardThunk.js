@@ -1,5 +1,5 @@
 import { jhApis } from "@/api/jumpersHeaven";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/functions/utils";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchLeaderboard = createAsyncThunk(

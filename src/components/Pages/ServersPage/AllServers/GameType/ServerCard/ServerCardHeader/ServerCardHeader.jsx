@@ -1,6 +1,6 @@
 "use client";
 
-import { domainToCountryFlag } from "@/functions/utils";
+import { domainToCountryFlag } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./ServerCardHeader.module.scss";

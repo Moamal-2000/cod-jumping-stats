@@ -8,7 +8,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
   getCachedMaps,
-} from "@/functions/utils";
+} from "@/lib/utils";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";

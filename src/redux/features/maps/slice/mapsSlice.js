@@ -1,4 +1,4 @@
-import { getMapsByParams, paginateData } from "@/functions/filters";
+import { getMapsByParams, paginateData } from "@/lib/filters";
 import { createSlice } from "@reduxjs/toolkit";
 import { fetchMaps } from "../thunk/mapsThunk";
 

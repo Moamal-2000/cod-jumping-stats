@@ -1,6 +1,6 @@
 "use client";
 
-import { isMobile } from "@/functions/validation";
+import { isMobile } from "@/lib/validation";
 import { toggleMobileNav } from "@/redux/features/global/slice/globalSlice";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

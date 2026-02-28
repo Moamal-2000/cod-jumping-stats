@@ -1,5 +1,5 @@
 import { CHART_PADDING } from "@/data/graphConstants";
-import { formatTimeBySeconds, toSecondsFlexible } from "@/functions/utils";
+import { formatTimeBySeconds, toSecondsFlexible } from "@/lib/utils";
 import s from "./YAxisLabels.module.scss";
 
 const YAxisLabels = ({ graphPoints, scaleRunTimeToY }) => {

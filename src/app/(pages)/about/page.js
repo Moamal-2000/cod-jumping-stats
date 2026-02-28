@@ -1,6 +1,6 @@
 import About from "@/components/Pages/About/About";
 import { METADATA, SITE_URL } from "@/data/metadata";
-import { getOpenGraphMetadata } from "@/functions/metadata";
+import { getOpenGraphMetadata } from "@/lib/metadata";
 
 const title = "About | JumpersHeaven";
 const description =

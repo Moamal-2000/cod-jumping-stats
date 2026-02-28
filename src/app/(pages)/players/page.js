@@ -1,7 +1,7 @@
 import PlayersPage from "@/components/Pages/PlayersPage/PlayersPage";
 import PlayerToolTip from "@/components/Pages/ServersPage/PlayerToolTip/PlayerToolTip";
 import { METADATA, SITE_URL } from "@/data/metadata";
-import { getOpenGraphMetadata } from "@/functions/metadata";
+import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 
 const title = "Players | JumpersHeaven";

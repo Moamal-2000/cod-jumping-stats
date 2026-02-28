@@ -1,6 +1,6 @@
 "use client";
 
-import { getIsLastPagination } from "@/functions/filters";
+import { getIsLastPagination } from "@/lib/filters";
 import { useCallback, useRef, useState } from "react";
 
 const useInfiniteScroll = (

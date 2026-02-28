@@ -1,4 +1,4 @@
-import { getOpenGraphMetadata } from "@/functions/metadata";
+import { getOpenGraphMetadata } from "@/lib/metadata";
 
 export const SITE_URL = process.env.SITE_URL;
 const title = "Statistics | JumpersHeaven";

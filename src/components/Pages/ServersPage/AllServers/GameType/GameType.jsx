@@ -1,6 +1,6 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CopyButton from "@/components/Shared/Buttons/CopyButton/CopyButton";
-import { domainToCountryFlag } from "@/functions/utils";
+import { domainToCountryFlag } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
 import s from "./GameType.module.scss";

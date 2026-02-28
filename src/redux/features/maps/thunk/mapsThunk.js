@@ -5,7 +5,7 @@ import {
   decodeAsyncData,
   fetchMsgPackResponse,
   getCachedMaps,
-} from "@/functions/utils";
+} from "@/lib/utils";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchMaps = createAsyncThunk(

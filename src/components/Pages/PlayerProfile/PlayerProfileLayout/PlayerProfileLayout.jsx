@@ -1,7 +1,7 @@
 "use client";
 
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
-import { stripColorCodes } from "@/functions/utils";
+import { stripColorCodes } from "@/lib/utils";
 import {
   clearPlayerProfile,
   updatePlayerProfileState,

@@ -1,13 +1,13 @@
 "use client";
 
-import { getCountryName } from "@/functions/utils";
+import { getCountryName } from "@/lib/utils";
 import Image from "next/image";
 import { useState } from "react";
 import s from "./CountryImage.module.scss";
 
 const CountryImage = ({ countryCode, size = 32, colorPlaceholder = false }) => {
   const [src, setSrc] = useState(
-    `/countryFlags/${countryCode?.toLowerCase()}.svg`
+    `/countryFlags/${countryCode?.toLowerCase()}.svg`,
   );
 
   const countryName = getCountryName(countryCode);

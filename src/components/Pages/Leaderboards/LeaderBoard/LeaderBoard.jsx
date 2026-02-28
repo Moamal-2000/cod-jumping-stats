@@ -1,7 +1,7 @@
 "use client";
 
-import { getIsLastPagination, paginateData } from "@/functions/filters";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
+import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { fetchLeaderboard } from "@/redux/features/leaderboard/thunk/leaderboardThunk";
 import { useSearchParams } from "next/navigation";

@@ -3,8 +3,8 @@ import {
   getMapOgDescription,
   getMapSeoDescription,
   getOpenGraphMetadata,
-} from "@/functions/metadata";
-import { getMapByCpId } from "@/functions/utils";
+} from "@/lib/metadata";
+import { getMapByCpId } from "@/lib/utils";
 import { size } from "./opengraph-image";
 
 export const revalidate = 86400; // 1 day

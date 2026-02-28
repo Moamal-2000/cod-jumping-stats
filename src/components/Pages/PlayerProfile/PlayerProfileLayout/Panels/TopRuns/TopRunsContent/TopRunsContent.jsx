@@ -1,4 +1,4 @@
-import { getProcessedTopRuns } from "@/functions/filters";
+import { getProcessedTopRuns } from "@/lib/filters";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

@@ -1,7 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
-import { createQueryString } from "@/functions/utils";
+import { createQueryString } from "@/lib/utils";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";

@@ -5,8 +5,8 @@ import {
   getOpenGraphMetadata,
   getPlayerOgDescription,
   getPlayerSeoDescription,
-} from "@/functions/metadata";
-import { getPlayerById, stripColorCodes } from "@/functions/utils";
+} from "@/lib/metadata";
+import { getPlayerById, stripColorCodes } from "@/lib/utils";
 import { size } from "./opengraph-image";
 
 export async function generateMetadata({ params }) {

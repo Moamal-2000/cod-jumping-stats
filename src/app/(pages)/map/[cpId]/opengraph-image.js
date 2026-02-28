@@ -1,5 +1,5 @@
 import { SITE_URL } from "@/data/metadata";
-import { getCleanMapName, getMapByCpId } from "@/functions/utils";
+import { getCleanMapName, getMapByCpId } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 1300, height: 740 };

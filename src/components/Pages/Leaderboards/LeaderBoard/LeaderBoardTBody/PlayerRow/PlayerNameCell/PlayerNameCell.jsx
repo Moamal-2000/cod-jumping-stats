@@ -2,7 +2,7 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { stripColorCodes } from "@/functions/utils";
+import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";

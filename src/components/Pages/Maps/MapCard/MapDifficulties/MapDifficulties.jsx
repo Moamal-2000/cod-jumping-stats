@@ -1,5 +1,5 @@
 import { JUMP_FPS } from "@/data/constants";
-import { getFpsDifficultyValue } from "@/functions/utils";
+import { getFpsDifficultyValue } from "@/lib/utils";
 import s from "./MapDifficulties.module.scss";
 
 const MapDifficulties = ({ Difficulty }) => {

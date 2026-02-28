@@ -1,4 +1,4 @@
-import { formatDate } from "@/functions/utils";
+import { formatDate } from "@/lib/utils";
 import Link from "next/link";
 import s from "./TopRunsTBody.module.scss";
 
