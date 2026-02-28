@@ -286,12 +286,19 @@
 // Graph Container
 .graphContainer {
   position: relative;
+  width: 100%;
+  min-width: 0;
   height: 100%;
   background: rgba(0, 0, 0, 0.15);
   border-radius: 8px;
   border: 1px solid rgba(255, 255, 255, 0.03);
   user-select: none;
   touch-action: none;
+
+  svg {
+    display: block;
+    width: 100%;
+  }
 
   .graphControls {
     position: absolute;

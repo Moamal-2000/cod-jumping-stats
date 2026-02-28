@@ -304,6 +304,13 @@ const Graph = ({ data: runData, isLoading = false }) => {
   useEffect(() => {
     const targetElement = containerRef.current;
     if (!targetElement || typeof ResizeObserver === "undefined") return;
+
+    // Sync immediately so first painted SVG uses actual container width.
+    const immediateWidth = Math.floor(targetElement.getBoundingClientRect().width);
+    if (immediateWidth > 0) {
+      setContainerWidth(immediateWidth);
+    }
+
     const resizeObserver = new ResizeObserver((resizeEntries) => {
       for (const resizeEntry of resizeEntries) {
         const nextContainerWidth = Math.floor(
@@ -314,7 +321,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     });
     resizeObserver.observe(targetElement);
     return () => resizeObserver.disconnect();
-  }, []);
+  }, [isLoading, graphPoints.length]);
 
   // Add a native, non-passive wheel listener for zooming towards the cursor.
   useEffect(() => {
