@@ -3,8 +3,8 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { cacheMapsLocally, getCachedMaps } from "@/lib/localCache";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";

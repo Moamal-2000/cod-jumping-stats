@@ -1,5 +1,5 @@
 import { jhApis } from "@/api/jumpersHeaven";
-import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/msgpackClient";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerProfile = createAsyncThunk(

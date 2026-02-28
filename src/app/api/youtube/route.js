@@ -1,4 +1,4 @@
-import { YOUTUBE_API_KEY, buildYouTubeApiUrl } from "@/lib/youtube";
+import { YOUTUBE_API_KEY, buildYouTubeApiUrl } from "@/lib/api/youtube";
 import { NextResponse } from "next/server";
 
 export async function GET(req) {

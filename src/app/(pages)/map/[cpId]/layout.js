@@ -1,5 +1,5 @@
 import { SITE_URL } from "@/data/metadata";
-import { getMapByCpId } from "@/lib/mapsApi";
+import { getMapByCpId } from "@/lib/api/mapsApi";
 import {
   getMapOgDescription,
   getMapSeoDescription,
