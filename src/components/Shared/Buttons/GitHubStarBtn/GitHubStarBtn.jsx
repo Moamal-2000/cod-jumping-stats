@@ -15,7 +15,7 @@ const GitHubStarBtn = () => {
       </svg>
 
       <div className={s.tooltip} role="tooltip">
-        Star us on GitHub
+        <span className={s.tooltipText}>Star us on GitHub</span>
         <div className={s.borderEffect} />
         <div className={s.effectHover} />
       </div>

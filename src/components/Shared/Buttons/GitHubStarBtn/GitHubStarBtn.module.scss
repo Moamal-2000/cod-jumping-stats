@@ -23,7 +23,7 @@
     width: 20px;
     height: 20px;
     fill: #9ea3b0;
-    transition: fill 0.2s ease;
+    transition: fill 0.2s ease, filter 0.2s ease;
   }
 
   &:hover {
@@ -35,13 +35,15 @@
 
     svg {
       fill: #ffd700;
-      transition: fill 0.2s 1s ease;
+      filter: drop-shadow(0 0 3px rgba(255, 215, 0, .6));
+      transition: fill 0.2s 1s ease, filter 0.2s .9s ease;
     }
 
     .tooltip {
       opacity: 1;
       visibility: visible;
       translate: 8px -50%;
+      transition: opacity 0.2s .3s ease;
     }
   }
 
@@ -59,7 +61,6 @@
   translate: 0 -50%;
   white-space: nowrap;
   background-color: #574f21;
-  color: #ffd700;
   padding: 8px 12px;
   border-radius: 6px;
   font-size: 0.8rem;
@@ -71,7 +72,16 @@
   visibility: hidden;
   z-index: 1;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: opacity 0.2s .3s ease;
+  transition: opacity 0 0;
+}
+
+.tooltipText {
+  color: transparent;
+  background: linear-gradient(90deg, #ffd700, #ffd700) no-repeat;
+  background-size: 0 100%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  transition: background-size 0 0;
 }
 
 .tooltip .borderEffect {
@@ -102,7 +112,14 @@
 .githubStarBtn:hover .effectHover {
   scale: 1 1;
   translate: 0;
-  transition: scale 0.2s .5s ease-out, translate 0.2s .5s ease-out;
+  transition:
+    scale 0.45s .5s ease-out,
+    translate .45s .5s ease-out;
+}
+
+.githubStarBtn:hover .tooltipText {
+  background-size: 100% 100%;
+  transition: background-size .3s .6s ease-out;
 }
 
 @include m.small {
