@@ -1,6 +1,7 @@
 "use client";
 
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
+import { createQueryString } from "@/lib/queryParams";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchMapRuns } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
