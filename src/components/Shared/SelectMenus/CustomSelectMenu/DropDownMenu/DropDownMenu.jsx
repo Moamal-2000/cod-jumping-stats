@@ -1,5 +1,5 @@
 import { SORT_MAPS_OPTIONS } from "@/data/staticData";
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./DropDownMenu.module.scss";
 

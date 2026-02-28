@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import s from "./CustomLabeledCheckbox.module.scss";

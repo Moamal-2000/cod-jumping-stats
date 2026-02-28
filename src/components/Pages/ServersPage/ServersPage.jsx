@@ -6,7 +6,7 @@ import {
   SERVERS_REFRESH_OPTIONS,
   SERVERS_VIEW_MODE,
 } from "@/data/constants";
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { useGetServersQuery } from "@/redux/features/servers/api/serversSlice";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AllServers from "./AllServers/AllServers";

@@ -1,7 +1,7 @@
 "use client";
 
 import { JUMP_FPS } from "@/data/constants";
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./SelectFpsButtons.module.scss";
 

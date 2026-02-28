@@ -3,7 +3,7 @@
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
-import { removeQueryString } from "@/lib/utils";
+import { removeQueryString } from "@/lib/queryParams";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { updatePlayersState } from "@/redux/features/players/slice/playersSlice";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";

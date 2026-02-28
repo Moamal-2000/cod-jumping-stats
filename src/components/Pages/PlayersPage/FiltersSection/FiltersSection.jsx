@@ -4,7 +4,7 @@ import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { VIEW_OPTIONS_DATA } from "@/data/constants";
 import { FILTER_PLAYERS_BADGES, SORT_PLAYERS_OPTIONS } from "@/data/staticData";
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 

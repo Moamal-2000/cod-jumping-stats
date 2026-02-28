@@ -1,6 +1,6 @@
 "use client";
 
-import { createQueryString, removeQueryString } from "@/lib/utils";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
