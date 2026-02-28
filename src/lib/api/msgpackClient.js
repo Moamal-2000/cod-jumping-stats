@@ -24,7 +24,6 @@ export async function decodeAsyncData(response, datatype = "arraybuffer") {
     );
   } catch (error) {
     console.error("Error decoding data:", error);
-    console.error("Buffer length:", uint8Array?.length || "unknown");
     console.error("Response status:", response?.status);
     console.error("Response headers:", response?.headers);
     return null;
