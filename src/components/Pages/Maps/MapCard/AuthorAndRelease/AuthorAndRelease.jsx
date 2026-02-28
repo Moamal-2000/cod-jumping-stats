@@ -1,4 +1,4 @@
-import { formateReleaseDate } from "@/lib/utils";
+import { formateReleaseDate } from "@/lib/dateTime";
 import s from "./AuthorAndRelease.module.scss";
 
 const AuthorAndRelease = ({ author, release }) => {

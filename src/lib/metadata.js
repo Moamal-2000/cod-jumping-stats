@@ -1,6 +1,6 @@
 import { SITE_URL } from "@/data/metadata";
+import { formatDateExcludeTime } from "./dateTime";
 import {
-  formatDateExcludeTime,
   getCleanMapName,
   getFormattedCountryName,
   getMapAverageDifficulty,
