@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start",
-    "lint": "eslint ."
+    "start": "next start"
   },
   "browserslist": [
     "extends browserslist-config-baseline"
@@ -24,9 +23,6 @@
   },
   "devDependencies": {
     "browserslist-config-baseline": "^0.5.0",
-    "eslint": "10",
-    "eslint-config-next": "16.1.6",
-    "eslint-plugin-unused-imports": "^4.4.1",
     "npm-check-updates": "^19.6.3",
     "sass": "^1.97.3"
   },
