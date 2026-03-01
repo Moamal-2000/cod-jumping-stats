@@ -1,4 +1,4 @@
-import Favorites from "@/components/Pages/Favorites/Favorites/Favorites";
+import Favorites from "@/components/Pages/Favorites/Favorites";
 import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
