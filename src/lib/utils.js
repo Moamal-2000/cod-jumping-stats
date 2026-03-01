@@ -25,7 +25,7 @@ export function getCountryName(countryCode) {
   try {
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
     return regionNames.of(countryCode) || "Unknown Country";
-  } catch (e) {
+  } catch {
     return "Unknown Country";
   }
 }
