@@ -59,6 +59,8 @@ function shouldDisableButton({
   leaderboardData,
   isLeaderboardExpanded,
 } = {}) {
+  if (typeof window === "undefined") return true;
+
   const isLeaderboardUnavailable =
     loading || error || leaderboardData?.length === 0;
 
