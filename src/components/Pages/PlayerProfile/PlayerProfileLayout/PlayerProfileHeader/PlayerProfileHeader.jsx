@@ -26,6 +26,7 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
               <CountryImage
                 countryCode={countryCode}
                 countryName={jumpScores?.Country}
+                colorPlaceholder={true}
                 size={24}
               />
             )}
