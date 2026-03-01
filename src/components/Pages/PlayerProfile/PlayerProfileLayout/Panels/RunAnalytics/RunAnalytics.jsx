@@ -8,7 +8,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Graph from "./Graph/Graph";
-import MapList from "./MapList";
+import MapList from "./MapList/MapList";
 import MapRoutes from "./MapRoutes/MapRoutes";
 import s from "./RunAnalytics.module.scss";
 

@@ -4,7 +4,7 @@ import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import s from "./RunAnalytics.module.scss";
+import s from "./MapList.module.scss";
 
 const MapList = ({
   allMaps = [],
