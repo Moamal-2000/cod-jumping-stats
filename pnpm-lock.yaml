@@ -33,9 +33,6 @@ importers:
         specifier: ^9.2.0
         version: 9.2.0(react@19.2.4)(redux@5.0.1)
     devDependencies:
-      babel-plugin-react-compiler:
-        specifier: ^1.0.0
-        version: 1.0.0
       browserslist-config-baseline:
         specifier: ^0.5.0
         version: 0.5.0
@@ -2683,6 +2680,7 @@ snapshots:
   babel-plugin-react-compiler@1.0.0:
     dependencies:
       '@babel/types': 7.28.5
+    optional: true
 
   balanced-match@1.0.2: {}
 

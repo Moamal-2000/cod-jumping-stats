@@ -23,7 +23,6 @@
     "react-redux": "^9.2.0"
   },
   "devDependencies": {
-    "babel-plugin-react-compiler": "^1.0.0",
     "browserslist-config-baseline": "^0.5.0",
     "eslint": "9",
     "eslint-config-next": "16.1.6",
