@@ -3,8 +3,6 @@ import { getMapByCpId } from "@/lib/api/mapsApi";
 import { getCleanMapName } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 
-/* eslint-disable @next/next/no-img-element */
-
 export const size = { width: 1300, height: 740 };
 export const contentType = "image/png";
 export const revalidate = 86400; // 1 day

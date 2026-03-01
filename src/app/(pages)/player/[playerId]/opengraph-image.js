@@ -3,8 +3,6 @@ import { SITE_URL } from "@/data/metadata";
 import { getPlayerById } from "@/lib/api/playersApi";
 import { ImageResponse } from "next/og";
 
-/* eslint-disable @next/next/no-img-element */
-
 export const size = { width: 1300, height: 740 };
 export const contentType = "image/png";
 export const revalidate = 21600; // 6 hours
