@@ -34,12 +34,12 @@ const ToolTip = ({ hoveredPoint, mapName, chartWidth, chartHeight }) => {
   return (
     <div ref={tooltipRef} className={s.tooltip} style={position}>
       <div className={s.header}>
-        <strong>{coloredPlayerName || "Unknown Player"}</strong> /
+        <strong>{coloredPlayerName || "Unknown Player"}</strong>
         <strong>{mapName}</strong>
       </div>
 
-      <div>Time: {hoveredRunData.TimePlayedString}</div>
-      <div className={s.tooltipDate}>{formattedDate}</div>
+      <div className={s.time}>Time: {hoveredRunData.TimePlayedString}</div>
+      <div className={s.date}>{formattedDate}</div>
     </div>
   );
 };

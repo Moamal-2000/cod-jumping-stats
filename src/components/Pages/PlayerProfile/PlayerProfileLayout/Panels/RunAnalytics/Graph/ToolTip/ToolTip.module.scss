@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .tooltip {
   background: rgba(15, 23, 42, 0.95);
   border: 1px solid rgba(255, 255, 255, 0.08);
@@ -13,27 +15,35 @@
   line-height: 1.5;
   position: absolute;
   overflow-wrap: anywhere;
+}
 
-  & .header {
-    margin-bottom: 0.5rem;
-    font-size: 0.95rem;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
+.tooltip .header {
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+}
 
-  strong {
-    color: #f8fafc;
-    font-weight: 500;
-  }
+.tooltip strong {
+  color: #f8fafc;
+  font-weight: 500;
+  text-wrap: nowrap;
+}
 
-  div {
-    color: #cbd5e1;
-  }
+.tooltip .time {
+  color: #cbd5e1;
+}
 
-  .tooltipDate {
-    color: #94a3b8;
-    font-size: 0.8rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+.tooltip .date {
+  color: #94a3b8;
+  font-size: 0.8rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@include m.small {
+
+  .tooltip,
+  .tooltip strong {
+    font-size: .8rem;
   }
 }
