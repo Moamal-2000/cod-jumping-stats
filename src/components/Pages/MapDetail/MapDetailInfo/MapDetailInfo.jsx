@@ -59,14 +59,6 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
 
 export default MapDetailInfo;
 
-function getStatsForFps({ selectedFps, Difficulty } = {}) {
-  const fpsData = Difficulty?.[selectedFps];
-
-  if (!fpsData || fpsData.Difficulty < 0) return null;
-
-  return fpsData;
-}
-
 function mapHasDifficulties(Difficulty) {
   return JUMP_FPS.some(
     (fps) => getFpsDifficultyValue({ fps, Difficulty }) !== "?",
