@@ -16,7 +16,7 @@ export function capitalize(str) {
 export function domainToCountryFlag(domain) {
   let country = domain.split(".")[0];
   if (country === "uk") country = "gb";
-  return `/countryFlags/${country}.svg`;
+  return `/assets/countryFlags/${country}.svg`;
 }
 
 export function getCountryName(countryCode) {

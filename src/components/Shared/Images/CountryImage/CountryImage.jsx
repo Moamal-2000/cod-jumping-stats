@@ -7,7 +7,7 @@ import s from "./CountryImage.module.scss";
 
 const CountryImage = ({ countryCode, size = 32, colorPlaceholder = false }) => {
   const [src, setSrc] = useState(
-    `/countryFlags/${countryCode?.toLowerCase()}.svg`,
+    `/assets/countryFlags/${countryCode?.toLowerCase()}.svg`,
   );
 
   const countryName = getCountryName(countryCode);
@@ -18,7 +18,7 @@ const CountryImage = ({ countryCode, size = 32, colorPlaceholder = false }) => {
     colorPlaceholder && alt === "Unknown country" ? s.placeholder : "";
 
   function handleError() {
-    setSrc("/placeholders/country-placeholder.svg");
+    setSrc("/assets/placeholders/country-placeholder.svg");
     setAlt("Unknown country");
     setTitle("Unknown country");
   }

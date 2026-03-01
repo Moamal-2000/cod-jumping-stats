@@ -9,7 +9,7 @@ import s from "./MapImage.module.scss";
 const MapImage = ({ mapName, resolution = "512" }) => {
   const cleanMapName = getCleanMapName(mapName);
 
-  const [src, setSrc] = useState(`/maps/${resolution}/${cleanMapName}.webp`);
+  const [src, setSrc] = useState(`/assets/maps/${resolution}/${cleanMapName}.webp`);
   const [isLoading, setIsLoading] = useState(true);
 
   const scale = src === PLACEHOLDER_PATH ? 0.5 : 1;
@@ -41,4 +41,4 @@ const MapImage = ({ mapName, resolution = "512" }) => {
 
 export default MapImage;
 
-const PLACEHOLDER_PATH = "/placeholders/map-placeholder.svg";
+const PLACEHOLDER_PATH = "/assets/placeholders/map-placeholder.svg";

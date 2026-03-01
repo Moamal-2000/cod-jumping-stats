@@ -26,7 +26,7 @@ export default async function Image({ params }) {
   const playerOpenGraphElement = (
     <div style={s.container}>
       <img
-        src={`${SITE_URL}/countryFlags/${playerCountryCode}.svg`}
+        src={`${SITE_URL}/assets/countryFlags/${playerCountryCode}.svg`}
         width={countryWidth}
         height={countryHeight}
         style={s.countryImg}

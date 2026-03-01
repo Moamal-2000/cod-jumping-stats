@@ -8,7 +8,7 @@ import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
 const ServerCardHeader = ({ server, index, viewMode }) => {
-  const [src, setSrc] = useState(`/maps/512/${server.Map}.webp`);
+  const [src, setSrc] = useState(`/assets/maps/512/${server.Map}.webp`);
   const isList = viewMode === "list";
 
   return (
@@ -33,7 +33,7 @@ const ServerCardHeader = ({ server, index, viewMode }) => {
           fill={true}
           sizes="383px"
           className={s.mapBackground}
-          onError={() => setSrc("/placeholders/blank-black.svg")}
+          onError={() => setSrc("/assets/placeholders/blank-black.svg")}
           loading={index < 3 ? "eager" : "lazy"}
           priority={index < 3}
           fetchPriority={index < 3 ? "high" : "low"}
