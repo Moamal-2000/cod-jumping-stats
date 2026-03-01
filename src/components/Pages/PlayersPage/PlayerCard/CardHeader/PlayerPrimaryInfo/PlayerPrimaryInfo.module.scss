@@ -6,16 +6,18 @@
 }
 
 .playerName {
-  display: flex;
-  flex-wrap: wrap;
   font-size: 1rem;
   font-weight: 600;
   line-height: 1.4;
   color: inherit;
   width: fit-content;
+  max-width: 216px;
   text-decoration: underline;
   text-decoration-color: #42464d;
   text-underline-offset: 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   &:hover {
     text-decoration-color: currentColor;
