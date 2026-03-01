@@ -15,11 +15,6 @@ const OnlinePlayerItem = ({ player, server }) => {
   const coloredName = getColoredName(player.Name || "Unknown Player");
   const pureName = stripColorCodes(player.Name);
 
-  const adminClass = getAdminShieldClass({
-    cssModule: s,
-    adminLevel: player?.Admin,
-  });
-
   function handleClick(event) {
     if (isCod4) event.preventDefault();
   }
@@ -55,17 +50,3 @@ const OnlinePlayerItem = ({ player, server }) => {
 };
 
 export default OnlinePlayerItem;
-
-function getAdminShieldClass({ cssModule, adminLevel }) {
-  const isLevelUndefined =
-    adminLevel === undefined || adminLevel === null || adminLevel === "N/A";
-  if (isLevelUndefined) return null;
-
-  const level = Number(adminLevel) || 0;
-
-  if (level >= 90 && level <= 97) return cssModule.admin90;
-  if (level >= 98 && level <= 99) return cssModule.admin98;
-  if (level >= 100) return cssModule.admin100;
-
-  return null;
-}
