@@ -32,7 +32,7 @@ const ToolTip = ({ hoveredPoint, mapName, chartWidth, chartHeight }) => {
   }, [tooltipX, tooltipY, chartWidth, chartHeight]);
 
   return (
-    <div ref={tooltipRef} className={s.tooltip} style={position}>
+    <div ref={tooltipRef} className={s.tooltip} style={position} role="tooltip">
       <div className={s.header}>
         <strong>{coloredPlayerName || "Unknown Player"}</strong>
         <strong>{mapName}</strong>
