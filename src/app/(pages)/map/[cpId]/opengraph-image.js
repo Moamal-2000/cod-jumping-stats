@@ -3,6 +3,8 @@ import { getMapByCpId } from "@/lib/api/mapsApi";
 import { getCleanMapName } from "@/lib/utils";
 import { ImageResponse } from "next/og";
 
+/* eslint-disable @next/next/no-img-element */
+
 export const size = { width: 1300, height: 740 };
 export const contentType = "image/png";
 export const revalidate = 86400; // 1 day
@@ -19,7 +21,13 @@ export default async function Image({ params }) {
       <p style={s.noImageText}>No Image Available for Map {map.Name}</p>
 
       <div style={s.mapContainer}>
-        <img src={mapImagePath} width="100%" height="100%" style={s.mapImage} />
+        <img
+          src={mapImagePath}
+          width="100%"
+          height="100%"
+          style={s.mapImage}
+          alt=""
+        />
         <span style={s.mapName}>By: {map.Author}</span>
       </div>
     </div>
