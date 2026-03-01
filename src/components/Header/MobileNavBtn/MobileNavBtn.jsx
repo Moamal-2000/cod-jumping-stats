@@ -20,7 +20,11 @@ const MobileNavBtn = () => {
   }
 
   useEffect(() => {
-    setIsMobileDevice(isMobile());
+    const timeoutId = setTimeout(() => {
+      setIsMobileDevice(isMobile());
+    }, 0);
+
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
