@@ -9,11 +9,14 @@ import { useDispatch } from "react-redux";
 import s from "./PlayerNameCell.module.scss";
 
 const PlayerNameCell = ({ playerData }) => {
-  const dispatch = useDispatch();
   const { PlayerName, Rank, CountryCode, Country, PlayerID } = playerData;
+
+  const dispatch = useDispatch();
+
   const coloredPlayerName = getColoredName(PlayerName);
   const purePlayerName = stripColorCodes(PlayerName);
-  const rankClass = s["rank" + Rank];
+
+  const classes = `${s.player} ${s["rank" + Rank]}`;
 
   function handleMouseEnter() {
     dispatch(
@@ -22,7 +25,7 @@ const PlayerNameCell = ({ playerData }) => {
   }
 
   return (
-    <td className={`${s.player} ${rankClass}`}>
+    <td className={classes}>
       <Link href={`/player/${PlayerID}`} onMouseEnter={handleMouseEnter}>
         <span className={s.playerCountry}>
           <CountryImage countryCode={CountryCode} countryName={Country} />
