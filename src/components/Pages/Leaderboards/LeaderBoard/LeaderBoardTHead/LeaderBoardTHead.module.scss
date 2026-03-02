@@ -62,13 +62,13 @@
 }
 
 @include m.large {
-  .thead tr .score {
+  .thead tr .score[data-header=Points] {
     display: none;
   }
 }
 
 @include m.medium {
-  .thead tr .score {
+  .thead tr .score[data-header=Points] {
     display: block;
   }
 }

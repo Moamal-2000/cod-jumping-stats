@@ -90,7 +90,13 @@
 }
 
 .leaderBoard.routesCompleted tr {
-  grid-template-columns: 2.16fr 9fr 4fr 4fr 4fr;
+  grid-template-columns: 1.65fr 9fr 1fr 3fr;
+}
+
+@include m.large {
+  .leaderBoard.routesCompleted tr {
+    grid-template-columns: 1.65fr 9fr 1fr 4fr;
+  }
 }
 
 @include m.medium {

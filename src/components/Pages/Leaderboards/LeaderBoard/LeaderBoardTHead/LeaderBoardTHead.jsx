@@ -7,8 +7,12 @@ import s from "./LeaderBoardTHead.module.scss";
 import RankTableHeader from "./RankTableHeader/RankTableHeader";
 
 const LeaderBoardTHead = () => {
-  const { isLeaderboardHeaderVisible } = useSelector((s) => s.leaderboard);
+  const isLeaderboardHeaderVisible = useSelector(
+    (s) => s.leaderboard.isLeaderboardHeaderVisible,
+  );
+
   const searchParams = useSearchParams();
+
   const leaderboardType = searchParams.get("leaderboard");
   const isSkilledLeaderboard = leaderboardType === "skilled";
   const isRoutesCompleted = leaderboardType === "routescompleted";
@@ -24,7 +28,9 @@ const LeaderBoardTHead = () => {
         <RankTableHeader text="Rank" />
         <th className={s.player}>Player</th>
         <th className={s.rating}>Rating</th>
-        <th className={s.score}>{scoreText}</th>
+        <th className={s.score} data-header={scoreText}>
+          {scoreText}
+        </th>
 
         {!isRoutesCompleted && (
           <th className={s.tops}>

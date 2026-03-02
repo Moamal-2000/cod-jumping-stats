@@ -39,13 +39,13 @@
 }
 
 @include m.large {
-  .playerRow .score {
+  .playerRow .score[data-header=Points] {
     display: none;
   }
 }
 
 @include m.medium {
-  .playerRow .score {
+  .playerRow .score[data-header=Points] {
     display: flex;
   }
 }
