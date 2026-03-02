@@ -1,23 +1,26 @@
 "use client";
 
 import { getModifiedRank } from "@/components/Helper/rankBadge";
-import { useSearchParams } from "next/navigation";
 import PlayerNameCell from "./PlayerNameCell/PlayerNameCell";
 import s from "./PlayerRow.module.scss";
 import TopsCell from "./TopsCell/TopsCell";
 
-const PlayerRow = ({ playerData, leaderboardData, lastPlayerRef, index }) => {
+const PlayerRow = ({
+  playerData,
+  leaderboardData,
+  lastPlayerRef,
+  isRoutesCompleted,
+  index,
+}) => {
   const { Rating, Score, TopList, Rank } = playerData;
-  const modifiedRank = getModifiedRank(Rank);
-  const ref = leaderboardData.length === index + 1 ? lastPlayerRef : null;
-  const searchParams = useSearchParams();
-  const isRoutesCompleted =
-    searchParams.get("leaderboard") === "routescompleted";
+
+  const lastRowRef =
+    leaderboardData.length === index + 1 ? lastPlayerRef : null;
 
   return (
-    <tr className={s.playerRow} ref={ref} data-type="player-stats-row">
+    <tr className={s.playerRow} ref={lastRowRef} data-type="player-stats-row">
       <td className={s.rank} data-header="Rank">
-        {modifiedRank}
+        {getModifiedRank(Rank)}
       </td>
 
       <PlayerNameCell playerData={playerData} />

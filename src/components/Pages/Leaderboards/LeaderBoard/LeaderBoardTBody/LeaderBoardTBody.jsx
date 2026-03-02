@@ -1,6 +1,7 @@
 "use client";
 
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
+import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import SpinnerLoader from "../../../../Shared/Loaders/SpinnerLoader/SpinnerLoader";
@@ -9,9 +10,17 @@ import s from "./LeaderBoardTBody.module.scss";
 import PlayerRow from "./PlayerRow/PlayerRow";
 
 const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
-  const dispatch = useDispatch();
-  const { isLeaderboardReversed } = useSelector((s) => s.global);
   const { loading, error } = useSelector((s) => s.leaderboard);
+  const isLeaderboardReversed = useSelector(
+    (s) => s.global.isLeaderboardReversed,
+  );
+
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+
+  const isRoutesCompleted =
+    searchParams.get("leaderboard") === "routescompleted";
+
   const reverseClass = isLeaderboardReversed ? s.reverse : "";
 
   function handleMouseLeave() {
@@ -41,6 +50,7 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
                 playerData={playerData}
                 leaderboardData={leaderboardData}
                 lastPlayerRef={lastPlayerRef}
+                isRoutesCompleted={isRoutesCompleted}
                 index={index}
               />
             </Suspense>
