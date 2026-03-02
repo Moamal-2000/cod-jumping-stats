@@ -19,21 +19,16 @@
   }
 }
 
-@media (max-width: 1300px) {
-  .header {
-    margin: 10px 20px 0;
-    padding: 20px;
-    margin-inline: 0;
-    background-color: #14171d;
-    width: calc(100% - 4px);
-    left: 18px;
-  }
-}
-
 @include m.medium {
   .header {
     top: 67px;
+    left: 18px;
+    width: calc(100% - 4px);
+    margin: 10px 20px 0;
+    padding: 20px;
+    margin-inline: 0;
     align-items: flex-start;
+    background-color: #14171d;
   }
 }
 

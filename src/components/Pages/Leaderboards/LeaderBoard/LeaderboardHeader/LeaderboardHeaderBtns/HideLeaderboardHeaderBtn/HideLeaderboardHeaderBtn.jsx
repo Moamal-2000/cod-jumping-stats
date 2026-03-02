@@ -64,9 +64,9 @@ function shouldDisableButton({
   const isLeaderboardUnavailable =
     loading || error || leaderboardData?.length === 0;
 
-  const isViewportBelow1300px = matchMedia("(max-width: 1300px)").matches;
+  const isViewportBelow992px = matchMedia("(max-width: 992px)").matches;
 
   return (
-    isLeaderboardUnavailable || !isLeaderboardExpanded || isViewportBelow1300px
+    isLeaderboardUnavailable || !isLeaderboardExpanded || isViewportBelow992px
   );
 }

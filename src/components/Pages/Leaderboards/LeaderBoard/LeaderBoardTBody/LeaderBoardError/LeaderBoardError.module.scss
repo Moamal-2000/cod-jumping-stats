@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .error {
   user-select: text;
 }
@@ -14,7 +16,7 @@
   translate: -50% -50%;
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .error td {
     position: relative !important;
     left: 0;

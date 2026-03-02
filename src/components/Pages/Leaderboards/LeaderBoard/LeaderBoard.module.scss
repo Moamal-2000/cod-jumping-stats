@@ -25,7 +25,7 @@
   }
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .leaderboardWrapper {
     background-color: transparent;
     padding: 24px 0;
@@ -71,7 +71,7 @@
   width: inherit;
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .leaderBoard thead {
     display: none;
   }
@@ -79,15 +79,21 @@
 
 .leaderBoard tr {
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr 1fr 5.2fr;
+  grid-template-columns: .7fr 3fr 1fr 1fr 4fr;
   font-weight: 600;
+}
+
+@include m.large {
+  .leaderBoard tr {
+    grid-template-columns: .7fr 3fr 1fr 4fr;
+  }
 }
 
 .leaderBoard.routesCompleted tr {
   grid-template-columns: 2.16fr 9fr 4fr 4fr 4fr;
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .leaderBoard tr {
     display: flex;
     flex-direction: column;
@@ -107,7 +113,7 @@
   grid-template-columns: 1fr 0 0 0 0 0;
 }
 
-@media (max-width: 1300px) {
+@include m.large {
 
   .leaderBoard:has([data-loader]) tbody tr,
   .leaderBoard:has([data-error]) tbody tr {
@@ -115,7 +121,7 @@
   }
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .leaderBoard tr td {
     width: 100%;
     display: flex;

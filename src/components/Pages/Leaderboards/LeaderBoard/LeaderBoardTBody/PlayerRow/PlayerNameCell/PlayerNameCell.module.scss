@@ -39,7 +39,7 @@
   max-width: 240px;
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .player a {
     max-width: none;
   }

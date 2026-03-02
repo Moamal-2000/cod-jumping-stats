@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .thead {
   background-color: #151923;
   color: #fff;
@@ -59,11 +61,24 @@
   transition: color .1s;
 }
 
+@include m.large {
+  .thead tr .score {
+    display: none;
+  }
+}
+
+@include m.medium {
+  .thead tr .score {
+    display: block;
+  }
+}
+
 .thead tr th.tops {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 8px 20px;
+  min-width: 456px;
 
   &.afterHideHeader {
     justify-content: flex-end;

@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .tbody {
   display: flex;
   flex-direction: column;
@@ -9,7 +11,7 @@
   }
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .tbody {
     display: flex;
     flex-direction: column;
@@ -30,7 +32,7 @@
   background-color: #242b3b;
 }
 
-@media (max-width: 1300px) {
+@include m.medium {
   .tbody tr[data-type=player-stats-row]:hover {
     background-color: #1d222f;
   }
