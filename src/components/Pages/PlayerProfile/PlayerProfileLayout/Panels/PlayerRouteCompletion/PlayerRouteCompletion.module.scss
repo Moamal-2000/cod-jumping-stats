@@ -112,7 +112,6 @@
   }
 }
 
-.filterSelect,
 .sortSelect,
 .orderSelect {
   padding: 0.75rem 1rem;
@@ -140,11 +139,6 @@
     background: #111827;
     color: #f9fafb;
   }
-}
-
-.routesList {
-  display: none;
-  /* Hide old grid layout */
 }
 
 .routesTableWrapper {
@@ -488,82 +482,6 @@
     color: #e5e7eb;
   }
 }
-
-
-
-.mapDetails {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.difficulty {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.difficultyLabel {
-  font-size: 0.8rem;
-  color: #9ca3af;
-  font-weight: 500;
-}
-
-.difficultyValue {
-  font-size: 0.9rem;
-  color: #facc15;
-  font-weight: 600;
-}
-
-.completionDetails {
-  background: rgba(0, 0, 0, 0.2);
-  padding: 0.75rem;
-  border-radius: 8px;
-  border: 1px solid rgba(75, 85, 99, 0.3);
-}
-
-.completionInfo {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.rank {
-  font-size: 0.8rem;
-  color: #10b981;
-  font-weight: 600;
-}
-
-.finishes {
-  font-size: 0.8rem;
-  color: #facc15;
-  font-weight: 600;
-}
-
-.fps {
-  font-size: 0.8rem;
-  color: #60a5fa;
-  font-weight: 600;
-}
-
-.finisherCount {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
-}
-
-.finisherLabel {
-  font-size: 0.9rem;
-  color: #9ca3af;
-  font-weight: 600;
-}
-
-.finisherValue {
-  font-size: 1.2rem;
-  font-weight: 700;
-}
-
 // Legend styles
 .legendItems {
   margin: 1.5rem 0;
@@ -819,14 +737,6 @@
 
   .controlGroup {
     min-width: auto;
-  }
-
-  .routesList {
-    grid-template-columns: 1fr;
-  }
-
-  .mapCard {
-    padding: 0.7rem 0.75rem;
   }
 }
 
