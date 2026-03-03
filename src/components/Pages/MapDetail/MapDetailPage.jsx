@@ -5,7 +5,8 @@ import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { cacheMapsLocally, getCachedMaps } from "@/lib/localCache";
-import { useSearchParams } from "next/navigation";
+import { createQueryString } from "@/lib/queryParams";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
@@ -15,14 +16,16 @@ import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = ({ cpId }) => {
+  const router = useRouter();
+  const pathname = usePathname();
   const searchParams = useSearchParams();
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
   const [playersData, setPlayersData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [selectedFps, setSelectedFps] = useState("125");
 
   const [hasMoreTops, setHasMoreTops] = useState(true);
   const [hasMorePlayers, setHasMorePlayers] = useState(true);
@@ -46,6 +49,13 @@ const MapDetailPage = ({ cpId }) => {
   const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
 
   const activeTab = searchParams.get("tab") || "tops";
+
+  function handleFpsChange(nextFps) {
+    const normalizedFps = normalizeFpsQuery(nextFps);
+    if (normalizedFps === selectedFps) return;
+
+    createQueryString("fps", normalizedFps, searchParams, router, pathname);
+  }
 
   async function fetchMapData() {
     let mapsLocal = getCachedMaps();
@@ -464,7 +474,7 @@ const MapDetailPage = ({ cpId }) => {
             <MapDetailInfo
               mapData={mapData}
               selectedFps={selectedFps}
-              onFpsChange={setSelectedFps}
+              onFpsChange={handleFpsChange}
             />
             {mapData && <MapVideos mapData={mapData} />}
           </div>
@@ -503,3 +513,18 @@ const breadcrumbPaths = [
 ];
 
 const ITEMS_PER_PAGE = 10;
+const FPS_QUERY_VALUES = new Set([
+  "all",
+  "125",
+  "250",
+  "333",
+  "43",
+  "76",
+  "mix",
+]);
+
+function normalizeFpsQuery(fpsValue) {
+  const value = String(fpsValue || "125").toLowerCase();
+  if (!FPS_QUERY_VALUES.has(value)) return "125";
+  return value === "all" ? "All" : value;
+}
