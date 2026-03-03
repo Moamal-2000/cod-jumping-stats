@@ -4,6 +4,8 @@
   color: #9ca3af;
   margin: 0.5rem 0 1.5rem;
   font-size: 0.95rem;
+  position: relative;
+  z-index: 1;
 }
 
 .recentActivitySection {
@@ -28,7 +30,7 @@
     color: #f9fafb;
 
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       left: 0;
       bottom: -0.75rem;
@@ -37,14 +39,6 @@
       background: linear-gradient(90deg, var(--accent-color), transparent);
       border-radius: 3px;
     }
-  }
-
-  .sectionDescription {
-    color: #9ca3af;
-    margin: 0.5rem 0 1.5rem;
-    font-size: 0.95rem;
-    position: relative;
-    z-index: 1;
   }
 }
 
@@ -83,7 +77,7 @@
   color: inherit;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -102,42 +96,6 @@
 
     .activityTitle {
       color: #f9fafb;
-    }
-  }
-
-  &[data-rank="1"] {
-    border-left: 3px solid #facc15;
-
-    .activityIcon {
-      background: linear-gradient(135deg, #facc15, #eab308);
-
-      svg {
-        color: #fef3c7;
-      }
-    }
-  }
-
-  &[data-rank="2"] {
-    border-left: 3px solid #94a3b8;
-
-    .activityIcon {
-      background: linear-gradient(135deg, #94a3b8, #64748b);
-
-      svg {
-        color: #f1f5f9;
-      }
-    }
-  }
-
-  &[data-rank="3"] {
-    border-left: 3px solid #f59e0b;
-
-    .activityIcon {
-      background: linear-gradient(135deg, #f59e0b, #d97706);
-
-      svg {
-        color: #fef3c7;
-      }
     }
   }
 }
@@ -193,7 +151,7 @@
     gap: 0.25rem;
 
     &::before {
-      content: '•';
+      content: "\2022";
       color: rgba(156, 163, 175, 0.5);
       margin-right: 0.25rem;
     }
@@ -204,42 +162,11 @@
   }
 }
 
-[data-rank="1"] {
-  .activityRank {
-    color: #facc15;
-    font-weight: 600;
-  }
-}
-
-[data-rank="2"] {
-  .activityRank {
-    color: #94a3b8;
-    font-weight: 600;
-  }
-}
-
-[data-rank="3"] {
-  .activityRank {
-    color: #f59e0b;
-    font-weight: 600;
-  }
+.activityRank {
+  font-weight: 600;
 }
 
 @media (max-width: 768px) {
-
-  .playerStatsOverview,
-  .fpsPerformanceSection {
-    padding: 1.5rem;
-  }
-
-  .infoGrid {
-    grid-template-columns: 1fr;
-  }
-
-  .playerName {
-    font-size: 2rem;
-  }
-
   .recentActivityItem {
     padding: 0.875rem 1rem;
 
@@ -261,171 +188,6 @@
     .activityDetails {
       gap: 0.5rem;
       font-size: 0.8rem;
-    }
-  }
-
-  .metricsGrid {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-  }
-
-  .metricCard {
-    padding: 1rem;
-    flex-direction: column;
-    text-align: center;
-    gap: 0.75rem;
-  }
-
-  .metricIcon {
-    width: 40px;
-    height: 40px;
-
-    svg {
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  .metricValue {
-    font-size: 1.75rem;
-  }
-
-  .achievementGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  .achievementCard {
-    padding: 1rem;
-  }
-
-  .achievementValue {
-    font-size: 1.5rem;
-  }
-
-  .fpsGrid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.75rem;
-  }
-
-  .fpsCard {
-    padding: 1rem;
-  }
-
-  .fpsCount {
-    font-size: 1.25rem;
-  }
-
-  .recentRunsList {
-    gap: 0.5rem;
-  }
-
-  .recentRunCard {
-    padding: 0.75rem;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .fpsBreakdownGrid {
-    grid-template-columns: 1fr;
-    gap: 0.75rem;
-  }
-
-  .fpsBreakdownCard {
-    padding: 1rem;
-  }
-
-  .fpsBreakdownHeader {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .fpsBreakdownTitle {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .fpsBreakdownStats {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.75rem;
-  }
-
-  .fpsBreakdownPercentage {
-    align-items: flex-start;
-  }
-
-  .fpsBreakdownNumber {
-    font-size: 1.75rem;
-  }
-
-  .fpsBreakdownPercent {
-    font-size: 1.25rem;
-  }
-
-  .mapsList,
-  .leaderboardList {
-    grid-template-columns: 1fr;
-  }
-
-  .mapCard,
-  .leaderboardCard,
-  .runCard {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 1rem;
-  }
-
-  .mapDate,
-  .leaderboardStats,
-  .runStats {
-    text-align: left;
-  }
-
-  .topRunsHeader {
-    flex-direction: column;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .topRunsControls {
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .controlGroup {
-    min-width: unset;
-    width: 100%;
-  }
-
-  @media (max-width: 768px) {
-    .topRunsList {
-      grid-template-columns: 1fr;
-    }
-
-    .runCard {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .runCardHeader {
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 1rem;
-    }
-
-    .runRank {
-      align-self: flex-start;
-    }
-
-    .runStats {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
     }
   }
 }
