@@ -1,8 +1,11 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import s from "./NotFoundPage.module.scss";
 import NotFoundPageList from "./NotFoundPageList/NotFoundPageList";
 
 const NotFoundPage = () => {
+  const router = useRouter();
+
   return (
     <main className={s.notFoundPage}>
       <h1 className={s.errorCode}>404</h1>
@@ -21,7 +24,7 @@ const NotFoundPage = () => {
         <button
           type="button"
           className={s.backBtn}
-          onClick={() => window.history.back()}
+          onClick={() => router.back()}
         >
           Go Back
         </button>
