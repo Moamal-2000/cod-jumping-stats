@@ -84,32 +84,32 @@ const MapDetailPlayers = ({
 
           return (
             <Link
-              href={`/player/${player.player_id}`}
-              key={`${player.player_id}-${index}`}
+              href={`/player/${player.PlayerID}`}
+              key={`${player.PlayerID}-${index}`}
               className={s.playerItem}
             >
               <div className={s.rank}>{modifiedRank}</div>
 
               <div className={s.playerInfo}>
                 <div className={s.playerName}>
-                  <span>{getColoredName(player.player_name)}</span>
+                  <span>{getColoredName(player.PlayerName)}</span>
                   {selectedFps === "All" &&
-                    player.fps_list &&
-                    player.fps_list.length > 0 && (
+                    player.FPSList &&
+                    player.FPSList.length > 0 && (
                       <span className={s.fpsDisplay}>
-                        {player.fps_list
+                        {player.FPSList
                           .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
                           .join(", ")}{" "}
                         FPS
                       </span>
                     )}
                 </div>
-                <div className={s.playerId}>ID: {player.player_id}</div>
+                <div className={s.playerId}>ID: {player.PlayerID}</div>
               </div>
 
               <div className={s.playtime}>
                 <div className={s.playtimeValue}>
-                  {formatPlaytime(player.time_played)}
+                  {formatPlaytime(player.TimePlayed)}
                 </div>
                 <div className={s.playtimeLabel}>Playtime</div>
               </div>

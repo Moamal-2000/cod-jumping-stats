@@ -58,7 +58,7 @@ const MapDetailTops = ({
           <span className={s.totalRuns}>
             {selectedFps === "All"
               ? "Combined runs"
-              : `${topsData[0]?.totalNr || 0} total runs`}
+              : `${topsData[0]?.TotalNr || 0} total runs`}
           </span>
           {!showingAll && allData && allData.length > topsData.length && (
             <button className={s.showAllButton} onClick={onShowAll}>
@@ -70,28 +70,28 @@ const MapDetailTops = ({
 
       <div className={s.topsList}>
         {topsData.map((run, index) => {
-          const modifiedRank = getModifiedRank(run.rank);
+          const modifiedRank = getModifiedRank(run.Rank);
 
           return (
             <Link
-              href={`/player/${run.player_id}`}
-              key={`${run.run_id}-${index}`}
+              href={`/player/${run.PlayerID}`}
+              key={`${run.RunID}-${index}`}
               className={s.topRun}
             >
               <div className={s.rank}>{modifiedRank}</div>
 
               <div className={s.playerInfo}>
                 <div className={s.playerName}>
-                  <span>{getColoredName(run.playername)}</span>
-                  {selectedFps === "All" && run.fps && (
-                    <span className={s.fpsDisplay}>{run.fps} FPS</span>
+                  <span>{getColoredName(run.PlayerName)}</span>
+                  {selectedFps === "All" && run.FPS && (
+                    <span className={s.fpsDisplay}>{run.FPS} FPS</span>
                   )}
                 </div>
                 <div className={s.runDetails}>
-                  <span className={s.time}>{run.time_played_string}</span>
+                  <span className={s.time}>{run.TimePlayedString}</span>
                   <span className={s.separator}>•</span>
                   <span className={s.date}>
-                    {new Date(run.time_created).toLocaleDateString()}
+                    {new Date(run.TimeCreated).toLocaleDateString()}
                   </span>
                 </div>
               </div>
@@ -99,15 +99,15 @@ const MapDetailTops = ({
               <div className={s.stats}>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Loads</span>
-                  <span className={s.statValue}>{run.load_count || 0}</span>
+                  <span className={s.statValue}>{run.LoadCount || 0}</span>
                 </div>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Saves</span>
-                  <span className={s.statValue}>{run.save_count || 0}</span>
+                  <span className={s.statValue}>{run.SaveCount || 0}</span>
                 </div>
                 <div className={s.stat}>
                   <span className={s.statLabel}>Nade Jumps</span>
-                  <span className={s.statValue}>{run.nadejumps || 0}</span>
+                  <span className={s.statValue}>{run.Nadejumps || 0}</span>
                 </div>
               </div>
             </Link>

@@ -95,11 +95,11 @@ const MapDetailPage = ({ cpId }) => {
       if (selectedFps === "All") {
         if (!isLoadMore) {
           const promises = JUMP_FPS.map((fps) =>
-            fetch(jhApis({ fps, cpId }).map.tops)
-              .then((res) => res.json())
+            fetchMsgPackResponse({ url: jhApis({ fps, cpId }).map.tops })
+              .then((response) => decodeAsyncData(response))
               .then((data) => {
                 if (Array.isArray(data)) {
-                  return data.map((run) => ({ ...run, fps }));
+                  return data.map((run) => ({ ...run, FPS: run?.FPS ?? fps }));
                 }
                 return [];
               })
@@ -117,10 +117,10 @@ const MapDetailPage = ({ cpId }) => {
               (item) =>
                 item &&
                 typeof item === "object" &&
-                item.time_played !== null &&
-                item.time_played !== undefined,
+                item.TimePlayed !== null &&
+                item.TimePlayed !== undefined,
             )
-            .sort((a, b) => a.time_played - b.time_played);
+            .sort((a, b) => a.TimePlayed - b.TimePlayed);
 
           setAllTopsData(allData);
 
@@ -139,14 +139,17 @@ const MapDetailPage = ({ cpId }) => {
         }
       } else if (selectedFps === "mix") {
         if (!isLoadMore) {
-          const response = await fetch(jhApis({ fps: "0", cpId }).map.tops);
-          const data = await response.json();
+          const response = await fetchMsgPackResponse({
+            url: jhApis({ fps: "0", cpId }).map.tops,
+          });
+          const data = (await decodeAsyncData(response)) ?? [];
+          const normalizedData = Array.isArray(data) ? data : [];
 
-          setAllTopsData(data);
+          setAllTopsData(normalizedData);
 
-          const firstPage = data.slice(0, ITEMS_PER_PAGE);
+          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
           setTopsData(firstPage);
-          setHasMoreTops(data.length > ITEMS_PER_PAGE);
+          setHasMoreTops(normalizedData.length > ITEMS_PER_PAGE);
           setDisplayedTopsCount(ITEMS_PER_PAGE);
         } else {
           const startIndex = displayedTopsCount;
@@ -159,16 +162,17 @@ const MapDetailPage = ({ cpId }) => {
         }
       } else {
         if (!isLoadMore) {
-          const response = await fetch(
-            jhApis({ fps: selectedFps, cpId }).map.tops,
-          );
-          const data = await response.json();
+          const response = await fetchMsgPackResponse({
+            url: jhApis({ fps: selectedFps, cpId }).map.tops,
+          });
+          const data = (await decodeAsyncData(response)) ?? [];
+          const normalizedData = Array.isArray(data) ? data : [];
 
-          setAllTopsData(data);
+          setAllTopsData(normalizedData);
 
-          const firstPage = data.slice(0, ITEMS_PER_PAGE);
+          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
           setTopsData(firstPage);
-          setHasMoreTops(data.length > ITEMS_PER_PAGE);
+          setHasMoreTops(normalizedData.length > ITEMS_PER_PAGE);
           setDisplayedTopsCount(ITEMS_PER_PAGE);
         } else {
           const startIndex = displayedTopsCount;
@@ -202,11 +206,16 @@ const MapDetailPage = ({ cpId }) => {
       if (selectedFps === "All") {
         if (!isLoadMore) {
           const promises = JUMP_FPS.map((fps) =>
-            fetch(jhApis({ fps, mapid: mapData?.ID }).player.playersPlayTime)
-              .then((res) => res.json())
+            fetchMsgPackResponse({
+              url: jhApis({ fps, mapid: mapData?.ID }).player.playersPlayTime,
+            })
+              .then((response) => decodeAsyncData(response))
               .then((data) => {
                 if (Array.isArray(data)) {
-                  return data.map((player) => ({ ...player, fps }));
+                  return data.map((player) => ({
+                    ...player,
+                    FPS: player?.FPS ?? fps,
+                  }));
                 }
                 return [];
               })
@@ -224,33 +233,33 @@ const MapDetailPage = ({ cpId }) => {
               (player) =>
                 player &&
                 typeof player === "object" &&
-                player.player_id &&
-                player.time_played !== null &&
-                player.time_played !== undefined,
+                player.PlayerID &&
+                player.TimePlayed !== null &&
+                player.TimePlayed !== undefined,
             );
 
           const playerMap = new Map();
           combinedData.forEach((player) => {
-            const key = player.player_id;
+            const key = player.PlayerID;
             if (playerMap.has(key)) {
               const existingPlayer = playerMap.get(key);
-              existingPlayer.time_played += player.time_played;
-              if (!existingPlayer.fps_list) {
-                existingPlayer.fps_list = [existingPlayer.fps];
+              existingPlayer.TimePlayed += player.TimePlayed;
+              if (!existingPlayer.FPSList) {
+                existingPlayer.FPSList = [existingPlayer.FPS];
               }
-              if (!existingPlayer.fps_list.includes(player.fps)) {
-                existingPlayer.fps_list.push(player.fps);
+              if (!existingPlayer.FPSList.includes(player.FPS)) {
+                existingPlayer.FPSList.push(player.FPS);
               }
             } else {
               playerMap.set(key, {
                 ...player,
-                fps_list: [player.fps],
+                FPSList: [player.FPS],
               });
             }
           });
 
           const allData = Array.from(playerMap.values()).sort(
-            (a, b) => b.time_played - a.time_played,
+            (a, b) => b.TimePlayed - a.TimePlayed,
           );
 
           setAllPlayersData(allData);
@@ -270,16 +279,18 @@ const MapDetailPage = ({ cpId }) => {
         }
       } else if (selectedFps === "mix") {
         if (!isLoadMore) {
-          const response = await fetch(
-            jhApis({ fps: "0", mapid: mapData?.ID }).player.playersPlayTime,
-          );
-          const data = await response.json();
+          const response = await fetchMsgPackResponse({
+            url: jhApis({ fps: "0", mapid: mapData?.ID }).player
+              .playersPlayTime,
+          });
+          const data = (await decodeAsyncData(response)) ?? [];
+          const normalizedData = Array.isArray(data) ? data : [];
 
-          setAllPlayersData(data);
+          setAllPlayersData(normalizedData);
 
-          const firstPage = data.slice(0, ITEMS_PER_PAGE);
+          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
           setPlayersData(firstPage);
-          setHasMorePlayers(data.length > ITEMS_PER_PAGE);
+          setHasMorePlayers(normalizedData.length > ITEMS_PER_PAGE);
           setDisplayedPlayersCount(ITEMS_PER_PAGE);
         } else {
           const startIndex = displayedPlayersCount;
@@ -292,17 +303,18 @@ const MapDetailPage = ({ cpId }) => {
         }
       } else {
         if (!isLoadMore) {
-          const response = await fetch(
-            jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
+          const response = await fetchMsgPackResponse({
+            url: jhApis({ fps: selectedFps, mapid: mapData?.ID }).player
               .playersPlayTime,
-          );
-          const data = await response.json();
+          });
+          const data = (await decodeAsyncData(response)) ?? [];
+          const normalizedData = Array.isArray(data) ? data : [];
 
-          setAllPlayersData(data);
+          setAllPlayersData(normalizedData);
 
-          const firstPage = data.slice(0, ITEMS_PER_PAGE);
+          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
           setPlayersData(firstPage);
-          setHasMorePlayers(data.length > ITEMS_PER_PAGE);
+          setHasMorePlayers(normalizedData.length > ITEMS_PER_PAGE);
           setDisplayedPlayersCount(ITEMS_PER_PAGE);
         } else {
           const startIndex = displayedPlayersCount;
