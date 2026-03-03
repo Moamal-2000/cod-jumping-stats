@@ -60,8 +60,8 @@ const PlayerRouteCompletion = ({ playerId }) => {
             {map.mapname}
           </Link>
         </td>
-        <td className={s.authorCell}>{map.author}</td>
-        <td className={s.releasedCell}>{map.released}</td>
+        <td className={s.authorCell}>{map.author || "Unknown"}</td>
+        <td className={s.releasedCell}>{map.released || "Unknown"}</td>
         <td className={s.finisherCell}>
           <span className={s.finisherBadge}>
             {map.individual_finish_count} / {allPlayersLength}
