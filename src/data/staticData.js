@@ -89,7 +89,7 @@ export const SOCIAL_MEDIA_DATA = [
     id: 4,
   },
   {
-    iconName: "jumpersHeaven",
+    iconName: "jumpers-heaven",
     link: "https://www.jumpersheaven.com",
     id: 5,
   },

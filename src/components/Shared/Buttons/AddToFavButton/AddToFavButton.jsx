@@ -20,7 +20,7 @@ const AddToFavButton = ({ id, groupKey }) => {
     >
       <svg viewBox="0 0 24 24">
         <use
-          href={`/icons-sprite.svg#${isFavorited ? "trashCan" : "heart"}`}
+          href={`/icons-sprite.svg#${isFavorited ? "trash-can" : "heart"}`}
         ></use>
       </svg>
     </button>

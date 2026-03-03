@@ -141,6 +141,7 @@
 }
 
 @include m.large {
+
   .searchContainer,
   .searchContainer input,
   .mapsTypes {
@@ -151,6 +152,7 @@
 }
 
 @media (max-width: 450px) {
+
   .searchContainer,
   .searchContainer input,
   .mapsTypes {
@@ -355,26 +357,10 @@
   min-height: 200px;
 
   svg {
-    width: 48px;
-    height: 48px;
+    width: 36px;
+    height: 36px;
     margin-bottom: 1rem;
     opacity: 0.6;
-  }
-}
-
-.loadingState {
-  svg {
-    animation: spin 1s linear infinite;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
   }
 }
 

@@ -9,7 +9,7 @@ import s from "./MobileNavBtn.module.scss";
 const MobileNavBtn = () => {
   const { isMobileNavActive } = useSelector((s) => s.global);
   const dispatch = useDispatch();
-  const iconName = isMobileNavActive ? "xMark" : "hamburger";
+  const iconName = isMobileNavActive ? "x-mark" : "hamburger";
   const title = `${isMobileNavActive ? "Close" : "Open"} navigation menu`;
   const [isMobileDevice, setIsMobileDevice] = useState(false);
   const moveClass = isMobileNavActive ? s.move : "";

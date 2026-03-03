@@ -43,7 +43,7 @@ const GitHubNotice = () => {
           aria-label="Close notification"
         >
           <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#xMark" />
+            <use href="/icons-sprite.svg#x-mark" />
           </svg>
         </button>
       </div>

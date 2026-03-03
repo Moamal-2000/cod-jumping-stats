@@ -41,7 +41,7 @@ const CustomSelectMenu = ({ id }) => {
         >
           <span>{currentSortBy}</span>
           <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#solidArrow" />
+            <use href="/icons-sprite.svg#solid-arrow" />
           </svg>
         </button>
       </div>

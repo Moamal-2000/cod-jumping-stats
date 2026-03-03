@@ -1,6 +1,7 @@
 "use client";
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import AnimatedSpinnerIcon from "@/components/Shared/Loaders/SpinnerLoader/AnimatedSpinnerIcon";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -53,11 +54,7 @@ const MapList = ({
         aria-expanded={!isCollapsed}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
-          {isCollapsed ? (
-            <path d="M9 6l6 6-6 6" />
-          ) : (
-            <path d="M15 6l-6 6 6 6" />
-          )}
+          <path d={`${isCollapsed ? "M9 6l6 6-6 6" : "M15 6l-6 6 6 6"}`} />
         </svg>
       </button>
 
@@ -94,19 +91,7 @@ const MapList = ({
 
           {isLoading && (
             <div className={s.loadingState}>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M21 12a9 9 0 1 1-6.219-8.56" />
-              </svg>
+              <AnimatedSpinnerIcon />
               <p>Loading maps...</p>
             </div>
           )}
@@ -115,19 +100,8 @@ const MapList = ({
             <div className={s.mapsList} role="list">
               {filteredMaps.length === 0 && mapName ? (
                 <div className={s.emptyState}>
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                  <svg aria-hidden="true">
+                    <use href="/icons-sprite.svg#search" />
                   </svg>
                   <p>No maps found matching "{mapName}"</p>
                 </div>

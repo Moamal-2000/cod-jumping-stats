@@ -86,7 +86,7 @@ export function getPlayerBadges({
     {
       displayCondition: isActiveWithinWeek(LastSeen),
       classes: cssModule.active,
-      icon: "activeStatus",
+      icon: "active-status",
       label: "Active",
       tooltipText: "Player was active within the last 7 days",
       id: 3,

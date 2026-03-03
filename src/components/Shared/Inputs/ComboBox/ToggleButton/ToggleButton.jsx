@@ -11,7 +11,7 @@ const ToggleButton = ({ handleToggle, disabled }) => {
       data-type="toggle-button"
     >
       <svg aria-hidden="true">
-        <use href="/icons-sprite.svg#solidArrow" />
+        <use href="/icons-sprite.svg#solid-arrow" />
       </svg>
     </button>
   );

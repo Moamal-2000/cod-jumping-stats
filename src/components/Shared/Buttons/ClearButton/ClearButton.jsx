@@ -19,7 +19,7 @@ const ClearButton = ({
       tabIndex={inputValue === "" ? -1 : 0}
     >
       <svg aria-hidden="true">
-        <use href="/icons-sprite.svg#xMark" />
+        <use href="/icons-sprite.svg#x-mark" />
       </svg>
     </button>
   );
