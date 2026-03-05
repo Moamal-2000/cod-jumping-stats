@@ -2,12 +2,13 @@
 
 import { jhApis } from "@/api/jumpersHeaven";
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
-import { JUMP_FPS, MAPS_CACHE_EXPIRATION_TIME } from "@/data/constants";
+import { JUMP_FPS } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
-import { cacheMapsLocally, getCachedMaps } from "@/lib/localCache";
 import { createQueryString } from "@/lib/queryParams";
+import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
 import s from "./MapDetailPage.module.scss";
@@ -16,16 +17,8 @@ import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = ({ cpId }) => {
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
-
-  const [mapData, setMapData] = useState(null);
   const [topsData, setTopsData] = useState(null);
   const [playersData, setPlayersData] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
 
   const [hasMoreTops, setHasMoreTops] = useState(true);
   const [hasMorePlayers, setHasMorePlayers] = useState(true);
@@ -48,6 +41,16 @@ const MapDetailPage = ({ cpId }) => {
   const [loadingMoreTops, setLoadingMoreTops] = useState(false);
   const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
 
+  const { allMaps, loading, error } = useSelector((s) => s.maps);
+
+  const mapData = allMaps.find((map) => map.CpID === +cpId);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
   const activeTab = searchParams.get("tab") || "tops";
 
   function handleFpsChange(nextFps) {
@@ -55,46 +58,6 @@ const MapDetailPage = ({ cpId }) => {
     if (normalizedFps === selectedFps) return;
 
     createQueryString("fps", normalizedFps, searchParams, router, pathname);
-  }
-
-  async function fetchMapData() {
-    let mapsLocal = getCachedMaps();
-
-    if (mapsLocal !== null) {
-      const cacheAge = Date.now() - parseInt(mapsLocal.timeStamp, 10);
-      const isCacheExpire = cacheAge > MAPS_CACHE_EXPIRATION_TIME;
-
-      if (!isCacheExpire) {
-        const map = mapsLocal.maps.find((map) => map.CpID === +cpId);
-
-        setMapData(map);
-        setError(false);
-        setLoading(false);
-
-        return;
-      }
-    }
-
-    try {
-      setLoading(true);
-      setError(false);
-
-      const response = await fetchMsgPackResponse({
-        url: jhApis().map.allMaps,
-      });
-
-      mapsLocal = (await decodeAsyncData(response)) ?? [];
-      if (mapsLocal.length > 0) cacheMapsLocally(mapsLocal);
-
-      const map = mapsLocal.find((map) => map.CpID === +cpId);
-
-      map ? setMapData(map) : setError(true);
-    } catch (err) {
-      console.error("Error fetching map data:", err);
-      setError(true);
-    } finally {
-      setLoading(false);
-    }
   }
 
   async function fetchTopsData(isLoadMore = false) {
@@ -432,7 +395,7 @@ const MapDetailPage = ({ cpId }) => {
   }, [hasMorePlayers, loadingMorePlayers, activeTab, playersData]);
 
   useEffect(() => {
-    if (cpId) fetchMapData();
+    if (cpId) dispatch(fetchMaps());
   }, [cpId]);
 
   useEffect(() => {
