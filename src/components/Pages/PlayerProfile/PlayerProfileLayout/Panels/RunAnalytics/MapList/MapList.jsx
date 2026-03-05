@@ -2,6 +2,7 @@
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import AnimatedSpinnerIcon from "@/components/Shared/Loaders/SpinnerLoader/AnimatedSpinnerIcon";
+import { createQueryString } from "@/lib/queryParams";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
