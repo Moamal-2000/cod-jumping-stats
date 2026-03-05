@@ -7,7 +7,7 @@ import MapDetailPlayers from "../MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "../MapDetailTops/MapDetailTops";
 import s from "./TabsSection.module.scss";
 
-const TabsSection = ({ showingAllTops }) => {
+const TabsSection = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -35,12 +35,7 @@ const TabsSection = ({ showingAllTops }) => {
         </div>
 
         <div className={s.tabContent}>
-          {activeTab === "tops" && (
-            <MapDetailTops
-              selectedFps={selectedFps}
-              showingAll={showingAllTops}
-            />
-          )}
+          {activeTab === "tops" && <MapDetailTops selectedFps={selectedFps} />}
 
           {activeTab === "players" && (
             <MapDetailPlayers selectedFps={selectedFps} />

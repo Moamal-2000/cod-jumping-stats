@@ -3,6 +3,8 @@ import s from "./MapVideos.module.scss";
 import Video from "./Video/Video";
 
 const MapVideos = ({ mapData }) => {
+  if (!mapData) return null;
+
   const videos = getMapVideos(mapData);
 
   if (videos.length === 0)
@@ -21,7 +23,7 @@ export default MapVideos;
 
 function getMapVideos(mapData) {
   const mapVideosConfig = MAPS_VIDEOS.find((config) =>
-    config.mapsIds.includes(mapData?.CpID)
+    config.mapsIds.includes(mapData?.CpID),
   );
   if (!mapVideosConfig) return [];
 
@@ -29,6 +31,6 @@ function getMapVideos(mapData) {
   if (!hasRoutes) return mapVideosConfig.videos || [];
 
   return mapVideosConfig.videos.filter(
-    (video) => video.route === mapData.Ender
+    (video) => video.route === mapData.Ender,
   );
 }

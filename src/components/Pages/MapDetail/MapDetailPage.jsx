@@ -8,7 +8,7 @@ import {
 } from "@/redux/features/map/thunk/mapThunk";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
@@ -19,7 +19,6 @@ import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = ({ cpId }) => {
   const { allMaps, loading, error } = useSelector((s) => s.maps);
-  const [showingAllTops, setShowingAllTops] = useState(false);
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
@@ -30,25 +29,14 @@ const MapDetailPage = ({ cpId }) => {
   const activeTab = searchParams.get("tab") || "tops";
 
   useEffect(() => {
-    if (activeTab === "tops")
+    if (cpId && allMaps.length <= 0) dispatch(fetchMaps());
+
+    if (activeTab === "tops" && cpId)
       dispatch(fetchMapTops({ fps: selectedFps, cpId }));
-  }, [activeTab, selectedFps, cpId, dispatch]);
 
-  useEffect(() => {
-    if (activeTab === "players" && mapData?.ID) {
+    if (activeTab === "players" && mapData?.ID)
       dispatch(fetchMapPlayers({ fps: selectedFps, mapId: mapData.ID }));
-    }
-  }, [activeTab, selectedFps, mapData?.ID, dispatch]);
-
-  useEffect(() => {
-    if (cpId) dispatch(fetchMaps());
-  }, [cpId]);
-
-  useEffect(() => {
-    if (mapData) {
-      setShowingAllTops(false);
-    }
-  }, [mapData, selectedFps]);
+  }, [activeTab, selectedFps]);
 
   if (loading || error || !mapData) {
     return (
@@ -69,10 +57,10 @@ const MapDetailPage = ({ cpId }) => {
         <div className={s.contentGrid}>
           <div className={s.leftColumn}>
             <MapDetailInfo mapData={mapData} />
-            {mapData && <MapVideos mapData={mapData} />}
+            <MapVideos mapData={mapData} />
           </div>
 
-          <TabsSection showingAllTops={showingAllTops} />
+          <TabsSection />
         </div>
       </main>
     </div>

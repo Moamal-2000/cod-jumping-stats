@@ -6,7 +6,9 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
 
-const MapDetailTops = ({ selectedFps, showingAll }) => {
+const showingAll = false;
+
+const MapDetailTops = ({ selectedFps }) => {
   const { mapTops, loadingTops } = useSelector((s) => s.map);
 
   function handleShowAllBtn(event) {}
