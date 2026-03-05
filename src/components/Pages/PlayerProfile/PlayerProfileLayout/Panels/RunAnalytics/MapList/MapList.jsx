@@ -25,6 +25,8 @@ const MapList = ({
   const mapName = searchParams.get("mapname") || "";
   const mapType = searchParams.get("maptype") || "all";
 
+  const title = isCollapsed ? "Show map list" : "Hide map list";
+
   function handleSelectMapType(type) {
     createQueryString("maptype", type, searchParams, router, pathname);
   }
@@ -51,7 +53,8 @@ const MapList = ({
         type="button"
         className={s.collapseButton}
         onClick={onToggleCollapse}
-        aria-label={isCollapsed ? "Show map list" : "Hide map list"}
+        title={title}
+        aria-label={title}
         aria-expanded={!isCollapsed}
       >
         <svg viewBox="0 0 24 24" aria-hidden="true">
