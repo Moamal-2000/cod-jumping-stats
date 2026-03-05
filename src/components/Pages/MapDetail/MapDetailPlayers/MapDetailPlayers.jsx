@@ -1,19 +1,79 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
 import s from "./MapDetailPlayers.module.scss";
 
-const MapDetailPlayers = ({
-  playersData,
-  selectedFps,
-  loading,
-  loadingMore,
-  hasMore,
-  loadMoreRef,
-  showingAll,
-  onShowAll,
-  allData,
-}) => {
+const ITEMS_PER_PAGE = 10;
+
+const MapDetailPlayers = ({ selectedFps }) => {
+  const [displayedPlayersCount, setDisplayedPlayersCount] =
+    useState(ITEMS_PER_PAGE);
+  const [showingAll, setShowingAll] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const loadMoreRef = useRef(null);
+
+  const { mapPlayers, loadingPlayers: loading } = useSelector((s) => s.map);
+
+  const playersData = !Array.isArray(mapPlayers)
+    ? []
+    : showingAll
+      ? mapPlayers
+      : mapPlayers.slice(0, displayedPlayersCount);
+
+  const hasMore =
+    !showingAll &&
+    Array.isArray(mapPlayers) &&
+    displayedPlayersCount < mapPlayers.length;
+
+  function onShowAll() {
+    setShowingAll(true);
+  }
+
+  function loadMorePlayers() {
+    if (loadingMore || !hasMore) return;
+
+    setLoadingMore(true);
+    setTimeout(() => {
+      setDisplayedPlayersCount((prev) =>
+        Math.min(prev + ITEMS_PER_PAGE, mapPlayers.length),
+      );
+      setLoadingMore(false);
+    }, 120);
+  }
+
+  useEffect(() => {
+    setDisplayedPlayersCount(ITEMS_PER_PAGE);
+    setShowingAll(false);
+  }, [mapPlayers, selectedFps]);
+
+  useEffect(() => {
+    if (!hasMore || playersData.length === 0) return;
+
+    const playersObserver = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          loadMorePlayers();
+        }
+      },
+      { threshold: 0.1 },
+    );
+
+    const timeoutId = setTimeout(() => {
+      if (loadMoreRef.current) {
+        playersObserver.observe(loadMoreRef.current);
+      }
+    }, 100);
+
+    return () => {
+      clearTimeout(timeoutId);
+      if (loadMoreRef.current) {
+        playersObserver.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [hasMore, playersData.length, loadingMore]);
+
   const formatPlaytime = (seconds) => {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -68,11 +128,11 @@ const MapDetailPlayers = ({
           <span className={s.totalPlayers}>
             {selectedFps === "All"
               ? "Combined players"
-              : `${playersData.length} players`}
+              : `${mapPlayers.length} players`}
           </span>
-          {!showingAll && allData && allData.length > playersData.length && (
+          {!showingAll && mapPlayers.length > playersData.length && (
             <button className={s.showAllButton} onClick={onShowAll}>
-              Show All ({allData.length})
+              Show All ({mapPlayers.length})
             </button>
           )}
         </div>
@@ -97,7 +157,7 @@ const MapDetailPlayers = ({
                     player.FPSList &&
                     player.FPSList.length > 0 && (
                       <span className={s.fpsDisplay}>
-                        {player.FPSList
+                        {[...player.FPSList]
                           .sort((a, b) => parseInt(a, 10) - parseInt(b, 10))
                           .join(", ")}{" "}
                         FPS

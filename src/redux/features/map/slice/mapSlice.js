@@ -1,10 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchMapTops } from "../thunk/mapThunk";
+import { fetchMapPlayers, fetchMapTops } from "../thunk/mapThunk";
 
 const initialState = {
   mapTops: [],
+  mapPlayers: [],
   loadingTops: true,
+  loadingPlayers: true,
   errorTops: false,
+  errorPlayers: false,
 };
 
 export const mapSlice = createSlice({
@@ -28,6 +31,19 @@ export const mapSlice = createSlice({
     addCase(fetchMapTops.rejected, (state) => {
       state.errorTops = true;
       state.loadingTops = false;
+    });
+    addCase(fetchMapPlayers.pending, (state) => {
+      state.loadingPlayers = true;
+      state.errorPlayers = false;
+    });
+    addCase(fetchMapPlayers.fulfilled, (state, { payload }) => {
+      state.mapPlayers = payload;
+      state.loadingPlayers = false;
+      state.errorPlayers = false;
+    });
+    addCase(fetchMapPlayers.rejected, (state) => {
+      state.errorPlayers = true;
+      state.loadingPlayers = false;
     });
   },
 });

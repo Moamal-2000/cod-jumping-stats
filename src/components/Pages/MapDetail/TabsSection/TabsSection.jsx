@@ -7,18 +7,10 @@ import MapDetailTops from "../MapDetailTops/MapDetailTops";
 import s from "./TabsSection.module.scss";
 
 const TabsSection = ({
-  playersData,
   selectedFps,
   hasMoreTops,
   topsLoadMoreRef,
   showingAllTops,
-  loadingPlayers,
-  loadingMorePlayers,
-  hasMorePlayers,
-  playersLoadMoreRef,
-  showingAllPlayers,
-  showAllPlayers,
-  allPlayersData,
 }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -56,17 +48,7 @@ const TabsSection = ({
           )}
 
           {activeTab === "players" && (
-            <MapDetailPlayers
-              playersData={playersData}
-              selectedFps={selectedFps}
-              loading={loadingPlayers}
-              loadingMore={loadingMorePlayers}
-              hasMore={hasMorePlayers}
-              loadMoreRef={playersLoadMoreRef}
-              showingAll={showingAllPlayers}
-              onShowAll={showAllPlayers}
-              allData={allPlayersData}
-            />
+            <MapDetailPlayers selectedFps={selectedFps} />
           )}
         </div>
       </div>
