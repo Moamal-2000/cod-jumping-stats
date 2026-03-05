@@ -1,14 +1,14 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
-import { createQueryString } from "@/lib/queryParams";
 import {
   fetchMapPlayers,
   fetchMapTops,
 } from "@/redux/features/map/thunk/mapThunk";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import MapDetailHeader from "./MapDetailHeader/MapDetailHeader";
 import MapDetailInfo from "./MapDetailInfo/MapDetailInfo";
@@ -18,30 +18,16 @@ import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = ({ cpId }) => {
-  const [hasMoreTops, setHasMoreTops] = useState(true);
-
-  const topsLoadMoreRef = useRef(null);
-
+  const { allMaps, loading, error } = useSelector((s) => s.maps);
   const [showingAllTops, setShowingAllTops] = useState(false);
 
-  const { allMaps, loading, error } = useSelector((s) => s.maps);
+  const dispatch = useDispatch();
+  const searchParams = useSearchParams();
 
   const mapData = allMaps.find((map) => map.CpID === +cpId);
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-
   const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
   const activeTab = searchParams.get("tab") || "tops";
-
-  function handleFpsChange(nextFps) {
-    const normalizedFps = normalizeFpsQuery(nextFps);
-    if (normalizedFps === selectedFps) return;
-
-    createQueryString("fps", normalizedFps, searchParams, router, pathname);
-  }
 
   useEffect(() => {
     if (activeTab === "tops")
@@ -60,7 +46,6 @@ const MapDetailPage = ({ cpId }) => {
 
   useEffect(() => {
     if (mapData) {
-      setHasMoreTops(true);
       setShowingAllTops(false);
     }
   }, [mapData, selectedFps]);
@@ -83,20 +68,11 @@ const MapDetailPage = ({ cpId }) => {
 
         <div className={s.contentGrid}>
           <div className={s.leftColumn}>
-            <MapDetailInfo
-              mapData={mapData}
-              selectedFps={selectedFps}
-              onFpsChange={handleFpsChange}
-            />
+            <MapDetailInfo mapData={mapData} />
             {mapData && <MapVideos mapData={mapData} />}
           </div>
 
-          <TabsSection
-            selectedFps={selectedFps}
-            hasMoreTops={hasMoreTops}
-            topsLoadMoreRef={topsLoadMoreRef}
-            showingAllTops={showingAllTops}
-          />
+          <TabsSection showingAllTops={showingAllTops} />
         </div>
       </main>
     </div>
@@ -110,19 +86,3 @@ const breadcrumbPaths = [
   { index: 0, path: "/" },
   { index: 1, path: "/maps" },
 ];
-
-const FPS_QUERY_VALUES = new Set([
-  "all",
-  "125",
-  "250",
-  "333",
-  "43",
-  "76",
-  "mix",
-]);
-
-function normalizeFpsQuery(fpsValue) {
-  const value = String(fpsValue || "125").toLowerCase();
-  if (!FPS_QUERY_VALUES.has(value)) return "125";
-  return value === "all" ? "All" : value;
-}

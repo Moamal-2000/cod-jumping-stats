@@ -55,25 +55,6 @@
   color: #9ca3af;
 }
 
-.spinner {
-  width: 20px;
-  height: 20px;
-  border: 2px solid #374151;
-  border-top: 2px solid #facc15;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 .noData {
   text-align: center;
   padding: 2rem;
@@ -198,31 +179,6 @@
   color: #f9fafb;
   font-size: 0.75rem;
   font-weight: 600;
-}
-
-.loadMoreContainer {
-  display: flex;
-  justify-content: center;
-  padding: 2rem;
-  border-top: 1px solid #374151;
-  min-height: 60px;
-}
-
-.loadingIndicator {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  color: #9ca3af;
-  font-size: 0.875rem;
-}
-
-.scrollHint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #6b7280;
-  font-size: 0.875rem;
-  font-style: italic;
 }
 
 @include m.small {

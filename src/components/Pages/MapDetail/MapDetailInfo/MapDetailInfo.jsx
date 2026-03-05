@@ -1,12 +1,30 @@
+"use client";
+
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { JUMP_FPS } from "@/data/constants";
+import { createQueryString } from "@/lib/queryParams";
 import { getFpsDifficultyValue } from "@/lib/utils";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./MapDetailInfo.module.scss";
 
 const fpsOptions = ["All", "125", "250", "333", "43", "76", "mix"];
 
-const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
+const MapDetailInfo = ({ mapData }) => {
   const Difficulty = mapData?.Difficulty;
   const hasDifficulty = mapHasDifficulties(Difficulty);
+
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
+
+  function handleFpsChange(nextFps) {
+    const normalizedFps = normalizeFpsQuery(nextFps);
+    if (normalizedFps === selectedFps) return;
+
+    createQueryString("fps", normalizedFps, searchParams, router, pathname);
+  }
 
   return (
     <div className={s.infoCard}>
@@ -21,7 +39,7 @@ const MapDetailInfo = ({ mapData, selectedFps, onFpsChange }) => {
                 className={`${s.fpsButton} ${
                   selectedFps === fps ? s.active : ""
                 }`}
-                onClick={() => onFpsChange(fps)}
+                onClick={() => handleFpsChange(fps)}
               >
                 {fps === "mix" ? "Mixed" : fps}
               </button>

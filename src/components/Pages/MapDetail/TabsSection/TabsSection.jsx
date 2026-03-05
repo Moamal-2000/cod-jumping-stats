@@ -1,22 +1,19 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { createQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import MapDetailPlayers from "../MapDetailPlayers/MapDetailPlayers";
 import MapDetailTops from "../MapDetailTops/MapDetailTops";
 import s from "./TabsSection.module.scss";
 
-const TabsSection = ({
-  selectedFps,
-  hasMoreTops,
-  topsLoadMoreRef,
-  showingAllTops,
-}) => {
+const TabsSection = ({ showingAllTops }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
 
   const activeTab = searchParams.get("tab") || "tops";
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   function handleUpdateTab(tab) {
     createQueryString("tab", tab, searchParams, router, pathname);
@@ -41,8 +38,6 @@ const TabsSection = ({
           {activeTab === "tops" && (
             <MapDetailTops
               selectedFps={selectedFps}
-              hasMore={hasMoreTops}
-              loadMoreRef={topsLoadMoreRef}
               showingAll={showingAllTops}
             />
           )}

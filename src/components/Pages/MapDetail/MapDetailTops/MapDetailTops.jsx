@@ -6,9 +6,7 @@ import Link from "next/link";
 import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
 
-const loadingMore = false;
-
-const MapDetailTops = ({ selectedFps, hasMore, loadMoreRef, showingAll }) => {
+const MapDetailTops = ({ selectedFps, showingAll }) => {
   const { mapTops, loadingTops } = useSelector((s) => s.map);
 
   function handleShowAllBtn(event) {}
@@ -113,21 +111,6 @@ const MapDetailTops = ({ selectedFps, hasMore, loadMoreRef, showingAll }) => {
           );
         })}
       </div>
-
-      {hasMore && (
-        <div ref={loadMoreRef} className={s.loadMoreContainer}>
-          {loadingMore ? (
-            <div className={s.loadingIndicator}>
-              <div className={s.spinner}></div>
-              <span>Loading more runs...</span>
-            </div>
-          ) : (
-            <div className={s.scrollHint}>
-              <span>Scroll down to load more runs</span>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };
