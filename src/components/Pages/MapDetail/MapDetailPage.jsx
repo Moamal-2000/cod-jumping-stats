@@ -5,6 +5,7 @@ import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { JUMP_FPS } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { createQueryString } from "@/lib/queryParams";
+import { fetchMapTops } from "@/redux/features/map/thunk/mapThunk";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -17,28 +18,23 @@ import PageLoadingError from "./PageLoadingError/PageLoadingError";
 import TabsSection from "./TabsSection/TabsSection";
 
 const MapDetailPage = ({ cpId }) => {
-  const [topsData, setTopsData] = useState(null);
   const [playersData, setPlayersData] = useState(null);
 
   const [hasMoreTops, setHasMoreTops] = useState(true);
   const [hasMorePlayers, setHasMorePlayers] = useState(true);
 
-  const [displayedTopsCount, setDisplayedTopsCount] = useState(0);
   const [displayedPlayersCount, setDisplayedPlayersCount] = useState(0);
 
   const topsLoadMoreRef = useRef(null);
   const playersLoadMoreRef = useRef(null);
 
-  const [allTopsData, setAllTopsData] = useState(null);
   const [allPlayersData, setAllPlayersData] = useState(null);
 
-  const [loadingTops, setLoadingTops] = useState(false);
   const [loadingPlayers, setLoadingPlayers] = useState(false);
 
   const [showingAllTops, setShowingAllTops] = useState(false);
   const [showingAllPlayers, setShowingAllPlayers] = useState(false);
 
-  const [loadingMoreTops, setLoadingMoreTops] = useState(false);
   const [loadingMorePlayers, setLoadingMorePlayers] = useState(false);
 
   const { allMaps, loading, error } = useSelector((s) => s.maps);
@@ -58,117 +54,6 @@ const MapDetailPage = ({ cpId }) => {
     if (normalizedFps === selectedFps) return;
 
     createQueryString("fps", normalizedFps, searchParams, router, pathname);
-  }
-
-  async function fetchTopsData(isLoadMore = false) {
-    try {
-      if (isLoadMore) setLoadingMoreTops(true);
-      else setLoadingTops(true);
-
-      if (selectedFps === "All") {
-        if (!isLoadMore) {
-          const promises = JUMP_FPS.map((fps) =>
-            fetchMsgPackResponse({ url: jhApis({ fps, cpId }).map.tops })
-              .then((response) => decodeAsyncData(response))
-              .then((data) => {
-                if (Array.isArray(data)) {
-                  return data.map((run) => ({ ...run, FPS: run?.FPS ?? fps }));
-                }
-                return [];
-              })
-              .catch((err) => {
-                console.warn(`Error fetching tops for ${fps} FPS:`, err);
-                return [];
-              }),
-          );
-
-          const results = await Promise.all(promises);
-          const allData = results
-            .filter((result) => Array.isArray(result))
-            .flat()
-            .filter(
-              (item) =>
-                item &&
-                typeof item === "object" &&
-                item.TimePlayed !== null &&
-                item.TimePlayed !== undefined,
-            )
-            .sort((a, b) => a.TimePlayed - b.TimePlayed);
-
-          setAllTopsData(allData);
-
-          const firstPage = allData.slice(0, ITEMS_PER_PAGE);
-          setTopsData(firstPage);
-          setHasMoreTops(allData.length > ITEMS_PER_PAGE);
-          setDisplayedTopsCount(ITEMS_PER_PAGE);
-        } else {
-          const startIndex = displayedTopsCount;
-          const endIndex = startIndex + ITEMS_PER_PAGE;
-          const nextPage = allTopsData.slice(startIndex, endIndex);
-
-          setTopsData((prev) => [...(prev || []), ...nextPage]);
-          setHasMoreTops(endIndex < allTopsData.length);
-          setDisplayedTopsCount(endIndex);
-        }
-      } else if (selectedFps === "mix") {
-        if (!isLoadMore) {
-          const response = await fetchMsgPackResponse({
-            url: jhApis({ fps: "0", cpId }).map.tops,
-          });
-          const data = (await decodeAsyncData(response)) ?? [];
-          const normalizedData = Array.isArray(data) ? data : [];
-
-          setAllTopsData(normalizedData);
-
-          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
-          setTopsData(firstPage);
-          setHasMoreTops(normalizedData.length > ITEMS_PER_PAGE);
-          setDisplayedTopsCount(ITEMS_PER_PAGE);
-        } else {
-          const startIndex = displayedTopsCount;
-          const endIndex = startIndex + ITEMS_PER_PAGE;
-          const nextPage = allTopsData.slice(startIndex, endIndex);
-
-          setTopsData((prev) => [...(prev || []), ...nextPage]);
-          setHasMoreTops(endIndex < allTopsData.length);
-          setDisplayedTopsCount(endIndex);
-        }
-      } else {
-        if (!isLoadMore) {
-          const response = await fetchMsgPackResponse({
-            url: jhApis({ fps: selectedFps, cpId }).map.tops,
-          });
-          const data = (await decodeAsyncData(response)) ?? [];
-          const normalizedData = Array.isArray(data) ? data : [];
-
-          setAllTopsData(normalizedData);
-
-          const firstPage = normalizedData.slice(0, ITEMS_PER_PAGE);
-          setTopsData(firstPage);
-          setHasMoreTops(normalizedData.length > ITEMS_PER_PAGE);
-          setDisplayedTopsCount(ITEMS_PER_PAGE);
-        } else {
-          const startIndex = displayedTopsCount;
-          const endIndex = startIndex + ITEMS_PER_PAGE;
-          const nextPage = allTopsData.slice(startIndex, endIndex);
-
-          setTopsData((prev) => [...(prev || []), ...nextPage]);
-          setHasMoreTops(endIndex < allTopsData.length);
-          setDisplayedTopsCount(endIndex);
-        }
-      }
-    } catch (err) {
-      console.error("Error fetching tops data:", err);
-      if (!isLoadMore) {
-        setTopsData([]);
-      }
-    } finally {
-      if (isLoadMore) {
-        setLoadingMoreTops(false);
-      } else {
-        setLoadingTops(false);
-      }
-    }
   }
 
   async function fetchPlayersData(isLoadMore = false) {
@@ -313,23 +198,9 @@ const MapDetailPage = ({ cpId }) => {
     }
   }
 
-  function loadMoreTops() {
-    if (!loadingMoreTops && hasMoreTops) {
-      fetchTopsData(true);
-    }
-  }
-
   function loadMorePlayers() {
     if (!loadingMorePlayers && hasMorePlayers) {
       fetchPlayersData(true);
-    }
-  }
-
-  function showAllTops() {
-    if (allTopsData) {
-      setTopsData(allTopsData);
-      setShowingAllTops(true);
-      setHasMoreTops(false);
     }
   }
 
@@ -342,30 +213,9 @@ const MapDetailPage = ({ cpId }) => {
   }
 
   useEffect(() => {
-    if (activeTab !== "tops" || !topsData || topsData.length === 0) return;
-
-    const topsObserver = new IntersectionObserver(
-      (entries) => {
-        const shouldLoadMore =
-          entries[0].isIntersecting && hasMoreTops && !loadingMoreTops;
-        if (shouldLoadMore) loadMoreTops();
-      },
-      { threshold: 0.1 },
-    );
-
-    const timeoutId = setTimeout(() => {
-      if (topsLoadMoreRef.current) {
-        topsObserver.observe(topsLoadMoreRef.current);
-      }
-    }, 100);
-
-    return () => {
-      clearTimeout(timeoutId);
-      if (topsLoadMoreRef.current) {
-        topsObserver.unobserve(topsLoadMoreRef.current);
-      }
-    };
-  }, [hasMoreTops, loadingMoreTops, activeTab, topsData]);
+    if (activeTab === "tops")
+      dispatch(fetchMapTops({ fps: selectedFps, cpId }));
+  }, [activeTab, selectedFps]);
 
   useEffect(() => {
     if (activeTab !== "players" || !playersData || playersData.length === 0)
@@ -403,16 +253,12 @@ const MapDetailPage = ({ cpId }) => {
 
     setHasMoreTops(true);
     setHasMorePlayers(true);
-    setTopsData(null);
     setPlayersData(null);
-    setAllTopsData(null);
     setAllPlayersData(null);
-    setDisplayedTopsCount(0);
     setDisplayedPlayersCount(0);
     setShowingAllTops(false);
     setShowingAllPlayers(false);
 
-    fetchTopsData();
     fetchPlayersData();
   }, [mapData, selectedFps]);
 
@@ -443,16 +289,11 @@ const MapDetailPage = ({ cpId }) => {
           </div>
 
           <TabsSection
-            topsData={topsData}
             playersData={playersData}
             selectedFps={selectedFps}
-            loadingTops={loadingTops}
-            loadingMoreTops={loadingMoreTops}
             hasMoreTops={hasMoreTops}
             topsLoadMoreRef={topsLoadMoreRef}
             showingAllTops={showingAllTops}
-            showAllTops={showAllTops}
-            allTopsData={allTopsData}
             loadingPlayers={loadingPlayers}
             loadingMorePlayers={loadingMorePlayers}
             hasMorePlayers={hasMorePlayers}

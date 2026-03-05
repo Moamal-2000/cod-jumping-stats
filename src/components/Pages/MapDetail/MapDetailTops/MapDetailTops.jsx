@@ -1,20 +1,19 @@
+"use client";
+
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import Link from "next/link";
+import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
 
-const MapDetailTops = ({
-  topsData,
-  selectedFps,
-  loading,
-  loadingMore,
-  hasMore,
-  loadMoreRef,
-  showingAll,
-  onShowAll,
-  allData,
-}) => {
-  if (loading) {
+const loadingMore = false;
+
+const MapDetailTops = ({ selectedFps, hasMore, loadMoreRef, showingAll }) => {
+  const { mapTops, loadingTops } = useSelector((s) => s.map);
+
+  function handleShowAllBtn(event) {}
+
+  if (loadingTops) {
     return (
       <div className={s.topsCard}>
         <div className={s.cardHeader}>
@@ -31,7 +30,7 @@ const MapDetailTops = ({
     );
   }
 
-  if (!topsData || topsData.length === 0) {
+  if (!mapTops || mapTops.length === 0) {
     return (
       <div className={s.topsCard}>
         <div className={s.cardHeader}>
@@ -58,18 +57,18 @@ const MapDetailTops = ({
           <span className={s.totalRuns}>
             {selectedFps === "All"
               ? "Combined runs"
-              : `${topsData[0]?.TotalNr || 0} total runs`}
+              : `${mapTops[0]?.TotalNr || 0} total runs`}
           </span>
-          {!showingAll && allData && allData.length > topsData.length && (
-            <button className={s.showAllButton} onClick={onShowAll}>
-              Show All ({allData.length})
+          {!showingAll && mapTops && mapTops.length > mapTops.length && (
+            <button className={s.showAllButton} onClick={handleShowAllBtn}>
+              Show All ({mapTops.length})
             </button>
           )}
         </div>
       </div>
 
       <div className={s.topsList}>
-        {topsData.map((run, index) => {
+        {mapTops.map((run, index) => {
           const modifiedRank = getModifiedRank(run.Rank);
 
           return (

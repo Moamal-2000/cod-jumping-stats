@@ -7,16 +7,11 @@ import MapDetailTops from "../MapDetailTops/MapDetailTops";
 import s from "./TabsSection.module.scss";
 
 const TabsSection = ({
-  topsData,
   playersData,
   selectedFps,
-  loadingTops,
-  loadingMoreTops,
   hasMoreTops,
   topsLoadMoreRef,
   showingAllTops,
-  showAllTops,
-  allTopsData,
   loadingPlayers,
   loadingMorePlayers,
   hasMorePlayers,
@@ -53,15 +48,10 @@ const TabsSection = ({
         <div className={s.tabContent}>
           {activeTab === "tops" && (
             <MapDetailTops
-              topsData={topsData}
               selectedFps={selectedFps}
-              loading={loadingTops}
-              loadingMore={loadingMoreTops}
               hasMore={hasMoreTops}
               loadMoreRef={topsLoadMoreRef}
               showingAll={showingAllTops}
-              onShowAll={showAllTops}
-              allData={allTopsData}
             />
           )}
 
