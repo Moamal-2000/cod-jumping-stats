@@ -9,6 +9,44 @@ export const fetchMapTops = createAsyncThunk(
     try {
       const { fps, cpId } = paramsObject;
 
+      if (fps === "All") {
+        const promises = JUMP_FPS.map((jumpFps) =>
+          fetchMsgPackResponse({
+            url: jhApis({ fps: jumpFps, cpId }).map.tops,
+          })
+            .then((response) => decodeAsyncData(response))
+            .then((data) => {
+              if (Array.isArray(data)) {
+                return data.map((run) => ({
+                  ...run,
+                  FPS: run?.FPS ?? jumpFps,
+                }));
+              }
+              return [];
+            })
+            .catch(() => []),
+        );
+
+        const results = await Promise.all(promises);
+
+        return results
+          .filter((result) => Array.isArray(result))
+          .flat()
+          .filter(
+            (run) =>
+              run &&
+              typeof run === "object" &&
+              run.TimePlayed !== null &&
+              run.TimePlayed !== undefined,
+          )
+          .sort((a, b) => a.TimePlayed - b.TimePlayed)
+          .map((run, index, runs) => ({
+            ...run,
+            Rank: index + 1,
+            TotalNr: runs.length,
+          }));
+      }
+
       const response = await fetchMsgPackResponse({
         url: jhApis({ fps, cpId }).map.tops,
       });

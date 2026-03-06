@@ -36,7 +36,6 @@ const TabsSection = () => {
 
         <div className={s.tabContent}>
           {activeTab === "tops" && <MapDetailTops selectedFps={selectedFps} />}
-
           {activeTab === "players" && (
             <MapDetailPlayers selectedFps={selectedFps} />
           )}
