@@ -6,7 +6,6 @@ import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import SpinnerLoader from "../../../Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import s from "./Maps.module.scss";
 import ViewMaps from "./ViewMaps/ViewMaps";
 
@@ -59,10 +58,57 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   return (
     <section className={`${s.mapsSection} ${collapseClass} ${listClass}`}>
       {loading && !error && (
-        <SpinnerLoader
-          title="Loading maps..."
-          description="Fetching the latest maps"
-        />
+        <>
+          {Array.from({ length: 6 }, (_, index) =>
+            viewType === "list" ? (
+              <article className={s.listSkeletonCard} key={`skeleton-${index}`}>
+                <div className={`${s.skeletonBox} ${s.listImage}`}></div>
+
+                <div className={s.listMain}>
+                  <div className={`${s.skeletonBox} ${s.listTitle}`}></div>
+                  <div className={s.listTags}>
+                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
+                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
+                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
+                  </div>
+                  <div className={`${s.skeletonBox} ${s.listLine}`}></div>
+                </div>
+
+                <div className={s.listMeta}>
+                  <div className={`${s.skeletonBox} ${s.listLine}`}></div>
+                  <div className={`${s.skeletonBox} ${s.listLineShort}`}></div>
+                </div>
+              </article>
+            ) : (
+              <article className={s.gridSkeletonCard} key={`skeleton-${index}`}>
+                <div className={`${s.skeletonBox} ${s.gridImage}`} />
+
+                <div className={s.gridBody}>
+                  <div className={s.gridTopRow}>
+                    <div className={`${s.skeletonBox} ${s.gridTitle}`} />
+                    <div className={`${s.skeletonBox} ${s.gridCircle}`} />
+                  </div>
+
+                  <div className={`${s.skeletonBox} ${s.gridLineTiny}`} />
+
+                  <div className={s.difficulties}>
+                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
+                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
+                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
+                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
+                  </div>
+
+                  <div className={`${s.skeletonBox} ${s.gridLine}`} />
+
+                  <div className={s.authorAndRelease}>
+                    <div className={`${s.skeletonBox} ${s.gridLineTiny} ${s.author}`} />
+                    <div className={`${s.skeletonBox} ${s.releaseBox}`} />
+                  </div>
+                </div>
+              </article>
+            ),
+          )}
+        </>
       )}
 
       <ViewMaps lastMapRef={lastMapRef} mapsScroll={mapsScroll} />
