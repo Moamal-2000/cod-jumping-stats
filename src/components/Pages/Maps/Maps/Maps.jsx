@@ -1,5 +1,6 @@
 "use client";
 
+import SkeletonMapCard from "@/components/Shared/Loaders/SkeletonLoaders/SkeletonMapCard/SkeletonMapCard";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -57,7 +58,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 
   return (
     <section className={`${s.mapsSection} ${collapseClass} ${listClass}`}>
-      {loading && !error && (
+      {!loading && !error && (
         <>
           {Array.from({ length: 6 }, (_, index) =>
             viewType === "list" ? (
@@ -80,32 +81,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
                 </div>
               </article>
             ) : (
-              <article className={s.gridSkeletonCard} key={`skeleton-${index}`}>
-                <div className={`${s.skeletonBox} ${s.gridImage}`} />
-
-                <div className={s.gridBody}>
-                  <div className={s.gridTopRow}>
-                    <div className={`${s.skeletonBox} ${s.gridTitle}`} />
-                    <div className={`${s.skeletonBox} ${s.gridCircle}`} />
-                  </div>
-
-                  <div className={`${s.skeletonBox} ${s.gridLineTiny}`} />
-
-                  <div className={s.difficulties}>
-                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
-                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
-                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
-                    <div className={`${s.skeletonBox} ${s.gridTag}`} />
-                  </div>
-
-                  <div className={`${s.skeletonBox} ${s.gridLine}`} />
-
-                  <div className={s.authorAndRelease}>
-                    <div className={`${s.skeletonBox} ${s.gridLineTiny} ${s.author}`} />
-                    <div className={`${s.skeletonBox} ${s.releaseBox}`} />
-                  </div>
-                </div>
-              </article>
+              <SkeletonMapCard key={`skeleton-${index}`} />
             ),
           )}
         </>
