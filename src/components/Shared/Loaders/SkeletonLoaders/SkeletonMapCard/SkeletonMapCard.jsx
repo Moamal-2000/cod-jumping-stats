@@ -2,29 +2,29 @@ import s from "./SkeletonMapCard.module.scss";
 
 const SkeletonMapCard = () => {
   return (
-    <div className={s.gridSkeletonCard} role="presentation">
-      <div className={`${s.skeletonBox} ${s.gridImage}`} />
+    <div className={s.card} role="presentation">
+      <div className={`${s.skeleton} ${s.mapImage}`} />
 
-      <div className={s.gridBody}>
-        <div className={s.gridTopRow}>
-          <div className={`${s.skeletonBox} ${s.gridTitle}`} />
-          <div className={`${s.skeletonBox} ${s.gridCircle}`} />
+      <div className={s.content}>
+        <div className={s.nameAndRating}>
+          <div className={`${s.skeleton} ${s.mapName}`} />
+          <div className={`${s.skeleton} ${s.circle}`} />
         </div>
 
-        <div className={`${s.skeletonBox} ${s.gridLineTiny}`} />
+        <div className={`${s.skeleton} ${s.tinyLine}`} />
 
         <div className={s.difficulties}>
-          <div className={`${s.skeletonBox} ${s.gridTag}`} />
-          <div className={`${s.skeletonBox} ${s.gridTag}`} />
-          <div className={`${s.skeletonBox} ${s.gridTag}`} />
-          <div className={`${s.skeletonBox} ${s.gridTag}`} />
+          <div className={s.skeleton} />
+          <div className={s.skeleton} />
+          <div className={s.skeleton} />
+          <div className={s.skeleton} />
         </div>
 
-        <div className={`${s.skeletonBox} ${s.gridLine}`} />
+        <div className={`${s.skeleton} ${s.line}`} />
 
         <div className={s.authorAndRelease}>
-          <div className={`${s.skeletonBox} ${s.gridLineTiny} ${s.author}`} />
-          <div className={`${s.skeletonBox} ${s.releaseBox}`} />
+          <div className={`${s.skeleton} ${s.tinyLine} ${s.author}`} />
+          <div className={`${s.skeleton} ${s.releaseBox}`} />
         </div>
       </div>
     </div>
