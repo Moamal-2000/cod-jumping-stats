@@ -42,13 +42,13 @@ Follow these steps to set up the project locally:
 2.  **Install dependencies**
 
     ```bash
-    pnpm install
+    npm install
     ```
 
 3.  **Run the development server**
 
     ```bash
-    pnpm run dev
+    npm run dev
     ```
 
 4.  **Open the app**
@@ -65,10 +65,10 @@ Follow these steps to set up the project locally:
 
 ### Development Commands
 
-- `pnpm run dev`: Starts the development server with Turbopack.
-- `pnpm run build`: Builds the application for production.
-- `pnpm run start`: Starts the production server.
-- `pnpm run lint`: Runs ESLint to check for code quality issues.
+- `npm run dev`: Starts the development server with Turbopack.
+- `npm run build`: Builds the application for production.
+- `npm run start`: Starts the production server.
+- `npm run lint`: Runs ESLint to check for code quality issues.
 
 ## Project Structure
 
