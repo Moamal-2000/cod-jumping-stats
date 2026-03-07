@@ -4,6 +4,7 @@
   width: 100%;
   min-height: 480px;
   display: grid;
+  gap: 16px;
   grid-template-columns: repeat(3, minmax(390px, 1fr));
   position: relative;
 
@@ -33,6 +34,7 @@
 .mapsSection.list {
   display: flex;
   flex-direction: column;
+  gap: 0;
   background-color: #111827;
   border-radius: 20px;
   overflow: hidden;
