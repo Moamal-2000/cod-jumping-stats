@@ -2,7 +2,7 @@ import s from "./SkeletonMapCard.module.scss";
 
 const SkeletonMapCard = () => {
   return (
-    <article className={s.gridSkeletonCard}>
+    <div className={s.gridSkeletonCard} role="presentation">
       <div className={`${s.skeletonBox} ${s.gridImage}`} />
 
       <div className={s.gridBody}>
@@ -27,7 +27,7 @@ const SkeletonMapCard = () => {
           <div className={`${s.skeletonBox} ${s.releaseBox}`} />
         </div>
       </div>
-    </article>
+    </div>
   );
 };
 export default SkeletonMapCard;

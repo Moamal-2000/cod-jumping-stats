@@ -2,7 +2,7 @@ import s from "./SkeletonMapList.module.scss";
 
 const SkeletonMapList = () => {
   return (
-    <article className={s.listSkeletonCard}>
+    <div className={s.listSkeletonCard} role="presentation">
       <div className={`${s.skeletonBox} ${s.listImage}`} />
 
       <div className={s.listMain}>
@@ -21,7 +21,7 @@ const SkeletonMapList = () => {
         <div className={`${s.skeletonBox} ${s.listLine}`} />
         <div className={`${s.skeletonBox} ${s.listLineShort}`} />
       </div>
-    </article>
+    </div>
   );
 };
 export default SkeletonMapList;
