@@ -12,8 +12,6 @@ const SkeletonMapList = () => {
           <div className={`${s.skeleton} ${s.listTag}`} />
           <div className={`${s.skeleton} ${s.listTag}`} />
           <div className={`${s.skeleton} ${s.listTag}`} />
-          <div className={`${s.skeleton} ${s.listTag}`} />
-          <div className={`${s.skeleton} ${s.listTag}`} />
         </div>
 
         <div className={s.classifications}>

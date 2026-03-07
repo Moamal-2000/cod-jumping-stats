@@ -51,11 +51,10 @@
 .leftSide {
   display: flex;
   flex-direction: column;
-  flex: 1;
 }
 
 .mapName {
-  width: 40%;
+  width: 170px;
   height: 24px;
   margin-bottom: 14px;
 }
@@ -88,11 +87,18 @@
 
 .rightSide {
   width: 360px;
+  margin-left: auto;
 }
 
-@include m.small {
+@include m.medium {
   .rightSide {
-    max-width: 320px;
+    margin-left: unset;
+  }
+}
+
+@include m.large {
+  .rightSide {
+    max-width: 310px;
     width: 100%;
   }
 }
