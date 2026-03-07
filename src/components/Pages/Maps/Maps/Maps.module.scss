@@ -5,7 +5,6 @@
   min-height: 480px;
   display: grid;
   grid-template-columns: repeat(3, minmax(390px, 1fr));
-  gap: 16px;
   position: relative;
 
   &.collapse>* {
