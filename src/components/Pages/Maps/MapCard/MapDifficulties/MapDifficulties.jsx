@@ -2,12 +2,12 @@ import { JUMP_FPS } from "@/data/constants";
 import { getFpsDifficultyValue } from "@/lib/utils";
 import s from "./MapDifficulties.module.scss";
 
-const MapDifficulties = ({ Difficulty }) => {
+const MapDifficulties = ({ Difficulty, hideLabel = false }) => {
   return (
     <div className={s.difficultySection}>
-      <span className={s.difficultyLabel}>Difficulties</span>
+      {!hideLabel && <span className={s.difficultyLabel}>Difficulties</span>}
 
-      <div className={s.fpsDifficulties}>
+      <div className={`${s.fpsDifficulties} ${hideLabel ? s.labelHidden : ""}`}>
         {JUMP_FPS.map((fps) => {
           const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
 

@@ -67,7 +67,9 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           )}
         </Link>
 
-        {!hideDifficulties && <MapDifficulties Difficulty={Difficulty} />}
+        {!hideDifficulties && (
+          <MapDifficulties Difficulty={Difficulty} hideLabel />
+        )}
 
         <div className={s.classifications}>
           {Classifications?.map((text, index) => (

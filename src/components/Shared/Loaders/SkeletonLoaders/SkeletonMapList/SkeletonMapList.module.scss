@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-.listSkeletonCard {
+.map {
   --pulse-delay: 0s;
   display: flex;
   align-items: center;
@@ -11,28 +11,148 @@
 }
 
 @include m.medium {
-  .listSkeletonCard {
+  .map {
     border-bottom: 1px solid #394b69;
     gap: 0 24px;
   }
 }
 
 @include m.medium {
-  .listSkeletonCard {
+  .map {
     flex-direction: column;
     gap: 24px;
     padding: 14px 12px;
   }
 }
 
-.skeletonBox {
+.mapImage {
+  width: 300px;
+  height: 170px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+@include m.medium {
+  .mapImage {
+    max-width: 320px;
+    width: 100%;
+    height: 180px;
+    border-radius: 6px;
+  }
+}
+
+@include m.small {
+  .mapImage {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.leftSide {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.mapName {
+  width: 40%;
+  height: 24px;
+  margin-bottom: 14px;
+}
+
+.difficulties {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.difficulties>div {
+  width: 66px;
+  height: 24.13px;
+  border-radius: 4px;
+}
+
+.classifications {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.classifications>div {
+  width: 47.21px;
+  height: 22px;
+  border-radius: 100px;
+}
+
+.rightSide {
+  width: 360px;
+}
+
+@include m.small {
+  .rightSide {
+    max-width: 320px;
+    width: 100%;
+  }
+}
+
+.completionRate {
+  margin-bottom: 26px;
+}
+
+.completionRate .wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.completionRate .wrapper>div {
+  height: 19px;
+}
+
+.completionRate .wrapper .label {
+  width: 100px;
+}
+
+.completionRate .wrapper .value {
+  width: 50px;
+}
+
+.completionRate .progressBar {
+  width: 100%;
+  height: 12px;
+}
+
+.authorAndRelease {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.authorAndRelease>div {
+  height: 12px;
+}
+
+.author {
+  width: 150px;
+}
+
+.release {
+  width: 110px;
+}
+
+.skeleton {
   border-radius: 8px;
   position: relative;
   overflow: hidden;
   background-color: rgba(148, 163, 184, 0.12);
 }
 
-.skeletonBox::after {
+.skeleton::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -47,72 +167,13 @@
   animation-delay: var(--pulse-delay);
 }
 
-.listImage {
-  width: 300px;
-  height: 170px;
-  border-radius: 12px;
-  flex-shrink: 0;
-}
-
-@include m.medium {
-  .listImage {
-    max-width: 320px;
-    width: 100%;
-    height: 180px;
-    border-radius: 6px;
-  }
-}
-
-@include m.small {
-  .listImage {
-    aspect-ratio: 16 / 9;
-    width: 100%;
-    height: auto;
-  }
-}
-
-.listMain {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.listTitle {
-  width: 50%;
-  height: 24px;
-  margin-bottom: 14px;
-}
-
-.listTags {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 14px;
-}
-
-.listTag {
-  width: 72px;
-  height: 24px;
-  border-radius: 9999px;
-}
-
-.listMeta {
-  width: 300px;
-}
-
-@include m.small {
-  .listMeta {
-    max-width: 320px;
-    width: 100%;
-  }
-}
-
-.listLine {
+.line {
   width: 100%;
   height: 14px;
   margin-bottom: 10px;
 }
 
-.listLineShort {
+.shortLine {
   width: 70%;
   height: 14px;
 }
