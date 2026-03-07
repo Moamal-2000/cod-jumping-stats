@@ -1,6 +1,7 @@
 "use client";
 
 import SkeletonMapCard from "@/components/Shared/Loaders/SkeletonLoaders/SkeletonMapCard/SkeletonMapCard";
+import SkeletonMapList from "@/components/Shared/Loaders/SkeletonLoaders/SkeletonMapList/SkeletonMapList";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -62,24 +63,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
         <>
           {Array.from({ length: 6 }, (_, index) =>
             viewType === "list" ? (
-              <article className={s.listSkeletonCard} key={`skeleton-${index}`}>
-                <div className={`${s.skeletonBox} ${s.listImage}`}></div>
-
-                <div className={s.listMain}>
-                  <div className={`${s.skeletonBox} ${s.listTitle}`}></div>
-                  <div className={s.listTags}>
-                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
-                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
-                    <div className={`${s.skeletonBox} ${s.listTag}`}></div>
-                  </div>
-                  <div className={`${s.skeletonBox} ${s.listLine}`}></div>
-                </div>
-
-                <div className={s.listMeta}>
-                  <div className={`${s.skeletonBox} ${s.listLine}`}></div>
-                  <div className={`${s.skeletonBox} ${s.listLineShort}`}></div>
-                </div>
-              </article>
+              <SkeletonMapList key={`skeleton-${index}`} />
             ) : (
               <SkeletonMapCard key={`skeleton-${index}`} />
             ),

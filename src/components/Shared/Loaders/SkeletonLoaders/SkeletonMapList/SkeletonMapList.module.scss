@@ -1,0 +1,128 @@
+@use "@/styles/mixins" as m;
+
+.listSkeletonCard {
+  --pulse-delay: 0s;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 20px 24px;
+  border-bottom: 1px solid #1e293b;
+}
+
+@include m.medium {
+  .listSkeletonCard {
+    border-bottom: 1px solid #394b69;
+    gap: 0 24px;
+  }
+}
+
+@include m.medium {
+  .listSkeletonCard {
+    flex-direction: column;
+    gap: 24px;
+    padding: 14px 12px;
+  }
+}
+
+.skeletonBox {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(148, 163, 184, 0.12);
+}
+
+.skeletonBox::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(148, 163, 184, 0.26) 50%,
+      transparent 100%);
+  transform: translateX(-150%);
+  will-change: transform;
+  animation: mapsSkeletonPulse 1.7s ease-in-out infinite;
+  animation-delay: var(--pulse-delay);
+}
+
+.listImage {
+  width: 300px;
+  height: 170px;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+@include m.medium {
+  .listImage {
+    max-width: 320px;
+    width: 100%;
+    height: 180px;
+    border-radius: 6px;
+  }
+}
+
+@include m.small {
+  .listImage {
+    aspect-ratio: 16 / 9;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.listMain {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.listTitle {
+  width: 50%;
+  height: 24px;
+  margin-bottom: 14px;
+}
+
+.listTags {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.listTag {
+  width: 72px;
+  height: 24px;
+  border-radius: 9999px;
+}
+
+.listMeta {
+  width: 300px;
+}
+
+@include m.small {
+  .listMeta {
+    max-width: 320px;
+    width: 100%;
+  }
+}
+
+.listLine {
+  width: 100%;
+  height: 14px;
+  margin-bottom: 10px;
+}
+
+.listLineShort {
+  width: 70%;
+  height: 14px;
+}
+
+@keyframes mapsSkeletonPulse {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
+}
