@@ -20,7 +20,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   const viewType = searchParams.get("view") || "grid";
   const paramsObject = Object.fromEntries(searchParams.entries());
 
-  const collapseClass = isMapsExpanded ? "" : s.collapse;
+  const mapsSectionClasses = getMapsSectionClasses(isMapsExpanded, viewType);
 
   function addDataOnScroll() {
     const paginationMapsData = paginateData(mapsData, paginationNumber);
@@ -56,7 +56,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   }, [paginationNumber]);
 
   return (
-    <section className={`${s.mapsSection} ${collapseClass}`}>
+    <section className={mapsSectionClasses}>
       <MapsSkeletonLoader viewType={viewType} loading={loading} error={error} />
       <ViewMaps lastMapRef={lastMapRef} mapsScroll={mapsScroll} />
     </section>
@@ -64,3 +64,11 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 };
 
 export default Maps;
+
+function getMapsSectionClasses(isMapsExpanded, viewType) {
+  return [
+    s.mapsSection,
+    isMapsExpanded ? "" : s.collapse,
+    viewType === "list" ? s.list : "",
+  ].join(" ");
+}
