@@ -3,36 +3,27 @@
 .section {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  gap: 16px;
 }
 
 .sectionTitle {
-  font-size: 1.75rem;
+  font-size: clamp(1.45rem, 1.15rem + 1vw, 2rem);
+  line-height: 1.15;
   font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.01em;
-  position: relative;
-  padding-left: 16px;
+  letter-spacing: -0.03em;
+  color: var(--text-primary, #fff);
 }
 
 @include m.small {
-  .sectionTitle {
-    font-size: 1.125rem;
-    margin-bottom: 12px;
+  .section {
+    gap: 12px;
   }
-}
 
-.sectionTitle::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0.25em;
-  bottom: 0.25em;
-  width: 4px;
-  background: #FFB800;
-  border-radius: 2px;
-}
+  .sectionTitle {
+    margin-left: 16px;
+  }
 
-.card {
-  padding-block: 16px;
+  .card {
+    padding: 0;
+  }
 }

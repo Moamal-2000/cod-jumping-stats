@@ -1,141 +1,245 @@
 @use "@/styles/mixins" as m;
 
 .aboutPage {
+  --page-bg: #0f141b;
+  --surface: #151c25;
+  --surface-strong: #1b2430;
+  --border: #334052;
+  --border-soft: #283243;
+  --text-primary: #f5f7fa;
+  --text-secondary: #d3dae3;
+  --text-muted: #b5beca;
+  --accent: #ffd166;
+  --accent-soft: rgba(255, 209, 102, 0.14);
+
   min-height: calc(100vh - 128px);
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-  padding-bottom: 100px;
+  padding-bottom: 96px;
   display: flex;
   flex-direction: column;
-  gap: 74px;
+  gap: 40px;
+  color: var(--text-primary);
+}
+
+@include m.very-small {
+  .aboutPage {
+    padding-inline: 0;
+  }
 }
 
 .aboutPage strong {
-  font-weight: 600;
+  color: var(--text-primary);
+  font-weight: 700;
 }
 
-.techGrid {
+.hero {
   display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(500px, 1fr);
+  gap: 46px;
+  padding: 32px;
+  border: 1px solid var(--accent);
+  border-radius: 24px;
+  background:
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.07), transparent 32%),
+    linear-gradient(150deg, rgba(255, 209, 102, 0.16), rgba(255, 209, 102, 0) 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0)),
+    var(--page-bg);
+  box-shadow: 0 24px 72px rgba(0, 0, 0, 0.22);
+}
+
+.heroContent {
+  display: flex;
+  flex-direction: column;
   gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 }
 
-.description {
-  font-size: 1.05rem;
+.pageTitle {
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--accent);
+
+  font-size: clamp(2.4rem, 4.6vw, 4rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+
+@include m.large {
+  .pageTitle {
+    font-size: clamp(2.4rem, 4.2vw, 4rem);
+  }
+}
+
+@include m.small {
+  .pageTitle {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+    max-width: 16ch;
+    width: 100%;
+  }
+}
+
+@include m.very-small {
+  .pageTitle {
+    font-size: 1.6rem;
+  }
+}
+
+.lead {
+  max-width: 62ch;
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.factGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.factLabel,
+.personRole {
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.factValue {
+  font-size: 1rem;
   line-height: 1.6;
-  max-width: 1180px;
-  color: #f9fafb;
-  margin-bottom: 24px;
-
-  &:last-child {
-    margin-bottom: 0;
-  }
+  color: var(--text-primary);
 }
 
-@include m.small {
-  .description {
-    font-size: .8rem;
-  }
+.featureGrid,
+.closingGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.highlight {
-  color: #FFB800;
-  font-weight: 600;
-  position: relative;
-}
-
-a.highlight::after {
-  content: '';
-  position: absolute;
-  left: -50%;
-  width: 100%;
-  bottom: -1px;
-  height: 1px;
-  scale: 0 1;
-  opacity: .6;
-  background: rgb(255, 184, 0);
-  transition:
-    scale .2s ease,
-    translate .2s ease,
-    opacity .2s .22s ease;
-}
-
-a.highlight:hover::after {
-  translate: 50% 0;
-  scale: 1 2;
-  opacity: 1;
-}
-
-.teamGrid {
+.featureCard,
+.infoCard,
+.teamCard {
   display: flex;
-  gap: 28px;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 0;
+  padding: 20px;
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.015), rgba(255, 255, 255, 0)), var(--surface);
 }
 
-@include m.small {
-  .teamGrid {
-    gap: 20px;
-  }
+.infoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
 }
 
-.memberInfo {
-  display: flex;
+.cardTitle,
+.personName {
+  font-size: 1.15rem;
+  line-height: 1.3;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.bodyText {
+  max-width: 68ch;
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.bulletList {
+  display: grid;
   gap: 12px;
 }
 
-.memberInfo>a {
-  text-decoration: underline;
-
-  &:hover {
-    color: #f1f1f1;
-  }
+.bulletList li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
 }
 
-.memberRole {
-  font-size: .875rem;
-  color: #FFC933;
-  font-weight: 600;
-  margin-bottom: 8px;
-  text-transform: uppercase;
-  letter-spacing: .75px;
-  padding-block: 4px;
+.bulletList li::before {
+  content: "";
+  position: absolute;
+  top: 0.7em;
+  left: 0;
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--accent);
+}
+
+.teamGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.personName {
+  margin: 0;
+}
+
+.textLink {
+  color: #ffe39b;
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+
+.textLink:hover {
+  color: #fff1c8;
+}
+
+.textLink:focus-visible {
+  outline: 3px solid var(--accent-soft);
+  outline-offset: 3px;
   border-radius: 4px;
 }
 
-.memberName {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: #fff;
-  margin-bottom: 8px;
-}
+@include m.medium {
 
-.techGrid {
-  display: grid;
-  gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-}
-
-@include m.small {
+  .hero,
+  .featureGrid,
+  .closingGrid,
+  .infoGrid,
   .teamGrid {
     grid-template-columns: 1fr;
-    gap: 16px;
   }
 }
 
-.techItem {
-  padding: 16px;
-  background: #14161a;
-  border: 1px solid #222427;
-  border-radius: 8px;
-}
+@include m.small {
+  .aboutPage {
+    padding-bottom: 72px;
+    gap: 32px;
+  }
 
-.techTitle {
-  font-size: 1rem;
-  font-weight: 600;
-  color: #ffcc33;
-  margin-bottom: 8px;
-}
+  .hero {
+    padding: 20px;
+    border-radius: 0;
+  }
 
-.techDescription {
-  font-size: .875rem;
-  line-height: 1.6;
-  color: #f9fafb;
+  .lead,
+  .bodyText,
+  .bulletList li,
+  .factValue {
+    font-size: 0.95rem;
+  }
+
+  .infoCard,
+  .teamCard {
+    padding: 18px;
+  }
+
+  @include m.very-small {
+    .featureCard {
+      border-radius: 0;
+    }
+  }
 }
