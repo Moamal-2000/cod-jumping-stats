@@ -1,8 +1,5 @@
 "use client";
 
-import SkeletonMapCard from "@/components/Shared/Loaders/SkeletonLoaders/SkeletonMapCard/SkeletonMapCard";
-import SkeletonMapList from "@/components/Shared/Loaders/SkeletonLoaders/SkeletonMapList/SkeletonMapList";
-import { SKELETON_LIST } from "@/data/constants";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -10,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./Maps.module.scss";
+import MapsSkeletonLoader from "./MapsSkeletonLoader/MapsSkeletonLoader";
 import ViewMaps from "./ViewMaps/ViewMaps";
 
 const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
@@ -23,7 +21,6 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   const paramsObject = Object.fromEntries(searchParams.entries());
 
   const collapseClass = isMapsExpanded ? "" : s.collapse;
-  const listClass = viewType === "list" ? s.list : "";
 
   function addDataOnScroll() {
     const paginationMapsData = paginateData(mapsData, paginationNumber);
@@ -59,17 +56,8 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   }, [paginationNumber]);
 
   return (
-    <section className={`${s.mapsSection} ${collapseClass} ${listClass}`}>
-      {loading &&
-        !error &&
-        SKELETON_LIST.map((_, index) =>
-          viewType === "list" ? (
-            <SkeletonMapList key={`skeleton-${index}`} />
-          ) : (
-            <SkeletonMapCard key={`skeleton-${index}`} />
-          ),
-        )}
-
+    <section className={`${s.mapsSection} ${collapseClass}`}>
+      <MapsSkeletonLoader viewType={viewType} loading={loading} error={error} />
       <ViewMaps lastMapRef={lastMapRef} mapsScroll={mapsScroll} />
     </section>
   );
