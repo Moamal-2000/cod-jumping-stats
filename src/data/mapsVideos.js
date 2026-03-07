@@ -1362,4 +1362,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "mp_6jump_hard",
+    mapsIds: [12286],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=6mraVTH5iTI",
+        id: 1,
+      },
+    ],
+  },
 ];
