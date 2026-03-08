@@ -39,6 +39,10 @@
   pointer-events: all;
 }
 
+.statBarWrapper .toolTip.top0 {
+  translate: calc(-50% - 30px);
+}
+
 .statBarWrapper :where(.top, .times) {
   --text-border-color: #1d1d1d;
   color: #fff;

@@ -7,6 +7,7 @@ import s from "./TopsVisualization.module.scss";
 const TopsVisualization = ({ topsList, leaderboardData }) => {
   const maxFinishTimes = getMaxFinishTimesFrom(leaderboardData[0]);
   const topsEntries = Object.entries(topsList || {});
+
   const searchParams = useSearchParams();
   const isSkilledLeaderboard = searchParams.get("leaderboard") === "skilled";
   const modifiedTopsEntries = isSkilledLeaderboard

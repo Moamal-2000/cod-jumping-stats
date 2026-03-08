@@ -15,7 +15,9 @@ const TopStatBar = ({ top, times, maxFinishTimes, isSkilledLeaderboard }) => {
 
   return (
     <div className={`${s.statBarWrapper} ${+top === 1 ? s.top1 : ""}`}>
-      <p className={s.toolTip}>{tooltipText}</p>
+      <p className={`${s.toolTip} ${+top === 0 ? s.top0 : ""}`}>
+        {tooltipText}
+      </p>
 
       <span className={s.top}>#{top}</span>
       <span className={s.times}>{times}</span>
