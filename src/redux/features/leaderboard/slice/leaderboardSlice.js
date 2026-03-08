@@ -9,6 +9,7 @@ const isLeaderboardHeaderVisible = getValueFromLocalStorage({
 });
 
 const initialState = {
+  allLeaderboardData: [],
   leaderboardData: [],
   leaderboardScroll: [],
   firstChunkLeaderboard: [],
@@ -40,6 +41,7 @@ export const leaderboardSlice = createSlice({
         );
         const paginationLeaderboard = paginateData(filteredLeaderboard, 1);
 
+        state.allLeaderboardData = leaderboardData;
         state.leaderboardData = filteredLeaderboard;
         state.leaderboardScroll = paginationLeaderboard;
         state.firstChunkLeaderboard = paginationLeaderboard;
