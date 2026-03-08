@@ -11,6 +11,12 @@
   transition: background-color .3s;
 }
 
+@include m.large {
+  .thead {
+    top: 195px;
+  }
+}
+
 .thead.afterHideHeader {
   top: 68px;
   translate: 0 -2px;
