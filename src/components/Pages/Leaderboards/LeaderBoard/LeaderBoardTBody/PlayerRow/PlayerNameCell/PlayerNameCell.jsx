@@ -26,7 +26,11 @@ const PlayerNameCell = ({ playerData }) => {
 
   return (
     <td className={classes}>
-      <Link href={`/player/${PlayerID}`} onMouseEnter={handleMouseEnter}>
+      <Link
+        href={`/player/${PlayerID}`}
+        title={`View ${purePlayerName}'s profile`}
+        onMouseEnter={handleMouseEnter}
+      >
         <span className={s.playerCountry}>
           <CountryImage countryCode={CountryCode} countryName={Country} />
         </span>
