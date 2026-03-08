@@ -9,6 +9,7 @@ import {
 import { getFilteredLeaderboard, paginateData } from "@/lib/filters";
 import { stripColorCodes } from "@/lib/utils";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
+import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,6 +23,7 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
     leaderboardScroll,
     isLeaderboardHeaderVisible,
   } = useSelector((s) => s.leaderboard);
+  const allMaps = useSelector((s) => s.maps.allMaps);
   const statistics = useSelector((s) => s.global.statistics);
 
   const dispatch = useDispatch();
@@ -35,7 +37,8 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
   const totalPlayers = leaderboardData?.length || 0;
   const displayedPlayers = leaderboardScroll?.length || 0;
 
-  const totalMaps = statistics?.mapsCount || TOTAL_MAPS_PLACEHOLDER;
+  const totalMaps =
+    statistics?.mapsCount || allMaps?.length || TOTAL_MAPS_PLACEHOLDER;
   const normalizedCountryNames = comboboxCountryNames(allLeaderboardData);
 
   function updateAllDataDisplayedStatus() {
@@ -60,6 +63,8 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
       dispatch,
       setPaginationNumber,
     });
+
+    if (allMaps?.length === 0) dispatch(fetchMaps());
   }, [allLeaderboardData, leaderboardData, searchParamsString]);
 
   useEffect(() => {
