@@ -83,6 +83,7 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
             queryName="country"
             options={normalizedCountryNames}
             placeholder="Search by country name..."
+            orderByCount
           />
         </div>
 
@@ -177,14 +178,13 @@ function comboboxCountryNames(allLeaderboardData) {
       return acc;
     }, 0);
 
-    return [
-      ...acc,
-      {
-        value: normalizedCountry.toLowerCase(),
-        label: normalizedCountry,
-        id: country,
-        madeMapsCount: count,
-      },
-    ];
+    const countryObject = {
+      value: normalizedCountry.toLowerCase(),
+      label: normalizedCountry,
+      id: country,
+      count,
+    };
+
+    return [...acc, countryObject];
   }, []);
 }

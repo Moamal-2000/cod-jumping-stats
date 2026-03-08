@@ -29,7 +29,7 @@ const SortSection = ({
           id="author"
           queryName="author"
           options={getMapsAuthors(allMaps)}
-          orderByMapsCount={true}
+          orderByCount
         />
 
         <p className={s.totalMapsText}>
@@ -70,7 +70,7 @@ function getMapsAuthors(maps = []) {
           id: normalizedKey,
           label: authorName,
           value: authorName,
-          madeMapsCount: 1,
+          count: 1,
         });
         return;
       }
@@ -80,7 +80,7 @@ function getMapsAuthors(maps = []) {
         existingAuthor.value = authorName;
       }
 
-      existingAuthor.madeMapsCount += 1;
+      existingAuthor.count += 1;
     });
   });
 

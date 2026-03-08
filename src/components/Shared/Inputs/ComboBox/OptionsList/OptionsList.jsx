@@ -30,9 +30,7 @@ const OptionsList = ({
               data-combobox-value={option.value}
             >
               {option.label}
-              {option?.madeMapsCount > 0 && (
-                <span className={s.madeMapsCount}>{option.madeMapsCount}</span>
-              )}
+              {option?.count > 0 && <span>{option.count}</span>}
             </button>
           );
         })}
