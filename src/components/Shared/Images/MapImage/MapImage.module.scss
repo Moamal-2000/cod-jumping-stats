@@ -8,8 +8,14 @@
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #374151;
+  background-color: #0d1422;
   position: relative;
   object-fit: cover;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
 }
 
 @include m.very-small {
@@ -22,4 +28,17 @@
   width: 112px;
   height: 112px;
   color: #a6aeb0;
+}
+
+.imageContainer .image {
+  object-fit: cover;
+
+  &.error {
+    opacity: 0;
+  }
+}
+
+.imageContainer .placeholder {
+  scale: .5;
+  object-fit: contain;
 }

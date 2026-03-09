@@ -1,5 +1,6 @@
 "use client";
 
+import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/lib/queryParams";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -23,16 +24,19 @@ const fpsOptions = [
 const RunAnalytics = ({ playerId }) => {
   const { mapRuns, mapRunsLoading } = useSelector((s) => s.playerProfile);
   const { allMaps, loading } = useSelector((s) => s.maps);
+
   const [isMapListCollapsed, setIsMapListCollapsed] = useState(false);
+  const [hoveredMapName, setHoveredMapName] = useState("");
 
   const router = useRouter();
   const pathname = usePathname();
   const dispatch = useDispatch();
-
   const searchParams = useSearchParams();
+
   const selectedFps = searchParams.get("fps") || 125;
   const firstMapId = parseInt(allMaps[0]?.CpID, 10);
   const selectedMapId = parseInt(searchParams.get("mapid"), 10) || firstMapId;
+  const previewMapName = hoveredMapName || "";
 
   function handleFpsChange(event) {
     createQueryString(
@@ -64,6 +68,7 @@ const RunAnalytics = ({ playerId }) => {
         selectMapRoute={selectMapRoute}
         isLoading={loading}
         isCollapsed={isMapListCollapsed}
+        setHoveredMapName={setHoveredMapName}
         onToggleCollapse={() => setIsMapListCollapsed((previous) => !previous)}
       />
 
@@ -87,7 +92,23 @@ const RunAnalytics = ({ playerId }) => {
             />
           </div>
         </div>
-        <Graph data={mapRuns} isLoading={mapRunsLoading} />
+
+        <div className={s.graphWrapper}>
+          {previewMapName && (
+            <div className={s.previewPanel}>
+              <MapImage
+                containerClassName={s.previewImage}
+                mapName={previewMapName}
+                resolution="1920"
+                onError={() => setHoveredMapName(null)}
+              />
+            </div>
+          )}
+
+          <div className={s.graphPanel}>
+            <Graph data={mapRuns} isLoading={mapRunsLoading} />
+          </div>
+        </div>
       </div>
     </div>
   );

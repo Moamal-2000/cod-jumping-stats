@@ -14,14 +14,15 @@ const MapList = ({
   selectMapRoute,
   isLoading = false,
   isCollapsed = false,
+  setHoveredMapName,
   onToggleCollapse = () => {},
 }) => {
   const [filteredMaps, setFilteredMaps] = useState(allMaps);
 
   const router = useRouter();
   const pathname = usePathname();
-
   const searchParams = useSearchParams();
+
   const mapName = searchParams.get("mapname") || "";
   const mapType = searchParams.get("maptype") || "all";
 
@@ -29,6 +30,14 @@ const MapList = ({
 
   function handleSelectMapType(type) {
     createQueryString("maptype", type, searchParams, router, pathname);
+  }
+
+  function onMapHover(mapName) {
+    setHoveredMapName(mapName);
+  }
+
+  function onMapLeave() {
+    setHoveredMapName(null);
   }
 
   useEffect(() => {
@@ -64,6 +73,7 @@ const MapList = ({
 
       <section
         className={`${s.leftPanel} ${isCollapsed ? s.leftPanelCollapsed : ""}`}
+        onMouseLeave={onMapLeave}
       >
         <div
           className={`${s.leftPanelContent} ${
@@ -119,11 +129,13 @@ const MapList = ({
                       key={map.CpID}
                       role="listitem"
                       className={`${s.mapButtonWrapper} ${s.fadeIn}`}
+                      onMouseEnter={() => onMapHover(map.Name)}
                     >
                       <button
                         type="button"
                         className={`${s.mapButton} ${isActive ? s.active : ""}`}
                         onClick={() => selectMapRoute(map.CpID)}
+                        onFocus={() => onMapHover(map.Name)}
                         aria-pressed={isActive}
                         aria-label={`Select ${map.Name} map`}
                       >
