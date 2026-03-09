@@ -13,6 +13,12 @@
   }
 }
 
+@media (max-width: 430px) {
+  .controls {
+    flex-direction: column;
+  }
+}
+
 .controlGroup {
   display: flex;
   flex-direction: column;
