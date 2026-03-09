@@ -10,7 +10,10 @@ import RoutesCard from "./RoutesCard/RoutesCard";
 const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
-  const lastSeenText = getLastSeenText(performanceStats.DaysSinceLastSeen);
+  const lastSeenText = getLastSeenText(performanceStats?.DaysSinceLastSeen);
+  const oldestTop = performanceStats?.OldestTop;
+  const lastSeen = formatLastSeen(jumpScores?.LastSeen);
+  const finishDate = formatDate(oldestTop?.FinishDate, "N/A");
 
   return (
     <section className={s.overview}>
@@ -31,12 +34,10 @@ const PlayerInfo = () => {
                 Last Active
               </div>
               <div className={s.infoValue}>{lastSeenText}</div>
-              <div className={s.infoSubtext}>
-                Last seen: {formatLastSeen(jumpScores?.LastSeen)}
-              </div>
+              <div className={s.infoSubtext}>Last seen: {lastSeen}</div>
             </div>
 
-            {performanceStats?.OldestTop && (
+            {oldestTop && (
               <div className={s.infoItem}>
                 <div className={s.infoLabel}>
                   <svg aria-hidden="true">
@@ -46,11 +47,11 @@ const PlayerInfo = () => {
                 </div>
 
                 <Link
-                  href={`/map/${performanceStats.OldestTop.Cpid}`}
+                  href={`/map/${oldestTop.Cpid}`}
                   className={s.mapName}
-                  title={performanceStats.OldestTop.MapName}
+                  title={oldestTop.MapName}
                 >
-                  {performanceStats.OldestTop.MapName}
+                  {oldestTop.MapName}
                 </Link>
 
                 <div className={s.metaInfo}>
@@ -58,21 +59,21 @@ const PlayerInfo = () => {
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#star"></use>
                     </svg>
-                    Rank #{performanceStats.OldestTop.Rank}
+                    Rank #{oldestTop.Rank}
                   </span>
 
                   <span>
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#gauge"></use>
                     </svg>
-                    {performanceStats.OldestTop.FPS} FPS
+                    {oldestTop.FPS} FPS
                   </span>
 
                   <span>
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#calendar"></use>
                     </svg>
-                    {formatDate(performanceStats.OldestTop.FinishDate, "N/A")}
+                    {finishDate}
                   </span>
                 </div>
               </div>
