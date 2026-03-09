@@ -10,7 +10,7 @@ const GameType = ({ gameType, groupedServers, viewMode }) => {
   if (viewMode === "list") {
     return (
       <section className={s.listWrapper} key={gameType}>
-        <div className={s.listTitle}>{gameType}</div>
+        <div className={`${s.listTitle} ${s[gameType]}`}>{gameType}</div>
         <div className={s.tableWrap}>
           <table className={s.serversTable}>
             <thead>
