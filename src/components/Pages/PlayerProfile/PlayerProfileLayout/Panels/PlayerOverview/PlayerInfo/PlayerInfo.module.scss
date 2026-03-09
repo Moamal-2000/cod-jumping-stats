@@ -93,6 +93,11 @@
   margin-block: 8px 12px;
   padding-left: 20px;
   position: relative;
+  text-decoration: underline;
+
+  &:hover {
+    color: #facc15;
+  }
 }
 
 .overview .mapName::before {

@@ -1,6 +1,7 @@
 "use client";
 
 import { formatDate } from "@/lib/dateTime";
+import Link from "next/link";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";
@@ -43,12 +44,15 @@ const PlayerInfo = () => {
                   </svg>
                   Oldest Top Run
                 </div>
-                <div
+
+                <Link
+                  href={`/map/${performanceStats.OldestTop.Cpid}`}
                   className={s.mapName}
                   title={performanceStats.OldestTop.MapName}
                 >
                   {performanceStats.OldestTop.MapName}
-                </div>
+                </Link>
+
                 <div className={s.metaInfo}>
                   <span>
                     <svg aria-hidden="true">
