@@ -28,10 +28,30 @@
   overflow-x: auto;
 }
 
+@include m.small {
+  .tableWrap {
+    overflow: visible;
+    border: none;
+    background: transparent;
+  }
+}
+
 .serversTable {
   width: 100%;
   border-collapse: collapse;
   min-width: 560px;
+}
+
+@include m.small {
+  .serversTable {
+    min-width: 0;
+  }
+}
+
+@include m.small {
+  .serversTable thead {
+    display: none;
+  }
 }
 
 .serversTable thead th {
@@ -44,9 +64,14 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+.serversTable tbody {
+  position: relative;
+}
+
 @include m.small {
-  .serversTable thead th:last-child {
-    display: none;
+  .serversTable tbody tr {
+    gap: 12px;
+    padding: 10px;
   }
 }
 
@@ -58,12 +83,71 @@
   vertical-align: top;
 }
 
+@include m.small {
+  .serversTable tbody td {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 0;
+  }
+}
+
+@include m.small {
+  .serversTable tbody td::before {
+    content: attr(data-label);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    color: #9aa3b2;
+  }
+}
+
 .serversTable tbody tr:last-child td {
   border-bottom: none;
 }
 
 .serversTable tbody tr:hover {
-  background: rgba(255, 255, 255, 0.03);
+  background: #1d232f;
+}
+
+@include m.small {
+  .serversTable tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+@include m.small {
+  .serversTable tbody tr {
+    display: grid;
+    grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
+    grid-template-areas:
+      "server map"
+      "player address";
+    background: #161c28;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .serversTable tbody tr {
+    grid-template-areas:
+      "server"
+      "map"
+      "player"
+      "address";
+  }
+}
+
+@include m.small {
+  .serversTable tbody td:last-child {
+    border-bottom: none;
+  }
 }
 
 .serverCell {
@@ -72,12 +156,32 @@
   width: 60px;
 }
 
+@include m.small {
+  .serverCell {
+    grid-area: server;
+    width: auto;
+    align-items: center;
+  }
+}
+
 .serverCell img {
   width: 26px;
   height: 20px;
   object-fit: cover;
   border-radius: 3px;
   display: block;
+}
+
+@include m.small {
+  .serverCell img {
+    margin-left: 9px;
+  }
+}
+
+@media (max-width: 480px) {
+  .serverCell img {
+    margin: 0;
+  }
 }
 
 .mapCell a {
@@ -89,9 +193,32 @@
   text-decoration: underline;
 }
 
+@include m.small {
+  .mapCell {
+    grid-area: map;
+  }
+
+  .mapCell>* {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .mapCell>a {
+    width: fit-content;
+  }
+}
+
 .playerCell {
   color: #e5e7eb;
   font-weight: 600;
+}
+
+@include m.small {
+  .playerCell {
+    grid-area: player;
+  }
 }
 
 .playerCell>a:hover {
@@ -99,8 +226,23 @@
 }
 
 .addressCell {
+  color: #cbd5f5;
+}
+
+@include m.small {
+  .addressCell {
+    grid-area: address;
+  }
+}
+
+.addressValue {
   display: flex;
   align-items: center;
   gap: 8px;
-  color: #cbd5f5;
+}
+
+@include m.small {
+  .addressValue {
+    flex-wrap: wrap;
+  }
 }

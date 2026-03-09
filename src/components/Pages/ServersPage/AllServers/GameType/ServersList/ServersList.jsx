@@ -40,7 +40,7 @@ const ServersList = ({ groupedServers, gameType }) => {
                   <tr
                     key={`${server.Domain}${server.IP}${server.Port}-${index}`}
                   >
-                    <td className={s.serverCell}>
+                    <td className={s.serverCell} data-label="Server">
                       <Image
                         src={domainToCountryFlag(server.Domain)}
                         alt="Country flag"
@@ -48,24 +48,30 @@ const ServersList = ({ groupedServers, gameType }) => {
                         height="20"
                       />
                     </td>
-                    <td className={s.mapCell}>
+                    <td className={s.mapCell} data-label="Map">
                       {isCod4 ? (
                         <span>{server.Map}</span>
                       ) : (
                         <Link href={`/map/${server.MapID}`}>{server.Map}</Link>
                       )}
                     </td>
-                    <td className={s.playerCell}>
-                      <Link href={`/player/${player?.PlayerID || -1}`}>
-                        {playerName}
-                      </Link>
+                    <td className={s.playerCell} data-label="Player">
+                      {player?.PlayerID ? (
+                        <Link href={`/player/${player.PlayerID}`}>
+                          {playerName}
+                        </Link>
+                      ) : (
+                        <span>{playerName}</span>
+                      )}
                     </td>
-                    <td className={s.addressCell}>
-                      <span>{address}</span>
-                      <CopyButton
-                        title="Copy server address"
-                        textToCopy={address}
-                      />
+                    <td className={s.addressCell} data-label="Address">
+                      <div className={s.addressValue}>
+                        <span>{address}</span>
+                        <CopyButton
+                          title="Copy server address"
+                          textToCopy={address}
+                        />
+                      </div>
                     </td>
                   </tr>
                 );
