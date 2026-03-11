@@ -49,12 +49,15 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                   </Link>
                 </div>
               </td>
+
               <td className={s.visitsCell}>
                 <span className={s.visitsValue}>{player.Visits || 0}</span>
               </td>
+
               <td className={s.lastSeenCell}>
                 {formatLastSeen(player.LastSeen) || "Never"}
               </td>
+
               <td className={s.badgesCell}>
                 <PlayerBadges
                   Admin={player.Admin}

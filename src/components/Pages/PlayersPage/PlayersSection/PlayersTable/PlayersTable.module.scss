@@ -7,47 +7,127 @@
   border: 1px solid #2a313a;
   border-radius: 12px;
   overflow: hidden;
+}
 
-  thead {
+@include m.small {
+  .playersTable {
+    border: none;
+    border-radius: 0;
+  }
+}
+
+.playersTable thead {
+  background-color: #131820;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+@include m.small {
+  .playersTable thead {
+    display: none;
+  }
+}
+
+.playersTable th {
+  padding: 16px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  border-bottom: 1px solid #2a313a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+@include m.small {
+  .playersTable tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+}
+
+.playersTable tbody tr {
+  border-bottom: 1px solid #2a313a;
+  transition: background-color 0.2s ease;
+}
+
+@include m.small {
+  .playersTable tbody tr {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    border-radius: 12px;
     background-color: #131820;
-    position: sticky;
-    top: 0;
-    z-index: 10;
+    border: 1px solid #2a313a;
+    padding: 0;
+    gap: 0;
   }
+}
 
-  th {
-    padding: 16px 16px;
-    text-align: left;
+.playersTable tbody tr:hover {
+  background-color: #20272f;
+}
+
+@include m.small {
+  .playersTable tbody tr:hover {
+    background-color: #131820;
+  }
+}
+
+.playersTable tbody tr:last-child {
+  border-bottom: none;
+}
+
+@include m.small {
+  .playersTable tbody tr:last-child {
+    border-bottom: 1px solid #2a313a;
+  }
+}
+
+.playersTable td {
+  padding: 16px;
+  font-size: 0.9rem;
+  color: #e2e8f0;
+}
+
+@include m.small {
+  .playersTable td {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 16px;
+    border-bottom: 1px solid #2a313a;
+    position: relative;
+  }
+}
+
+@include m.small {
+  .playersTable td::before {
+    content: attr(data-label);
     font-weight: 600;
-    font-size: 0.875rem;
+    font-size: 0.75rem;
     color: #9ca3af;
-    border-bottom: 1px solid #2a313a;
-    letter-spacing: 0.5px;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
   }
+}
 
-  tbody tr {
-    border-bottom: 1px solid #2a313a;
-    transition: background-color 0.2s ease;
-
-    &:hover {
-      background-color: #20272f;
-    }
-
-    &:last-child {
-      border-bottom: none;
-    }
-  }
-
-  td {
-    padding: 16px;
-    font-size: 0.9rem;
-    color: #e2e8f0;
+@include m.small {
+  .playersTable td:last-child {
+    border-bottom: none;
   }
 }
 
 .playerNameCell {
   font-weight: 500;
+}
+
+@include m.small {
+  .playerNameCell::before {
+    content: "Player";
+  }
 }
 
 .playerInfoWrapper {
@@ -67,12 +147,12 @@
   overflow: hidden;
   flex-shrink: 0;
   border: 1px solid #2a313a;
+}
 
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+.countryFlag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .playerLink {
@@ -115,6 +195,12 @@
   font-weight: 500;
 }
 
+@include m.small {
+  .visitsValue {
+    width: fit-content;
+  }
+}
+
 .lastSeenCell {
   color: #9ca3af;
   font-weight: 500;
@@ -125,96 +211,15 @@
 }
 
 @include m.small {
-  .playersTable {
-    border: none;
-    border-radius: 0;
-
-    thead {
-      display: none;
-    }
-
-    tbody {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    tbody tr {
-      display: flex;
-      flex-direction: column;
-      border: none;
-      border-radius: 12px;
-      background-color: #131820;
-      border: 1px solid #2a313a;
-      padding: 0;
-      gap: 0;
-      transition: all 0.2s ease;
-
-      &:hover {
-        background-color: #131820;
-      }
-
-      &:last-child {
-        border-bottom: 1px solid #2a313a;
-      }
-    }
-
-    td {
-      display: flex;
-      flex-direction: column;
-      padding: 12px 16px;
-      border-bottom: 1px solid #2a313a;
-      position: relative;
-
-      &:before {
-        content: attr(data-label);
-        font-weight: 600;
-        font-size: 0.75rem;
-        color: #9ca3af;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 6px;
-      }
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
+  .visitsCell::before {
+    content: "Visits";
   }
 
-  .playerNameCell {
-    &:before {
-      content: "Player";
-    }
+  .lastSeenCell::before {
+    content: "Last Seen";
   }
 
-  .visitsCell {
-    &:before {
-      content: "Visits";
-    }
-  }
-
-  .lastSeenCell {
-    &:before {
-      content: "Last Seen";
-    }
-  }
-
-  .badgesCell {
-    &:before {
-      content: "Badges";
-    }
-
-    padding: 12px 16px;
-  }
-
-  .playerInfoWrapper {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .visitsValue {
-    width: fit-content;
+  .badgesCell::before {
+    content: "Badges";
   }
 }
