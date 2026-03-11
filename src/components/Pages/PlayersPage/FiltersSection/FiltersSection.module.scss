@@ -36,6 +36,14 @@
   position: relative;
 }
 
+@include m.small {
+  .filtersSection .row {
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+}
+
 .filtersSection .row.secondRow {
   align-items: flex-end;
   justify-content: space-between;
@@ -62,7 +70,7 @@
 @include m.very-small {
   .sortButtons {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     width: 100%;
   }
 }
@@ -105,12 +113,6 @@
   }
 }
 
-@include m.very-small {
-  .sortButton {
-    width: 100%;
-  }
-}
-
 .fields {
   display: flex;
   gap: 8px;
@@ -140,6 +142,10 @@
   font-size: .9rem;
   font-weight: 600;
   text-transform: capitalize;
+}
+
+.options {
+  flex: 1;
 }
 
 .sortGroup {
