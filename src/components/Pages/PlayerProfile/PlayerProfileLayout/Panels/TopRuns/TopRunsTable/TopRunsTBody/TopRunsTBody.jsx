@@ -16,7 +16,7 @@ const TopRunsTBody = ({ topRuns }) => {
               <Link href={`/map/${run.CpID}`}>{run.MapName}</Link>
             </td>
 
-            <td className={s.fpsCell}>{run.FPS}</td>
+            <td className={s.fpsCell}>{run.FPS === "0" ? "Mix" : run.FPS}</td>
             <td className={s.scoreCell}>{run?.Score}</td>
             <td className={s.nadesCell}>{run.Nadejumps}</td>
             <td className={s.timeCell}>{formatTime(run.TimePlayedString)}</td>
