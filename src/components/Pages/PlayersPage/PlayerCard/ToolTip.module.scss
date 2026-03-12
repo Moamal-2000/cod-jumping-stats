@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .customTooltip {
   position: absolute;
   left: 50%;
@@ -27,9 +29,18 @@
   }
 }
 
-@media (max-width: 768px) {
+@include m.small {
   .customTooltip {
     left: -128px;
     translate: 0;
+  }
+}
+
+@include m.very-small {
+  .customTooltip {
+    min-width: 22ch;
+    white-space: normal;
+    left: calc(50% - 20px);
+    translate: -50% 0;
   }
 }
