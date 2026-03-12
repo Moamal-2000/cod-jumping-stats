@@ -5,6 +5,7 @@
   width: 100%;
   max-width: 480px;
   height: 272px;
+  @include m.flex-center;
   border-radius: 8px;
   overflow: hidden;
   border: 1px solid #374151;
@@ -34,7 +35,7 @@
   object-fit: cover;
 
   &.error {
-    opacity: 0;
+    display: none;
   }
 }
 

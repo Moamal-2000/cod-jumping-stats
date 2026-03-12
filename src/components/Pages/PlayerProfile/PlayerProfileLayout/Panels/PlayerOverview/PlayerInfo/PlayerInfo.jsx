@@ -14,7 +14,7 @@ const PlayerInfo = () => {
   const oldestTop = performanceStats?.OldestTop;
   const lastSeen = formatLastSeen(jumpScores?.LastSeen);
   const finishDate = formatDate(oldestTop?.FinishDate, "N/A");
-  const oldestTopFps = oldestTop.FPS === "0" ? "Mix" : oldestTop.FPS;
+  const oldestTopFps = oldestTop?.FPS === "0" ? "Mix" : oldestTop?.FPS;
 
   return (
     <section className={s.overview}>
