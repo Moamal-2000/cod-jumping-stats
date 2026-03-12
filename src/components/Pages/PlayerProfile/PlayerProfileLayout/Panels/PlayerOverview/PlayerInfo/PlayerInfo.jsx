@@ -14,6 +14,7 @@ const PlayerInfo = () => {
   const oldestTop = performanceStats?.OldestTop;
   const lastSeen = formatLastSeen(jumpScores?.LastSeen);
   const finishDate = formatDate(oldestTop?.FinishDate, "N/A");
+  const oldestTopFps = oldestTop.FPS === "0" ? "Mix" : oldestTop.FPS;
 
   return (
     <section className={s.overview}>
@@ -66,7 +67,7 @@ const PlayerInfo = () => {
                     <svg aria-hidden="true">
                       <use href="/icons-sprite.svg#gauge"></use>
                     </svg>
-                    {oldestTop.FPS} FPS
+                    {oldestTopFps} FPS
                   </span>
 
                   <span>

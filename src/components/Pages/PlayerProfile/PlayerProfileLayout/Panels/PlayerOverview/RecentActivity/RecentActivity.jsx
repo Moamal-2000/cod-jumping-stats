@@ -35,7 +35,9 @@ const RecentActivity = () => {
               <div className={s.activityTitle}>{run.MapName}</div>
               <div className={s.activityDetails}>
                 <span className={s.activityRank}>Rank #{run.Rank}</span>
-                <span className={s.activityFps}>{run.FPS} FPS</span>
+                <span className={s.activityFps}>
+                  {run.FPS === "0" ? "Mix" : run.FPS} FPS
+                </span>
                 <span className={s.activityDate}>
                   {formatDate(run.FinishDate, "N/A")}
                 </span>
