@@ -10,5 +10,5 @@ export async function getMapByCpId(cpid, datatype) {
   const response = await fetchMsgPackResponse({ url: jhApis().map.allMaps });
   const maps = (await decodeAsyncData(response, datatype)) ?? [];
 
-  return maps.find((map) => +map.CpID === +cpid);
+  return maps.find((map) => +map.CpID === +cpid) || [];
 }

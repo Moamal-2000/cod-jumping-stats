@@ -181,7 +181,7 @@
   font-weight: 600;
 }
 
-@include m.small {
+@media (max-width: 620px) {
   .topRun {
     flex-direction: column;
     align-items: flex-start;
