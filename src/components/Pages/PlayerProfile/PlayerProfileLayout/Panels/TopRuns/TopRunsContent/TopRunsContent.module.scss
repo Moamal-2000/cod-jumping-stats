@@ -26,32 +26,7 @@
   min-height: 400px;
   gap: 1.5rem;
   color: #9ca3af;
-
-  p {
-    font-size: 1.125rem;
-    margin: 0;
-    font-weight: 500;
-  }
-}
-
-.loadingSpinner {
-  width: 40px;
-  height: 40px;
-  border: 3px solid rgba(75, 85, 99, 0.3);
-  border-top-color: #facc15;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-    border-top-color: rgba(75, 85, 99, 0.3);
-  }
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
+  position: relative;
 }
 
 .runsSummary {

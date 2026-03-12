@@ -3,16 +3,12 @@
 import { fetchPlayerTops } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import s from "./TopRuns.module.scss";
 import TopRunsContent from "./TopRunsContent/TopRunsContent";
 import TopRunsOptions from "./TopRunsOptions/TopRunsOptions";
 
 const TopRuns = ({ playerId }) => {
-  const { topRunsLoading, jumpScoresLoading } = useSelector(
-    (s) => s.playerProfile,
-  );
-
   const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
@@ -21,8 +17,6 @@ const TopRuns = ({ playerId }) => {
     playerId,
   };
   const selectedFps = searchParams.get("fps") || 125;
-
-  const isLoading = topRunsLoading || jumpScoresLoading;
 
   useEffect(() => {
     dispatch(fetchPlayerTops(paramsObject));
@@ -34,14 +28,7 @@ const TopRuns = ({ playerId }) => {
         <TopRunsOptions />
       </div>
 
-      {isLoading && (
-        <div className={s.loadingContainer}>
-          <div className={s.loadingSpinner}></div>
-          <p>Loading top runs...</p>
-        </div>
-      )}
-
-      {!isLoading && <TopRunsContent />}
+      <TopRunsContent />
     </div>
   );
 };

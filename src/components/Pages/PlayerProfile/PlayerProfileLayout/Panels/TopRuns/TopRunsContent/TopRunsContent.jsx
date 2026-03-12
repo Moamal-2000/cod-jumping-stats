@@ -1,3 +1,4 @@
+import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
 import { getProcessedTopRuns } from "@/lib/filters";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -6,7 +7,10 @@ import TopRunsTable from "../TopRunsTable/TopRunsTable";
 import s from "./TopRunsContent.module.scss";
 
 const TopRunsContent = () => {
-  const topRuns = useSelector((s) => s.playerProfile.topRuns);
+  const { topRuns, topRunsLoading, jumpScoresLoading } = useSelector(
+    (s) => s.playerProfile,
+  );
+
   const [processedTopRuns, setProcessedTopRuns] = useState(topRuns);
 
   const searchParams = useSearchParams();
@@ -17,6 +21,7 @@ const TopRunsContent = () => {
 
   const runSummeryText = getRunSummeryText({ processedTopRuns, rankFilter });
   const hasRuns = processedTopRuns.length > 0;
+  const isLoading = topRunsLoading || jumpScoresLoading;
 
   useEffect(() => {
     setProcessedTopRuns(getProcessedTopRuns(topRuns, paramsObject));
@@ -24,6 +29,12 @@ const TopRunsContent = () => {
 
   return (
     <div className={s.topRunsContent}>
+      {isLoading && (
+        <div className={s.loadingContainer}>
+          <SpinnerLoader title="Loading Top Runs" />
+        </div>
+      )}
+
       {hasRuns && (
         <div className={`${s.topRunsWrapper} ${s[orderFilter]}`}>
           <p className={s.runsSummary}>{runSummeryText}</p>
