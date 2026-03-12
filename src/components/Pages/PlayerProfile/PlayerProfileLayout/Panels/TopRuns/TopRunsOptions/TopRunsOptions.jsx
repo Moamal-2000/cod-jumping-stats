@@ -10,23 +10,25 @@ const TopRunsOptions = () => {
         <SelectFpsButtons />
       </div>
 
-      <TopRunsSelectMenu
-        options={rankOptions}
-        label="Filter By Rank:"
-        urlQuery="rank"
-      />
+      <div className={s.menusGroup}>
+        <TopRunsSelectMenu
+          options={rankOptions}
+          label="Filter By Rank:"
+          urlQuery="rank"
+        />
 
-      <TopRunsSelectMenu
-        options={sortOptions}
-        label="Sort By:"
-        urlQuery="sort"
-      />
+        <TopRunsSelectMenu
+          options={sortOptions}
+          label="Sort By:"
+          urlQuery="sort"
+        />
 
-      <TopRunsSelectMenu
-        options={orderOptions}
-        label="Order:"
-        urlQuery="order"
-      />
+        <TopRunsSelectMenu
+          options={orderOptions}
+          label="Order:"
+          urlQuery="order"
+        />
+      </div>
     </div>
   );
 };

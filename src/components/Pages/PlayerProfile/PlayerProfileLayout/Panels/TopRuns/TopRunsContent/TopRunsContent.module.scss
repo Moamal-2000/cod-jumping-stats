@@ -1,7 +1,21 @@
+@use "@/styles/mixins" as m;
+
 .topRunsContent {
   padding: 20px 24px;
   max-width: 1400px;
   margin: 0 auto;
+}
+
+@include m.small {
+  .topRunsContent {
+    padding: 24px 20px;
+  }
+}
+
+@include m.small {
+  .topRunsContent {
+    padding: 24px 0;
+  }
 }
 
 .loadingContainer {

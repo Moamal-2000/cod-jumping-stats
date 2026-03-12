@@ -15,6 +15,12 @@
 
 @include m.small {
   .topRunsHeader {
-    padding: 24px 32px;
+    padding: 24px 20px;
+  }
+}
+
+@include m.small {
+  .topRunsHeader {
+    padding: 24px 0;
   }
 }

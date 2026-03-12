@@ -1,18 +1,16 @@
+@use "@/styles/mixins" as m;
+
 .topRunsControls {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
+  display: flex;
   max-width: 1400px;
   margin: 0 auto;
+  gap: 20px;
+}
 
-  @media (min-width: 640px) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+@include m.medium {
+  .topRunsControls {
+    flex-direction: column;
+    gap: 12px;
   }
 }
 
@@ -41,4 +39,21 @@
     border-radius: 50%;
     opacity: 1;
   }
+}
+
+.menusGroup {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+}
+
+@include m.small {
+  .menusGroup {
+    flex-wrap: wrap;
+  }
+}
+
+.menusGroup>* {
+  flex: 1;
+  min-width: 150px;
 }

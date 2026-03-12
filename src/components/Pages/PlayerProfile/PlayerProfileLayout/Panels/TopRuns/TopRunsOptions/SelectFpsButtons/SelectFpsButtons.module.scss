@@ -1,19 +1,16 @@
+@use "@/styles/mixins" as m;
+
 .fpsButtons {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   gap: 6px;
   min-width: 350px;
+}
 
-  @media (min-width: 480px) {
-    grid-template-columns: repeat(6, 1fr);
-  }
-
-  @media (min-width: 768px) {
+@include m.medium {
+  .fpsButtons {
     grid-template-columns: repeat(3, 1fr);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(6, 1fr);
+    min-width: auto;
   }
 }
 
