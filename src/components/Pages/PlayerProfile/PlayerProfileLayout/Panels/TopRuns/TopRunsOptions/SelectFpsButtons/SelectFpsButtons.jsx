@@ -12,9 +12,7 @@ const SelectFpsButtons = ({ defaultFps = 125 }) => {
 
   const selectedFps = searchParams.get("fps") || 125;
 
-  function handleFpsClick(event) {
-    const fps = +event.target.textContent;
-
+  function handleChangeFps(fps) {
     if (fps === defaultFps) {
       removeQueryString("fps", searchParams, router, pathname);
       return;
@@ -25,13 +23,13 @@ const SelectFpsButtons = ({ defaultFps = 125 }) => {
 
   return (
     <div className={s.fpsButtons}>
-      {JUMP_FPS.map((fps) => (
+      {JUMP_FPS.concat([0]).map((fps) => (
         <button
           key={fps}
           className={`${s.fps} ${+selectedFps === +fps ? s.active : ""}`}
-          onClick={handleFpsClick}
+          onClick={() => handleChangeFps(fps)}
         >
-          {fps}
+          {fps === 0 ? "Mix" : fps}
         </button>
       ))}
     </div>
