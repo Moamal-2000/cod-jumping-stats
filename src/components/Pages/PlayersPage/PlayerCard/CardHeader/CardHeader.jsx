@@ -22,7 +22,11 @@ const CardHeader = ({ PlayerName, PrefName, PlayerID, Country, Admin }) => {
         />
       </div>
 
-      <AddToFavButton groupKey="playersIds" id={PlayerID} />
+      <AddToFavButton
+        groupKey="playersIds"
+        id={PlayerID}
+        className={s.favButton}
+      />
     </header>
   );
 };

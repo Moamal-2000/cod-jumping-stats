@@ -7,12 +7,19 @@
   gap: 16px;
 }
 
+@include m.very-small {
+  .cardHeader {
+    position: relative;
+    margin-bottom: 50px;
+  }
+}
+
 .cardHeader .wrapper {
   display: flex;
   gap: 16px;
 }
 
-@include m.very-small {
+@include m.small {
   .cardHeader .wrapper {
     gap: 8px;
   }
@@ -34,7 +41,16 @@
 
 @include m.very-small {
   .cardHeader .wrapper .country {
-    width: 36px;
-    height: 36px;
+    position: absolute;
+    top: 58px;
+    left: 0;
+  }
+}
+
+@include m.very-small {
+  .favButton {
+    position: absolute;
+    top: 64px;
+    right: 0;
   }
 }

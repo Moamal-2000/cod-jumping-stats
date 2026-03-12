@@ -32,6 +32,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                       colorPlaceholder={true}
                     />
                   </div>
+
                   <Link
                     href={`/player/${player.PlayerID}`}
                     className={s.playerLink}
@@ -41,7 +42,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                         {getColoredName(player.PlayerName || player.PrefName)}
                       </span>
                       {player.PrefName && (
-                        <span className={s.originalName}>
+                        <span className={s.prefName}>
                           {getColoredName(player.PrefName)}
                         </span>
                       )}

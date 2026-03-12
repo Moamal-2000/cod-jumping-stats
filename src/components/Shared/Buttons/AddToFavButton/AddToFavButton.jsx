@@ -3,8 +3,10 @@
 import { useEffect, useState } from "react";
 import s from "./AddToFavButton.module.scss";
 
-const AddToFavButton = ({ id, groupKey }) => {
+const AddToFavButton = ({ id, groupKey, className }) => {
   const [isFavorited, setIsFavorited] = useState(false);
+
+  const classes = `${className} ${s.favoriteButton} ${isFavorited ? s.favorited : ""}`;
 
   useEffect(() => {
     checkIsItemFavorited({ setIsFavorited, id, groupKey });
@@ -14,7 +16,7 @@ const AddToFavButton = ({ id, groupKey }) => {
     <button
       type="button"
       onClick={() => toggleFavorite({ setIsFavorited, id, groupKey })}
-      className={`${s.favoriteButton} ${isFavorited ? s.favorited : ""}`}
+      className={classes}
       title={isFavorited ? "Remove from favorites" : "Add to favorites"}
       aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
     >
