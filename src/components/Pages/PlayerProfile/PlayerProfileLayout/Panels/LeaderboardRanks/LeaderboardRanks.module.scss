@@ -1,22 +1,32 @@
+@use "@/styles/mixins" as m;
+
 .leaderboardControls {
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
-  padding: 1.5rem;
+  padding: 24px;
   background: rgba(17, 24, 39, 0.7);
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.08);
   align-items: flex-start;
   flex: 1;
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-  position: relative;
-  overflow: hidden;
+}
 
-  // Responsive behavior
-  @media (max-width: 768px) {
+@include m.small {
+  .leaderboardControls {
     flex-wrap: wrap;
     gap: 1.5rem;
-    padding: 1.5rem;
+    padding: 20px;
+  }
+}
+
+@include m.very-small {
+  .leaderboardControls {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 32px;
   }
 }
 
@@ -72,9 +82,24 @@
 .leaderboardContent {
   margin-top: 0.5rem;
   background: rgba(17, 24, 39, 0.7);
-  padding: 2rem;
+  padding: 24px;
   border-radius: 18px;
   border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+@include m.small {
+  .leaderboardContent {
+    padding: 20px;
+  }
+}
+
+@include m.very-small {
+  .leaderboardContent {
+    border: none;
+    padding: 0;
+    border-radius: 0;
+    margin-bottom: 20px;
+  }
 }
 
 .fpsGroupTitle {
@@ -85,12 +110,24 @@
   font-weight: 600;
 }
 
+@include m.very-small {
+  .fpsGroupTitle {
+    margin-bottom: 0;
+  }
+}
+
 .leaderboardList {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: 1.5rem;
   align-items: flex-start;
   padding-top: 4px;
+}
+
+@media (max-width: 420px) {
+  .leaderboardList {
+    grid-template-columns: 1fr;
+  }
 }
 
 .leaderboardCard {
@@ -99,7 +136,6 @@
   gap: 1.5rem;
   transition: all 0.4s ease;
   position: relative;
-  min-width: 340px;
   flex: 0 0 auto;
   background: rgba(17, 24, 39, 0.7);
   padding: 1.2rem;
@@ -251,7 +287,7 @@
 }
 
 .leaderboardInfo h3 {
-  font-size: 1.25rem;
+  font-size: clamp(1rem, 4vw, 1.25rem);
   color: #f9fafb;
   margin: 0 0 0.5rem 0;
   font-weight: 700;
