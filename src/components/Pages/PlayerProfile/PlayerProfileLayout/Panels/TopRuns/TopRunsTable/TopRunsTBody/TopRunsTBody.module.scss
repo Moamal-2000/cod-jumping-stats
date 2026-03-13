@@ -1,10 +1,11 @@
+@use "@/styles/mixins" as m;
+
 .tbody tr {
   border-bottom: 1px solid rgba(59, 130, 246, 0.15);
   transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .tbody td {
-  padding: 1rem 1.25rem;
   color: #f1f5f9;
   font-size: 0.95rem;
   font-weight: 500;
@@ -25,7 +26,6 @@
   letter-spacing: 1.6;
   color: #f1f5f9;
   gap: 0.25rem;
-  padding-left: 20px;
 }
 
 .tbody .rankCell>svg {
@@ -172,6 +172,7 @@
   font-weight: 500;
   color: #f1f5f9;
   font-size: 0.95rem;
+  min-width: 190px;
   max-width: 260px;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -191,6 +192,12 @@
   padding-left: 50px !important;
 }
 
+@include m.medium {
+  .scoreCell {
+    display: none;
+  }
+}
+
 .nadesCell {
   font-weight: 700;
   font-size: 0.98rem;
@@ -207,4 +214,10 @@
 .dateCell {
   font-size: 0.9rem;
   color: #cbd5e1;
+}
+
+@include m.large {
+  .dateCell {
+    display: none;
+  }
 }

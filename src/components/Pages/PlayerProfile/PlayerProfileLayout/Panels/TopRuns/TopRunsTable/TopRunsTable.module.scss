@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .topRunsList {
   width: 100%;
   overflow-x: auto;
@@ -24,8 +26,19 @@
   grid-template-columns: 1fr 2fr 1fr 1fr 1fr 1fr 1fr;
 }
 
+@include m.large {
+  .table tr {
+    grid-template-columns: 100px 1.8fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+@include m.medium {
+  .table tr {
+    grid-template-columns: 100px 1.8fr 1fr 1fr 1fr;
+  }
+}
+
 .table th {
-  padding: 1rem 1.25rem;
   text-align: left;
   font-size: 0.7rem;
   font-weight: 700;
@@ -33,4 +46,35 @@
   text-transform: uppercase;
   letter-spacing: 0.12em;
   white-space: nowrap;
+}
+
+.table :where(th, td) {
+  padding: 1rem 1.25rem;
+}
+
+@include m.medium {
+  .table :where(th, td) {
+    padding: 1rem;
+  }
+}
+
+.mapNameCell {
+  min-width: 190px;
+  max-width: 260px;
+}
+
+.fpsCell {
+  margin-left: 3px;
+}
+
+@include m.medium {
+  .scoreCell {
+    display: none;
+  }
+}
+
+@include m.large {
+  .table .dateCell {
+    display: none;
+  }
 }

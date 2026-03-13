@@ -8,12 +8,12 @@ const TopRunsTable = ({ topRuns }) => {
         <thead>
           <tr>
             <th>Rank</th>
-            <th>Map Name</th>
-            <th>FPS</th>
-            <th>Skill Points</th>
+            <th className={s.mapNameCell}>Map Name</th>
+            <th className={s.fpsCell}>FPS</th>
+            <th className={s.scoreCell}>Skill Points</th>
             <th>Nade Jumps</th>
             <th>Time</th>
-            <th>Date</th>
+            <th className={s.dateCell}>Date</th>
           </tr>
         </thead>
 
