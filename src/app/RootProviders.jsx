@@ -21,10 +21,10 @@ const RootProviders = ({ children }) => {
         <body>
           <LayoutLayer>
             <Header />
+            <GitHubStarBtn />
             {children}
             <Footer />
             <ScrollToTopBtn />
-            <GitHubStarBtn />
             <GitHubNotice />
             <GlobalOverlay />
           </LayoutLayer>
