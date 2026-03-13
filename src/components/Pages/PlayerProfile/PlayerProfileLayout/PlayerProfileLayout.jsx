@@ -2,10 +2,7 @@
 
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { stripColorCodes } from "@/lib/utils";
-import {
-  clearPlayerProfile,
-  updatePlayerProfileState,
-} from "@/redux/features/playerProfile/slice/playerProfileSlice";
+import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
 import {
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
@@ -33,8 +30,6 @@ const PlayerProfileLayout = ({ children, playerId }) => {
 
   useEffect(() => {
     if (!playerId) return;
-
-    dispatch(clearPlayerProfile());
 
     dispatch(fetchPlayerProfile({ playerId }));
     dispatch(fetchPlayerLeaderboardPositions({ playerId }));

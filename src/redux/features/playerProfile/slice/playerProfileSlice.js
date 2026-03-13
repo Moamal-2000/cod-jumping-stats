@@ -39,22 +39,6 @@ export const playerProfileSlice = createSlice({
     updatePlayerProfileState: (state, { payload }) => {
       state[payload.key] = payload.value;
     },
-    clearPlayerProfile: (state) => {
-      state.performanceStats = {};
-      state.leaderboardPositions = [];
-      state.topRuns = [];
-      state.jumpScores = [];
-      state.loading = false;
-      state.error = false;
-      state.performanceStatsLoading = false;
-      state.performanceStatsError = false;
-      state.leaderboardPositionsLoading = false;
-      state.leaderboardPositionsError = false;
-      state.topRunsLoading = false;
-      state.topRunsError = false;
-      state.jumpScoresLoading = false;
-      state.jumpScoresError = false;
-    },
   },
   extraReducers: ({ addCase }) => {
     addCase(fetchPlayerProfile.pending, (state) => {
@@ -132,6 +116,5 @@ export const playerProfileSlice = createSlice({
   },
 });
 
-export const { updatePlayerProfileState, clearPlayerProfile } =
-  playerProfileSlice.actions;
+export const { updatePlayerProfileState } = playerProfileSlice.actions;
 export default playerProfileSlice.reducer;

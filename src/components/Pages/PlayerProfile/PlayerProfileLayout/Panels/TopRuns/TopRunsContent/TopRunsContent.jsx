@@ -25,7 +25,7 @@ const TopRunsContent = () => {
 
   useEffect(() => {
     setProcessedTopRuns(getProcessedTopRuns(topRuns, paramsObject));
-  }, [rankFilter, sortFilter]);
+  }, [rankFilter, sortFilter, topRuns]);
 
   return (
     <div className={s.topRunsContent}>
