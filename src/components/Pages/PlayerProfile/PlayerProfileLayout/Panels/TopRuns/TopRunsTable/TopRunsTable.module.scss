@@ -78,3 +78,9 @@
     display: none;
   }
 }
+
+@include m.small {
+  .table thead {
+    display: none;
+  }
+}
