@@ -1,57 +1,78 @@
 @use "@/styles/mixins" as m;
 
 .githubStarBtn {
+  --size: 42px;
+
+  width: var(--size);
+  height: var(--size);
   position: fixed;
   left: 0;
   top: 50%;
   translate: 0 -50%;
-  width: 42px;
-  height: 42px;
-  border-radius: 6px;
+  @include m.flex-center;
   background-color: #1a202c;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid rgba(255, 215, 0, 0.15);
-  cursor: pointer;
+  border: 1px solid #3c3b25;
+  border-radius: 6px;
   z-index: 30;
-  text-decoration: none;
-  transition: translate 0.2s ease, background-color 0.2s ease,
-    border-color 0 0 ease, box-shadow 0.2s ease;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    fill: #9ea3b0;
-    transition: fill 0.2s ease, filter 0.2s ease;
-  }
+  transition:
+    background-color .2s ease,
+    box-shadow .2s ease,
+    border-color 0 0 ease;
 
   &:hover {
     background-color: #232d3f;
-    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.2);
+    box-shadow: 0 2px 8px rgba(255, 215, 0, .2);
     border-color: #ffd700;
-    transition: translate 0.2s ease, background-color 0.2s ease,
-      border-color 0.3s .8s ease, box-shadow 0.2s .8s ease;
-
-    svg {
-      fill: #ffd700;
-      filter: drop-shadow(0 0 3px rgba(255, 215, 0, .6));
-      transition: fill 0.2s 1s ease, filter 0.2s .9s ease;
-    }
-
-    .tooltip {
-      opacity: 1;
-      visibility: visible;
-      translate: 8px -50%;
-      transition: opacity 0.2s .3s ease;
-    }
+    transition:
+      background-color .2s ease,
+      box-shadow .2s .8s ease,
+      border-color .3s .8s ease;
   }
 
   &:focus-visible {
     outline: none;
-    border-color: rgba(255, 215, 0, 0.5);
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, 0.2);
+    border-color: #8b7d1e;
+    box-shadow: 0 0 0 2px rgba(255, 215, 0, .2);
   }
+}
+
+@include m.small {
+  .githubStarBtn {
+    --size: 38px;
+  }
+}
+
+@include m.very-small {
+  .githubStarBtn {
+    --size: 36px;
+  }
+}
+
+.githubStarBtn svg {
+  --icon-size: 20px;
+
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: #9ea3b0;
+  transition: fill .2s ease, filter .2s ease;
+}
+
+@include m.small {
+  .githubStarBtn svg {
+    --icon-size: 18px;
+  }
+}
+
+@include m.very-small {
+  .githubStarBtn svg {
+    --icon-size: 16px;
+  }
+}
+
+.githubStarBtn:hover svg {
+  fill: #ffd700;
+  filter: drop-shadow(0 0 3px rgba(255, 215, 0, .6));
+  transition: fill .2s 1s ease, filter .2s .9s ease;
 }
 
 .tooltip {
@@ -59,20 +80,40 @@
   left: 32px;
   top: 50%;
   translate: 0 -50%;
-  white-space: nowrap;
   background-color: #574f21;
   padding: 8px 12px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
   margin-left: 8px;
+  border-radius: 6px;
+  font-size: .8rem;
+  font-weight: 600;
+  white-space: nowrap;
   overflow: hidden;
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
   z-index: 1;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
   transition: opacity 0 0;
+}
+
+@include m.small {
+  .tooltip {
+    font-size: .75rem;
+    padding: 6.4px 10.4px;
+  }
+}
+
+@include m.very-small {
+  .tooltip {
+    font-size: .7rem;
+    padding: 5.6px 9.6px;
+  }
+}
+
+.githubStarBtn:hover .tooltip {
+  opacity: 1;
+  visibility: visible;
+  translate: 8px -50%;
+  transition: opacity .2s .3s ease;
 }
 
 .tooltipText {
@@ -82,6 +123,11 @@
   background-clip: text;
   -webkit-background-clip: text;
   transition: background-size 0 0;
+}
+
+.githubStarBtn:hover .tooltipText {
+  background-size: 100% 100%;
+  transition: background-size .3s .6s ease-out;
 }
 
 .tooltip .borderEffect {
@@ -113,45 +159,6 @@
   scale: 1 1;
   translate: 0;
   transition:
-    scale 0.45s .5s ease-out,
+    scale .45s .5s ease-out,
     translate .45s .5s ease-out;
-}
-
-.githubStarBtn:hover .tooltipText {
-  background-size: 100% 100%;
-  transition: background-size .3s .6s ease-out;
-}
-
-@include m.small {
-  .githubStarBtn {
-    width: 38px;
-    height: 38px;
-
-    svg {
-      width: 18px;
-      height: 18px;
-    }
-  }
-
-  .tooltip {
-    font-size: 0.75rem;
-    padding: 0.4rem 0.65rem;
-  }
-}
-
-@include m.very-small {
-  .githubStarBtn {
-    width: 36px;
-    height: 36px;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-
-  .tooltip {
-    font-size: 0.7rem;
-    padding: 0.35rem 0.6rem;
-  }
 }
