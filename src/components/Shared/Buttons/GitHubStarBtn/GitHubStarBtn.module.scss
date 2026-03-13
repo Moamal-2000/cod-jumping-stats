@@ -3,6 +3,7 @@
 .githubStarBtn {
   --size: 42px;
 
+  outline: none;
   width: var(--size);
   height: var(--size);
   position: fixed;
@@ -19,7 +20,7 @@
     box-shadow .2s ease,
     border-color 0 0 ease;
 
-  &:hover {
+  &:where(:hover, :focus-visible) {
     background-color: #232d3f;
     box-shadow: 0 2px 8px rgba(255, 215, 0, .2);
     border-color: #ffd700;
@@ -27,12 +28,6 @@
       background-color .2s ease,
       box-shadow .2s .8s ease,
       border-color .3s .8s ease;
-  }
-
-  &:focus-visible {
-    outline: none;
-    border-color: #8b7d1e;
-    box-shadow: 0 0 0 2px rgba(255, 215, 0, .2);
   }
 }
 
@@ -69,13 +64,14 @@
   }
 }
 
-.githubStarBtn:hover svg {
+.githubStarBtn:where(:hover, :focus-visible) svg {
   fill: #ffd700;
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, .6));
   transition: fill .2s 1s ease, filter .2s .9s ease;
 }
 
 .tooltip {
+  outline: none;
   position: absolute;
   left: 32px;
   top: 50%;
@@ -109,7 +105,7 @@
   }
 }
 
-.githubStarBtn:hover .tooltip {
+.githubStarBtn:where(:hover, :focus-visible) .tooltip {
   opacity: 1;
   visibility: visible;
   translate: 8px -50%;
@@ -125,7 +121,7 @@
   transition: background-size 0 0;
 }
 
-.githubStarBtn:hover .tooltipText {
+.githubStarBtn:where(:hover, :focus-visible) .tooltipText {
   background-size: 100% 100%;
   transition: background-size .3s .6s ease-out;
 }
@@ -155,7 +151,7 @@
   scale: 0 1;
 }
 
-.githubStarBtn:hover .effectHover {
+.githubStarBtn:where(:hover, :focus-visible) .effectHover {
   scale: 1 1;
   translate: 0;
   transition:
