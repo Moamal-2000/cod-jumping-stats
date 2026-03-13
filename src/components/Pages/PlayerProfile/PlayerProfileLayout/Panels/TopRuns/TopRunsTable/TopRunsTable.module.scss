@@ -2,7 +2,6 @@
 
 .topRunsList {
   width: 100%;
-  overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
@@ -12,13 +11,14 @@
   background-color: #131d33;
   border: 1px solid #334155;
   border-radius: 12px;
-  overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
 }
 
 .table thead {
   background: linear-gradient(180deg, #334155 0, #1e293b 100%);
   border-bottom: 2px solid #475569;
+  position: sticky;
+  top: 68px;
 }
 
 .table tr {
