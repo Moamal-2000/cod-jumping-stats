@@ -44,6 +44,20 @@
   line-height: 1.5;
 }
 
+@include m.small {
+  .runsSummary {
+    font-size: 0.875rem;
+  }
+}
+
+@include m.very-small {
+  .runsSummary {
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+}
+
 .emptyState {
   display: flex;
   flex-direction: column;
