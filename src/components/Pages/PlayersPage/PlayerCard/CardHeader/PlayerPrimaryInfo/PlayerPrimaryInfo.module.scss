@@ -36,8 +36,28 @@
 }
 
 .wrapper .playerId {
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
   color: #9ca3af;
+  font-size: .9rem;
   font-weight: 500;
   opacity: .9;
   letter-spacing: .02em;
+  position: relative;
+
+  &:hover,
+  &:focus-visible {
+    opacity: 1;
+    color: #facc15;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #facc15;
+    outline-offset: 2px;
+  }
+}
+
+.wrapper .playerId:hover [data-tooltip] {
+  opacity: 1;
 }

@@ -6,6 +6,7 @@ import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
 import { useDispatch } from "react-redux";
+import ToolTip from "../../ToolTip";
 import s from "./PlayerPrimaryInfo.module.scss";
 
 const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
@@ -14,6 +15,11 @@ const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
 
   function handleMouseEnter() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: pureName }));
+  }
+
+  function handleCopyPlayerId(PlayerID) {
+    navigator.clipboard.writeText(PlayerID);
+    dispatch(updateGlobalState({ key: "activeCopyAlert", value: true }));
   }
 
   return (
@@ -27,7 +33,15 @@ const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
       </Link>
 
       <div className={s.wrapper}>
-        <span className={s.playerId}>#{PlayerID}</span>
+        <button
+          type="button"
+          className={s.playerId}
+          onClick={() => handleCopyPlayerId(PlayerID)}
+        >
+          #{PlayerID}
+          <ToolTip centerPosition>Copy</ToolTip>
+        </button>
+
         <AdminLevel adminLevel={Admin} />
       </div>
     </div>

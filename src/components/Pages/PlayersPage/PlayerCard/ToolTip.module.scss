@@ -24,20 +24,20 @@
 }
 
 @media (max-width: 1320px) {
-  .customTooltip {
+  .customTooltip:not(.center) {
     left: calc(50% - 14px);
   }
 }
 
 @include m.small {
-  .customTooltip {
+  .customTooltip:not(.center) {
     left: -128px;
     translate: 0;
   }
 }
 
 @include m.very-small {
-  .customTooltip {
+  .customTooltip:not(.center) {
     min-width: 22ch;
     white-space: normal;
     left: calc(50% - 20px);
