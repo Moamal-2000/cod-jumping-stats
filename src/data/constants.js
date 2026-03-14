@@ -8,6 +8,7 @@ export const PAGINATION_ITEMS_PER_PAGE = 10;
 export const PLAYERS_BATCH_SIZE = 50;
 export const COD2_SERVERS_COUNT = 9;
 export const COD4_SERVERS_COUNT = 11;
+export const SERVERS_LIST_COUNT = 12;
 export const SKELETON_LIST = [1, 2, 3, 4, 5, 6];
 export const MONTHS = {
   1: "January",
