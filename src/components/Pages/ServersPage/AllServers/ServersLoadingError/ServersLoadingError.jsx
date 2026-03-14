@@ -11,7 +11,7 @@ const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
 
   if (loading && viewMode === "list") {
     return (
-      <section className={s.listWrapper}>
+      <section className={s.listWrapper} role="presentation">
         <div className={s.listTitle}>
           <div className={`${s.skeletonLine} ${s.titleLine}`} />
         </div>
@@ -51,11 +51,11 @@ const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
 
   if (loading && viewMode === "grid") {
     return (
-      <div className={s.serversGrid}>
+      <section className={s.serversGrid} role="presentation">
         {skeletonList.map((_, i) => (
           <SkeletonCard key={i} />
         ))}
-      </div>
+      </section>
     );
   }
 
