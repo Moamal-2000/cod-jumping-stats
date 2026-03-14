@@ -1,0 +1,21 @@
+.copiedPopup {
+  background-color: #faf9f5;
+  color: #262624;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  width: fit-content;
+  position: fixed;
+  bottom: 0;
+  right: 50%;
+  translate: 50% 100px;
+  z-index: 1000;
+  user-select: none;
+  transition: translate .4s ease;
+
+  &.visible {
+    translate: 50% -24px;
+  }
+}
+

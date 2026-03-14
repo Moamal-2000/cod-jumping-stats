@@ -7,6 +7,7 @@ import ScrollToTopBtn from "@/components/Shared/Buttons/ScrollToTopBtn/ScrollToT
 import GitHubNotice from "@/components/Shared/GitHubNotice/GitHubNotice";
 import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
 import LayoutLayer from "@/components/Shared/LayoutLayer/LayoutLayer";
+import CopiedPopup from "@/components/Shared/Popups/CopiedPopup/CopiedPopup";
 import { store } from "@/redux/store";
 import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
@@ -27,6 +28,7 @@ const RootProviders = ({ children }) => {
             <ScrollToTopBtn />
             <GitHubNotice />
             <GlobalOverlay />
+            <CopiedPopup />
           </LayoutLayer>
         </body>
       </html>

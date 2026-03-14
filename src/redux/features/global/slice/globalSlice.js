@@ -10,6 +10,7 @@ const initialState = {
   pageVisits: [],
   tryFetchAgain: 0,
   hoveredPlayer: null,
+  activeCopyAlert: false,
 };
 
 export const globalSlice = createSlice({
