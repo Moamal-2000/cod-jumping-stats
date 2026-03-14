@@ -122,6 +122,7 @@ const ServersPage = () => {
         gameFilter={gameFilter}
         viewMode={viewMode}
         statusFilter={statusFilter}
+        gameParam={gameParam}
       />
       <PlayerToolTip />
     </>

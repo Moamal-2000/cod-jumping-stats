@@ -8,6 +8,7 @@ const AllServers = ({
   gameFilter,
   viewMode,
   statusFilter,
+  gameParam,
 }) => {
   const normalizedFilter = gameFilter?.toLowerCase();
   const filteredServers =
@@ -38,6 +39,7 @@ const AllServers = ({
         loading={loading}
         error={error}
         viewMode={viewMode}
+        gameParam={gameParam}
       />
     );
   }

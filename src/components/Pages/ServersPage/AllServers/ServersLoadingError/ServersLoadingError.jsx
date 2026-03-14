@@ -2,7 +2,9 @@ import { COD2_SERVERS_COUNT, COD4_SERVERS_COUNT } from "@/data/constants";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import s from "./ServersLoadingError.module.scss";
 
-const ServersLoadingError = ({ loading, error, viewMode }) => {
+const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
+  const skeletonList = getSkeletonList(gameParam);
+
   if (loading && viewMode === "list") {
     return (
       <section className={s.listWrapper}>
@@ -45,18 +47,11 @@ const ServersLoadingError = ({ loading, error, viewMode }) => {
 
   if (loading && viewMode === "grid") {
     return (
-      <>
-        <div className={s.serversGrid}>
-          {[...Array(COD2_SERVERS_COUNT)].map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-        <div className={s.serversGrid}>
-          {[...Array(COD4_SERVERS_COUNT)].map((_, i) => (
-            <SkeletonCard key={i} />
-          ))}
-        </div>
-      </>
+      <div className={s.serversGrid}>
+        {skeletonList.map((_, i) => (
+          <SkeletonCard key={i} />
+        ))}
+      </div>
     );
   }
 
@@ -71,3 +66,17 @@ const ServersLoadingError = ({ loading, error, viewMode }) => {
 };
 
 export default ServersLoadingError;
+
+function getSkeletonList(gameParam) {
+  let serversCount = 0;
+
+  if (gameParam === "cod2" || gameParam === "all") {
+    serversCount = COD2_SERVERS_COUNT;
+  }
+
+  if (gameParam === "cod4") {
+    serversCount = COD4_SERVERS_COUNT;
+  }
+
+  return Array.from({ length: serversCount }, (_, i) => i);
+}
