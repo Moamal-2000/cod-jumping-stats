@@ -1,5 +1,6 @@
 "use client";
 
+import { COPIED_POPUP_DELAY_MS } from "@/data/constants";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -16,7 +17,7 @@ const CopiedPopup = () => {
 
     debounceRef.current = setTimeout(() => {
       dispatch(updateGlobalState({ key: "activeCopyAlert", value: false }));
-    }, 2000);
+    }, COPIED_POPUP_DELAY_MS);
 
     return () => clearTimeout(debounceRef?.current);
   }, [activeCopyAlert]);

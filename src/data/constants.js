@@ -27,6 +27,7 @@ export const MONTHS = {
 
 export const TOTAL_MAPS_PLACEHOLDER = 627;
 export const COPY_BUTTON_DELAY_MS = 2000;
+export const COPIED_POPUP_DELAY_MS = 4000;
 export const MAPS_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
