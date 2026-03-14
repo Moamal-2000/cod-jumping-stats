@@ -1,8 +1,15 @@
+"use client";
+
 import Link from "next/link";
+import ToolTip from "../PlayersPage/PlayerCard/PlayerBadges/ToolTip/ToolTip";
 import s from "./About.module.scss";
 import AboutSection from "./AboutSection/AboutSection";
 
 const About = () => {
+  function handleCopyDiscordUsername(username) {
+    navigator.clipboard.writeText(username);
+  }
+
   return (
     <div className="container">
       <main className={s.aboutPage}>
@@ -88,14 +95,28 @@ const About = () => {
               <article className={s.teamCard} key={member.name}>
                 <h3 className={s.personName}>
                   {member.href ? (
-                    <Link
-                      href={member.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={s.textLink}
-                    >
-                      {member.name}
-                    </Link>
+                    <>
+                      <Link
+                        href={member.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={s.textLink}
+                      >
+                        {member.name}
+                      </Link>
+                      {member?.discordUser && (
+                        <button
+                          type="button"
+                          className={s.discordUser}
+                          onClick={() =>
+                            handleCopyDiscordUsername(member.discordUser)
+                          }
+                        >
+                          {member.discordUser}
+                          <ToolTip>Copy Discord username</ToolTip>
+                        </button>
+                      )}
+                    </>
                   ) : (
                     member.name
                   )}
@@ -178,6 +199,7 @@ const teamMembers = [
   },
   {
     name: "Moamal",
+    discordUser: "Moamal_Alaa#8153",
     href: "https://moamalalaa.netlify.app",
     role: "Frontend Developer",
     description:
