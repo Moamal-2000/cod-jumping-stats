@@ -1,3 +1,4 @@
+import { COD2_SERVERS_COUNT, COD4_SERVERS_COUNT } from "@/data/constants";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import s from "./ServersLoadingError.module.scss";
 
@@ -46,12 +47,12 @@ const ServersLoadingError = ({ loading, error, viewMode }) => {
     return (
       <>
         <div className={s.serversGrid}>
-          {[...Array(10)].map((_, i) => (
+          {[...Array(COD2_SERVERS_COUNT)].map((_, i) => (
             <SkeletonCard key={i} />
           ))}
         </div>
         <div className={s.serversGrid}>
-          {[...Array(11)].map((_, i) => (
+          {[...Array(COD4_SERVERS_COUNT)].map((_, i) => (
             <SkeletonCard key={i} />
           ))}
         </div>
