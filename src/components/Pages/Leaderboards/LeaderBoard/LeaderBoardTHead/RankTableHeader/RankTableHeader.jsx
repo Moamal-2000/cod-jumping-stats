@@ -5,15 +5,22 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./RankTableHeader.module.scss";
 
 const RankTableHeader = ({ text }) => {
-  const { isLeaderboardReversed } = useSelector((s) => s.global);
+  const isLeaderboardReversed = useSelector(
+    (s) => s.global.isLeaderboardReversed,
+  );
+
   const dispatch = useDispatch();
+
+  const ariaLabel = `Sort leaderboard by rank ${
+    isLeaderboardReversed ? "descending" : "ascending"
+  }`;
 
   function reverseLeaderboard() {
     dispatch(
       updateGlobalState({
         key: "isLeaderboardReversed",
         value: !isLeaderboardReversed,
-      })
+      }),
     );
   }
 
@@ -27,9 +34,7 @@ const RankTableHeader = ({ text }) => {
       className={s.rank}
       data-sortable
       tabIndex="0"
-      aria-label={`Sort leaderboard by rank ${
-        isLeaderboardReversed ? "descending" : "ascending"
-      }`}
+      aria-label={ariaLabel}
       onClick={reverseLeaderboard}
       onKeyDown={handleKeyDown}
     >
