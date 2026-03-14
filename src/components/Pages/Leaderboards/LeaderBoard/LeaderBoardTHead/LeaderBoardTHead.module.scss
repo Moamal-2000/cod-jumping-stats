@@ -4,16 +4,15 @@
   background-color: #151923;
   color: #fff;
   position: sticky;
-  top: 165px;
+  top: 155px;
   left: 0;
   z-index: 10;
-  translate: 0 -10px;
   transition: background-color .3s;
 }
 
 @include m.large {
   .thead {
-    top: 195px;
+    top: 186px;
   }
 }
 
