@@ -1,13 +1,18 @@
 "use client";
 
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 import ToolTip from "../PlayersPage/PlayerCard/PlayerBadges/ToolTip/ToolTip";
 import s from "./About.module.scss";
 import AboutSection from "./AboutSection/AboutSection";
 
 const About = () => {
+  const dispatch = useDispatch();
+
   function handleCopyDiscordUsername(username) {
     navigator.clipboard.writeText(username);
+    dispatch(updateGlobalState({ key: "activeCopyAlert", value: true }));
   }
 
   return (
