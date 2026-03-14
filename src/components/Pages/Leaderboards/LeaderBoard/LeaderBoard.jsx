@@ -57,11 +57,12 @@ const LeaderBoard = () => {
       leaderboardScroll,
       allDataDisplayed,
       isLeaderboardExpanded,
+      isLeaderboardReversed,
       searchHasValue,
       pageVisits,
       dispatch,
     });
-  }, [paginationNumber]);
+  }, [paginationNumber, isLeaderboardReversed]);
 
   return (
     <div className={`${s.leaderboardWrapper} ${collapseClass}`}>
@@ -89,10 +90,21 @@ function checkAndLoadMoreData({
   leaderboardScroll,
   allDataDisplayed,
   isLeaderboardExpanded,
+  isLeaderboardReversed,
   searchHasValue,
   pageVisits,
   dispatch,
 } = {}) {
+  if (isLeaderboardReversed) {
+    dispatch(
+      updateLeaderboardState({
+        key: "leaderboardScroll",
+        value: leaderboardData,
+      }),
+    );
+    return;
+  }
+
   const isLastPagination = getIsLastPagination(
     leaderboardData,
     paginationNumber,
