@@ -26,8 +26,8 @@
     border-color: #ffd700;
     transition:
       background-color .2s ease,
-      box-shadow .2s .8s ease,
-      border-color .3s .8s ease;
+      box-shadow .2s 1s ease,
+      border-color .3s 1s ease;
   }
 }
 
@@ -67,7 +67,7 @@
 .githubStarBtn:where(:hover, :focus-visible) svg {
   fill: #ffd700;
   filter: drop-shadow(0 0 3px rgba(255, 215, 0, .6));
-  transition: fill .2s 1s ease, filter .2s .9s ease;
+  transition: fill .2s 1.2s ease, filter .2s 1.1s ease;
 }
 
 .tooltip {
