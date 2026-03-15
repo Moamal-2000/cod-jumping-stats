@@ -22,7 +22,11 @@ import ToolTip from "./ToolTip/ToolTip";
 import XAxisLabels from "./XAxisLabels/XAxisLabels";
 import YAxisLabels from "./YAxisLabels/YAxisLabels";
 
-const Graph = ({ data: runData, isLoading = false }) => {
+const Graph = ({
+  data: runData,
+  isLoading = false,
+  showChartElements = true,
+}) => {
   const containerRef = useRef(null);
   const [containerWidth, setContainerWidth] = useState(800);
   const CHART_WIDTH = containerWidth || 800; // Final width used for calculations
@@ -459,41 +463,43 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   return (
     <div className={s.graphContainer} ref={containerRef}>
-      <div className={s.graphControls}>
-        <button
-          aria-label="Zoom out"
-          onClick={() => decreaseScale()}
-          className={s.controlButton}
-          disabled={zoomScale <= SCALE_MIN}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#zoom-out" />
-          </svg>
-        </button>
-        <button
-          aria-label="Reset zoom"
-          onClick={() => {
-            setZoomScale(1);
-            setPanOffsetPx(0);
-          }}
-          className={s.controlButton}
-          disabled={zoomScale === 1 && panOffsetPx === 0}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#infinite-circles" />
-          </svg>
-        </button>
-        <button
-          aria-label="Zoom in"
-          onClick={() => increaseScale()}
-          className={s.controlButton}
-          disabled={zoomScale >= SCALE_MAX}
-        >
-          <svg aria-hidden="true">
-            <use href="/icons-sprite.svg#zoom-in" />
-          </svg>
-        </button>
-      </div>
+      {showChartElements && (
+        <div className={s.graphControls}>
+          <button
+            aria-label="Zoom out"
+            onClick={() => decreaseScale()}
+            className={s.controlButton}
+            disabled={zoomScale <= SCALE_MIN}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#zoom-out" />
+            </svg>
+          </button>
+          <button
+            aria-label="Reset zoom"
+            onClick={() => {
+              setZoomScale(1);
+              setPanOffsetPx(0);
+            }}
+            className={s.controlButton}
+            disabled={zoomScale === 1 && panOffsetPx === 0}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#infinite-circles" />
+            </svg>
+          </button>
+          <button
+            aria-label="Zoom in"
+            onClick={() => increaseScale()}
+            className={s.controlButton}
+            disabled={zoomScale >= SCALE_MAX}
+          >
+            <svg aria-hidden="true">
+              <use href="/icons-sprite.svg#zoom-in" />
+            </svg>
+          </button>
+        </div>
+      )}
 
       {hoveredPoint && (
         <ToolTip
@@ -548,12 +554,14 @@ const Graph = ({ data: runData, isLoading = false }) => {
           setHoveredPoint={setHoveredPoint}
         />
 
-        <XAxisLabels
-          allTimestamps={allTimestamps}
-          scaleTimestampToX={scaleTimestampToX}
-        />
+        {showChartElements && (
+          <XAxisLabels
+            allTimestamps={allTimestamps}
+            scaleTimestampToX={scaleTimestampToX}
+          />
+        )}
 
-        {!isMobileChart && (
+        {!isMobileChart && showChartElements && (
           <YAxisLabels
             graphPoints={graphPoints}
             scaleRunTimeToY={scaleRunTimeToY}

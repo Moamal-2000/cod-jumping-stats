@@ -27,6 +27,7 @@ const RunAnalytics = ({ playerId }) => {
 
   const [isMapListCollapsed, setIsMapListCollapsed] = useState(false);
   const [hoveredMapName, setHoveredMapName] = useState("");
+  const [showChartElements, setShowChartElements] = useState(true);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -84,6 +85,17 @@ const RunAnalytics = ({ playerId }) => {
               selectedMapId={selectedMapId}
               selectMapRoute={selectMapRoute}
             />
+
+            <label className={s.chartToggle}>
+              <input
+                type="checkbox"
+                checked={showChartElements}
+                onChange={(event) => setShowChartElements(event.target.checked)}
+                className={s.chartToggleInput}
+              />
+              <span className={s.chartToggleText}>show chart elements</span>
+            </label>
+
             <SelectMenu
               label="FPS"
               onChange={handleFpsChange}
@@ -106,7 +118,11 @@ const RunAnalytics = ({ playerId }) => {
           )}
 
           <div className={s.graphPanel}>
-            <Graph data={mapRuns} isLoading={mapRunsLoading} />
+            <Graph
+              data={mapRuns}
+              isLoading={mapRunsLoading}
+              showChartElements={showChartElements}
+            />
           </div>
         </div>
       </div>
