@@ -10,7 +10,6 @@
   --text-secondary: #d3dae3;
   --text-muted: #b5beca;
   --accent: #ffd166;
-  --accent-soft: rgba(255, 209, 102, 0.14);
 
   min-height: calc(100vh - 128px);
   padding-bottom: 96px;
@@ -183,7 +182,9 @@
 }
 
 .personName {
-  margin: 0;
+  display: flex;
+  align-items: center;
+  line-height: 1.4;
 }
 
 .textLink {
@@ -198,37 +199,49 @@
 }
 
 .textLink:focus-visible {
-  outline: 3px solid var(--accent-soft);
+  outline: 2px solid #fff1c8;
   outline-offset: 3px;
   border-radius: 4px;
 }
 
 .personName:has(.discordUser) :where(.textLink, .plyerNameSpan) {
-  margin-right: 16px;
-  position: relative;
+  margin-right: 10px;
 }
 
 .personName .discordUser {
-  background-color: transparent;
-  border: none;
-  user-select: none;
-  cursor: pointer;
-  font-size: 1.1rem;
-  font-weight: 700;
-  position: relative;
-}
-
-.personName:has(.discordUser) .textLink::after,
-.personName:has(.discordUser) .plyerNameSpan::after {
-  content: "|";
-  position: absolute;
-  right: -11px;
+  border: 0;
+  outline: none;
+  width: 26px;
+  height: 24px;
+  background-color: #5e75ca;
   color: #fff;
-  cursor: default;
-  pointer-events: none;
+  border-radius: 4px;
+  @include m.flex-center;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  top: 1px;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: #5462e5;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #fff1c8;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
 }
 
-.personName .discordUser:hover [data-tooltip] {
+.personName .discordUser svg {
+  width: 14px;
+  height: 14px;
+  fill: currentColor;
+}
+
+.personName .discordUser:hover [data-tooltip],
+.personName .discordUser:focus-visible [data-tooltip] {
   opacity: 1;
 }
 

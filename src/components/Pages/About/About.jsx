@@ -119,8 +119,11 @@ const About = () => {
                       onClick={() =>
                         handleCopyDiscordUsername(member.discordUser)
                       }
+                      aria-label={`Copy ${member.discordUser} to clipboard`}
                     >
-                      {member.discordUser}
+                      <svg aria-hidden="true">
+                        <use href="/icons-sprite.svg#discord" />
+                      </svg>
                       <ToolTip>Copy Discord username</ToolTip>
                     </button>
                   )}
