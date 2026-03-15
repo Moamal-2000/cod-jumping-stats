@@ -17,13 +17,13 @@
 }
 
 @media (max-width: 1320px) {
-  .customTooltip {
+  .customTooltip:not(.center) {
     left: calc(50% - 14px);
   }
 }
 
 @media (max-width: 768px) {
-  .customTooltip {
+  .customTooltip:not(.center) {
     left: -128px;
     bottom: -10px;
     translate: 0;

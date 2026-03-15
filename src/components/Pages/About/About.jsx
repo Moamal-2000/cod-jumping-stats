@@ -124,7 +124,7 @@ const About = () => {
                       <svg aria-hidden="true">
                         <use href="/icons-sprite.svg#discord" />
                       </svg>
-                      <ToolTip>Copy Discord username</ToolTip>
+                      <ToolTip centerPosition>Copy Discord username</ToolTip>
                     </button>
                   )}
                 </h3>
