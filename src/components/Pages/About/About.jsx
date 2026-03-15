@@ -83,7 +83,7 @@ const About = () => {
           </div>
         </AboutSection>
 
-        <AboutSection title="How the project works">
+        <AboutSection title="How the project works" contentVisibility>
           <div className={s.infoGrid}>
             {operationCards.map((card) => (
               <article className={s.infoCard} key={card.title}>
@@ -94,7 +94,7 @@ const About = () => {
           </div>
         </AboutSection>
 
-        <AboutSection title="Development team">
+        <AboutSection title="Development team" contentVisibility>
           <div className={s.teamGrid}>
             {teamMembers.map((member) => (
               <article className={s.teamCard} key={member.name}>
@@ -134,7 +134,7 @@ const About = () => {
           </div>
         </AboutSection>
 
-        <AboutSection title="Community and thanks">
+        <AboutSection title="Community and thanks" contentVisibility>
           <div className={s.closingGrid}>
             <article className={s.featureCard}>
               <h3 className={s.cardTitle}>Built for the community</h3>
