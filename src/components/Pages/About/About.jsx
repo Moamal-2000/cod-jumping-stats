@@ -100,30 +100,29 @@ const About = () => {
               <article className={s.teamCard} key={member.name}>
                 <h3 className={s.personName}>
                   {member.href ? (
-                    <>
-                      <Link
-                        href={member.href}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className={s.textLink}
-                      >
-                        {member.name}
-                      </Link>
-                      {member?.discordUser && (
-                        <button
-                          type="button"
-                          className={s.discordUser}
-                          onClick={() =>
-                            handleCopyDiscordUsername(member.discordUser)
-                          }
-                        >
-                          {member.discordUser}
-                          <ToolTip>Copy Discord username</ToolTip>
-                        </button>
-                      )}
-                    </>
+                    <Link
+                      href={member.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={s.textLink}
+                    >
+                      {member.name}
+                    </Link>
                   ) : (
-                    member.name
+                    <span className={s.plyerNameSpan}>{member.name}</span>
+                  )}
+
+                  {member?.discordUser && (
+                    <button
+                      type="button"
+                      className={s.discordUser}
+                      onClick={() =>
+                        handleCopyDiscordUsername(member.discordUser)
+                      }
+                    >
+                      {member.discordUser}
+                      <ToolTip>Copy Discord username</ToolTip>
+                    </button>
                   )}
                 </h3>
 
@@ -198,6 +197,7 @@ const operationCards = [
 const teamMembers = [
   {
     name: "Dcoy",
+    discordUser: "dcoy#1742",
     role: "Backend Developer and Frontend Contributor",
     description:
       "Built the backend side of the project and supported frontend implementation where needed.",
