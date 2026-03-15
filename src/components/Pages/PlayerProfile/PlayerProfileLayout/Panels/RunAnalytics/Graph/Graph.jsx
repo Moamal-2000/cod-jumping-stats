@@ -31,9 +31,10 @@ const Graph = ({
   const [containerWidth, setContainerWidth] = useState(800);
   const CHART_WIDTH = containerWidth || 800; // Final width used for calculations
   const isMobileChart = CHART_WIDTH <= MOBILE_BREAKPOINT_PX;
-  const chartPadding = isMobileChart
-    ? { ...CHART_PADDING, left: 12, right: 12 }
-    : CHART_PADDING;
+  const chartPadding =
+    isMobileChart || !showChartElements
+      ? { ...CHART_PADDING, left: 12, right: 12 }
+      : CHART_PADDING;
 
   const [hoveredPoint, setHoveredPoint] = useState(null);
   // Horizontal zoom level. 1 = default spacing, >1 increases spacing.
