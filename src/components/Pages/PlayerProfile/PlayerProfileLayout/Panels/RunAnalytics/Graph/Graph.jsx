@@ -43,6 +43,8 @@ const Graph = ({ data: runData, isLoading = false }) => {
   const dragStartPanOffsetRef = useRef(0); // panOffsetPx value when dragging started
   const mouseXLocalRef = useRef(null); // Local X position within the SVG/container
   const rafAutoPanRef = useRef(null); // Animation frame ID for auto-pan loop
+  const isPinchingRef = useRef(false);
+  const pinchPrevDistanceRef = useRef(0);
 
   // Pixels from edge to trigger auto-pan
   const edgeAutopanThresholdPx =
@@ -68,6 +70,15 @@ const Graph = ({ data: runData, isLoading = false }) => {
 
   const graphPoints = getGraphPoints();
 
+  const getTouchDistance = (touchA, touchB) =>
+    Math.hypot(
+      touchB.clientX - touchA.clientX,
+      touchB.clientY - touchA.clientY,
+    );
+
+  const getTouchCenterX = (touchA, touchB) =>
+    (touchA.clientX + touchB.clientX) / 2;
+
   const handleMouseDown = (mouseEvent) => {
     if (zoomScale <= SCALE_MIN) return;
     isDraggingRef.current = true;
@@ -76,9 +87,44 @@ const Graph = ({ data: runData, isLoading = false }) => {
     document.body.style.cursor = "grabbing";
   };
 
+  const handlePinchMove = (touchEvent) => {
+    const touches = touchEvent.touches;
+    if (!touches || touches.length < 2) return;
+
+    const [touchA, touchB] = touches;
+    const currentDistance = getTouchDistance(touchA, touchB);
+    const prevDistance = pinchPrevDistanceRef.current || currentDistance;
+    const scaleFactor = prevDistance === 0 ? 1 : currentDistance / prevDistance;
+
+    pinchPrevDistanceRef.current = currentDistance;
+
+    const svgRect = svgRef.current?.getBoundingClientRect();
+    const centerClientX = getTouchCenterX(touchA, touchB);
+    const localCenterX = svgRect
+      ? centerClientX - svgRect.left
+      : CHART_WIDTH / 2;
+
+    const nextScale = Math.max(
+      SCALE_MIN,
+      Math.min(SCALE_MAX, scaleRef.current * scaleFactor),
+    );
+
+    setScaleAround(nextScale, localCenterX);
+    touchEvent.preventDefault();
+  };
+
   const handleTouchStart = (touchEvent) => {
+    const touches = touchEvent.touches || [];
+    if (touches.length >= 2) {
+      handleDragEnd();
+      isPinchingRef.current = true;
+      pinchPrevDistanceRef.current = getTouchDistance(touches[0], touches[1]);
+      touchEvent.preventDefault();
+      return;
+    }
+
     if (zoomScale <= SCALE_MIN) return;
-    const touch = touchEvent.touches && touchEvent.touches[0];
+    const touch = touches[0];
     if (!touch) return;
     isDraggingRef.current = true;
     dragStartXRef.current = touch.clientX;
@@ -112,8 +158,14 @@ const Graph = ({ data: runData, isLoading = false }) => {
   };
 
   const handleTouchMove = (touchEvent) => {
+    const touches = touchEvent.touches || [];
+    if (touches.length >= 2 && isPinchingRef.current) {
+      handlePinchMove(touchEvent);
+      return;
+    }
+
     if (!isDraggingRef.current) return;
-    const touch = touchEvent.touches && touchEvent.touches[0];
+    const touch = touches[0];
     if (!touch) return;
     const dragDeltaX = touch.clientX - dragStartXRef.current;
     const nextPan = calculateNewPanOffset(
@@ -258,6 +310,7 @@ const Graph = ({ data: runData, isLoading = false }) => {
     handleSvgPointerMove(mouseEvent.clientX);
 
   const handleSvgTouchMove = (touchEvent) => {
+    if ((touchEvent.touches?.length || 0) >= 2) return;
     const touch = touchEvent.touches && touchEvent.touches[0];
     if (touch) handleSvgPointerMove(touch.clientX);
   };
@@ -460,10 +513,16 @@ const Graph = ({ data: runData, isLoading = false }) => {
         onMouseLeave={handleSvgMouseLeave}
         onTouchStart={handleTouchStart}
         onTouchMove={(touchEvent) => {
-          handleTouchMove(touchEvent); // Handle pan
+          handleTouchMove(touchEvent); // Handle pan/pinch
           handleSvgTouchMove(touchEvent); // Handle auto-pan trigger
         }}
-        onTouchEnd={handleDragEnd}
+        onTouchEnd={(touchEvent) => {
+          if ((touchEvent.touches?.length || 0) < 2) {
+            isPinchingRef.current = false;
+            pinchPrevDistanceRef.current = 0;
+          }
+          handleDragEnd();
+        }}
         viewBox={`0 0 ${Math.max(300, CHART_WIDTH)} ${CHART_HEIGHT}`}
         width="100%"
         height={CHART_HEIGHT}
