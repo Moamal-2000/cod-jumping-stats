@@ -6,7 +6,6 @@ import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import HeroSection from "./HeroSection/HeroSection";
 import FavMaps from "./TabPanel/FavMaps/FavMaps";
 import FavPlayers from "./TabPanel/FavPlayers/FavPlayers";
 import TabPanel from "./TabPanel/TabPanel";
@@ -50,8 +49,6 @@ const Favorites = () => {
   return (
     <div className="container">
       <main>
-        <HeroSection />
-
         <Tabs
           tabs={tabs({ mapsCount, playersCount })}
           activeTab={activeTab}
