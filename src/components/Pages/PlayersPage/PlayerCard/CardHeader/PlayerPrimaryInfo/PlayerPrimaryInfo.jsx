@@ -9,9 +9,11 @@ import { useDispatch } from "react-redux";
 import ToolTip from "../../ToolTip";
 import s from "./PlayerPrimaryInfo.module.scss";
 
-const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
+const PlayerPrimaryInfo = ({ PlayerName, PrefName, Admin, PlayerID }) => {
   const dispatch = useDispatch();
+
   const pureName = stripColorCodes(PlayerName);
+  const coloredPrefName = getColoredName(PrefName || PlayerName);
 
   function handleMouseEnter() {
     dispatch(updateGlobalState({ key: "hoveredPlayer", value: pureName }));
@@ -30,6 +32,7 @@ const PlayerPrimaryInfo = ({ PlayerName, Admin, PlayerID }) => {
         onMouseEnter={handleMouseEnter}
       >
         {getColoredName(PlayerName)}
+        <ToolTip centerPosition>{coloredPrefName}</ToolTip>
       </Link>
 
       <div className={s.wrapper}>

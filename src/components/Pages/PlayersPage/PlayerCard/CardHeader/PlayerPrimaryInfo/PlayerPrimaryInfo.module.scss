@@ -15,9 +15,9 @@
   text-decoration: underline;
   text-decoration-color: #42464d;
   text-underline-offset: 2px;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  position: relative;
 
   &:hover {
     text-decoration-color: currentColor;
@@ -27,6 +27,10 @@
     outline: 2px solid #facc15;
     outline-offset: 2px;
   }
+}
+
+.playerName:hover [data-tooltip] {
+  opacity: 1;
 }
 
 .wrapper {
