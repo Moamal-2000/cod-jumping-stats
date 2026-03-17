@@ -52,6 +52,7 @@
   .header .mainWrapper {
     flex-direction: column;
     align-items: flex-start;
+    width: 100%;
   }
 }
 
@@ -63,7 +64,6 @@
 
 @include m.small {
   .header .mainWrapper .wrapper {
-    // flex-wrap: wrap;
     flex-direction: column;
     align-items: flex-start;
   }
@@ -83,12 +83,6 @@
 @include m.small {
   .header .mainWrapper>p {
     font-size: .9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .header .mainWrapper>p {
-    max-width: 166px;
   }
 }
 
