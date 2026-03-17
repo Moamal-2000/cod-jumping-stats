@@ -15,9 +15,7 @@
 
 .tab {
   flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   gap: 8px;
   padding: 14px 24px;
   background: transparent;
@@ -119,6 +117,7 @@
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
+
   .tab,
   .tab::before,
   .icon,

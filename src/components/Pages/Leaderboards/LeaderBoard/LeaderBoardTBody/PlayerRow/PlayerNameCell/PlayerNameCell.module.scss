@@ -28,9 +28,7 @@
   background-color: #c9c9c9;
   color: #fff;
   border: 2px solid #2a2e39;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   font-weight: bold;
   user-select: none;
 }

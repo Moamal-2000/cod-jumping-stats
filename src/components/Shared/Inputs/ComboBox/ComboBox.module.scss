@@ -88,9 +88,7 @@
   padding: 4px;
   width: 24px;
   height: 24px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   border-radius: 4px;
   color: #6b7280;
   transition:

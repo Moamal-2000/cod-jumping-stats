@@ -47,9 +47,7 @@
 }
 
 .loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   gap: 0.75rem;
   padding: 2rem;
   color: #9ca3af;
@@ -193,9 +191,7 @@
 }
 
 .scrollHint {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   color: #6b7280;
   font-size: 0.875rem;
   font-style: italic;

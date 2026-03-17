@@ -19,10 +19,8 @@
 }
 
 .loadingContainer {
-  display: flex;
+  @include m.flex-center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 400px;
   gap: 1.5rem;
   color: #9ca3af;
@@ -59,10 +57,8 @@
 }
 
 .emptyState {
-  display: flex;
+  @include m.flex-center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   min-height: 320px;
   gap: 1.25rem;
   padding: 2rem;

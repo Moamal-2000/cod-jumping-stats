@@ -1,12 +1,12 @@
+@use "@/styles/mixins" as m;
+
 .expandButton {
   cursor: pointer;
   border: none;
   background-color: #1f2937;
   fill: #fff;
   border-radius: .25rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   transition: background-color .2s ease;
 
   &.active {

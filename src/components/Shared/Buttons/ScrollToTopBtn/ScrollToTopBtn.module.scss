@@ -10,9 +10,7 @@
   background: linear-gradient(145deg, #1f2b36, #0c0c19);
   border: solid 2px #fff;
   outline: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.flex-center;
   cursor: pointer;
   opacity: 0;
   z-index: 98;

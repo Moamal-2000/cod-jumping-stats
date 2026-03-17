@@ -31,9 +31,7 @@
   border-radius: 50%;
   background-color: #1f2937;
   color: #f8fafc;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   border: 2px solid #facc15;
   overflow: hidden;
   flex-shrink: 0;

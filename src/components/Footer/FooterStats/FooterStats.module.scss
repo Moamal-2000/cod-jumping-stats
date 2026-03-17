@@ -25,9 +25,7 @@
   height: 36px;
   background-color: rgba(234, 179, 8, .15);
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.flex-center;
   margin-right: 15px;
 }
 

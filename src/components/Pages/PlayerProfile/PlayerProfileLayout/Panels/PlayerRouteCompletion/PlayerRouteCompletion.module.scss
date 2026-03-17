@@ -482,6 +482,7 @@
     color: #e5e7eb;
   }
 }
+
 // Legend styles
 .legendItems {
   margin: 1.5rem 0;
@@ -629,9 +630,7 @@
   height: 94px;
   border: 6px solid #EF4444;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.flex-center;
   margin-bottom: 24px;
   position: relative;
   background: radial-gradient(circle,

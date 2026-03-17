@@ -30,9 +30,7 @@
   height: 36px;
   max-height: 36px;
   min-width: 70px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   background-color: #1f2937;
   color: #9ca3af;
   border: 1px solid #374151;

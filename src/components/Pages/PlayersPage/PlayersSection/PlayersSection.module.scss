@@ -50,9 +50,7 @@
 }
 
 .endOfResults {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include m.flex-center;
   padding: 32px;
   text-align: center;
 }

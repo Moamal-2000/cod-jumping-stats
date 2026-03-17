@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .profileHeader {
   display: flex;
   flex-direction: column;
@@ -65,9 +67,7 @@
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   overflow: hidden;
   border: 3px solid #facc15;
   background: #374151;

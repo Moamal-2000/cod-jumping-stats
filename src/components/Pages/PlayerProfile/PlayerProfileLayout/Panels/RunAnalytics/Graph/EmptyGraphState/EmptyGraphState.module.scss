@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .graphContainer {
   height: var(--graph-height);
   background: #0e1422;
@@ -6,10 +8,8 @@
 }
 
 .emptyState {
-  display: flex;
+  @include m.flex-center;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   color: #94a3b8;
   font-size: .95rem;

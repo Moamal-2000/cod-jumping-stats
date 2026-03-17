@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .graphContainer {
   position: relative;
   width: 100%;
@@ -30,9 +32,7 @@
   border-radius: 6px;
   width: 32px;
   height: 32px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   cursor: pointer;
   color: #cbd5e1;
   transition: all 0.2s ease;

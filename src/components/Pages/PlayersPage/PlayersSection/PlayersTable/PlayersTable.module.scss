@@ -150,9 +150,7 @@
   height: 32px;
   border-radius: 50%;
   background-color: #1f2937;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   overflow: hidden;
   flex-shrink: 0;
   border: 1px solid #2a313a;

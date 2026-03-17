@@ -105,9 +105,7 @@
   height: 2.5rem;
   border-radius: 10px;
   border: 1px solid #eab308;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   box-shadow: 0 4px 15px -8px #eab2089f;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   flex-shrink: 0;

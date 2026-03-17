@@ -1,3 +1,5 @@
+@use "@/styles/mixins" as m;
+
 .favoriteButton {
   background: none;
   border: none;
@@ -5,9 +7,7 @@
   height: 32px;
   padding: 4px;
   border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include m.flex-center;
   flex-shrink: 0;
   color: #6b7280;
   cursor: pointer;
