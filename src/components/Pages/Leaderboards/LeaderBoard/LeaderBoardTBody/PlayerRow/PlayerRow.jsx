@@ -23,7 +23,7 @@ const PlayerRow = ({
         {getModifiedRank(Rank)}
       </td>
 
-      <PlayerNameCell playerData={playerData} />
+      <PlayerNameCell playerData={playerData} index={index} />
 
       <td className={s.rating} data-header="Rating">
         {(+Rating).toFixed(2)}

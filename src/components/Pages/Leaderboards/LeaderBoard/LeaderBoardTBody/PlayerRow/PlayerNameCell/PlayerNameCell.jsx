@@ -8,7 +8,7 @@ import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./PlayerNameCell.module.scss";
 
-const PlayerNameCell = ({ playerData }) => {
+const PlayerNameCell = ({ playerData, index }) => {
   const { PlayerName, Rank, CountryCode, Country, PlayerID } = playerData;
 
   const dispatch = useDispatch();
@@ -32,7 +32,11 @@ const PlayerNameCell = ({ playerData }) => {
         onMouseEnter={handleMouseEnter}
       >
         <span className={s.playerCountry}>
-          <CountryImage countryCode={CountryCode} countryName={Country} />
+          <CountryImage
+            countryCode={CountryCode}
+            countryName={Country}
+            loadEagerly={index < 5}
+          />
         </span>
         <span className={s.playerName}>{coloredPlayerName}</span>
       </Link>

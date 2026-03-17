@@ -13,6 +13,7 @@ const PlayerCard = ({
   Country,
   Banned,
   Donated,
+  index,
   cardRef,
 }) => {
   return (
@@ -24,6 +25,7 @@ const PlayerCard = ({
           PlayerID={PlayerID}
           Country={Country}
           Admin={Admin}
+          index={index}
         />
 
         <PlayerBadges

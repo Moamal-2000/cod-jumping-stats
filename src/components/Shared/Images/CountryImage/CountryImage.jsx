@@ -5,7 +5,12 @@ import Image from "next/image";
 import { useState } from "react";
 import s from "./CountryImage.module.scss";
 
-const CountryImage = ({ countryCode, size = 32, colorPlaceholder = false }) => {
+const CountryImage = ({
+  countryCode,
+  size = 32,
+  colorPlaceholder = false,
+  loadEagerly = false,
+}) => {
   const [src, setSrc] = useState(
     `/assets/countryFlags/${countryCode?.toLowerCase()}.svg`,
   );
@@ -32,6 +37,9 @@ const CountryImage = ({ countryCode, size = 32, colorPlaceholder = false }) => {
       title={title}
       onError={handleError}
       className={classes}
+      loading={loadEagerly ? "eager" : "lazy"}
+      priority={loadEagerly}
+      fetchPriority={loadEagerly ? "high" : "low"}
     />
   );
 };

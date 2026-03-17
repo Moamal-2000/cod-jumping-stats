@@ -30,6 +30,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                       countryCode={player.Country}
                       size={32}
                       colorPlaceholder={true}
+                      loadEagerly={index < 6}
                     />
                   </div>
 

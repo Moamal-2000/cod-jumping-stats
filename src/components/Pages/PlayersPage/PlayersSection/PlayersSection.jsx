@@ -22,7 +22,12 @@ const PlayersSection = ({
             const ref =
               playersScroll.length === index + 1 ? lastPlayerRef : null;
             return (
-              <PlayerCard key={player.PlayerID} cardRef={ref} {...player} />
+              <PlayerCard
+                key={player.PlayerID}
+                cardRef={ref}
+                index={index}
+                {...player}
+              />
             );
           })}
         </div>
