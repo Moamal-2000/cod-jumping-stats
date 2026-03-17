@@ -6,7 +6,6 @@
   background-color: transparent;
   border: 1px solid #2a313a;
   border-radius: 12px;
-  overflow: hidden;
 }
 
 @include m.small {
@@ -17,10 +16,16 @@
 }
 
 .playersTable thead {
-  background-color: #131820;
+  background-color: #1c2431;
   position: sticky;
-  top: 0;
+  top: 68px;
   z-index: 10;
+}
+
+@include m.medium {
+  .playersTable thead {
+    top: 66px;
+  }
 }
 
 @include m.small {
