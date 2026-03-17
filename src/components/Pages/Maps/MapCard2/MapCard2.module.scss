@@ -14,13 +14,15 @@
   .mapCard {
     border-bottom: 1px solid #394b69;
     gap: 0 24px;
+    flex-direction: column;
+    gap: 24px;
   }
 }
 
-@include m.medium {
+@include m.very-small {
   .mapCard {
-    flex-direction: column;
-    gap: 24px;
+    padding: 0;
+    border: 0;
   }
 }
 
@@ -51,9 +53,22 @@
   }
 }
 
+@include m.very-small {
+  .mapCard .imgHolder {
+    border-radius: 0;
+  }
+}
+
 .mapCard .imgHolder [data-type=img-holder] {
   height: inherit;
   border-radius: 14px;
+}
+
+@include m.very-small {
+  .mapCard .imgHolder [data-type=img-holder] {
+    border-radius: 0;
+    border: 0;
+  }
 }
 
 .mapCard .imgHolder [data-type=img-holder] [data-loader] {
@@ -66,6 +81,13 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+
+@include m.very-small {
+  .leftSide {
+    padding-inline: 14px;
+  }
 }
 
 .leftSide a {
@@ -191,6 +213,12 @@
   .rightSide {
     max-width: 320px;
     width: 100%;
+  }
+}
+
+@include m.very-small {
+  .rightSide {
+    padding: 14px;
   }
 }
 
