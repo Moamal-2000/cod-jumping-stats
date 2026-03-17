@@ -16,7 +16,7 @@ const CardHeader = ({ PlayerName, PrefName, PlayerID, Country, Admin }) => {
         </div>
 
         <PlayerPrimaryInfo
-          PlayerName={PrefName || PlayerName}
+          PlayerName={PlayerName || PrefName}
           Admin={Admin}
           PlayerID={PlayerID}
         />
