@@ -4,18 +4,21 @@
   --players-accent: #14b8a6;
   --players-accent-strong: #0f766e;
   --players-accent-soft: rgba(20, 184, 166, 0.22);
+  --active-icon-color: #fff;
 }
 
 .blue {
   --players-accent: #3b82f6;
   --players-accent-strong: #2563eb;
   --players-accent-soft: rgba(59, 130, 246, 0.22);
+  --active-icon-color: #fff;
 }
 
 .yellow {
   --players-accent: #facc15;
   --players-accent-strong: #f59e0b;
   --players-accent-soft: rgba(250, 204, 21, 0.22);
+  --active-icon-color: #000;
 }
 
 .buttons {
@@ -50,7 +53,7 @@
     background: linear-gradient(135deg,
         var(--players-accent) 0%,
         var(--players-accent-strong) 100%);
-    color: #fff;
+    color: var(--active-icon-color);
     border-color: var(--players-accent-strong);
     box-shadow: 0 0 0 2px var(--players-accent-soft);
   }
