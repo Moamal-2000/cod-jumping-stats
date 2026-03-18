@@ -5,11 +5,11 @@ import ServerCardHeader from "./ServerCardHeader/ServerCardHeader";
 import ServerInfo from "./ServerCardMapSection/ServerInfo";
 import ServerCardPlayersSection from "./ServerCardPlayersSection/ServerCardPlayersSection";
 
-const ServerCard = ({ server, index, viewMode }) => {
+const ServerCard = ({ server, index, viewType }) => {
   return (
-    <div className={`${s.serverCard} ${viewMode === "list" ? s.list : ""}`}>
-      <ServerCardHeader server={server} index={index} viewMode={viewMode} />
-      <ServerInfo server={server} viewMode={viewMode} />
+    <div className={`${s.serverCard} ${viewType === "list" ? s.list : ""}`}>
+      <ServerCardHeader server={server} index={index} viewType={viewType} />
+      <ServerInfo server={server} viewType={viewType} />
       <ServerCardPlayersSection server={server} />
     </div>
   );

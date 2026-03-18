@@ -1,12 +1,12 @@
 "use client";
 
-import { VIEW_OPTIONS_DATA } from "@/data/constants";
+import { DEFAULT_VIEW_MODE, VIEW_OPTIONS_DATA } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./SortViewButtons.module.scss";
 
 const SortViewButtons = ({
-  defaultView = "grid",
+  defaultView = DEFAULT_VIEW_MODE,
   queryName = "view",
   themeColor = "green",
 }) => {
@@ -14,7 +14,7 @@ const SortViewButtons = ({
   const pathname = usePathname();
   const router = useRouter();
 
-  const viewBy = searchParams.get(queryName) || defaultView;
+  const viewType = searchParams.get(queryName) || defaultView;
 
   function changeView(value) {
     const isDefault = value === defaultView;
@@ -30,7 +30,7 @@ const SortViewButtons = ({
   return (
     <div className={s.buttons}>
       {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
-        const activeClass = viewBy === value ? s.active : "";
+        const activeClass = viewType === value ? s.active : "";
         const title = `Change view to ${value}`;
 
         return (

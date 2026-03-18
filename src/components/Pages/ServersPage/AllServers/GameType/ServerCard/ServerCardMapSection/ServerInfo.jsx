@@ -1,9 +1,9 @@
 import Link from "next/link";
 import s from "./ServerInfo.module.scss";
 
-const ServerInfo = ({ server, viewMode }) => {
+const ServerInfo = ({ server, viewType }) => {
   const isCod4 = server.GameType === "COD4";
-  const isList = viewMode === "list";
+  const isList = viewType === "list";
 
   return (
     <section className={`${s.serverInfo} ${isList ? s.list : ""}`}>

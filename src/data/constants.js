@@ -34,6 +34,8 @@ export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 export const JUMP_FPS = [125, 250, 333, 43, 76];
 export const TABS_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
 
+export const DEFAULT_VIEW_MODE = "grid";
+
 export const SERVERS_REFRESH_OPTIONS = [10, 30, 60, 120, 300];
 export const SERVERS_GAME_FILTER_OPTIONS = [
   { id: "all", label: "All" },

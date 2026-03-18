@@ -15,8 +15,6 @@ const ServersControls = ({
   onAutoRefreshEnabledChange,
   gameFilter,
   onGameFilterChange,
-  viewMode,
-  onViewModeChange,
   statusFilter,
   onStatusFilterChange,
 }) => {

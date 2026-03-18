@@ -7,9 +7,9 @@ import s from "./ServerCardHeader.module.scss";
 import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
 import ServerCardIp from "./ServerCardIp/ServerCardIp";
 
-const ServerCardHeader = ({ server, index, viewMode }) => {
+const ServerCardHeader = ({ server, index, viewType }) => {
   const [src, setSrc] = useState(`/assets/maps/512/${server.Map}.webp`);
-  const isList = viewMode === "list";
+  const isList = viewType === "list";
 
   return (
     <header className={`${s.serverHeader} ${isList ? s.list : ""}`}>

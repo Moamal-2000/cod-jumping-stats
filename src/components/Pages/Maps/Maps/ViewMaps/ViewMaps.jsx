@@ -1,5 +1,6 @@
 "use client";
 
+import { DEFAULT_VIEW_MODE } from "@/data/constants";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import MapCard from "../../MapCard/MapCard";
@@ -12,7 +13,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
   const searchParams = useSearchParams();
   const searchByAuthor = searchParams.get("author");
   const searchByName = searchParams.get("name");
-  const viewType = searchParams.get("view") || "grid";
+  const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
 
   if (loading || error) return null;
 

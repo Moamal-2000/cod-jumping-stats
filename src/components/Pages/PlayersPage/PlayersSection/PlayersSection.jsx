@@ -1,5 +1,6 @@
 "use client";
 
+import { DEFAULT_VIEW_MODE } from "@/data/constants";
 import { useSearchParams } from "next/navigation";
 import PlayerCard from "../PlayerCard/PlayerCard";
 import s from "./PlayersSection.module.scss";
@@ -12,11 +13,11 @@ const PlayersSection = ({
   searchByName,
 }) => {
   const searchParams = useSearchParams();
-  const viewBy = searchParams.get("view") || "grid";
+  const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
 
   return (
     <section className={s.playersSection}>
-      {viewBy === "grid" && (
+      {viewType === DEFAULT_VIEW_MODE && (
         <div className={s.playersGrid}>
           {playersScroll.map((player, index) => {
             const ref =
@@ -33,7 +34,7 @@ const PlayersSection = ({
         </div>
       )}
 
-      {viewBy === "list" && (
+      {viewType === "list" && (
         <PlayersTable
           playersScroll={playersScroll}
           lastPlayerRef={lastPlayerRef}

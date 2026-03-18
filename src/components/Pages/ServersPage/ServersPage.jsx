@@ -4,7 +4,6 @@ import {
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
   SERVERS_REFRESH_OPTIONS,
-  SERVERS_VIEW_MODE,
 } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { useGetServersQuery } from "@/redux/features/servers/api/serversSlice";
@@ -15,7 +14,6 @@ import ServersControls from "./ServersControls/ServersControls";
 
 const DEFAULT_REFRESH_SECONDS = 30;
 const DEFAULT_GAME_FILTER = "cod2";
-const DEFAULT_VIEW_MODE = "grid";
 const DEFAULT_STATUS_SERVER = "all";
 const DEFAULT_AUTO_REFRESH = "true";
 
@@ -28,7 +26,6 @@ const ServersPage = () => {
   const autoRefreshParam =
     searchParams.get("auto-refresh") || DEFAULT_AUTO_REFRESH;
   const gameParam = searchParams.get("game") || DEFAULT_GAME_FILTER;
-  const viewParam = searchParams.get("view") || DEFAULT_VIEW_MODE;
   const statusParam = searchParams.get("status") || DEFAULT_STATUS_SERVER;
 
   const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(+refreshParam)
@@ -41,10 +38,6 @@ const ServersPage = () => {
   )
     ? gameParam
     : DEFAULT_GAME_FILTER;
-
-  const viewMode = SERVERS_VIEW_MODE.some((option) => option.id === viewParam)
-    ? viewParam
-    : DEFAULT_VIEW_MODE;
 
   const statusFilter = SERVER_STATUS_FILTER.some(
     (option) => option.id === statusParam,
@@ -83,15 +76,6 @@ const ServersPage = () => {
     createQueryString("game", value, searchParams, router, pathname);
   }
 
-  function handleViewModeChange(value) {
-    if (value === DEFAULT_VIEW_MODE) {
-      removeQueryString("view", searchParams, router, pathname);
-      return;
-    }
-
-    createQueryString("view", value, searchParams, router, pathname);
-  }
-
   function handleStatusFilterChange(value) {
     if (value === DEFAULT_STATUS_SERVER) {
       removeQueryString("status", searchParams, router, pathname);
@@ -110,8 +94,6 @@ const ServersPage = () => {
         onAutoRefreshEnabledChange={handleAutoRefreshEnabledChange}
         gameFilter={gameFilter}
         onGameFilterChange={handleGameFilterChange}
-        viewMode={viewMode}
-        onViewModeChange={handleViewModeChange}
         statusFilter={statusFilter}
         onStatusFilterChange={handleStatusFilterChange}
       />
@@ -120,7 +102,6 @@ const ServersPage = () => {
         loading={isLoading}
         error={isError}
         gameFilter={gameFilter}
-        viewMode={viewMode}
         statusFilter={statusFilter}
         gameParam={gameParam}
       />

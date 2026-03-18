@@ -1,15 +1,20 @@
 import {
   COD2_SERVERS_COUNT,
   COD4_SERVERS_COUNT,
+  DEFAULT_VIEW_MODE,
   SERVERS_LIST_COUNT,
 } from "@/data/constants";
+import { useSearchParams } from "next/navigation";
 import SkeletonCard from "../SkeletonCard/SkeletonCard";
 import s from "./ServersLoadingError.module.scss";
 
-const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
-  const skeletonList = getSkeletonList(gameParam, viewMode);
+const ServersLoadingError = ({ loading, error, gameParam }) => {
+  const searchParams = useSearchParams();
+  const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
 
-  if (loading && viewMode === "list") {
+  const skeletonList = getSkeletonList(gameParam, viewType);
+
+  if (loading && viewType === "list") {
     return (
       <section className={s.listWrapper} role="presentation">
         <div className={s.listTitle}>
@@ -49,7 +54,7 @@ const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
     );
   }
 
-  if (loading && viewMode === "grid") {
+  if (loading && viewType === DEFAULT_VIEW_MODE) {
     return (
       <section className={s.serversGrid} role="presentation">
         {skeletonList.map((_, i) => (
@@ -71,10 +76,10 @@ const ServersLoadingError = ({ loading, error, viewMode, gameParam }) => {
 
 export default ServersLoadingError;
 
-function getSkeletonList(gameParam, viewMode) {
+function getSkeletonList(gameParam, viewType) {
   let serversCount = 0;
 
-  if (viewMode === "grid") {
+  if (viewType === DEFAULT_VIEW_MODE) {
     if (gameParam === "cod2" || gameParam === "all") {
       serversCount = COD2_SERVERS_COUNT;
     }
@@ -84,7 +89,7 @@ function getSkeletonList(gameParam, viewMode) {
     }
   }
 
-  if (viewMode === "list") {
+  if (viewType === "list") {
     serversCount = SERVERS_LIST_COUNT;
   }
 

@@ -1,5 +1,6 @@
 "use client";
 
+import { DEFAULT_VIEW_MODE } from "@/data/constants";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -18,7 +19,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-  const viewType = searchParams.get("view") || "grid";
+  const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
   const paramsObject = Object.fromEntries(searchParams.entries());
 
   const mapsSectionClasses = getMapsSectionClasses(isMapsExpanded, viewType);

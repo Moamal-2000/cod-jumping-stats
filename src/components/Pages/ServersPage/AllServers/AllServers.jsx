@@ -6,7 +6,6 @@ const AllServers = ({
   loading,
   error,
   gameFilter,
-  viewMode,
   statusFilter,
   gameParam,
 }) => {
@@ -38,7 +37,6 @@ const AllServers = ({
       <ServersLoadingError
         loading={loading}
         error={error}
-        viewMode={viewMode}
         gameParam={gameParam}
       />
     );
@@ -49,7 +47,6 @@ const AllServers = ({
       key={gameType}
       gameType={gameType}
       groupedServers={groupedServers}
-      viewMode={viewMode}
     />
   ));
 };
