@@ -121,18 +121,35 @@
 
 .activityContent {
   flex: 1;
-  min-width: 0;
+  display: flex;
+  gap: 14px;
+}
+
+@include m.small {
+  .activityContent {
+    flex-direction: column;
+    gap: 0;
+  }
 }
 
 .activityTitle {
+  min-width: 240px;
+  max-width: 240px;
   font-size: 1rem;
   font-weight: 600;
   color: #e5e7eb;
-  margin: 0 0 0.25rem;
+  margin-bottom: .25rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: color 0.2s ease;
+}
+
+@include m.small {
+  .activityTitle {
+    max-width: auto;
+    min-width: auto;
+  }
 }
 
 .activityDetails {
