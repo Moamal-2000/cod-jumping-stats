@@ -1,0 +1,56 @@
+@use "@/styles/mixins" as m;
+
+.buttons {
+  --players-accent: #14b8a6;
+  --players-accent-strong: #0f766e;
+  --players-accent-soft: rgba(20, 184, 166, 0.22);
+  --players-focus: #2dd4bf;
+
+  display: flex;
+  gap: 8px;
+}
+
+@include m.very-small {
+  .buttons {
+    flex-wrap: wrap;
+  }
+}
+
+.buttons .viewButton {
+  cursor: pointer;
+  background-color: #21262d;
+  color: #8b949e;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  @include m.flex-center;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, .1);
+  transition:
+    background-color .15s ease-in-out,
+    color .15s ease-in-out,
+    border-color .15s ease-in-out,
+    box-shadow .15s ease-in-out;
+
+  &.active {
+    background: linear-gradient(135deg,
+        var(--players-accent) 0%,
+        var(--players-accent-strong) 100%);
+    color: #fff;
+    border-color: var(--players-accent-strong);
+    box-shadow: 0 0 0 2px var(--players-accent-soft);
+  }
+
+  &:not(.active):hover {
+    background-color: #374151;
+    color: #f3f4f6;
+    border-color: #9ca3af;
+  }
+}
+
+.buttons .viewButton svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
