@@ -1,10 +1,10 @@
 "use client";
 
+import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortViewButtons";
 import {
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
   SERVERS_REFRESH_OPTIONS,
-  SERVERS_VIEW_MODE,
 } from "@/data/constants";
 import s from "./ServersControls.module.scss";
 
@@ -64,20 +64,7 @@ const ServersControls = ({
 
       <div className={s.controlGroup}>
         <span className={s.groupLabel}>View</span>
-        <div className={s.toggleButtons} role="group" aria-label="View mode">
-          {SERVERS_VIEW_MODE.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              className={`${s.toggleButton} ${
-                viewMode === option.id ? s.active : ""
-              }`}
-              onClick={() => onViewModeChange(option.id)}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
+        <SortViewButtons themeColor="yellow" />
       </div>
 
       <div className={s.controlGroup}>
