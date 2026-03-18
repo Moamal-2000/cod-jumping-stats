@@ -5,7 +5,11 @@ import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./SortViewButtons.module.scss";
 
-const SortViewButtons = ({ defaultView = "grid", queryName = "view" }) => {
+const SortViewButtons = ({
+  defaultView = "grid",
+  queryName = "view",
+  themeColor = "green",
+}) => {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -33,7 +37,7 @@ const SortViewButtons = ({ defaultView = "grid", queryName = "view" }) => {
           <button
             key={id}
             type="button"
-            className={`${s.viewButton} ${activeClass}`}
+            className={`${s.viewButton} ${activeClass} ${s[themeColor]}`}
             onClick={() => changeView(value)}
             title={title}
             aria-label={title}

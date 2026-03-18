@@ -1,11 +1,24 @@
 @use "@/styles/mixins" as m;
 
-.buttons {
+.green {
   --players-accent: #14b8a6;
   --players-accent-strong: #0f766e;
   --players-accent-soft: rgba(20, 184, 166, 0.22);
-  --players-focus: #2dd4bf;
+}
 
+.blue {
+  --players-accent: #3b82f6;
+  --players-accent-strong: #2563eb;
+  --players-accent-soft: rgba(59, 130, 246, 0.22);
+}
+
+.yellow {
+  --players-accent: #facc15;
+  --players-accent-strong: #f59e0b;
+  --players-accent-soft: rgba(250, 204, 21, 0.22);
+}
+
+.buttons {
   display: flex;
   gap: 8px;
 }
