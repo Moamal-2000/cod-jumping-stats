@@ -1,10 +1,10 @@
 "use client";
 
+import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortViewButtons";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
-import { VIEW_OPTIONS_DATA } from "@/data/constants";
 import { FILTER_PLAYERS_BADGES, SORT_PLAYERS_OPTIONS } from "@/data/staticData";
-import { createQueryString, removeQueryString } from "@/lib/queryParams";
+import { createQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 
@@ -14,7 +14,6 @@ const FiltersSection = () => {
   const searchParams = useSearchParams();
   const sortBy = searchParams?.get("sort") || "admin";
   const filterBy = searchParams?.get("badge") || "all";
-  const viewBy = searchParams.get("view") || "grid";
 
   function handleSortChange(newValue) {
     createQueryString("sort", newValue, searchParams, router, pathname);
@@ -23,17 +22,6 @@ const FiltersSection = () => {
   function handleFilterChange(event) {
     const newValue = event.target.value;
     createQueryString("badge", newValue, searchParams, router, pathname);
-  }
-
-  function changeView(value) {
-    const isDefault = value === "grid";
-
-    if (isDefault) {
-      removeQueryString("view", searchParams, router, pathname);
-      return;
-    }
-
-    createQueryString("view", value, searchParams, router, pathname);
   }
 
   return (
@@ -100,27 +88,7 @@ const FiltersSection = () => {
           </div>
         </div>
 
-        <div className={s.sortGroup}>
-          {VIEW_OPTIONS_DATA.map(({ value, icon, id }) => {
-            const activeClass = viewBy === value ? s.active : "";
-
-            return (
-              <button
-                key={id}
-                type="button"
-                className={`${s.sortViewBtn} ${activeClass}`}
-                onClick={() => changeView(value)}
-                title={`Change maps view to ${value}`}
-              >
-                <span>
-                  <svg aria-hidden="true">
-                    <use href={`/icons-sprite.svg#${icon}`} />
-                  </svg>
-                </span>
-              </button>
-            );
-          })}
-        </div>
+        <SortViewButtons />
       </div>
     </section>
   );
