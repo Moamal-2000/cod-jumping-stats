@@ -8,6 +8,7 @@ import s from "./ViewMaps.module.scss";
 
 const ViewMaps = ({ mapsScroll, lastMapRef }) => {
   const { loading, error, allMaps } = useSelector((s) => s.maps);
+
   const searchParams = useSearchParams();
   const searchByAuthor = searchParams.get("author");
   const searchByName = searchParams.get("name");

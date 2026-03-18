@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 const useTrackPageVisits = (limit = 5) => {
   const pageVisits = useSelector((s) => s.global.pageVisits);
+
   const currentPage = usePathname();
   const dispatch = useDispatch();
 

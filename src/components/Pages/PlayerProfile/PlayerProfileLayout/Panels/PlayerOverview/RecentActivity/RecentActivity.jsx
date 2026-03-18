@@ -7,6 +7,7 @@ import s from "./RecentActivity.module.scss";
 
 const RecentActivity = () => {
   const performanceStats = useSelector((s) => s.playerProfile.performanceStats);
+
   const recentTops = performanceStats?.RecentTops || [];
   const topRunsCount = recentTops?.length;
 

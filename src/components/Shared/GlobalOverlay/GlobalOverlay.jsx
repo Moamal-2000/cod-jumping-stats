@@ -5,7 +5,10 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./GlobalOverlay.module.scss";
 
 const GlobalOverlay = () => {
-  const { isGlobalOverlayActive } = useSelector((s) => s.global);
+  const isGlobalOverlayActive = useSelector(
+    (s) => s.global.isGlobalOverlayActive,
+  );
+
   const dispatch = useDispatch();
   const activeClass = isGlobalOverlayActive ? s.active : "";
 

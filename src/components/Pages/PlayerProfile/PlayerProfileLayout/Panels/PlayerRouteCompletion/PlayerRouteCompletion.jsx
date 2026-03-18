@@ -12,9 +12,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const [activeList, setActiveList] = useState("completed"); // "completed", "not_completed"
 
   // Mock data for now - will be replaced with Redux state
+  const [completionData, setCompletionData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
-  const [completionData, setCompletionData] = useState(null);
 
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const allPlayersLength = allPlayersData.length || 0;

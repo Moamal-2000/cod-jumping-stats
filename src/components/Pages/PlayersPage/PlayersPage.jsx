@@ -17,16 +17,16 @@ import s from "./PlayersPage.module.scss";
 import PlayersSection from "./PlayersSection/PlayersSection";
 
 const PlayersPage = () => {
-  const dispatch = useDispatch();
   const { playersData, playersScroll, allDataDisplayed, loading, error } =
     useSelector((s) => s.players);
-  const { pageVisits } = useSelector((s) => s.global);
+  const pageVisits = useSelector((s) => s.global.pageVisits);
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const pathname = usePathname();
 
   const [lastPlayerRef, paginationNumber, setPaginationNumber] =
     useInfiniteScroll(playersData, null, PLAYERS_BATCH_SIZE);
-
-  const router = useRouter();
-  const pathname = usePathname();
 
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());

@@ -11,9 +11,11 @@ import s from "./MapsPage.module.scss";
 
 const MapsPage = () => {
   const { allMaps, mapsData, mapsScroll } = useSelector((s) => s.maps);
+
+  const dispatch = useDispatch();
+
   const [lastMapRef, paginationNumber, setPaginationNumber] =
     useInfiniteScroll(mapsData);
-  const dispatch = useDispatch();
 
   function updateAllDataDisplayedStatus() {
     const lastMapsPagination = Math.ceil(

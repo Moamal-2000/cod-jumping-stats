@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./LeaderBoardError.module.scss";
 
 const LeaderBoardError = () => {
-  const { tryFetchAgain } = useSelector((s) => s.global);
+  const tryFetchAgain = useSelector((s) => s.global.tryFetchAgain);
   const dispatch = useDispatch();
 
   function handleRetryButton() {

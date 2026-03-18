@@ -6,7 +6,7 @@ import s from "./ExpandButton.module.scss";
 
 const ExpandButton = () => {
   const { loading, error, mapsData } = useSelector((s) => s.maps);
-  const { isMapsExpanded } = useSelector((s) => s.global);
+  const isMapsExpanded = useSelector((s) => s.global.isMapsExpanded);
 
   const dispatch = useDispatch();
 

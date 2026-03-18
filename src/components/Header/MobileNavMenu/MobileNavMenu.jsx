@@ -7,7 +7,7 @@ import MobileNavLinks from "./MobileNavLinks/MobileNavLinks";
 import s from "./MobileNavMenu.module.scss";
 
 const MobileNavMenu = () => {
-  const { isMobileNavActive } = useSelector((s) => s.global);
+  const isMobileNavActive = useSelector((s) => s.global.isMobileNavActive);
   const activeClass = isMobileNavActive ? s.active : "";
 
   useEffect(() => {

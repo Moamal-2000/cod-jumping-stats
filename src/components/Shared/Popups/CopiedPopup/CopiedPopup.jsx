@@ -7,7 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./CopiedPopup.module.scss";
 
 const CopiedPopup = () => {
-  const { activeCopyAlert } = useSelector((s) => s.global);
+  const activeCopyAlert = useSelector((s) => s.global.activeCopyAlert);
+
   const dispatch = useDispatch();
   const debounceRef = useRef(null);
 

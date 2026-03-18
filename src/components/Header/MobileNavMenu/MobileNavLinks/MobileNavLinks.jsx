@@ -6,10 +6,12 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./MobileNavLinks.module.scss";
 
 const MobileNavLinks = () => {
-  const { isMobileNavActive } = useSelector((s) => s.global);
-  const activeClass = isMobileNavActive ? s.active : "";
+  const isMobileNavActive = useSelector((s) => s.global.isMobileNavActive);
+
   const currentPage = usePathname();
   const dispatch = useDispatch();
+
+  const activeClass = isMobileNavActive ? s.active : "";
 
   return (
     <ul className={`${s.links} ${activeClass}`}>
