@@ -2,94 +2,86 @@
 
 .tabsNav {
   display: flex;
-  gap: 4px;
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  padding: 6px;
-  margin-bottom: 24px;
+  align-items: center;
+  margin-bottom: 22px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
 
-  @include m.small {
-    margin-bottom: 16px;
+@include m.very-small {
+  .tabsNav {
+    width: 100%;
   }
 }
 
 .tab {
-  flex: 1;
   @include m.flex-center;
-  gap: 8px;
-  padding: 14px 24px;
+  gap: 7px;
+  min-height: 36px;
+  padding: 8px 12px;
   background: transparent;
   border: none;
-  border-radius: 8px;
   color: #9ca3af;
-  font-size: 0.95rem;
-  font-weight: 500;
+  font-size: 0.84rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: color 0.2s ease, background-color 0.2s ease;
   position: relative;
-  overflow: hidden;
   white-space: nowrap;
-
-  &::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, rgba(250, 204, 21, 0.1) 0%, rgba(250, 204, 21, 0.05) 100%);
-    opacity: 0;
-    transition: opacity 0.2s ease;
-  }
 
   &:hover:not(.active) {
     color: #e5e7eb;
-    background: rgba(255, 255, 255, 0.04);
+    background: rgba(255, 255, 255, 0.03);
   }
 
   &:focus-visible {
     outline: 2px solid #facc15;
-    outline-offset: 2px;
+    outline-offset: 1px;
     z-index: 1;
   }
+}
 
-  @include m.small {
-    padding: 12px 16px;
-    font-size: 0.875rem;
-    gap: 6px;
+@include m.very-small {
+  .tab {
+    flex: 1;
   }
 }
 
 .tab.active {
-  color: #facc15;
-  background: rgba(250, 204, 21, 0.08);
-
-  &::before {
-    opacity: 1;
-  }
+  color: #f9fafb;
+  background: rgba(255, 255, 255, 0.05);
 
   .icon {
     color: #facc15;
   }
 
   .count {
-    background: rgba(250, 204, 21, 0.2);
+    background: #3f391f;
     color: #facc15;
   }
 }
 
+.tab.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  border-radius: 50%;
+  background: #facc15;
+}
+
 .icon {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
   flex-shrink: 0;
   color: currentColor;
   fill: currentColor;
   transition: color 0.2s ease;
-
-  @include m.small {
-    width: 16px;
-    height: 16px;
-  }
 }
 
 .label {
+  line-height: 1;
   transition: color 0.2s ease;
 }
 
@@ -97,29 +89,22 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 24px;
-  height: 24px;
-  padding: 0 8px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
   background: rgba(255, 255, 255, 0.08);
-  border-radius: 12px;
-  font-size: 0.75rem;
+  border-radius: 50%;
+  font-size: 0.64rem;
   font-weight: 600;
   color: #9ca3af;
   transition: all 0.2s ease;
-
-  @include m.small {
-    min-width: 22px;
-    height: 22px;
-    padding: 0 6px;
-    font-size: 0.7rem;
-  }
 }
 
 /* Reduced motion support */
 @media (prefers-reduced-motion: reduce) {
 
   .tab,
-  .tab::before,
+  .tab::after,
   .icon,
   .label,
   .count {
