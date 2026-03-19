@@ -17,7 +17,6 @@ const MobileNavLinks = () => {
     <ul className={`${s.links} ${activeClass}`}>
       {NAV_LINKS_DATA.map(({ name, href, iconName, id }) => {
         const isCurrentPage = currentPage === href;
-        const activeClass = isCurrentPage ? s.active : "";
 
         function handleLinkClick() {
           if (isCurrentPage) return;
@@ -28,7 +27,7 @@ const MobileNavLinks = () => {
           <li key={id}>
             <Link
               href={href}
-              className={`${s.link} ${activeClass}`}
+              className={isCurrentPage ? s.active : ""}
               onClick={handleLinkClick}
             >
               <svg aria-hidden="true">
