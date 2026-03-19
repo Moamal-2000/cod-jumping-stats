@@ -13,7 +13,7 @@
   }
 }
 
-@media (max-width: 430px) {
+@include m.small {
   .controls {
     flex-direction: column;
   }
@@ -84,7 +84,6 @@
   padding-right: 0.75rem;
   width: 100%;
   min-width: 74px;
-
 }
 
 .selectWrap select:disabled {
@@ -181,4 +180,17 @@
   color: #000;
   border-color: transparent;
   box-shadow: 0 0 0 1px rgba(250, 204, 21, 0.35);
+}
+
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-left: auto;
+}
+
+@include m.small {
+  .options {
+    margin-left: 0;
+  }
 }
