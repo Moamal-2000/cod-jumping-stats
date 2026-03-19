@@ -12,26 +12,23 @@ import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 import ServersControls from "./ServersControls/ServersControls";
 
-const DEFAULT_REFRESH_SECONDS = 30;
+const DEFAULT_REFRESH_SECONDS = "30";
 const DEFAULT_GAME_FILTER = "cod2";
 const DEFAULT_STATUS_SERVER = "all";
-const DEFAULT_AUTO_REFRESH = "true";
 
 const ServersPage = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  const refreshParam = +searchParams.get("refresh") || DEFAULT_REFRESH_SECONDS;
-  const autoRefreshParam =
-    searchParams.get("auto-refresh") || DEFAULT_AUTO_REFRESH;
+  const refreshParam = searchParams.get("refresh") || DEFAULT_REFRESH_SECONDS;
   const gameParam = searchParams.get("game") || DEFAULT_GAME_FILTER;
   const statusParam = searchParams.get("status") || DEFAULT_STATUS_SERVER;
 
-  const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(+refreshParam)
+  const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(refreshParam)
     ? refreshParam
     : DEFAULT_REFRESH_SECONDS;
-  const autoRefreshEnabled = autoRefreshParam === "true" ? true : false;
+  const autoRefreshEnabled = refreshParam !== "disabled" ? true : false;
 
   const gameFilter = SERVERS_GAME_FILTER_OPTIONS.some(
     (option) => option.id === gameParam,
@@ -58,15 +55,6 @@ const ServersPage = () => {
     createQueryString("refresh", value, searchParams, router, pathname);
   }
 
-  function handleAutoRefreshEnabledChange(enabled) {
-    if (enabled) {
-      removeQueryString("auto-refresh", searchParams, router, pathname);
-      return;
-    }
-
-    createQueryString("auto-refresh", false, searchParams, router, pathname);
-  }
-
   function handleGameFilterChange(value) {
     if (value === DEFAULT_GAME_FILTER) {
       removeQueryString("game", searchParams, router, pathname);
@@ -91,7 +79,6 @@ const ServersPage = () => {
         refreshSeconds={refreshSeconds}
         onRefreshSecondsChange={handlerefreshParamChange}
         autoRefreshEnabled={autoRefreshEnabled}
-        onAutoRefreshEnabledChange={handleAutoRefreshEnabledChange}
         gameFilter={gameFilter}
         onGameFilterChange={handleGameFilterChange}
         statusFilter={statusFilter}

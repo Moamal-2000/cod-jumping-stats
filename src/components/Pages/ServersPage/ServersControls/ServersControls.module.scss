@@ -35,37 +35,21 @@
 }
 
 .selectWrap {
+  height: 40px;
   display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  justify-content: space-between;
-}
-
-.refreshRow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-}
-
-.selectWrap {
   position: relative;
 }
 
-.selectWrap::after {
-  content: "sec";
+.selectWrap:not(.inactive)::after {
+  content: "Second";
   position: absolute;
   color: #f8fafc;
   font-weight: 600;
   font-size: 0.9rem;
-  top: calc(50% - 2px);
+  top: calc(50% - 1px);
   right: 9px;
   translate: 0 -50%;
   pointer-events: none;
-}
-
-.selectWrap:has(select:disabled)::after {
-  color: #4f5560;
 }
 
 .selectWrap select {
@@ -79,6 +63,7 @@
   cursor: pointer;
   font-weight: 600;
   font-size: 0.9rem;
+  text-transform: capitalize;
   outline: none;
   appearance: none;
   padding-right: 0.75rem;
@@ -86,70 +71,9 @@
   min-width: 74px;
 }
 
-.selectWrap select:disabled {
-  color: #6b7280;
-  cursor: not-allowed;
-}
-
 .selectWrap select option {
   background: #111827;
   color: #f9fafb;
-}
-
-.switch {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  cursor: pointer;
-  user-select: none;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: #cbd5f5;
-}
-
-.switch input {
-  position: absolute;
-  opacity: 0;
-  width: 1px;
-  height: 1px;
-}
-
-.slider {
-  width: 36px;
-  height: 20px;
-  border-radius: 999px;
-  background: rgba(55, 65, 81, 0.8);
-  position: relative;
-  transition: all 0.2s ease;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.slider::after {
-  content: "";
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #e5e7eb;
-  position: absolute;
-  top: 2px;
-  left: 3px;
-  transition: all 0.2s ease;
-}
-
-.switch input:checked+.slider {
-  background: linear-gradient(135deg, #facc15, #f59e0b);
-  border-color: transparent;
-}
-
-.switch input:checked+.slider::after {
-  transform: translateX(16px);
-  background: #1f2937;
-}
-
-.switchLabel {
-  min-width: 22px;
-  text-transform: uppercase;
-  letter-spacing: 0.6px;
 }
 
 .toggleButtons {
