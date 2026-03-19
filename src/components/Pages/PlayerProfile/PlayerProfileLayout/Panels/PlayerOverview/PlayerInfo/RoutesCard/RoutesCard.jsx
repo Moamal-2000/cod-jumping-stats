@@ -16,19 +16,18 @@ const RoutesCard = ({ performanceStats }) => {
 
       <div className={s.infoValue}>{totalMapsCompleted}</div>
 
-      <h2 className={s.infoSubtext}>
+      <h2 className={s.infoSubtext} id="completion-rate">
         <svg aria-hidden="true">
           <use href="/icons-sprite.svg#check-circle"></use>
         </svg>
         {Math.round(completionRatio)}% completion rate
       </h2>
 
-      <div className={s.progressBar} role="progressbar">
-        <div
-          className={`${s.progressBarFill} ${getCompletionRateClass(completionRatio)}`}
-          style={{ width: `${completionRatio}%` }}
-        />
-      </div>
+      <progress
+        className={`${s.progressBar} ${getCompletionRateClass(20)}`}
+        value={completionRatio}
+        max="100"
+      />
     </div>
   );
 };
