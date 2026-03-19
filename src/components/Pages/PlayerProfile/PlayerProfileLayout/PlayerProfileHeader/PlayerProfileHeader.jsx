@@ -16,21 +16,15 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
   return (
     <section className={s.profileHeader}>
       <div className={s.playerInfo}>
-        <div className={s.avatarContainer}>
-          <div className={s.avatar}>
-            <svg aria-hidden="true">
-              <use href="/icons-sprite.svg#users" />
-            </svg>
-
-            {countryCode && (
-              <CountryImage
-                countryCode={countryCode}
-                countryName={jumpScores?.Country}
-                colorPlaceholder={true}
-                size={24}
-              />
-            )}
-          </div>
+        <div className={s.avatar}>
+          {countryCode && (
+            <CountryImage
+              countryCode={countryCode}
+              countryName={jumpScores?.Country}
+              colorPlaceholder={true}
+              size={24}
+            />
+          )}
         </div>
 
         <div className={s.playerDetails}>
