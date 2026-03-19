@@ -77,4 +77,9 @@ $progress-gradients: (
   .progressBar.highlight-#{$key}::-webkit-progress-value {
     background: linear-gradient(90deg, #{nth($colors, 1)}, #{nth($colors, 2)});
   }
+
+  // Mozilla Firefox Doesn't support linear gradients yet.
+  .progressBar::-moz-progress-bar {
+    background: #{nth($colors, 2)};
+  }
 }
