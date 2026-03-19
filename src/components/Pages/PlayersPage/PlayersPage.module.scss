@@ -1,6 +1,11 @@
 @use "@/styles/mixins" as m;
 
 .playersContainer {
+  --players-accent: #14b8a6;
+  --players-accent-strong: #0f766e;
+  --players-accent-soft: rgba(20, 184, 166, 0.22);
+  --players-focus: #2dd4bf;
+
   display: flex;
   flex-direction: column;
   gap: 32px;
