@@ -1,11 +1,6 @@
 @use "@/styles/mixins" as m;
 
 .playersContainer {
-  --players-accent: #14b8a6;
-  --players-accent-strong: #0f766e;
-  --players-accent-soft: rgba(20, 184, 166, 0.22);
-  --players-focus: #2dd4bf;
-
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -15,39 +10,4 @@
   .playersContainer {
     gap: 24px;
   }
-}
-
-.playersHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  margin-bottom: 32px;
-  position: relative;
-}
-
-.titleSection {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.playersTitle {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #f9fafb;
-  margin: 0;
-  background: linear-gradient(135deg, #f9fafb 0%, #9ca3af 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  letter-spacing: -0.02em;
-}
-
-.playersSubtitle {
-  color: #9ca3af;
-  font-size: 1rem;
-  margin: 0;
-  font-weight: 500;
-  letter-spacing: .01em;
 }

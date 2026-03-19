@@ -22,10 +22,6 @@
 .tbody tr {
   width: inherit;
   transition: background-color .1s ease;
-
-  & .score {
-    text-align: center;
-  }
 }
 
 .tbody tr[data-type=player-stats-row]:hover {

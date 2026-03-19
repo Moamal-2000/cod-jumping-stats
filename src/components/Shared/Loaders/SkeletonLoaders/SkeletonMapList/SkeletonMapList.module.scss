@@ -172,17 +172,6 @@
   animation-delay: var(--pulse-delay);
 }
 
-.line {
-  width: 100%;
-  height: 14px;
-  margin-bottom: 10px;
-}
-
-.shortLine {
-  width: 70%;
-  height: 14px;
-}
-
 @keyframes mapsSkeletonPulse {
   0% {
     transform: translateX(-150%);
