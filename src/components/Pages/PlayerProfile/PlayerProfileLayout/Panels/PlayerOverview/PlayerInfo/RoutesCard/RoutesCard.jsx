@@ -24,7 +24,7 @@ const RoutesCard = ({ performanceStats }) => {
       </h2>
 
       <progress
-        className={`${s.progressBar} ${getCompletionRateClass(20)}`}
+        className={`${s.progressBar} ${getCompletionRateClass(completionRatio)}`}
         value={completionRatio}
         max="100"
       />
