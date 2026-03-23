@@ -1,3 +1,5 @@
+@use 'sass:list';
+
 .card {
   background: rgba(31, 41, 55, 0.6);
   border-radius: 12px;
@@ -75,11 +77,11 @@ $progress-gradients: (
 
 @each $key, $colors in $progress-gradients {
   .progressBar.highlight-#{$key}::-webkit-progress-value {
-    background: linear-gradient(90deg, #{nth($colors, 1)}, #{nth($colors, 2)});
+    background: linear-gradient(90deg, #{list.nth($colors, 1)}, #{list.nth($colors, 2)});
   }
 
   // Mozilla Firefox Doesn't support linear gradients yet.
   .progressBar::-moz-progress-bar {
-    background: #{nth($colors, 2)};
+    background: #{list.nth($colors, 2)};
   }
 }
