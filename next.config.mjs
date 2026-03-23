@@ -22,6 +22,10 @@ const nextConfig = {
       { source: "/api/localhost/:path*", destination: `${API_URL}/:path*` },
     ];
   },
+
+  experimental: {
+    optimizePackageImports: ["@reduxjs/toolkit", "react-redux"],
+  },
 };
 
 export default nextConfig;
