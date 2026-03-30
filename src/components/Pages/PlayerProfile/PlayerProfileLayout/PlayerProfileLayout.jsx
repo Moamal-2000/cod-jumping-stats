@@ -45,8 +45,8 @@ const PlayerProfileLayout = ({ children, playerId }) => {
     <div className="container">
       <main className={s.playerPage}>
         <Breadcrumbs
-          breadcrumbLabels={breadcrumbLabels(purePlayerName)}
-          breadcrumbPaths={breadcrumbPaths}
+          labels={breadcrumbLabels(purePlayerName)}
+          paths={breadcrumbPaths}
         />
 
         <div className={s.profileContainer}>

@@ -48,8 +48,8 @@ const MapDetailPage = ({ cpId }) => {
     <div className="container">
       <main className={s.mapDetailPage}>
         <Breadcrumbs
-          breadcrumbLabels={breadcrumbLabels(mapData?.Name)}
-          breadcrumbPaths={breadcrumbPaths}
+          labels={breadcrumbLabels(mapData?.Name)}
+          paths={breadcrumbPaths}
         />
 
         <MapDetailHeader mapData={mapData} />
