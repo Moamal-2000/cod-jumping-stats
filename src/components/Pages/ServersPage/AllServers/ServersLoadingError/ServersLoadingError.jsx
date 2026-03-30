@@ -16,10 +16,11 @@ const ServersLoadingError = ({ loading, error, gameParam }) => {
 
   if (loading && viewType === "list") {
     return (
-      <section className={s.listWrapper} role="presentation">
+      <section className={s.listWrapper}>
         <div className={s.listTitle}>
           <div className={`${s.skeletonLine} ${s.titleLine}`} />
         </div>
+
         <div className={s.tableWrap}>
           <table className={s.serversTable}>
             <thead>
@@ -30,9 +31,10 @@ const ServersLoadingError = ({ loading, error, gameParam }) => {
                 <th>Address</th>
               </tr>
             </thead>
+
             <tbody>
               {skeletonList.map((_, i) => (
-                <tr key={i}>
+                <tr key={i} role="presentation">
                   <td className={s.serverCell}>
                     <div className={`${s.skeletonLine} ${s.flagLine}`} />
                   </td>

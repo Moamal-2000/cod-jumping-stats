@@ -2,7 +2,7 @@ import s from "./SkeletonCard.module.scss";
 
 const SkeletonCard = () => {
   return (
-    <div className={s.skeletonCard}>
+    <div className={s.skeletonCard} role="presentation">
       <div className={s.header}>
         <div className={s.flag} />
         <div className={s.serverInfo}>
