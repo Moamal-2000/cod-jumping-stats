@@ -7,7 +7,7 @@
   gap: 16px;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .cardHeader {
     position: relative;
     margin-bottom: 50px;
@@ -19,7 +19,7 @@
   gap: 16px;
 }
 
-@include m.small {
+@include m.media(small) {
   .cardHeader .wrapper {
     gap: 8px;
   }
@@ -37,7 +37,7 @@
   flex-shrink: 0;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .cardHeader .wrapper .country {
     position: absolute;
     top: 58px;
@@ -45,7 +45,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .favButton {
     position: absolute;
     top: 64px;

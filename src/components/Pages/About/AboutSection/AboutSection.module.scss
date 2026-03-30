@@ -18,7 +18,7 @@
   color: var(--text-primary, #fff);
 }
 
-@include m.small {
+@include m.media(small) {
   .section {
     gap: 12px;
   }

@@ -7,7 +7,7 @@
   margin-bottom: 24px;
 }
 
-@include m.small {
+@include m.media(small) {
   .filtersSection {
     grid-template-columns: 1fr;
   }

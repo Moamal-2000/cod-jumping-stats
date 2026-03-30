@@ -6,7 +6,7 @@
   gap: 8px;
 }
 
-@include m.small {
+@include m.media(small) {
   .buttons {
     width: min-content;
   }

@@ -20,7 +20,7 @@
   }
 }
 
-@include m.large {
+@include m.media(large) {
   .mapsSection {
     grid-template-columns: repeat(2, minmax(368px, 1fr));
   }
@@ -41,7 +41,7 @@
   box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25), 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapsSection.list {
     border-radius: 0;
   }

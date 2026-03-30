@@ -28,7 +28,7 @@
   overflow-x: auto;
 }
 
-@include m.small {
+@include m.media(small) {
   .tableWrap {
     overflow: visible;
     border: none;
@@ -42,13 +42,13 @@
   min-width: 560px;
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable {
     min-width: 0;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable thead {
     display: none;
   }
@@ -68,7 +68,7 @@
   position: relative;
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody tr {
     gap: 12px;
     padding: 10px;
@@ -83,7 +83,7 @@
   vertical-align: top;
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody td {
     display: flex;
     flex-direction: column;
@@ -93,7 +93,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody td::before {
     content: attr(data-label);
     font-size: 0.7rem;
@@ -112,7 +112,7 @@
   background: #1d232f;
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody {
     display: flex;
     flex-direction: column;
@@ -120,7 +120,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody tr {
     display: grid;
     grid-template-columns: minmax(72px, auto) minmax(0, 1fr);
@@ -144,7 +144,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .serversTable tbody td:last-child {
     border-bottom: none;
   }
@@ -156,7 +156,7 @@
   width: 60px;
 }
 
-@include m.small {
+@include m.media(small) {
   .serverCell {
     grid-area: server;
     width: auto;
@@ -172,7 +172,7 @@
   display: block;
 }
 
-@include m.small {
+@include m.media(small) {
   .serverCell img {
     margin-left: 9px;
   }
@@ -193,7 +193,7 @@
   text-decoration: underline;
 }
 
-@include m.small {
+@include m.media(small) {
   .mapCell {
     grid-area: map;
   }
@@ -215,7 +215,7 @@
   font-weight: 600;
 }
 
-@include m.small {
+@include m.media(small) {
   .playerCell {
     grid-area: player;
   }
@@ -229,7 +229,7 @@
   color: #cbd5f5;
 }
 
-@include m.small {
+@include m.media(small) {
   .addressCell {
     grid-area: address;
   }
@@ -241,7 +241,7 @@
   gap: 8px;
 }
 
-@include m.small {
+@include m.media(small) {
   .addressValue {
     flex-wrap: wrap;
   }

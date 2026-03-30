@@ -21,7 +21,7 @@
   transition: padding 0.28s ease;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .leftPanel {
     background: transparent;
     border: none;
@@ -67,7 +67,7 @@
   margin: 0 -1rem 0;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .header {
     margin: 0;
     padding: 0;
@@ -108,7 +108,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .collapseButton {
     display: none;
   }
@@ -140,7 +140,7 @@
   }
 }
 
-@include m.large {
+@include m.media(large) {
 
   .searchContainer,
   .searchContainer input,
@@ -214,7 +214,7 @@
   }
 }
 
-@include m.large {
+@include m.media(large) {
   .mapsList {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -222,19 +222,19 @@
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mapsList {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .mapsList {
     grid-template-columns: 1fr;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapsList {
     margin: 0;
   }
@@ -320,7 +320,7 @@
   display: block;
 }
 
-@include m.large {
+@include m.media(large) {
   .mapTooltip {
     display: none;
   }

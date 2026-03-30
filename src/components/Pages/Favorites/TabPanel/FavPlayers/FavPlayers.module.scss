@@ -5,11 +5,11 @@
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 20px;
 
-  @include m.large {
+  @include m.media(large) {
     grid-template-columns: repeat(2, minmax(300px, 1fr));
   }
 
-  @include m.small {
+  @include m.media(small) {
     grid-template-columns: 1fr;
     gap: 12px;
   }

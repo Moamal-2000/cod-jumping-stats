@@ -5,7 +5,7 @@
   gap: 8px;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .sortViewWrapper {
     flex-wrap: wrap;
   }

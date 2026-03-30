@@ -7,7 +7,7 @@
   width: 100%;
 }
 
-@include m.small {
+@include m.media(small) {
   .checkboxes {
     display: grid;
     grid-template-columns: repeat(2, minmax(120px, 1fr));

@@ -29,14 +29,14 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .customTooltip:not(.center) {
     left: -128px;
     translate: 0;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .customTooltip:not(.center) {
     min-width: 22ch;
     white-space: normal;

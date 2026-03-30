@@ -8,7 +8,7 @@
   flex-wrap: wrap;
 }
 
-@include m.small {
+@include m.media(small) {
   .statsSection {
     justify-content: center;
     padding: 25px 12px 15px;
@@ -35,7 +35,7 @@
   color: #eab308;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .statsSection .dateWrapper .iconHolder {
     display: none;
   }
@@ -47,13 +47,13 @@
   line-height: 1.5;
 }
 
-@include m.small {
+@include m.media(small) {
   .statsSection .dateWrapper .info {
     font-size: 1rem;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .statsSection .dateWrapper .info {
     text-align: center;
     font-size: .9rem;
@@ -73,13 +73,13 @@
   gap: 60px;
 }
 
-@include m.small {
+@include m.media(small) {
   .statsSection .statsWrapper {
     gap: 40px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .statsSection .statsWrapper {
     gap: 30px;
   }
@@ -98,7 +98,7 @@
   margin-bottom: 5px;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .statsSection .statsWrapper .stat .number {
     font-size: 1.4rem;
   }
@@ -109,7 +109,7 @@
   color: #94a3b8;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .statsSection .statsWrapper .stat .title {
     font-size: .8rem;
   }

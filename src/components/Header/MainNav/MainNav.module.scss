@@ -6,13 +6,13 @@
   gap: 10px;
 }
 
-@include m.large {
+@include m.media(large) {
   .mainNav {
     gap: 0;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mainNav {
     display: none;
   }
@@ -40,13 +40,13 @@
   }
 }
 
-@include m.large {
+@include m.media(large) {
   .mainNav>a {
     border-radius: 0;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mainNav>a {
     padding: 11px 16px;
   }
@@ -83,7 +83,7 @@
   transition: color .12s ease;
 }
 
-@include m.large {
+@include m.media(large) {
   .mainNav>a>span {
     font-size: .85rem;
   }

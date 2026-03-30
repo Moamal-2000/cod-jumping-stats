@@ -14,13 +14,13 @@
   }
 }
 
-@include m.large {
+@include m.media(large) {
   .filtersSection {
     gap: 10px;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .filtersSection {
     flex-direction: column;
     align-items: flex-start;
@@ -36,7 +36,7 @@
   position: relative;
 }
 
-@include m.small {
+@include m.media(small) {
   .filtersSection .row {
     justify-content: space-between;
     align-items: flex-start;
@@ -49,7 +49,7 @@
   justify-content: space-between;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .filtersSection .row.secondRow {
     flex-direction: column;
     align-items: flex-start;
@@ -62,13 +62,13 @@
   gap: 6px;
 }
 
-@include m.large {
+@include m.media(large) {
   .sortButtons {
     grid-template-columns: repeat(3, minmax(100px, 1fr));
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .sortButtons {
     display: flex;
     flex-direction: column;
@@ -117,7 +117,7 @@
   gap: 8px;
 }
 
-@include m.small {
+@include m.media(small) {
   .fields {
     flex-wrap: wrap;
 

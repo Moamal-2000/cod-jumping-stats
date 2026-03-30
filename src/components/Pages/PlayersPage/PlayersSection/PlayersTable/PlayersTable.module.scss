@@ -8,7 +8,7 @@
   border-radius: 12px;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable {
     border: none;
     border-radius: 0;
@@ -22,13 +22,13 @@
   z-index: 10;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .playersTable thead {
     top: 66px;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable thead {
     display: none;
   }
@@ -45,7 +45,7 @@
   text-transform: uppercase;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable tbody {
     display: flex;
     flex-direction: column;
@@ -58,7 +58,7 @@
   transition: background-color 0.2s ease;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable tbody tr {
     display: flex;
     flex-direction: column;
@@ -70,7 +70,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .playersTable tbody tr {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -102,7 +102,7 @@
   background-color: #20272f;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable tbody tr:hover {
     background-color: #131820;
   }
@@ -112,7 +112,7 @@
   border-bottom: none;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable tbody tr:last-child {
     border-bottom: 1px solid #2a313a;
   }
@@ -124,7 +124,7 @@
   color: #e2e8f0;
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable td {
     display: flex;
     flex-direction: column;
@@ -134,7 +134,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .playersTable td:last-child {
     border-bottom: none;
   }
@@ -179,7 +179,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .playerLink {
     width: 100%;
   }
@@ -198,7 +198,7 @@
   line-height: 1.2;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .playerName {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -213,7 +213,7 @@
   line-height: 1.2;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .prefName {
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -233,7 +233,7 @@
   font-weight: 500;
 }
 
-@include m.small {
+@include m.media(small) {
   .visitsValue {
     width: fit-content;
   }

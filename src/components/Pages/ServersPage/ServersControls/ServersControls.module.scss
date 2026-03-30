@@ -7,13 +7,13 @@
   margin-bottom: 64px;
 }
 
-@include m.large {
+@include m.media(large) {
   .controls {
     gap: 1rem;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .controls {
     flex-direction: column;
   }
@@ -113,7 +113,7 @@
   margin-left: auto;
 }
 
-@include m.small {
+@include m.media(small) {
   .options {
     margin-left: 0;
   }

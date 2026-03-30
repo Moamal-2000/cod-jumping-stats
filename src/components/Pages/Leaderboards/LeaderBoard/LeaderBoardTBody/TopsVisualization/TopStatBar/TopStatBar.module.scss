@@ -28,7 +28,7 @@
   transition: opacity .2s ease;
 }
 
-@include m.small {
+@include m.media(small) {
   .statBarWrapper .toolTip {
     display: none;
   }

@@ -17,7 +17,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .playerCard {
     padding: 12px;
   }

@@ -11,7 +11,7 @@
   cursor: pointer;
 }
 
-@include m.small {
+@include m.media(small) {
   .player a {
     align-items: flex-end;
   }
@@ -37,13 +37,13 @@
   max-width: 240px;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .player a {
     max-width: none;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .player a {
     max-width: 240px;
   }
@@ -55,7 +55,7 @@
   white-space: nowrap;
 }
 
-@include m.small {
+@include m.media(small) {
   .player .playerName {
     position: relative;
     top: -6px;

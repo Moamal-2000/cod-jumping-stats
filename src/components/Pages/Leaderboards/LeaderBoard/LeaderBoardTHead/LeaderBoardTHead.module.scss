@@ -10,7 +10,7 @@
   transition: background-color .3s;
 }
 
-@include m.large {
+@include m.media(large) {
   .thead {
     top: 186px;
   }
@@ -66,13 +66,13 @@
   transition: color .1s;
 }
 
-@include m.large {
+@include m.media(large) {
   .thead tr .score[data-header=Points] {
     display: none;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .thead tr .score[data-header=Points] {
     display: block;
   }

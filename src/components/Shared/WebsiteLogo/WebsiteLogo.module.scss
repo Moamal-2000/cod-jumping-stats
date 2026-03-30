@@ -11,7 +11,7 @@
   position: relative;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .logo {
     min-width: 172px;
     padding-left: 64px;
@@ -28,7 +28,7 @@
   filter: brightness(1.5) saturate(1.5);
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .logo>img {
     width: 58px;
     height: 58px;
@@ -50,7 +50,7 @@
   color: #f2f2f2;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .logo>span {
     font-size: 1.2rem;
   }

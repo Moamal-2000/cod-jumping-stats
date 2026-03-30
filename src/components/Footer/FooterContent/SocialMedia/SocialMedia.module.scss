@@ -16,7 +16,7 @@
   font-weight: 500;
 }
 
-@include m.small {
+@include m.media(small) {
   .socialMediaNav .title {
     margin-bottom: 0;
   }
@@ -29,7 +29,7 @@
   gap: 16px;
 }
 
-@include m.small {
+@include m.media(small) {
   .socialMediaNav ul {
     flex-wrap: wrap;
   }

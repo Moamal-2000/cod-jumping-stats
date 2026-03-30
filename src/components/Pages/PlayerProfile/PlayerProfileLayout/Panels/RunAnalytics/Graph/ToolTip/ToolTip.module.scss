@@ -40,7 +40,7 @@
   border-top: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-@include m.small {
+@include m.media(small) {
 
   .tooltip,
   .tooltip strong {

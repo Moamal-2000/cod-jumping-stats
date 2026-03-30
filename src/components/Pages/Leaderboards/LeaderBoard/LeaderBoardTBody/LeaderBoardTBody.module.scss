@@ -11,7 +11,7 @@
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .tbody {
     display: flex;
     flex-direction: column;
@@ -28,7 +28,7 @@
   background-color: #242b3b;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .tbody tr[data-type=player-stats-row]:hover {
     background-color: #1d222f;
   }

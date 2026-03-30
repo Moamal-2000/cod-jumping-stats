@@ -7,7 +7,7 @@
   margin-bottom: 100px;
 }
 
-@include m.large {
+@include m.media(large) {
   .serversGrid {
     grid-template-columns: repeat(2, 1fr);
     gap: 16px;

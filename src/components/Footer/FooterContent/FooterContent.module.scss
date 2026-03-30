@@ -6,13 +6,13 @@
   gap: 40px;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .contentSection {
     flex-wrap: wrap;
   }
 }
 
-@include m.small {
+@include m.media(small) {
 
   .contentSection,
   .contentSection .leftSide {
@@ -29,19 +29,19 @@
   margin-block: 16px 24px;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .contentSection .leftSide .description {
     max-width: 470px;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .contentSection .leftSide .description {
     text-align: center;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .contentSection .leftSide .description {
     font-size: .8rem;
     text-wrap: balance;

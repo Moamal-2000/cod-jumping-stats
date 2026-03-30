@@ -166,13 +166,13 @@
   box-shadow: 0 1px 0 #facc15;
 }
 
-@include m.large {
+@include m.media(large) {
   .table thead {
     top: 128px;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .table thead {
     top: 67px;
   }
@@ -496,7 +496,7 @@
   left: 0;
 }
 
-@include m.large {
+@include m.media(large) {
   .legendItems {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -504,7 +504,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .legendItems {
     display: flex;
     flex-wrap: wrap;

@@ -9,7 +9,7 @@
     grid-template-columns: repeat(2, minmax(340px, 1fr));
   }
 
-  @include m.large {
+  @include m.media(large) {
     grid-template-columns: repeat(2, minmax(320px, 1fr));
   }
 
@@ -17,7 +17,7 @@
     grid-template-columns: 1fr;
   }
 
-  @include m.small {
+  @include m.media(small) {
     gap: 16px;
   }
 }

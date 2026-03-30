@@ -6,13 +6,13 @@
   margin: 0 auto;
 }
 
-@include m.small {
+@include m.media(small) {
   .topRunsContent {
     padding: 24px 20px;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .topRunsContent {
     padding: 24px 0;
   }
@@ -42,13 +42,13 @@
   line-height: 1.5;
 }
 
-@include m.small {
+@include m.media(small) {
   .runsSummary {
     font-size: 0.875rem;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .runsSummary {
     background: transparent;
     border: 0;

@@ -20,7 +20,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .notice {
     max-width: none;
     width: 100%;
@@ -37,7 +37,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .notice {
     padding: 16px;
   }
@@ -57,13 +57,13 @@
   line-height: 1.4;
 }
 
-@include m.small {
+@include m.media(small) {
   .content>p {
     font-size: 0.85rem;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .content>p {
     font-weight: 400;
   }

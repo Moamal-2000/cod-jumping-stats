@@ -7,7 +7,7 @@
   dominant-baseline: central;
 }
 
-@include m.small {
+@include m.media(small) {
   .label {
     display: none;
   }

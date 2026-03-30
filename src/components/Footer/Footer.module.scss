@@ -29,7 +29,7 @@
   margin-block: 40px;
 }
 
-@include m.small {
+@include m.media(small) {
   .sectionsLine {
     margin-block: 20px;
   }

@@ -18,7 +18,7 @@
   text-shadow: 0 10px 15px rgba(245, 212, 82, .3);
 }
 
-@include m.small {
+@include m.media(small) {
   .errorCode {
     font-size: 9rem;
   }
@@ -34,7 +34,7 @@
   -webkit-text-fill-color: transparent;
 }
 
-@include m.small {
+@include m.media(small) {
   .title {
     font-size: 1.8rem;
   }
@@ -49,7 +49,7 @@
   color: #c4c8ce;
 }
 
-@include m.small {
+@include m.media(small) {
   .description {
     font-size: .9rem;
     line-height: 1.6;
@@ -57,7 +57,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .description {
     max-width: 100%;
   }
@@ -68,7 +68,7 @@
   gap: 10px;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .buttons {
     flex-direction: column;
     width: 100%;
@@ -101,7 +101,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .buttons :where(a, button) {
     padding: 10px 18px;
     font-size: .9rem;
@@ -109,7 +109,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .buttons :where(a, button) {
     width: 100%;
     text-align: center;

@@ -21,7 +21,7 @@
   --pulse-delay: 1.2s;
 }
 
-@include m.large {
+@include m.media(large) {
   .card:nth-child(2n + 1) {
     --pulse-delay: 0s;
   }
@@ -54,13 +54,13 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .card .content {
     padding: 18px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .card .content {
     padding: 16px 10px;
   }

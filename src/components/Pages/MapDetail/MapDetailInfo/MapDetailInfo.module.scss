@@ -130,7 +130,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .cardHeader {
     flex-direction: column;
     align-items: flex-start;

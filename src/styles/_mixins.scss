@@ -1,29 +1,28 @@
+@use "sass:list";
+
+$breakpoints: (
+  "large": 1200px,
+  "medium": 992px,
+  "small": 768px,
+  "very-small": 376px,
+);
+
 @mixin flex-center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-@mixin large {
-  @media (max-width: 1200px) {
-    @content;
-  }
-}
+@mixin media($name) {
+  $size: map-get($breakpoints, $name);
 
-@mixin medium {
-  @media (max-width: 992px) {
-    @content;
+  @if ($size) {
+    @media (max-width: $size) {
+      @content;
+    }
   }
-}
 
-@mixin small {
-  @media (max-width: 768px) {
-    @content;
-  }
-}
-
-@mixin very-small {
-  @media (max-width: 376px) {
-    @content;
+  @else {
+    @error "Unknown breakpoint: #{$name}, known breakpoints are: (#{map-keys($breakpoints)})";
   }
 }

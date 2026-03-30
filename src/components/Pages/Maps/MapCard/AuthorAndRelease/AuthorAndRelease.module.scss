@@ -31,7 +31,7 @@
   overflow: hidden;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .authorAndRelease .authorWrapper .countryFlag {
     display: none;
   }

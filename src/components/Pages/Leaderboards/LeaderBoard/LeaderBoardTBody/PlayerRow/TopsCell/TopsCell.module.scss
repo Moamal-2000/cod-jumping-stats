@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-@include m.medium {
+@include m.media(medium) {
   .tops[data-type=player-stats-tops] {
     align-items: flex-end;
     height: 150px;

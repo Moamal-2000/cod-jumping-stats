@@ -7,13 +7,13 @@
   border: 1px solid #1d2432;
 }
 
-@include m.small {
+@include m.media(small) {
   .fpsPerformanceSection {
     padding: 20px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .fpsPerformanceSection {
     padding: 0;
     border: none;
@@ -29,7 +29,7 @@
   border-bottom: 1px solid #1d2432;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .fpsHeader {
     flex-direction: column;
     align-items: flex-start;
@@ -62,19 +62,19 @@
   width: 100%;
 }
 
-@include m.large {
+@include m.media(large) {
   .fpsOverviewStats {
     grid-template-columns: repeat(3, minmax(150px, 1fr));
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .fpsOverviewStats {
     grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .fpsOverviewStats {
     grid-template-columns: 1fr;
   }

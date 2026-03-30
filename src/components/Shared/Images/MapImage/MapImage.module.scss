@@ -19,7 +19,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .imageContainer {
     height: 200px;
   }

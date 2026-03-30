@@ -88,7 +88,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .header {
     padding: 1.5rem;
   }

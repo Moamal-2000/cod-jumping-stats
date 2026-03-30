@@ -7,7 +7,7 @@
   min-width: 350px;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .fpsButtons {
     grid-template-columns: repeat(3, 1fr);
     min-width: auto;

@@ -21,7 +21,7 @@
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mobileNavBtn {
     display: flex;
   }

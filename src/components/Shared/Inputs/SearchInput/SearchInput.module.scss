@@ -10,14 +10,14 @@
   width: 100%;
 }
 
-@include m.small {
+@include m.media(small) {
   .searchContainer {
     max-width: 320px;
     min-width: 240px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .searchContainer {
     min-width: auto;
   }

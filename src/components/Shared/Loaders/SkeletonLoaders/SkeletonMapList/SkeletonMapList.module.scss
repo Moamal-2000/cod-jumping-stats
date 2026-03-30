@@ -10,14 +10,14 @@
   border-bottom: 1px solid #1e293b;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .map {
     border-bottom: 1px solid #394b69;
     gap: 0 24px;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .map {
     flex-direction: column;
     gap: 24px;
@@ -31,7 +31,7 @@
   flex-shrink: 0;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mapImage {
     max-width: 320px;
     width: 100%;
@@ -40,7 +40,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .mapImage {
     aspect-ratio: 16 / 9;
     width: 100%;
@@ -90,13 +90,13 @@
   margin-left: auto;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .rightSide {
     margin-left: unset;
   }
 }
 
-@include m.large {
+@include m.media(large) {
   .rightSide {
     max-width: 310px;
     width: 100%;
@@ -181,3 +181,4 @@
     transform: translateX(150%);
   }
 }
+

@@ -19,13 +19,13 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .list>li {
     font-size: .9rem;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .list>li {
     font-size: .8rem;
   }

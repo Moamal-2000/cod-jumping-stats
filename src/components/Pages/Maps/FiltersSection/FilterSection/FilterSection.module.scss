@@ -10,7 +10,7 @@
   flex-wrap: wrap;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .filtersSection {
     justify-content: center;
   }

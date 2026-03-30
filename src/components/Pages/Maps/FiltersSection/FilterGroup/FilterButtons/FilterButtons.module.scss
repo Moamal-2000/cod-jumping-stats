@@ -6,20 +6,20 @@
   gap: 8px 6px;
 }
 
-@include m.large {
+@include m.media(large) {
   .filterButtons {
     grid-template-columns: repeat(4, minmax(90px, 1fr));
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .filterButtons {
     display: flex;
     flex-wrap: wrap;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .filterButtons {
     grid-template-columns: repeat(2, minmax(90px, 1fr));
   }
@@ -59,13 +59,13 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .filterButtons button {
     min-width: 100px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .filterButtons button {
     flex: 1;
   }

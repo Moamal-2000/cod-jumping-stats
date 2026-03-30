@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-@include m.small {
+@include m.media(small) {
   .playerRow td {
     min-height: 64px;
   }
@@ -10,7 +10,7 @@
   color: #fff;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .playerRow .rank {
     background-color: #14171d;
     border-radius: 10px 10px 0 0;
@@ -38,13 +38,13 @@
   user-select: text;
 }
 
-@include m.large {
+@include m.media(large) {
   .playerRow .score[data-header=Points] {
     display: none;
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .playerRow .score[data-header=Points] {
     display: flex;
   }

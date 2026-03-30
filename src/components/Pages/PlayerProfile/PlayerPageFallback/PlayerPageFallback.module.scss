@@ -12,7 +12,7 @@
   color: #f9fafb;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .heroSection {
     padding: 28px;
   }
@@ -27,7 +27,7 @@
   text-wrap: balance;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .heroSection h1 {
     font-size: 1.3rem;
   }

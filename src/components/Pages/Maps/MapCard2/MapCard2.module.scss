@@ -10,7 +10,7 @@
   position: relative;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mapCard {
     border-bottom: 1px solid #394b69;
     gap: 0 24px;
@@ -19,7 +19,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapCard {
     padding: 0;
     border: 0;
@@ -37,7 +37,7 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .mapCard .imgHolder {
     max-width: 320px;
     width: 100%;
@@ -46,14 +46,14 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .mapCard .imgHolder {
     aspect-ratio: 16 / 9;
     width: 100%;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapCard .imgHolder {
     border-radius: 0;
   }
@@ -64,7 +64,7 @@
   border-radius: 14px;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapCard .imgHolder [data-type=img-holder] {
     border-radius: 0;
     border: 0;
@@ -84,7 +84,7 @@
 }
 
 
-@include m.very-small {
+@include m.media(very-small) {
   .leftSide {
     padding-inline: 14px;
   }
@@ -108,14 +108,14 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .leftSide a {
     font-size: 1rem;
     font-weight: 600;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .leftSide a {
     font-size: 1rem;
   }
@@ -197,20 +197,20 @@
   }
 }
 
-@include m.medium {
+@include m.media(medium) {
   .rightSide {
     width: 300px;
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .rightSide {
     max-width: 320px;
     width: 100%;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .rightSide {
     padding: 14px;
   }
@@ -228,7 +228,7 @@
   width: 200px;
 }
 
-@include m.large {
+@include m.media(large) {
   .rightSide .authorAndRelease .authorName {
     width: 150px;
   }

@@ -66,7 +66,7 @@
   opacity: 1;
 }
 
-@include m.small {
+@include m.media(small) {
   .label .tooltip .tooltipText {
     top: auto;
     left: 50%;
@@ -74,7 +74,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .label .tooltip .tooltipText {
     top: auto;
     left: 0;
@@ -84,13 +84,13 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .label[data-label="Map Type"] .tooltip .tooltipText {
     margin-left: -90px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .label[data-label="Map Type"] .tooltip .tooltipText {
     margin-left: -84px;
   }

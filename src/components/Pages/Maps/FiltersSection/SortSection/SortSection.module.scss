@@ -7,7 +7,7 @@
   gap: 26px;
 }
 
-@include m.large {
+@include m.media(large) {
   .sortSection {
     flex-direction: column;
     justify-content: flex-start;
@@ -30,7 +30,7 @@
   z-index: 1;
 }
 
-@include m.small {
+@include m.media(small) {
   .sortSection .leftSide {
     flex-direction: column-reverse;
     align-items: flex-start;
@@ -49,7 +49,7 @@
   text-wrap: nowrap;
 }
 
-@include m.large {
+@include m.media(large) {
   .totalMapsText {
     position: absolute;
     bottom: -56px;

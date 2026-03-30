@@ -17,13 +17,13 @@
   width: 100%;
 }
 
-@include m.large {
+@include m.media(large) {
   .playersGrid {
     grid-template-columns: repeat(2, minmax(320px, 1fr));
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .playersGrid {
     grid-template-columns: 1fr;
   }

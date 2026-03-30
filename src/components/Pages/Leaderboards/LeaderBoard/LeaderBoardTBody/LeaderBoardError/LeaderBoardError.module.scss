@@ -16,7 +16,7 @@
   translate: -50% -50%;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .error td {
     position: relative !important;
     left: 0;

@@ -13,7 +13,7 @@
   box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
 }
 
-@include m.small {
+@include m.media(small) {
   .leaderboardControls {
     flex-wrap: wrap;
     gap: 1.5rem;
@@ -21,7 +21,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .leaderboardControls {
     border: none;
     padding: 0;
@@ -87,13 +87,13 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-@include m.small {
+@include m.media(small) {
   .leaderboardContent {
     padding: 20px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .leaderboardContent {
     border: none;
     padding: 0;
@@ -110,7 +110,7 @@
   font-weight: 600;
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .fpsGroupTitle {
     margin-bottom: 0;
   }

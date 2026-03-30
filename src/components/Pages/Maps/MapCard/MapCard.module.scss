@@ -100,13 +100,13 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .mapCard .content {
     padding: 18px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapCard .content {
     padding: 16px 10px;
   }
@@ -137,14 +137,14 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .mapCard .content .nameAndRating a {
     font-size: 1rem;
     font-weight: 600;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .mapCard .content .nameAndRating a {
     font-size: 1rem;
   }

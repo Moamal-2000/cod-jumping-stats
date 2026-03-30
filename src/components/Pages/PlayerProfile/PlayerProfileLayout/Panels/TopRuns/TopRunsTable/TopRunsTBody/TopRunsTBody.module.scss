@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-@include m.small {
+@include m.media(small) {
   .tbody {
     display: flex;
     flex-direction: column;
@@ -14,7 +14,7 @@
   transition: background-color 200ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@include m.small {
+@include m.media(small) {
   .tbody tr {
     border: 1px solid rgba(148, 163, 184, 0.25);
     border-radius: 14px;
@@ -34,7 +34,7 @@
   border: none;
 }
 
-@include m.small {
+@include m.media(small) {
   .tbody td {
     display: flex;
     justify-content: space-between;
@@ -240,7 +240,7 @@
   padding-left: 50px !important;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .scoreCell {
     display: none;
   }
@@ -264,13 +264,13 @@
   color: #cbd5e1;
 }
 
-@include m.large {
+@include m.media(large) {
   .dateCell {
     display: none;
   }
 }
 
-@include m.small {
+@include m.media(small) {
 
   .scoreCell,
   .nadesCell {

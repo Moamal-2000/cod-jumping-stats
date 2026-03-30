@@ -5,7 +5,7 @@
   font-size: .7rem;
 }
 
-@include m.small {
+@include m.media(small) {
   .label {
     display: none;
   }

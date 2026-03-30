@@ -4,7 +4,7 @@
   min-width: 240px;
 }
 
-@include m.small {
+@include m.media(small) {
   .navigation {
     display: flex;
     flex-direction: column;
@@ -28,19 +28,19 @@
   width: fit-content;
 }
 
-@include m.medium {
+@include m.media(medium) {
   .navigation .links {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .navigation .links {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .navigation .links {
     grid-template-columns: 1fr;
   }
@@ -63,7 +63,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .navigation .links a {
     padding-left: calc(50% - 45px);
 

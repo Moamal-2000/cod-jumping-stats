@@ -19,7 +19,7 @@
   color: var(--text-primary);
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .aboutPage {
     padding-inline: 0;
   }
@@ -61,13 +61,13 @@
   letter-spacing: -0.04em;
 }
 
-@include m.large {
+@include m.media(large) {
   .pageTitle {
     font-size: clamp(2.4rem, 4.2vw, 4rem);
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .pageTitle {
     font-size: clamp(1.8rem, 7vw, 3rem);
     max-width: 16ch;
@@ -75,7 +75,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .pageTitle {
     font-size: 1.6rem;
   }
@@ -245,7 +245,7 @@
   opacity: 1;
 }
 
-@include m.medium {
+@include m.media(medium) {
 
   .hero,
   .featureGrid,
@@ -256,7 +256,7 @@
   }
 }
 
-@include m.small {
+@include m.media(small) {
   .aboutPage {
     padding-bottom: 72px;
     gap: 32px;
@@ -279,7 +279,7 @@
     padding: 18px;
   }
 
-  @include m.very-small {
+  @include m.media(very-small) {
     .featureCard {
       border-radius: 0;
     }

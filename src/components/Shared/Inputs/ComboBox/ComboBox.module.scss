@@ -10,14 +10,14 @@
   width: 100%;
 }
 
-@include m.small {
+@include m.media(small) {
   .comboBox {
     max-width: 320px;
     min-width: 240px;
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .comboBox {
     min-width: auto;
   }
@@ -56,7 +56,7 @@
   }
 }
 
-@include m.very-small {
+@include m.media(very-small) {
   .inputRow {
     min-width: auto;
   }
