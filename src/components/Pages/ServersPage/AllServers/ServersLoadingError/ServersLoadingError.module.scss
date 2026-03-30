@@ -23,7 +23,20 @@
 }
 
 .listWrapper {
+  --pulse-delay: 0s;
   margin-bottom: 48px;
+}
+
+.serversTable tbody tr:nth-child(3n + 1) {
+  --pulse-delay: 0s;
+}
+
+.serversTable tbody tr:nth-child(3n + 2) {
+  --pulse-delay: 0.6s;
+}
+
+.serversTable tbody tr:nth-child(3n) {
+  --pulse-delay: 1.2s;
 }
 
 .listTitle {
@@ -78,9 +91,27 @@
 .skeletonLine {
   height: 14px;
   width: 100%;
-  background-color: #444e5c;
+  background-color: rgba(148, 163, 184, 0.12);
   border-radius: 4px;
-  animation: pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.skeletonLine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.26) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  will-change: transform;
+  animation: mapsSkeletonPulse 1.7s ease-in-out infinite;
+  animation-delay: var(--pulse-delay);
 }
 
 .titleLine {
@@ -106,9 +137,13 @@
   width: 70%;
 }
 
-@keyframes pulse {
-  50% {
-    opacity: 0.5;
+@keyframes mapsSkeletonPulse {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
   }
 }
 

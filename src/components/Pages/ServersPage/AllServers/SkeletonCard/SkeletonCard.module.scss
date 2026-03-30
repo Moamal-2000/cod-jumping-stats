@@ -1,4 +1,5 @@
 .skeletonCard {
+  --pulse-delay: 0s;
   --padding: 16px;
   background-color: #1c2333;
   border-radius: 12px;
@@ -8,17 +9,59 @@
   flex-direction: column;
 }
 
+.skeletonCard:nth-child(3n + 1) {
+  --pulse-delay: 0s;
+}
+
+.skeletonCard:nth-child(3n + 2) {
+  --pulse-delay: 0.6s;
+}
+
+.skeletonCard:nth-child(3n) {
+  --pulse-delay: 1.2s;
+}
+
+@media (max-width: 1280px) {
+  .skeletonCard:nth-child(2n + 1) {
+    --pulse-delay: 0s;
+  }
+
+  .skeletonCard:nth-child(2n) {
+    --pulse-delay: 0.9s;
+  }
+}
+
 @media (max-width: 820px) {
   .skeletonCard {
+    --pulse-delay: 0s;
     max-width: 383px;
   }
 }
 
 .line,
 .flag {
-  background-color: #444e5c;
+  background-color: rgba(148, 163, 184, 0.12);
   border-radius: 4px;
-  animation: pulse 1.5s cubic-bezier(.4, 0, .6, 1) infinite;
+  position: relative;
+  overflow: hidden;
+}
+
+.line::after,
+.flag::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(148, 163, 184, 0.26) 50%,
+    transparent 100%
+  );
+  transform: translateX(-150%);
+  will-change: transform;
+  animation: mapsSkeletonPulse 1.7s ease-in-out infinite;
+  animation-delay: var(--pulse-delay);
 }
 
 .header {
@@ -120,8 +163,12 @@
   gap: 12px;
 }
 
-@keyframes pulse {
-  50% {
-    opacity: .5;
+@keyframes mapsSkeletonPulse {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
   }
 }
