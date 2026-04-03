@@ -1,4 +1,5 @@
 @use "sass:list";
+@use "sass:map";
 
 $breakpoints: (
   "large": 1200px,
@@ -14,7 +15,7 @@ $breakpoints: (
 }
 
 @mixin media($name) {
-  $size: map-get($breakpoints, $name);
+  $size: map.get($breakpoints, $name);
 
   @if ($size) {
     @media (max-width: $size) {
@@ -23,6 +24,6 @@ $breakpoints: (
   }
 
   @else {
-    @error "Unknown breakpoint: #{$name}, known breakpoints are: (#{map-keys($breakpoints)})";
+    @error "Unknown breakpoint: #{$name}, known breakpoints are: (#{map.keys($breakpoints)})";
   }
 }
