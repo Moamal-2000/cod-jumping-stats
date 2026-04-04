@@ -208,7 +208,7 @@ const teamMembers = [
   {
     name: "Moamal",
     discordUser: "Moamal_Alaa#8153",
-    href: "https://moamalalaa.netlify.app",
+    href: "https://moamal-alaa.vercel.app",
     role: "Frontend Developer",
     description:
       "Designed and implemented the full frontend experience, with a focus on clarity, structure, and usability.",
