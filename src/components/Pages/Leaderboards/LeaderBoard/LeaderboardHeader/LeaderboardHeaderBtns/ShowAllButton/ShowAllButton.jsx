@@ -16,7 +16,7 @@ const ShowAllButton = ({ setPaginationNumber }) => {
     loading,
     error,
   } = useSelector((s) => s.leaderboard);
-  const { isLeaderboardReversed } = useSelector(
+  const isLeaderboardReversed = useSelector(
     (s) => s.global.isLeaderboardReversed,
   );
 
