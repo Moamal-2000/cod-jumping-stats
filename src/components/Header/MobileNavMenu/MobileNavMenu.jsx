@@ -15,7 +15,7 @@ const MobileNavMenu = () => {
   }, [isMobileNavActive]);
 
   return (
-    <nav className={`${s.mobileNav} ${activeClass}`}>
+    <nav className={`${s.mobileNav} ${activeClass}`} inert={!isMobileNavActive}>
       <p className={s.title}>Main Navigation</p>
 
       <MobileNavLinks />
