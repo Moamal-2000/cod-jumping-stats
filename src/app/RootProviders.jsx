@@ -20,8 +20,8 @@ const RootProviders = ({ children }) => {
     <Provider store={store}>
       <html lang="en" className={currentPage}>
         <body>
+          <Header />
           <LayoutLayer>
-            <Header />
             <GitHubStarBtn />
             {children}
             <Footer />
