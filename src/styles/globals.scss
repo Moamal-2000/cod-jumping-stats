@@ -16,6 +16,12 @@ body {
   }
 }
 
+body::selection {
+  background: #fde69a;
+  color: #212121;
+  text-shadow: none;
+}
+
 * {
   box-sizing: border-box;
   padding: 0;
