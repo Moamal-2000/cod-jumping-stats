@@ -124,8 +124,8 @@ export const SORT_MAPS_OPTIONS = [
 ];
 
 export const SORT_PLAYERS_OPTIONS = [
-  { label: "Admin Level", value: "admin", id: 1 },
-  { label: "Last Seen", value: "last-seen", id: 2 },
+  { label: "Last Seen", value: "last-seen", id: 1 },
+  { label: "Admin Level", value: "admin", id: 2 },
   { label: "Visit Count", value: "visits", id: 3 },
 ];
 

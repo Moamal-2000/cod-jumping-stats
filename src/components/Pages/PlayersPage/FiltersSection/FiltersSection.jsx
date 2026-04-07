@@ -12,7 +12,7 @@ const FiltersSection = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const sortBy = searchParams?.get("sort") || "admin";
+  const sortBy = searchParams?.get("sort") || "last-seen";
   const filterBy = searchParams?.get("badge") || "all";
 
   function handleSortChange(newValue) {

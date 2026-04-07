@@ -7,7 +7,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
   async (paramsObject) => {
-    const dataType = paramsObject?.sort || "admin";
+    const dataType = paramsObject?.sort || "last-seen";
     const cachedData = getCachedPlayers(dataType);
 
     if (cachedData !== null && dataType === cachedData.dataType) {
