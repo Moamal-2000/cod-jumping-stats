@@ -1363,6 +1363,17 @@ export const MAPS_VIDEOS = [
     ],
   },
   {
+    mapName: "mp_daskorun",
+    mapsIds: [17717],
+    videos: [
+      {
+        type: "125 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=7LICcI_Up3I",
+        id: 1,
+      },
+    ],
+  },
+  {
     mapName: "mp_6jump_hard",
     mapsIds: [12286],
     videos: [
