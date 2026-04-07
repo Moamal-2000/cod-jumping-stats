@@ -10,10 +10,10 @@ const DropDownMenu = ({ isOpen, currentSortBy, setCurrentSortBy }) => {
   const visibleClass = isOpen ? `${s.visible}` : "";
 
   function handleSelectOption(value, label) {
-    const isDefault = value === "newest";
+    const isDefault = value === "completions-high-to-low";
 
     if (isDefault) {
-      setCurrentSortBy("Newest First");
+      setCurrentSortBy("Most Completions");
       removeQueryString("sort-by", searchParams, router, pathname);
       return;
     }

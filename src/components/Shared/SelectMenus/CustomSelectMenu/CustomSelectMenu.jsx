@@ -59,12 +59,12 @@ const CustomSelectMenu = ({ id }) => {
 export default CustomSelectMenu;
 
 function getSortByLabel(value) {
-  if (!value) return "Newest First";
+  if (!value) return "Most Completions";
 
   for (const group of SORT_MAPS_OPTIONS) {
     const option = group.groupOptions.find((opt) => opt.value === value);
     if (option) return option.label;
   }
 
-  return "Newest First";
+  return "Most Completions";
 }

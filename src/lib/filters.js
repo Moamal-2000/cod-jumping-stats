@@ -86,7 +86,7 @@ export function getFilteredLeaderboard(leaderboardData, paramsObject) {
 
 export function getMapsByParams({ mapsData, paramsObject }) {
   const mapType = paramsObject?.type || "all";
-  const sortBy = paramsObject?.["sort-by"] || "newest";
+  const sortBy = paramsObject?.["sort-by"] || "completions-high-to-low";
   const filterBy = paramsObject?.["filter-by"] || "all";
   const nameQuery = paramsObject?.name || "";
   const authorQuery = paramsObject?.author || "";
