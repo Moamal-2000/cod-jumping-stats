@@ -271,7 +271,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
             </tr>
           </thead>
           <tbody>
-            {activeListData.map((map, index) => renderMapRow(map, index, true))}
+            {activeListData.map((map, index) =>
+              renderMapRow(map, index, activeList === "completed"),
+            )}
           </tbody>
         </table>
       </div>
