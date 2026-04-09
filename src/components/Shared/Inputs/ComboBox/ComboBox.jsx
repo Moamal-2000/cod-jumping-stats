@@ -243,6 +243,7 @@ const ComboBox = ({
         selectedValue={selectedValue}
         handleSelect={handleSelect}
         isOpen={isOpen}
+        setIsOpen={setIsOpen}
         listId={listId}
         emptyText={emptyText}
       />

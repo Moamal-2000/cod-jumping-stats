@@ -5,13 +5,19 @@ const OptionsList = ({
   selectedValue,
   handleSelect,
   isOpen,
+  setIsOpen,
   listId,
   emptyText,
 }) => {
   const classes = `${s.optionsList} ${isOpen ? s.visible : ""}`;
 
   return (
-    <div className={classes} id={listId} role="listbox">
+    <div
+      className={classes}
+      id={listId}
+      role="listbox"
+      onBlur={() => setIsOpen(false)}
+    >
       {options.length === 0 && <div className={s.emptyState}>{emptyText}</div>}
 
       <div className={s.options}>
