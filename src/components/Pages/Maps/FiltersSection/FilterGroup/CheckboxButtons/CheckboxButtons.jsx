@@ -28,6 +28,12 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
     router.push(`${pathname}?${params.toString()}`);
   }
 
+  function handleKeyDown(event, queryValue) {
+    if (event.key === "Enter") {
+      handleChange(queryValue);
+    }
+  }
+
   return (
     <div className={s.checkboxes}>
       {filtersData?.map(({ text, queryValue, id }) => {
@@ -42,6 +48,7 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
               type="checkbox"
               value={queryValue}
               onChange={() => handleChange(queryValue)}
+              onKeyDown={(event) => handleKeyDown(event, queryValue)}
               checked={isActive}
             />
             <span className={s.checkboxMark} aria-hidden="true">
