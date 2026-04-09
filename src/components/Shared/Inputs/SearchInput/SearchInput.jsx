@@ -56,6 +56,8 @@ const SearchInput = ({
     setSearchValue("");
     removeQueryString(queryName, searchParams, router, pathname);
     clearTimeout(debounceRef?.current);
+
+    inputRef.current.focus();
   }
 
   useEffect(() => {
