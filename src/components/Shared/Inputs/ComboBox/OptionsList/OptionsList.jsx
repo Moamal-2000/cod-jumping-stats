@@ -28,6 +28,7 @@ const OptionsList = ({
               className={`${s.optionButton} ${isActive ? s.active : ""}`}
               onClick={() => handleSelect(option)}
               data-combobox-value={option.value}
+              tabIndex="-1"
             >
               {option.label}
               {option?.count > 0 && <span>{option.count}</span>}
