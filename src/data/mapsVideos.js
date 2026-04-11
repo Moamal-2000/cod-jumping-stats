@@ -1384,4 +1384,15 @@ export const MAPS_VIDEOS = [
       },
     ],
   },
+  {
+    mapName: "mp_12",
+    mapsIds: [25587],
+    videos: [
+      {
+        type: "125 fps showcase",
+        videoUrl: "https://www.youtube.com/watch?v=QUfgmYZjV6o",
+        id: 1,
+      },
+    ],
+  },
 ];
