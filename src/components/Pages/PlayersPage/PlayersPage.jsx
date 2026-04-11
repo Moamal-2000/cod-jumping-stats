@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
-import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
+import PlayersError from "./PlayersError/PlayersError";
 import s from "./PlayersPage.module.scss";
 import PlayersSection from "./PlayersSection/PlayersSection";
 import PlayersSkeletonLoader from "./PlayersSkeletonLoader/PlayersSkeletonLoader";
@@ -79,7 +79,7 @@ const PlayersPage = () => {
       )}
 
       {loading && !error && <PlayersSkeletonLoader playersData={playersData} />}
-      {error && <PlayersLoadingError error={error} dispatch={dispatch} />}
+      {error && <PlayersError error={error} dispatch={dispatch} />}
 
       {hasPlayers && !loading && !error && (
         <PlayersSection
