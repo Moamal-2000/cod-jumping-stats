@@ -1,0 +1,344 @@
+@use "@/styles/mixins" as m;
+
+.playersSkeletonSection {
+  padding-top: 4px;
+  margin: 0 auto 32px;
+  max-width: 1600px;
+  width: 100%;
+}
+
+.playersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 12px;
+  padding-top: 4px;
+}
+
+@include m.media(large) {
+  .playersGrid {
+    grid-template-columns: repeat(2, minmax(320px, 1fr));
+  }
+}
+
+@include m.media(small) {
+  .playersGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.playerCardSkeleton,
+.playersTableSkeleton {
+  --pulse-delay: 0s;
+}
+
+.playerCardSkeleton {
+  background-color: #131820;
+  border: 1px solid #2a313a;
+  border-radius: 12px;
+  padding: 20px;
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-height: 192px;
+  justify-content: space-between;
+}
+
+@include m.media(small) {
+  .playerCardSkeleton {
+    padding: 12px;
+  }
+}
+
+.playersTableSkeleton {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: transparent;
+  border: 1px solid #2a313a;
+  border-radius: 12px;
+}
+
+.playersTableSkeleton th,
+.playersTableSkeleton tr {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 1.34fr .4fr .55fr 2.8fr;
+}
+
+@include m.media(medium) {
+
+  .playersTableSkeleton th,
+  .playersTableSkeleton tr {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1.2fr .4fr .55fr 1.5fr;
+  }
+}
+
+.playersTableSkeleton thead {
+  background-color: #1c2431;
+  position: sticky;
+  top: 68px;
+  z-index: 10;
+}
+
+@include m.media(medium) {
+  .playersTableSkeleton thead {
+    top: 66px;
+  }
+}
+
+@include m.media(small) {
+  .playersTableSkeleton thead {
+    display: none;
+  }
+}
+
+@include m.media(small) {
+  .playersTableSkeleton tbody {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+.playersTableSkeleton th {
+  padding: 6px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  border-bottom: 1px solid #2a313a;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.playersTableSkeleton tbody tr {
+  border-bottom: 1px solid #2a313a;
+  transition: background-color 0.2s ease;
+}
+
+@include m.media(small) {
+  .playersTableSkeleton tbody tr {
+    display: flex;
+    flex-direction: column;
+    border: none;
+    background-color: #131820;
+    border: 1px solid #2a313a;
+    padding: 0;
+    gap: 0;
+  }
+}
+
+@include m.media(very-small) {
+  .playersTableSkeleton tbody tr {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr;
+
+    grid-template-areas:
+      "name name"
+      "visit last-seen"
+      "badges badges";
+
+    & td:nth-child(1) {
+      grid-area: name;
+    }
+
+    & td:nth-child(2) {
+      grid-area: visit;
+    }
+
+    & td:nth-child(3) {
+      grid-area: last-seen;
+    }
+
+    & td:nth-child(4) {
+      grid-area: badges;
+    }
+  }
+}
+
+.playersTableSkeleton tbody tr:last-child {
+  border-bottom: none;
+}
+
+@include m.media(small) {
+  .playersTableSkeleton tbody tr:last-child {
+    border-bottom: 1px solid #2a313a;
+  }
+}
+
+.playersTableSkeleton td {
+  padding: 16px;
+  vertical-align: middle;
+  min-height: 70px;
+  max-height: 70px;
+  height: 70px;
+}
+
+@include m.media(small) {
+  .playersTableSkeleton td {
+    padding: 12px 16px;
+  }
+}
+
+.playersTableSkeleton .playerInfoWrapper {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.playersTableSkeleton .identityBlock {
+  gap: 4px;
+  margin-top: 0;
+}
+
+.playersTableSkeleton .visitsLine {
+  width: 36px;
+  margin-left: 4px;
+}
+
+.playersTableSkeleton .lastSeenLine {
+  width: 68px;
+}
+
+@include m.media(small) {
+
+  .playersTableSkeleton .visitsLine,
+  .playersTableSkeleton .lastSeenLine {
+    width: 190px;
+  }
+}
+
+@include m.media(very-small) {
+
+  .playersTableSkeleton .visitsLine,
+  .playersTableSkeleton .lastSeenLine {
+    width: 80%;
+  }
+}
+
+.topSection {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: rgba(148, 163, 184, 0.12);
+  flex-shrink: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.playerInfoWrapper .avatar {
+  width: 32px;
+  height: 32px;
+}
+
+.identityBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  flex: 1;
+  margin-top: 2px;
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.statsGrid {
+  display: flex;
+  gap: 24px;
+}
+
+.statBlock {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.skeleton {
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  background-color: rgba(148, 163, 184, 0.12);
+}
+
+.skeleton::after,
+.avatar::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  height: 200%;
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(148, 163, 184, 0.26) 50%,
+      transparent 100%);
+  transform: translateX(-150%);
+  will-change: transform;
+  animation: playersSkeletonPulse 1.7s ease-in-out infinite;
+  animation-delay: var(--pulse-delay);
+}
+
+.nameLine {
+  width: 150px;
+  height: 18px;
+}
+
+.idAndAdminLine {
+  width: 70px;
+  height: 16px;
+}
+
+.favButton {
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+}
+
+.badge {
+  width: 72px;
+  height: 22px;
+  border-radius: 6px;
+}
+
+.visitsLine {
+  width: 80px;
+  height: 16px;
+}
+
+.lastSeenLine {
+  width: 125px;
+  height: 16px;
+}
+
+@include m.media(very-small) {
+  .badgeRow .badge:last-child {
+    display: none;
+  }
+}
+
+@keyframes playersSkeletonPulse {
+  0% {
+    transform: translateX(-150%);
+  }
+
+  100% {
+    transform: translateX(150%);
+  }
+}

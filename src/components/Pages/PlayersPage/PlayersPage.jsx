@@ -15,6 +15,7 @@ import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
 import PlayersLoadingError from "./PlayersLoadingError/PlayersLoadingError";
 import s from "./PlayersPage.module.scss";
 import PlayersSection from "./PlayersSection/PlayersSection";
+import PlayersSkeletonLoader from "./PlayersSkeletonLoader/PlayersSkeletonLoader";
 
 const PlayersPage = () => {
   const { playersData, playersScroll, allDataDisplayed, loading, error } =
@@ -77,9 +78,8 @@ const PlayersPage = () => {
         <NoPlayersFound handleClearSearch={handleClearSearch} />
       )}
 
-      {(loading || error) && (
-        <PlayersLoadingError error={error} dispatch={dispatch} />
-      )}
+      {loading && !error && <PlayersSkeletonLoader playersData={playersData} />}
+      {error && <PlayersLoadingError error={error} dispatch={dispatch} />}
 
       {hasPlayers && !loading && !error && (
         <PlayersSection
