@@ -20,7 +20,7 @@ export const fetchAllPlayers = createAsyncThunk(
     }
 
     try {
-      const url = jhApis({ sort: paramsObject?.sort }).player.all;
+      const url = jhApis({ sort: dataType }).player.all;
       const response = await fetchMsgPackResponse({ url });
 
       if (!response.ok) {
