@@ -4,7 +4,7 @@ import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortVie
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { FILTER_PLAYERS_BADGES, SORT_PLAYERS_OPTIONS } from "@/data/staticData";
-import { createQueryString } from "@/lib/queryParams";
+import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FiltersSection.module.scss";
 
@@ -16,7 +16,12 @@ const FiltersSection = () => {
   const filterBy = searchParams?.get("badge") || "all";
 
   function handleSortChange(newValue) {
-    createQueryString("sort", newValue, searchParams, router, pathname);
+    const isDefault = newValue === "last-seen";
+
+    if (isDefault) removeQueryString("sort", searchParams, router, pathname);
+
+    if (!isDefault)
+      createQueryString("sort", newValue, searchParams, router, pathname);
   }
 
   function handleFilterChange(event) {
