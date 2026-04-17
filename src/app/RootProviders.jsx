@@ -19,6 +19,10 @@ const RootProviders = ({ children }) => {
   return (
     <Provider store={store}>
       <html lang="en" className={currentPage}>
+        <head>
+          <link rel="preconnect" href="https://jhstats.fly.dev" />
+        </head>
+
         <body>
           <Header />
           <LayoutLayer>
