@@ -39,7 +39,7 @@ const MapImage = ({
         src={imagePath}
         alt={mapName}
         quality={100}
-        priority
+        preload
         onError={handleError}
         onLoad={() => setLoading(false)}
       />
@@ -52,7 +52,7 @@ const MapImage = ({
           src={PLACEHOLDER_PATH}
           alt={`${mapName} Placeholder`}
           quality={100}
-          priority
+          preload
         />
       )}
     </div>

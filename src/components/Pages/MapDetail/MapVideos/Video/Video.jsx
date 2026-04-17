@@ -57,7 +57,7 @@ const Video = ({ video }) => {
               width={320}
               height={180}
               className={s.thumbnail}
-              priority
+              preload
             />
           )}
 

@@ -12,7 +12,7 @@ const WebsiteLogo = () => {
         width="64"
         height="64"
         quality={100}
-        priority
+        preload
       />
       <span>{WEBSITE_NAME}</span>
     </Link>

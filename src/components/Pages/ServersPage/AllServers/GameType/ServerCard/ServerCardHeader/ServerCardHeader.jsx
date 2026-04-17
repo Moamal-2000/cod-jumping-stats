@@ -35,7 +35,7 @@ const ServerCardHeader = ({ server, index, viewType }) => {
           className={s.mapBackground}
           onError={() => setSrc("/assets/placeholders/blank-black.svg")}
           loading={index < 3 ? "eager" : "lazy"}
-          priority={index < 3}
+          preload={index < 3}
           fetchPriority={index < 3 ? "high" : "low"}
         />
       )}

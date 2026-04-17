@@ -38,7 +38,7 @@ const CountryImage = ({
       onError={handleError}
       className={classes}
       loading={loadEagerly ? "eager" : "lazy"}
-      priority={loadEagerly}
+      preload={loadEagerly}
       fetchPriority={loadEagerly ? "high" : "low"}
     />
   );
