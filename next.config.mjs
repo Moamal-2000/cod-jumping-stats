@@ -8,7 +8,7 @@ const nextConfig = {
 
   images: {
     formats: ["image/avif", "image/webp"],
-    qualities: [75, 100],
+    qualities: [25, 75, 100],
     remotePatterns: [
       { protocol: "https", hostname: "img.youtube.com" },
       { protocol: "https", hostname: "yt3.googleusercontent.com" },

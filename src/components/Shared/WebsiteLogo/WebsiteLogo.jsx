@@ -7,11 +7,11 @@ const WebsiteLogo = () => {
   return (
     <Link href="/" className={s.logo}>
       <Image
-        src="/logo.png"
+        src="/logo.svg"
         alt="Jumpers Heaven"
         width="64"
         height="64"
-        quality={100}
+        quality={25}
         preload
       />
       <span>{WEBSITE_NAME}</span>

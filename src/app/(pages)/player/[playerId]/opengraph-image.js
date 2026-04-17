@@ -32,7 +32,7 @@ export default async function Image({ params }) {
       />
 
       <img
-        src={`${SITE_URL}/logo.png`}
+        src={`${SITE_URL}/logo.svg`}
         width={logoSize}
         height={logoSize}
         style={s.logoImg}
