@@ -1,17 +1,9 @@
 # Security Policy
 
 ## Supported Versions
-
-Use this section to tell people about which versions of your project are
-currently being supported with security updates.
-
-## Supported Versions
 Currently, only the latest version of Jumpers Heaven Statistics is supported with security updates.
 
 ## Reporting a Vulnerability
+If you discover a security vulnerability, please report it by contacting the project maintainer.
 
-Use this section to tell people how to report a vulnerability.
-
-Tell them where to go, how often they can expect to get an update on a
-reported vulnerability, what to expect if the vulnerability is accepted or
-declined, etc.
+You can expect a response within a reasonable timeframe. If the vulnerability is accepted, appropriate fixes will be applied. If declined, an explanation will be provided.
