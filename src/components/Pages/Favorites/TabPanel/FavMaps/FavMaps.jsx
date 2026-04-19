@@ -5,14 +5,14 @@ import s from "./FavMaps.module.scss";
 
 const FavMaps = ({ favMaps, allMaps, mapsLoading }) => {
   if (mapsLoading && favMaps.length === 0)
-    return (
+    {return (
       <SpinnerLoader
         title="Loading Maps"
         description="Fetching your favorite maps..."
       />
-    );
+    );}
 
-  if (!mapsLoading && favMaps.length === 0) return <EmptyState type="maps" />;
+  if (!mapsLoading && favMaps.length === 0) {return <EmptyState type="maps" />;}
 
   return (
     <div className={s.maps}>

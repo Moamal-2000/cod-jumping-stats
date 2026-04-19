@@ -51,7 +51,9 @@ function handleKeyDown({ event, index, tabs, tabRefs, onTabChange } = {}) {
   const tabIds = tabs.map((tab) => tab.id);
   let newIndex = index;
 
-  if (TABS_KEYS.includes(event.key)) event.preventDefault();
+  if (TABS_KEYS.includes(event.key)) {
+    event.preventDefault();
+  }
 
   switch (event.key) {
     case "ArrowLeft":

@@ -19,7 +19,9 @@ const MobileNavLinks = () => {
         const isCurrentPage = currentPage === href;
 
         function handleLinkClick() {
-          if (isCurrentPage) return;
+          if (isCurrentPage) {
+            return;
+          }
           dispatch(toggleMobileNav({ value: false }));
         }
 

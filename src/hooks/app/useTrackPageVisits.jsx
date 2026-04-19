@@ -14,7 +14,9 @@ const useTrackPageVisits = (limit = 5) => {
   function watchPageVisits() {
     const visitsClone = [...pageVisits];
 
-    if (limit === +visitsClone.length) visitsClone.shift();
+    if (limit === +visitsClone.length) {
+      visitsClone.shift();
+    }
     visitsClone.push(currentPage);
 
     dispatch(updateGlobalState({ key: "pageVisits", value: visitsClone }));

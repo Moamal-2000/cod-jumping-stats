@@ -1,7 +1,9 @@
 import { COUNTRIES_WITH_THE } from "@/data/constants";
 
 export function stripColorCodes(name) {
-  if (name === undefined) return "";
+  if (name === undefined) {
+    return "";
+  }
   return name.replace(/\^\d/g, "");
 }
 
@@ -15,12 +17,16 @@ export function capitalize(str) {
 
 export function domainToCountryFlag(domain) {
   let country = domain.split(".")[0];
-  if (country === "uk") country = "gb";
+  if (country === "uk") {
+    country = "gb";
+  }
   return `/assets/countryFlags/${country}.svg`;
 }
 
 export function getCountryName(countryCode) {
-  if (!countryCode) return "Unknown Country";
+  if (!countryCode) {
+    return "Unknown Country";
+  }
 
   try {
     const regionNames = new Intl.DisplayNames(["en"], { type: "region" });
@@ -31,7 +37,9 @@ export function getCountryName(countryCode) {
 }
 
 export function getCleanMapName(mapName) {
-  if (!mapName) return "unknown";
+  if (!mapName) {
+    return "unknown";
+  }
   return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
 }
 
@@ -42,7 +50,9 @@ export function getFormattedCountryName(code) {
 
 export function getFpsDifficultyValue({ fps, Difficulty } = {}) {
   const diff = Difficulty?.[fps];
-  if (!diff || diff?.Difficulty < 0) return "?";
+  if (!diff || diff?.Difficulty < 0) {
+    return "?";
+  }
   return Number(diff.Difficulty).toFixed(2);
 }
 
@@ -67,7 +77,9 @@ export function isNewMap(releaseDate) {
   const currentYear = new Date().getFullYear();
   const isReleasedInThisYear = releaseDate?.startsWith(currentYear);
 
-  if (!releaseDate && !isReleasedInThisYear) return false;
+  if (!releaseDate && !isReleasedInThisYear) {
+    return false;
+  }
 
   const releaseDateMilliSeconds = new Date(releaseDate).getTime();
   return releaseDateMilliSeconds >= dateBeforeMonth;

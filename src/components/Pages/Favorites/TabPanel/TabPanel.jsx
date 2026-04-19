@@ -1,7 +1,9 @@
 import s from "./TabPanel.module.scss";
 
 const TabPanel = ({ id, isActive, children }) => {
-  if (!isActive) return null;
+  if (!isActive) {
+    return null;
+  }
 
   return (
     <section

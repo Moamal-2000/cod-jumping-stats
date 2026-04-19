@@ -11,7 +11,9 @@ const RecentActivity = () => {
   const recentTops = performanceStats?.RecentTops || [];
   const topRunsCount = recentTops?.length;
 
-  if (!recentTops && topRunsCount <= 0) return null;
+  if (!recentTops && topRunsCount <= 0) {
+    return null;
+  }
 
   return (
     <section className={s.recentActivitySection}>

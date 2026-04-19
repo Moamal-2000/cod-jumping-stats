@@ -65,25 +65,3 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
 };
 
 export default CheckboxButtons;
-
-function getFilterBtnTitle(queryName, queryValue) {
-  const value = String(queryValue)?.toLowerCase();
-
-  switch (queryName) {
-    case "map-difficulty":
-      return `Filter maps by ${value} fps difficulty`;
-
-    case "map-type":
-      return value === "all"
-        ? "Display all types of maps"
-        : `Filter maps by ${value} type`;
-
-    case "map-rating":
-      return value === "all"
-        ? "Display all ratings"
-        : `Filter maps by ${value} rating`;
-
-    default:
-      return `Filter maps by ${value}`;
-  }
-}

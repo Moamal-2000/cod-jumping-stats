@@ -23,7 +23,9 @@ const CustomSelectMenu = ({ id }) => {
   useEffect(() => {
     function handleClickOutside(event) {
       const isMenuClicked = menuRef.current?.contains(event.target);
-      if (!isMenuClicked) setIsOpen(false);
+      if (!isMenuClicked) {
+        setIsOpen(false);
+      }
     }
 
     document.addEventListener("click", handleClickOutside);
@@ -59,11 +61,15 @@ const CustomSelectMenu = ({ id }) => {
 export default CustomSelectMenu;
 
 function getSortByLabel(value) {
-  if (!value) return "Most Completions";
+  if (!value) {
+    return "Most Completions";
+  }
 
   for (const group of SORT_MAPS_OPTIONS) {
     const option = group.groupOptions.find((opt) => opt.value === value);
-    if (option) return option.label;
+    if (option) {
+      return option.label;
+    }
   }
 
   return "Most Completions";

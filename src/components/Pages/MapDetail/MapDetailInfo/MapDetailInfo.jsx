@@ -21,7 +21,9 @@ const MapDetailInfo = ({ mapData }) => {
 
   function handleFpsChange(nextFps) {
     const normalizedFps = normalizeFpsQuery(nextFps);
-    if (normalizedFps === selectedFps) return;
+    if (normalizedFps === selectedFps) {
+      return;
+    }
 
     createQueryString("fps", normalizedFps, searchParams, router, pathname);
   }
@@ -55,7 +57,9 @@ const MapDetailInfo = ({ mapData }) => {
             {JUMP_FPS.map((fps) => {
               const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
 
-              if (fpsDifficulty === "?") return null;
+              if (fpsDifficulty === "?") {
+                return null;
+              }
 
               return (
                 <div key={fps} className={s.difficultyItem}>

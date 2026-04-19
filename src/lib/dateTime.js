@@ -40,16 +40,26 @@ export function toSecondsFlexible(timeStr = "") {
 export function formatTimeBySeconds(seconds) {
   const { days, hours, minutes, seconds: sec } = getTimeObj(seconds);
 
-  if (days > 0) return `${days}:${hours}:${minutes}:${sec}`;
-  if (hours > 0) return `${hours}:${minutes}:${sec}`;
-  if (minutes > 0) return `${minutes}:${sec}`;
-  if (seconds > 0) return `${sec}`;
+  if (days > 0) {
+    return `${days}:${hours}:${minutes}:${sec}`;
+  }
+  if (hours > 0) {
+    return `${hours}:${minutes}:${sec}`;
+  }
+  if (minutes > 0) {
+    return `${minutes}:${sec}`;
+  }
+  if (seconds > 0) {
+    return `${sec}`;
+  }
 
   return seconds || 0;
 }
 
 export function formatDate(dateStr, fallback) {
-  if (!dateStr) return fallback;
+  if (!dateStr) {
+    return fallback;
+  }
 
   const date = new Date(dateStr);
 
@@ -61,12 +71,16 @@ export function formatDate(dateStr, fallback) {
 }
 
 export function formatDateExcludeTime(dateString) {
-  if (!dateString) return null;
+  if (!dateString) {
+    return null;
+  }
 
   const isoString = dateString.replace(" ", "T");
   const date = new Date(isoString);
 
-  if (isNaN(date)) return null;
+  if (isNaN(date)) {
+    return null;
+  }
 
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -76,7 +90,9 @@ export function formatDateExcludeTime(dateString) {
 }
 
 export function formateReleaseDate(dateStr) {
-  if (!dateStr) return "Unknown";
+  if (!dateStr) {
+    return "Unknown";
+  }
   const [year, month, day] = dateStr.split("-");
   return `${MONTHS[+month]} ${day}, ${year}`;
 }

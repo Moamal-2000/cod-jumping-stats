@@ -14,7 +14,9 @@ const LeaderboardRanks = () => {
   const leaderboards = getProcessedLeaderboards();
 
   function getProcessedLeaderboards() {
-    if (!leaderboardPositions || leaderboardPositions.length === 0) return {};
+    if (!leaderboardPositions || leaderboardPositions.length === 0) {
+      return {};
+    }
 
     const filteredPositions = leaderboardPositions.filter(
       (position) => +position.FPS === selectedFps,
@@ -26,15 +28,23 @@ const LeaderboardRanks = () => {
   function getRankClass(rankValue) {
     const rank = Number(rankValue);
 
-    if (!Number.isFinite(rank) || rank <= 0) return "";
-    if (rank <= 3) return s[`rank${rank}`];
+    if (!Number.isFinite(rank) || rank <= 0) {
+      return "";
+    }
+    if (rank <= 3) {
+      return s[`rank${rank}`];
+    }
 
     return "";
   }
 
   function getLeaderboardType(type) {
-    if (type === "jump") return "raw skill";
-    if (type === "howmany") return "Route Completion";
+    if (type === "jump") {
+      return "raw skill";
+    }
+    if (type === "howmany") {
+      return "Route Completion";
+    }
     return type;
   }
 

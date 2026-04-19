@@ -64,7 +64,9 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
       setPaginationNumber,
     });
 
-    if (allMaps?.length === 0) dispatch(fetchMaps());
+    if (allMaps?.length === 0) {
+      dispatch(fetchMaps());
+    }
   }, [allLeaderboardData, leaderboardData, searchParamsString]);
 
   useEffect(() => {
@@ -119,14 +121,16 @@ function filterLeaderboardByParams({
     paramsObject,
   );
 
-  if (searchQuery.length > 0)
+  if (searchQuery.length > 0) {
     filteredPlayers = searchByPlayerName({ searchQuery, filteredPlayers });
+  }
 
-  if (selectedCountry.length > 0)
+  if (selectedCountry.length > 0) {
     filteredPlayers = searchByCountryName({
       selectedCountry,
       filteredPlayers,
     });
+  }
 
   const isChanged = !isSameLeaderboard(filteredPlayers, leaderboardData);
   const value = paginateData(filteredPlayers, 1);
@@ -159,7 +163,9 @@ function searchByCountryName({ selectedCountry, filteredPlayers }) {
 }
 
 function isSameLeaderboard(nextLeaderboard = [], currentLeaderboard = []) {
-  if (nextLeaderboard.length !== currentLeaderboard.length) return false;
+  if (nextLeaderboard.length !== currentLeaderboard.length) {
+    return false;
+  }
 
   return nextLeaderboard.every(
     (player, index) => player.PlayerID === currentLeaderboard[index]?.PlayerID,
@@ -172,14 +178,18 @@ function comboboxCountryNames(allLeaderboardData) {
   ];
 
   return uniqueCountryNames.reduce((acc, country) => {
-    if (!country || country === "N/A") return acc;
+    if (!country || country === "N/A") {
+      return acc;
+    }
 
     const hasParentheses = new RegExp("[()]").test(country);
     const baseCountryName = country.slice(0, country.indexOf("(") - 1);
     const normalizedCountry = hasParentheses ? baseCountryName : country;
 
     const count = allLeaderboardData.reduce((acc, player) => {
-      if (player.Country === country) acc += 1;
+      if (player.Country === country) {
+        acc += 1;
+      }
       return acc;
     }, 0);
 

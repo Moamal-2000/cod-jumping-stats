@@ -20,8 +20,9 @@ const Video = ({ video }) => {
           fetch(`/api/youtube?videoId=${videoId}`),
         ]);
 
-        if (!oEmbedRes.ok && !videoRes.ok)
+        if (!oEmbedRes.ok && !videoRes.ok) {
           throw new Error("Failed to fetch YouTube data");
+        }
 
         const [oEmbedJson, videoJson] = [
           await oEmbedRes.json(),
@@ -82,7 +83,9 @@ const Video = ({ video }) => {
 export default Video;
 
 function extractYouTubeVideoInfo(video) {
-  if (!video) return { videoId: "", oEmbedUrl: "" };
+  if (!video) {
+    return { videoId: "", oEmbedUrl: "" };
+  }
 
   const videoUrl = new URL(video.videoUrl);
   const videoId =
@@ -94,7 +97,9 @@ function extractYouTubeVideoInfo(video) {
 
 async function fetchChannelThumbnail(videoJson) {
   const channelId = videoJson.items[0]?.snippet?.channelId;
-  if (!channelId) return "";
+  if (!channelId) {
+    return "";
+  }
 
   try {
     const channelRes = await fetch(`/api/youtube?channelId=${channelId}`);

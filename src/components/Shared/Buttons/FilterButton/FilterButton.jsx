@@ -33,7 +33,9 @@ export function FilterButton({
     const value = isRegionFilter
       ? regionValue
       : queryValue?.toLowerCase() || textValue;
-    if (!value) return;
+    if (!value) {
+      return;
+    }
 
     const isDefault = value === defaultUrlQuery;
 

@@ -14,7 +14,7 @@ export function getLocalStorageUsage() {
   let total = 0;
   const details = [];
 
-  for (let key in localStorage) {
+  for (const key in localStorage) {
     if (localStorage.hasOwnProperty(key)) {
       const value = localStorage.getItem(key);
       const size = (key.length + value.length) * 2;

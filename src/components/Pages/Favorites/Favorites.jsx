@@ -32,8 +32,9 @@ const Favorites = () => {
   function handleTabChange(tabId) {
     createQueryString("tab", tabId, searchParams, router, pathname);
 
-    if (tabId === "maps")
+    if (tabId === "maps") {
       removeQueryString("tab", searchParams, router, pathname);
+    }
   }
 
   useEffect(() => {
@@ -86,13 +87,19 @@ function loadFavorites({
   setFavPlayers,
   dispatch,
 } = {}) {
-  if (allMaps.length <= 0) dispatch(fetchMaps());
-  if (allPlayersData.length <= 0) dispatch(fetchAllPlayers());
+  if (allMaps.length <= 0) {
+    dispatch(fetchMaps());
+  }
+  if (allPlayersData.length <= 0) {
+    dispatch(fetchAllPlayers());
+  }
 
   const favoritesLocal = localStorage.getItem("favorites") || "[]";
   const favorites = JSON.parse(favoritesLocal);
 
-  if (favorites <= 0) return;
+  if (favorites <= 0) {
+    return;
+  }
 
   const filteredFavMaps = allMaps.filter((map) =>
     favorites.mapsIds.includes(map.CpID),

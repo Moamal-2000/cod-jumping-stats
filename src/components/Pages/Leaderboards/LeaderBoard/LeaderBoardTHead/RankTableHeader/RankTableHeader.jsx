@@ -26,7 +26,9 @@ const RankTableHeader = ({ text }) => {
 
   function handleKeyDown(event) {
     const isEnterKey = event.code === "Enter" && event.keyCode === 13;
-    if (isEnterKey) reverseLeaderboard();
+    if (isEnterKey) {
+      reverseLeaderboard();
+    }
   }
 
   return (

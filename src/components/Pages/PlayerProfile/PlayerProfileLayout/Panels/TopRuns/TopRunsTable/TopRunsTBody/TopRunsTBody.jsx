@@ -42,6 +42,8 @@ const TopRunsTBody = ({ topRuns }) => {
 export default TopRunsTBody;
 
 function formatTime(timeString) {
-  if (!timeString) return "N/A";
+  if (!timeString) {
+    return "N/A";
+  }
   return timeString;
 }

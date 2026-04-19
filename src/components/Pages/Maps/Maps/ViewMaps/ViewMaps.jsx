@@ -15,7 +15,9 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
   const searchByName = searchParams.get("name");
   const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
 
-  if (loading || error) return null;
+  if (loading || error) {
+    return null;
+  }
 
   const hasNoResults =
     (searchByAuthor || searchByName) && mapsScroll.length === 0;
@@ -29,7 +31,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
     );
   }
 
-  if (viewType === "list")
+  if (viewType === "list") {
     return mapsScroll.map((mapData, index) => {
       return (
         <MapCard2
@@ -42,6 +44,7 @@ const ViewMaps = ({ mapsScroll, lastMapRef }) => {
         />
       );
     });
+  }
 
   return mapsScroll.map((mapData, index) => {
     return (

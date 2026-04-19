@@ -34,7 +34,9 @@ async function handleClick({
   setIsCopied,
   dispatch,
 } = {}) {
-  if (isCopied) return;
+  if (isCopied) {
+    return;
+  }
 
   try {
     navigator.clipboard.writeText(textToCopy);

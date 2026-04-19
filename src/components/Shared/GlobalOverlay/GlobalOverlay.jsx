@@ -13,7 +13,9 @@ const GlobalOverlay = () => {
   const activeClass = isGlobalOverlayActive ? s.active : "";
 
   function handleOverlayClick() {
-    if (!isGlobalOverlayActive) return;
+    if (!isGlobalOverlayActive) {
+      return;
+    }
 
     // Overlay also will be closed
     dispatch(toggleMobileNav({ value: false }));

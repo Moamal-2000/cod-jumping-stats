@@ -41,7 +41,9 @@ export function getOpenGraphMetadata({
 }
 
 export function getPlayerSeoDescription(player = {}) {
-  if (!player?.PlayerID) return "Player profile and statistics.";
+  if (!player?.PlayerID) {
+    return "Player profile and statistics.";
+  }
 
   const parts = [];
   const purePlayerName = stripColorCodes(player.PrefName || player.PlayerName);
@@ -149,7 +151,9 @@ export function getPlayerOgDescription(player = {}) {
 }
 
 export function getMapOgDescription(map = {}) {
-  if (!map?.ID) return "Discover maps, records, and rankings on JumpersHeaven.";
+  if (!map?.ID) {
+    return "Discover maps, records, and rankings on JumpersHeaven.";
+  }
 
   const mapName = getCleanMapName(map.Name || "This map");
   const author = map.Author || null;
@@ -158,7 +162,9 @@ export function getMapOgDescription(map = {}) {
 
   let sentence = `Explore ${mapName}`;
 
-  if (author) sentence += ` by ${author}`;
+  if (author) {
+    sentence += ` by ${author}`;
+  }
   sentence += ` on JumpersHeaven.`;
   parts.push(sentence);
 
@@ -183,8 +189,9 @@ export function getMapOgDescription(map = {}) {
 }
 
 export function getMapSeoDescription(map = {}) {
-  if (!map?.ID)
+  if (!map?.ID) {
     return "Explore map statistics, difficulty, and player records on JumpersHeaven.";
+  }
 
   const mapName = getCleanMapName(map.Name || "Unknown Map");
   const author = map.Author || "Unknown author";

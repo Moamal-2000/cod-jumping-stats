@@ -29,13 +29,17 @@ const MapDetailPage = ({ cpId }) => {
   const activeTab = searchParams.get("tab") || "tops";
 
   useEffect(() => {
-    if (cpId && allMaps.length <= 0) dispatch(fetchMaps());
+    if (cpId && allMaps.length <= 0) {
+      dispatch(fetchMaps());
+    }
 
-    if (activeTab === "tops" && cpId)
+    if (activeTab === "tops" && cpId) {
       dispatch(fetchMapTops({ fps: selectedFps, cpId }));
+    }
 
-    if (activeTab === "players" && mapData?.ID)
+    if (activeTab === "players" && mapData?.ID) {
       dispatch(fetchMapPlayers({ fps: selectedFps, mapId: mapData.ID }));
+    }
   }, [activeTab, selectedFps]);
 
   if (loading || error || !mapData) {

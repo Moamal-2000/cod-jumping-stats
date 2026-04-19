@@ -8,7 +8,7 @@ const useFunctionOnKey = (
   keysNames,
   delay = 200,
   disableMainKeys = false,
-  disableOnFocus = false
+  disableOnFocus = false,
 ) => {
   const [pressedKey, pressInfo] = useKeyPress();
   useDebounce(() => executeOnClick(), delay, [pressedKey, pressInfo]);
@@ -22,9 +22,13 @@ const useFunctionOnKey = (
       (disableMainKeys || disableOnFocus) &&
       (isOneOfMainKeysPressed || isFocusOnInput);
 
-    if (shouldRejectExecution) return;
+    if (shouldRejectExecution) {
+      return;
+    }
 
-    if (keysNames.includes(pressedKey)) callback();
+    if (keysNames.includes(pressedKey)) {
+      callback();
+    }
   }
 };
 

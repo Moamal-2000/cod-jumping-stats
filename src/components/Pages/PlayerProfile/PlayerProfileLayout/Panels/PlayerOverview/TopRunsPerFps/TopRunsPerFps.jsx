@@ -9,7 +9,9 @@ const TopRunsPerFps = () => {
   const topsPerFps = performanceStats?.NbTopsPerFps;
   const isFpsDataEmpty = !topsPerFps || Object.keys(topsPerFps).length === 0;
 
-  if (isFpsDataEmpty) return null;
+  if (isFpsDataEmpty) {
+    return null;
+  }
 
   const totalRuns = Object.values(topsPerFps).reduce((a, b) => a + b, 0);
   const FpsAndRuns = Object.entries(topsPerFps);

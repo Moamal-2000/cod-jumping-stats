@@ -11,8 +11,6 @@ const showingAll = false;
 const MapDetailTops = ({ selectedFps }) => {
   const { mapTops, loadingTops } = useSelector((s) => s.map);
 
-  function handleShowAllBtn(event) {}
-
   if (loadingTops) {
     return (
       <div className={s.topsCard}>

@@ -4,7 +4,9 @@ import s from "./MapRoutesSelector.module.scss";
 const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
   const otherRoutes = getMapRoutes({ allMaps, Name, Ender });
 
-  if (otherRoutes.length <= 0) return null;
+  if (otherRoutes.length <= 0) {
+    return null;
+  }
 
   return (
     <nav className={s.otherRoutes}>

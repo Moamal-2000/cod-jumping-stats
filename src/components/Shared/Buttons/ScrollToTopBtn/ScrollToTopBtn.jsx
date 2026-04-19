@@ -19,7 +19,9 @@ const ScrollToTopBtn = () => {
 
   useEffect(() => {
     function onScrollRaf() {
-      if (animationFrameRef.current) return;
+      if (animationFrameRef.current) {
+        return;
+      }
 
       animationFrameRef.current = window.requestAnimationFrame(() => {
         animationFrameRef.current = null;
@@ -35,7 +37,9 @@ const ScrollToTopBtn = () => {
     function onScrollThrottled() {
       const now = Date.now();
 
-      if (now - lastRunRef.current < 500) return;
+      if (now - lastRunRef.current < 500) {
+        return;
+      }
 
       lastRunRef.current = now;
       onScrollRaf();

@@ -10,9 +10,15 @@ export function getLastSeenCategories(lastSeen) {
   const diffInDays = diffInMs / (1000 * 60 * 60 * 24);
   const filters = ["today", "this week", "this month", "long time"];
 
-  if (diffInDays < 1) return filters.slice(0, 3);
-  if (diffInDays <= 7) return filters.slice(1, 3);
-  if (diffInDays <= 30) return filters.slice(2, 4);
+  if (diffInDays < 1) {
+    return filters.slice(0, 3);
+  }
+  if (diffInDays <= 7) {
+    return filters.slice(1, 3);
+  }
+  if (diffInDays <= 30) {
+    return filters.slice(2, 4);
+  }
   return [filters.at(-1)];
 }
 
@@ -22,12 +28,16 @@ export function matchesFilterKey(lastSeen, filterKey) {
 }
 
 export function getLastSeenLeaderboard(data, filterKey) {
-  if (!filterKey) return data;
+  if (!filterKey) {
+    return data;
+  }
   return data?.filter((item) => matchesFilterKey(item.LastSeen, filterKey));
 }
 
 export function getRegionLeaderboard(data, filterKey) {
-  if (!filterKey) return data;
+  if (!filterKey) {
+    return data;
+  }
   return data?.filter((item) => item?.Region?.toLowerCase() === filterKey);
 }
 
@@ -75,11 +85,13 @@ export function getFilteredLeaderboard(leaderboardData, paramsObject) {
 
   let filteredData = leaderboardData;
 
-  if (lastSeenFilter)
+  if (lastSeenFilter) {
     filteredData = getLastSeenLeaderboard(filteredData, lastSeenFilter);
+  }
 
-  if (regionFilter)
+  if (regionFilter) {
     filteredData = getRegionLeaderboard(filteredData, regionFilter);
+  }
 
   return filteredData;
 }
@@ -106,7 +118,9 @@ export function getMapsByParams({ mapsData, paramsObject }) {
 }
 
 export function filterMapsByName(maps, nameQuery) {
-  if (!nameQuery) return maps;
+  if (!nameQuery) {
+    return maps;
+  }
 
   const normalizedQuery = nameQuery.toLowerCase().trim();
 
@@ -122,7 +136,9 @@ export function filterMapsByName(maps, nameQuery) {
 }
 
 export function filterMapsByAuthor(maps, authorQuery) {
-  if (!authorQuery) return maps;
+  if (!authorQuery) {
+    return maps;
+  }
 
   const normalizedAuthor = authorQuery.toLowerCase();
 
@@ -132,7 +148,9 @@ export function filterMapsByAuthor(maps, authorQuery) {
 }
 
 export function sortMaps(maps, sortBy) {
-  if (!maps || maps.length === 0) return maps;
+  if (!maps || maps.length === 0) {
+    return maps;
+  }
 
   const sortedMaps = [...maps];
 
@@ -172,8 +190,9 @@ export function sortMaps(maps, sortBy) {
     default: {
       // If sortBy is a number, treat it as FPS difficulty
       const sortByNumber = parseInt(sortBy, 10);
-      if (!isNaN(sortByNumber))
+      if (!isNaN(sortByNumber)) {
         return getMapsByFpsDifficulty({ sortedMaps, fps: sortByNumber });
+      }
 
       return sortedMaps;
     }
@@ -192,7 +211,9 @@ export function modifyMapsData(mapsData = []) {
     mapData.Classifications = mapData?.Type
       ? [mapData?.Type?.toLowerCase()]
       : [];
-    if (requiredVideos) mapData.Videos = requiredVideos;
+    if (requiredVideos) {
+      mapData.Videos = requiredVideos;
+    }
 
     if (mapData?.Released && isReleasedInThisYear) {
       const releaseDate = new Date(mapData.Released).getTime();
@@ -216,8 +237,9 @@ export function getRequiredMapVideos(mapData) {
 
 export function getMostFinishedMap(mapsData) {
   return mapsData.reduce((map, currentMap) => {
-    if (map.IndividualFinishCount > currentMap.IndividualFinishCount)
+    if (map.IndividualFinishCount > currentMap.IndividualFinishCount) {
       return map;
+    }
 
     return currentMap;
   });
@@ -239,15 +261,23 @@ export function getMapsByFpsDifficulty({ sortedMaps, fps }) {
     const difficultyA = a.Difficulty?.[fps]?.Difficulty ?? -1;
     const difficultyB = b.Difficulty?.[fps]?.Difficulty ?? -1;
 
-    if (difficultyA < 0 && difficultyB < 0) return 0;
-    if (difficultyA < 0) return 1;
-    if (difficultyB < 0) return -1;
+    if (difficultyA < 0 && difficultyB < 0) {
+      return 0;
+    }
+    if (difficultyA < 0) {
+      return 1;
+    }
+    if (difficultyB < 0) {
+      return -1;
+    }
     return difficultyB - difficultyA;
   });
 }
 
 export function filterMapsByVideos(maps, filterBy = "all") {
-  if (!maps || maps.length === 0 || filterBy === "all") return maps;
+  if (!maps || maps.length === 0 || filterBy === "all") {
+    return maps;
+  }
 
   return maps.filter((map) => {
     const hasVideos = map?.Videos?.length > 0;
@@ -266,12 +296,15 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
 
   let filteredPlayers = allPlayersData;
 
-  if (searchByName)
+  if (searchByName) {
     filteredPlayers = filterPlayersByName(filteredPlayers, searchByName);
-  if (searchById)
+  }
+  if (searchById) {
     filteredPlayers = filterPlayersById(filteredPlayers, searchById);
-  if (badge !== "all")
+  }
+  if (badge !== "all") {
     filteredPlayers = filterPlayersByBadge(filteredPlayers, badge);
+  }
 
   return filteredPlayers;
 }
@@ -289,14 +322,18 @@ export function filterPlayersByName(allPlayersData, nameQuery) {
 }
 
 export function filterPlayersById(allPlayersData, playerId) {
-  if (playerId === undefined) return allPlayersData;
+  if (playerId === undefined) {
+    return allPlayersData;
+  }
   return allPlayersData.filter((player) =>
     `${player.PlayerID}`.includes(playerId),
   );
 }
 
 export function filterPlayersByBadge(allPlayersData, nameQuery) {
-  if (nameQuery === "all" || nameQuery === undefined) return allPlayersData;
+  if (nameQuery === "all" || nameQuery === undefined) {
+    return allPlayersData;
+  }
 
   return allPlayersData.filter(
     ({ PlayerID, Banned, Donated, Admin, LastSeen }) => {
@@ -319,7 +356,9 @@ export function filterPlayersByBadge(allPlayersData, nameQuery) {
 }
 
 export function getProcessedTopRuns(topRuns, paramsObject) {
-  if (!topRuns) return [];
+  if (!topRuns) {
+    return [];
+  }
   const rank = paramsObject?.rank || "all";
   const sort = paramsObject?.sort || "rank";
 
@@ -337,9 +376,12 @@ export function getProcessedTopRuns(topRuns, paramsObject) {
 }
 
 export function getTopRunsByRank(topRuns = [], rank) {
-  if (rank === "1") return topRuns.filter((run) => run.Rank === 1);
-  if (rank === "1-10")
+  if (rank === "1") {
+    return topRuns.filter((run) => run.Rank === 1);
+  }
+  if (rank === "1-10") {
     return topRuns.filter((run) => run.Rank > 0 && run.Rank <= 10);
+  }
 
   return topRuns;
 }

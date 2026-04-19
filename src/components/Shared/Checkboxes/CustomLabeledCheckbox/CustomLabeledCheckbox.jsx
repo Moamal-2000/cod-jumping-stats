@@ -26,7 +26,9 @@ const CustomLabeledCheckbox = ({ name, labelText, queryName }) => {
 
   function handleKeyDown(event) {
     const isEnterKey = event.code === "Enter" || event.keyCode === 13;
-    if (isEnterKey) updateCheckboxState();
+    if (isEnterKey) {
+      updateCheckboxState();
+    }
   }
 
   return (

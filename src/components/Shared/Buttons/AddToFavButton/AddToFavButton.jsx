@@ -33,7 +33,7 @@ export default AddToFavButton;
 
 function toggleFavorite({ setIsFavorited, id, groupKey = "playersIds" } = {}) {
   const favoritesLocal = localStorage.getItem("favorites");
-  let favorites = favoritesLocal
+  const favorites = favoritesLocal
     ? JSON.parse(favoritesLocal)
     : { mapsIds: [], playersIds: [] };
 
@@ -43,7 +43,9 @@ function toggleFavorite({ setIsFavorited, id, groupKey = "playersIds" } = {}) {
     favorites[groupKey] = favorites[groupKey].filter((itemId) => itemId !== id);
     setIsFavorited(false);
   } else {
-    if (!favorites[groupKey]) favorites[groupKey] = [];
+    if (!favorites[groupKey]) {
+      favorites[groupKey] = [];
+    }
 
     favorites[groupKey].push(id);
     setIsFavorited(true);
@@ -55,7 +57,9 @@ function toggleFavorite({ setIsFavorited, id, groupKey = "playersIds" } = {}) {
 function checkIsItemFavorited({ setIsFavorited, id, groupKey = "playersIds" }) {
   const favoritesLocal = localStorage.getItem("favorites");
 
-  if (!favoritesLocal) return;
+  if (!favoritesLocal) {
+    return;
+  }
 
   const favorites = JSON.parse(favoritesLocal);
   const isFavorited = favorites[groupKey]?.includes(id);

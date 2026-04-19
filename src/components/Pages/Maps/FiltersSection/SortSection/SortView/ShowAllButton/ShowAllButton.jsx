@@ -25,7 +25,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   }
 
   function handleShowAll() {
-    if (mapsData?.length <= 0 || allDataDisplayed) return;
+    if (mapsData?.length <= 0 || allDataDisplayed) {
+      return;
+    }
 
     const lastMapsPagination = Math.ceil(
       mapsData?.length / PAGINATION_ITEMS_PER_PAGE,
@@ -36,7 +38,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   }
 
   function handleShowLess() {
-    if (mapsData?.length <= 0) return;
+    if (mapsData?.length <= 0) {
+      return;
+    }
 
     dispatch(updateMapsState({ key: "mapsScroll", value: firstChunkMaps }));
     setPaginationNumber(1);

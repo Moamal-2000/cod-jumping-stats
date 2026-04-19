@@ -18,10 +18,13 @@ const FiltersSection = () => {
   function handleSortChange(newValue) {
     const isDefault = newValue === "last-seen";
 
-    if (isDefault) removeQueryString("sort", searchParams, router, pathname);
+    if (isDefault) {
+      removeQueryString("sort", searchParams, router, pathname);
+    }
 
-    if (!isDefault)
+    if (!isDefault) {
       createQueryString("sort", newValue, searchParams, router, pathname);
+    }
   }
 
   function handleFilterChange(event) {

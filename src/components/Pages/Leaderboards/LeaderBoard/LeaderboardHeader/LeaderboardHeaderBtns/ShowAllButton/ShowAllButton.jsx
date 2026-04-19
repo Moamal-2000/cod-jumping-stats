@@ -38,7 +38,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   }
 
   function handleShowAll() {
-    if (leaderboardData?.length <= 0 || allDataDisplayed) return;
+    if (leaderboardData?.length <= 0 || allDataDisplayed) {
+      return;
+    }
 
     const lastLeaderboardPagination = Math.ceil(
       leaderboardData?.length / PAGINATION_ITEMS_PER_PAGE,
@@ -55,7 +57,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   }
 
   function handleShowLess() {
-    if (leaderboardData?.length <= 0) return;
+    if (leaderboardData?.length <= 0) {
+      return;
+    }
 
     dispatch(
       updateLeaderboardState({
@@ -70,7 +74,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
 
   useEffect(() => {
     const isSameArrayReference = leaderboardScroll === leaderboardData;
-    if (!isSameArrayReference) handleShowAll();
+    if (!isSameArrayReference) {
+      handleShowAll();
+    }
   }, [isLeaderboardReversed]);
 
   return (

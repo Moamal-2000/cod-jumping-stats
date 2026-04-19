@@ -12,7 +12,9 @@ const useInfiniteScroll = (
   const observer = useRef();
 
   const lastElementRef = useCallback((node) => {
-    if (isTableElementReversed && isTableElementReversed !== null) return;
+    if (isTableElementReversed && isTableElementReversed !== null) {
+      return;
+    }
 
     const isLastPagination = getIsLastPagination(
       data,
@@ -20,16 +22,23 @@ const useInfiniteScroll = (
       itemsPerPage,
     );
 
-    if (isLastPagination) return;
+    if (isLastPagination) {
+      return;
+    }
 
-    if (observer.current) observer.current.disconnect();
+    if (observer.current) {
+      observer.current.disconnect();
+    }
 
     observer.current = new IntersectionObserver((entries) => {
-      if (entries[0]?.isIntersecting)
+      if (entries[0]?.isIntersecting) {
         setPaginationNumber((prevValue) => prevValue + 1);
+      }
     });
 
-    if (node) observer.current.observe(node);
+    if (node) {
+      observer.current.observe(node);
+    }
   });
 
   return [lastElementRef, paginationNumber, setPaginationNumber];

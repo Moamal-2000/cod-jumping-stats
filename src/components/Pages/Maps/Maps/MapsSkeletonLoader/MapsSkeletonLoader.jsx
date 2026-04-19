@@ -5,7 +5,9 @@ import SkeletonMapList from "@/components/Shared/Loaders/SkeletonLoaders/Skeleto
 import { SKELETON_LIST } from "@/data/constants";
 
 const MapsSkeletonLoader = ({ viewType, loading, error }) => {
-  if (!loading && !error) return null;
+  if (!loading && !error) {
+    return null;
+  }
 
   return SKELETON_LIST.map((_, index) =>
     viewType === "list" ? (

@@ -24,9 +24,11 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
     <div className={s.badges}>
       {playerBadgesData.map(
         ({ id, displayCondition, classes, icon, label, tooltipText, href }) => {
-          if (!displayCondition) return null;
+          if (!displayCondition) {
+            return null;
+          }
 
-          if (href)
+          if (href) {
             return (
               <Link
                 key={id}
@@ -42,6 +44,7 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
                 <span>{label}</span>
               </Link>
             );
+          }
 
           return (
             <div key={id} className={`${s.badge} ${classes}`}>

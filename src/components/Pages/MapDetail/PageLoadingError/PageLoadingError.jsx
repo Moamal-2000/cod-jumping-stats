@@ -3,7 +3,7 @@ import Link from "next/link";
 import s from "./PageLoadingError.module.scss";
 
 const PageLoadingError = ({ loading, error, mapData }) => {
-  if (loading)
+  if (loading) {
     return (
       <main className={s.mapDetailPage}>
         <div className="container">
@@ -14,6 +14,7 @@ const PageLoadingError = ({ loading, error, mapData }) => {
         </div>
       </main>
     );
+  }
 
   if (error || !mapData) {
     return (

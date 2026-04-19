@@ -5,7 +5,9 @@ export function getColoredName(name = "Unknown Player") {
   const colorNumbers = colorParts.slice(1).map((part) => part.charAt(0));
 
   return colorParts.map((part, index) => {
-    if (index === 0 || !colorNumbers[index - 1]) return part;
+    if (index === 0 || !colorNumbers[index - 1]) {
+      return part;
+    }
 
     const colorNumber = colorNumbers[index - 1];
     const text = part.slice(1);
@@ -24,7 +26,9 @@ export function getColoredNameForOG(name = "Unknown Player") {
   const colorNumbers = colorParts.slice(1).map((part) => part.charAt(0));
 
   return colorParts.map((part, index) => {
-    if (index === 0 || !colorNumbers[index - 1]) return part;
+    if (index === 0 || !colorNumbers[index - 1]) {
+      return part;
+    }
 
     const colorNumber = colorNumbers[index - 1];
     const text = part.slice(1);

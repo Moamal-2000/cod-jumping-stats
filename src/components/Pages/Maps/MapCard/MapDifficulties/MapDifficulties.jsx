@@ -11,7 +11,9 @@ const MapDifficulties = ({ Difficulty, hideLabel = false }) => {
         {JUMP_FPS.map((fps) => {
           const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
 
-          if (fpsDifficulty === "?") return null;
+          if (fpsDifficulty === "?") {
+            return null;
+          }
 
           return (
             <div key={fps} className={s.fpsDifficulty}>

@@ -13,7 +13,9 @@ const CopiedPopup = () => {
   const debounceRef = useRef(null);
 
   useEffect(() => {
-    if (!activeCopyAlert) return;
+    if (!activeCopyAlert) {
+      return;
+    }
     clearTimeout(debounceRef?.current);
 
     debounceRef.current = setTimeout(() => {

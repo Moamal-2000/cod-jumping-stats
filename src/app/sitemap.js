@@ -19,7 +19,9 @@ async function getSiteMapRoutes() {
   entries.forEach((entry) => {
     const isValidRoute =
       entry.isDirectory() && !excludeDirs.includes(entry.name);
-    if (isValidRoute) routes.push(`/${entry.name}`);
+    if (isValidRoute) {
+      routes.push(`/${entry.name}`);
+    }
   });
 
   const sitemap = routes.map((route) => ({

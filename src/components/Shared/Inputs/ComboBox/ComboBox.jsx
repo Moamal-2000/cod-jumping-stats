@@ -45,15 +45,23 @@ const ComboBox = ({
   const filteredOptions = getFilteredOptions(sortedOptions, filterQuery);
 
   function handleToggle() {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
 
     setIsOpen((prev) => !prev);
-    if (!isOpen) inputRef.current?.focus();
+    if (!isOpen) {
+      inputRef.current?.focus();
+    }
   }
 
   function handleInputChange(event) {
-    if (disabled) return;
-    if (!isOpen) setIsOpen(true);
+    if (disabled) {
+      return;
+    }
+    if (!isOpen) {
+      setIsOpen(true);
+    }
     clearTimeout(debounceRef?.current);
 
     const value = event.target.value.toLowerCase().trim();
@@ -65,8 +73,12 @@ const ComboBox = ({
     const optionValues = sortedOptions.map(({ value }) => value.toLowerCase());
     const isInOptionsList = optionValues.includes(value);
 
-    if (isInOptionsList) setSelectedValue(value);
-    if (!isInOptionsList) setSelectedValue("");
+    if (isInOptionsList) {
+      setSelectedValue(value);
+    }
+    if (!isInOptionsList) {
+      setSelectedValue("");
+    }
     autoSelectRef.current = isInOptionsList;
   }
 
@@ -92,7 +104,9 @@ const ComboBox = ({
     const { label, value } = option;
 
     setInputValue(label);
-    if (!preserveFilterQuery) setFilterQuery(label);
+    if (!preserveFilterQuery) {
+      setFilterQuery(label);
+    }
     clearTimeout(debounceRef?.current);
 
     debounceRef.current = setTimeout(() => updateUrlQuery(value), 300);
@@ -102,7 +116,9 @@ const ComboBox = ({
   }
 
   function handleClear() {
-    if (disabled) return;
+    if (disabled) {
+      return;
+    }
     inputRef.current?.focus();
 
     setInputValue("");
@@ -125,13 +141,16 @@ const ComboBox = ({
       inputRef.current?.blur();
     }
 
-    if (isArrowDown || isArrowUp)
+    if (isArrowDown || isArrowUp) {
       handleArrowNavigation({ isArrowDown, isArrowUp });
+    }
   }
 
   function handleArrowNavigation({ isArrowDown, isArrowUp } = {}) {
     const optionsForNavigation = filteredOptions;
-    if (!isOpen || optionsForNavigation.length === 0) return;
+    if (!isOpen || optionsForNavigation.length === 0) {
+      return;
+    }
 
     const optionValues = optionsForNavigation.map(({ value }) => value);
     const hasSelectedValue = optionValues.includes(selectedValue);
@@ -139,7 +158,9 @@ const ComboBox = ({
     if (!hasSelectedValue) {
       const edgeIndex = isArrowUp ? optionsForNavigation.length - 1 : 0;
       const edgeOption = optionsForNavigation[edgeIndex];
-      if (!edgeOption) return;
+      if (!edgeOption) {
+        return;
+      }
 
       autoSelectRef.current = true;
       handleSelect(edgeOption, {
@@ -155,11 +176,19 @@ const ComboBox = ({
 
     let optionIndex = selectedOptionIndex;
 
-    if (isArrowDown && !isLast) optionIndex += 1;
-    if (isArrowUp && !isFirst) optionIndex -= 1;
+    if (isArrowDown && !isLast) {
+      optionIndex += 1;
+    }
+    if (isArrowUp && !isFirst) {
+      optionIndex -= 1;
+    }
 
-    if (isArrowDown && isLast) optionIndex = 0;
-    if (isArrowUp && isFirst) optionIndex = optionsForNavigation.length - 1;
+    if (isArrowDown && isLast) {
+      optionIndex = 0;
+    }
+    if (isArrowUp && isFirst) {
+      optionIndex = optionsForNavigation.length - 1;
+    }
 
     const newSelectValue = optionsForNavigation[optionIndex];
     if (newSelectValue !== undefined) {
@@ -172,7 +201,9 @@ const ComboBox = ({
   }
 
   useEffect(() => {
-    if (!isOpen) return;
+    if (!isOpen) {
+      return;
+    }
 
     function handleClickOutside(event) {
       const isComboClicked = wrapperRef.current?.contains(event.target);
@@ -190,7 +221,9 @@ const ComboBox = ({
   }, [isOpen]);
 
   useEffect(() => {
-    if (!isOpen || !autoSelectRef.current) return;
+    if (!isOpen || !autoSelectRef.current) {
+      return;
+    }
     autoSelectRef.current = false;
 
     const target = wrapperRef.current?.querySelector(
@@ -258,12 +291,15 @@ function sortOptions({
   alphaOrder = false,
   orderByCount = false,
 } = {}) {
-  let normalizedOptions = options;
+  const normalizedOptions = options;
 
-  if (alphaOrder && !orderByCount)
+  if (alphaOrder && !orderByCount) {
     normalizedOptions.sort((a, b) => a.label.localeCompare(b.label));
+  }
 
-  if (orderByCount) normalizedOptions.sort((a, b) => b.count - a.count);
+  if (orderByCount) {
+    normalizedOptions.sort((a, b) => b.count - a.count);
+  }
 
   return normalizedOptions;
 }
@@ -271,7 +307,9 @@ function sortOptions({
 function getFilteredOptions(options, inputValue) {
   const query = inputValue.trim().toLowerCase();
 
-  if (!query) return options;
+  if (!query) {
+    return options;
+  }
 
   return options.filter(({ label, value }) => {
     const labelValue = String(label).toLowerCase();

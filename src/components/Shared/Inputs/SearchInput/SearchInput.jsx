@@ -61,17 +61,23 @@ const SearchInput = ({
   }
 
   useEffect(() => {
-    if (currentValue === "") setSearchValue("");
+    if (currentValue === "") {
+      setSearchValue("");
+    }
   }, [currentValue]);
 
   useEffect(() => {
-    if (typeof window === "undefined" || !autoFocus) return;
+    if (typeof window === "undefined" || !autoFocus) {
+      return;
+    }
 
     const isDesktop =
       window.matchMedia("(hover: hover)").matches &&
       window.matchMedia("(pointer: fine)").matches;
 
-    if (isDesktop) inputRef.current.focus();
+    if (isDesktop) {
+      inputRef.current.focus();
+    }
   }, []);
 
   return (

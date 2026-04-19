@@ -2,7 +2,7 @@ import AnimatedSpinnerIcon from "./AnimatedSpinnerIcon.jsx";
 import s from "./SpinnerLoader.module.scss";
 
 const SpinnerLoader = ({ title, description, type }) => {
-  if (type === "table")
+  if (type === "table") {
     return (
       <tr className={s.loader} data-loader>
         <td>
@@ -12,6 +12,7 @@ const SpinnerLoader = ({ title, description, type }) => {
         </td>
       </tr>
     );
+  }
 
   return (
     <div className={s.loader} data-loader>

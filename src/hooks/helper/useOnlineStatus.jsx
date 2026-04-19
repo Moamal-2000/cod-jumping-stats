@@ -14,8 +14,11 @@ const useOnlineStatus = () => {
   }
 
   useEffect(() => {
-    if (navigator.onLine) checkOnlineStatus();
-    else checkOfflineStatus();
+    if (navigator.onLine) {
+      checkOnlineStatus();
+    } else {
+      checkOfflineStatus();
+    }
 
     window.addEventListener("online", checkOnlineStatus);
     window.addEventListener("offline", checkOfflineStatus);

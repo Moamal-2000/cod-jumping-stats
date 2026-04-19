@@ -45,7 +45,9 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
       !isSameArrayReference &&
       !cameFromDifferentPage;
 
-    if (shouldLoadMoreData) addDataOnScroll();
+    if (shouldLoadMoreData) {
+      addDataOnScroll();
+    }
   }
 
   useEffect(() => {

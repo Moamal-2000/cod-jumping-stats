@@ -91,23 +91,37 @@ const PlayerInfo = () => {
 export default PlayerInfo;
 
 function formatLastSeen(lastSeen) {
-  if (!lastSeen) return "Unknown";
+  if (!lastSeen) {
+    return "Unknown";
+  }
 
   const date = new Date(lastSeen);
   const now = new Date();
   const diffInHours = Math.floor((now - date) / (1000 * 60 * 60));
 
-  if (diffInHours < 1) return "Just now";
-  if (diffInHours < 24) return `${diffInHours}h ago`;
-  if (diffInHours < 168) return `${Math.floor(diffInHours / 24)}d ago`;
+  if (diffInHours < 1) {
+    return "Just now";
+  }
+  if (diffInHours < 24) {
+    return `${diffInHours}h ago`;
+  }
+  if (diffInHours < 168) {
+    return `${Math.floor(diffInHours / 24)}d ago`;
+  }
 
   return date.toLocaleDateString();
 }
 
 function getLastSeenText(daysSinceLastSeen) {
-  if (daysSinceLastSeen === 0) return "Today";
-  if (daysSinceLastSeen === 1) return "Yesterday";
-  if (daysSinceLastSeen > 1) return `${daysSinceLastSeen} days ago`;
+  if (daysSinceLastSeen === 0) {
+    return "Today";
+  }
+  if (daysSinceLastSeen === 1) {
+    return "Yesterday";
+  }
+  if (daysSinceLastSeen > 1) {
+    return `${daysSinceLastSeen} days ago`;
+  }
 
   return "Unknown";
 }

@@ -35,7 +35,9 @@ export default TopsVisualization;
 
 function getMaxFinishTimesFrom(bestPlayer) {
   const topList = bestPlayer?.TopList;
-  if (topList === undefined || topList === null) return 0;
+  if (topList === undefined || topList === null) {
+    return 0;
+  }
 
   return Math.max(...Object.values(topList));
 }

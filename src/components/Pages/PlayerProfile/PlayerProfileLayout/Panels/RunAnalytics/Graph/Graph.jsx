@@ -60,7 +60,9 @@ const Graph = ({
   const mapName = runData?.[0]?.MapName;
 
   function getGraphPoints() {
-    if (!runData || runData.length === 0) return [];
+    if (!runData || runData.length === 0) {
+      return [];
+    }
 
     return runData
       .map((runEntry) => ({
@@ -85,7 +87,9 @@ const Graph = ({
     (touchA.clientX + touchB.clientX) / 2;
 
   const handleMouseDown = (mouseEvent) => {
-    if (zoomScale <= SCALE_MIN) return;
+    if (zoomScale <= SCALE_MIN) {
+      return;
+    }
     isDraggingRef.current = true;
     dragStartXRef.current = mouseEvent.clientX;
     dragStartPanOffsetRef.current = panOffsetPx;
@@ -94,7 +98,9 @@ const Graph = ({
 
   const handlePinchMove = (touchEvent) => {
     const touches = touchEvent.touches;
-    if (!touches || touches.length < 2) return;
+    if (!touches || touches.length < 2) {
+      return;
+    }
 
     const [touchA, touchB] = touches;
     const currentDistance = getTouchDistance(touchA, touchB);
@@ -128,9 +134,13 @@ const Graph = ({
       return;
     }
 
-    if (zoomScale <= SCALE_MIN) return;
+    if (zoomScale <= SCALE_MIN) {
+      return;
+    }
     const touch = touches[0];
-    if (!touch) return;
+    if (!touch) {
+      return;
+    }
     isDraggingRef.current = true;
     dragStartXRef.current = touch.clientX;
     dragStartPanOffsetRef.current = panOffsetPx;
@@ -152,7 +162,9 @@ const Graph = ({
   };
 
   const handleMouseMove = (mouseEvent) => {
-    if (!isDraggingRef.current) return;
+    if (!isDraggingRef.current) {
+      return;
+    }
     const dragDeltaX = mouseEvent.clientX - dragStartXRef.current;
     const nextPan = calculateNewPanOffset(
       dragStartPanOffsetRef.current,
@@ -169,9 +181,13 @@ const Graph = ({
       return;
     }
 
-    if (!isDraggingRef.current) return;
+    if (!isDraggingRef.current) {
+      return;
+    }
     const touch = touches[0];
-    if (!touch) return;
+    if (!touch) {
+      return;
+    }
     const dragDeltaX = touch.clientX - dragStartXRef.current;
     const nextPan = calculateNewPanOffset(
       dragStartPanOffsetRef.current,
@@ -183,7 +199,9 @@ const Graph = ({
   };
 
   const handleDragEnd = () => {
-    if (!isDraggingRef.current) return;
+    if (!isDraggingRef.current) {
+      return;
+    }
     isDraggingRef.current = false;
     document.body.style.cursor = "";
   };
@@ -246,7 +264,7 @@ const Graph = ({
 
   const autoPanStep = () => {
     const cursorX = mouseXLocalRef.current;
-    if (cursorX == null || isDraggingRef.current) {
+    if (cursorX === null || isDraggingRef.current) {
       rafAutoPanRef.current = null;
       return;
     }
@@ -290,7 +308,9 @@ const Graph = ({
 
   const handleSvgPointerMove = (pointerClientX) => {
     const svgRect = svgRef.current?.getBoundingClientRect();
-    if (!svgRect) return;
+    if (!svgRect) {
+      return;
+    }
     const localCursorX = pointerClientX - svgRect.left;
     mouseXLocalRef.current = localCursorX;
 
@@ -315,9 +335,13 @@ const Graph = ({
     handleSvgPointerMove(mouseEvent.clientX);
 
   const handleSvgTouchMove = (touchEvent) => {
-    if ((touchEvent.touches?.length || 0) >= 2) return;
+    if ((touchEvent.touches?.length || 0) >= 2) {
+      return;
+    }
     const touch = touchEvent.touches && touchEvent.touches[0];
-    if (touch) handleSvgPointerMove(touch.clientX);
+    if (touch) {
+      handleSvgPointerMove(touch.clientX);
+    }
   };
 
   const handleSvgMouseLeave = () => {
@@ -380,7 +404,9 @@ const Graph = ({
   // Use native non-passive wheel listener to reliably prevent browser/page zoom.
   useEffect(() => {
     const svgElement = svgRef.current;
-    if (!svgElement) return;
+    if (!svgElement) {
+      return;
+    }
 
     svgElement.addEventListener("wheel", handleSvgWheel, { passive: false });
     return () => svgElement.removeEventListener("wheel", handleSvgWheel);
@@ -389,7 +415,9 @@ const Graph = ({
   // Resize observer to make chart responsive
   useEffect(() => {
     const targetElement = containerRef.current;
-    if (!targetElement || typeof ResizeObserver === "undefined") return;
+    if (!targetElement || typeof ResizeObserver === "undefined") {
+      return;
+    }
 
     // Sync immediately so first painted SVG uses actual container width.
     const immediateWidth = Math.floor(
@@ -411,8 +439,12 @@ const Graph = ({
     return () => resizeObserver.disconnect();
   }, [isLoading, graphPoints.length]);
 
-  if (isLoading) return <LoadingUI />;
-  if (graphPoints.length === 0) return <EmptyGraphState />;
+  if (isLoading) {
+    return <LoadingUI />;
+  }
+  if (graphPoints.length === 0) {
+    return <EmptyGraphState />;
+  }
 
   const allTimestamps = graphPoints.map((point) => point.timestamp);
   const allRunTimes = graphPoints.map((point) => point.runTime);
@@ -423,7 +455,9 @@ const Graph = ({
 
   // Time-to-Pixel X Scale function
   const scaleTimestampToX = (timestamp) => {
-    if (maxTimestamp === minTimestamp) return chartPadding.left;
+    if (maxTimestamp === minTimestamp) {
+      return chartPadding.left;
+    }
     // 1. Calculate base (unscaled) X position
     const graphRange = maxTimestamp - minTimestamp;
     const pixelRange = CHART_WIDTH - chartPadding.left - chartPadding.right;

@@ -55,7 +55,9 @@ function calcToolTipPosition({
   setPosition,
 }) {
   const tooltipElement = tooltipRef.current;
-  if (!tooltipElement) return;
+  if (!tooltipElement) {
+    return;
+  }
 
   const { width: tooltipWidth, height: tooltipHeight } =
     tooltipElement.getBoundingClientRect();

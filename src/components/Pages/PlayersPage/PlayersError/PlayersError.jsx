@@ -3,7 +3,9 @@ import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
 import s from "./PlayersError.module.scss";
 
 const PlayersError = ({ error, dispatch }) => {
-  if (!error) return null;
+  if (!error) {
+    return null;
+  }
 
   return (
     <div className={s.errorContainer}>

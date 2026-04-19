@@ -16,7 +16,9 @@ const OnlinePlayerItem = ({ player, server }) => {
   const pureName = stripColorCodes(player.Name);
 
   function handleClick(event) {
-    if (isCod4) event.preventDefault();
+    if (isCod4) {
+      event.preventDefault();
+    }
   }
 
   function handleMouseEnter() {

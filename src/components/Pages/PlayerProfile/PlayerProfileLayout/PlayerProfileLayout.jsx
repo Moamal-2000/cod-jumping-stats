@@ -29,7 +29,9 @@ const PlayerProfileLayout = ({ children, playerId }) => {
   );
 
   useEffect(() => {
-    if (!playerId) return;
+    if (!playerId) {
+      return;
+    }
 
     dispatch(fetchPlayerProfile({ playerId }));
     dispatch(fetchPlayerLeaderboardPositions({ playerId }));

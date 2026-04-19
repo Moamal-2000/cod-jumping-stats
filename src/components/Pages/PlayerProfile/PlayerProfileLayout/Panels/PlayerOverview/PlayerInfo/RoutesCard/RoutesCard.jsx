@@ -35,10 +35,18 @@ const RoutesCard = ({ performanceStats }) => {
 export default RoutesCard;
 
 function getCompletionRateClass(completionRate) {
-  if (completionRate >= 95) return s[`highlight-95`];
-  if (completionRate >= 70) return s[`highlight-70`];
-  if (completionRate >= 50) return s[`highlight-50`];
-  if (completionRate >= 25) return s[`highlight-25`];
+  if (completionRate >= 95) {
+    return s[`highlight-95`];
+  }
+  if (completionRate >= 70) {
+    return s[`highlight-70`];
+  }
+  if (completionRate >= 50) {
+    return s[`highlight-50`];
+  }
+  if (completionRate >= 25) {
+    return s[`highlight-25`];
+  }
 
   return "";
 }

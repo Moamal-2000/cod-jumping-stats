@@ -10,7 +10,9 @@ const MapRoutes = ({ allMaps, selectedMapId, selectMapRoute }) => {
     Ender: selectedMap?.Ender,
   });
 
-  if (mapRoutes.length <= 0) return null;
+  if (mapRoutes.length <= 0) {
+    return null;
+  }
 
   return (
     <div className={s.routes}>

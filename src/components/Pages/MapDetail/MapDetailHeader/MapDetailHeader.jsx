@@ -19,14 +19,20 @@ const MapDetailHeader = ({ mapData }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (allMaps.length <= 0) dispatch(fetchMaps());
+    if (allMaps.length <= 0) {
+      dispatch(fetchMaps());
+    }
 
-    if (!CpID || bestPlayer?.PlayerID) return;
+    if (!CpID || bestPlayer?.PlayerID) {
+      return;
+    }
 
     let cancelled = false;
 
     async function fetchBestPlayer() {
-      if (cancelled) return;
+      if (cancelled) {
+        return;
+      }
 
       try {
         const results = await fetchAllTopRuns({ mapId: CpID });
@@ -39,7 +45,9 @@ const MapDetailHeader = ({ mapData }) => {
           (a, b) => a.TimePlayed - b.TimePlayed,
         )?.[0];
 
-        if (bestPlayerRun) setBestPlayer(bestPlayerRun);
+        if (bestPlayerRun) {
+          setBestPlayer(bestPlayerRun);
+        }
       } catch (error) {
         console.error(`Error fetching best player :${error}`);
       }
@@ -111,8 +119,9 @@ export async function fetchAllTopRuns({ mapId }) {
       });
       const topRunsByFps = await decodeAsyncData(response);
 
-      if (Array.isArray(topRunsByFps))
+      if (Array.isArray(topRunsByFps)) {
         return topRunsByFps.map((run) => ({ ...run, fps }));
+      }
 
       return [];
     });

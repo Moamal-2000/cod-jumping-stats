@@ -26,14 +26,18 @@ function base64ToUint8(base64) {
 }
 
 export function getValueFromLocalStorage({ key, defaultValue }) {
-  if (typeof window === "undefined") return defaultValue;
+  if (typeof window === "undefined") {
+    return defaultValue;
+  }
 
   const value = localStorage.getItem(key);
   return value ? JSON.parse(value) : defaultValue;
 }
 
 export function cacheMapsLocally(mapsLocal) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") {
+    return;
+  }
 
   const dataToCache = { maps: mapsLocal, timeStamp: Date.now() };
 
@@ -45,10 +49,14 @@ export function cacheMapsLocally(mapsLocal) {
 }
 
 export function getCachedMaps() {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   const compressed = localStorage.getItem("mapsData");
-  if (!compressed) return null;
+  if (!compressed) {
+    return null;
+  }
 
   try {
     const base64 = LZString.decompressFromUTF16(compressed);
@@ -63,7 +71,9 @@ export function getCachedMaps() {
 }
 
 export function cachePlayersLocally(playersLocal, dataType) {
-  if (typeof window === "undefined") return;
+  if (typeof window === "undefined") {
+    return;
+  }
 
   const dataToCache = {
     allPlayersData: playersLocal,
@@ -80,11 +90,15 @@ export function cachePlayersLocally(playersLocal, dataType) {
 }
 
 export function getCachedPlayers(dataType) {
-  if (typeof window === "undefined") return null;
+  if (typeof window === "undefined") {
+    return null;
+  }
 
   const key = `playersData${capitalize(dataType)}`;
   const compressed = localStorage.getItem(key);
-  if (!compressed) return null;
+  if (!compressed) {
+    return null;
+  }
 
   try {
     const base64 = LZString.decompressFromUTF16(compressed);

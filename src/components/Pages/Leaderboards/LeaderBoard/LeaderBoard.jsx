@@ -124,13 +124,14 @@ function checkAndLoadMoreData({
     !cameFromDifferentPage &&
     !searchHasValue;
 
-  if (shouldShowMoreData)
+  if (shouldShowMoreData) {
     addDataOnScroll({
       leaderboardData,
       paginationNumber,
       leaderboardScroll,
       dispatch,
     });
+  }
 }
 
 function addDataOnScroll({

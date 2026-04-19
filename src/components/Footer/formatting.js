@@ -10,6 +10,8 @@ const FPS_QUERY_VALUES = new Set([
 
 export function normalizeFpsQuery(fpsValue) {
   const value = String(fpsValue || "125").toLowerCase();
-  if (!FPS_QUERY_VALUES.has(value)) return "125";
+  if (!FPS_QUERY_VALUES.has(value)) {
+    return "125";
+  }
   return value === "all" ? "All" : value;
 }

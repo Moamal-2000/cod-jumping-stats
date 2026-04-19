@@ -48,16 +48,22 @@ function getMapsAuthors(maps = []) {
   const seen = new Map();
 
   maps.forEach(({ Author }) => {
-    if (!Author) return;
+    if (!Author) {
+      return;
+    }
 
     const authors = extractAuthorNames(Author);
-    if (authors.length === 0) return;
+    if (authors.length === 0) {
+      return;
+    }
 
     const mapAuthorKeys = new Set();
 
     authors.forEach((authorName) => {
       const normalizedKey = normalizeAuthor(authorName);
-      if (!normalizedKey || mapAuthorKeys.has(normalizedKey)) return;
+      if (!normalizedKey || mapAuthorKeys.has(normalizedKey)) {
+        return;
+      }
 
       mapAuthorKeys.add(normalizedKey);
       const existingAuthor = seen.get(normalizedKey);
@@ -89,7 +95,9 @@ function getMapsAuthors(maps = []) {
 
 function extractAuthorNames(authorText = "") {
   const text = String(authorText).trim();
-  if (!text) return [];
+  if (!text) {
+    return [];
+  }
 
   const hasByKeyword = text.toLowerCase().includes("by");
   let byKeyWordMatches = [];
@@ -125,7 +133,9 @@ function normalizeAuthor(author) {
 
 function isLikelyAuthor(author) {
   const hasAnd = /&|\band\b/i.test(author);
-  if (hasAnd) return false;
+  if (hasAnd) {
+    return false;
+  }
 
   let score = 0;
 
@@ -135,11 +145,21 @@ function isLikelyAuthor(author) {
   const hasParenthesis = /[()]/.test(author);
   const hasKeywords = /\b(by|version|reworked|ported|finished)\b/i.test(author);
 
-  if (has15Char) score += 1;
-  if (has3Words) score += 2;
-  if (hasNumber) score += 1;
-  if (hasParenthesis) score += 2;
-  if (hasKeywords) score += 2;
+  if (has15Char) {
+    score += 1;
+  }
+  if (has3Words) {
+    score += 2;
+  }
+  if (hasNumber) {
+    score += 1;
+  }
+  if (hasParenthesis) {
+    score += 2;
+  }
+  if (hasKeywords) {
+    score += 2;
+  }
 
   return score < 3;
 }

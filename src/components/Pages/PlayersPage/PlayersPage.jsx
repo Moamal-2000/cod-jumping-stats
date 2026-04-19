@@ -120,13 +120,14 @@ function checkAndLoadMoreData({
     !isSameArrayReference &&
     !cameFromDifferentPage;
 
-  if (shouldLoadMoreData)
+  if (shouldLoadMoreData) {
     addDataOnScroll({
       playersData,
       paginationNumber,
       playersScroll,
       dispatch,
     });
+  }
 }
 
 function addDataOnScroll({

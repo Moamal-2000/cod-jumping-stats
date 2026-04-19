@@ -56,7 +56,9 @@ export default AllServers;
 function getCodServers(servers = []) {
   return servers.reduce((groups, server) => {
     const gameType = server.GameType;
-    if (!groups[gameType]) groups[gameType] = [];
+    if (!groups[gameType]) {
+      groups[gameType] = [];
+    }
 
     groups[gameType].push(server);
     return groups;

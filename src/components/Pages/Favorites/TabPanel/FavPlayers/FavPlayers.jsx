@@ -4,16 +4,18 @@ import EmptyState from "../../EmptyState/EmptyState";
 import s from "./FavPlayers.module.scss";
 
 const FavPlayers = ({ favPlayers, playersLoading }) => {
-  if (playersLoading && favPlayers.length === 0)
+  if (playersLoading && favPlayers.length === 0) {
     return (
       <SpinnerLoader
         title="Loading Players"
         description="Fetching your favorite players..."
       />
     );
+  }
 
-  if (!playersLoading && favPlayers.length === 0)
+  if (!playersLoading && favPlayers.length === 0) {
     return <EmptyState type="players" />;
+  }
 
   return (
     <div className={s.players}>

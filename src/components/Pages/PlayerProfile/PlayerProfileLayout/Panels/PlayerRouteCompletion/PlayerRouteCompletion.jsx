@@ -22,7 +22,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (playerId) fetchData();
+    if (playerId) {
+      fetchData();
+    }
   }, [playerId]);
 
   async function fetchData() {
@@ -293,22 +295,42 @@ const rarityMap = {
 };
 
 function getRarityLevel(finishCount) {
-  if (finishCount <= 2) return "mythical";
-  if (finishCount <= 10) return "legendary";
-  if (finishCount <= 20) return "epic";
-  if (finishCount <= 30) return "rare";
-  if (finishCount <= 50) return "uncommon";
+  if (finishCount <= 2) {
+    return "mythical";
+  }
+  if (finishCount <= 10) {
+    return "legendary";
+  }
+  if (finishCount <= 20) {
+    return "epic";
+  }
+  if (finishCount <= 30) {
+    return "rare";
+  }
+  if (finishCount <= 50) {
+    return "uncommon";
+  }
   return "common";
 }
 
 function getCompletionRateRarity(completionRate) {
   // Remove % sign and convert to number
   const rate = parseFloat(completionRate.replace("%", ""));
-  if (rate >= 95) return "mythical";
-  if (rate >= 85) return "legendary";
-  if (rate >= 70) return "epic";
-  if (rate >= 50) return "rare";
-  if (rate >= 25) return "uncommon";
+  if (rate >= 95) {
+    return "mythical";
+  }
+  if (rate >= 85) {
+    return "legendary";
+  }
+  if (rate >= 70) {
+    return "epic";
+  }
+  if (rate >= 50) {
+    return "rare";
+  }
+  if (rate >= 25) {
+    return "uncommon";
+  }
   return "common";
 }
 
@@ -318,7 +340,9 @@ function getCompletionRateInfo(completionRate) {
 }
 
 function getSortedData({ data, sortBy, sortOrder }) {
-  if (!data) return [];
+  if (!data) {
+    return [];
+  }
 
   const sorted = [...data];
 

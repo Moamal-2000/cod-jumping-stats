@@ -32,7 +32,9 @@ const MapDetailPlayers = ({ selectedFps }) => {
   }
 
   function loadMorePlayers() {
-    if (loadingMore || !hasMore) return;
+    if (loadingMore || !hasMore) {
+      return;
+    }
 
     setLoadingMore(true);
     setTimeout(() => {
@@ -49,7 +51,9 @@ const MapDetailPlayers = ({ selectedFps }) => {
   }, [mapPlayers, selectedFps]);
 
   useEffect(() => {
-    if (!hasMore || playersData.length === 0) return;
+    if (!hasMore || playersData.length === 0) {
+      return;
+    }
 
     const playersObserver = new IntersectionObserver(
       (entries) => {
