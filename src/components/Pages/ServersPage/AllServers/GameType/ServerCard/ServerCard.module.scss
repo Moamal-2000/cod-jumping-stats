@@ -7,6 +7,10 @@
   min-height: 440px;
 }
 
+.serversGrid :where(a, button):focus-visible {
+  outline-offset: 4px;
+}
+
 .list {
   min-height: 0;
   gap: 8px;

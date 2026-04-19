@@ -4,6 +4,10 @@
   margin-bottom: 48px;
 }
 
+.listWrapper :where(a, button):focus-visible {
+  outline-offset: 4px;
+}
+
 .listTitle {
   font-size: 0.85rem;
   font-weight: 700;
