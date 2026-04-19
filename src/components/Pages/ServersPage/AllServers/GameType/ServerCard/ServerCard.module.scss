@@ -7,7 +7,7 @@
   min-height: 440px;
 }
 
-.serverGrid :where(a, button):focus-visible {
+.serverCard :where(a, button):focus-visible {
   outline-offset: 4px;
 }
 
