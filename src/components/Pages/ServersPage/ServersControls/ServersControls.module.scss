@@ -71,6 +71,11 @@
   min-width: 74px;
 }
 
+.selectWrap:has(:focus-visible) select {
+  outline: 2px solid #fff;
+  outline-offset: -2px;
+}
+
 .selectWrap select option {
   background: #111827;
   color: #f9fafb;
