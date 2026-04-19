@@ -1,18 +1,26 @@
-import cssModules from "eslint-plugin-css-modules";
-
 export default [
-  { ignores: ["node_modules/", ".next/", "out/", "public/"] },
   {
-    files: ["src/**/*.{js,jsx,ts,tsx}"],
+    ignores: ["node_modules/", ".next/", "out/", "dist/", "public/"],
+
+    files: ["src/**/*.{js,jsx}"],
+
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
-      parserOptions: { ecmaFeatures: { jsx: true } },
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
     },
-    plugins: { "css-modules": cssModules },
+
     rules: {
-      "css-modules/no-unused-class": ["error", { camelCase: true }],
-      "css-modules/no-undef-class": "off",
+      "no-unused-vars": "warn",
+      "no-debugger": "error",
+      eqeqeq: "error",
+      curly: "error",
+      "react/react-in-jsx-scope": "off",
+      "no-var": "error",
+      "prefer-const": "error",
+      "react/prop-types": "off",
     },
   },
 ];
