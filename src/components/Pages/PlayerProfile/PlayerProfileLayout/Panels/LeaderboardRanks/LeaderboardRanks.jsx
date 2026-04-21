@@ -5,48 +5,15 @@ import { useSelector } from "react-redux";
 import s from "./LeaderboardRanks.module.scss";
 
 const LeaderboardRanks = () => {
-  const { leaderboardPositionsLoading, leaderboardPositions } = useSelector(
+  const { leaderboardPositions, leaderboardPositionsLoading } = useSelector(
     (s) => s.playerProfile,
   );
-
   const [selectedFps, setSelectedFps] = useState(125);
 
-  const leaderboards = getProcessedLeaderboards();
-
-  function getProcessedLeaderboards() {
-    if (!leaderboardPositions || leaderboardPositions.length === 0) {
-      return {};
-    }
-
-    const filteredPositions = leaderboardPositions.filter(
-      (position) => +position.FPS === selectedFps,
-    );
-
-    return filteredPositions;
-  }
-
-  function getRankClass(rankValue) {
-    const rank = Number(rankValue);
-
-    if (!Number.isFinite(rank) || rank <= 0) {
-      return "";
-    }
-    if (rank <= 3) {
-      return s[`rank${rank}`];
-    }
-
-    return "";
-  }
-
-  function getLeaderboardType(type) {
-    if (type === "jump") {
-      return "raw skill";
-    }
-    if (type === "howmany") {
-      return "Route Completion";
-    }
-    return type;
-  }
+  const leaderboards = getProcessedLeaderboards({
+    leaderboardPositions,
+    selectedFps,
+  });
 
   return (
     <div className={s.leaderboardTab}>
@@ -165,3 +132,41 @@ const LeaderboardRanks = () => {
 };
 
 export default LeaderboardRanks;
+
+function getRankClass(rankValue) {
+  const rank = Number(rankValue);
+
+  if (!Number.isFinite(rank) || rank <= 0) {
+    return "";
+  }
+
+  if (rank <= 3) {
+    return s[`rank${rank}`];
+  }
+
+  return "";
+}
+
+function getLeaderboardType(type) {
+  if (type === "jump") {
+    return "raw skill";
+  }
+
+  if (type === "howmany") {
+    return "Route Completion";
+  }
+
+  return type;
+}
+
+function getProcessedLeaderboards({ leaderboardPositions, selectedFps } = {}) {
+  if (!leaderboardPositions || leaderboardPositions.length === 0) {
+    return {};
+  }
+
+  const filteredPositions = leaderboardPositions.filter(
+    (position) => +position.FPS === selectedFps,
+  );
+
+  return filteredPositions;
+}
