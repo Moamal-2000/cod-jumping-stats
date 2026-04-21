@@ -13,8 +13,6 @@ const initialState = {
   performanceStatsError: false,
 
   leaderboardPositions: [],
-  leaderboardPositionsLoading: false,
-  leaderboardPositionsError: false,
 
   topRuns: [],
   topRunsLoading: false,
@@ -55,22 +53,9 @@ export const playerProfileSlice = createSlice({
         state.loading = false;
       });
 
-    addCase(fetchPlayerLeaderboardPositions.pending, (state) => {
-      state.leaderboardPositionsLoading = true;
-      state.leaderboardPositionsError = false;
-    })
-      .addCase(
-        fetchPlayerLeaderboardPositions.fulfilled,
-        (state, { payload }) => {
-          state.leaderboardPositions = payload;
-          state.leaderboardPositionsLoading = false;
-          state.leaderboardPositionsError = false;
-        },
-      )
-      .addCase(fetchPlayerLeaderboardPositions.rejected, (state) => {
-        state.leaderboardPositionsError = true;
-        state.leaderboardPositionsLoading = false;
-      });
+    addCase(fetchPlayerLeaderboardPositions.fulfilled, (state, { payload }) => {
+      state.leaderboardPositions = payload;
+    });
 
     addCase(fetchPlayerTops.pending, (state) => {
       state.topRunsLoading = true;
