@@ -103,7 +103,7 @@
 }
 
 .playersTableSkeleton th {
-  padding: 6px 16px;
+  padding: 16px;
   text-align: left;
   font-weight: 600;
   font-size: 0.875rem;
@@ -111,6 +111,7 @@
   border-bottom: 1px solid #2a313a;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+  text-wrap: nowrap;
 }
 
 .playersTableSkeleton tbody tr {
@@ -171,7 +172,6 @@
 
 .playersTableSkeleton td {
   padding: 16px;
-  vertical-align: middle;
   min-height: 70px;
   max-height: 70px;
   height: 70px;
