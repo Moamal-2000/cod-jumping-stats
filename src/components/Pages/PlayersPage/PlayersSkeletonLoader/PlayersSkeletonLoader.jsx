@@ -38,11 +38,9 @@ const PlayersSkeletonLoader = () => {
                   <div className={`${s.skeleton} ${s.favButton}`} />
                 </div>
 
-                <div className={s.badgeRow}>
-                  <div className={`${s.skeleton} ${s.badge}`} />
-                  <div className={`${s.skeleton} ${s.badge}`} />
-                  <div className={`${s.skeleton} ${s.badge}`} />
-                  <div className={`${s.skeleton} ${s.badge}`} />
+                <div className={s.badges}>
+                  <div className={`${s.skeleton} ${s.badgeLine}`} />
+                  <div className={`${s.skeleton} ${s.badgeLine}`} />
                 </div>
               </div>
 
