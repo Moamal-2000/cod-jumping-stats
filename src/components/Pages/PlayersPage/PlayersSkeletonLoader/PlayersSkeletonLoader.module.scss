@@ -175,6 +175,8 @@
   min-height: 70px;
   max-height: 70px;
   height: 70px;
+  display: flex;
+  align-items: center;
 }
 
 @include m.media(small) {
