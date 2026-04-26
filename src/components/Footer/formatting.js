@@ -1,3 +1,5 @@
+import { DEFAULT_FPS } from "@/data/constants";
+
 const FPS_QUERY_VALUES = new Set([
   "all",
   "125",
@@ -9,9 +11,12 @@ const FPS_QUERY_VALUES = new Set([
 ]);
 
 export function normalizeFpsQuery(fpsValue) {
-  const value = String(fpsValue || "125").toLowerCase();
+  const value = String(fpsValue || DEFAULT_FPS).toLowerCase();
+  const isNumber = !Number.isNaN(+value);
+
   if (!FPS_QUERY_VALUES.has(value)) {
-    return "125";
+    return DEFAULT_FPS;
   }
-  return value === "all" ? "All" : value;
+
+  return isNumber ? +value : value;
 }

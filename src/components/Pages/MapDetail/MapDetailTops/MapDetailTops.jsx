@@ -17,7 +17,7 @@ const MapDetailTops = ({ selectedFps }) => {
         <div className={s.cardHeader}>
           <h2>
             Top Runs{" "}
-            {selectedFps === "All" ? "(All FPS)" : `(${selectedFps} FPS)`}
+            {selectedFps === "all" ? "(All FPS)" : `(${selectedFps} FPS)`}
           </h2>
         </div>
         <div className={s.loading}>
@@ -34,7 +34,7 @@ const MapDetailTops = ({ selectedFps }) => {
         <div className={s.cardHeader}>
           <h2>
             Top Runs{" "}
-            {selectedFps === "All" ? "(All FPS)" : `(${selectedFps} FPS)`}
+            {selectedFps === "all" ? "(All FPS)" : `(${selectedFps} FPS)`}
           </h2>
         </div>
         <div className={s.noData}>
@@ -49,11 +49,11 @@ const MapDetailTops = ({ selectedFps }) => {
       <div className={s.cardHeader}>
         <h2>
           Top Runs{" "}
-          {selectedFps === "All" ? "(All FPS)" : `(${selectedFps} FPS)`}
+          {selectedFps === "all" ? "(All FPS)" : `(${selectedFps} FPS)`}
         </h2>
         <div className={s.headerActions}>
           <span className={s.totalRuns}>
-            {selectedFps === "All"
+            {selectedFps === "all"
               ? "Combined runs"
               : `${mapTops[0]?.TotalNr || 0} total runs`}
           </span>
@@ -80,7 +80,7 @@ const MapDetailTops = ({ selectedFps }) => {
               <div className={s.playerInfo}>
                 <div className={s.playerName}>
                   <span>{getColoredName(run.PlayerName)}</span>
-                  {selectedFps === "All" && run.FPS && (
+                  {selectedFps === "all" && run.FPS && (
                     <span className={s.fpsDisplay}>{run.FPS} FPS</span>
                   )}
                 </div>

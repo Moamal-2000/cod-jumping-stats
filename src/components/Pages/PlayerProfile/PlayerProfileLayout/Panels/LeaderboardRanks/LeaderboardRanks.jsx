@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import FpsButtons from "@/components/Shared/Buttons/FpsButtons/FpsButtons";
 import { useSearchParams } from "next/navigation";
@@ -12,7 +13,7 @@ const LeaderboardRanks = () => {
   );
 
   const searchParams = useSearchParams();
-  const selectedFps = +searchParams.get("fps") || DEFAULT_FPS;
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   const leaderboards = getProcessedLeaderboards({
     leaderboardPositions,

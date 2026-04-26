@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { DEFAULT_FPS } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -10,12 +11,18 @@ const FpsButtons = ({ options = [] }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const selectedFps = +searchParams.get("fps") || DEFAULT_FPS;
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   function handleClick(fps) {
-    createQueryString("fps", fps, searchParams, router, pathname);
+    createQueryString(
+      "fps",
+      normalizeFpsQuery(fps),
+      searchParams,
+      router,
+      pathname,
+    );
 
-    if (selectedFps === DEFAULT_FPS) {
+    if (normalizeFpsQuery(fps) === DEFAULT_FPS) {
       removeQueryString("fps", searchParams, router, pathname);
     }
   }

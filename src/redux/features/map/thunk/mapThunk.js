@@ -9,7 +9,7 @@ export const fetchMapTops = createAsyncThunk(
     try {
       const { fps, cpId } = paramsObject;
 
-      if (fps === "All") {
+      if (fps === "all") {
         const promises = JUMP_FPS.map((jumpFps) =>
           fetchMsgPackResponse({
             url: jhApis({ fps: jumpFps, cpId }).map.tops,

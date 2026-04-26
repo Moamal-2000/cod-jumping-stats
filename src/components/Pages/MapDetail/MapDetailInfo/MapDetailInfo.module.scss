@@ -26,47 +26,6 @@
   }
 }
 
-.fpsSelector {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.fpsLabel {
-  color: #9ca3af;
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.fpsButtons {
-  display: flex;
-  gap: 0.5rem;
-}
-
-.fpsButton {
-  background: rgba(255, 255, 255, 0.02);
-  color: #d1d5db;
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  padding: 0.375rem 0.75rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
-
-  &:hover {
-    background: rgba(255, 255, 255, 0.035);
-    border-color: rgba(255, 255, 255, 0.04);
-  }
-
-  &.active {
-    background: #facc15;
-    border-color: #facc15;
-    color: #1f2937;
-    font-weight: 600;
-  }
-}
-
 .difficultySection {
   margin-bottom: 1.5rem;
 
@@ -134,14 +93,5 @@
   .cardHeader {
     flex-direction: column;
     align-items: flex-start;
-  }
-
-  .fpsSelector {
-    width: 100%;
-    justify-content: space-between;
-  }
-
-  .fpsButtons {
-    flex-wrap: wrap;
   }
 }
