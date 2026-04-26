@@ -1,6 +1,8 @@
 "use client";
+
 import { getModifiedRank } from "@/components/Helper/rankBadge";
-import { useState } from "react";
+import FpsButtons from "@/components/Shared/Buttons/FpsButtons/FpsButtons";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./LeaderboardRanks.module.scss";
 
@@ -8,7 +10,9 @@ const LeaderboardRanks = () => {
   const leaderboardPositions = useSelector(
     (s) => s.playerProfile.leaderboardPositions,
   );
-  const [selectedFps, setSelectedFps] = useState(125);
+
+  const searchParams = useSearchParams();
+  const selectedFps = +searchParams.get("fps") || DEFAULT_FPS;
 
   const leaderboards = getProcessedLeaderboards({
     leaderboardPositions,
@@ -17,30 +21,7 @@ const LeaderboardRanks = () => {
 
   return (
     <div className={s.leaderboardTab}>
-      <div
-        className={s.fpsToggleButtons}
-        role="tablist"
-        aria-label="FPS selector"
-      >
-        {[43, 76, 125, 250, 333, "mix"].map((fps) => (
-          <button
-            key={fps}
-            type="button"
-            role="tab"
-            aria-selected={selectedFps === fps}
-            aria-pressed={selectedFps === fps}
-            aria-label={`Show ${
-              fps === "mix" ? "Mixed" : fps
-            } FPS leaderboards`}
-            className={`${s.fpsToggleButton} ${
-              selectedFps === fps ? s.active : ""
-            }`}
-            onClick={() => setSelectedFps(fps)}
-          >
-            {fps === "mix" ? "Mixed" : fps}
-          </button>
-        ))}
-      </div>
+      <FpsButtons options={[43, 76, 125, 250, 333, "mix"]} />
 
       <div className={s.leaderboardContent}>
         <h3 className={s.fpsGroupTitle}>

@@ -11,6 +11,7 @@ export const COD4_SERVERS_COUNT = 11;
 export const SERVERS_LIST_COUNT = 12;
 export const PLAYERS_CARDS_COUNT = 9;
 export const PLAYERS_LIST_COUNT = 12;
+export const DEFAULT_FPS = 125;
 export const SKELETON_LIST = [1, 2, 3, 4, 5, 6];
 export const MONTHS = {
   1: "January",
