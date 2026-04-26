@@ -18,7 +18,8 @@ const MapDetailInfo = ({ mapData }) => {
 
       <div className={s.difficultySection}>
         <h3>Difficulty</h3>
-        {hasDifficulty ? (
+
+        {hasDifficulty && (
           <div className={s.difficultyGrid}>
             {JUMP_FPS.map((fps) => {
               const fpsDifficulty = getFpsDifficultyValue({ fps, Difficulty });
@@ -35,7 +36,9 @@ const MapDetailInfo = ({ mapData }) => {
               );
             })}
           </div>
-        ) : (
+        )}
+
+        {!hasDifficulty && (
           <div className={s.noDifficulty}>
             <p>No difficulty data available for this map</p>
           </div>
