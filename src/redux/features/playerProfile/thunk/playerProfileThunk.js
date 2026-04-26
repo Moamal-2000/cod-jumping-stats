@@ -1,4 +1,5 @@
 import { jhApis } from "@/api/jumpersHeaven";
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
@@ -93,7 +94,7 @@ export const fetchPlayerTops = createAsyncThunk(
   "playerProfile/fetchPlayerTops",
   async (paramsObject) => {
     const playerId = paramsObject.playerId;
-    const fps = paramsObject.fps || "125";
+    const fps = normalizeFpsQuery(paramsObject.fps);
 
     try {
       const response = await fetchMsgPackResponse({

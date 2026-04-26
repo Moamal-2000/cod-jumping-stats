@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { fetchPlayerTops } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -16,7 +17,7 @@ const TopRuns = ({ playerId }) => {
     ...Object.fromEntries(searchParams.entries()),
     playerId,
   };
-  const selectedFps = searchParams.get("fps") || 125;
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   useEffect(() => {
     dispatch(fetchPlayerTops(paramsObject));

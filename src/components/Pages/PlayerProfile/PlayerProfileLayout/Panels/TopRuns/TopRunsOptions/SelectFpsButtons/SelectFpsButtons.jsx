@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { JUMP_FPS } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -10,7 +11,7 @@ const SelectFpsButtons = ({ defaultFps = 125 }) => {
   const router = useRouter();
   const pathname = usePathname();
 
-  const selectedFps = searchParams.get("fps") || 125;
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
 
   function handleChangeFps(fps) {
     if (fps === defaultFps) {

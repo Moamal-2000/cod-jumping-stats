@@ -1,5 +1,6 @@
 "use client";
 
+import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
 import { createQueryString } from "@/lib/queryParams";
@@ -34,7 +35,7 @@ const RunAnalytics = ({ playerId }) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
-  const selectedFps = searchParams.get("fps") || 125;
+  const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
   const firstMapId = parseInt(allMaps[0]?.CpID, 10);
   const selectedMapId = parseInt(searchParams.get("mapid"), 10) || firstMapId;
   const previewMapName = hoveredMapName || "";
