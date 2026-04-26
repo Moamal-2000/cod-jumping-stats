@@ -2,7 +2,6 @@
 
 import Breadcrumbs from "@/components/Shared/Breadcrumbs/Breadcrumbs";
 import { stripColorCodes } from "@/lib/utils";
-import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
 import {
   fetchPlayerJumpScores,
   fetchPlayerLeaderboardPositions,
@@ -35,13 +34,9 @@ const PlayerProfileLayout = ({ children, playerId }) => {
 
     dispatch(fetchPlayerProfile({ playerId }));
     dispatch(fetchPlayerLeaderboardPositions({ playerId }));
-    dispatch(fetchPlayerJumpScores({ playerId, fps: "125" }));
+    dispatch(fetchPlayerJumpScores({ playerId }));
     dispatch(fetchAllPlayers());
-
-    dispatch(
-      updatePlayerProfileState({ key: "currentFetchingFps", value: "125" }),
-    );
-  }, [dispatch, playerId]);
+  }, [playerId]);
 
   return (
     <div className="container">
