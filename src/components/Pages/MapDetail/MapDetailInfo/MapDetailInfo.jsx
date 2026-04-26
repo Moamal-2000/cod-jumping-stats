@@ -13,7 +13,7 @@ const MapDetailInfo = ({ mapData }) => {
     <div className={s.infoCard}>
       <div className={s.cardHeader}>
         <h2>Map Information</h2>
-        <FpsButtons options={["all", 125, 250, 333, 43, 76, "mix"]} />
+        <FpsButtons options={["all", ...JUMP_FPS, "mix"]} />
       </div>
 
       <div className={s.difficultySection}>

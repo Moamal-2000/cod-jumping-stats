@@ -34,7 +34,7 @@ export const COPIED_POPUP_DELAY_MS = 4000;
 export const MAPS_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
-export const JUMP_FPS = [125, 250, 333, 43, 76];
+export const JUMP_FPS = [43, 76, 125, 250, 333];
 export const TABS_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
 
 export const DEFAULT_VIEW_MODE = "grid";

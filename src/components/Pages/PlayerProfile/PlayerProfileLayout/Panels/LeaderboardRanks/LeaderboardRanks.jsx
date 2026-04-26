@@ -3,6 +3,7 @@
 import { normalizeFpsQuery } from "@/components/Footer/formatting";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import FpsButtons from "@/components/Shared/Buttons/FpsButtons/FpsButtons";
+import { JUMP_FPS } from "@/data/constants";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./LeaderboardRanks.module.scss";
@@ -22,7 +23,7 @@ const LeaderboardRanks = () => {
 
   return (
     <div className={s.leaderboardTab}>
-      <FpsButtons options={[43, 76, 125, 250, 333, "mix"]} />
+      <FpsButtons options={[...JUMP_FPS, "mix"]} />
 
       <div className={s.leaderboardContent}>
         <h3 className={s.fpsGroupTitle}>
