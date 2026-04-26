@@ -5,8 +5,6 @@ import { JUMP_FPS } from "@/data/constants";
 import { getFpsDifficultyValue } from "@/lib/utils";
 import s from "./MapDetailInfo.module.scss";
 
-const fpsOptions = ["all", 125, 250, 333, 43, 76, "mix"];
-
 const MapDetailInfo = ({ mapData }) => {
   const Difficulty = mapData?.Difficulty;
   const hasDifficulty = mapHasDifficulties(Difficulty);
@@ -15,7 +13,7 @@ const MapDetailInfo = ({ mapData }) => {
     <div className={s.infoCard}>
       <div className={s.cardHeader}>
         <h2>Map Information</h2>
-        <FpsButtons options={fpsOptions} />
+        <FpsButtons options={["all", 125, 250, 333, 43, 76, "mix"]} />
       </div>
 
       <div className={s.difficultySection}>
