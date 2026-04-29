@@ -1034,6 +1034,17 @@ export const MAPS_VIDEOS = [
     ],
   },
   {
+    mapName: "like_a_g6",
+    mapsIds: [2852],
+    videos: [
+      {
+        type: "333 fps speedrun",
+        videoUrl: "https://www.youtube.com/watch?v=fK72wZamBUM",
+        id: 1,
+      },
+    ],
+  },
+  {
     mapName: "jm_renaissance",
     mapsIds: [4452],
     videos: [
