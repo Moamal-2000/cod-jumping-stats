@@ -180,11 +180,6 @@
     <line x1="12" x2="12.01" y1="20" y2="20" />
   </symbol>
 
-  <symbol id="copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-    <rect width="14" height="14" x="8" y="8" rx="2" ry="2" />
-    <path d="m4 16-2-2V4l2-2h10l2 2" />
-  </symbol>
-
   <symbol id="checked" viewBox="0 0 448 512">
     <path
       d="M439 105c12 13 12 33 0 46L183 407a32 32 0 0 1-46 0L9 279a32 32 0 0 1 46-46l105 106 233-234c13-12 33-12 46 0z" />
