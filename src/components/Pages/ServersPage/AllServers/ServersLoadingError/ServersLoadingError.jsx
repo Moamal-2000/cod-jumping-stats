@@ -1,7 +1,7 @@
 import {
   COD2_SERVERS_COUNT,
   COD4_SERVERS_COUNT,
-  DEFAULT_VIEW_MODE,
+  DEFAULT_SERVERS_VIEW_MODE,
   SERVERS_LIST_COUNT,
 } from "@/data/constants";
 import { useSearchParams } from "next/navigation";
@@ -10,9 +10,10 @@ import s from "./ServersLoadingError.module.scss";
 
 const ServersLoadingError = ({ loading, error, gameParam }) => {
   const searchParams = useSearchParams();
-  const viewType = searchParams.get("view") || DEFAULT_VIEW_MODE;
-
+  const viewType = searchParams.get("view") || DEFAULT_SERVERS_VIEW_MODE;
   const skeletonList = getSkeletonList(gameParam, viewType);
+
+  console.log(skeletonList);
 
   if (loading && viewType === "list") {
     return (
@@ -56,7 +57,7 @@ const ServersLoadingError = ({ loading, error, gameParam }) => {
     );
   }
 
-  if (loading && viewType === DEFAULT_VIEW_MODE) {
+  if (loading && viewType === "grid") {
     return (
       <section className={s.serversGrid} role="presentation">
         {skeletonList.map((_, i) => (
@@ -81,7 +82,7 @@ export default ServersLoadingError;
 function getSkeletonList(gameParam, viewType) {
   let serversCount = 0;
 
-  if (viewType === DEFAULT_VIEW_MODE) {
+  if (viewType === "grid") {
     if (gameParam === "cod2" || gameParam === "all") {
       serversCount = COD2_SERVERS_COUNT;
     }

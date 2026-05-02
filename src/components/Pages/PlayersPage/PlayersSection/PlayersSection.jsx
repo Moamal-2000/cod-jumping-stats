@@ -17,7 +17,7 @@ const PlayersSection = ({
 
   return (
     <section className={s.playersSection}>
-      {viewType === DEFAULT_VIEW_MODE && (
+      {viewType === "grid" && (
         <div className={s.playersGrid}>
           {playersScroll.map((player, index) => {
             const ref =

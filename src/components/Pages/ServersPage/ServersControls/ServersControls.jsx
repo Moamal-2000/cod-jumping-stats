@@ -2,6 +2,7 @@
 
 import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortViewButtons";
 import {
+  DEFAULT_SERVERS_VIEW_MODE,
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
   SERVERS_REFRESH_OPTIONS,
@@ -83,7 +84,10 @@ const ServersControls = ({
 
         <div className={s.controlGroup}>
           <span className={s.groupLabel}>View</span>
-          <SortViewButtons themeColor="yellow" />
+          <SortViewButtons
+            themeColor="yellow"
+            defaultView={DEFAULT_SERVERS_VIEW_MODE}
+          />
         </div>
       </div>
     </section>

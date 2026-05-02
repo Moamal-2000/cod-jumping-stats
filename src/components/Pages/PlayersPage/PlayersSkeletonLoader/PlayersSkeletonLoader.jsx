@@ -18,7 +18,7 @@ const PlayersSkeletonLoader = () => {
       role="presentation"
       aria-busy="true"
     >
-      {viewType === DEFAULT_VIEW_MODE ? (
+      {viewType === "grid" ? (
         <div className={s.playersGrid} aria-hidden="true">
           {Array.from({ length: PLAYERS_CARDS_COUNT }).map((_, index) => (
             <div
