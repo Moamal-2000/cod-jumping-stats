@@ -35,11 +35,18 @@ export const MAPS_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
 export const JUMP_FPS = [43, 76, 125, 250, 333];
-export const TABS_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
+export const HORIZONTAL_NAV_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
 
 export const DEFAULT_VIEW_MODE = "grid";
 
-export const SERVERS_REFRESH_OPTIONS = ["disabled", "10", "30", "60", "120", "300"];
+export const SERVERS_REFRESH_OPTIONS = [
+  "disabled",
+  "10",
+  "30",
+  "60",
+  "120",
+  "300",
+];
 export const SERVERS_GAME_FILTER_OPTIONS = [
   { id: "all", label: "All" },
   { id: "cod2", label: "COD2" },

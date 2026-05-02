@@ -1,6 +1,6 @@
 "use client";
 
-import { TABS_KEYS } from "@/data/constants";
+import { HORIZONTAL_NAV_KEYS } from "@/data/constants";
 import { useRef } from "react";
 import s from "./Tabs.module.scss";
 
@@ -51,7 +51,7 @@ function handleKeyDown({ event, index, tabs, tabRefs, onTabChange } = {}) {
   const tabIds = tabs.map((tab) => tab.id);
   let newIndex = index;
 
-  if (TABS_KEYS.includes(event.key)) {
+  if (HORIZONTAL_NAV_KEYS.includes(event.key)) {
     event.preventDefault();
   }
 
