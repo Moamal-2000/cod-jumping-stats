@@ -250,3 +250,12 @@
     flex-wrap: wrap;
   }
 }
+
+.serverAddressBtn {
+  background-color: transparent;
+  border: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

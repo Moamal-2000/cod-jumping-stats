@@ -1,4 +1,5 @@
 import { COUNTRIES_WITH_THE } from "@/data/constants";
+import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 
 export function stripColorCodes(name) {
   if (name === undefined) {
@@ -83,4 +84,13 @@ export function isNewMap(releaseDate) {
 
   const releaseDateMilliSeconds = new Date(releaseDate).getTime();
   return releaseDateMilliSeconds >= dateBeforeMonth;
+}
+
+export async function copyText({ textToCopy, dispatch } = {}) {
+  try {
+    navigator.clipboard.writeText(textToCopy);
+    dispatch(updateGlobalState({ key: "activeCopyAlert", value: true }));
+  } catch (error) {
+    console.error("Can't copy text:", error);
+  }
 }

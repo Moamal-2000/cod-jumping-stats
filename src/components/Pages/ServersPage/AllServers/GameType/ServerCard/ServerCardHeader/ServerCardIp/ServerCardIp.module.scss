@@ -3,7 +3,7 @@
   grid-area: ip;
 }
 
-.domain {
+.domainBtn {
   color: #f9fafb;
   font-weight: 600;
   font-size: 1.125rem;
@@ -15,7 +15,17 @@
   gap: 8px;
 }
 
-.serverIp {
+.serverAddressBtn {
   color: #f6f6f6;
   font-size: .875rem;
+}
+
+.serverAddressBtn,
+.domainBtn {
+  background-color: transparent;
+  border: 0;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

@@ -1,11 +1,15 @@
+"use client";
+
 import { getColoredName } from "@/components/Helper/playerNameColor";
-import CopyButton from "@/components/Shared/Buttons/CopyButton/CopyButton";
-import { domainToCountryFlag } from "@/lib/utils";
+import { copyText, domainToCountryFlag } from "@/lib/utils";
 import Image from "next/image";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 import s from "./ServersList.module.scss";
 
 const ServersList = ({ groupedServers, gameType }) => {
+  const dispatch = useDispatch();
+
   return (
     <section className={s.listWrapper} key={gameType}>
       <div className={`${s.listTitle} ${s[gameType]}`}>{gameType}</div>
@@ -66,11 +70,15 @@ const ServersList = ({ groupedServers, gameType }) => {
                     </td>
                     <td className={s.addressCell} data-label="Address">
                       <div className={s.addressValue}>
-                        <span>{address}</span>
-                        <CopyButton
-                          title="Copy server address"
-                          textToCopy={address}
-                        />
+                        <button
+                          type="button"
+                          className={s.serverAddressBtn}
+                          onClick={() =>
+                            copyText({ textToCopy: address, dispatch })
+                          }
+                        >
+                          {address}
+                        </button>
                       </div>
                     </td>
                   </tr>
