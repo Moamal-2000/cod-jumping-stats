@@ -36,6 +36,7 @@ export const PLAYER_CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
 
 export const JUMP_FPS = [43, 76, 125, 250, 333];
 export const HORIZONTAL_NAV_KEYS = ["ArrowLeft", "ArrowRight", "Home", "End"];
+export const VERTICAL_NAV_KEYS = ["ArrowUp", "ArrowDown", "Home", "End"];
 
 export const DEFAULT_VIEW_MODE = "grid";
 

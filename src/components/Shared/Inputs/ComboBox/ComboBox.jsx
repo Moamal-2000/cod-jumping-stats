@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { VERTICAL_NAV_KEYS } from "@/data/constants";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -131,8 +132,6 @@ const ComboBox = ({
 
   function handleKeyDown(event) {
     const key = event.key;
-    const isArrowDown = key === "ArrowDown";
-    const isArrowUp = key === "ArrowUp";
     const isClosingKeyPressed =
       key === "Escape" || (key === "Enter" && inputValue !== "");
 
@@ -141,12 +140,12 @@ const ComboBox = ({
       inputRef.current?.blur();
     }
 
-    if (isArrowDown || isArrowUp) {
-      handleArrowNavigation({ isArrowDown, isArrowUp });
+    if (VERTICAL_NAV_KEYS.includes(key)) {
+      handleArrowNavigation(key);
     }
   }
 
-  function handleArrowNavigation({ isArrowDown, isArrowUp } = {}) {
+  function handleArrowNavigation(key) {
     const optionsForNavigation = filteredOptions;
     if (!isOpen || optionsForNavigation.length === 0) {
       return;
@@ -154,6 +153,11 @@ const ComboBox = ({
 
     const optionValues = optionsForNavigation.map(({ value }) => value);
     const hasSelectedValue = optionValues.includes(selectedValue);
+
+    const isArrowDown = key === "ArrowDown";
+    const isArrowUp = key === "ArrowUp";
+    const isEndKey = key === "End";
+    const isHomeKey = key === "Home";
 
     if (!hasSelectedValue) {
       const edgeIndex = isArrowUp ? optionsForNavigation.length - 1 : 0;
@@ -183,10 +187,10 @@ const ComboBox = ({
       optionIndex -= 1;
     }
 
-    if (isArrowDown && isLast) {
+    if ((isArrowDown && isLast) || isHomeKey) {
       optionIndex = 0;
     }
-    if (isArrowUp && isFirst) {
+    if ((isArrowUp && isFirst) || isEndKey) {
       optionIndex = optionsForNavigation.length - 1;
     }
 
