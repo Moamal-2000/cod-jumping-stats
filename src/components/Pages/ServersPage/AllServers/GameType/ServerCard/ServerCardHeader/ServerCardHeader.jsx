@@ -24,7 +24,19 @@ const ServerCardHeader = ({ server, index, viewType }) => {
       </div>
 
       <ServerCardIp server={server} />
-      <ServerCardIndicator server={server} />
+
+      <div className={s.wrapper}>
+        <ServerCardIndicator server={server} />
+        {server.GameType === "COD2" && (
+          <a
+            href={`cod2x://%2Bconnect%20${server.IP}%3A${server.Port}`}
+            title={`Connect via cod2x:// to ${server.IP}:${server.Port}`}
+            className={s.joinServerLink}
+          >
+            Join Server
+          </a>
+        )}
+      </div>
 
       {!isList && (
         <Image

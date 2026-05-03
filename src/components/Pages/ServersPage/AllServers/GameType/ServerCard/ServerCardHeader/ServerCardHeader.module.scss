@@ -33,6 +33,28 @@
   }
 }
 
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.joinServerLink {
+  min-height: 22px;
+  padding: 6px 8px;
+  border: 1px solid rgba(250, 204, 21, .7);
+  border-radius: 4px;
+  background: linear-gradient(135deg, #fde047, #fb923c);
+  color: #0f172a;
+  font-size: .7rem;
+  font-weight: 700;
+  line-height: 1;
+
+  &:active {
+    scale: .999;
+  }
+}
+
 .serverHeader>*:not(.mapBackground) {
   position: relative;
   z-index: 2;

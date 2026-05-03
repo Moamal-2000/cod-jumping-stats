@@ -13,8 +13,6 @@ const ServersLoadingError = ({ loading, error, gameParam }) => {
   const viewType = searchParams.get("view") || DEFAULT_SERVERS_VIEW_MODE;
   const skeletonList = getSkeletonList(gameParam, viewType);
 
-  console.log(skeletonList);
-
   if (loading && viewType === "list") {
     return (
       <section className={s.listWrapper}>
