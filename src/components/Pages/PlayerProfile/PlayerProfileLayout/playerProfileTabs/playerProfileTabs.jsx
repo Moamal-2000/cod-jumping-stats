@@ -2,9 +2,9 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import s from "./playerProfileTabs.module.scss";
+import s from "./PlayerProfileTabs.module.scss";
 
-const tabs = [
+const playerProfileTabs = [
   { id: "overview", label: "Overview", icon: "chart-bar" },
   { id: "tops", label: "Top Runs", icon: "star" },
   { id: "leaderboards", label: "Leaderboard Ranks", icon: "trophy" },
@@ -12,16 +12,16 @@ const tabs = [
   { id: "runs-analytics", label: "Runs Analytics", icon: "line-chart" },
 ];
 
-const tabIds = tabs.map((tab) => tab.id);
+const tabIds = playerProfileTabs.map((tab) => tab.id);
 
-const playerProfileTabs = ({ playerId }) => {
+const PlayerProfileTabs = ({ playerId }) => {
   const searchParams = useSearchParams();
   const currentTab = searchParams.get("tab");
   const activeTab = tabIds.includes(currentTab) ? currentTab : "overview";
 
   return (
     <nav className={s.tabs}>
-      {tabs.map((tab) => (
+      {playerProfileTabs.map((tab) => (
         <PlayerProfileTab
           key={tab.id}
           tab={tab}
@@ -33,7 +33,7 @@ const playerProfileTabs = ({ playerId }) => {
   );
 };
 
-export default playerProfileTabs;
+export default PlayerProfileTabs;
 
 const PlayerProfileTab = ({ tab, playerId, activeTab }) => {
   const href = `/player/${playerId}${tab.id === "overview" ? "" : `?tab=${tab.id}`}`;

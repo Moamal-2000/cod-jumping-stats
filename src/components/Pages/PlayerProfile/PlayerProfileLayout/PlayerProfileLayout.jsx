@@ -12,7 +12,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerProfileHeader from "./PlayerProfileHeader/PlayerProfileHeader";
 import s from "./PlayerProfileLayout.module.scss";
-import PlayerProfileTabs from "./playerProfileTabs/playerProfileTabs";
+import PlayerProfileTabs from "./PlayerProfileTabs/PlayerProfileTabs";
 
 const PlayerProfileLayout = ({ children, playerId }) => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
