@@ -94,3 +94,9 @@ export async function copyText({ textToCopy, dispatch } = {}) {
     console.error("Can't copy text:", error);
   }
 }
+
+export const getNextTabIndex = (index, length) =>
+  index === length - 1 ? 0 : index + 1;
+
+export const getPrevTabIndex = (index, length) =>
+  index === 0 ? length - 1 : index - 1;

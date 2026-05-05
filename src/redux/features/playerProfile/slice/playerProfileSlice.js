@@ -28,6 +28,8 @@ const initialState = {
   mapRuns: [],
   mapRunsLoading: false,
   mapRunsError: false,
+
+  focusedProfileTab: 0,
 };
 
 export const playerProfileSlice = createSlice({
