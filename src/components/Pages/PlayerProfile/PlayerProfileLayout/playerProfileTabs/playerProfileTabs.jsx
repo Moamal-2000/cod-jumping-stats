@@ -40,7 +40,13 @@ const PlayerProfileTab = ({ tab, playerId, activeTab }) => {
   const classes = `${s.tabButton} ${tab.id === activeTab ? s.active : ""}`;
 
   return (
-    <Link href={href} key={tab.id} className={classes} role="tab">
+    <Link
+      href={href}
+      key={tab.id}
+      className={classes}
+      role="tab"
+      tabIndex={tab.id === activeTab ? 0 : -1}
+    >
       <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${tab.icon}`} />
       </svg>
