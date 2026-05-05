@@ -20,7 +20,7 @@ const PlayerProfileTabs = ({ playerId }) => {
   const activeTab = tabIds.includes(currentTab) ? currentTab : "overview";
 
   return (
-    <nav className={s.tabs}>
+    <nav className={s.tabs} role="tablist">
       {playerProfileTabs.map((tab) => (
         <PlayerProfileTab
           key={tab.id}
@@ -40,7 +40,7 @@ const PlayerProfileTab = ({ tab, playerId, activeTab }) => {
   const classes = `${s.tabButton} ${tab.id === activeTab ? s.active : ""}`;
 
   return (
-    <Link href={href} key={tab.id} className={classes}>
+    <Link href={href} key={tab.id} className={classes} role="tab">
       <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${tab.icon}`} />
       </svg>
