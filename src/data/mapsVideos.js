@@ -1411,7 +1411,7 @@ export const MAPS_VIDEOS = [
     mapsIds: [25681],
     videos: [
       {
-        type: "125 fps sppedrun",
+        type: "125 fps speedrun",
         videoUrl: "https://www.youtube.com/watch?v=wubspOlK5AY",
         id: 1,
       },
