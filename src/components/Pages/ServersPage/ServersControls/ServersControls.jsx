@@ -31,6 +31,7 @@ const ServersControls = ({
                 gameFilter === option.id ? s.active : ""
               }`}
               onClick={() => onGameFilterChange(option.id)}
+              aria-pressed={gameFilter === option.id}
             >
               {option.label}
             </button>
@@ -53,6 +54,7 @@ const ServersControls = ({
                 statusFilter === option.id ? s.active : ""
               }`}
               onClick={() => onStatusFilterChange(option.id)}
+              aria-pressed={statusFilter === option.id}
             >
               {option.label}
             </button>

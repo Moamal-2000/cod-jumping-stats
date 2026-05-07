@@ -41,6 +41,7 @@ const SortViewButtons = ({
             onClick={() => changeView(value)}
             title={title}
             aria-label={title}
+            aria-pressed={viewType === value}
           >
             <svg aria-hidden="true">
               <use href={`/icons-sprite.svg#${icon}`} />
