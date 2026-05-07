@@ -77,8 +77,10 @@ const PlayerProfileTabs = ({ playerId }) => {
 export default PlayerProfileTabs;
 
 const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
+  const isActive = tab.id === activeTab;
+
   const href = `/player/${playerId}${tab.id === "overview" ? "" : `?tab=${tab.id}`}`;
-  const classes = `${s.tabButton} ${tab.id === activeTab ? s.active : ""}`;
+  const classes = `${s.tabButton} ${isActive ? s.active : ""}`;
 
   return (
     <Link
@@ -86,8 +88,10 @@ const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
       key={tab.id}
       className={classes}
       role="tab"
-      tabIndex={tab.id === activeTab ? 0 : -1}
+      tabIndex={isActive ? 0 : -1}
       ref={(el) => (tabsRef.current[index] = el)}
+      id={`player-profile-tab-${tab.id}`}
+      aria-selected={isActive}
     >
       <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${tab.icon}`} />
