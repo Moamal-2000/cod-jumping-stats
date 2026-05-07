@@ -6,11 +6,11 @@ import TopRunsPerFps from "./TopRunsPerFps/TopRunsPerFps";
 
 const PlayerOverview = () => {
   return (
-    <>
+    <div id="player-profile-panel-overview">
       <PlayerInfo />
       <TopRunsPerFps />
       <RecentActivity />
-    </>
+    </div>
   );
 };
 

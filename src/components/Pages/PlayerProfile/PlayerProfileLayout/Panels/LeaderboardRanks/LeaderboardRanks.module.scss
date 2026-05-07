@@ -1,11 +1,11 @@
 @use "@/styles/mixins" as m;
 
-.leaderboardTab {
+.leaderboardRanksPanel {
   padding: 20px 24px;
 }
 
 @include m.media(small) {
-  .leaderboardTab {
+  .leaderboardRanksPanel {
     padding: 0;
   }
 }

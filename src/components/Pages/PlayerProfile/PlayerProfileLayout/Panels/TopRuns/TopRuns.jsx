@@ -24,7 +24,7 @@ const TopRuns = ({ playerId }) => {
   }, [selectedFps, playerId]);
 
   return (
-    <div className={s.topRunsTab}>
+    <div className={s.topRunsPanel} id="player-profile-panel-tops">
       <div className={s.topRunsHeader}>
         <TopRunsOptions />
       </div>

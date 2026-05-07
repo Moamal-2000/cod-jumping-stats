@@ -64,7 +64,8 @@ const RunAnalytics = ({ playerId }) => {
 
   return (
     <div
-      className={`${s.container} ${isMapListCollapsed ? s.containerCollapsed : ""}`}
+      className={`${s.runAnalyticsPanel} ${isMapListCollapsed ? s.containerCollapsed : ""}`}
+      id="player-profile-panel-run-analytics"
     >
       <MapList
         allMaps={allMaps}

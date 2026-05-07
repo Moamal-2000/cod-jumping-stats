@@ -147,7 +147,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
     activeList === "completed" ? completedRoutes : notCompletedRoutes;
 
   return (
-    <div className={s.routeCompletionContainer}>
+    <div className={s.routeCompletionPanel} id="player-profile-panel-routes">
       {/* Header with stats */}
       <div className={s.statsHeader}>
         <div className={s.statsCard}>

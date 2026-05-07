@@ -22,7 +22,10 @@ const LeaderboardRanks = () => {
   });
 
   return (
-    <div className={s.leaderboardTab}>
+    <div
+      className={s.leaderboardRanksPanel}
+      id="player-profile-panel-leaderboards"
+    >
       <FpsButtons options={[...JUMP_FPS, "mix"]} />
 
       <div className={s.leaderboardContent}>

@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-.routeCompletionContainer {
+.routeCompletionPanel {
   padding: 2rem;
   background: rgba(17, 24, 39, 0.8);
   backdrop-filter: blur(10px);
@@ -720,7 +720,7 @@
 
 // Responsive design
 @media (max-width: 768px) {
-  .routeCompletionContainer {
+  .routeCompletionPanel {
     padding: 1rem;
   }
 

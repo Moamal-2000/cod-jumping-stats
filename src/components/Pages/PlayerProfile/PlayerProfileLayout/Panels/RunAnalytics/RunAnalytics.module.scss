@@ -1,6 +1,6 @@
 @use "@/styles/mixins" as m;
 
-.container {
+.runAnalyticsPanel {
   display: grid;
   grid-template-columns: 320px 1fr;
   gap: 24px;
@@ -8,14 +8,14 @@
 }
 
 @include m.media(large) {
-  .container {
+  .runAnalyticsPanel {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 }
 
 @include m.media(small) {
-  .container {
+  .runAnalyticsPanel {
     padding: 16px 0;
   }
 }

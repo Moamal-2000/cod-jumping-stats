@@ -92,6 +92,7 @@ const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
       ref={(el) => (tabsRef.current[index] = el)}
       id={`player-profile-tab-${tab.id}`}
       aria-selected={isActive}
+      aria-controls={`player-profile-panel-${tab.id}`}
     >
       <svg aria-hidden="true">
         <use href={`/icons-sprite.svg#${tab.icon}`} />
