@@ -53,10 +53,14 @@ const ServersList = ({ groupedServers, gameType }) => {
                       />
                     </td>
                     <td className={s.mapCell} data-label="Map">
-                      {isCod4 ? (
+                      {isCod4 && server.Online ? (
                         <span>{server.Map}</span>
                       ) : (
-                        <Link href={`/map/${server.MapID}`}>{server.Map}</Link>
+                        server.Online && (
+                          <Link href={`/map/${server.MapID}`}>
+                            {server.Map}
+                          </Link>
+                        )
                       )}
                     </td>
                     <td className={s.playerCell} data-label="Player">

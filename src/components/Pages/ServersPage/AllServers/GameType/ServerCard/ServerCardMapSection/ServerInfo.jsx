@@ -34,7 +34,7 @@ const ServerInfo = ({ server, viewType }) => {
 
         {isCod4 && <span className={s.mapName}>{server.Map}</span>}
 
-        {!isCod4 && (
+        {!isCod4 && server.Online && (
           <Link href={`/map/${server.MapID}`} className={s.mapName}>
             {server.Map}
           </Link>
