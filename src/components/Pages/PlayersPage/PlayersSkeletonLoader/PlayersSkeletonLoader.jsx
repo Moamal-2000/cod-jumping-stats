@@ -21,11 +21,7 @@ const PlayersSkeletonLoader = () => {
       {viewType === "grid" ? (
         <div className={s.playersGrid} aria-hidden="true">
           {Array.from({ length: PLAYERS_CARDS_COUNT }).map((_, index) => (
-            <div
-              key={index}
-              className={s.playerCardSkeleton}
-              style={{ ["--pulse-delay"]: `${(index % 3) * 0.25}s` }}
-            >
+            <div key={index} className={s.skeletonCard}>
               <div className={s.topSection}>
                 <div className={s.cardHeader}>
                   <div className={s.avatar} />

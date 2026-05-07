@@ -10,15 +10,15 @@
 }
 
 .skeletonCard:nth-child(3n + 1) {
-  --pulse-delay: 0s;
+  --pulse-delay: 0;
 }
 
 .skeletonCard:nth-child(3n + 2) {
-  --pulse-delay: 0.6s;
+  --pulse-delay: .4s;
 }
 
 .skeletonCard:nth-child(3n) {
-  --pulse-delay: 1.2s;
+  --pulse-delay: .8s;
 }
 
 @media (max-width: 1280px) {
@@ -52,12 +52,10 @@
   position: absolute;
   inset: 0;
   height: 200%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(148, 163, 184, 0.26) 50%,
-    transparent 100%
-  );
+  background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(148, 163, 184, 0.26) 50%,
+      transparent 100%);
   transform: translateX(-150%);
   will-change: transform;
   animation: mapsSkeletonPulse 1.7s ease-in-out infinite;

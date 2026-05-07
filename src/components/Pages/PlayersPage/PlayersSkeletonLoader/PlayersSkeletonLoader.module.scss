@@ -26,12 +26,24 @@
   }
 }
 
-.playerCardSkeleton,
+.skeletonCard,
 .playersTableSkeleton {
   --pulse-delay: 0s;
 }
 
-.playerCardSkeleton {
+.skeletonCard:nth-child(3n + 1) {
+  --pulse-delay: 0;
+}
+
+.skeletonCard:nth-child(3n + 2) {
+  --pulse-delay: .4s;
+}
+
+.skeletonCard:nth-child(3n) {
+  --pulse-delay: .8s;
+}
+
+.skeletonCard {
   background-color: #131820;
   border: 1px solid #2a313a;
   border-radius: 12px;
@@ -45,7 +57,7 @@
 }
 
 @include m.media(small) {
-  .playerCardSkeleton {
+  .skeletonCard {
     padding: 12px;
   }
 }

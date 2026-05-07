@@ -10,15 +10,15 @@
 }
 
 .card:nth-child(3n + 1) {
-  --pulse-delay: 0s;
+  --pulse-delay: 0;
 }
 
 .card:nth-child(3n + 2) {
-  --pulse-delay: 0.6s;
+  --pulse-delay: .4s;
 }
 
 .card:nth-child(3n) {
-  --pulse-delay: 1.2s;
+  --pulse-delay: .8s;
 }
 
 @include m.media(large) {
