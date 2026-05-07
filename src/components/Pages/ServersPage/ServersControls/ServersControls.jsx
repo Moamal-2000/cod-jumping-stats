@@ -20,9 +20,10 @@ const ServersControls = ({
 }) => {
   return (
     <section className={s.controls} aria-label="Server options">
-      <div className={s.controlGroup}>
-        <span className={s.groupLabel}>Show</span>
-        <div className={s.toggleButtons} role="group" aria-label="Game filter">
+      <fieldset className={s.controlGroup}>
+        <legend className={s.groupLabel}>Show</legend>
+
+        <div className={s.toggleButtons}>
           {SERVERS_GAME_FILTER_OPTIONS.map((option) => (
             <button
               key={option.id}
@@ -37,15 +38,12 @@ const ServersControls = ({
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
 
-      <div className={s.controlGroup}>
-        <span className={s.groupLabel}>Filters</span>
-        <div
-          className={s.toggleButtons}
-          role="group"
-          aria-label="Online filter"
-        >
+      <fieldset className={s.controlGroup}>
+        <legend className={s.groupLabel}>Filters</legend>
+
+        <div className={s.toggleButtons}>
           {SERVER_STATUS_FILTER.map((option) => (
             <button
               key={option.id}
@@ -60,13 +58,14 @@ const ServersControls = ({
             </button>
           ))}
         </div>
-      </div>
+      </fieldset>
 
       <div className={s.options}>
         <div className={s.controlGroup}>
           <label htmlFor="servers-refresh" className={s.groupLabel}>
             Refresh servers
           </label>
+
           <div
             className={`${s.selectWrap} ${!autoRefreshEnabled ? s.inactive : ""}`}
           >
@@ -84,13 +83,14 @@ const ServersControls = ({
           </div>
         </div>
 
-        <div className={s.controlGroup}>
-          <span className={s.groupLabel}>View</span>
+        <fieldset className={s.controlGroup}>
+          <legend className={s.groupLabel}>View</legend>
+
           <SortViewButtons
             themeColor="yellow"
             defaultView={DEFAULT_SERVERS_VIEW_MODE}
           />
-        </div>
+        </fieldset>
       </div>
     </section>
   );

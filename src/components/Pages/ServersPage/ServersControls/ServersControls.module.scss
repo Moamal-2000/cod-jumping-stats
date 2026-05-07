@@ -20,18 +20,18 @@
 }
 
 .controlGroup {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  border: 0;
 }
 
 .groupLabel {
+  display: block;
   min-width: 64px;
   text-wrap: nowrap;
   color: #fff;
   font-size: .9rem;
   font-weight: 600;
   text-transform: capitalize;
+  margin-bottom: 0.5rem;
 }
 
 .selectWrap {
