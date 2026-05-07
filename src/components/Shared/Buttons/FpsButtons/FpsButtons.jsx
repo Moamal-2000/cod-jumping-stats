@@ -28,14 +28,11 @@ const FpsButtons = ({ options = [] }) => {
   }
 
   return (
-    <div className={s.fpsButtons} role="tablist" aria-label="FPS selector">
+    <div className={s.fpsButtons}>
       {options.map((fps) => (
         <button
           key={fps}
           type="button"
-          role="tab"
-          aria-selected={selectedFps === fps}
-          aria-pressed={selectedFps === fps}
           aria-label={`Show ${fps === "mix" ? "Mixed" : fps} FPS leaderboards`}
           className={selectedFps === fps ? s.active : ""}
           onClick={() => handleClick(fps)}
