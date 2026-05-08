@@ -39,75 +39,71 @@ const FiltersSection = () => {
   return (
     <section className={s.filtersSection}>
       <div className={s.row}>
-        <div className={`${s.filterGroup} ${s.searchGroup}`}>
-          <span className={s.filterLabel}>Search With</span>
+        <div className={`${s.filterGroup} ${s.sortGroup}`}>
+          <span className={s.filterLabel}>Sort By</span>
+          <div className={s.sortButtons} role="group" aria-label="Sort players">
+            {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
+              const isActive = sortBy === value;
 
-          <div className={s.fields}>
-            <SearchInput
-              queryName="name"
-              placeholder="Player Name"
-              id="player-name-search"
-              autoFocus={true}
-            />
-
-            <SearchInput
-              queryName="id"
-              placeholder="Player ID"
-              id="player-id-search"
-              inputMode="numeric"
-            />
+              return (
+                <button
+                  key={id}
+                  type="button"
+                  onClick={() => handleSortChange(value)}
+                  className={`${s.sortButton} ${isActive ? s.active : ""}`}
+                  aria-pressed={isActive}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
-        </div>
-
-        <div className={`${s.filterGroup} ${s.selectGroup}`}>
-          <label className={s.filterLabel} htmlFor="players-filter-badges">
-            Filter By Badges
-          </label>
-          <SelectMenu
-            optionsData={FILTER_PLAYERS_BADGES}
-            onChange={handleFilterChange}
-            value={filterBy}
-            id="players-filter-badges"
-          />
         </div>
       </div>
 
       <div className={`${s.row} ${s.secondRow}`}>
-        <div className={s.options}>
-          <div className={`${s.filterGroup} ${s.sortGroup}`}>
-            <span className={s.filterLabel}>Sort By</span>
-            <div
-              className={s.sortButtons}
-              role="group"
-              aria-label="Sort players"
-            >
-              {SORT_PLAYERS_OPTIONS.map(({ label, value, id }) => {
-                const isActive = sortBy === value;
+        <div className={s.row}>
+          <div className={`${s.filterGroup} ${s.searchGroup}`}>
+            <span className={s.filterLabel}>Search With</span>
 
-                return (
-                  <button
-                    key={id}
-                    type="button"
-                    onClick={() => handleSortChange(value)}
-                    className={`${s.sortButton} ${isActive ? s.active : ""}`}
-                    aria-pressed={isActive}
-                  >
-                    {label}
-                  </button>
-                );
-              })}
+            <div className={s.fields}>
+              <SearchInput
+                queryName="name"
+                placeholder="Player Name"
+                id="player-name-search"
+                autoFocus={true}
+              />
+
+              <SearchInput
+                queryName="id"
+                placeholder="Player ID"
+                id="player-id-search"
+                inputMode="numeric"
+              />
             </div>
           </div>
-        </div>
 
-        <div className={s.rightSide}>
+          <div className={`${s.filterGroup} ${s.selectGroup}`}>
+            <label className={s.filterLabel} htmlFor="players-filter-badges">
+              Filter By Badges
+            </label>
+            <SelectMenu
+              optionsData={FILTER_PLAYERS_BADGES}
+              onChange={handleFilterChange}
+              value={filterBy}
+              id="players-filter-badges"
+            />
+          </div>
+
           <ResultsSummary
             displayCount={playersScroll.length}
             total={allPlayersData.length}
             label="players"
+            className={s.resultsSummary}
           />
-          <SortViewButtons />
         </div>
+
+        <SortViewButtons />
       </div>
     </section>
   );
