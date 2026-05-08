@@ -3,12 +3,16 @@
 import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortViewButtons";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import SelectMenu from "@/components/Shared/SelectMenus/SelectMenu/SelectMenu";
+import ResultsSummary from "@/components/Shared/Texts/ResultsSummary/ResultsSummary";
 import { FILTER_PLAYERS_BADGES, SORT_PLAYERS_OPTIONS } from "@/data/staticData";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSelector } from "react-redux";
 import s from "./FiltersSection.module.scss";
 
 const FiltersSection = () => {
+  const { allPlayersData, playersScroll } = useSelector((s) => s.players);
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -96,7 +100,14 @@ const FiltersSection = () => {
           </div>
         </div>
 
-        <SortViewButtons />
+        <div className={s.rightSide}>
+          <ResultsSummary
+            displayCount={playersScroll.length}
+            total={allPlayersData.length}
+            label="players"
+          />
+          <SortViewButtons />
+        </div>
       </div>
     </section>
   );

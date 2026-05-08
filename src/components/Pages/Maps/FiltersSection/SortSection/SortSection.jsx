@@ -1,6 +1,7 @@
 import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import CustomSelectMenu from "@/components/Shared/SelectMenus/CustomSelectMenu/CustomSelectMenu";
+import ResultsSummary from "@/components/Shared/Texts/ResultsSummary/ResultsSummary";
 import { TOTAL_MAPS_PLACEHOLDER } from "@/data/constants";
 import s from "./SortSection.module.scss";
 import SortView from "./SortView/SortView";
@@ -32,9 +33,11 @@ const SortSection = ({
           orderByCount
         />
 
-        <p className={s.totalMapsText}>
-          Showing <span>{displayedMaps}</span> of <span>{totalMaps}</span> maps
-        </p>
+        <ResultsSummary
+          displayCount={displayedMaps}
+          total={totalMaps}
+          label="maps"
+        />
       </div>
 
       <SortView setPaginationNumber={setPaginationNumber} />

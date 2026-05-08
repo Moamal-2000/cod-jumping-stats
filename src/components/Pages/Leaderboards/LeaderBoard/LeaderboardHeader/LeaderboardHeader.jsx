@@ -2,6 +2,7 @@
 
 import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import ResultsSummary from "@/components/Shared/Texts/ResultsSummary/ResultsSummary";
 import {
   PAGINATION_ITEMS_PER_PAGE,
   TOTAL_MAPS_PLACEHOLDER,
@@ -11,7 +12,7 @@ import { stripColorCodes } from "@/lib/utils";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./LeaderboardHeader.module.scss";
 import LeaderboardHeaderBtns from "./LeaderboardHeaderBtns/LeaderboardHeaderBtns";
@@ -95,8 +96,13 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
         </div>
 
         <p>
-          Showing <span>{displayedPlayers}</span> of <span>{totalPlayers}</span>{" "}
-          players • <span>{totalMaps}</span> total maps available
+          <ResultsSummary
+            displayCount={displayedPlayers}
+            total={totalPlayers}
+            label="players"
+            as={React.Fragment}
+          />{" "}
+          • <b>{totalMaps}</b> total maps available
         </p>
       </div>
 

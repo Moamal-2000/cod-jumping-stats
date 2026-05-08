@@ -43,28 +43,3 @@
     align-items: flex-start;
   }
 }
-
-.totalMapsText {
-  color: #9ca3af;
-  text-wrap: nowrap;
-}
-
-@include m.media(large) {
-  .totalMapsText {
-    position: absolute;
-    bottom: -56px;
-    left: 200px;
-  }
-}
-
-@media (max-width: 500px) {
-  .totalMapsText {
-    bottom: -80px;
-    left: 0;
-  }
-}
-
-.totalMapsText>span {
-  color: #cdd4de;
-  font-weight: 500;
-}
