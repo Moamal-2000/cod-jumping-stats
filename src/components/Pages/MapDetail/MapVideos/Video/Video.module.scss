@@ -30,6 +30,12 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .thumbnail:hover {
+    opacity: 1;
+  }
+}
+
 .youtubeIcon {
   position: absolute;
   top: 50%;

@@ -216,6 +216,15 @@
   font-weight: 700;
 }
 
+@media (prefers-reduced-transparency: reduce) {
+
+  .tbody tr:nth-child(1),
+  .tbody tr:nth-child(2),
+  .tbody tr:nth-child(3) {
+    background: transparent;
+  }
+}
+
 .mapNameCell {
   font-weight: 500;
   color: #f1f5f9;

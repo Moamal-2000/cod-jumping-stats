@@ -59,12 +59,25 @@
   transition: background 140ms ease, border-color 140ms ease, box-shadow 140ms ease;
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .difficultyItem {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
 .difficultyItem .fpsLabel {
   color: #9ca3af;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .difficultyItem .fpsLabel {
+    color: #d2d7e0;
+  }
 }
 
 .difficultyValue {

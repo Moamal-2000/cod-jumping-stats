@@ -81,6 +81,12 @@
   z-index: 2;
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .serverHeader::before {
+    background-color: rgba(0, 0, 0, 0.3);
+  }
+}
+
 .serverHeader.list::before {
   display: none;
 }

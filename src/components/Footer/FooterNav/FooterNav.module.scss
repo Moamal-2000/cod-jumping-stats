@@ -78,6 +78,16 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .navigation .links a {
+
+    &:hover,
+    &.active {
+      background: transparent;
+    }
+  }
+}
+
 .navigation .links a>span {
   color: #d1d5dc;
 }

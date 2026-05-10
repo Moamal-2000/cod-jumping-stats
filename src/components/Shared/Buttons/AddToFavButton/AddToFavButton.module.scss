@@ -19,6 +19,12 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .favoriteButton:hover {
+    background-color: transparent;
+  }
+}
+
 .favoriteButton>svg {
   width: 18px;
   height: 18px;

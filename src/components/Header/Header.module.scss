@@ -12,6 +12,12 @@
   backdrop-filter: blur(8px);
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .header {
+    background-color: #0d1117;
+  }
+}
+
 .header [data-container] {
   display: flex;
   align-items: center;

@@ -81,6 +81,18 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .topRun {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.05);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.07);
+      border-color: rgba(255, 255, 255, 0.07);
+    }
+  }
+}
+
 .rank {
   color: #fff;
   font-weight: 700;

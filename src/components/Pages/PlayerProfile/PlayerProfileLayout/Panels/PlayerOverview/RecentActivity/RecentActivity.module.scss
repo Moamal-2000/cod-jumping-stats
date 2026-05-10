@@ -100,6 +100,12 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .recentActivityItem {
+    background: #1f2937;
+  }
+}
+
 .activityIcon {
   width: 2.5rem;
   height: 2.5rem;

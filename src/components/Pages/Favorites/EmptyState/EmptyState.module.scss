@@ -17,6 +17,12 @@
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .emptyState {
+    background-color: #111827;
+  }
+}
+
 .iconWrapper {
   @include m.flex-center;
   width: 80px;
@@ -35,6 +41,12 @@
     height: 64px;
     border-radius: 16px;
     margin-bottom: 20px;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .iconWrapper {
+    background-color: rgba(250, 204, 21, .2);
   }
 }
 
