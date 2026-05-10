@@ -27,6 +27,12 @@ body::selection {
   padding: 0;
   margin: 0;
 }
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
 
 a {
   color: inherit;
