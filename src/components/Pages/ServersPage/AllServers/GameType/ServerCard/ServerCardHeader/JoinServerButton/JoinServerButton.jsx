@@ -1,8 +1,25 @@
-import s from "./JoinServerButton.module.scss"
+import { isMobile } from "@/lib/validation";
+import s from "./JoinServerButton.module.scss";
 
-const JoinServerButton = () => {
+const isMobileDevice = isMobile();
+
+const JoinServerButton = ({ server }) => {
+  const showJoinServerLink = server.GameType === "COD2" && !isMobileDevice;
+
+  if (!showJoinServerLink) {
+    return;
+  }
+
+  const serverAddress = `${server.IP}:${server.Port}`;
+
   return (
-    <div>JoinServerButton</div>
-  )
-}
-export default JoinServerButton
+    <a
+      href={`cod2x://%2Bconnect%20${serverAddress}`}
+      title={`Connect via cod2x:// to ${serverAddress}`}
+      className={s.joinServerButton}
+    >
+      Join Server
+    </a>
+  );
+};
+export default JoinServerButton;
