@@ -15,7 +15,8 @@ const JoinServerButton = ({ server }) => {
   return (
     <a
       href={`cod2x://%2Bconnect%20${serverAddress}`}
-      title={`Connect via cod2x:// to ${serverAddress}`}
+      title={`Connect to ${serverAddress}`}
+      aria-label={`Join Server at ${serverAddress}`}
       className={s.joinServerButton}
     >
       Join Server
