@@ -1,6 +1,7 @@
 "use client";
 
 import { DEFAULT_VIEW_MODE } from "@/data/constants";
+import useFakeLoader from "@/hooks/app/useFakeLoader";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { updateMapsState } from "@/redux/features/maps/slice/mapsSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
@@ -16,6 +17,8 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
     useSelector((s) => s.maps);
 
   const { pageVisits, isMapsExpanded } = useSelector((s) => s.global);
+
+  const fakeLoading = useFakeLoader();
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
@@ -61,7 +64,11 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 
   return (
     <section className={mapsSectionClasses}>
-      <MapsSkeletonLoader viewType={viewType} loading={loading} error={error} />
+      <MapsSkeletonLoader
+        viewType={viewType}
+        loading={loading || fakeLoading}
+        error={error}
+      />
       <ViewMaps lastMapRef={lastMapRef} mapsScroll={mapsScroll} />
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 
 import { PLAYERS_BATCH_SIZE } from "@/data/constants";
+import useFakeLoader from "@/hooks/app/useFakeLoader";
 import useInfiniteScroll from "@/hooks/app/useInfiniteScroll";
 import { getIsLastPagination, paginateData } from "@/lib/filters";
 import { removeQueryString } from "@/lib/queryParams";
@@ -21,6 +22,8 @@ const PlayersPage = () => {
   const { playersData, playersScroll, allDataDisplayed, loading, error } =
     useSelector((s) => s.players);
   const pageVisits = useSelector((s) => s.global.pageVisits);
+
+  const fakeLoading = useFakeLoader();
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -78,7 +81,9 @@ const PlayersPage = () => {
         <NoPlayersFound handleClearSearch={handleClearSearch} />
       )}
 
-      {loading && !error && <PlayersSkeletonLoader playersData={playersData} />}
+      {(loading || fakeLoading) && !error && (
+        <PlayersSkeletonLoader playersData={playersData} />
+      )}
       {error && <PlayersError error={error} dispatch={dispatch} />}
 
       {hasPlayers && !loading && !error && (

@@ -1,3 +1,4 @@
+import useFakeLoader from "@/hooks/app/useFakeLoader";
 import GameType from "./GameType/GameType";
 import ServersLoadingError from "./ServersLoadingError/ServersLoadingError";
 
@@ -9,6 +10,8 @@ const AllServers = ({
   statusFilter,
   gameParam,
 }) => {
+  const fakeLoading = useFakeLoader();
+
   const normalizedFilter = gameFilter?.toLowerCase();
   const filteredServers =
     normalizedFilter && normalizedFilter !== "all"
@@ -32,10 +35,10 @@ const AllServers = ({
   const groupedServers = getCodServers(statusFilteredServers);
   const gameTypes = getGameTypes(groupedServers);
 
-  if (loading || error) {
+  if (loading || fakeLoading || error) {
     return (
       <ServersLoadingError
-        loading={loading}
+        loading={loading || fakeLoading}
         error={error}
         gameParam={gameParam}
       />
