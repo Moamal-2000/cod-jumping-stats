@@ -9,7 +9,7 @@ const SortView = ({ setPaginationNumber }) => {
   return (
     <div className={s.sortViewWrapper}>
       <ShowAllButton setPaginationNumber={setPaginationNumber} />
-      <ExpandButton />
+      <ExpandButton controlsId="maps-section" />
       <SortViewButtons themeColor="blue" />
     </div>
   );

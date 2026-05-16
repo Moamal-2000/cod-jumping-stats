@@ -4,7 +4,7 @@ import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./ExpandButton.module.scss";
 
-const ExpandButton = () => {
+const ExpandButton = ({ controlsId }) => {
   const { loading, error, mapsData } = useSelector((s) => s.maps);
   const isMapsExpanded = useSelector((s) => s.global.isMapsExpanded);
 
@@ -26,6 +26,8 @@ const ExpandButton = () => {
       onClick={handleExpandBtn}
       disabled={isMapsUnavailable}
       aria-label={title}
+      aria-expanded={isMapsExpanded}
+      aria-controls={controlsId}
       title={title}
     >
       <svg aria-hidden="true">

@@ -63,7 +63,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
   }, [paginationNumber]);
 
   return (
-    <section className={mapsSectionClasses}>
+    <section className={mapsSectionClasses} id="maps-section">
       <MapsSkeletonLoader
         viewType={viewType}
         loading={loading || fakeLoading}
