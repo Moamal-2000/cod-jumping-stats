@@ -19,6 +19,8 @@ const BadgeStats = () => {
   const pathname = usePathname();
   const router = useRouter();
 
+  const filterBy = searchParams?.get("badge") || "all";
+
   function handleFilterChange(urlQuery) {
     createQueryString("badge", urlQuery, searchParams, router, pathname);
   }
@@ -29,7 +31,7 @@ const BadgeStats = () => {
         <button
           type="button"
           key={badge.id}
-          className={s.badgeButton}
+          className={`${s.badgeButton} ${filterBy === badge.urlQuery ? s.active : ""}`}
           onClick={() => handleFilterChange(badge.urlQuery)}
         >
           <span className={s.badgeLabel}>{badge.label}</span>
