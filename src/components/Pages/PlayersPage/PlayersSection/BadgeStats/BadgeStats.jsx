@@ -8,7 +8,22 @@ import { isActiveWithinWeek } from "@/lib/validation";
 import s from "./BadgeStats.module.scss";
 
 const BadgeStats = ({ playersData }) => {
-  const badgesArray = [
+  return (
+    <div className={s.badgesCountContainer}>
+      {getBadgesCount(playersData).map((badge) => (
+        <div key={badge.id} className={s.badgeCountItem}>
+          <span className={s.badgeCountLabel}>{badge.label}</span>
+          <span className={s.badgeCountValue}>{badge.count}</span>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default BadgeStats;
+
+function getBadgesCount(playersData) {
+  return [
     {
       id: "all",
       label: "Total Players",
@@ -65,16 +80,4 @@ const BadgeStats = ({ playersData }) => {
       urlQuery: "banned",
     },
   ];
-
-  return (
-    <div className={s.badgesCountContainer}>
-      {badgesArray.map((badge) => (
-        <div key={badge.id} className={s.badgeCountItem}>
-          <span className={s.badgeCountLabel}>{badge.label}</span>
-          <span className={s.badgeCountValue}>{badge.count}</span>
-        </div>
-      ))}
-    </div>
-  );
-};
-export default BadgeStats;
+}
