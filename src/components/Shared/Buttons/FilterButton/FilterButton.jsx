@@ -52,6 +52,7 @@ export function FilterButton({
       className={`${s.button} ${isActive ? s.active : ""}`}
       onClick={handleClick}
       aria-label={ariaLabel}
+      aria-pressed={isActive}
     >
       {toolTip && <p className={s.toolTip}>{toolTip}</p>}
       <span>{text}</span>

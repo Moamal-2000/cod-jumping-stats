@@ -39,6 +39,7 @@ const FilterButtons = ({ filtersData, queryName, defaultUrlQuery }) => {
             onClick={() => handleClick(queryValue)}
             className={`${isActive ? s.active : ""}`}
             title={title}
+            aria-pressed={isActive}
           >
             {text}
           </button>
