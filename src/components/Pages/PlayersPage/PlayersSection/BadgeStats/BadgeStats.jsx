@@ -4,17 +4,32 @@ import {
   eventWinnerIds,
   mappersIds,
 } from "@/data/manualBadges";
+import { createQueryString } from "@/lib/queryParams";
 import { isActiveWithinWeek } from "@/lib/validation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./BadgeStats.module.scss";
 
 const BadgeStats = ({ playersData }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  function handleFilterChange(urlQuery) {
+    createQueryString("badge", urlQuery, searchParams, router, pathname);
+  }
+
   return (
     <div className={s.badgesCountContainer}>
       {getBadgesCount(playersData).map((badge) => (
-        <div key={badge.id} className={s.badgeCountItem}>
-          <span className={s.badgeCountLabel}>{badge.label}</span>
-          <span className={s.badgeCountValue}>{badge.count}</span>
-        </div>
+        <button
+          type="button"
+          key={badge.id}
+          className={s.badgeButton}
+          onClick={() => handleFilterChange(badge.urlQuery)}
+        >
+          <span className={s.badgeLabel}>{badge.label}</span>
+          <span className={s.badgeValue}>{badge.count}</span>
+        </button>
       ))}
     </div>
   );

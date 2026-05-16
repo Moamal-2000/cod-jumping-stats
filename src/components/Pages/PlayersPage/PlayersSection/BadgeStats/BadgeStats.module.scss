@@ -12,7 +12,9 @@
   border-bottom: 2px solid rgba(96, 105, 128, 0.3);
 }
 
-.badgeCountItem {
+.badgeButton {
+  background-color: transparent;
+  border: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,11 +26,11 @@
   border-right: 1px solid rgba(96, 105, 128, 0.2);
 }
 
-.badgeCountItem:last-child {
+.badgeButton:last-child {
   border-right: none;
 }
 
-.badgeCountLabel {
+.badgeLabel {
   color: #9ca3af;
   font-size: 0.8rem;
   font-weight: 400;
@@ -38,7 +40,7 @@
   transition: color 0.2s ease;
 }
 
-.badgeCountValue {
+.badgeValue {
   color: #e5e7eb;
   font-size: 1.6rem;
   font-weight: 700;
@@ -53,16 +55,16 @@
     padding: 14px 0;
   }
 
-  .badgeCountItem {
+  .badgeButton {
     min-width: 90px;
     padding: 10px;
   }
 
-  .badgeCountLabel {
+  .badgeLabel {
     font-size: 0.65rem;
   }
 
-  .badgeCountValue {
+  .badgeValue {
     font-size: 1.5rem;
   }
 }
@@ -73,18 +75,18 @@
     padding: 12px 0;
   }
 
-  .badgeCountItem {
+  .badgeButton {
     flex: 1;
     min-width: 80px;
     padding: 8px;
     border-right: 1px solid rgba(96, 105, 128, 0.15);
   }
 
-  .badgeCountLabel {
+  .badgeLabel {
     font-size: 0.6rem;
   }
 
-  .badgeCountValue {
+  .badgeValue {
     font-size: 1.35rem;
   }
 }
@@ -96,7 +98,7 @@
     margin-bottom: 20px;
   }
 
-  .badgeCountItem {
+  .badgeButton {
     flex: 1 1 calc(50% - 0.5px);
     min-width: auto;
     padding: 8px 6px;
@@ -104,19 +106,19 @@
     border-bottom: 1px solid rgba(96, 105, 128, 0.15);
   }
 
-  .badgeCountItem:nth-child(even) {
+  .badgeButton:nth-child(even) {
     border-right: none;
   }
 
-  .badgeCountItem:nth-child(n + 5) {
+  .badgeButton:nth-child(n + 5) {
     border-bottom: none;
   }
 
-  .badgeCountLabel {
+  .badgeLabel {
     font-size: 0.55rem;
   }
 
-  .badgeCountValue {
+  .badgeValue {
     font-size: 1.2rem;
   }
 }
@@ -128,7 +130,7 @@
     margin-bottom: 16px;
   }
 
-  .badgeCountItem {
+  .badgeButton {
     flex: 1 1 calc(50% - 0.5px);
     min-width: auto;
     padding: 6px 4px;
@@ -136,19 +138,19 @@
     border-bottom: 1px solid rgba(96, 105, 128, 0.15);
   }
 
-  .badgeCountItem:nth-child(even) {
+  .badgeButton:nth-child(even) {
     border-right: none;
   }
 
-  .badgeCountItem:nth-child(n + 5) {
+  .badgeButton:nth-child(n + 5) {
     border-bottom: none;
   }
 
-  .badgeCountLabel {
+  .badgeLabel {
     font-size: 0.5rem;
   }
 
-  .badgeCountValue {
+  .badgeValue {
     font-size: 1rem;
   }
 }
