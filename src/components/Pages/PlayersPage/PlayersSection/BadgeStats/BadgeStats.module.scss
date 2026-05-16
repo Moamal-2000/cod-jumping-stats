@@ -45,10 +45,6 @@
   transition: color 0.2s ease;
 }
 
-// .badgeButton.active .badgeLabel {
-//   color: #2e2e2e;
-// }
-
 .badgeValue {
   color: #e5e7eb;
   font-size: 1.6rem;
@@ -57,10 +53,6 @@
   line-height: 1;
   transition: color 0.2s ease;
 }
-
-// .badgeButton.active .badgeValue {
-//   color: #2e2e2e;
-// }
 
 @include m.media(large) {
   .badgesCountContainer {
@@ -123,10 +115,6 @@
     border-right: none;
   }
 
-  .badgeButton:nth-child(n + 5) {
-    border-bottom: none;
-  }
-
   .badgeLabel {
     font-size: 0.55rem;
   }
@@ -153,10 +141,6 @@
 
   .badgeButton:nth-child(even) {
     border-right: none;
-  }
-
-  .badgeButton:nth-child(n + 5) {
-    border-bottom: none;
   }
 
   .badgeLabel {
