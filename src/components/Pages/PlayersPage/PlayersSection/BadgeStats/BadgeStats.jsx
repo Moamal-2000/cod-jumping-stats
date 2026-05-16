@@ -9,6 +9,7 @@ import s from "./BadgeStats.module.scss";
 
 const BadgeStats = ({ playersData }) => {
   const badgesCount = {
+    all: playersData.length,
     winner: eventWinnerIds.length,
     bugHunter: bugHunterIds.length,
     admin: playersData.filter((player) => player.Admin >= 100).length,
@@ -22,6 +23,11 @@ const BadgeStats = ({ playersData }) => {
 
   return (
     <div className={s.badgesCountContainer}>
+      <div className={s.badgeCountItem}>
+        <span className={s.badgeCountLabel}>Total</span>
+        <span className={s.badgeCountValue}>{badgesCount.all}</span>
+      </div>
+
       <div className={s.badgeCountItem}>
         <span className={s.badgeCountLabel}>Event Winners</span>
         <span className={s.badgeCountValue}>{badgesCount.winner}</span>
