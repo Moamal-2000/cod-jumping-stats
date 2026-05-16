@@ -1,3 +1,5 @@
+"use client";
+
 import {
   bugHunterIds,
   contentCreators,
@@ -7,9 +9,12 @@ import {
 import { createQueryString } from "@/lib/queryParams";
 import { isActiveWithinWeek } from "@/lib/validation";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useSelector } from "react-redux";
 import s from "./BadgeStats.module.scss";
 
-const BadgeStats = ({ playersData }) => {
+const BadgeStats = () => {
+  const allPlayersData = useSelector((s) => s.players.allPlayersData);
+
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -20,7 +25,7 @@ const BadgeStats = ({ playersData }) => {
 
   return (
     <div className={s.badgesCountContainer}>
-      {getBadgesCount(playersData).map((badge) => (
+      {getBadgesCount(allPlayersData).map((badge) => (
         <button
           type="button"
           key={badge.id}
@@ -37,12 +42,12 @@ const BadgeStats = ({ playersData }) => {
 
 export default BadgeStats;
 
-function getBadgesCount(playersData) {
+function getBadgesCount(allPlayersData) {
   return [
     {
       id: "all",
       label: "Total Players",
-      count: playersData.length,
+      count: allPlayersData.length,
       urlQuery: "all",
     },
     {
@@ -60,7 +65,7 @@ function getBadgesCount(playersData) {
     {
       id: "admin",
       label: "Admins",
-      count: playersData.filter((player) => player.Admin >= 100).length,
+      count: allPlayersData.filter((player) => player.Admin >= 100).length,
       urlQuery: "admin",
     },
     {
@@ -78,20 +83,21 @@ function getBadgesCount(playersData) {
     {
       id: "donator",
       label: "Donators",
-      count: playersData.filter((player) => player.Donated === 1).length,
+      count: allPlayersData.filter((player) => player.Donated === 1).length,
       urlQuery: "donator",
     },
     {
       id: "active",
       label: "Active Players",
-      count: playersData.filter((player) => isActiveWithinWeek(player.LastSeen))
-        .length,
+      count: allPlayersData.filter((player) =>
+        isActiveWithinWeek(player.LastSeen),
+      ).length,
       urlQuery: "active",
     },
     {
       id: "banned",
       label: "Banned",
-      count: playersData.filter((player) => player.Banned === 1).length,
+      count: allPlayersData.filter((player) => player.Banned === 1).length,
       urlQuery: "banned",
     },
   ];

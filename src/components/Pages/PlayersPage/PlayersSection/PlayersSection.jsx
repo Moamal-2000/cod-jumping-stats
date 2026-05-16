@@ -8,7 +8,6 @@ import s from "./PlayersSection.module.scss";
 import PlayersTable from "./PlayersTable/PlayersTable";
 
 const PlayersSection = ({
-  playersData,
   playersScroll,
   allDataDisplayed,
   lastPlayerRef,
@@ -19,7 +18,7 @@ const PlayersSection = ({
 
   return (
     <section className={s.playersSection}>
-      <BadgeStats playersData={playersData} />
+      <BadgeStats />
 
       {viewType === "grid" && (
         <div className={s.playersGrid}>

@@ -88,7 +88,6 @@ const PlayersPage = () => {
 
       {hasPlayers && !loading && !error && (
         <PlayersSection
-          playersData={playersData}
           playersScroll={playersScroll}
           allDataDisplayed={allDataDisplayed}
           lastPlayerRef={lastPlayerRef}
