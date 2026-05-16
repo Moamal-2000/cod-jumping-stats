@@ -11,9 +11,9 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   const dispatch = useDispatch();
 
   const isMapsUnavailable = loading || error || mapsData?.length === 0;
-  const flipButton =
+  const isActive =
     mapsData?.length === 0 ? false : allDataDisplayed ? true : false;
-  const title = flipButton ? "Show less" : "Show all";
+  const title = isActive ? "Show less" : "Show all";
 
   function handleShowAllBtn() {
     if (allDataDisplayed) {
@@ -49,7 +49,7 @@ const ShowAllButton = ({ setPaginationNumber }) => {
   return (
     <button
       type="button"
-      className={`${s.showAllBtn} ${flipButton ? s.active : ""}`}
+      className={`${s.showAllBtn} ${isActive ? s.active : ""}`}
       onClick={handleShowAllBtn}
       disabled={isMapsUnavailable}
       aria-label={title}
