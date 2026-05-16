@@ -8,65 +8,72 @@ import { isActiveWithinWeek } from "@/lib/validation";
 import s from "./BadgeStats.module.scss";
 
 const BadgeStats = ({ playersData }) => {
-  const badgesCount = {
-    all: playersData.length,
-    winner: eventWinnerIds.length,
-    bugHunter: bugHunterIds.length,
-    admin: playersData.filter((player) => player.Admin >= 100).length,
-    mapper: mappersIds.length,
-    creator: contentCreators.length,
-    donator: playersData.filter((player) => player.Donated === 1).length,
-    active: playersData.filter((player) => isActiveWithinWeek(player.LastSeen))
-      .length,
-    banned: playersData.filter((player) => player.Banned === 1).length,
-  };
+  const badgesArray = [
+    {
+      id: "all",
+      label: "Total Players",
+      count: playersData.length,
+      urlQuery: "all",
+    },
+    {
+      id: "winner",
+      label: "Event Winners",
+      count: eventWinnerIds.length,
+      urlQuery: "winner",
+    },
+    {
+      id: "bugHunter",
+      label: "Bug Hunters",
+      count: bugHunterIds.length,
+      urlQuery: "bug-hunter",
+    },
+    {
+      id: "admin",
+      label: "Admins",
+      count: playersData.filter((player) => player.Admin >= 100).length,
+      urlQuery: "admin",
+    },
+    {
+      id: "mapper",
+      label: "Mappers",
+      count: mappersIds.length,
+      urlQuery: "mapper",
+    },
+    {
+      id: "creator",
+      label: "Content Creators",
+      count: contentCreators.length,
+      urlQuery: "creator",
+    },
+    {
+      id: "donator",
+      label: "Donators",
+      count: playersData.filter((player) => player.Donated === 1).length,
+      urlQuery: "donator",
+    },
+    {
+      id: "active",
+      label: "Active Players",
+      count: playersData.filter((player) => isActiveWithinWeek(player.LastSeen))
+        .length,
+      urlQuery: "active",
+    },
+    {
+      id: "banned",
+      label: "Banned",
+      count: playersData.filter((player) => player.Banned === 1).length,
+      urlQuery: "banned",
+    },
+  ];
 
   return (
     <div className={s.badgesCountContainer}>
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Total</span>
-        <span className={s.badgeCountValue}>{badgesCount.all}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Event Winners</span>
-        <span className={s.badgeCountValue}>{badgesCount.winner}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Bug Hunters</span>
-        <span className={s.badgeCountValue}>{badgesCount.bugHunter}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Admins</span>
-        <span className={s.badgeCountValue}>{badgesCount.admin}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Mappers</span>
-        <span className={s.badgeCountValue}>{badgesCount.mapper}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Content Creators</span>
-        <span className={s.badgeCountValue}>{badgesCount.creator}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Donators</span>
-        <span className={s.badgeCountValue}>{badgesCount.donator}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Active</span>
-        <span className={s.badgeCountValue}>{badgesCount.active}</span>
-      </div>
-
-      <div className={s.badgeCountItem}>
-        <span className={s.badgeCountLabel}>Banned</span>
-        <span className={s.badgeCountValue}>{badgesCount.banned}</span>
-      </div>
+      {badgesArray.map((badge) => (
+        <div key={badge.id} className={s.badgeCountItem}>
+          <span className={s.badgeCountLabel}>{badge.label}</span>
+          <span className={s.badgeCountValue}>{badge.count}</span>
+        </div>
+      ))}
     </div>
   );
 };
