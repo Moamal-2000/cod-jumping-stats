@@ -32,6 +32,7 @@ const BadgeStats = () => {
           type="button"
           key={badge.id}
           className={`${s.badgeButton} ${filterBy === badge.urlQuery ? s.active : ""}`}
+          aria-pressed={filterBy === badge.urlQuery}
           onClick={() => handleFilterChange(badge.urlQuery)}
         >
           <span className={s.badgeLabel}>{badge.label}</span>
