@@ -3,7 +3,6 @@
 import { DEFAULT_VIEW_MODE } from "@/data/constants";
 import { useSearchParams } from "next/navigation";
 import PlayerCard from "../PlayerCard/PlayerCard";
-import BadgeStats from "./BadgeStats/BadgeStats";
 import s from "./PlayersSection.module.scss";
 import PlayersTable from "./PlayersTable/PlayersTable";
 
@@ -18,8 +17,6 @@ const PlayersSection = ({
 
   return (
     <section className={s.playersSection}>
-      <BadgeStats />
-
       {viewType === "grid" && (
         <div className={s.playersGrid}>
           {playersScroll.map((player, index) => {

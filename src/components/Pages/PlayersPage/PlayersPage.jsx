@@ -15,6 +15,7 @@ import FiltersSection from "./FiltersSection/FiltersSection";
 import NoPlayersFound from "./NoPlayersFound/NoPlayersFound";
 import PlayersError from "./PlayersError/PlayersError";
 import s from "./PlayersPage.module.scss";
+import BadgeStats from "./PlayersSection/BadgeStats/BadgeStats";
 import PlayersSection from "./PlayersSection/PlayersSection";
 import PlayersSkeletonLoader from "./PlayersSkeletonLoader/PlayersSkeletonLoader";
 
@@ -76,6 +77,7 @@ const PlayersPage = () => {
   return (
     <div className={s.playersContainer} onMouseLeave={handleMouseLeave}>
       <FiltersSection />
+      <BadgeStats />
 
       {showNoPlayersUI && (
         <NoPlayersFound handleClearSearch={handleClearSearch} />

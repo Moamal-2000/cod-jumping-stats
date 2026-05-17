@@ -6,7 +6,6 @@
   justify-content: space-between;
   flex-wrap: wrap;
   padding-block: 16px;
-  margin-bottom: 28px;
   border-top: 2px solid #272c36;
   border-bottom: 2px solid #272c36;
 }
@@ -23,7 +22,6 @@
   .badgesCountContainer {
     border: 0;
     padding-block: 10px;
-    margin-bottom: 20px;
     display: flex;
     justify-content: flex-start;
   }
@@ -32,7 +30,6 @@
 @include m.media(very-small) {
   .badgesCountContainer {
     padding-block: 8px;
-    margin-bottom: 16px;
   }
 }
 
