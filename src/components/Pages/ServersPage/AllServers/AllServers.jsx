@@ -10,7 +10,7 @@ const AllServers = ({
   statusFilter,
   gameParam,
 }) => {
-  const fakeLoading = useFakeLoader();
+  const fakeLoading = useFakeLoader({ delay: 1000 });
 
   const normalizedFilter = gameFilter?.toLowerCase();
   const filteredServers =

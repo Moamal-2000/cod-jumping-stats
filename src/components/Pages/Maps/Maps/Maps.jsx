@@ -18,7 +18,7 @@ const Maps = ({ paginationNumber, setPaginationNumber, lastMapRef }) => {
 
   const { pageVisits, isMapsExpanded } = useSelector((s) => s.global);
 
-  const fakeLoading = useFakeLoader();
+  const fakeLoading = useFakeLoader({ delay: 1000 });
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();

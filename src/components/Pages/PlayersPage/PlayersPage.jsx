@@ -24,7 +24,7 @@ const PlayersPage = () => {
     useSelector((s) => s.players);
   const pageVisits = useSelector((s) => s.global.pageVisits);
 
-  const fakeLoading = useFakeLoader();
+  const fakeLoading = useFakeLoader({ delay: 1000 });
 
   const dispatch = useDispatch();
   const router = useRouter();
