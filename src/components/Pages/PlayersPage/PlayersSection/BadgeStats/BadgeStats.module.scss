@@ -14,13 +14,18 @@
 @include m.media(medium) {
   .badgesCountContainer {
     padding-block: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
 @include m.media(small) {
   .badgesCountContainer {
+    border: 0;
     padding-block: 10px;
     margin-bottom: 20px;
+    display: flex;
+    justify-content: flex-start;
   }
 }
 
@@ -63,27 +68,44 @@
   .badgeButton {
     flex: 1;
     min-width: 80px;
-    padding: 8px;
-    border-right: 1px solid #1f232b;
+    padding: 14px;
+    border: 0;
+    border-bottom: solid 3px transparent;
+
+    &:nth-child(3n - 1) {
+      border-left: 1px solid #1f232b;
+      border-right: 1px solid #1f232b;
+    }
+
+    &:not(.active):not(:nth-last-child(-n + 3)) {
+      border-bottom: 1px solid #1f232b;
+    }
   }
 }
 
 @include m.media(small) {
   .badgeButton {
-    flex: 1 1 calc(50% - .5px);
+    flex: 0 1 50%;
     min-width: auto;
-    padding: 8px 6px;
-    border-bottom: 1px solid #1f232b;
+    border: 1px solid #1f232b;
+
+    &:last-child {
+      border-right: 1px solid #1f232b;
+    }
 
     &:nth-child(even) {
-      border-right: none;
+      border-left: 0;
     }
   }
 }
 
 @include m.media(very-small) {
   .badgeButton {
-    padding: 6px 4px;
+    gap: 6px;
+
+    &:last-child {
+      flex-grow: 1;
+    }
   }
 }
 
@@ -104,19 +126,7 @@
 
 @include m.media(medium) {
   .badgeLabel {
-    font-size: .6rem;
-  }
-}
-
-@include m.media(small) {
-  .badgeLabel {
-    font-size: .55rem;
-  }
-}
-
-@include m.media(very-small) {
-  .badgeLabel {
-    font-size: .5rem;
+    font-size: .8rem;
   }
 }
 
@@ -135,18 +145,12 @@
 
 @include m.media(medium) {
   .badgeValue {
-    font-size: 1.35rem;
-  }
-}
-
-@include m.media(small) {
-  .badgeValue {
-    font-size: 1.2rem;
+    font-size: 1.6rem;
   }
 }
 
 @include m.media(very-small) {
   .badgeValue {
-    font-size: 1rem;
+    font-size: 1.1rem;
   }
 }
