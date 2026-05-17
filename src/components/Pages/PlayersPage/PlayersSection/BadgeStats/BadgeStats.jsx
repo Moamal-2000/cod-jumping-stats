@@ -32,8 +32,9 @@ const BadgeStats = () => {
           type="button"
           key={badge.id}
           className={`${s.badgeButton} ${filterBy === badge.urlQuery ? s.active : ""}`}
-          aria-pressed={filterBy === badge.urlQuery}
           onClick={() => handleFilterChange(badge.urlQuery)}
+          aria-pressed={filterBy === badge.urlQuery}
+          aria-label={`Filter players by ${badge.label}`}
         >
           <span className={s.badgeLabel}>{badge.label}</span>
           <span className={s.badgeValue}>{badge.count}</span>
