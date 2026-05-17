@@ -26,21 +26,25 @@ const BadgeStats = () => {
   }
 
   return (
-    <div className={s.badgesCountContainer}>
-      {getBadgesCount(allPlayersData).map((badge) => (
-        <button
-          type="button"
-          key={badge.id}
-          className={`${s.badgeButton} ${filterBy === badge.urlQuery ? s.active : ""}`}
-          onClick={() => handleFilterChange(badge.urlQuery)}
-          aria-pressed={filterBy === badge.urlQuery}
-          aria-label={`Filter players by ${badge.label}`}
-        >
-          <span className={s.badgeLabel}>{badge.label}</span>
-          <span className={s.badgeValue}>{badge.count}</span>
-        </button>
-      ))}
-    </div>
+    <fieldset className={s.badgesFieldset}>
+      <legend>Filter by Badges</legend>
+
+      <div className={s.badgesContainer}>
+        {getBadgesCount(allPlayersData).map((badge) => (
+          <button
+            type="button"
+            key={badge.id}
+            className={`${s.badgeButton} ${filterBy === badge.urlQuery ? s.active : ""}`}
+            onClick={() => handleFilterChange(badge.urlQuery)}
+            aria-pressed={filterBy === badge.urlQuery}
+            aria-label={`Filter players by ${badge.label}`}
+          >
+            <span className={s.badgeLabel}>{badge.label}</span>
+            <span className={s.badgeValue}>{badge.count}</span>
+          </button>
+        ))}
+      </div>
+    </fieldset>
   );
 };
 

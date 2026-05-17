@@ -1,6 +1,20 @@
 @use "@/styles/mixins" as m;
 
-.badgesCountContainer {
+.badgesFieldset {
+  border: 0;
+}
+
+.badgesFieldset>legend {
+  text-wrap: nowrap;
+  color: #fff;
+  text-transform: capitalize;
+  min-width: 64px;
+  font-size: .9rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.badgesContainer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11,7 +25,7 @@
 }
 
 @include m.media(medium) {
-  .badgesCountContainer {
+  .badgesContainer {
     padding-block: 12px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -19,7 +33,7 @@
 }
 
 @include m.media(small) {
-  .badgesCountContainer {
+  .badgesContainer {
     border: 0;
     padding-block: 10px;
     display: flex;
@@ -28,7 +42,7 @@
 }
 
 @include m.media(very-small) {
-  .badgesCountContainer {
+  .badgesContainer {
     padding-block: 8px;
   }
 }
