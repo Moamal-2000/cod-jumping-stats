@@ -4,20 +4,19 @@ import s from "./JoinServerButton.module.scss";
 const isMobileDevice = isMobile();
 
 const JoinServerButton = ({ server }) => {
-  const showJoinServerLink = server.GameType === "COD2" && !isMobileDevice;
-
-  if (!showJoinServerLink) {
+  if (isMobileDevice) {
     return;
   }
 
+  const game = server.GameType === "COD4" ? "cod4" : "cod2x";
   const serverAddress = `${server.IP}:${server.Port}`;
 
   return (
     <a
-      href={`cod2x://%2Bconnect%20${serverAddress}`}
+      href={`${game}://%2Bconnect%20${serverAddress}`}
       title={`Connect to ${serverAddress}`}
       aria-label={`Join Server at ${serverAddress}`}
-      className={s.joinServerButton}
+      className={`${s.joinServerButton} ${s[server.GameType.toLowerCase()]}`}
     >
       Join Server
     </a>

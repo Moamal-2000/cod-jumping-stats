@@ -1,15 +1,31 @@
 .joinServerButton {
   min-height: 22px;
   padding: 6px 8px;
-  border: 1px solid rgba(250, 204, 21, .7);
   border-radius: 4px;
-  background: linear-gradient(135deg, #fde047, #fb923c);
-  color: #0f172a;
   font-size: .7rem;
   font-weight: 700;
   line-height: 1;
+  transition: border-color .2s, box-shadow .2s, filter .2s;
+
+  &:hover {
+    filter: brightness(1.08);
+  }
 
   &:active {
     scale: .999;
+  }
+
+  &.cod2 {
+    border: 1px solid rgba(250, 204, 21, .7);
+    background: linear-gradient(135deg, #fde047, #fb923c);
+    box-shadow: 0 4px 10px rgba(251, 146, 60, .18);
+    color: #0f172a;
+  }
+
+  &.cod4 {
+    border: 1px solid rgba(132, 228, 134, .75);
+    background: linear-gradient(135deg, #d2ffc4, #84e486);
+    box-shadow: 0 4px 10px rgba(94, 200, 95, .2);
+    color: #0d2a12;
   }
 }
