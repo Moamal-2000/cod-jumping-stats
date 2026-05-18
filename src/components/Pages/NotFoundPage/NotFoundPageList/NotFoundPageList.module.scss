@@ -5,17 +5,16 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
+  padding-inline-start: 25px;
 }
 
 .list>li {
+  display: list-item;
   color: #E2E8F0;
-  background: linear-gradient(45deg, #E2E8F0, #99a5b5);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 
-  &::before {
+  &::marker {
     content: '🔹';
+    -webkit-text-fill-color: initial;
   }
 }
 
