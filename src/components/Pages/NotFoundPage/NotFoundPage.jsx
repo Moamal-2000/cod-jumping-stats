@@ -11,7 +11,8 @@ const NotFoundPage = () => {
       <h1 className={s.errorCode}>404</h1>
       <h2 className={s.title}>Page Not Found</h2>
       <p className={s.description}>
-        {`It looks like the page you're searching for doesn’t exist or may have been moved.`}
+        It looks like the page you're searching for doesn’t exist or may have
+        been moved.
       </p>
 
       <NotFoundPageList />
