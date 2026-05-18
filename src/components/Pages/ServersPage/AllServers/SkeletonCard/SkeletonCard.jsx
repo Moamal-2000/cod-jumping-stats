@@ -10,7 +10,10 @@ const SkeletonCard = () => {
           <div className={`${s.line} ${s.shorter}`} />
         </div>
 
-        <div className={`${s.statusIndicator} ${s.line} ${s.tiny}`} />
+        <div className={s.wrapper}>
+          <div className={`${s.line} ${s.statusIndicator}`} />
+          <div className={`${s.line} ${s.joinServerButton}`} />
+        </div>
       </div>
 
       <div className={s.mapInfo}>
@@ -25,7 +28,7 @@ const SkeletonCard = () => {
       </div>
 
       <div className={s.players}>
-        {[...Array(9)].map((_, i) => (
+        {[...Array(8)].map((_, i) => (
           <div key={i} className={s.line} />
         ))}
       </div>
