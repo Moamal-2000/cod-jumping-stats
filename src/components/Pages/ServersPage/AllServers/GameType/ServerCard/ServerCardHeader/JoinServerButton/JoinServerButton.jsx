@@ -51,7 +51,7 @@ const JoinServerButton = ({ server }) => {
 
       if (!gameInstalled) {
         alert(
-          `It looks like you don't have ${game}x installed. Please download it to be able to join the server. (Might not be accurate, we are working on it.)`,
+          `It looks like you don't have ${game}x installed. Please download it to be able to join the server.`,
         );
       }
     }, BLUR_TIMEOUT_MS);
