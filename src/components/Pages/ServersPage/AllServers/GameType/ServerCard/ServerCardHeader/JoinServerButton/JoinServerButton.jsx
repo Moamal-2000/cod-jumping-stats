@@ -23,7 +23,10 @@ const JoinServerButton = ({ server }) => {
 
   const game = server.GameType.toLowerCase();
   const serverAddress = `${server.IP}:${server.Port}`;
-  const protocolUrl = `${game}x://%2Bconnect%20${serverAddress}`;
+  const protocolUrl =
+    game === "cod2"
+      ? `cod2x://%2Bconnect%20${serverAddress}`
+      : `cod4://${serverAddress}`;
 
   function handleJoinClick(event) {
     event.preventDefault();
