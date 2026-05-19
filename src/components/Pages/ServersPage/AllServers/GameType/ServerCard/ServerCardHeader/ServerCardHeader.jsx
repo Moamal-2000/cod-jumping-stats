@@ -30,34 +30,6 @@ const ServerCardHeader = ({ server, index, viewType }) => {
       <div className={s.wrapper}>
         <ServerCardIndicator server={server} />
         <JoinServerButton server={server} />
-
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton gameProp="CoD4X.CallofDuty4X.1" server={server} />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton gameProp="CoD4X.CallofDuty4X" server={server} />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton
-            gameProp={"CoD4X.CallofDuty4X.1".toLowerCase()}
-            server={server}
-          />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton
-            gameProp={"CoD4X.CallofDuty4X".toLowerCase()}
-            server={server}
-          />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton gameProp="cod4" server={server} />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton gameProp="iw3mp" server={server} />
-        )}
-        {server.GameType === "COD4" && !isList && (
-          <JoinServerButton gameProp="iw3mpx" server={server} />
-        )}
       </div>
 
       {!isList && (

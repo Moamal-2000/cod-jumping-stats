@@ -5,7 +5,7 @@ import s from "./JoinServerButton.module.scss";
 const isMobileDevice = isMobile();
 const BLUR_TIMEOUT_MS = 1500;
 
-const JoinServerButton = ({ server, gameProp }) => {
+const JoinServerButton = ({ server }) => {
   const pageBlurredRef = useRef(false);
   const timeoutRef = useRef(null);
 
@@ -23,11 +23,7 @@ const JoinServerButton = ({ server, gameProp }) => {
 
   const game = server.GameType.toLowerCase();
   const serverAddress = `${server.IP}:${server.Port}`;
-  let protocolUrl = `${game}x://%2Bconnect%20${serverAddress}`;
-
-  if (gameProp) {
-    protocolUrl = `${gameProp}x://%2Bconnect%20${serverAddress}`;
-  }
+  const protocolUrl = `${game}x://%2Bconnect%20${serverAddress}`;
 
   function handleJoinClick(event) {
     event.preventDefault();
@@ -66,7 +62,7 @@ const JoinServerButton = ({ server, gameProp }) => {
       title={`Connect to ${serverAddress}`}
       aria-label={`Join Server at ${serverAddress}`}
     >
-      {gameProp ? gameProp : "Join Server"}
+      Join Server
     </a>
   );
 };
