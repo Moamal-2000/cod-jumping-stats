@@ -30,7 +30,7 @@
 
 .filtersSection .row {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 16px;
   width: 100%;
   position: relative;
@@ -49,7 +49,7 @@
   justify-content: space-between;
 }
 
-@include m.media(medium) {
+@include m.media(large) {
   .filtersSection .row.secondRow {
     flex-direction: column;
     align-items: flex-start;
@@ -161,19 +161,11 @@
 
 .resultsSummary {
   position: relative;
-  top: 12px;
+  bottom: 10px;
   right: 6px;
 }
 
 @include m.media(large) {
-  .resultsSummary {
-    position: relative;
-    bottom: unset;
-    left: unset;
-  }
-}
-
-@include m.media(medium) {
   .resultsSummary {
     position: absolute;
     top: unset;

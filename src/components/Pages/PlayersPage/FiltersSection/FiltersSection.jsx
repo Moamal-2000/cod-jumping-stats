@@ -1,12 +1,14 @@
 "use client";
 
 import SortViewButtons from "@/components/Shared/Buttons/SortViewButtons/SortViewButtons";
+import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import ResultsSummary from "@/components/Shared/Texts/ResultsSummary/ResultsSummary";
 import { SORT_PLAYERS_OPTIONS } from "@/data/staticData";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+import { comboboxCountryNames } from "../../Leaderboards/LeaderBoard/LeaderboardHeader/LeaderboardHeader";
 import s from "./FiltersSection.module.scss";
 
 const FiltersSection = () => {
@@ -17,6 +19,8 @@ const FiltersSection = () => {
   const router = useRouter();
 
   const sortBy = searchParams?.get("sort") || "last-seen";
+
+  const normalizedCountryNames = comboboxCountryNames(allPlayersData, true);
 
   function handleSortChange(newValue) {
     const isDefault = newValue === "last-seen";
@@ -73,6 +77,13 @@ const FiltersSection = () => {
                 placeholder="Player ID"
                 id="player-id-search"
                 inputMode="numeric"
+              />
+
+              <ComboBox
+                queryName="country"
+                options={normalizedCountryNames}
+                placeholder="Search by player country..."
+                orderByCount
               />
             </div>
           </div>

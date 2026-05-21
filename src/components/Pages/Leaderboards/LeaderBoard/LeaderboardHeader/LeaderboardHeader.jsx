@@ -8,7 +8,7 @@ import {
   TOTAL_MAPS_PLACEHOLDER,
 } from "@/data/constants";
 import { getFilteredLeaderboard, paginateData } from "@/lib/filters";
-import { stripColorCodes } from "@/lib/utils";
+import { getCountryName, stripColorCodes } from "@/lib/utils";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
@@ -178,7 +178,10 @@ function isSameLeaderboard(nextLeaderboard = [], currentLeaderboard = []) {
   );
 }
 
-function comboboxCountryNames(allLeaderboardData) {
+export function comboboxCountryNames(
+  allLeaderboardData,
+  fullCountryName = false,
+) {
   const uniqueCountryNames = [
     ...new Set(allLeaderboardData.map((player) => player.Country)),
   ];
@@ -190,7 +193,11 @@ function comboboxCountryNames(allLeaderboardData) {
 
     const hasParentheses = new RegExp("[()]").test(country);
     const baseCountryName = country.slice(0, country.indexOf("(") - 1);
-    const normalizedCountry = hasParentheses ? baseCountryName : country;
+    let normalizedCountry = hasParentheses ? baseCountryName : country;
+
+    if (fullCountryName) {
+      normalizedCountry = getCountryName(normalizedCountry);
+    }
 
     const count = allLeaderboardData.reduce((acc, player) => {
       if (player.Country === country) {
