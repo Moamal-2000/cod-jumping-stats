@@ -17,16 +17,11 @@ const JoinServerButton = ({ server }) => {
     };
   }, []);
 
-  if (isMobileDevice || !server.GameType.includes("COD")) {
+  if (isMobileDevice) {
     return null;
   }
 
-  const game = server.GameType.toLowerCase();
-  const serverAddress = `${server.IP}:${server.Port}`;
-  const protocolUrl =
-    game === "cod2"
-      ? `cod2x://%2Bconnect%20${serverAddress}`
-      : `cod4://${serverAddress}`;
+  const { game, serverAddress, protocolUrl } = getServerConnectionData(server);
 
   function handleJoinClick(event) {
     event.preventDefault();
@@ -71,3 +66,22 @@ const JoinServerButton = ({ server }) => {
 };
 
 export default JoinServerButton;
+
+const GAME_PROTOCOLS = {
+  cod2: (address) => `cod2x://%2Bconnect%20${address}`,
+  cod4: (address) => `cod4://${address}`,
+};
+
+function getServerConnectionData(server) {
+  if (!server?.IP || !server?.Port || !server?.GameType) {
+    return { game: "", serverAddress: "", protocolUrl: "" };
+  }
+
+  const serverAddress = `${server.IP}:${server.Port}`;
+  const game = server.GameType.toLowerCase();
+
+  const getGameProtocolUrl = GAME_PROTOCOLS[game] || (() => "");
+  const protocolUrl = getGameProtocolUrl(serverAddress);
+
+  return { game, serverAddress, protocolUrl };
+}
