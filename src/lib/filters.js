@@ -1,7 +1,7 @@
 import { getPlayerBadges } from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
 import { MAPS_VIDEOS } from "@/data/mapsVideos";
-import { kebabCase, stripColorCodes } from "./utils";
+import { getCountryName, kebabCase, stripColorCodes } from "./utils";
 
 export function getLastSeenCategories(lastSeen) {
   const now = new Date();
@@ -293,6 +293,7 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   const searchByName = paramsObject?.name || "";
   const searchById = paramsObject?.id || "";
   const badge = paramsObject?.badge || "all";
+  const country = paramsObject?.country || "";
 
   let filteredPlayers = allPlayersData;
 
@@ -304,6 +305,9 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   }
   if (badge !== "all") {
     filteredPlayers = filterPlayersByBadge(filteredPlayers, badge);
+  }
+  if (country) {
+    filteredPlayers = filterPlayersByCountry(filteredPlayers, country);
   }
 
   return filteredPlayers;
@@ -352,6 +356,18 @@ export function filterPlayersByBadge(allPlayersData, nameQuery) {
 
       return selectedBadge?.displayCondition || false;
     },
+  );
+}
+
+export function filterPlayersByCountry(allPlayersData, country) {
+  if (!country) {
+    return allPlayersData;
+  }
+
+  return allPlayersData.filter((player) =>
+    getCountryName(player.Country)
+      .toLowerCase()
+      .includes(country.toLowerCase()),
   );
 }
 

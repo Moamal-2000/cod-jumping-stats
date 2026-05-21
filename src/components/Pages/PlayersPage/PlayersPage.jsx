@@ -37,13 +37,19 @@ const PlayersPage = () => {
   const paramsObject = Object.fromEntries(searchParams.entries());
   const searchByName = searchParams.get("name") || "";
   const searchById = searchParams.get("id") || "";
+  const country = searchParams.get("country") || "";
 
   const hasPlayers = playersScroll.length > 0;
   const showNoPlayersUI =
-    (searchByName !== "" || searchById !== "") && !hasPlayers;
+    (searchByName !== "" || searchById !== "" || country !== "") && !hasPlayers;
 
   function handleClearSearch() {
-    removeQueryString(["name", "id"], searchParams, router, pathname);
+    removeQueryString(
+      ["name", "id", "country"],
+      searchParams,
+      router,
+      pathname,
+    );
   }
 
   function handleMouseLeave() {

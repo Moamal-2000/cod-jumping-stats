@@ -19,7 +19,6 @@ const FiltersSection = () => {
   const router = useRouter();
 
   const sortBy = searchParams?.get("sort") || "last-seen";
-
   const normalizedCountryNames = comboboxCountryNames(allPlayersData, true);
 
   function handleSortChange(newValue) {

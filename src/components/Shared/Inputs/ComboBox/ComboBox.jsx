@@ -239,6 +239,14 @@ const ComboBox = ({
     }
   }, [selectedValue, isOpen]);
 
+  useEffect(() => {
+    if (currentValue === "") {
+      setInputValue("");
+      setFilterQuery("");
+      setSelectedValue("");
+    }
+  }, [currentValue]);
+
   return (
     <div className={s.comboBox} ref={wrapperRef}>
       <div
