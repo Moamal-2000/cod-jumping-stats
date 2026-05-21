@@ -7,8 +7,12 @@ import {
   PAGINATION_ITEMS_PER_PAGE,
   TOTAL_MAPS_PLACEHOLDER,
 } from "@/data/constants";
-import { getFilteredLeaderboard, paginateData } from "@/lib/filters";
-import { getCountryName, stripColorCodes } from "@/lib/utils";
+import {
+  comboboxCountryNames,
+  getFilteredLeaderboard,
+  paginateData,
+} from "@/lib/filters";
+import { stripColorCodes } from "@/lib/utils";
 import { updateLeaderboardState } from "@/redux/features/leaderboard/slice/leaderboardSlice";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useSearchParams } from "next/navigation";
@@ -40,7 +44,9 @@ const LeaderboardHeader = ({ paginationNumber, setPaginationNumber }) => {
 
   const totalMaps =
     statistics?.mapsCount || allMaps?.length || TOTAL_MAPS_PLACEHOLDER;
-  const normalizedCountryNames = comboboxCountryNames(allLeaderboardData);
+  const normalizedCountryNames = comboboxCountryNames({
+    allData: allLeaderboardData,
+  });
 
   function updateAllDataDisplayedStatus() {
     const lastLeaderboardPagination = Math.ceil(
@@ -176,43 +182,4 @@ function isSameLeaderboard(nextLeaderboard = [], currentLeaderboard = []) {
   return nextLeaderboard.every(
     (player, index) => player.PlayerID === currentLeaderboard[index]?.PlayerID,
   );
-}
-
-export function comboboxCountryNames(
-  allLeaderboardData,
-  fullCountryName = false,
-) {
-  const uniqueCountryNames = [
-    ...new Set(allLeaderboardData.map((player) => player.Country)),
-  ];
-
-  return uniqueCountryNames.reduce((acc, country) => {
-    if (!country || country === "N/A") {
-      return acc;
-    }
-
-    const hasParentheses = new RegExp("[()]").test(country);
-    const baseCountryName = country.slice(0, country.indexOf("(") - 1);
-    let normalizedCountry = hasParentheses ? baseCountryName : country;
-
-    if (fullCountryName) {
-      normalizedCountry = getCountryName(normalizedCountry);
-    }
-
-    const count = allLeaderboardData.reduce((acc, player) => {
-      if (player.Country === country) {
-        acc += 1;
-      }
-      return acc;
-    }, 0);
-
-    const countryObject = {
-      value: normalizedCountry.toLowerCase(),
-      label: normalizedCountry,
-      id: country,
-      count,
-    };
-
-    return [...acc, countryObject];
-  }, []);
 }

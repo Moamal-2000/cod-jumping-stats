@@ -5,10 +5,10 @@ import ComboBox from "@/components/Shared/Inputs/ComboBox/ComboBox";
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import ResultsSummary from "@/components/Shared/Texts/ResultsSummary/ResultsSummary";
 import { SORT_PLAYERS_OPTIONS } from "@/data/staticData";
+import { comboboxCountryNames } from "@/lib/filters";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
-import { comboboxCountryNames } from "../../Leaderboards/LeaderBoard/LeaderboardHeader/LeaderboardHeader";
 import s from "./FiltersSection.module.scss";
 
 const FiltersSection = () => {
@@ -19,7 +19,10 @@ const FiltersSection = () => {
   const router = useRouter();
 
   const sortBy = searchParams?.get("sort") || "last-seen";
-  const normalizedCountryNames = comboboxCountryNames(allPlayersData, true);
+  const normalizedCountryNames = comboboxCountryNames({
+    allData: allPlayersData,
+    fullCountryName: true,
+  });
 
   function handleSortChange(newValue) {
     const isDefault = newValue === "last-seen";

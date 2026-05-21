@@ -441,3 +441,42 @@ export function getIsLastPagination(
   const lastPagination = Math.ceil(data?.length / itemsPerPage);
   return paginationNumber > lastPagination;
 }
+
+export function comboboxCountryNames({
+  allData = [],
+  fullCountryName = false,
+} = {}) {
+  const uniqueCountryNames = [
+    ...new Set(allData.map((player) => player.Country)),
+  ];
+
+  return uniqueCountryNames.reduce((acc, country) => {
+    if (!country || country === "N/A") {
+      return acc;
+    }
+
+    const hasParentheses = new RegExp("[()]").test(country);
+    const baseCountryName = country.slice(0, country.indexOf("(") - 1);
+    let normalizedCountry = hasParentheses ? baseCountryName : country;
+
+    if (fullCountryName) {
+      normalizedCountry = getCountryName(normalizedCountry);
+    }
+
+    const count = allData.reduce((acc, player) => {
+      if (player.Country === country) {
+        acc += 1;
+      }
+      return acc;
+    }, 0);
+
+    const countryObject = {
+      value: normalizedCountry.toLowerCase(),
+      label: normalizedCountry,
+      id: country,
+      count,
+    };
+
+    return [...acc, countryObject];
+  }, []);
+}
