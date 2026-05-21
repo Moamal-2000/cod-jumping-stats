@@ -4,6 +4,8 @@ import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const title = "Players | JumpersHeaven";
 const description =
   "Explore JumpersHeaven players, compare profile stats, and find players by performance and activity.";

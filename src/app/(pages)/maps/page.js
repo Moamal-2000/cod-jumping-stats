@@ -2,6 +2,8 @@ import MapsPage from "@/components/Pages/Maps/MapsPage/MapsPage";
 import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 
+export const dynamic = "force-dynamic";
+
 const title = "Maps | JumpersHeaven";
 const description =
   "Discover JumpersHeaven maps with searchable listings, map details, and route-related information for tracking progress.";

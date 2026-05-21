@@ -7,8 +7,6 @@ import {
 } from "@/lib/metadata";
 import { size } from "./opengraph-image";
 
-export const revalidate = 86400; // 1 day
-
 export async function generateMetadata({ params }) {
   const { cpId } = await params;
   const map = await getMapByCpId(cpId);

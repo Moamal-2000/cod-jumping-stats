@@ -3,6 +3,8 @@ import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const title = "Servers | JumpersHeaven";
 const description =
   "Browse active JumpersHeaven mod servers, monitor live player counts, and quickly jump to server-specific activity.";

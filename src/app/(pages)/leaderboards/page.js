@@ -5,6 +5,8 @@ import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const title = "Leaderboards | JumpersHeaven";
 const description =
   "View filtered JumpersHeaven leaderboards to compare top runs, rankings, and player performance across categories.";

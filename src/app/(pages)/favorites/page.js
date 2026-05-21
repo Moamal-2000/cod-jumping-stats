@@ -3,6 +3,8 @@ import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
 import { Suspense } from "react";
 
+export const dynamic = "force-dynamic";
+
 const title = "Favorites | JumpersHeaven";
 const description =
   "Access your saved JumpersHeaven players and maps in one place to quickly revisit the profiles and content you follow.";
