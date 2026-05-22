@@ -24,22 +24,22 @@ export default async function Image({ params }) {
   const playerOpenGraphElement = (
     <div style={s.container}>
       <img
+        style={s.countryImg}
         src={`${SITE_URL}/assets/countryFlags/${playerCountryCode}.svg`}
         width={countryWidth}
         height={countryHeight}
-        style={s.countryImg}
         alt=""
       />
 
       <img
+        style={s.logoImg}
         src={`${SITE_URL}/logo.svg`}
         width={logoSize}
         height={logoSize}
-        style={s.logoImg}
         alt=""
       />
 
-      <div style={s.playerName}>{coloredPlayerName}</div>
+      <p style={s.playerName}>{coloredPlayerName}</p>
     </div>
   );
 

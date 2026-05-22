@@ -20,13 +20,13 @@ export default async function Image({ params }) {
 
       <div style={s.mapContainer}>
         <img
+          style={s.mapImage}
           src={mapImagePath}
           width="100%"
           height="100%"
-          style={s.mapImage}
           alt=""
         />
-        <span style={s.mapName}>By: {map.Author}</span>
+        <p style={s.mapAuthor}>By: {map.Author}</p>
       </div>
     </div>
   );
@@ -73,7 +73,7 @@ const s = {
     left: 0,
   },
 
-  mapName: {
+  mapAuthor: {
     fontSize: 60,
     fontWeight: 600,
     color: "white",
