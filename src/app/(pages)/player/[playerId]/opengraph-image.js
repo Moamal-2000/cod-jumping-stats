@@ -52,7 +52,6 @@ const s = {
     height: "100%",
     display: "flex",
     flexDirection: "column",
-    paddingLeft: 70,
     paddingTop: 100,
     background: "linear-gradient(135deg, #020617, #0f172a)",
   },
@@ -83,5 +82,6 @@ const s = {
     overflow: "hidden",
     textOverflow: "ellipsis",
     whiteSpace: "nowrap",
+    width: "1130px",
   },
 };
