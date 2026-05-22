@@ -31,7 +31,7 @@ export default async function Image({ params }) {
     </div>
   );
 
-  return new ImageResponse(MapOpenGraphElement, { ...size });
+  return new ImageResponse(MapOpenGraphElement, size);
 }
 
 const s = {

@@ -43,7 +43,7 @@ export default async function Image({ params }) {
     </div>
   );
 
-  return new ImageResponse(playerOpenGraphElement, { ...size });
+  return new ImageResponse(playerOpenGraphElement, size);
 }
 
 const s = {
