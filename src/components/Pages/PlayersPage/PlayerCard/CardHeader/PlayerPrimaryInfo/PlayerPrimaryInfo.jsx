@@ -28,10 +28,10 @@ const PlayerPrimaryInfo = ({ PlayerName, PrefName, Admin, PlayerID }) => {
     <div className={s.primaryInfo}>
       <Link
         href={`/player/${PlayerID}`}
-        className={s.playerName}
+        className={s.playerNameWrapper}
         onMouseEnter={handleMouseEnter}
       >
-        {getColoredName(PlayerName)}
+        <span className={s.playerName}>{getColoredName(PlayerName)}</span>
         <ToolTip centerPosition>{coloredPrefName}</ToolTip>
       </Link>
 

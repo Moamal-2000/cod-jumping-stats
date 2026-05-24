@@ -5,24 +5,8 @@
   width: 100%;
 }
 
-.playerName {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: inherit;
-  width: fit-content;
-  max-width: 216px;
-  text-decoration: underline;
-  text-decoration-color: #42464d;
-  text-underline-offset: 2px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+.playerNameWrapper {
   position: relative;
-
-  &:hover {
-    text-decoration-color: currentColor;
-  }
 
   &:focus-visible {
     outline: 2px solid #facc15;
@@ -30,8 +14,29 @@
   }
 }
 
-.playerName:hover [data-tooltip] {
+.playerNameWrapper:hover [data-tooltip] {
   opacity: 1;
+}
+
+.playerNameWrapper .playerName {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  color: inherit;
+  max-width: 216px;
+  width: fit-content;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  text-decoration-color: #42464d;
+}
+
+.playerNameWrapper:hover .playerName {
+  text-decoration-color: currentColor;
 }
 
 .wrapper {
