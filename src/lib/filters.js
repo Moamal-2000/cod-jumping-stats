@@ -294,6 +294,10 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   const searchById = paramsObject?.id || "";
   const badge = paramsObject?.badge || "all";
   const country = paramsObject?.country || "";
+  const charCount = paramsObject?.charcount || "";
+  const lastSeen = paramsObject?.lastseen || "";
+  const colorStatus = paramsObject?.colorstatus || "all";
+  const colors = paramsObject?.colors || "";
 
   let filteredPlayers = allPlayersData;
 
@@ -308,6 +312,18 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   }
   if (country) {
     filteredPlayers = filterPlayersByCountry(filteredPlayers, country);
+  }
+  if (charCount) {
+    filteredPlayers = filterPlayersByCharacterCount(filteredPlayers, charCount);
+  }
+  if (lastSeen) {
+    filteredPlayers = filterPlayersByLastSeenDate(filteredPlayers, lastSeen);
+  }
+  if (colorStatus !== "all") {
+    filteredPlayers = filterPlayersByColorStatus(filteredPlayers, colorStatus);
+  }
+  if (colors) {
+    filteredPlayers = filterPlayersByColors(filteredPlayers, colors);
   }
 
   return filteredPlayers;
@@ -479,4 +495,107 @@ export function comboboxCountryNames({
 
     return [...acc, countryObject];
   }, []);
+}
+
+export function filterPlayersByCharacterCount(allPlayersData, charCountRange) {
+  if (!charCountRange) {
+    return allPlayersData;
+  }
+
+  const [min, max] = charCountRange.split("-").map((n) => parseInt(n, 10));
+
+  return allPlayersData.filter((player) => {
+    const playerName = stripColorCodes(
+      player.PlayerName || player.PrefName || "",
+    );
+    const charLength = playerName.length;
+
+    if (!isNaN(min) && !isNaN(max)) {
+      return charLength >= min && charLength <= max;
+    }
+    if (!isNaN(min)) {
+      return charLength >= min;
+    }
+    if (!isNaN(max)) {
+      return charLength <= max;
+    }
+
+    return true;
+  });
+}
+
+export function filterPlayersByLastSeenDate(allPlayersData, lastSeenRange) {
+  if (!lastSeenRange) {
+    return allPlayersData;
+  }
+
+  const seenDate = (days) => {
+    const date = new Date();
+    date.setDate(date.getDate() - days);
+    return date;
+  };
+
+  let dateThreshold;
+
+  switch (lastSeenRange) {
+    case "today":
+      dateThreshold = seenDate(0);
+      break;
+    case "this-week":
+      dateThreshold = seenDate(7);
+      break;
+    case "this-month":
+      dateThreshold = seenDate(30);
+      break;
+    case "this-year":
+      dateThreshold = seenDate(365);
+      break;
+    default:
+      return allPlayersData;
+  }
+
+  return allPlayersData.filter((player) => {
+    const playerLastSeen = new Date(player.LastSeen);
+    return playerLastSeen >= dateThreshold;
+  });
+}
+
+export function filterPlayersByColorStatus(allPlayersData, colorStatus) {
+  if (colorStatus === "all") {
+    return allPlayersData;
+  }
+
+  const colorCodeRegex = /\^\d/g;
+
+  if (colorStatus === "colored") {
+    return allPlayersData.filter((player) =>
+      colorCodeRegex.test(player.PlayerName || player.PrefName || ""),
+    );
+  }
+
+  if (colorStatus === "non-colored") {
+    return allPlayersData.filter(
+      (player) =>
+        !colorCodeRegex.test(player.PlayerName || player.PrefName || ""),
+    );
+  }
+
+  return allPlayersData;
+}
+
+export function filterPlayersByColors(allPlayersData, colorsList) {
+  if (!colorsList) {
+    return allPlayersData;
+  }
+
+  const selectedColors = colorsList.split(",").map((c) => c.trim());
+  const colorCodeRegex = /\^(\d)/g;
+
+  return allPlayersData.filter((player) => {
+    const playerName = player.PlayerName || player.PrefName || "";
+    const matches = [...playerName.matchAll(colorCodeRegex)];
+    const playerColors = matches.map((m) => m[1]);
+
+    return selectedColors.some((color) => playerColors.includes(color));
+  });
 }

@@ -1,0 +1,240 @@
+@use "@/styles/mixins" as m;
+
+.filterGroup {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+
+  @include m.media(large) {
+    width: auto;
+  }
+}
+
+.menuButton {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 36px;
+  padding: 8px 12px;
+  background-color: #1f2937;
+  color: #9ca3af;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition:
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: #2d3748;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  &:active {
+    background-color: #1a202c;
+  }
+
+  &.open {
+    background-color: #2d3748;
+    border-color: #14b8a6;
+    color: #14b8a6;
+  }
+
+  &.hasSelection {
+    border-color: #14b8a6;
+    color: #14b8a6;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.15),
+      0 0 0 3px rgba(20, 184, 166, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.buttonLabel {
+  flex: 1;
+  text-align: left;
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 8px;
+  font-size: 0.625rem;
+  transition: transform 0.2s ease;
+
+  .open & {
+    transform: rotate(180deg);
+  }
+}
+
+.menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 8px;
+  background-color: #1f2937;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.3),
+    0 0 0 1px rgba(20, 184, 166, 0.2);
+  z-index: 100;
+  max-height: 300px;
+  overflow-y: auto;
+  animation: slideDown 0.2s ease-out;
+
+  @include m.media(large) {
+    width: 280px;
+  }
+
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #2d3748;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #4b5563;
+    border-radius: 3px;
+
+    &:hover {
+      background: #6b7280;
+    }
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menuHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #374151;
+}
+
+.menuTitle {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d5db;
+}
+
+.clearButton {
+  padding: 4px 8px;
+  background-color: transparent;
+  color: #ef4444;
+  border: 1px solid #ef4444;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &:hover {
+    background-color: #ef4444;
+    color: #ffffff;
+  }
+}
+
+.colorsList {
+  padding: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.colorCheckbox {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: background-color 0.15s ease;
+
+  &:hover {
+    background-color: #2d3748;
+  }
+
+  &:has(.checkbox:checked) {
+    background-color: rgba(20, 184, 166, 0.15);
+  }
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: #14b8a6;
+  flex-shrink: 0;
+}
+
+.colorBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.colorDot {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.colorLabel {
+  flex: 1;
+  font-size: 0.875rem;
+  color: #9ca3af;
+  text-transform: capitalize;
+
+  .colorCheckbox:hover & {
+    color: #d1d5db;
+  }
+
+  .colorCheckbox:has(.checkbox:checked) & {
+    color: #14b8a6;
+    font-weight: 500;
+  }
+}
+
+.emptyState {
+  padding: 16px;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}

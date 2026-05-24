@@ -1,0 +1,83 @@
+@use "@/styles/mixins" as m;
+
+.filterGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.filterLabel {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #d1d5db;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toggleGroup {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(80px, 1fr));
+  gap: 6px;
+}
+
+@include m.media(very-small) {
+  .toggleGroup {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toggleButton {
+  cursor: pointer;
+  height: 36px;
+  max-height: 36px;
+  @include m.flex-center;
+  background-color: #1f2937;
+  color: #9ca3af;
+  border: 1px solid #374151;
+  border-radius: 6px;
+  padding-inline: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
+  transition:
+    background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    background-color: #2d3748;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+
+  &:active {
+    background-color: #1a202c;
+  }
+
+  &.active {
+    background-color: #14b8a6;
+    border-color: #14b8a6;
+    color: #ffffff;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.15),
+      0 0 0 3px rgba(20, 184, 166, 0.2);
+  }
+
+  &.active:hover {
+    background-color: #0f766e;
+    border-color: #0f766e;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #14b8a6;
+    box-shadow:
+      inset 0 2px 4px rgba(0, 0, 0, 0.15),
+      0 0 0 3px rgba(20, 184, 166, 0.1);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

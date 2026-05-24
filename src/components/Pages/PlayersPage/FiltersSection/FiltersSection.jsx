@@ -9,7 +9,11 @@ import { comboboxCountryNames } from "@/lib/filters";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
+import CharacterCountFilter from "./CharacterCountFilter/CharacterCountFilter";
+import ColoredPlayersToggle from "./ColoredPlayersToggle/ColoredPlayersToggle";
 import s from "./FiltersSection.module.scss";
+import LastSeenDateFilter from "./LastSeenDateFilter/LastSeenDateFilter";
+import PlayersColorFilter from "./PlayersColorFilter/PlayersColorFilter";
 
 const FiltersSection = () => {
   const { allPlayersData, playersScroll } = useSelector((s) => s.players);
@@ -99,6 +103,15 @@ const FiltersSection = () => {
         </div>
 
         <SortViewButtons />
+      </div>
+
+      <div className={`${s.row} ${s.advancedFiltersRow}`}>
+        <div className={s.filtersGrid}>
+          <CharacterCountFilter />
+          <LastSeenDateFilter />
+          <ColoredPlayersToggle />
+          <PlayersColorFilter />
+        </div>
       </div>
     </section>
   );
