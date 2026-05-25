@@ -1,7 +1,9 @@
 "use client";
 
+import LegendLabel from "@/components/Pages/Maps/FiltersSection/FilterGroup/LegendLabel/LegendLabel";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { useRef, useState } from "react";
 import s from "./CharacterCountFilter.module.scss";
 
 const CharacterCountFilter = () => {
@@ -9,35 +11,59 @@ const CharacterCountFilter = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const charCountParam = searchParams?.get("charcount") || "";
+  const currentValue = searchParams.get("charcount") || "";
+  const [searchValue, setSearchValue] = useState(currentValue);
 
-  function handleCharCountChange(value) {
-    if (value === "") {
+  const debounceRef = useRef(null);
+
+  const [minChars, maxChars] = currentValue
+    ? currentValue.split("-")
+    : ["", ""];
+
+  function handleRangeChange(min, max) {
+    setSearchValue(`${min}-${max}`);
+    clearTimeout(debounceRef?.current);
+    debounceRef.current = setTimeout(() => performSearch(min, max), 400);
+  }
+
+  function performSearch(min, max) {
+    if (min === "" && max === "") {
       removeQueryString("charcount", searchParams, router, pathname);
-    } else {
-      createQueryString("charcount", value, searchParams, router, pathname);
+      return;
     }
+
+    const value = `${min}-${max}`;
+    createQueryString("charcount", value, searchParams, router, pathname);
   }
 
   return (
-    <div className={s.filterGroup}>
-      <label htmlFor="char-count-filter" className={s.filterLabel}>
-        Character Count
-      </label>
-      <select
-        id="char-count-filter"
-        value={charCountParam}
-        onChange={(e) => handleCharCountChange(e.target.value)}
-        className={s.select}
-      >
-        <option value="">All</option>
-        <option value="0-5">1-5 Characters</option>
-        <option value="6-10">6-10 Characters</option>
-        <option value="11-15">11-15 Characters</option>
-        <option value="16-20">16-20 Characters</option>
-        <option value="21-999">21+ Characters</option>
-      </select>
-    </div>
+    <fieldset className={s.filterGroup}>
+      <LegendLabel className={s.label} label="Character Count" />
+
+      <div className={s.rangeInputContainer}>
+        <input
+          type="number"
+          min="0"
+          max="50"
+          value={searchValue.split("-")[0] || ""}
+          onChange={(e) => handleRangeChange(e.target.value, maxChars)}
+          placeholder="Min"
+          className={s.rangeInput}
+        />
+
+        <span className={s.separator}>-</span>
+
+        <input
+          type="number"
+          min="0"
+          max="50"
+          value={searchValue.split("-")[1] || ""}
+          onChange={(e) => handleRangeChange(minChars, e.target.value)}
+          placeholder="Max"
+          className={s.rangeInput}
+        />
+      </div>
+    </fieldset>
   );
 };
 

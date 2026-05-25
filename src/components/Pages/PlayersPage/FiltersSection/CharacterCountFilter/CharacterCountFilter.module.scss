@@ -1,53 +1,62 @@
-@use "@/styles/mixins" as m;
-
 .filterGroup {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  border: none;
+  max-width: 100px;
 }
 
-.filterLabel {
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: #d1d5db;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
+.label {
+  margin-bottom: 8px;
 }
 
-.select {
-  height: 36px;
-  padding: 8px 12px;
+.rangeInputContainer {
+  display: flex;
+  align-items: center;
   background-color: #1f2937;
-  color: #9ca3af;
   border: 1px solid #374151;
   border-radius: 6px;
-  font-size: 0.875rem;
-  font-weight: 500;
-  cursor: pointer;
   box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.15);
   transition:
     background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    border-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 
   &:hover {
     background-color: #2d3748;
     border-color: #4b5563;
+  }
+
+  &:focus-within {
+    outline: none;
+    border-color: var(--players-focus, #3b82f6);
+    box-shadow: 0 0 0 1px var(--players-focus, #3b82f6);
+  }
+}
+
+.rangeInput {
+  flex: 1;
+  height: 36px;
+  padding-block: 8px;
+  background-color: transparent;
+  text-align: center;
+  color: #9ca3af;
+  border: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
     color: #e5e7eb;
   }
 
   &:focus {
     outline: none;
-    background-color: #2d3748;
-    border-color: #14b8a6;
     color: #e5e7eb;
-    box-shadow:
-      inset 0 2px 4px rgba(0, 0, 0, 0.15),
-      0 0 0 3px rgba(20, 184, 166, 0.1);
-  }
 
-  &:active {
-    background-color: #1a202c;
+    &::placeholder {
+      color: currentColor;
+    }
   }
 
   &:disabled {
@@ -55,8 +64,28 @@
     cursor: not-allowed;
   }
 
-  option {
-    background-color: #1f2937;
-    color: #e5e7eb;
+  /* Remove number input spinners */
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
   }
+
+  &[type=number] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+  }
+
+  &::placeholder {
+    color: #6b7280;
+  }
+}
+
+.separator {
+  position: absolute;
+  top: calc(50% - 1px);
+  left: 50%;
+  translate: -50% -50%;
+  color: #6b7280;
+  user-select: none;
+  pointer-events: none;
 }

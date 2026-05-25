@@ -1,7 +1,7 @@
 import { COD2_COLORS, COD2_HEX_COLORS } from "@/data/staticData";
 
 export function getColoredName(name = "Unknown Player") {
-  const colorParts = name.split(/\^(?=\d)/);
+  const colorParts = name === null ? [""] : name.split(/\^(?=\d)/);
   const colorNumbers = colorParts.slice(1).map((part) => part.charAt(0));
 
   return colorParts.map((part, index) => {
