@@ -1,14 +1,15 @@
 @use "@/styles/mixins" as m;
 
 .label {
-  color: #60a5fa;
-  font-size: .875rem;
+  min-width: 64px;
+  text-wrap: nowrap;
+  color: #fff;
+  font-size: .9rem;
   font-weight: 600;
+  text-transform: capitalize;
   display: flex;
   align-items: center;
   gap: 4px;
-  margin-bottom: 8px;
-  letter-spacing: .02em;
 }
 
 .label .tooltip {

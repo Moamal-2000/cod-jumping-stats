@@ -1,8 +1,8 @@
 import s from "./LegendLabel.module.scss";
 
-const LegendLabel = ({ label, tooltipText }) => {
+const LegendLabel = ({ className, label, tooltipText }) => {
   return (
-    <legend className={s.label} data-label={label}>
+    <legend className={`${s.label} ${className}`} data-label={label}>
       {label}
 
       {tooltipText !== undefined && (

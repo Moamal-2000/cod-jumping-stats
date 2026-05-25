@@ -13,7 +13,12 @@ const FilterGroup = ({
 }) => {
   return (
     <fieldset className={`${s.filterGroup} ${s[groupType]}`}>
-      <LegendLabel label={label} tooltipText={tooltipText} />
+      <LegendLabel
+        className={s.label}
+        label={label}
+        tooltipText={tooltipText}
+      />
+
       {groupType === "select" && (
         <FilterButtons
           filtersData={filtersData}
