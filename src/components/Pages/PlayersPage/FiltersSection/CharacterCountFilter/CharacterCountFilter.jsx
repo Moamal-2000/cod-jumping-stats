@@ -48,6 +48,7 @@ const CharacterCountFilter = () => {
           value={searchValue.split("-")[0] || ""}
           onChange={(e) => handleRangeChange(e.target.value, maxChars)}
           placeholder="Min"
+          aria-label="Minimum character count"
           className={s.rangeInput}
         />
 
@@ -60,6 +61,7 @@ const CharacterCountFilter = () => {
           value={searchValue.split("-")[1] || ""}
           onChange={(e) => handleRangeChange(minChars, e.target.value)}
           placeholder="Max"
+          aria-label="Maximum character count"
           className={s.rangeInput}
         />
       </div>
