@@ -6,7 +6,7 @@ const FilterSection = () => {
   return (
     <section className={s.filtersSection}>
       {MAPS_FILTERS_DATA.map((group) => (
-        <FilterGroup key={group.queryName} {...group} />
+        <FilterGroup key={group.queryName} {...group} themeColor="blue" />
       ))}
     </section>
   );

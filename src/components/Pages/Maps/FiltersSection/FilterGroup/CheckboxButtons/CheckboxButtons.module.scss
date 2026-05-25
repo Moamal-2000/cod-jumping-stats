@@ -1,5 +1,27 @@
 @use "@/styles/mixins" as m;
 
+.green {
+  --color: #14b8a6;
+  --color-strong: #0f766e;
+  --color-soft: rgba(20, 184, 166, .22);
+  --active-bg-color: #173a37;
+  --active-hover-bg-color: #143e3b;
+  --checkbox-inactive-hover-border-color: #0f766e;
+  --inactive-hover-bg-color: #1c4744;
+  --inactive-hover-border-color: #0f766e;
+}
+
+.blue {
+  --color: #3b82f6;
+  --color-strong: #2563eb;
+  --color-soft: rgba(59, 130, 246, .22);
+  --active-bg-color: #18263c;
+  --active-hover-bg-color: #1f2e45;
+  --checkbox-inactive-hover-border-color: #456086;
+  --inactive-hover-bg-color: #1f2e45;
+  --inactive-hover-border-color: #456086;
+}
+
 .checkboxes {
   display: flex;
   align-items: center;
@@ -39,19 +61,19 @@
     color .2s cubic-bezier(.4, 0, .2, 1);
 
   &.active {
-    background: #18263c;
-    border-color: #3b82f6;
+    background: var(--active-bg-color);
+    border-color: var(--color);
     color: #dbeafe;
   }
 
   &:not(.active):hover {
-    background-color: #1f2e45;
+    background-color: var(--inactive-hover-bg-color);
+    border-color: var(--inactive-hover-border-color);
     color: #f3f4f6;
-    border-color: #456086;
   }
 
   &.active:hover {
-    background-color: #1d2d46;
+    background-color: var(--active-hover-bg-color);
   }
 }
 
@@ -75,12 +97,12 @@
 }
 
 .checkboxLabel.active .checkboxMark {
-  border-color: #60a5fa;
-  background: linear-gradient(160deg, #3b82f6, #2563eb);
+  border-color: var(--color);
+  background: linear-gradient(160deg, var(--color), var(--color-strong));
 }
 
 .checkboxLabel:not(.active):hover .checkboxMark {
-  border-color: #456086;
+  border-color: var(--checkbox-inactive-hover-border-color);
 }
 
 .checkboxMark>svg {

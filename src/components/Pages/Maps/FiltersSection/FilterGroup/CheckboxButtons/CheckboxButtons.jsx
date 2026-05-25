@@ -3,7 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./CheckboxButtons.module.scss";
 
-const CheckboxButtons = ({ filtersData, queryName }) => {
+const CheckboxButtons = ({ filtersData, queryName, themeColor = "green" }) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -35,7 +35,7 @@ const CheckboxButtons = ({ filtersData, queryName }) => {
   }
 
   return (
-    <div className={s.checkboxes}>
+    <div className={`${s.checkboxes} ${s[themeColor]}`}>
       {filtersData?.map(({ text, queryValue, id }) => {
         const isActive = selectedCheckboxes.includes(queryValue);
 

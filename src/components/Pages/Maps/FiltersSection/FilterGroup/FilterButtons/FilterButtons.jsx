@@ -4,7 +4,12 @@ import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import s from "./FilterButtons.module.scss";
 
-const FilterButtons = ({ filtersData, queryName, defaultUrlQuery }) => {
+const FilterButtons = ({
+  filtersData,
+  queryName,
+  defaultUrlQuery,
+  themeColor = "green",
+}) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const pathname = usePathname();
@@ -22,7 +27,7 @@ const FilterButtons = ({ filtersData, queryName, defaultUrlQuery }) => {
   }
 
   return (
-    <div className={s.filterButtons}>
+    <div className={`${s.filterButtons} ${s[themeColor]}`}>
       {filtersData?.map(({ text, queryValue, id }) => {
         const isNumber = !Number.isNaN(+text);
         const currentValue = urlQuery || defaultUrlQuery;

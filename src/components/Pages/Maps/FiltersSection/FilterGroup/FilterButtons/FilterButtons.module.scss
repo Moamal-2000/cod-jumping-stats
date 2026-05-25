@@ -1,5 +1,17 @@
 @use "@/styles/mixins" as m;
 
+.green {
+  --accent-color: #14b8a6;
+  --accent-color-strong: #0f766e;
+  --accent-color-soft: rgba(20, 184, 166, .22);
+}
+
+.blue {
+  --accent-color: #3b82f6;
+  --accent-color-strong: #2563eb;
+  --accent-color-soft: rgba(59, 130, 246, .22);
+}
+
 .filterButtons {
   display: flex;
   align-items: center;
@@ -44,7 +56,7 @@
     color .2s cubic-bezier(.4, 0, .2, 1);
 
   &.active {
-    background: linear-gradient(135deg, #3b82f6, #2563eb);
+    background: linear-gradient(135deg, var(--accent-color), var(--accent-color-strong));
     color: #fff;
   }
 
@@ -55,7 +67,7 @@
   }
 
   &.active:hover {
-    box-shadow: 0 0 15px rgba(37, 99, 235, .5);
+    box-shadow: 0 0 15px var(--accent-color-soft);
   }
 }
 

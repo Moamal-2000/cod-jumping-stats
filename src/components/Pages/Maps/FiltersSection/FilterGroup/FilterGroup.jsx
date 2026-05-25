@@ -10,6 +10,7 @@ const FilterGroup = ({
   filtersData,
   tooltipText,
   groupType,
+  themeColor = "green",
 }) => {
   return (
     <fieldset className={`${s.filterGroup} ${s[groupType]}`}>
@@ -24,11 +25,16 @@ const FilterGroup = ({
           filtersData={filtersData}
           queryName={queryName}
           defaultUrlQuery={defaultUrlQuery}
+          themeColor={themeColor}
         />
       )}
 
       {groupType === "checkbox" && (
-        <CheckboxButtons filtersData={filtersData} queryName={queryName} />
+        <CheckboxButtons
+          filtersData={filtersData}
+          queryName={queryName}
+          themeColor={themeColor}
+        />
       )}
     </fieldset>
   );
