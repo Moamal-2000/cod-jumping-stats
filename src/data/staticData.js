@@ -123,12 +123,6 @@ export const SORT_MAPS_OPTIONS = [
   },
 ];
 
-export const SORT_PLAYERS_OPTIONS = [
-  { label: "Last Seen", value: "last-seen", id: 1 },
-  { label: "Admin Level", value: "admin", id: 2 },
-  { label: "Visit Count", value: "visits", id: 3 },
-];
-
 export const FILTER_PLAYERS_BADGES = [
   { label: "All", value: "all", id: 0 },
   { label: "Banned", value: "banned", id: 1 },

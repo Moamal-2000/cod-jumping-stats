@@ -113,3 +113,30 @@ export const MAPS_FILTERS_DATA = [
     id: 2,
   },
 ];
+
+export const PLAYERS_FILTERS_DATA = [
+  {
+    label: "Sort By",
+    queryName: "sort",
+    defaultUrlQuery: "last-seen",
+    groupType: "select",
+    filtersData: [
+      { text: "Last Seen", queryValue: "last-seen", id: 1 },
+      { text: "Admin Level", queryValue: "admin", id: 2 },
+      { text: "Visit Count", queryValue: "visits", id: 3 },
+    ],
+    id: 1,
+  },
+  {
+    label: "Player Colors",
+    queryName: "colorstatus",
+    defaultUrlQuery: "all",
+    groupType: "select",
+    filtersData: [
+      { text: "All", queryValue: "all", id: 1 },
+      { text: "Colored", queryValue: "colored", id: 2 },
+      { text: "Non-Colored", queryValue: "non-colored", id: 3 },
+    ],
+    id: 1,
+  },
+];
