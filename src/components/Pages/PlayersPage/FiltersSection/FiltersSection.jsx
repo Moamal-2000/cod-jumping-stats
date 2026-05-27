@@ -10,6 +10,7 @@ import { useSelector } from "react-redux";
 import FilterGroup from "../../Maps/FiltersSection/FilterGroup/FilterGroup";
 import CharacterCountFilter from "./CharacterCountFilter/CharacterCountFilter";
 import s from "./FiltersSection.module.scss";
+import LastSeenDateFilter from "./LastSeenDateFilter/LastSeenDateFilter";
 
 const FiltersSection = () => {
   const { allPlayersData, playersScroll } = useSelector((s) => s.players);
@@ -67,10 +68,10 @@ const FiltersSection = () => {
         <SortViewButtons />
       </div>
 
-      <div className={`${s.row} ${s.advancedFiltersRow}`}>
-        <div className={s.filtersGrid}>
+      <div className={`${s.row} ${s.thirdRow}`}>
+        <div className={s.advancedFilters}>
           <CharacterCountFilter />
-          {/* <LastSeenDateFilter /> */}
+          <LastSeenDateFilter />
           {/* <PlayersColorFilter /> */}
         </div>
       </div>

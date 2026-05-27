@@ -1,4 +1,32 @@
-.hide {
-  visibility: hidden;
-  pointer-events: none;
+.clearButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  color: #6b7280;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+
+  &.hide {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  &:hover {
+    background-color: rgba(55, 65, 81, 0.6);
+    color: #e5e7eb;
+  }
+}
+
+.clearButton>svg {
+  width: 12px;
+  height: 12px;
+  fill: currentColor;
 }

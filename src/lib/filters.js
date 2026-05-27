@@ -295,7 +295,7 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   const badge = paramsObject?.badge || "all";
   const country = paramsObject?.country || "";
   const charCount = paramsObject?.charcount || "";
-  const lastSeen = paramsObject?.lastseen || "";
+  const lastSeenYear = paramsObject?.lastseenyear || "";
   const colorStatus = paramsObject?.colorstatus || "all";
   const colors = paramsObject?.colors || "";
 
@@ -316,8 +316,11 @@ export function getPlayersByParams({ allPlayersData, paramsObject }) {
   if (charCount) {
     filteredPlayers = filterPlayersByCharacterCount(filteredPlayers, charCount);
   }
-  if (lastSeen) {
-    filteredPlayers = filterPlayersByLastSeenDate(filteredPlayers, lastSeen);
+  if (lastSeenYear) {
+    filteredPlayers = filterPlayersByLastSeenYear(
+      filteredPlayers,
+      lastSeenYear,
+    );
   }
   if (colorStatus !== "all") {
     filteredPlayers = filterPlayersByColorStatus(filteredPlayers, colorStatus);
@@ -524,39 +527,21 @@ export function filterPlayersByCharacterCount(allPlayersData, charCountRange) {
   });
 }
 
-export function filterPlayersByLastSeenDate(allPlayersData, lastSeenRange) {
-  if (!lastSeenRange) {
+export function filterPlayersByLastSeenYear(allPlayersData, year) {
+  if (!year) {
     return allPlayersData;
   }
 
-  const seenDate = (days) => {
-    const date = new Date();
-    date.setDate(date.getDate() - days);
-    return date;
-  };
+  const selectedYear = parseInt(year, 10);
 
-  let dateThreshold;
-
-  switch (lastSeenRange) {
-    case "today":
-      dateThreshold = seenDate(0);
-      break;
-    case "this-week":
-      dateThreshold = seenDate(7);
-      break;
-    case "this-month":
-      dateThreshold = seenDate(30);
-      break;
-    case "this-year":
-      dateThreshold = seenDate(365);
-      break;
-    default:
-      return allPlayersData;
+  if (isNaN(selectedYear)) {
+    return allPlayersData;
   }
 
   return allPlayersData.filter((player) => {
     const playerLastSeen = new Date(player.LastSeen);
-    return playerLastSeen >= dateThreshold;
+    const playerYear = playerLastSeen.getFullYear();
+    return playerYear === selectedYear;
   });
 }
 

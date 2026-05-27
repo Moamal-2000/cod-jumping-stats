@@ -116,33 +116,12 @@
   }
 }
 
-.advancedFiltersRow {
-  flex-direction: column;
-  align-items: stretch;
+.thirdRow {
+  display: flex;
   gap: 12px;
 }
 
-@include m.media(large) {
-  .advancedFiltersRow {
-    align-items: flex-start;
-  }
-}
-
-.filtersGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+.advancedFilters {
+  display: flex;
   gap: 12px;
-  width: 100%;
-}
-
-@include m.media(medium) {
-  .filtersGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@include m.media(very-small) {
-  .filtersGrid {
-    grid-template-columns: 1fr;
-  }
 }
