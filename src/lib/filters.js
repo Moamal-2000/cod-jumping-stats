@@ -1,6 +1,7 @@
 import { getPlayerBadges } from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import { PAGINATION_ITEMS_PER_PAGE } from "@/data/constants";
 import { MAPS_VIDEOS } from "@/data/mapsVideos";
+import { COD2_COLORS } from "@/data/staticData";
 import { getCountryName, kebabCase, stripColorCodes } from "./utils";
 
 export function getLastSeenCategories(lastSeen) {
@@ -569,18 +570,53 @@ export function filterPlayersByColorStatus(allPlayersData, colorStatus) {
 }
 
 export function filterPlayersByColors(allPlayersData, colorsList) {
-  if (!colorsList) {
+  if (!colorsList || !colorsList.trim()) {
     return allPlayersData;
   }
 
-  const selectedColors = colorsList.split(",").map((c) => c.trim());
+  const inputColors = colorsList.split(",").map((c) => c.trim().toLowerCase());
+  const selectedSet = new Set();
+
+  inputColors.forEach((input) => {
+    if (Object.prototype.hasOwnProperty.call(COD2_COLORS, input)) {
+      selectedSet.add(input);
+    } else {
+      const code = Object.keys(COD2_COLORS).find(
+        (key) => COD2_COLORS[key] === input,
+      );
+
+      if (code !== undefined) {
+        selectedSet.add(code);
+      }
+    }
+  });
+
+  if (selectedSet.size === 0) {
+    return [];
+  }
+
   const colorCodeRegex = /\^(\d)/g;
 
   return allPlayersData.filter((player) => {
     const playerName = player.PlayerName || player.PrefName || "";
-    const matches = [...playerName.matchAll(colorCodeRegex)];
-    const playerColors = matches.map((m) => m[1]);
 
-    return selectedColors.some((color) => playerColors.includes(color));
+    const playerMatches = [...playerName.matchAll(colorCodeRegex)];
+    const playerSet = new Set(playerMatches.map((m) => m[1]));
+
+    if (playerSet.size === 0) {
+      return false;
+    }
+
+    if (playerSet.size !== selectedSet.size) {
+      return false;
+    }
+
+    for (const color of playerSet) {
+      if (!selectedSet.has(color)) {
+        return false;
+      }
+    }
+
+    return true;
   });
 }
