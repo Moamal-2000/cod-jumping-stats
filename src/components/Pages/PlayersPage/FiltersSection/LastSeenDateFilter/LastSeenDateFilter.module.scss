@@ -28,9 +28,9 @@
   height: 36px;
   padding: 8px 12px;
   padding-right: 40px;
-  background-color: #1f2937;
+  background-color: #1a1e24;
   color: #9ca3af;
-  border: 1px solid #374151;
+  border: 1px solid #2a313a;
   border-radius: 6px;
   font-size: 0.875rem;
   font-weight: 500;
@@ -42,7 +42,7 @@
     color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
 
   &:hover {
-    border-color: #4b5563;
+    border-color: #374151;
     color: #e5e7eb;
   }
 
@@ -71,6 +71,10 @@
     &::placeholder {
       color: currentColor;
     }
+  }
+
+  &::placeholder {
+    color: #6b7280;
   }
 }
 

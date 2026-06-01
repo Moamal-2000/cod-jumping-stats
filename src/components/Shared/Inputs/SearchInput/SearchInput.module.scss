@@ -47,6 +47,10 @@
     outline: none;
     border-color: var(--players-focus, #3b82f6);
     box-shadow: 0 0 0 1px var(--players-focus, #3b82f6);
+
+    &::placeholder {
+      color: #e5e7eb;
+    }
   }
 
   &::placeholder {

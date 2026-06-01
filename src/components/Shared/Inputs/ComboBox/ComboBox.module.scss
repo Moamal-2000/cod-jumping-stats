@@ -74,6 +74,10 @@
 
   &:focus {
     outline: none;
+
+    &::placeholder {
+      color: #e5e7eb;
+    }
   }
 
   &::placeholder {
