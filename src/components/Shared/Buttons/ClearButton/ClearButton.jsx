@@ -1,6 +1,7 @@
 import s from "./ClearButton.module.scss";
 
 const ClearButton = ({
+  className,
   label,
   handleClear,
   disabled,
@@ -13,7 +14,7 @@ const ClearButton = ({
       aria-label={label}
       onClick={handleClear}
       disabled={disabled || inputValue === ""}
-      className={`${s.clearButton} ${inputValue === "" ? s.hide : ""}`}
+      className={`${className} ${s.clearButton} ${inputValue === "" ? s.hide : ""}`}
       ref={ref}
       aria-hidden={inputValue === ""}
       tabIndex={inputValue === "" ? -1 : 0}

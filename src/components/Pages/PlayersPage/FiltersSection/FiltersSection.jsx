@@ -11,6 +11,7 @@ import FilterGroup from "../../Maps/FiltersSection/FilterGroup/FilterGroup";
 import CharacterCountFilter from "./CharacterCountFilter/CharacterCountFilter";
 import s from "./FiltersSection.module.scss";
 import LastSeenDateFilter from "./LastSeenDateFilter/LastSeenDateFilter";
+import PlayersColorFilter from "./PlayersColorFilter/PlayersColorFilter";
 
 const FiltersSection = () => {
   const { allPlayersData, playersScroll } = useSelector((s) => s.players);
@@ -72,7 +73,7 @@ const FiltersSection = () => {
         <div className={s.advancedFilters}>
           <CharacterCountFilter />
           <LastSeenDateFilter />
-          {/* <PlayersColorFilter /> */}
+          <PlayersColorFilter />
         </div>
       </div>
     </section>

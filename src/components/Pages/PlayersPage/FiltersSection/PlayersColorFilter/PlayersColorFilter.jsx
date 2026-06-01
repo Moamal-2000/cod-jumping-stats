@@ -1,5 +1,6 @@
 "use client";
 
+import ClearButton from "@/components/Shared/Buttons/ClearButton/ClearButton";
 import { COD2_COLORS, COD2_HEX_COLORS } from "@/data/staticData";
 import { createQueryString, removeQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -78,29 +79,27 @@ const PlayersColorFilter = () => {
       <button
         type="button"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        className={`${s.menuButton} ${isMenuOpen ? s.open : ""} ${isAnyColorSelected ? s.hasSelection : ""}`}
+        className={`${s.menuButton} ${isMenuOpen ? s.open : ""}`}
       >
         <span className={s.buttonLabel}>
           {isAnyColorSelected
             ? `Colors (${selectedColors.length})`
             : "Filter by Colors"}
         </span>
-        <span className={s.chevron}>▼</span>
       </button>
+
+      {isAnyColorSelected && (
+        <ClearButton
+          className={s.clearButton}
+          label="Clear Colors"
+          handleClear={handleClearAll}
+        />
+      )}
 
       {isMenuOpen && availableColors.length > 0 && (
         <div className={s.menu}>
           <div className={s.menuHeader}>
             <span className={s.menuTitle}>Select Player Colors</span>
-            {isAnyColorSelected && (
-              <button
-                type="button"
-                onClick={handleClearAll}
-                className={s.clearButton}
-              >
-                Clear All
-              </button>
-            )}
           </div>
 
           <div className={s.colorsList}>
@@ -118,14 +117,16 @@ const PlayersColorFilter = () => {
                     onChange={() => handleColorToggle(colorCode)}
                     className={s.checkbox}
                   />
-                  <span className={s.colorBox}>
-                    <span
-                      className={s.colorDot}
-                      style={{ backgroundColor: colorHex }}
-                      title={colorName}
-                    />
-                  </span>
+                  <span
+                    className={s.colorDot}
+                    style={{ backgroundColor: colorHex }}
+                  />
                   <span className={s.colorLabel}>{colorName}</span>
+                  {isSelected && (
+                    <svg aria-hidden="true">
+                      <use href="/icons-sprite.svg#checked" />
+                    </svg>
+                  )}
                 </label>
               );
             })}
