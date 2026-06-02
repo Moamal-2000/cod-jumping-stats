@@ -4,10 +4,13 @@ import s from "./FilterCard.module.scss";
 const FilterCard = ({ title, children }) => {
   return (
     <Suspense>
-      <div className={s.card} aria-labelledby={`filter-card-title-${title}`}>
-        <h2 id={`filter-card-title-${title}`}>{title}</h2>
+      <fieldset
+        className={s.card}
+        aria-labelledby={`filter-card-title-${title}`}
+      >
+        <legend id={`filter-card-title-${title}`}>{title}</legend>
         {children}
-      </div>
+      </fieldset>
     </Suspense>
   );
 };

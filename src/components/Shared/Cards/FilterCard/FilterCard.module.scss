@@ -1,14 +1,29 @@
 .card {
+  border: 0;
   background-color: #131820;
-  border: 1px solid #2A3040;
+  // border: 1px solid #2A3040;
   border-radius: 12px;
   padding: 20px;
+  padding-top: 44px;
   position: relative;
 }
 
-.card>h2 {
+.card::before {
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: 0;
+  width: calc(100% - 1px);
+  height: calc(100% + 11px);
+  border: 1px solid #2A3040;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.card>legend {
   font-weight: 600;
   font-size: 1.1rem;
   color: #fff;
-  margin-bottom: 24px;
+  position: relative;
+  top: 26px;
 }
