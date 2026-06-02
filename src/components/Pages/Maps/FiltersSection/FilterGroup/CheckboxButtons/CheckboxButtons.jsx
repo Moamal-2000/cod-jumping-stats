@@ -25,7 +25,7 @@ const CheckboxButtons = ({ filtersData, queryName, themeColor = "green" }) => {
       filtered.forEach((v) => params.append(queryName, v));
     }
 
-    router.push(`${pathname}?${params.toString()}`);
+    router.push(`${pathname}?${params.toString()}`, { scroll: false });
   }
 
   function handleKeyDown(event, queryValue) {
