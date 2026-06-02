@@ -1,5 +1,6 @@
 "use client";
 
+import { ACTIVATION_KEYS } from "@/data/constants";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./RankTableHeader.module.scss";
@@ -25,8 +26,8 @@ const RankTableHeader = ({ text }) => {
   }
 
   function handleKeyDown(event) {
-    const isEnterKey = event.code === "Enter" && event.keyCode === 13;
-    if (isEnterKey) {
+    if (ACTIVATION_KEYS.includes(event.code)) {
+      event.preventDefault();
       reverseLeaderboard();
     }
   }
