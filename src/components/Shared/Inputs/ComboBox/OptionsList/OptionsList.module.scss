@@ -1,5 +1,4 @@
 .optionsList {
-  max-height: calc(40px * 7);
   position: absolute;
   left: 0;
   right: 0;
@@ -7,7 +6,7 @@
   background-color: #161b22;
   border: 1px solid #30363d;
   box-shadow: 0 4px 12px 0 rgba(0, 0, 0, 0.3);
-  min-width: 240px;
+  max-height: calc(41.6px * 7 + 2px); // 7 options + border
   z-index: 20;
   border-radius: 6px;
   display: none;
