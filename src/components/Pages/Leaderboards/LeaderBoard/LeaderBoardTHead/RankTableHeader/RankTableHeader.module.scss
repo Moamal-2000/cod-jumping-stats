@@ -1,12 +1,21 @@
 .rank {
   border: none !important;
   outline: none !important;
-  padding-left: 0 !important;
-  border-radius: 18px;
-  width: 90px;
-  transition: outline-color .2s;
+  padding-left: 10px !important;
+  border-bottom: 1px solid #2a3040 !important;
+  width: 100%;
+  text-align: left;
+}
 
-  &:focus-visible {
-    outline-color: #feb700;
-  }
+.rank::before {
+  content: '';
+  position: absolute;
+  inset: 10px 0;
+  border-radius: 2px;
+  border: solid 2px transparent;
+  z-index: -1;
+}
+
+.rank:focus-visible::before {
+  border-color: #feb700;
 }
