@@ -1,9 +1,9 @@
 "use client";
 
-import { fetchPlayerRouteCompletionNew } from "@/redux/features/playerProfile/thunk/playerRouteCompletionThunk";
+import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
 import Link from "next/link";
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
 
 const PlayerRouteCompletion = ({ playerId }) => {
@@ -11,43 +11,11 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const [sortOrder, setSortOrder] = useState("asc"); // "asc", "desc"
   const [activeList, setActiveList] = useState("completed"); // "completed", "not_completed"
 
-  // Mock data for now - will be replaced with Redux state
-  const [completionData, setCompletionData] = useState(null);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const { completionData, loading, error, refetch } =
+    usePlayerRouteCompletion(playerId);
 
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const allPlayersLength = allPlayersData.length || 0;
-
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    if (playerId) {
-      fetchData();
-    }
-  }, [playerId]);
-
-  async function fetchData() {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const result = await dispatch(
-        fetchPlayerRouteCompletionNew({ playerId: parseInt(playerId, 10) }),
-      );
-
-      if (result.payload) {
-        setCompletionData(result.payload);
-      } else {
-        setError("Failed to fetch route completion data");
-      }
-    } catch (err) {
-      setError("Error fetching route completion data");
-      console.error("Error:", err);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   function renderMapRow(map, index, isCompleted) {
     const rarityLevel = getRarityLevel(map.individual_finish_count);
@@ -109,7 +77,7 @@ const PlayerRouteCompletion = ({ playerId }) => {
           The profile data service may be temporarily unavailable. Retry in a
           moment.
         </p>
-        <button onClick={fetchData} className={s.retryButton}>
+        <button onClick={refetch} className={s.retryButton}>
           Retry Loading
         </button>
       </div>

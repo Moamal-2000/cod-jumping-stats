@@ -2,6 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import LeaderboardRanks from "./PlayerProfileLayout/Panels/LeaderboardRanks/LeaderboardRanks";
+import PlayerCompletionByFps from "./PlayerProfileLayout/Panels/PlayerCompletionByFps/PlayerCompletionByFps";
 import PlayerOverview from "./PlayerProfileLayout/Panels/PlayerOverview/PlayerOverview";
 import PlayerRouteCompletion from "./PlayerProfileLayout/Panels/PlayerRouteCompletion/PlayerRouteCompletion";
 import RunAnalytics from "./PlayerProfileLayout/Panels/RunAnalytics/RunAnalytics";
@@ -25,7 +26,13 @@ const PANEL_COMPONENTS = {
   tops: TopRuns,
   leaderboards: LeaderboardRanks,
   routes: PlayerRouteCompletion,
+  "completion-by-fps": PlayerCompletionByFps,
   "runs-analytics": RunAnalytics,
 };
 
-const PANELS_WITH_PLAYER_ID = new Set(["tops", "routes", "runs-analytics"]);
+const PANELS_WITH_PLAYER_ID = new Set([
+  "tops",
+  "routes",
+  "completion-by-fps",
+  "runs-analytics",
+]);
