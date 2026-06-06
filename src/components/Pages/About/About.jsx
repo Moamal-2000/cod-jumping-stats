@@ -1,6 +1,5 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useDispatch } from "react-redux";
 import ToolTip from "../PlayersPage/PlayerCard/PlayerBadges/ToolTip/ToolTip";
@@ -26,14 +25,14 @@ const About = () => {
 
             <p className={s.lead}>
               Jumpers Heaven Statistics is an independent web platform for the{" "}
-              <TransitionLink
+              <a
                 href="https://jumpersheaven.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={s.textLink}
               >
                 JumpersHeaven
-              </TransitionLink>{" "}
+              </a>{" "}
               community. It turns player, map, and server data into a format
               that is easier to browse, compare, and understand.
             </p>
@@ -54,14 +53,14 @@ const About = () => {
             <article className={s.featureCard}>
               <h3 className={s.cardTitle}>What JH Stats is</h3>
               <p className={s.bodyText}>
-                <TransitionLink
+                <a
                   href="https://jumpersheaven.com/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className={s.textLink}
                 >
                   JumpersHeaven
-                </TransitionLink>{" "}
+                </a>{" "}
                 is a Call of Duty 2 jump mod created by <strong>IzNoGoD</strong>
                 . JH Stats is a separate project that helps players read that
                 ecosystem more easily by surfacing rankings, records,
@@ -100,14 +99,14 @@ const About = () => {
               <article className={s.teamCard} key={member.name}>
                 <h3 className={s.personName}>
                   {member.href ? (
-                    <TransitionLink
+                    <a
                       href={member.href}
                       target="_blank"
                       rel="noopener noreferrer"
                       className={s.textLink}
                     >
                       {member.name}
-                    </TransitionLink>
+                    </a>
                   ) : (
                     <span className={s.plyerNameSpan}>{member.name}</span>
                   )}

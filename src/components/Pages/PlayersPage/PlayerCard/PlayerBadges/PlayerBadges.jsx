@@ -1,4 +1,3 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import {
   bugHunterIds,
   contentCreatorIds,
@@ -30,7 +29,7 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
 
           if (href) {
             return (
-              <TransitionLink
+              <a
                 key={id}
                 className={`${s.badge} ${classes}`}
                 href={href}
@@ -42,7 +41,7 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
                   <use href={`/icons-sprite.svg#${icon}`}></use>
                 </svg>
                 <span>{label}</span>
-              </TransitionLink>
+              </a>
             );
           }
 

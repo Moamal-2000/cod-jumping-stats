@@ -1,6 +1,5 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import s from "./Video.module.scss";
@@ -43,7 +42,7 @@ const Video = ({ video }) => {
 
   return (
     <div className={s.videoCard}>
-      <TransitionLink
+      <a
         href={video.videoUrl}
         className={s.videoLink}
         target="_blank"
@@ -70,7 +69,7 @@ const Video = ({ video }) => {
 
           {video.type && <span className={s.videoType}>{video.type}</span>}
         </div>
-      </TransitionLink>
+      </a>
 
       <VideoOverlay
         oEmbedData={oEmbedData}

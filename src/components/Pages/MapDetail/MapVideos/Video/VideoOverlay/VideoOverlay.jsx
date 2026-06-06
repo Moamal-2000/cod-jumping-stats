@@ -1,4 +1,3 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import Image from "next/image";
 import s from "./VideoOverlay.module.scss";
 
@@ -8,7 +7,7 @@ const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
       <div className={s.channelInfo}>
         {channelThumbnail && (
           <div className={s.channelAvatar}>
-            <TransitionLink
+            <a
               href={oEmbedData.author_url}
               target="_blank"
               rel="noopener"
@@ -22,7 +21,7 @@ const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
                 className={s.channelImage}
                 onError={(e) => (e.target.style.display = "none")}
               />
-            </TransitionLink>
+            </a>
           </div>
         )}
 

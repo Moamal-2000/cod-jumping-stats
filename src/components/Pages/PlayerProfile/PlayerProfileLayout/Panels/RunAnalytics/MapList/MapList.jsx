@@ -1,7 +1,6 @@
 "use client";
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import AnimatedSpinnerIcon from "@/components/Shared/Loaders/SpinnerLoader/AnimatedSpinnerIcon";
 import { createQueryString } from "@/lib/queryParams";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
@@ -145,15 +144,13 @@ const MapList = ({
                         )}
                       </button>
 
-                      <TransitionLink
+                      <a
                         href={mapDetailsHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
                         className={s.mapTooltip}
-                        role="tooltip"
+                        target="_blank"
                       >
                         Map details
-                      </TransitionLink>
+                      </a>
                     </div>
                   );
                 })
