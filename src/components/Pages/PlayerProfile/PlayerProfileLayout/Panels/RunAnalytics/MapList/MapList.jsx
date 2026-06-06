@@ -1,9 +1,9 @@
 "use client";
 
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import AnimatedSpinnerIcon from "@/components/Shared/Loaders/SpinnerLoader/AnimatedSpinnerIcon";
 import { createQueryString } from "@/lib/queryParams";
-import { Link } from "next-view-transitions";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "./MapList.module.scss";
@@ -145,7 +145,7 @@ const MapList = ({
                         )}
                       </button>
 
-                      <Link
+                      <TransitionLink
                         href={mapDetailsHref}
                         target="_blank"
                         rel="noopener noreferrer"
@@ -153,7 +153,7 @@ const MapList = ({
                         role="tooltip"
                       >
                         Map details
-                      </Link>
+                      </TransitionLink>
                     </div>
                   );
                 })

@@ -1,12 +1,12 @@
 import { jhApis } from "@/api/jumpersHeaven";
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import MapRoutesSelector from "@/components/Shared/MapRoutesSelector/MapRoutesSelector";
 import { JUMP_FPS } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { formateReleaseDate } from "@/lib/dateTime";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
-import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MapDetailHeader.module.scss";
@@ -93,9 +93,9 @@ const MapDetailHeader = ({ mapData }) => {
               <div className={s.metaItem}>
                 <span className={s.label}>Best player:</span>
                 <span className={`${s.value} ${s.bestPlayerValue}`}>
-                  <Link href={`/player/${bestPlayer.PlayerID}`}>
+                  <TransitionLink href={`/player/${bestPlayer.PlayerID}`}>
                     {getColoredName(bestPlayer.PlayerName)}
-                  </Link>{" "}
+                  </TransitionLink>{" "}
                   is the best on this map
                 </span>
               </div>

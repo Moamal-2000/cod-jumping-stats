@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import s from "./ServerInfo.module.scss";
 
 const ServerInfo = ({ server, viewType }) => {
@@ -35,9 +35,9 @@ const ServerInfo = ({ server, viewType }) => {
         {isCod4 && <span className={s.mapName}>{server.Map}</span>}
 
         {!isCod4 && server.Online && (
-          <Link href={`/map/${server.MapID}`} className={s.mapName}>
+          <TransitionLink href={`/map/${server.MapID}`} className={s.mapName}>
             {server.Map}
-          </Link>
+          </TransitionLink>
         )}
       </div>
     </section>

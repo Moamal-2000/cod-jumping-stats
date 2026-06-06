@@ -1,7 +1,7 @@
 import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { getMapCompletionRate } from "@/lib/filters";
-import { Link } from "next-view-transitions";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";
@@ -40,7 +40,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   return (
     <div className={s.mapCard} ref={ref}>
       {!hideMapImage && (
-        <Link
+        <TransitionLink
           href={`/map/${CpID}`}
           className={s.imgHolder}
           aria-label={mapDetailsLabel}
@@ -57,12 +57,12 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
               ))}
             </div>
           </div>
-        </Link>
+        </TransitionLink>
       )}
 
       <section className={s.content}>
         <div className={s.nameAndRating}>
-          <Link href={`/map/${CpID}`}>
+          <TransitionLink href={`/map/${CpID}`}>
             <span className={s.name}>
               {Name}
               {Ender && <span className={s.ender}>({Ender})</span>}
@@ -74,7 +74,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
                 </svg>
               </span>
             )}
-          </Link>
+          </TransitionLink>
 
           <AddToFavButton id={CpID} groupKey="mapsIds" />
         </div>

@@ -1,5 +1,5 @@
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
-import { Link } from "next-view-transitions";
 import s from "./TopRunsTBody.module.scss";
 
 const TopRunsTBody = ({ topRuns }) => {
@@ -13,7 +13,9 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td className={s.mapNameCell} data-header="Map">
-              <Link href={`/map/${run.CpID}`}>{run.MapName}</Link>
+              <TransitionLink href={`/map/${run.CpID}`}>
+                {run.MapName}
+              </TransitionLink>
             </td>
 
             <td className={s.fpsCell} data-header="FPS">

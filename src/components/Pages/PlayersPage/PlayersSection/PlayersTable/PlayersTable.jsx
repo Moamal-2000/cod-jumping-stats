@@ -1,6 +1,6 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { Link } from "next-view-transitions";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import PlayerBadges from "../../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../../PlayerCard/PlayerStats/PlayerStats";
 import s from "./PlayersTable.module.scss";
@@ -34,7 +34,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                     />
                   </div>
 
-                  <Link
+                  <TransitionLink
                     href={`/player/${player.PlayerID}`}
                     className={s.playerLink}
                   >
@@ -48,7 +48,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                         </span>
                       )}
                     </div>
-                  </Link>
+                  </TransitionLink>
                 </div>
               </td>
 

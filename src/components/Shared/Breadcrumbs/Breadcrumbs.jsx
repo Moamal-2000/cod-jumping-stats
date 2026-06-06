@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import TransitionLink from "../Links/TransitionLink/TransitionLink";
 import s from "./Breadcrumbs.module.scss";
 
 const Breadcrumbs = ({ labels, paths }) => {
@@ -9,7 +9,7 @@ const Breadcrumbs = ({ labels, paths }) => {
     <nav className={s.breadcrumbs} data-type="breadcrumbs">
       {previousPages.map((page, index) => (
         <div className={s.page} key={index}>
-          <Link href={paths?.[index]?.path}>{page}</Link>
+          <TransitionLink href={paths?.[index]?.path}>{page}</TransitionLink>
           <span>/</span>
         </div>
       ))}

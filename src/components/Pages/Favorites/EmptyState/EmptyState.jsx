@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import s from "./EmptyState.module.scss";
 
 const EmptyState = ({ type }) => {
@@ -15,12 +15,12 @@ const EmptyState = ({ type }) => {
       <h3 className={s.title}>{title}</h3>
       <p className={s.description}>{description}</p>
 
-      <Link href={linkHref} className={s.browseLink}>
+      <TransitionLink href={linkHref} className={s.browseLink}>
         <svg aria-hidden="true">
           <use href={`/icons-sprite.svg#${icon}`} />
         </svg>
         {linkText}
-      </Link>
+      </TransitionLink>
     </div>
   );
 };

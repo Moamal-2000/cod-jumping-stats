@@ -1,11 +1,11 @@
 import { WEBSITE_NAME } from "@/data/constants";
-import { Link } from "next-view-transitions";
 import Image from "next/image";
+import TransitionLink from "../Links/TransitionLink/TransitionLink";
 import s from "./WebsiteLogo.module.scss";
 
 const WebsiteLogo = () => {
   return (
-    <Link href="/" className={s.logo}>
+    <TransitionLink href="/" className={s.logo}>
       <Image
         src="/logo.svg"
         alt="Jumpers Heaven"
@@ -15,7 +15,7 @@ const WebsiteLogo = () => {
         preload
       />
       <span>{WEBSITE_NAME}</span>
-    </Link>
+    </TransitionLink>
   );
 };
 

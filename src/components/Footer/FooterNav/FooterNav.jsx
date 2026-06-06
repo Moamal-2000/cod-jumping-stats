@@ -1,7 +1,7 @@
 "use client";
 
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { NAV_LINKS_DATA } from "@/data/staticData";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from "./FooterNav.module.scss";
 
@@ -15,12 +15,15 @@ const FooterNav = () => {
       <ul className={s.links}>
         {NAV_LINKS_DATA.map(({ name, href, iconName, id }) => (
           <li key={id}>
-            <Link href={href} className={currentPage === href ? s.active : ""}>
+            <TransitionLink
+              href={href}
+              className={currentPage === href ? s.active : ""}
+            >
               <svg aria-hidden="true">
                 <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
               <span>{name}</span>
-            </Link>
+            </TransitionLink>
           </li>
         ))}
       </ul>

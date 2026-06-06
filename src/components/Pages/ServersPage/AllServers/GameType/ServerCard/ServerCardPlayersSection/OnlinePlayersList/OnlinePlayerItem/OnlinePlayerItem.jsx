@@ -2,9 +2,9 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
-import { Link } from "next-view-transitions";
 import { useDispatch } from "react-redux";
 import s from "./OnlinePlayerItem.module.scss";
 
@@ -26,7 +26,7 @@ const OnlinePlayerItem = ({ player, server }) => {
   }
 
   return (
-    <Link
+    <TransitionLink
       href={`/player/${player.PlayerID}`}
       className={`${s.playerItem} ${isCod4 ? s.cod4 : ""}`}
       onClick={handleClick}
@@ -47,7 +47,7 @@ const OnlinePlayerItem = ({ player, server }) => {
           {player?.Ping || 0}ms
         </span>
       </div>
-    </Link>
+    </TransitionLink>
   );
 };
 

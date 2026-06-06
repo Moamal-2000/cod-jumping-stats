@@ -1,7 +1,7 @@
 "use client";
 
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
-import { Link } from "next-view-transitions";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
@@ -26,9 +26,9 @@ const PlayerRouteCompletion = ({ playerId }) => {
         className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
         <td className={s.mapNameCell}>
-          <Link href={`/map/${map.cp_id}`} className={s.mapLink}>
+          <TransitionLink href={`/map/${map.cp_id}`} className={s.mapLink}>
             {map.mapname}
-          </Link>
+          </TransitionLink>
         </td>
         <td className={s.authorCell}>{map.author || "Unknown"}</td>
         <td className={s.releasedCell}>{map.released || "Unknown"}</td>

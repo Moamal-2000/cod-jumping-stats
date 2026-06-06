@@ -1,4 +1,4 @@
-import { Link } from "next-view-transitions";
+import TransitionLink from "../Links/TransitionLink/TransitionLink";
 import s from "./MapRoutesSelector.module.scss";
 
 const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
@@ -14,9 +14,9 @@ const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
 
       <div className={s.otherRoutesList}>
         {otherRoutes.map((route) => (
-          <Link key={route.CpID} href={`/map/${route.CpID}`}>
+          <TransitionLink key={route.CpID} href={`/map/${route.CpID}`}>
             {route.Ender}
-          </Link>
+          </TransitionLink>
         ))}
       </div>
     </nav>

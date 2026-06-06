@@ -1,10 +1,10 @@
 "use client";
 
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { HORIZONTAL_NAV_KEYS } from "@/data/constants";
 import { useKeyListeners } from "@/hooks/helper/useKeyListeners";
 import { getNextTabIndex, getPrevTabIndex } from "@/lib/utils";
 import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
-import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -84,7 +84,7 @@ const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
   const classes = `${s.tabButton} ${isActive ? s.active : ""}`;
 
   return (
-    <Link
+    <TransitionLink
       href={href}
       key={tab.id}
       className={classes}
@@ -99,7 +99,7 @@ const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
         <use href={`/icons-sprite.svg#${tab.icon}`} />
       </svg>
       {tab.label}
-    </Link>
+    </TransitionLink>
   );
 };
 

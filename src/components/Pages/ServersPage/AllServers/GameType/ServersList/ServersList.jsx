@@ -1,8 +1,8 @@
 "use client";
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { copyText, domainToCountryFlag } from "@/lib/utils";
-import { Link } from "next-view-transitions";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import s from "./ServersList.module.scss";
@@ -57,17 +57,17 @@ const ServersList = ({ groupedServers, gameType }) => {
                         <span>{server.Map}</span>
                       ) : (
                         server.Online && (
-                          <Link href={`/map/${server.MapID}`}>
+                          <TransitionLink href={`/map/${server.MapID}`}>
                             {server.Map}
-                          </Link>
+                          </TransitionLink>
                         )
                       )}
                     </td>
                     <td className={s.playerCell} data-label="Player">
                       {player?.PlayerID ? (
-                        <Link href={`/player/${player.PlayerID}`}>
+                        <TransitionLink href={`/player/${player.PlayerID}`}>
                           {playerName}
-                        </Link>
+                        </TransitionLink>
                       ) : (
                         <span>{playerName}</span>
                       )}

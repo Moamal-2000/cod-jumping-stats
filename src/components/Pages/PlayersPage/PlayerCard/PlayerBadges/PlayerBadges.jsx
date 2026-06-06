@@ -1,3 +1,4 @@
+import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import {
   bugHunterIds,
   contentCreatorIds,
@@ -6,7 +7,6 @@ import {
   mappersIds,
 } from "@/data/manualBadges";
 import { isActiveWithinWeek } from "@/lib/validation";
-import { Link } from "next-view-transitions";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 
@@ -30,7 +30,7 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
 
           if (href) {
             return (
-              <Link
+              <TransitionLink
                 key={id}
                 className={`${s.badge} ${classes}`}
                 href={href}
@@ -42,7 +42,7 @@ const PlayerBadges = ({ Admin, Banned, Donated, PlayerID, LastSeen }) => {
                   <use href={`/icons-sprite.svg#${icon}`}></use>
                 </svg>
                 <span>{label}</span>
-              </Link>
+              </TransitionLink>
             );
           }
 
