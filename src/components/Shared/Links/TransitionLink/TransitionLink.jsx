@@ -3,7 +3,7 @@
 import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 
-function TransitionLink({ href, children, ...props }) {
+function TransitionLink({ href, children, onClick, ...props }) {
   const pathname = usePathname();
 
   return (
@@ -11,6 +11,7 @@ function TransitionLink({ href, children, ...props }) {
       href={href}
       style={{ ...props.style }}
       onClick={(event) => {
+        onClick?.(event);
         if (pathname === href) {
           event.preventDefault();
         }
