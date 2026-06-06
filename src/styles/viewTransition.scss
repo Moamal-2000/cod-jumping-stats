@@ -15,6 +15,15 @@ main {
   animation-name: slide-in;
 }
 
+@media (prefers-reduced-motion: reduce) {
+
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none !important;
+  }
+}
+
 @keyframes slide-in {
   from {
     translate: 100vw;
