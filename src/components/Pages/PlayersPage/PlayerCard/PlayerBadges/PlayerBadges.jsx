@@ -6,7 +6,7 @@ import {
   mappersIds,
 } from "@/data/manualBadges";
 import { isActiveWithinWeek } from "@/lib/validation";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import ToolTip from "../ToolTip";
 import s from "./PlayerBadges.module.scss";
 

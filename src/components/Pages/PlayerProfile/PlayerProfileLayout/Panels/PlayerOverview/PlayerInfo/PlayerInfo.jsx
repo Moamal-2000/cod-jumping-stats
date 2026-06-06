@@ -1,7 +1,7 @@
 "use client";
 
 import { formatDate } from "@/lib/dateTime";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";

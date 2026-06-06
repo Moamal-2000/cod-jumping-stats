@@ -1,6 +1,6 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import PlayerBadges from "../../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../../PlayerCard/PlayerStats/PlayerStats";
 import s from "./PlayersTable.module.scss";

@@ -1,7 +1,7 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { formateReleaseDate } from "@/lib/dateTime";
 import { getMapCompletionRate } from "@/lib/filters";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import CompletionRate from "../MapCard/CompletionRate/CompletionRate";

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useRouter } from "next/navigation";
 import s from "./NotFoundPage.module.scss";
 import NotFoundPageList from "./NotFoundPageList/NotFoundPageList";

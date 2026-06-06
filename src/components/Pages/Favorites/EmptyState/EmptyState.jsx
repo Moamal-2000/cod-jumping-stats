@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import s from "./EmptyState.module.scss";
 
 const EmptyState = ({ type }) => {

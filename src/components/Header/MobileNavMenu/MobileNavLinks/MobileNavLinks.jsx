@@ -1,6 +1,6 @@
 import { NAV_LINKS_DATA } from "@/data/staticData";
 import { toggleMobileNav } from "@/redux/features/global/slice/globalSlice";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MobileNavLinks.module.scss";

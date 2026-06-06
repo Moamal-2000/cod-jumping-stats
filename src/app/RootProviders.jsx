@@ -9,6 +9,7 @@ import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
 import LayoutLayer from "@/components/Shared/LayoutLayer/LayoutLayer";
 import CopiedPopup from "@/components/Shared/Popups/CopiedPopup/CopiedPopup";
 import { store } from "@/redux/store";
+import { ViewTransitions } from "next-view-transitions";
 import { usePathname } from "next/navigation";
 import { Provider } from "react-redux";
 
@@ -17,26 +18,28 @@ const RootProviders = ({ children }) => {
   const currentPage = pathname === "/" ? "home" : pathname.slice(1);
 
   return (
-    <Provider store={store}>
-      <html lang="en" className={currentPage}>
-        <head>
-          <link rel="preconnect" href="https://jhstats.fly.dev" />
-        </head>
+    <ViewTransitions>
+      <Provider store={store}>
+        <html lang="en" className={currentPage}>
+          <head>
+            <link rel="preconnect" href="https://jhstats.fly.dev" />
+          </head>
 
-        <body>
-          <Header />
-          <LayoutLayer>
-            <GitHubStarBtn />
-            {children}
-            <Footer />
-            <ScrollToTopBtn />
-            <GitHubNotice />
-            <GlobalOverlay />
-            <CopiedPopup />
-          </LayoutLayer>
-        </body>
-      </html>
-    </Provider>
+          <body>
+            <Header />
+            <LayoutLayer>
+              <GitHubStarBtn />
+              {children}
+              <Footer />
+              <ScrollToTopBtn />
+              <GitHubNotice />
+              <GlobalOverlay />
+              <CopiedPopup />
+            </LayoutLayer>
+          </body>
+        </html>
+      </Provider>
+    </ViewTransitions>
   );
 };
 

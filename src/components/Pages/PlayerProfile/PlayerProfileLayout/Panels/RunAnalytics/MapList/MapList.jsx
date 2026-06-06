@@ -3,7 +3,7 @@
 import SearchInput from "@/components/Shared/Inputs/SearchInput/SearchInput";
 import AnimatedSpinnerIcon from "@/components/Shared/Loaders/SpinnerLoader/AnimatedSpinnerIcon";
 import { createQueryString } from "@/lib/queryParams";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import s from "./MapList.module.scss";

@@ -1,0 +1,28 @@
+main {
+  view-transition-name: main;
+}
+
+::view-transition-old(main),
+::view-transition-new(main) {
+  animation-duration: .3s;
+}
+
+::view-transition-old(main) {
+  animation-name: slide-out;
+}
+
+::view-transition-new(main) {
+  animation-name: slide-in;
+}
+
+@keyframes slide-in {
+  from {
+    translate: 100vw;
+  }
+}
+
+@keyframes slide-out {
+  to {
+    translate: -100vw
+  }
+}

@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import s from "./Breadcrumbs.module.scss";
 
 const Breadcrumbs = ({ labels, paths }) => {

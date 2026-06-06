@@ -1,6 +1,6 @@
 import { WEBSITE_NAME } from "@/data/constants";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 import s from "./WebsiteLogo.module.scss";
 
 const WebsiteLogo = () => {

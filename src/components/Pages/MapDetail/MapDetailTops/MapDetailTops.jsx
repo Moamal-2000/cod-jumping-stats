@@ -2,7 +2,7 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
 

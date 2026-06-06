@@ -4,7 +4,7 @@ import { getColoredName } from "@/components/Helper/playerNameColor";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useDispatch } from "react-redux";
 import s from "./OnlinePlayerItem.module.scss";
 

@@ -1,7 +1,7 @@
 "use client";
 
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 import { useEffect, useState } from "react";
 import s from "./Video.module.scss";
 import VideoOverlay from "./VideoOverlay/VideoOverlay";

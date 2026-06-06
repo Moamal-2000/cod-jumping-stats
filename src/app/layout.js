@@ -1,5 +1,6 @@
 import { METADATA } from "@/data/metadata";
 import "../styles/globals.scss";
+import "../styles/viewTransition.scss";
 import RootProviders from "./RootProviders";
 
 export const metadata = METADATA;

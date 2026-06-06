@@ -1,7 +1,7 @@
 "use client";
 
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useDispatch } from "react-redux";
 import ToolTip from "../PlayersPage/PlayerCard/PlayerBadges/ToolTip/ToolTip";
 import s from "./About.module.scss";

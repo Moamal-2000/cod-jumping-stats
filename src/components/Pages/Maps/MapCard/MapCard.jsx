@@ -1,7 +1,7 @@
 import AddToFavButton from "@/components/Shared/Buttons/AddToFavButton/AddToFavButton";
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
 import { getMapCompletionRate } from "@/lib/filters";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import AuthorAndRelease from "./AuthorAndRelease/AuthorAndRelease";

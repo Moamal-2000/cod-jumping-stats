@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import s from "./MapRoutesSelector.module.scss";
 
 const MapRoutesSelector = ({ allMaps, Name, Ender }) => {

@@ -1,7 +1,7 @@
 "use client";
 
 import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./PlayerCompletionByFps.module.scss";

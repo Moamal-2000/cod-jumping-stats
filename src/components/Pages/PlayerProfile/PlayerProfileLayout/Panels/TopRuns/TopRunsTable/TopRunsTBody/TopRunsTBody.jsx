@@ -1,5 +1,5 @@
 import { formatDate } from "@/lib/dateTime";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import s from "./TopRunsTBody.module.scss";
 
 const TopRunsTBody = ({ topRuns }) => {

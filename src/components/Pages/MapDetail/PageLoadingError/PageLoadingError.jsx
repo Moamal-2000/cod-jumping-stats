@@ -1,5 +1,5 @@
 import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import s from "./PageLoadingError.module.scss";
 
 const PageLoadingError = ({ loading, error, mapData }) => {

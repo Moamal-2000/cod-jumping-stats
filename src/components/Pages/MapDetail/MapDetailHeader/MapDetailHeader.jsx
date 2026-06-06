@@ -6,7 +6,7 @@ import { JUMP_FPS } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { formateReleaseDate } from "@/lib/dateTime";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MapDetailHeader.module.scss";

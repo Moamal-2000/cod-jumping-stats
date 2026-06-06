@@ -2,8 +2,8 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { copyText, domainToCountryFlag } from "@/lib/utils";
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 import { useDispatch } from "react-redux";
 import s from "./ServersList.module.scss";
 

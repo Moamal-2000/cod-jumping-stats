@@ -1,5 +1,5 @@
+import { Link } from "next-view-transitions";
 import Image from "next/image";
-import Link from "next/link";
 import s from "./VideoOverlay.module.scss";
 
 const VideoOverlay = ({ oEmbedData, channelThumbnail }) => {
