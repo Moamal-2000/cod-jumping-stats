@@ -11,6 +11,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import AllServers from "./AllServers/AllServers";
 import PlayerToolTip from "./PlayerToolTip/PlayerToolTip";
 import ServersControls from "./ServersControls/ServersControls";
+import ServersRefreshIndicator from "./ServersRefreshIndicator/ServersRefreshIndicator";
 
 const DEFAULT_REFRESH_SECONDS = "30";
 const DEFAULT_GAME_FILTER = "cod2";
@@ -42,9 +43,7 @@ const ServersPage = () => {
     ? statusParam
     : DEFAULT_STATUS_SERVER;
 
-  const { data, isLoading, isError } = useGetServersQuery(undefined, {
-    pollingInterval: autoRefreshEnabled ? refreshSeconds * 1000 : 0,
-  });
+  const { data, isLoading, isError, refetch } = useGetServersQuery();
 
   function handlerefreshParamChange(value) {
     if (value === DEFAULT_REFRESH_SECONDS) {
@@ -93,6 +92,10 @@ const ServersPage = () => {
         gameParam={gameParam}
       />
       <PlayerToolTip />
+      <ServersRefreshIndicator
+        onRefresh={refetch}
+        refreshSeconds={refreshSeconds}
+      />
     </>
   );
 };

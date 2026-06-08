@@ -4,8 +4,11 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 
 export const serversSlice = createApi({
   reducerPath: "serversApi",
-  baseQuery: () => {
-    const data = baseQueryMsgPack({ url: `${API_URL}/tracker/online-players` });
+  baseQuery: async () => {
+    const data = await baseQueryMsgPack({
+      url: `${API_URL}/tracker/online-players`,
+    });
+
     return { data };
   },
   endpoints: (builder) => ({

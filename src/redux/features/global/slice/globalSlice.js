@@ -11,6 +11,7 @@ const initialState = {
   tryFetchAgain: 0,
   hoveredPlayer: null,
   activeCopyAlert: false,
+  didServersFetchOk: false,
 };
 
 export const globalSlice = createSlice({
@@ -25,6 +26,25 @@ export const globalSlice = createSlice({
       state.isMobileNavActive = value;
       state.isGlobalOverlayActive = value;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(
+        (action) =>
+          action.type === "serversApi/executeQuery/fulfilled" &&
+          action.meta?.arg?.endpointName === "getServers",
+        (state, { payload }) => {
+          state.didServersFetchOk = payload?.__status === 200;
+        },
+      )
+      .addMatcher(
+        (action) =>
+          action.type === "serversApi/executeQuery/rejected" &&
+          action.meta?.arg?.endpointName === "getServers",
+        (state) => {
+          state.didServersFetchOk = false;
+        },
+      );
   },
 });
 
