@@ -54,9 +54,14 @@
   height: 22px;
 }
 
-.checkedIcon {
+.spinnerWrapper .checkedIcon {
   fill: #24ff75;
   filter: drop-shadow(0 0 8px rgba(29, 255, 112, 0.45));
+}
+
+.spinnerWrapper .errorIcon {
+  color: #ff4d4d;
+  filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.42));
 }
 
 .content {
@@ -74,6 +79,10 @@
 
   &.checked {
     color: #24ff75;
+  }
+
+  &.error {
+    color: #ff4d4d;
   }
 }
 

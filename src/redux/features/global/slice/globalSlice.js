@@ -12,6 +12,7 @@ const initialState = {
   hoveredPlayer: null,
   activeCopyAlert: false,
   didServersFetchOk: false,
+  didServersFetchFail: false,
 };
 
 export const globalSlice = createSlice({
@@ -35,6 +36,7 @@ export const globalSlice = createSlice({
           action.meta?.arg?.endpointName === "getServers",
         (state, { payload }) => {
           state.didServersFetchOk = payload?.__status === 200;
+          state.didServersFetchFail = payload?.__status !== 200;
         },
       )
       .addMatcher(
@@ -43,6 +45,7 @@ export const globalSlice = createSlice({
           action.meta?.arg?.endpointName === "getServers",
         (state) => {
           state.didServersFetchOk = false;
+          state.didServersFetchFail = true;
         },
       );
   },

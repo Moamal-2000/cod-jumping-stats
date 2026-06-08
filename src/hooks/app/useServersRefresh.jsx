@@ -4,6 +4,7 @@ const useServersRefresh = (
   refreshIntervalSeconds,
   refetch,
   didServersFetchOk,
+  didServersFetchFail,
   onRefreshStart,
 ) => {
   const [isVisible, setIsVisible] = useState(false);
@@ -76,6 +77,20 @@ const useServersRefresh = (
       setRefreshStage("before");
     }, 3000);
   }, [didServersFetchOk]);
+
+  useEffect(() => {
+    if (!didServersFetchFail || !waitingForOkRef.current) {
+      return;
+    }
+
+    waitingForOkRef.current = false;
+    setRefreshStage("error");
+
+    cycleTimeoutRef.current = setTimeout(() => {
+      setIsVisible(false);
+      setRefreshStage("before");
+    }, 300000);
+  }, [didServersFetchFail]);
 
   return { isVisible, refreshStage, startRefreshCycle };
 };

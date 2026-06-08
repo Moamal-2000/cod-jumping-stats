@@ -8,19 +8,26 @@ import { useDispatch, useSelector } from "react-redux";
 import s from "./ServersRefreshIndicator.module.scss";
 
 const ServersRefreshIndicator = ({ onRefresh, refreshSeconds }) => {
-  const didServersFetchOk = useSelector((s) => s.global.didServersFetchOk);
+  const { didServersFetchOk, didServersFetchFail } = useSelector(
+    (s) => s.global,
+  );
   const dispatch = useDispatch();
 
   const handleRefreshStart = useCallback(() => {
     dispatch(updateGlobalState({ key: "didServersFetchOk", value: false }));
+    dispatch(updateGlobalState({ key: "didServersFetchFail", value: false }));
   }, [dispatch]);
 
   const { isVisible, refreshStage } = useServersRefresh(
     refreshSeconds,
     onRefresh,
     didServersFetchOk,
+    didServersFetchFail,
     handleRefreshStart,
   );
+
+  const isError = refreshStage === "error";
+  const isChecked = refreshStage === "after";
 
   return (
     <div className={`${s.container} ${isVisible ? s.visible : s.hidden}`}>
@@ -29,14 +36,19 @@ const ServersRefreshIndicator = ({ onRefresh, refreshSeconds }) => {
           {refreshStage === "before" ? (
             <AnimatedSpinnerIcon />
           ) : (
-            <svg className={s.checkedIcon} aria-hidden="true">
-              <use href="/icons-sprite.svg#checked" />
+            <svg
+              className={isError ? s.errorIcon : s.checkedIcon}
+              aria-hidden="true"
+            >
+              <use
+                href={`/icons-sprite.svg#${isError ? "x-mark" : "checked"}`}
+              />
             </svg>
           )}
         </div>
         <div className={s.content}>
           <p
-            className={`${s.text} ${refreshStage === "after" ? s.checked : ""}`}
+            className={`${s.text} ${isChecked ? s.checked : ""} ${isError ? s.error : ""}`}
           >
             Refreshing servers...
           </p>
