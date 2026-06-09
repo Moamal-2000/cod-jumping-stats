@@ -38,34 +38,8 @@
   backdrop-filter: blur(12px);
 }
 
-.spinnerWrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  flex-shrink: 0;
-}
-
-.spinnerWrapper svg {
-  color: #eab308;
-  width: 22px;
-  height: 22px;
-}
-
-.spinnerWrapper .checkedIcon {
-  fill: #24ff75;
-  filter: drop-shadow(0 0 8px rgba(29, 255, 112, 0.45));
-}
-
-.container.hidden .spinnerWrapper .checkedIcon {
+.container.hidden *>svg {
   transition-delay: 1s;
-}
-
-.spinnerWrapper .errorIcon {
-  fill: #ff4d4d;
-  filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.42));
 }
 
 .content {
