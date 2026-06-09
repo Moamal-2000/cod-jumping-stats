@@ -28,19 +28,12 @@ const ServersRefreshIndicator = ({ onRefresh, refreshSeconds }) => {
 
   const isError = refreshStage === "error";
   const isChecked = refreshStage === "after";
+  const textClasses = `${s.text} ${isChecked ? s.checked : ""} ${isError ? s.error : ""}`;
 
   return (
-    <div className={`${s.container} ${isVisible ? s.visible : s.hidden}`}>
-      <div className={s.indicator}>
-        <StatusIcon refreshStage={refreshStage} isError={isError} />
-        <div className={s.content}>
-          <p
-            className={`${s.text} ${isChecked ? s.checked : ""} ${isError ? s.error : ""}`}
-          >
-            Refreshing servers...
-          </p>
-        </div>
-      </div>
+    <div className={`${s.indicator} ${isVisible ? s.visible : s.hidden}`}>
+      <StatusIcon refreshStage={refreshStage} isError={isError} />
+      <p className={textClasses}>Refreshing servers...</p>
     </div>
   );
 };
