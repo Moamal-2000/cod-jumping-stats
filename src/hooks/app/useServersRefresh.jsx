@@ -12,6 +12,7 @@ const useServersRefresh = (
 
   const refreshTimeoutRef = useRef(null);
   const cycleTimeoutRef = useRef(null);
+  const stageResetTimeoutRef = useRef(null);
   const pollingTimerRef = useRef(null);
   const waitingForOkRef = useRef(false);
 
@@ -21,6 +22,9 @@ const useServersRefresh = (
     }
     if (cycleTimeoutRef.current) {
       clearTimeout(cycleTimeoutRef.current);
+    }
+    if (stageResetTimeoutRef.current) {
+      clearTimeout(stageResetTimeoutRef.current);
     }
 
     setIsVisible(true);
@@ -61,6 +65,9 @@ const useServersRefresh = (
       if (cycleTimeoutRef.current) {
         clearTimeout(cycleTimeoutRef.current);
       }
+      if (stageResetTimeoutRef.current) {
+        clearTimeout(stageResetTimeoutRef.current);
+      }
     };
   }, [refreshIntervalSeconds, startRefreshCycle]);
 
@@ -74,7 +81,9 @@ const useServersRefresh = (
 
     cycleTimeoutRef.current = setTimeout(() => {
       setIsVisible(false);
-      setRefreshStage("before");
+      stageResetTimeoutRef.current = setTimeout(() => {
+        setRefreshStage("before");
+      }, 300);
     }, 3000);
   }, [didServersFetchOk]);
 
@@ -88,7 +97,9 @@ const useServersRefresh = (
 
     cycleTimeoutRef.current = setTimeout(() => {
       setIsVisible(false);
-      setRefreshStage("before");
+      stageResetTimeoutRef.current = setTimeout(() => {
+        setRefreshStage("before");
+      }, 300);
     }, 300000);
   }, [didServersFetchFail]);
 

@@ -59,6 +59,10 @@
   filter: drop-shadow(0 0 8px rgba(29, 255, 112, 0.45));
 }
 
+.container.hidden .spinnerWrapper .checkedIcon {
+  transition-delay: 1s;
+}
+
 .spinnerWrapper .errorIcon {
   fill: #ff4d4d;
   filter: drop-shadow(0 0 8px rgba(255, 77, 77, 0.42));
@@ -74,7 +78,6 @@
   font-weight: 600;
   font-size: 0.92rem;
   line-height: 1.2rem;
-  margin: 0;
   white-space: nowrap;
 
   &.checked {
@@ -84,6 +87,10 @@
   &.error {
     color: #ff4d4d;
   }
+}
+
+.container.hidden .text {
+  transition-delay: .5s;
 }
 
 @media (max-width: 640px) {
