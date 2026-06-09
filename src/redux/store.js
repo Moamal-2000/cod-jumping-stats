@@ -6,11 +6,12 @@ import mapSlice from "./features/map/slice/mapSlice";
 import mapsSlice from "./features/maps/slice/mapsSlice";
 import playerProfileSlice from "./features/playerProfile/slice/playerProfileSlice";
 import playersSlice from "./features/players/slice/playersSlice";
-import { serversSlice } from "./features/servers/api/serversSlice";
+import { serversSlice as serversApi } from "./features/servers/api/serversSlice";
+import serversSlice from "./features/servers/slice/serversSlice";
 
 export const store = configureStore({
   reducer: {
-    [serversSlice.reducerPath]: serversSlice.reducer,
+    [serversApi.reducerPath]: serversApi.reducer,
     [jhStatsSlice.reducerPath]: jhStatsSlice.reducer,
     global: globalSlice,
     leaderboard: leaderboardSlice,
@@ -18,10 +19,11 @@ export const store = configureStore({
     players: playersSlice,
     playerProfile: playerProfileSlice,
     map: mapSlice,
+    servers: serversSlice,
   },
   middleware: (getDefaultMiddlewares) =>
     getDefaultMiddlewares().concat(
-      serversSlice.middleware,
+      serversApi.middleware,
       jhStatsSlice.middleware,
     ),
 });

@@ -1,21 +1,20 @@
 "use client";
 
 import useServersRefresh from "@/hooks/app/useServersRefresh";
-import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
+import { resetServersFetchStatus } from "@/redux/features/servers/slice/serversSlice";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./ServersRefreshIndicator.module.scss";
 import StatusIcon from "./StatusIcon/StatusIcon";
 
 const ServersRefreshIndicator = ({ onRefresh, refreshSeconds }) => {
   const { didServersFetchOk, didServersFetchFail } = useSelector(
-    (s) => s.global,
+    (s) => s.servers,
   );
 
   const dispatch = useDispatch();
 
   function handleRefreshStart() {
-    dispatch(updateGlobalState({ key: "didServersFetchOk", value: false }));
-    dispatch(updateGlobalState({ key: "didServersFetchFail", value: false }));
+    dispatch(resetServersFetchStatus());
   }
 
   const { isVisible, refreshStage } = useServersRefresh(
