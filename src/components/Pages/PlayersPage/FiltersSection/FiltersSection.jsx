@@ -27,13 +27,17 @@ const FiltersSection = () => {
         {PLAYERS_FILTERS_DATA.map((filter) => (
           <FilterGroup key={filter.queryName} {...filter} />
         ))}
+
+        <div className={s.advancedFilters}>
+          <LastSeenDateFilter />
+          <CharacterCountFilter />
+          <PlayersColorFilter />
+        </div>
       </div>
 
       <div className={`${s.row} ${s.secondRow}`}>
         <div className={s.row}>
           <div className={`${s.filterGroup} ${s.searchGroup}`}>
-            <span className={s.filterLabel}>Search With</span>
-
             <div className={s.fields}>
               <SearchInput
                 queryName="name"
@@ -67,14 +71,6 @@ const FiltersSection = () => {
         </div>
 
         <SortViewButtons />
-      </div>
-
-      <div className={`${s.row} ${s.thirdRow}`}>
-        <div className={s.advancedFilters}>
-          <CharacterCountFilter />
-          <LastSeenDateFilter />
-          <PlayersColorFilter />
-        </div>
       </div>
     </section>
   );
