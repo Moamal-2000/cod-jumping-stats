@@ -14,7 +14,9 @@ import LastSeenDateFilter from "./LastSeenDateFilter/LastSeenDateFilter";
 import PlayersColorFilter from "./PlayersColorFilter/PlayersColorFilter";
 
 const FiltersSection = () => {
-  const { allPlayersData, playersScroll } = useSelector((s) => s.players);
+  const { allPlayersData, playersData, playersScroll } = useSelector(
+    (s) => s.players,
+  );
 
   const normalizedCountryNames = comboboxCountryNames({
     allData: allPlayersData,
@@ -64,7 +66,7 @@ const FiltersSection = () => {
 
           <ResultsSummary
             displayCount={playersScroll.length}
-            total={allPlayersData.length}
+            total={playersData.length}
             label="players"
             className={s.resultsSummary}
           />
