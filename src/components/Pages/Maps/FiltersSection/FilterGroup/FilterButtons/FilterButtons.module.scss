@@ -43,6 +43,8 @@
   max-height: 36px;
   min-width: 70px;
   @include m.flex-center;
+  flex-shrink: 0;
+  text-wrap: nowrap;
   background-color: #1f2937;
   color: #9ca3af;
   border: 1px solid #374151;

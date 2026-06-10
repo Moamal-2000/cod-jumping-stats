@@ -23,7 +23,7 @@ const FiltersSection = () => {
 
   return (
     <section className={s.filtersSection}>
-      <div className={s.row}>
+      <div className={`${s.row} ${s.firstRow}`}>
         {PLAYERS_FILTERS_DATA.map((filter) => (
           <FilterGroup key={filter.queryName} {...filter} />
         ))}

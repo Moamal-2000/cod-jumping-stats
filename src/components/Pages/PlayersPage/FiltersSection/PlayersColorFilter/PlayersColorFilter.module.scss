@@ -48,6 +48,12 @@
   }
 }
 
+@include m.media(very-small) {
+  .menuButton {
+    width: 100%;
+  }
+}
+
 .buttonLabel {
   flex: 1;
   text-align: left;
@@ -67,6 +73,12 @@
   max-width: 240px;
   overflow-y: auto;
   animation: slideDown 0.2s ease-out;
+}
+
+@include m.media(very-small) {
+  .menu {
+    max-width: 100%;
+  }
 }
 
 .menuHeader {
