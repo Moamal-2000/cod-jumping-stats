@@ -20,14 +20,14 @@
     cursor: not-allowed;
   }
 
-  &.active {
+  &.active:not(:disabled) {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
     border-color: #2563eb;
     box-shadow: 0 0 0 2px rgba(88, 166, 255, .3);
     rotate: 180deg;
   }
 
-  &:not(.active):hover {
+  &:not(.active):not(:disabled):hover {
     background-color: #374151;
     border-color: #9ca3af;
 
@@ -44,6 +44,6 @@
   transition: fill .15s ease-in-out;
 }
 
-.showAllBtn.active svg {
+.showAllBtn.active:not(:disabled) svg {
   fill: #fff;
 }

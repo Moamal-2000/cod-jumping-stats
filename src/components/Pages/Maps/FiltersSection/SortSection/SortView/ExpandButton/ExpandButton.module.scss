@@ -20,7 +20,7 @@
     cursor: not-allowed;
   }
 
-  &.active {
+  &.active:not(:disabled) {
     background: linear-gradient(135deg, #3b82f6, #2563eb);
     border-color: #2563eb;
     box-shadow: 0 0 0 2px rgba(88, 166, 255, .3);
@@ -43,6 +43,6 @@
   transition: fill .15s ease-in-out;
 }
 
-.expandButton.active svg {
+.expandButton.active:not(:disabled) svg {
   fill: #fff;
 }

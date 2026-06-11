@@ -15,7 +15,7 @@
     border-color .15s ease-in-out,
     box-shadow .15s ease-in-out;
 
-  &.active {
+  &.active:not(:disabled) {
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
     color: #ffffff;
     border-color: #f59e0b;

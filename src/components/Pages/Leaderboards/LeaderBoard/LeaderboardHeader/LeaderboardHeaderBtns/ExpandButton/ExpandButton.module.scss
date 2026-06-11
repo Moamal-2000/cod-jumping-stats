@@ -1,6 +1,6 @@
 .button {
 
-  &.active {
+  &.active:not(:disabled) {
     background: linear-gradient(135deg, #fbbf24, #f59e0b);
     border-color: #f59e0b;
     box-shadow: 0 0 0 2px rgba(251, 191, 36, .35);
@@ -18,6 +18,6 @@
   }
 }
 
-.button:not(.active):hover svg {
+.button:not(.active):not(:disabled):hover svg {
   fill: #fff;
 }
