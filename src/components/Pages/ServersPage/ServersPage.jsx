@@ -45,7 +45,7 @@ const ServersPage = () => {
 
   const { data, isLoading, isError, refetch } = useGetServersQuery();
 
-  function handlerefreshParamChange(value) {
+  function handleRefreshParamChange(value) {
     if (value === DEFAULT_REFRESH_SECONDS) {
       removeQueryString("refresh", searchParams, router, pathname);
       return;
@@ -76,7 +76,7 @@ const ServersPage = () => {
     <>
       <ServersControls
         refreshSeconds={refreshSeconds}
-        onRefreshSecondsChange={handlerefreshParamChange}
+        onRefreshSecondsChange={handleRefreshParamChange}
         autoRefreshEnabled={autoRefreshEnabled}
         gameFilter={gameFilter}
         onGameFilterChange={handleGameFilterChange}
