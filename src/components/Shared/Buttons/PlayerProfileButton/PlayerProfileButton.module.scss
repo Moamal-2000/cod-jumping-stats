@@ -1,0 +1,105 @@
+@use "@/styles/mixins" as m;
+
+.profileButton {
+  --size: 42px;
+
+  outline: none;
+  width: var(--size);
+  height: var(--size);
+  position: fixed;
+  left: 0;
+  top: calc(50% + var(--size) + 6px);
+  translate: 0 -50%;
+  @include m.flex-center;
+  background-color: #1a202c;
+  border: 1px solid #3c3b25;
+  border-radius: 6px;
+  z-index: 30;
+  transition:
+    background-color .2s ease,
+    box-shadow .2s ease,
+    border-color .3s ease;
+
+  &:where(:hover, :focus-visible) {
+    background-color: #232d3f;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, .2);
+    border-color: #e0bf00;
+  }
+}
+
+@include m.media(small) {
+  .profileButton {
+    --size: 38px;
+  }
+}
+
+@include m.media(very-small) {
+  .profileButton {
+    --size: 36px;
+  }
+}
+
+.profileButton svg {
+  --icon-size: 20px;
+
+  width: var(--icon-size);
+  height: var(--icon-size);
+  fill: #9ea3b0;
+  transition: fill .2s ease;
+}
+
+@include m.media(small) {
+  .profileButton svg {
+    --icon-size: 18px;
+  }
+}
+
+@include m.media(very-small) {
+  .profileButton svg {
+    --icon-size: 16px;
+  }
+}
+
+.profileButton:where(:hover, :focus-visible) svg {
+  fill: #ffd700;
+}
+
+.tooltip {
+  outline: none;
+  position: absolute;
+  left: 32px;
+  top: 50%;
+  translate: 8px -50%;
+  background-color: #232d3f;
+  padding: 8px 12px;
+  margin-left: 8px;
+  border: solid 1px #6b7a95;
+  border-radius: 6px;
+  font-size: .75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+}
+
+@include m.media(small) {
+  .tooltip {
+    font-size: .75rem;
+    padding: 6.4px 10.4px;
+  }
+}
+
+@include m.media(very-small) {
+  .tooltip {
+    font-size: .7rem;
+    padding: 5.6px 9.6px;
+  }
+}
+
+.profileButton:where(:hover, :focus-visible) .tooltip {
+  opacity: 1;
+  visibility: visible;
+}

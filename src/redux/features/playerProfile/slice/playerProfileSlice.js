@@ -30,6 +30,7 @@ const initialState = {
   mapRunsError: false,
 
   focusedProfileTab: 0,
+  playerProfileId: null,
 };
 
 export const playerProfileSlice = createSlice({

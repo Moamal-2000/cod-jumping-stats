@@ -3,6 +3,7 @@
 import Footer from "@/components/Footer/Footer";
 import Header from "@/components/Header/Header";
 import GitHubStarBtn from "@/components/Shared/Buttons/GitHubStarBtn/GitHubStarBtn";
+import PlayerProfileButton from "@/components/Shared/Buttons/PlayerProfileButton/PlayerProfileButton";
 import ScrollToTopBtn from "@/components/Shared/Buttons/ScrollToTopBtn/ScrollToTopBtn";
 import GitHubNotice from "@/components/Shared/GitHubNotice/GitHubNotice";
 import GlobalOverlay from "@/components/Shared/GlobalOverlay/GlobalOverlay";
@@ -29,6 +30,7 @@ const RootProviders = ({ children }) => {
             <Header />
             <LayoutLayer>
               <GitHubStarBtn />
+              <PlayerProfileButton />
               {children}
               <Footer />
               <ScrollToTopBtn />
