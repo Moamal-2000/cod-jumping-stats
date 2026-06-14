@@ -4,34 +4,15 @@ import { getColoredName } from "@/components/Helper/playerNameColor";
 import PlayerBadges from "@/components/Pages/PlayersPage/PlayerCard/PlayerBadges/PlayerBadges";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
+import PlayerProfileButton from "./PlayerProfileButton/PlayerProfileButton";
 import s from "./PlayerProfileHeader.module.scss";
 
 const PlayerProfileHeader = ({ playerData, playerId }) => {
-  const { jumpScores, playerProfileId } = useSelector((s) => s.playerProfile);
-
-  const dispatch = useDispatch();
+  const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
 
   const { countryCode, playerName, lastSeen, adminLevel, isBanned, isDonated } =
     getPlayerInfo({ playerData, jumpScores });
-
-  function handleStorePlayer() {
-    const playerProfileIdLocal = localStorage.getItem("player-profile-id");
-
-    if (playerProfileIdLocal) {
-      localStorage.removeItem("player-profile-id");
-      dispatch(
-        updatePlayerProfileState({ key: "playerProfileId", value: null }),
-      );
-      return;
-    }
-
-    localStorage.setItem("player-profile-id", playerId);
-    dispatch(
-      updatePlayerProfileState({ key: "playerProfileId", value: playerId }),
-    );
-  }
 
   return (
     <section className={s.profileHeader}>
@@ -50,18 +31,7 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
         <div className={s.playerDetails}>
           <div className={s.playerNameAndButton}>
             <h1 className={s.playerName}>{getColoredName(playerName)}</h1>
-
-            <button
-              type="button"
-              onClick={handleStorePlayer}
-              className={s.myProfileButton}
-            >
-              <svg aria-hidden="true">
-                <use
-                  href={`/icons-sprite.svg#${playerProfileId ? "trash-can" : "pin"}`}
-                />
-              </svg>
-            </button>
+            <PlayerProfileButton />
           </div>
 
           <div className={s.playerMeta}>
