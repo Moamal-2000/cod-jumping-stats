@@ -5,15 +5,12 @@ import {
   DEFAULT_SERVERS_VIEW_MODE,
   SERVER_STATUS_FILTER,
   SERVERS_GAME_FILTER_OPTIONS,
-  SERVERS_MOD_FILTER_OPTIONS,
   SERVERS_REFRESH_OPTIONS,
 } from "@/data/constants";
 import s from "./ServersControls.module.scss";
 
 const ServersControls = ({
   refreshSeconds,
-  onModChange,
-  sourceParam,
   onRefreshSecondsChange,
   autoRefreshEnabled,
   gameFilter,
@@ -23,26 +20,6 @@ const ServersControls = ({
 }) => {
   return (
     <section className={s.controls} aria-label="Server options">
-      <fieldset className={s.controlGroup}>
-        <legend className={s.groupLabel}>Mod</legend>
-
-        <div className={s.toggleButtons}>
-          {SERVERS_MOD_FILTER_OPTIONS.map((option) => (
-            <button
-              key={option.id}
-              type="button"
-              className={`${s.toggleButton} ${
-                sourceParam === option.id ? s.active : ""
-              }`}
-              onClick={() => onModChange(option.id)}
-              aria-pressed={sourceParam === option.id}
-            >
-              {option.label}
-            </button>
-          ))}
-        </div>
-      </fieldset>
-
       <fieldset className={s.controlGroup}>
         <legend className={s.groupLabel}>Show</legend>
 

@@ -11,13 +11,7 @@ export const serversSlice = createApi({
 
   endpoints: (builder) => ({
     getServers: builder.query({
-      query: (sourceParam) => {
-        if (sourceParam) {
-          return `tracker/online-players?source=${sourceParam}`;
-        }
-
-        return "tracker/online-players";
-      },
+      query: () => "tracker/online-players",
     }),
   }),
 });
