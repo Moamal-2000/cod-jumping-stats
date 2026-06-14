@@ -22,11 +22,13 @@ const ServerCardHeader = ({ server, index, viewType }) => {
 
   const isList = viewType === "list";
 
+  const domain = server.Domain.includes("beta") ? "fr.server" : server.Domain
+
   return (
     <header className={`${s.serverHeader} ${isList ? s.list : ""}`}>
       <div className={s.countryFlag}>
         <Image
-          src={domainToCountryFlag(server.Domain)}
+          src={domainToCountryFlag(domain)}
           alt="Country flag"
           width="30"
           height="26"

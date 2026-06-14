@@ -30,6 +30,9 @@ const ServersList = ({ groupedServers, gameType }) => {
               const players = server?.Players || [];
               const rows =
                 server.Online && players.length > 0 ? players : [null];
+              const domain = server.Domain.includes("beta")
+                ? "fr.server"
+                : server.Domain;
 
               return rows.map((player, index) => {
                 const playerName = player
@@ -41,12 +44,10 @@ const ServersList = ({ groupedServers, gameType }) => {
                     : "Offline";
 
                 return (
-                  <tr
-                    key={`${server.Domain}${server.IP}${server.Port}-${index}`}
-                  >
+                  <tr key={`${server.IP}${server.Port}-${index}`}>
                     <td className={s.serverCell} data-label="Server">
                       <Image
-                        src={domainToCountryFlag(server.Domain)}
+                        src={domainToCountryFlag(domain)}
                         alt="Country flag"
                         width="26"
                         height="20"

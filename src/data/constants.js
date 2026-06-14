@@ -50,6 +50,10 @@ export const SERVERS_REFRESH_OPTIONS = [
   "120",
   "300",
 ];
+export const SERVERS_MOD_FILTER_OPTIONS = [
+  { id: "jh", label: "Jumpers Heaven" },
+  { id: "j4l", label: "Jump 4 Life" },
+];
 export const SERVERS_GAME_FILTER_OPTIONS = [
   { id: "all", label: "All" },
   { id: "cod2", label: "COD2" },

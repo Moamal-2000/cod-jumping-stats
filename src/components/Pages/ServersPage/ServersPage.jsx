@@ -16,6 +16,7 @@ import ServersRefreshIndicator from "./ServersRefreshIndicator/ServersRefreshInd
 const DEFAULT_REFRESH_SECONDS = "30";
 const DEFAULT_GAME_FILTER = "cod2";
 const DEFAULT_STATUS_SERVER = "all";
+const DEFAULT_MOD_SERVERS = "jh";
 
 const ServersPage = () => {
   const router = useRouter();
@@ -25,6 +26,7 @@ const ServersPage = () => {
   const refreshParam = searchParams.get("refresh") || DEFAULT_REFRESH_SECONDS;
   const gameParam = searchParams.get("game") || DEFAULT_GAME_FILTER;
   const statusParam = searchParams.get("status") || DEFAULT_STATUS_SERVER;
+  const sourceParam = searchParams.get("source");
 
   const refreshSeconds = SERVERS_REFRESH_OPTIONS.includes(refreshParam)
     ? refreshParam
@@ -43,7 +45,16 @@ const ServersPage = () => {
     ? statusParam
     : DEFAULT_STATUS_SERVER;
 
-  const { data, isLoading, isError, refetch } = useGetServersQuery();
+  const { data, isLoading, isError, refetch } = useGetServersQuery(sourceParam);
+
+  function onModChange(value) {
+    if (value === DEFAULT_MOD_SERVERS) {
+      removeQueryString("source", searchParams, router, pathname);
+      return;
+    }
+
+    createQueryString("source", value, searchParams, router, pathname);
+  }
 
   function handleRefreshParamChange(value) {
     if (value === DEFAULT_REFRESH_SECONDS) {
@@ -76,6 +87,8 @@ const ServersPage = () => {
     <>
       <ServersControls
         refreshSeconds={refreshSeconds}
+        onModChange={onModChange}
+        sourceParam={sourceParam || DEFAULT_MOD_SERVERS}
         onRefreshSecondsChange={handleRefreshParamChange}
         autoRefreshEnabled={autoRefreshEnabled}
         gameFilter={gameFilter}
