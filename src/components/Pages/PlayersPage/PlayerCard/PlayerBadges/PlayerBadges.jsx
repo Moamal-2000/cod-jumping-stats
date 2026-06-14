@@ -132,7 +132,7 @@ export function getPlayerBadges({
       id: 8,
     },
     {
-      displayCondition: PlayerID === 1,
+      displayCondition: PlayerID === 1 || PlayerID === 46077,
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",
