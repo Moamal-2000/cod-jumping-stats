@@ -6,7 +6,7 @@ export const GITHUB_REPO_API_URL =
 
 export const PAGINATION_ITEMS_PER_PAGE = 10;
 export const PLAYERS_BATCH_SIZE = 50;
-export const COD2_SERVERS_COUNT = 9;
+export const COD2_SERVERS_COUNT = 12;
 export const COD4_SERVERS_COUNT = 11;
 export const SERVERS_LIST_COUNT = 12;
 export const PLAYERS_CARDS_COUNT = 9;
