@@ -1,5 +1,15 @@
 export const LEADERBOARDS_FILTERS_DATA = [
   {
+    title: "Server Type",
+    queryName: "source",
+    defaultUrlQuery: "jh",
+    filtersData: [
+      { text: "Jumpers Heaven", queryValue: "jh", id: 1 },
+      { text: "Jump 4 Life", queryValue: "j4l", id: 2 },
+    ],
+    id: 0,
+  },
+  {
     title: "Leaderboard Type",
     queryName: "leaderboard",
     defaultUrlQuery: "speedrun",

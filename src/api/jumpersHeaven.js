@@ -9,6 +9,7 @@ export const jhApis = ({
   cpId: cpid = 14606,
   sort = "",
   gametype = "jump",
+  source = "jh",
 } = {}) => {
   fps = fps === "mix" ? 0 : fps;
 
@@ -32,11 +33,11 @@ export const jhApis = ({
       mapRuns: generateUrl("/player/map-runs", { playerid, cpid, fps }),
     },
     leaderboard: {
-      skilledLeaderboard: generateUrl("/leaderboard/jump-skill", { fps }),
-      speedRunLeaderboard: generateUrl("/leaderboard/speed-skill", { fps }),
-      defragLeaderboard: generateUrl("/leaderboard/defrag-skill", { fps }),
-      surfLeaderboard: generateUrl("/leaderboard/surf-skill", { fps }),
-      routesCompletedLeaderboard: generateUrl("/leaderboard/howmany"),
+      skilledLeaderboard: generateUrl("/leaderboard/jump-skill", { fps, source }),
+      speedRunLeaderboard: generateUrl("/leaderboard/speed-skill", { fps, source }),
+      defragLeaderboard: generateUrl("/leaderboard/defrag-skill", { fps, source }),
+      surfLeaderboard: generateUrl("/leaderboard/surf-skill", { fps, source }),
+      routesCompletedLeaderboard: generateUrl("/leaderboard/howmany", { source }),
     },
   };
 };
