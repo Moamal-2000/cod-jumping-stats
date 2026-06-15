@@ -25,8 +25,9 @@ export const serversSlice = createSlice({
           action.type === "serversApi/executeQuery/fulfilled" &&
           action.meta?.arg?.endpointName === "getServers",
         (state, { payload }) => {
-          state.didServersFetchOk = payload?.__status === 200;
-          state.didServersFetchFail = payload?.__status !== 200;
+          const isDataReceived = payload?.Servers?.length > 0;
+          state.didServersFetchOk = isDataReceived;
+          state.didServersFetchFail = !isDataReceived;
         },
       )
       .addMatcher(
