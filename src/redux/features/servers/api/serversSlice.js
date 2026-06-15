@@ -5,21 +5,25 @@ import { createApi } from "@reduxjs/toolkit/query/react";
 export const serversSlice = createApi({
   reducerPath: "serversApi",
   baseQuery: async (endpoint) => {
-    try {
-      const [j4lServers, jhServers] = await Promise.allSettled([
-        baseQueryMsgPack({ url: `${API_URL}/${endpoint}?source=j4l` }),
-        baseQueryMsgPack({ url: `${API_URL}/${endpoint}` }),
-      ]);
+    const [j4lResponse, jhResponse] = await Promise.allSettled([
+      baseQueryMsgPack({ url: `${API_URL}/${endpoint}?source=j4l` }),
+      baseQueryMsgPack({ url: `${API_URL}/${endpoint}` }),
+    ]);
 
-      const data = {
-        Servers: [...j4lServers.value.Servers, ...jhServers.value.Servers],
+    const isError = !!(j4lResponse?.value?.error && jhResponse?.value?.error);
+    const j4lServers = isError ? [] : j4lResponse.value.Servers;
+    const jhServers = isError ? [] : jhResponse.value.Servers;
+
+    if (isError) {
+      return {
+        error: {
+          status: "FETCH_ERROR",
+          error: "Failed to fetch both j4l and jh servers data",
+        },
       };
-
-      return { data };
-    } catch (error) {
-      console.error(`Failed to fetch servers data: `, error);
-      return { data: {} };
     }
+
+    return { data: { Servers: [...j4lServers, ...jhServers] } };
   },
 
   endpoints: (builder) => ({

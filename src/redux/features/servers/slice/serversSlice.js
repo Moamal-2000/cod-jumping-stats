@@ -9,10 +9,6 @@ export const serversSlice = createSlice({
   name: "serversSlice",
   initialState,
   reducers: {
-    setServersFetchStatus: (state, { payload }) => {
-      state.didServersFetchOk = payload.success;
-      state.didServersFetchFail = !payload.success;
-    },
     resetServersFetchStatus: (state) => {
       state.didServersFetchOk = false;
       state.didServersFetchFail = false;
@@ -43,5 +39,4 @@ export const serversSlice = createSlice({
 });
 
 export default serversSlice.reducer;
-export const { setServersFetchStatus, resetServersFetchStatus } =
-  serversSlice.actions;
+export const { resetServersFetchStatus } = serversSlice.actions;
