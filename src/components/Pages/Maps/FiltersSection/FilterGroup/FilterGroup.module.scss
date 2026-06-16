@@ -6,8 +6,8 @@
 }
 
 @include m.media(very-small) {
-  .filterGroup.checkbox {
-    width: 100%;
+  .filterGroup {
+    flex: 1;
   }
 }
 
