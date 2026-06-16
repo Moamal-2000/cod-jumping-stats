@@ -78,6 +78,18 @@ export const LEADERBOARDS_FILTERS_DATA = [
 
 export const MAPS_FILTERS_DATA = [
   {
+    label: "Server Type",
+    queryName: "source",
+    defaultUrlQuery: "jh",
+    groupType: "select",
+    filtersData: [
+      { text: "Jumpers Heaven", queryValue: "jh", id: 1 },
+      { text: "Jump 4 Life", queryValue: "j4l", id: 2 },
+    ],
+    tooltipText: "Choose which server's maps to display",
+    id: 0,
+  },
+  {
     label: "Map Type",
     queryName: "type",
     defaultUrlQuery: "all",

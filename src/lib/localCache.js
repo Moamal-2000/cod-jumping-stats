@@ -34,26 +34,29 @@ export function getValueFromLocalStorage({ key, defaultValue }) {
   return value ? JSON.parse(value) : defaultValue;
 }
 
-export function cacheMapsLocally(mapsLocal) {
+export function cacheMapsLocally(mapsLocal, paramsObject) {
   if (typeof window === "undefined") {
     return;
   }
 
+  const sourceParam = paramsObject?.source || "jh";
   const dataToCache = { maps: mapsLocal, timeStamp: Date.now() };
 
   const encoded = encode(dataToCache);
   const base64 = uint8ToBase64(encoded);
   const compressed = LZString.compressToUTF16(base64);
 
-  localStorage.setItem("mapsData", compressed);
+  localStorage.setItem(`${sourceParam}-mapsData`, compressed);
 }
 
-export function getCachedMaps() {
+export function getCachedMaps(paramsObject) {
   if (typeof window === "undefined") {
     return null;
   }
 
-  const compressed = localStorage.getItem("mapsData");
+  const sourceParam = paramsObject?.source || "jh";
+  const compressed = localStorage.getItem(`${sourceParam}-mapsData`);
+
   if (!compressed) {
     return null;
   }

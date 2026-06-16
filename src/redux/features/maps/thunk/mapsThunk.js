@@ -7,7 +7,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 export const fetchMaps = createAsyncThunk(
   "globalSlice/fetchMaps",
   async (paramsObject) => {
-    const cachedData = getCachedMaps();
+    const cachedData = getCachedMaps(paramsObject);
 
     if (cachedData !== null) {
       const cacheAge = Date.now() - parseInt(cachedData.timeStamp, 10);
@@ -20,10 +20,10 @@ export const fetchMaps = createAsyncThunk(
 
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis().map.allMaps,
+        url: jhApis(paramsObject).map.allMaps,
       });
       const mapsData = (await decodeAsyncData(response)) ?? [];
-      cacheMapsLocally(mapsData);
+      cacheMapsLocally(mapsData, paramsObject);
 
       return { mapsData, paramsObject };
     } catch (error) {

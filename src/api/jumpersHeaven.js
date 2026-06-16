@@ -15,9 +15,9 @@ export const jhApis = ({
 
   return {
     map: {
-      allMaps: generateUrl("/map/all"),
+      allMaps: generateUrl("/map/all", { source }),
       mapsCount: generateUrl("/map/count"),
-      tops: generateUrl("/map/tops", { cpid, fps, limit }),
+      tops: generateUrl("/map/tops", { cpid, fps, limit, source }),
     },
     player: {
       all: generateUrl("/player/all", { sort }),
