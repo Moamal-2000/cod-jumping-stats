@@ -77,11 +77,9 @@
 
 @include m.media(very-small) {
   .label .tooltip .tooltipText {
-    top: auto;
-    left: 0;
-    translate: 0 0;
     margin-left: -70px;
     width: 190px;
+    text-wrap: wrap;
   }
 }
 
