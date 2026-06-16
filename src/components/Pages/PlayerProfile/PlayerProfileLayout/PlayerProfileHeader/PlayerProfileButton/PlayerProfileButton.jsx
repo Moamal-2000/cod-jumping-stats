@@ -2,7 +2,7 @@ import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/p
 import { useDispatch, useSelector } from "react-redux";
 import s from "./PlayerProfileButton.module.scss";
 
-const PlayerProfileButton = () => {
+const PlayerProfileButton = ({ playerId }) => {
   const playerProfileId = useSelector((s) => s.playerProfile.playerProfileId);
 
   const dispatch = useDispatch();

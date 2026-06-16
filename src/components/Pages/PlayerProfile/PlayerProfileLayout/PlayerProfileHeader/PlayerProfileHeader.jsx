@@ -31,7 +31,7 @@ const PlayerProfileHeader = ({ playerData, playerId }) => {
         <div className={s.playerDetails}>
           <div className={s.playerNameAndButton}>
             <h1 className={s.playerName}>{getColoredName(playerName)}</h1>
-            <PlayerProfileButton />
+            <PlayerProfileButton playerId={playerId} />
           </div>
 
           <div className={s.playerMeta}>
