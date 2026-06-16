@@ -30,7 +30,7 @@ const HideLeaderboardHeaderBtn = () => {
     dispatch(
       updateLeaderboardState({ key: "isLeaderboardHeaderVisible", value }),
     );
-    localStorage.setItem("isLeaderboardHeaderVisible", value);
+    localStorage.setItem("is-leaderboard-header-visible", value);
   }
 
   return (

@@ -1,6 +1,6 @@
 import LZString from "lz-string";
 import { decode, encode } from "msgpackr";
-import { capitalize } from "./utils";
+import { kebabCase } from "./utils";
 
 function uint8ToBase64(uint8Array) {
   let binary = "";
@@ -46,7 +46,7 @@ export function cacheMapsLocally(mapsLocal, paramsObject) {
   const base64 = uint8ToBase64(encoded);
   const compressed = LZString.compressToUTF16(base64);
 
-  localStorage.setItem(`${sourceParam}-mapsData`, compressed);
+  localStorage.setItem(`${sourceParam}-maps-data`, compressed);
 }
 
 export function getCachedMaps(paramsObject) {
@@ -55,7 +55,7 @@ export function getCachedMaps(paramsObject) {
   }
 
   const sourceParam = paramsObject?.source || "jh";
-  const compressed = localStorage.getItem(`${sourceParam}-mapsData`);
+  const compressed = localStorage.getItem(`${sourceParam}-maps-data`);
 
   if (!compressed) {
     return null;
@@ -88,7 +88,7 @@ export function cachePlayersLocally(playersLocal, dataType) {
   const base64 = uint8ToBase64(encoded);
   const compressed = LZString.compressToUTF16(base64);
 
-  const key = `playersData${capitalize(dataType)}`;
+  const key = `players-data-${kebabCase(dataType)}`;
   localStorage.setItem(key, compressed);
 }
 
@@ -97,7 +97,7 @@ export function getCachedPlayers(dataType) {
     return null;
   }
 
-  const key = `playersData${capitalize(dataType)}`;
+  const key = `players-data-${kebabCase(dataType)}`;
   const compressed = localStorage.getItem(key);
   if (!compressed) {
     return null;

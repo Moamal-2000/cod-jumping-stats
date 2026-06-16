@@ -4,7 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { fetchLeaderboard } from "../thunk/leaderboardThunk";
 
 const isLeaderboardHeaderVisible = getValueFromLocalStorage({
-  key: "isLeaderboardHeaderVisible",
+  key: "is-leaderboard-header-visible",
   defaultValue: true,
 });
 
