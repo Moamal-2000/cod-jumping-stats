@@ -113,11 +113,6 @@ export const MAPS_FILTERS_DATA = [
       { text: "Map Image", queryValue: "map-image", id: 1 },
       { text: "Difficulties", queryValue: "difficulties", id: 2 },
       { text: "Completion Rate", queryValue: "completion-rate", id: 3 },
-      {
-        text: "Author and Release Date",
-        queryValue: "author-release-date",
-        id: 4,
-      },
     ],
     tooltipText: "Enable/Disable maps information",
     id: 2,

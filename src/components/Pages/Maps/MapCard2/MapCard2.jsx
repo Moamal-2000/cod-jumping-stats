@@ -32,12 +32,8 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     IndividualFinishCount,
   });
 
-  const {
-    hideMapImage,
-    hideDifficulties,
-    hideCompletionRate,
-    hideAuthorAndRelease,
-  } = getHideMapInfo(searchParams);
+  const { hideMapImage, hideDifficulties, hideCompletionRate } =
+    getHideMapInfo(searchParams);
 
   return (
     <div className={s.mapCard} ref={ref}>
@@ -85,14 +81,10 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
           <CompletionRate completionRate={completionRate} />
         )}
 
-        {!hideAuthorAndRelease && (
-          <div className={s.authorAndRelease}>
-            <span className={s.authorName}>{Author}</span>
-            <span className={s.releaseDate}>
-              {formateReleaseDate(Released)}
-            </span>
-          </div>
-        )}
+        <div className={s.authorAndRelease}>
+          <span className={s.authorName}>{Author}</span>
+          <span className={s.releaseDate}>{formateReleaseDate(Released)}</span>
+        </div>
       </div>
     </div>
   );

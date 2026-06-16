@@ -30,12 +30,8 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   });
 
   const searchParams = useSearchParams();
-  const {
-    hideMapImage,
-    hideDifficulties,
-    hideCompletionRate,
-    hideAuthorAndRelease,
-  } = getHideMapInfo(searchParams);
+  const { hideMapImage, hideDifficulties, hideCompletionRate } =
+    getHideMapInfo(searchParams);
 
   return (
     <div className={s.mapCard} ref={ref}>
@@ -85,9 +81,7 @@ const MapCard = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
         {!hideCompletionRate && (
           <CompletionRate completionRate={completionRate} />
         )}
-        {!hideAuthorAndRelease && (
-          <AuthorAndRelease author={Author} release={Released} />
-        )}
+        <AuthorAndRelease author={Author} release={Released} />
       </section>
     </div>
   );
@@ -100,12 +94,6 @@ export function getHideMapInfo(searchParams) {
   const hideMapImage = hideParams.includes("map-image");
   const hideDifficulties = hideParams.includes("difficulties");
   const hideCompletionRate = hideParams.includes("completion-rate");
-  const hideAuthorAndRelease = hideParams.includes("author-release-date");
 
-  return {
-    hideMapImage,
-    hideDifficulties,
-    hideCompletionRate,
-    hideAuthorAndRelease,
-  };
+  return { hideMapImage, hideDifficulties, hideCompletionRate };
 }
