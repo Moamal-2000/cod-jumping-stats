@@ -7,12 +7,12 @@ export const fetchMapTops = createAsyncThunk(
   "globalSlice/fetchMapTops",
   async (paramsObject) => {
     try {
-      const { fps, cpId } = paramsObject;
+      const { fps, cpId, source } = paramsObject;
 
       if (fps === "all") {
         const promises = JUMP_FPS.map((jumpFps) =>
           fetchMsgPackResponse({
-            url: jhApis({ fps: jumpFps, cpId }).map.tops,
+            url: jhApis({ fps: jumpFps, cpId, source }).map.tops,
           })
             .then((response) => decodeAsyncData(response))
             .then((data) => {
@@ -48,7 +48,7 @@ export const fetchMapTops = createAsyncThunk(
       }
 
       const response = await fetchMsgPackResponse({
-        url: jhApis({ fps, cpId }).map.tops,
+        url: jhApis({ fps, cpId, source }).map.tops,
       });
       const mapTops = (await decodeAsyncData(response)) ?? [];
 
@@ -63,12 +63,13 @@ export const fetchMapPlayers = createAsyncThunk(
   "globalSlice/fetchMapPlayers",
   async (paramsObject) => {
     try {
-      const { fps, mapId } = paramsObject;
+      const { fps, mapId, source } = paramsObject;
 
       if (fps === "all") {
         const promises = JUMP_FPS.map((jumpFps) =>
           fetchMsgPackResponse({
-            url: jhApis({ fps: jumpFps, mapid: mapId }).player.playersPlayTime,
+            url: jhApis({ fps: jumpFps, mapid: mapId, source }).player
+              .playersPlayTime,
           })
             .then((response) => decodeAsyncData(response))
             .then((data) => {
@@ -122,7 +123,7 @@ export const fetchMapPlayers = createAsyncThunk(
       }
 
       const response = await fetchMsgPackResponse({
-        url: jhApis({ fps, mapid: mapId }).player.playersPlayTime,
+        url: jhApis({ fps, mapid: mapId, source }).player.playersPlayTime,
       });
       const data = (await decodeAsyncData(response)) ?? [];
       return Array.isArray(data) ? data : [];

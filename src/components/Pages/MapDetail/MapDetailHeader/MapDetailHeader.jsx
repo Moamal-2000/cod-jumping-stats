@@ -7,6 +7,7 @@ import { JUMP_FPS } from "@/data/constants";
 import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { formateReleaseDate } from "@/lib/dateTime";
 import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MapDetailHeader.module.scss";
@@ -15,16 +16,21 @@ import MapServerSelector from "./MapServerSelector/MapServerSelector";
 const MapDetailHeader = ({ mapData }) => {
   const { Name, Author, Released, Type, Ender, CpID } = mapData;
   const [bestPlayer, setBestPlayer] = useState(null);
-
   const allMaps = useSelector((state) => state.maps.allMaps);
+
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+
+  const sourceParam = searchParams.get("source") || "jh";
 
   useEffect(() => {
+    const source = sourceParam;
+
     if (allMaps.length <= 0) {
-      dispatch(fetchMaps());
+      dispatch(fetchMaps({ source }));
     }
 
-    if (!CpID || bestPlayer?.PlayerID) {
+    if (!CpID || !bestPlayer?.PlayerID) {
       return;
     }
 
@@ -36,7 +42,8 @@ const MapDetailHeader = ({ mapData }) => {
       }
 
       try {
-        const results = await fetchAllTopRuns({ mapId: CpID });
+        console.log("Fetching with source", source);
+        const results = await fetchAllTopRuns({ mapId: CpID, source });
 
         const allRuns = results
           .filter((result) => Array.isArray(result))
@@ -59,7 +66,7 @@ const MapDetailHeader = ({ mapData }) => {
     return () => {
       cancelled = true;
     };
-  }, [allMaps.length, CpID, dispatch]);
+  }, [allMaps.length, CpID, sourceParam]);
 
   return (
     <div className={s.header}>
@@ -115,11 +122,11 @@ const MapDetailHeader = ({ mapData }) => {
 
 export default MapDetailHeader;
 
-export async function fetchAllTopRuns({ mapId }) {
+export async function fetchAllTopRuns({ mapId, source }) {
   try {
     const topRunsPromises = JUMP_FPS.map(async (fps) => {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ fps, cpId: mapId }).map.tops,
+        url: jhApis({ fps, cpId: mapId, source }).map.tops,
       });
       const topRunsByFps = await decodeAsyncData(response);
 

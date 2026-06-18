@@ -27,20 +27,25 @@ const MapDetailPage = ({ cpId }) => {
 
   const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
   const activeTab = searchParams.get("tab") || "tops";
+  const sourceParam = searchParams.get("source") || "jh";
 
   useEffect(() => {
+    const source = sourceParam;
+
     if (cpId && allMaps.length <= 0) {
-      dispatch(fetchMaps());
+      dispatch(fetchMaps({ source }));
     }
 
     if (activeTab === "tops" && cpId) {
-      dispatch(fetchMapTops({ fps: selectedFps, cpId }));
+      dispatch(fetchMapTops({ fps: selectedFps, cpId, source }));
     }
 
     if (activeTab === "players" && mapData?.ID) {
-      dispatch(fetchMapPlayers({ fps: selectedFps, mapId: mapData.ID }));
+      dispatch(
+        fetchMapPlayers({ fps: selectedFps, mapId: mapData.ID, source }),
+      );
     }
-  }, [activeTab, selectedFps]);
+  }, [activeTab, selectedFps, sourceParam]);
 
   if (loading || error || !mapData) {
     return (
