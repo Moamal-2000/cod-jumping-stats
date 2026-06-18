@@ -39,6 +39,9 @@ const ServersList = ({ groupedServers, gameType }) => {
                   : server.Online
                     ? ""
                     : "Offline";
+                const query = server?.Domain.includes("jump4life")
+                  ? "?source=j4l"
+                  : "";
 
                 return (
                   <tr key={`${server.IP}${server.Port}-${index}`}>
@@ -55,7 +58,7 @@ const ServersList = ({ groupedServers, gameType }) => {
                         <span>{server.Map}</span>
                       ) : (
                         server.Online && (
-                          <TransitionLink href={`/map/${server.MapID}`}>
+                          <TransitionLink href={`/map/${server.MapID}${query}`}>
                             {server.Map}
                           </TransitionLink>
                         )

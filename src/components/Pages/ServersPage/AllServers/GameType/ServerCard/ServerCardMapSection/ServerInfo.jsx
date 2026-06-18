@@ -4,6 +4,7 @@ import s from "./ServerInfo.module.scss";
 const ServerInfo = ({ server, viewType }) => {
   const isCod4 = server.GameType === "COD4";
   const isList = viewType === "list";
+  const query = server?.Domain.includes("jump4life") ? "?source=j4l" : "";
 
   return (
     <section className={`${s.serverInfo} ${isList ? s.list : ""}`}>
@@ -35,7 +36,10 @@ const ServerInfo = ({ server, viewType }) => {
         {isCod4 && <span className={s.mapName}>{server.Map}</span>}
 
         {!isCod4 && server.Online && (
-          <TransitionLink href={`/map/${server.MapID}`} className={s.mapName}>
+          <TransitionLink
+            href={`/map/${server.MapID}${query}`}
+            className={s.mapName}
+          >
             {server.Map}
           </TransitionLink>
         )}
