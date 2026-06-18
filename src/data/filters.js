@@ -133,6 +133,17 @@ export const MAPS_FILTERS_DATA = [
 
 export const PLAYERS_FILTERS_DATA = [
   {
+    label: "Server Type",
+    queryName: "source",
+    defaultUrlQuery: "jh",
+    groupType: "select",
+    filtersData: [
+      { text: "Jumpers Heaven", queryValue: "jh", id: 1 },
+      { text: "Jump 4 Life", queryValue: "j4l", id: 2 },
+    ],
+    id: 0,
+  },
+  {
     label: "Sort By",
     queryName: "sort",
     defaultUrlQuery: "last-seen",

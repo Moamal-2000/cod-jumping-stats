@@ -73,7 +73,7 @@ export function getCachedMaps(paramsObject) {
   }
 }
 
-export function cachePlayersLocally(playersLocal, dataType) {
+export function cachePlayersLocally(playersLocal, dataType, sourceParam) {
   if (typeof window === "undefined") {
     return;
   }
@@ -88,17 +88,18 @@ export function cachePlayersLocally(playersLocal, dataType) {
   const base64 = uint8ToBase64(encoded);
   const compressed = LZString.compressToUTF16(base64);
 
-  const key = `players-data-${kebabCase(dataType)}`;
+  const key = `players-data-${kebabCase(dataType)}-${sourceParam}`;
   localStorage.setItem(key, compressed);
 }
 
-export function getCachedPlayers(dataType) {
+export function getCachedPlayers(dataType, sourceParam) {
   if (typeof window === "undefined") {
     return null;
   }
 
-  const key = `players-data-${kebabCase(dataType)}`;
+  const key = `players-data-${kebabCase(dataType)}-${sourceParam}`;
   const compressed = localStorage.getItem(key);
+
   if (!compressed) {
     return null;
   }

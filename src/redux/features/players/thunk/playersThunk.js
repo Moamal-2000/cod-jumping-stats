@@ -8,7 +8,8 @@ export const fetchAllPlayers = createAsyncThunk(
   "playersSlice/fetchAllPlayers",
   async (paramsObject) => {
     const dataType = paramsObject?.sort || "last-seen";
-    const cachedData = getCachedPlayers(dataType);
+    const sourceParam = paramsObject?.source || "jh";
+    const cachedData = getCachedPlayers(dataType, sourceParam);
 
     if (cachedData !== null && dataType === cachedData.dataType) {
       const cacheAge = Date.now() - parseInt(cachedData.timeStamp);
@@ -20,7 +21,7 @@ export const fetchAllPlayers = createAsyncThunk(
     }
 
     try {
-      const url = jhApis({ sort: dataType }).player.all;
+      const url = jhApis({ sort: dataType, source: sourceParam }).player.all;
       const response = await fetchMsgPackResponse({ url });
 
       if (!response.ok) {
@@ -29,7 +30,7 @@ export const fetchAllPlayers = createAsyncThunk(
 
       const allPlayersData = (await decodeAsyncData(response)) ?? [];
       if (allPlayersData.length > 0) {
-        cachePlayersLocally(allPlayersData, dataType);
+        cachePlayersLocally(allPlayersData, dataType, sourceParam);
       }
 
       return { allPlayersData, paramsObject };
