@@ -10,6 +10,7 @@ import { fetchMaps } from "@/redux/features/maps/thunk/mapsThunk";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MapDetailHeader.module.scss";
+import MapServerSelector from "./MapServerSelector/MapServerSelector";
 
 const MapDetailHeader = ({ mapData }) => {
   const { Name, Author, Released, Type, Ender, CpID } = mapData;
@@ -103,7 +104,10 @@ const MapDetailHeader = ({ mapData }) => {
           </div>
         </div>
 
-        <MapRoutesSelector allMaps={allMaps} Name={Name} Ender={Ender} />
+        <div className={s.buttons}>
+          <MapRoutesSelector allMaps={allMaps} Name={Name} Ender={Ender} />
+          <MapServerSelector />
+        </div>
       </div>
     </div>
   );

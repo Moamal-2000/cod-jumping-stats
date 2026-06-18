@@ -106,3 +106,16 @@
     gap: 0.5rem;
   }
 }
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+@include m.media(large) {
+  .buttons {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
