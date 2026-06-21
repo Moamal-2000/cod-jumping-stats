@@ -138,6 +138,20 @@
   }
 }
 
+.helper {
+  color: #ff9f43;
+  background: linear-gradient(to right, #ff9f43, #ff5252);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 15px rgba(255, 159, 67, 0.3);
+
+  svg {
+    fill: #ff9f43;
+    filter: drop-shadow(0 0 3px rgba(255, 159, 67, 0.5));
+  }
+}
+
 .owner {
   background: linear-gradient(to right, #00ffff, #4169e1);
   -webkit-background-clip: text;

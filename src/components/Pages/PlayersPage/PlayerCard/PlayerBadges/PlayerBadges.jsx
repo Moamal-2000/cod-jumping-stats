@@ -3,6 +3,7 @@ import {
   contentCreatorIds,
   contentCreators,
   eventWinnerIds,
+  helperIds,
   mappersIds,
 } from "@/data/manualBadges";
 import { isActiveWithinWeek } from "@/lib/validation";
@@ -86,19 +87,27 @@ export function getPlayerBadges({
       id: 2,
     },
     {
+      displayCondition: helperIds.includes(PlayerID),
+      classes: cssModule.helper,
+      icon: "handshake",
+      label: "Helper",
+      tooltipText: "Contributed to the CJ community",
+      id: 3,
+    },
+    {
       displayCondition: isActiveWithinWeek(LastSeen),
       classes: cssModule.active,
       icon: "active-status",
       label: "Active",
       tooltipText: "Player was active within the last 7 days",
-      id: 3,
+      id: 4,
     },
     {
       displayCondition: mappersIds.includes(PlayerID),
       classes: cssModule.mapper,
       icon: "special-mapper",
       label: "Mapper",
-      id: 4,
+      id: 5,
     },
     {
       displayCondition: eventWinnerIds.includes(PlayerID),
@@ -106,7 +115,7 @@ export function getPlayerBadges({
       icon: "trophy",
       label: "Winner",
       tooltipText: "Event winner",
-      id: 5,
+      id: 6,
     },
     {
       displayCondition: bugHunterIds.includes(PlayerID),
@@ -114,7 +123,7 @@ export function getPlayerBadges({
       icon: "exclamation-mark",
       label: "Bug Hunter",
       tooltipText: "Helped fix bugs",
-      id: 6,
+      id: 7,
     },
     {
       displayCondition: contentCreatorIds.includes(PlayerID),
@@ -122,21 +131,21 @@ export function getPlayerBadges({
       icon: "youtube",
       label: "Creator",
       href: contentCreators.find((c) => c.playerId === PlayerID)?.channelUrl,
-      id: 7,
+      id: 8,
     },
     {
       displayCondition: Admin >= 100,
       classes: cssModule.highLevel,
       icon: "star",
       label: "Admin",
-      id: 8,
+      id: 9,
     },
     {
       displayCondition: PlayerID === 1 || PlayerID === 46077,
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",
-      id: 9,
+      id: 10,
     },
   ];
 }

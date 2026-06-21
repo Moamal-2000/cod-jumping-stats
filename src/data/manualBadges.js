@@ -2,6 +2,11 @@ export const eventWinnerIds = [
   46, 125382, 127166, 136177, 123104, 135795, 128523,
 ];
 
+export const helperIds = [
+  1, 2, 6, 10, 20, 33, 46, 188, 318, 545, 550, 6381, 20314, 46077, 108468, 109442,
+  114869, 122405, 125194, 128523,
+];
+
 export const bugHunterIds = [1, 7, 108468, 127596, 125194];
 
 export const mappersIds = [
