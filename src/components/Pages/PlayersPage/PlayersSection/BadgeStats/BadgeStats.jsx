@@ -4,7 +4,9 @@ import {
   bugHunterIds,
   contentCreators,
   eventWinnerIds,
+  helperIds,
   mappersIds,
+  ownerIds,
 } from "@/data/manualBadges";
 import { createQueryString } from "@/lib/queryParams";
 import { isActiveWithinWeek } from "@/lib/validation";
@@ -59,6 +61,12 @@ function getBadgesCount(allPlayersData) {
       urlQuery: "all",
     },
     {
+      id: "helper",
+      label: "Helper",
+      count: helperIds.length,
+      urlQuery: "helper",
+    },
+    {
       id: "winner",
       label: "Event Winners",
       count: eventWinnerIds.length,
@@ -107,6 +115,12 @@ function getBadgesCount(allPlayersData) {
       label: "Banned",
       count: allPlayersData.filter((player) => player.Banned === 1).length,
       urlQuery: "banned",
+    },
+    {
+      id: "owner",
+      label: "Owner",
+      count: ownerIds.length,
+      urlQuery: "owner",
     },
   ];
 }

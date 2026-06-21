@@ -1,3 +1,5 @@
+export const ownerIds = [1, 46077];
+
 export const eventWinnerIds = [
   46, 125382, 127166, 136177, 123104, 135795, 128523,
 ];

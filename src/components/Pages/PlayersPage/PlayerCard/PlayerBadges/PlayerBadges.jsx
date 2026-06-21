@@ -5,6 +5,7 @@ import {
   eventWinnerIds,
   helperIds,
   mappersIds,
+  ownerIds,
 } from "@/data/manualBadges";
 import { isActiveWithinWeek } from "@/lib/validation";
 import ToolTip from "../ToolTip";
@@ -141,7 +142,7 @@ export function getPlayerBadges({
       id: 9,
     },
     {
-      displayCondition: PlayerID === 1 || PlayerID === 46077,
+      displayCondition: ownerIds.includes(PlayerID),
       classes: cssModule.owner,
       icon: "diamond",
       label: "Owner",
