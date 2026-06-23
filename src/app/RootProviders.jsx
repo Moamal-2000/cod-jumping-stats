@@ -23,7 +23,7 @@ const RootProviders = ({ children }) => {
       <Provider store={store}>
         <html lang="en" className={currentPage}>
           <head>
-            <link rel="preconnect" href="https://cjstats.fly.dev" />
+            <link rel="preconnect" href="https://jhstats.fly.dev" />
           </head>
 
           <body>

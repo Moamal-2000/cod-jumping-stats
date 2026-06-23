@@ -1,4 +1,4 @@
-export const API_URL = "https://cjstats.fly.dev/api/v1";
+export const API_URL = "https://jhstats.fly.dev/api/v1";
 
 export const jhApis = ({
   fps = 125,
