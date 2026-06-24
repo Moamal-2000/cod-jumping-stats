@@ -2,7 +2,7 @@
 
 import { domainToCountryFlag } from "@/lib/utils";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JoinServerButton from "./JoinServerButton/JoinServerButton";
 import s from "./ServerCardHeader.module.scss";
 import ServerCardIndicator from "./ServerCardIndicator/ServerCardIndicator";
@@ -17,10 +17,13 @@ const GAME_MAPS_URL = {
 const ServerCardHeader = ({ server, index, viewType }) => {
   const game = server.GameType.toLowerCase();
   const getGameMapUrl = GAME_MAPS_URL[game] || (() => PLACEHOLDER_URL);
+  const isList = viewType === "list";
 
   const [src, setSrc] = useState(getGameMapUrl(server));
 
-  const isList = viewType === "list";
+  useEffect(() => {
+    setSrc(getGameMapUrl(server));
+  }, [server]);
 
   return (
     <header className={`${s.serverHeader} ${isList ? s.list : ""}`}>

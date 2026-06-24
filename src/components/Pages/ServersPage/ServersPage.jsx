@@ -43,7 +43,7 @@ const ServersPage = () => {
     ? statusParam
     : DEFAULT_STATUS_SERVER;
 
-  const { data, isLoading, isError, refetch } = useGetServersQuery();
+  const { data: servers, isLoading, isError, refetch } = useGetServersQuery();
 
   function handleRefreshParamChange(value) {
     if (value === DEFAULT_REFRESH_SECONDS) {
@@ -84,7 +84,7 @@ const ServersPage = () => {
         onStatusFilterChange={handleStatusFilterChange}
       />
       <AllServers
-        servers={data?.Servers}
+        servers={servers}
         loading={isLoading}
         error={isError}
         gameFilter={gameFilter}

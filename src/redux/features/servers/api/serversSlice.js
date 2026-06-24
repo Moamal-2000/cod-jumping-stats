@@ -10,7 +10,7 @@ export const serversSlice = createApi({
       baseQueryMsgPack({ url: `${API_URL}/${endpoint}` }),
     ]);
 
-    const isError = !!(j4lResponse?.value?.error && jhResponse?.value?.error);
+    const isError = !!(j4lResponse?.value?.error || jhResponse?.value?.error);
     const j4lServers = isError ? [] : j4lResponse.value.Servers;
     const jhServers = isError ? [] : jhResponse.value.Servers;
 
@@ -23,7 +23,7 @@ export const serversSlice = createApi({
       };
     }
 
-    return { data: { Servers: [...j4lServers, ...jhServers] } };
+    return { data: [...j4lServers, ...jhServers] };
   },
 
   endpoints: (builder) => ({
