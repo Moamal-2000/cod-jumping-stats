@@ -5,10 +5,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerProfile = createAsyncThunk(
   "playerProfile/fetchPlayerProfile",
-  async ({ playerId }) => {
+  async ({ playerId, source }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId }).player.performanceStats,
+        url: jhApis({ playerId, source }).player.performanceStats,
       });
 
       if (response.status === 500) {
@@ -34,10 +34,10 @@ export const fetchPlayerProfile = createAsyncThunk(
 
 export const fetchPlayerLeaderboardPositions = createAsyncThunk(
   "playerProfile/fetchPlayerLeaderboardPositions",
-  async ({ playerId }) => {
+  async ({ playerId, source }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId }).player.leaderboardPositions,
+        url: jhApis({ playerId, source }).player.leaderboardPositions,
       });
 
       if (response.status === 500) {
@@ -63,10 +63,10 @@ export const fetchPlayerLeaderboardPositions = createAsyncThunk(
 
 export const fetchPlayerJumpScores = createAsyncThunk(
   "playerProfile/fetchPlayerJumpScores",
-  async ({ playerId, fps = 125 }) => {
+  async ({ playerId, source, fps = 125 }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId, fps }).player.jumpScores,
+        url: jhApis({ playerId, source, fps }).player.jumpScores,
       });
 
       if (response.status === 500) {

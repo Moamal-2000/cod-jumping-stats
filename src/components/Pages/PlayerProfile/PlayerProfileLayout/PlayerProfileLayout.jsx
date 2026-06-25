@@ -8,6 +8,7 @@ import {
   fetchPlayerProfile,
 } from "@/redux/features/playerProfile/thunk/playerProfileThunk";
 import { fetchAllPlayers } from "@/redux/features/players/thunk/playersThunk";
+import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import PlayerProfileHeader from "./PlayerProfileHeader/PlayerProfileHeader";
@@ -17,7 +18,12 @@ import PlayerProfileTabs from "./PlayerProfileTabs/PlayerProfileTabs";
 const PlayerProfileLayout = ({ children, playerId }) => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const jumpScores = useSelector((s) => s.playerProfile.jumpScores);
+
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+
+  const paramsObject = Object.fromEntries(searchParams.entries());
+  const sourceParam = searchParams.get("source") || "jh";
 
   const playerData = allPlayersData.find(
     (player) => player.PlayerID === playerId,
@@ -32,10 +38,12 @@ const PlayerProfileLayout = ({ children, playerId }) => {
       return;
     }
 
-    dispatch(fetchPlayerProfile({ playerId }));
-    dispatch(fetchPlayerLeaderboardPositions({ playerId }));
-    dispatch(fetchPlayerJumpScores({ playerId }));
-    dispatch(fetchAllPlayers());
+    const source = sourceParam;
+
+    dispatch(fetchPlayerProfile({ playerId, source }));
+    dispatch(fetchPlayerLeaderboardPositions({ playerId, source }));
+    dispatch(fetchPlayerJumpScores({ playerId, source }));
+    dispatch(fetchAllPlayers(paramsObject));
   }, [playerId]);
 
   return (
