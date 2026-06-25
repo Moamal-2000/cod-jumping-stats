@@ -80,7 +80,10 @@ export default PlayerProfileTabs;
 const PlayerProfileTab = ({ tab, playerId, activeTab, tabsRef, index }) => {
   const isActive = tab.id === activeTab;
 
-  const href = `/player/${playerId}${tab.id === "overview" ? "" : `?tab=${tab.id}`}`;
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
+
+  const href = getTabHref({ tab, playerId, sourceParam });
   const classes = `${s.tabButton} ${isActive ? s.active : ""}`;
 
   return (
@@ -152,4 +155,18 @@ function getNextFocusedTabOrder({ key, focusedTabOrder, tabs }) {
   }
 
   return null;
+}
+
+function getTabHref({ tab, playerId, sourceParam }) {
+  const query = {};
+
+  if (tab.id !== "overview") {
+    query.tab = tab.id;
+  }
+
+  if (sourceParam && sourceParam !== "jh") {
+    query.source = sourceParam;
+  }
+
+  return { pathname: `/player/${playerId}`, query };
 }
