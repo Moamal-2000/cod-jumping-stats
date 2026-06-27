@@ -20,27 +20,27 @@ const RootProviders = ({ children }) => {
 
   return (
     <ViewTransitions>
-      <Provider store={store}>
-        <html lang="en" className={currentPage}>
-          <head>
-            <link rel="preconnect" href="https://jhstats.fly.dev" />
-          </head>
+        <Provider store={store}>
+          <html lang="en" className={currentPage}>
+            <head>
+              <link rel="preconnect" href="https://jhstats.fly.dev" />
+            </head>
 
-          <body>
-            <Header />
-            <LayoutLayer>
-              <GitHubStarBtn />
-              <PlayerProfileButton />
-              {children}
-              <Footer />
-              <ScrollToTopBtn />
-              <GitHubNotice />
-              <GlobalOverlay />
-              <CopiedPopup />
-            </LayoutLayer>
-          </body>
-        </html>
-      </Provider>
+            <body>
+              <Header />
+              <LayoutLayer>
+                <GitHubStarBtn />
+                <PlayerProfileButton />
+                {children}
+                <Footer />
+                <ScrollToTopBtn />
+                <GitHubNotice />
+                <GlobalOverlay />
+                <CopiedPopup />
+              </LayoutLayer>
+            </body>
+          </html>
+        </Provider>
     </ViewTransitions>
   );
 };
