@@ -38,6 +38,7 @@ const RunAnalytics = ({ playerId }) => {
   const selectedFps = normalizeFpsQuery(searchParams.get("fps"));
   const firstMapId = parseInt(allMaps[0]?.CpID, 10);
   const selectedMapId = parseInt(searchParams.get("mapid"), 10) || firstMapId;
+  const sourceParam = searchParams.get("source") || "jh";
   const previewMapName = hoveredMapName || "";
 
   function handleFpsChange(event) {
@@ -59,7 +60,14 @@ const RunAnalytics = ({ playerId }) => {
       dispatch(fetchMaps());
     }
 
-    dispatch(fetchMapRuns({ playerId, cpId: selectedMapId, fps: selectedFps }));
+    dispatch(
+      fetchMapRuns({
+        playerId,
+        cpId: selectedMapId,
+        source: sourceParam,
+        fps: selectedFps,
+      }),
+    );
   }, [selectedMapId, selectedFps, playerId]);
 
   return (

@@ -95,10 +95,11 @@ export const fetchPlayerTops = createAsyncThunk(
   async (paramsObject) => {
     const playerId = paramsObject.playerId;
     const fps = normalizeFpsQuery(paramsObject.fps);
+    const source = paramsObject?.source || "jh";
 
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId, fps }).player.tops,
+        url: jhApis({ playerId, source, fps }).player.tops,
       });
 
       if (response.status === 500) {
@@ -124,10 +125,10 @@ export const fetchPlayerTops = createAsyncThunk(
 
 export const fetchMapRuns = createAsyncThunk(
   "playerProfile/fetchPlayerRuns",
-  async ({ playerId, cpId, fps }) => {
+  async ({ playerId, cpId, source, fps }) => {
     try {
       const response = await fetchMsgPackResponse({
-        url: jhApis({ playerId, cpId, fps }).player.mapRuns,
+        url: jhApis({ playerId, cpId, source, fps }).player.mapRuns,
       });
 
       if (response.status === 500) {
