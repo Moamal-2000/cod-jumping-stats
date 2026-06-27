@@ -17,18 +17,18 @@
     "@reduxjs/toolkit": "^2.12.0",
     "@vercel/speed-insights": "^2.0.0",
     "lz-string": "^1.5.0",
-    "msgpackr": "^2.0.1",
-    "next": "^16.2.6",
+    "msgpackr": "^2.0.4",
+    "next": "^16.2.9",
     "next-view-transitions": "^0.3.5",
-    "react": "^19.2.6",
-    "react-dom": "^19.2.6",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7",
     "react-redux": "^9.3.0"
   },
   "devDependencies": {
     "babel-plugin-react-compiler": "^1.0.0",
     "browserslist-config-baseline": "^0.5.0",
-    "eslint": "^10.4.0",
-    "sass": "^1.99.0"
+    "eslint": "^10.6.0",
+    "sass": "^1.101.0"
   },
   "overrides": {
     "postcss": "^8.5.10"
