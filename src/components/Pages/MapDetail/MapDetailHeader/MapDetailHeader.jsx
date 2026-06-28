@@ -20,7 +20,6 @@ const MapDetailHeader = ({ mapData }) => {
 
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
-
   const sourceParam = searchParams.get("source") || "jh";
 
   useEffect(() => {
@@ -112,8 +111,8 @@ const MapDetailHeader = ({ mapData }) => {
         </div>
 
         <div className={s.buttons}>
-          <MapRoutesSelector allMaps={allMaps} Name={Name} Ender={Ender} />
           <MapServerSelector />
+          <MapRoutesSelector allMaps={allMaps} Name={Name} Ender={Ender} />
         </div>
       </div>
     </div>
