@@ -17,28 +17,28 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const allPlayersData = useSelector((s) => s.players.allPlayersData);
   const allPlayersLength = allPlayersData.length || 0;
 
-  function renderMapRow(map, index, isCompleted) {
-    const rarityLevel = getRarityLevel(map.individual_finish_count);
+  function renderMapRow(map, index, IsCompleted) {
+    const rarityLevel = getRarityLevel(map.IndividualFinishCount);
 
     return (
       <tr
-        key={`${map.mapid}-${map.mapname}-${index}`}
+        key={`${map.MapID}-${map.MapName}-${index}`}
         className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
         <td className={s.mapNameCell}>
-          <TransitionLink href={`/map/${map.cp_id}`} className={s.mapLink}>
-            {map.mapname}
+          <TransitionLink href={`/map/${map.CpID}`} className={s.mapLink}>
+            {map.DisplayName}
           </TransitionLink>
         </td>
-        <td className={s.authorCell}>{map.author || "Unknown"}</td>
-        <td className={s.releasedCell}>{map.released || "Unknown"}</td>
+        <td className={s.authorCell}>{map.Author || "Unknown"}</td>
+        <td className={s.releasedCell}>{map.Released || "Unknown"}</td>
         <td className={s.finisherCell}>
           <span className={s.finisherBadge}>
-            {map.individual_finish_count} / {allPlayersLength}
+            {map.IndividualFinishCount} / {allPlayersLength}
           </span>
         </td>
         <td className={s.statusCell}>
-          {isCompleted ? (
+          {IsCompleted ? (
             <span className={s.completedBadge}>
               <svg aria-hidden="true">
                 <use href="/icons-sprite.svg#check-circle" />
@@ -319,10 +319,10 @@ function getSortedData({ data, sortBy, sortOrder }) {
 
     switch (sortBy) {
       case "mapname":
-        comparison = a.mapname.localeCompare(b.mapname);
+        comparison = a.MapName.localeCompare(b.MapName);
         break;
       case "finishers":
-        comparison = a.individual_finish_count - b.individual_finish_count;
+        comparison = a.IndividualFinishCount - b.IndividualFinishCount;
         break;
       default:
         comparison = 0;

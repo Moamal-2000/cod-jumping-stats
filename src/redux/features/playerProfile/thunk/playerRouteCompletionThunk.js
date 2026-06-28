@@ -1,83 +1,67 @@
+import { jhApis } from "@/api/jumpersHeaven";
+import { decodeAsyncData, fetchMsgPackResponse } from "@/lib/api/msgpackClient";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerRouteCompletionNew = createAsyncThunk(
   "playerProfileSlice/fetchPlayerRouteCompletionNew",
   async ({ playerId }) => {
     try {
-      // Fetch player's completed routes using the dedicated endpoint
-      const playerRoutesResponse = await fetch(
-        `/api/localhost/player/routes-completion?playerid=${playerId}`,
-        {
-          method: "GET",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const playerRoutesResponse = await fetchMsgPackResponse({
+        url: jhApis({ playerId }).player.routesCompletion,
+      });
 
       if (!playerRoutesResponse.ok) {
         throw new Error(`HTTP error! status: ${playerRoutesResponse.status}`);
       }
 
-      const playerRoutesData = await playerRoutesResponse.json();
+      const playerRoutesData = await decodeAsyncData(playerRoutesResponse);
 
       // Process completed routes
       const playerCompletedMaps = new Set();
       const playerMapDetails = {};
+      const isArrayData = Array.isArray(playerRoutesData);
 
-      if (Array.isArray(playerRoutesData)) {
-        playerRoutesData.forEach((route) => {
-          if (route.map_name) {
-            // Create unique key for map + ender combination
-            const mapKey = route.ender
-              ? `${route.map_name} (${route.ender})`
-              : route.map_name;
+      if (isArrayData) {
+        playerRoutesData.forEach(
+          ({ MapName, Ender, MapID, TotalFinishes, FPSList, PlayerName }) => {
+            if (!MapName) {
+              return;
+            }
+
+            const mapKey = Ender ? `${MapName} (${Ender})` : MapName;
             playerCompletedMaps.add(mapKey);
+
             playerMapDetails[mapKey] = {
-              map_id: route.map_id,
-              total_finishes: route.total_finishes,
-              fps_list: route.fps_list,
-              player_name: route.player_name,
-              ender: route.ender,
+              MapID,
+              TotalFinishes,
+              FPSList,
+              PlayerName,
+              Ender,
             };
-          }
-        });
+          },
+        );
       }
 
       // Fetch all available maps
-      const allMapsResponse = await fetch("/api/localhost/map/all", {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-        },
+      const allMapsResponse = await fetchMsgPackResponse({
+        url: jhApis().map.allMaps,
       });
 
       if (!allMapsResponse.ok) {
         throw new Error(`HTTP error! status: ${allMapsResponse.status}`);
       }
 
-      const allMapsData = await allMapsResponse.json();
-
-      // Use all maps without any filtering (type and FPS agnostic)
+      const allMapsData = await decodeAsyncData(allMapsResponse);
       const availableMaps = allMapsData;
 
       // Process maps to handle multiple routes/endings using the 'ender' field
       const processedMaps = availableMaps.map((map) => {
-        if (map.ender && map.ender !== null) {
-          // Multiple routes - add ender name to display name
-          return {
-            ...map,
-            displayName: `${map.mapname} (${map.ender})`,
-          };
-        } else {
-          // Single route - use original mapname
-          return {
-            ...map,
-            displayName: map.mapname,
-          };
-        }
+        const hasMultipleRoutes = map.Ender && map.Ender !== null;
+
+        return {
+          ...map,
+          DisplayName: `${map.Name}${hasMultipleRoutes ? ` (${map.Ender})` : ""}`,
+        };
       });
 
       const totalAvailableMaps = processedMaps.length;
@@ -88,61 +72,59 @@ export const fetchPlayerRouteCompletionNew = createAsyncThunk(
           : 0;
 
       // Create detailed completion data
-      const completionDetails = processedMaps.map((map) => {
-        // Check if this specific route is completed
-        const isCompleted = playerCompletedMaps.has(map.displayName);
-        const playerDetails = playerMapDetails[map.displayName] || null;
+      const completionDetails = processedMaps.map(
+        ({
+          DisplayName,
+          Name,
+          Difficulty,
+          IndividualFinishCount,
+          ID,
+          CpID,
+          Author,
+          Released,
+          Type,
+        }) => {
+          let individualFinishCount = IndividualFinishCount || 0;
 
-        // Get difficulty for 125 FPS as default
-        const difficulty = map.difficulty?.["125"]?.difficulty || 0;
+          // If still 0, try to calculate from difficulty data
+          if (individualFinishCount === 0 && Difficulty) {
+            const totalTops = Object.values(Difficulty).reduce(
+              (sum, { NBTops }) => sum + (NBTops || 0),
+              0,
+            );
+            individualFinishCount = totalTops;
+          }
 
-        // Get individual finish count - try different possible field names
-        let individual_finish_count =
-          map.individual_finish_count ||
-          map.individualFinishCount ||
-          map.finish_count ||
-          map.finishCount ||
-          map.total_finishes ||
-          map.totalFinishes ||
-          0;
+          if (individualFinishCount === 0) {
+            individualFinishCount = 1; // Default to 1 if no data available
+          }
 
-        // If still 0, try to calculate from difficulty data
-        if (individual_finish_count === 0 && map.difficulty) {
-          // Sum up the nb_tops from all FPS settings
-          const totalTops = Object.values(map.difficulty).reduce(
-            (sum, fpsData) => {
-              return sum + (fpsData.nb_tops || 0);
-            },
-            0
-          );
-          individual_finish_count = totalTops;
-        }
-
-        // If still 0, set a default value
-        if (individual_finish_count === 0) {
-          individual_finish_count = 1; // Default to 1 if no data available
-        }
-
-        return {
-          mapid: map.mapid,
-          mapname: map.displayName, // Use displayName for showing route info
-          originalMapname: map.mapname, // Keep original for completion checking
-          cp_id: map.cp_id,
-          author: map.author,
-          released: map.released,
-          type: map.type,
-          difficulty: difficulty,
-          isCompleted,
-          playerDetails,
-          individual_finish_count: individual_finish_count,
-        };
-      });
-
-      // Separate completed and not completed maps
-      const completedMaps = completionDetails.filter((map) => map.isCompleted);
-      const notCompletedMaps = completionDetails.filter(
-        (map) => !map.isCompleted
+          return {
+            MapID: ID,
+            DisplayName,
+            MapName: Name,
+            CpID,
+            Author,
+            Released,
+            Type,
+            Difficulty: Difficulty?.["125"]?.Difficulty || 0,
+            IsCompleted: playerCompletedMaps.has(DisplayName),
+            PlayerDetails: playerMapDetails[DisplayName] || null,
+            IndividualFinishCount: individualFinishCount,
+          };
+        },
       );
+
+      const completedMaps = [];
+      const notCompletedMaps = [];
+
+      completionDetails.forEach((map) => {
+        if (map.IsCompleted) {
+          completedMaps.push(map);
+        } else {
+          notCompletedMaps.push(map);
+        }
+      });
 
       return {
         playerId,
@@ -159,10 +141,9 @@ export const fetchPlayerRouteCompletionNew = createAsyncThunk(
       console.error("Error details:", {
         message: error.message,
         stack: error.stack,
-        playerId: playerId,
+        playerId,
       });
 
-      // Return a fallback structure to prevent app crash
       return {
         playerId,
         totalAvailableMaps: 0,
@@ -175,5 +156,5 @@ export const fetchPlayerRouteCompletionNew = createAsyncThunk(
         error: error.message,
       };
     }
-  }
+  },
 );

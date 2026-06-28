@@ -31,6 +31,7 @@ export const jhApis = ({
       leaderboardPositions: generateUrl("/player/leaderboard-positions", { playerid, source }),
       playerProgress: generateUrl("/historical/player-progress", { playerid, fps, gametype, source, limit }),
       mapRuns: generateUrl("/player/map-runs", { playerid, cpid, fps, source }),
+      routesCompletion: generateUrl("/player/routes-completion", { playerid, source })
     },
     leaderboard: {
       skilledLeaderboard: generateUrl("/leaderboard/jump-skill", { fps, source }),
