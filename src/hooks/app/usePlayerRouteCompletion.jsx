@@ -1,4 +1,5 @@
 import { fetchPlayerRouteCompletionNew } from "@/redux/features/playerProfile/thunk/playerRouteCompletionThunk";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
@@ -8,6 +9,8 @@ export const usePlayerRouteCompletion = (playerId) => {
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   async function fetchData() {
     setLoading(true);
@@ -15,7 +18,10 @@ export const usePlayerRouteCompletion = (playerId) => {
 
     try {
       const result = await dispatch(
-        fetchPlayerRouteCompletionNew({ playerId: parseInt(playerId, 10) }),
+        fetchPlayerRouteCompletionNew({
+          playerId: parseInt(playerId, 10),
+          source: sourceParam,
+        }),
       );
 
       if (result.payload) {

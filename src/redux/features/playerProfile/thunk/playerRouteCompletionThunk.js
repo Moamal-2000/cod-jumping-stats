@@ -4,10 +4,10 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchPlayerRouteCompletionNew = createAsyncThunk(
   "playerProfileSlice/fetchPlayerRouteCompletionNew",
-  async ({ playerId }) => {
+  async ({ playerId, source }) => {
     try {
       const playerRoutesResponse = await fetchMsgPackResponse({
-        url: jhApis({ playerId }).player.routesCompletion,
+        url: jhApis({ playerId, source }).player.routesCompletion,
       });
 
       if (!playerRoutesResponse.ok) {
@@ -44,7 +44,7 @@ export const fetchPlayerRouteCompletionNew = createAsyncThunk(
 
       // Fetch all available maps
       const allMapsResponse = await fetchMsgPackResponse({
-        url: jhApis().map.allMaps,
+        url: jhApis({ source }).map.allMaps,
       });
 
       if (!allMapsResponse.ok) {
