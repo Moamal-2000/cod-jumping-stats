@@ -1,10 +1,9 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
 import { useState } from "react";
-import { useSelector } from "react-redux";
 import s from "./PlayerRouteCompletion.module.scss";
+import RouteCompletionTable from "./RouteCompletionTable/RouteCompletionTable";
 
 const PlayerRouteCompletion = ({ playerId }) => {
   const [sortBy, setSortBy] = useState("mapname"); // "mapname", "finishers"
@@ -14,49 +13,16 @@ const PlayerRouteCompletion = ({ playerId }) => {
   const { completionData, loading, error, refetch } =
     usePlayerRouteCompletion(playerId);
 
-  const allPlayersData = useSelector((s) => s.players.allPlayersData);
-  const allPlayersLength = allPlayersData.length || 0;
-
-  function renderMapRow(map, index, IsCompleted) {
-    const rarityLevel = getRarityLevel(map.IndividualFinishCount);
-
-    return (
-      <tr
-        key={`${map.MapID}-${map.MapName}-${index}`}
-        className={`${s.tableRow} ${s[rarityLevel] || ""}`}
-      >
-        <td className={s.mapNameCell}>
-          <TransitionLink href={`/map/${map.CpID}`} className={s.mapLink}>
-            {map.DisplayName}
-          </TransitionLink>
-        </td>
-        <td className={s.authorCell}>{map.Author || "Unknown"}</td>
-        <td className={s.releasedCell}>{map.Released || "Unknown"}</td>
-        <td className={s.finisherCell}>
-          <span className={s.finisherBadge}>
-            {map.IndividualFinishCount} / {allPlayersLength}
-          </span>
-        </td>
-        <td className={s.statusCell}>
-          {IsCompleted ? (
-            <span className={s.completedBadge}>
-              <svg aria-hidden="true">
-                <use href="/icons-sprite.svg#check-circle" />
-              </svg>
-              Completed
-            </span>
-          ) : (
-            <span className={s.notCompletedBadge}>
-              <svg aria-hidden="true">
-                <use href="/icons-sprite.svg#x-circle" />
-              </svg>
-              Not Completed
-            </span>
-          )}
-        </td>
-      </tr>
-    );
-  }
+  const completedRoutes = getSortedData({
+    data: completionData?.completedMaps || [],
+    sortBy,
+    sortOrder,
+  });
+  const notCompletedRoutes = getSortedData({
+    data: completionData?.notCompletedMaps || [],
+    sortBy,
+    sortOrder,
+  });
 
   if (loading) {
     return (
@@ -99,20 +65,6 @@ const PlayerRouteCompletion = ({ playerId }) => {
       </div>
     );
   }
-
-  const completedRoutes = getSortedData({
-    data: completionData?.completedMaps || [],
-    sortBy,
-    sortOrder,
-  });
-  const notCompletedRoutes = getSortedData({
-    data: completionData?.notCompletedMaps || [],
-    sortBy,
-    sortOrder,
-  });
-
-  const activeListData =
-    activeList === "completed" ? completedRoutes : notCompletedRoutes;
 
   return (
     <div className={s.routeCompletionPanel} id="player-profile-panel-routes">
@@ -230,22 +182,11 @@ const PlayerRouteCompletion = ({ playerId }) => {
 
       {/* Routes Table */}
       <div className={s.routesTableWrapper}>
-        <table className={s.table}>
-          <thead>
-            <tr>
-              <th>Map Name</th>
-              <th>Author</th>
-              <th>Released</th>
-              <th>Finishers</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {activeListData.map((map, index) =>
-              renderMapRow(map, index, activeList === "completed"),
-            )}
-          </tbody>
-        </table>
+        <RouteCompletionTable
+          completedRoutes={completedRoutes}
+          notCompletedRoutes={notCompletedRoutes}
+          activeList={activeList}
+        />
       </div>
     </div>
   );
@@ -261,25 +202,6 @@ const rarityMap = {
   uncommon: { color: "#06ffa5" },
   common: { color: "#9ca3af" },
 };
-
-function getRarityLevel(finishCount) {
-  if (finishCount <= 2) {
-    return "mythical";
-  }
-  if (finishCount <= 10) {
-    return "legendary";
-  }
-  if (finishCount <= 20) {
-    return "epic";
-  }
-  if (finishCount <= 30) {
-    return "rare";
-  }
-  if (finishCount <= 50) {
-    return "uncommon";
-  }
-  return "common";
-}
 
 function getCompletionRateRarity(completionRate) {
   // Remove % sign and convert to number
