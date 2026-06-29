@@ -60,16 +60,15 @@ const PlayerCompletionByFps = ({ playerId }) => {
 
   // Filter completed maps by selected FPS
   const completedByFps = allCompletedMaps.filter((map) => {
-    const playerDetails = completionData.playerMapDetails[map.mapname];
-    if (!playerDetails || !playerDetails.fps_list) {
+    const playerDetails = completionData.playerMapDetails[map.MapName];
+    if (!playerDetails || !playerDetails.FPSList) {
       return false;
     }
 
-    // Parse fps_list (could be array or comma-separated string)
-    const fpsList = Array.isArray(playerDetails.fps_list)
-      ? playerDetails.fps_list
-      : playerDetails.fps_list
-          .toString()
+    // Parse FPSList (could be array or comma-separated string)
+    const fpsList = Array.isArray(playerDetails.FPSList)
+      ? playerDetails.FPSList
+      : playerDetails.FPSList.toString()
           .split(",")
           .map((f) => f.trim());
 
@@ -84,17 +83,17 @@ const PlayerCompletionByFps = ({ playerId }) => {
 
   // Get incomplete maps by finding the difference
   const allAvailableMaps = completionData.completionDetails || [];
-  const incompletedByFps = allAvailableMaps.filter((map) => {
+  const incompleteByFps = allAvailableMaps.filter((map) => {
     // Map must not be completed with the selected FPS
     return !completedByFps.some(
       (completed) =>
-        completed.mapid === map.mapid && completed.cp_id === map.cp_id,
+        completed.MapID === map.MapID && completed.CpID === map.CpID,
     );
   });
 
   // Select which list to display
   const displayMaps =
-    filterMode === "completed" ? completedByFps : incompletedByFps;
+    filterMode === "completed" ? completedByFps : incompleteByFps;
   const mapCount = displayMaps.length;
 
   return (
@@ -185,24 +184,24 @@ const PlayerCompletionByFps = ({ playerId }) => {
             <tbody>
               {displayMaps.map((map, index) => (
                 <tr
-                  key={`${map.mapid}-${map.mapname}-${index}`}
+                  key={`${map.MapID}-${map.mapName}-${index}`}
                   className={s.tableRow}
                 >
                   <td className={s.mapNameCell}>
                     <TransitionLink
-                      href={`/map/${map.cp_id}`}
+                      href={`/map/${map.CpID}`}
                       className={s.mapLink}
                     >
-                      {map.mapname}
+                      {map.MapName}
                     </TransitionLink>
                   </td>
-                  <td className={s.authorCell}>{map.author || "Unknown"}</td>
+                  <td className={s.authorCell}>{map.Author || "Unknown"}</td>
                   <td className={s.releasedCell}>
-                    {map.released || "Unknown"}
+                    {map.Released || "Unknown"}
                   </td>
                   <td className={s.finisherCell}>
                     <span className={s.finisherBadge}>
-                      {map.individual_finish_count} / {allPlayersLength}
+                      {map.IndividualFinishCount} / {allPlayersLength}
                     </span>
                   </td>
                   <td className={s.statusCell}>
