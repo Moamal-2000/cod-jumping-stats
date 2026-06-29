@@ -1,4 +1,5 @@
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./RouteCompletionTable.module.scss";
 
@@ -13,6 +14,9 @@ const RouteCompletionTable = ({
   const activeListData =
     activeList === "completed" ? completedRoutes : notCompletedRoutes;
 
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
+
   function renderMapRow(map, index, IsCompleted) {
     const rarityLevel = getRarityLevel(map.IndividualFinishCount);
 
@@ -22,7 +26,10 @@ const RouteCompletionTable = ({
         className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
         <td className={s.mapNameCell}>
-          <TransitionLink href={`/map/${map.CpID}`} className={s.mapLink}>
+          <TransitionLink
+            href={`/map/${map.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
+            className={s.mapLink}
+          >
             {map.DisplayName}
           </TransitionLink>
         </td>
