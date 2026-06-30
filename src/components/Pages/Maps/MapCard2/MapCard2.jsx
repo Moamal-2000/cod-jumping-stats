@@ -23,8 +23,10 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   } = mapData;
 
   const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   const ref = mapsScroll.length === index + 1 ? lastMapRef : null;
+  const href = `/map/${CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`;
   const mapDetailsLabel = `View ${Name}${Ender ? ` ${Ender} ` : " "}details`;
 
   const completionRate = getMapCompletionRate({
@@ -39,7 +41,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
     <div className={s.mapCard} ref={ref}>
       {!hideMapImage && (
         <TransitionLink
-          href={`/map/${CpID}`}
+          href={href}
           className={s.imgHolder}
           ari-label={mapDetailsLabel}
           title={mapDetailsLabel}
@@ -49,7 +51,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
       )}
 
       <div className={s.leftSide}>
-        <TransitionLink href={`/map/${CpID}`}>
+        <TransitionLink href={href}>
           <span className={s.name}>
             {Name}
             {Ender && <span className={s.ender}>({Ender})</span>}
