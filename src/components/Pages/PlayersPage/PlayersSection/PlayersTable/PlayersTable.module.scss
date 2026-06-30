@@ -161,10 +161,24 @@
   font-weight: 500;
 }
 
-.playerInfoWrapper {
+.playerLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  width: fit-content;
   display: flex;
   align-items: center;
   gap: 12px;
+
+  &:hover .playerName {
+    filter: brightness(1.3);
+  }
+}
+
+@include m.media(very-small) {
+  .playerLink {
+    width: 100%;
+  }
 }
 
 .countryFlag {
@@ -182,24 +196,6 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.playerLink {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-  width: fit-content;
-  display: flex;
-
-  &:hover .playerName {
-    filter: brightness(1.3);
-  }
-}
-
-@include m.media(very-small) {
-  .playerLink {
-    width: 100%;
-  }
 }
 
 .playerNameWrapper {

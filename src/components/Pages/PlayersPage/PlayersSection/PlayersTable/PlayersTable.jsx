@@ -31,19 +31,19 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
             <tr key={player.PlayerID} ref={ref}>
               <td className={s.playerNameCell}>
                 <div className={s.playerInfoWrapper}>
-                  <div className={s.countryFlag}>
-                    <CountryImage
-                      countryCode={player.Country}
-                      size={32}
-                      colorPlaceholder={true}
-                      loadEagerly={index < 6}
-                    />
-                  </div>
-
                   <TransitionLink
                     href={`/player/${player.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
                     className={s.playerLink}
                   >
+                    <div className={s.countryFlag}>
+                      <CountryImage
+                        countryCode={player.Country}
+                        size={32}
+                        colorPlaceholder={true}
+                        loadEagerly={index < 6}
+                      />
+                    </div>
+
                     <div className={s.playerNameWrapper}>
                       <span className={s.playerName}>
                         {getColoredName(player.PlayerName || player.PrefName)}
