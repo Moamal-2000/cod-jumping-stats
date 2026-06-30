@@ -1,11 +1,17 @@
+"use client";
+
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import { useSearchParams } from "next/navigation";
 import PlayerBadges from "../../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../../PlayerCard/PlayerStats/PlayerStats";
 import s from "./PlayersTable.module.scss";
 
 const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
+
   return (
     <table className={s.playersTable}>
       <thead>
@@ -35,7 +41,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                   </div>
 
                   <TransitionLink
-                    href={`/player/${player.PlayerID}`}
+                    href={`/player/${player.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
                     className={s.playerLink}
                   >
                     <div className={s.playerNameWrapper}>

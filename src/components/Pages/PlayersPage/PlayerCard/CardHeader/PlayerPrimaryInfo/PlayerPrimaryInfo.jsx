@@ -5,12 +5,15 @@ import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
+import { useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import ToolTip from "../../ToolTip";
 import s from "./PlayerPrimaryInfo.module.scss";
 
 const PlayerPrimaryInfo = ({ PlayerName, PrefName, Admin, PlayerID }) => {
   const dispatch = useDispatch();
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   const pureName = stripColorCodes(PlayerName);
   const coloredPrefName = getColoredName(PrefName || PlayerName);
@@ -27,7 +30,7 @@ const PlayerPrimaryInfo = ({ PlayerName, PrefName, Admin, PlayerID }) => {
   return (
     <div className={s.primaryInfo}>
       <TransitionLink
-        href={`/player/${PlayerID}`}
+        href={`/player/${PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
         className={s.playerNameWrapper}
         onMouseEnter={handleMouseEnter}
       >
