@@ -12,6 +12,7 @@ const OnlinePlayerItem = ({ player, server }) => {
   const dispatch = useDispatch();
 
   const isCod4 = server.GameType === "COD4";
+  const isJ4lServer = server.Domain.includes("jump4life");
   const coloredName = getColoredName(player.Name || "Unknown Player");
   const pureName = stripColorCodes(player.Name);
 
@@ -27,7 +28,7 @@ const OnlinePlayerItem = ({ player, server }) => {
 
   return (
     <TransitionLink
-      href={`/player/${player.PlayerID}`}
+      href={`/player/${player.PlayerID}${isJ4lServer ? `?source=j4l` : ""}`}
       className={`${s.playerItem} ${isCod4 ? s.cod4 : ""}`}
       onClick={handleClick}
       onMouseEnter={handleMouseEnter}
