@@ -2,7 +2,7 @@ import { COUNTRIES_WITH_THE } from "@/data/constants";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 
 export function stripColorCodes(name) {
-  if (name === undefined) {
+  if (name === undefined || name === null) {
     return "";
   }
   return name.replace(/\^\d/g, "");
