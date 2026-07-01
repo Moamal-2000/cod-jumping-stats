@@ -192,16 +192,26 @@
   text-decoration: underline;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.18em;
-}
+  position: relative;
+  padding-right: 0.45em;
 
-.textLink:hover {
-  color: #fff1c8;
-}
+  &:hover {
+    color: #fff1c8;
+  }
 
-.textLink:focus-visible {
-  outline: 2px solid #fff1c8;
-  outline-offset: 3px;
-  border-radius: 4px;
+  &:focus-visible {
+    outline: 2px solid #fff1c8;
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  &::after {
+    content: '↗';
+    position: absolute;
+    right: -5px;
+    top: -4px;
+    scale: .7;
+  }
 }
 
 .personName:has(.discordUser) :where(.textLink, .plyerNameSpan) {
