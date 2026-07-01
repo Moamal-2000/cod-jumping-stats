@@ -1,8 +1,12 @@
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import { useSearchParams } from "next/navigation";
 import s from "./TopRunsTBody.module.scss";
 
 const TopRunsTBody = ({ topRuns }) => {
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
+
   return (
     <tbody className={s.tbody} data-type="top-runs-tbody">
       {topRuns.map((run, index) => {
@@ -13,7 +17,9 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td className={s.mapNameCell} data-header="Map">
-              <TransitionLink href={`/map/${run.CpID}`}>
+              <TransitionLink
+                href={`/map/${run.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
+              >
                 {run.MapName}
               </TransitionLink>
             </td>
