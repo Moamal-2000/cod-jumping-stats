@@ -1,6 +1,7 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./MapDetailPlayers.module.scss";
@@ -8,13 +9,15 @@ import s from "./MapDetailPlayers.module.scss";
 const ITEMS_PER_PAGE = 10;
 
 const MapDetailPlayers = ({ selectedFps }) => {
+  const { mapPlayers, loadingPlayers: loading } = useSelector((s) => s.map);
   const [displayedPlayersCount, setDisplayedPlayersCount] =
     useState(ITEMS_PER_PAGE);
   const [showingAll, setShowingAll] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const loadMoreRef = useRef(null);
 
-  const { mapPlayers, loadingPlayers: loading } = useSelector((s) => s.map);
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   const playersData = !Array.isArray(mapPlayers)
     ? []
@@ -148,7 +151,7 @@ const MapDetailPlayers = ({ selectedFps }) => {
 
           return (
             <TransitionLink
-              href={`/player/${player.PlayerID}`}
+              href={`/player/${player.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
               key={`${player.PlayerID}-${index}`}
               className={s.playerItem}
             >

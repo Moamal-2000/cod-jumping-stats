@@ -3,6 +3,7 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
 
@@ -10,6 +11,9 @@ const showingAll = false;
 
 const MapDetailTops = ({ selectedFps }) => {
   const { mapTops, loadingTops } = useSelector((s) => s.map);
+
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   if (loadingTops) {
     return (
@@ -71,7 +75,7 @@ const MapDetailTops = ({ selectedFps }) => {
 
           return (
             <TransitionLink
-              href={`/player/${run.PlayerID}`}
+              href={`/player/${run.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
               key={`${run.RunID}-${index}`}
               className={s.topRun}
             >
