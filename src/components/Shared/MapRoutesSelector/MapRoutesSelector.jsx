@@ -1,12 +1,16 @@
-import TransitionLink from "../Links/TransitionLink/TransitionLink";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import s from "./MapRoutesSelector.module.scss";
 
 const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
   const otherRoutes = getMapRoutes({ allMaps, Name, Ender });
+  const searchParams = useSearchParams();
 
   if (otherRoutes.length <= 0) {
     return null;
   }
+
+  const sourceParam = searchParams.get("source") || "jh";
 
   return (
     <nav className={s.otherRoutes}>
@@ -14,9 +18,12 @@ const MapRoutesSelector = ({ allMaps, Name, Ender }) => {
 
       <div className={s.otherRoutesList}>
         {otherRoutes.map((route) => (
-          <TransitionLink key={route.CpID} href={`/map/${route.CpID}`}>
+          <Link
+            key={route.CpID}
+            href={`/map/${route?.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
+          >
             {route.Ender}
-          </TransitionLink>
+          </Link>
         ))}
       </div>
     </nav>
