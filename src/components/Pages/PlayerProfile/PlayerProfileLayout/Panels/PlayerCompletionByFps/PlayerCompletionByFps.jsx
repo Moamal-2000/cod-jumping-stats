@@ -2,6 +2,7 @@
 
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
+import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import s from "./PlayerCompletionByFps.module.scss";
@@ -11,6 +12,9 @@ const FPS_OPTIONS = ["43", "76", "125", "250", "333", "Mix"];
 const PlayerCompletionByFps = ({ playerId }) => {
   const [selectedFps, setSelectedFps] = useState("125");
   const [filterMode, setFilterMode] = useState("completed"); // "completed" or "incomplete"
+
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   const { completionData, loading, error, refetch } =
     usePlayerRouteCompletion(playerId);
@@ -189,7 +193,7 @@ const PlayerCompletionByFps = ({ playerId }) => {
                 >
                   <td className={s.mapNameCell}>
                     <TransitionLink
-                      href={`/map/${map.CpID}`}
+                      href={`/map/${map.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
                       className={s.mapLink}
                     >
                       {map.MapName}
