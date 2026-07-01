@@ -2,6 +2,7 @@
 
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
 import s from "./PlayerInfo.module.scss";
@@ -10,11 +11,15 @@ import RoutesCard from "./RoutesCard/RoutesCard";
 const PlayerInfo = () => {
   const { performanceStats, jumpScores } = useSelector((s) => s.playerProfile);
 
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
+
   const lastSeenText = getLastSeenText(performanceStats?.DaysSinceLastSeen);
   const oldestTop = performanceStats?.OldestTop;
   const lastSeen = formatLastSeen(jumpScores?.LastSeen);
   const finishDate = formatDate(oldestTop?.FinishDate, "N/A");
   const oldestTopFps = oldestTop?.FPS === "0" ? "Mix" : oldestTop?.FPS;
+  const oldestRunMapHref = `/map/${oldestTop?.Cpid}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`;
 
   return (
     <section className={s.overview}>
@@ -48,7 +53,7 @@ const PlayerInfo = () => {
                 </div>
 
                 <TransitionLink
-                  href={`/map/${oldestTop.Cpid}`}
+                  href={oldestRunMapHref}
                   className={s.mapName}
                   title={oldestTop.MapName}
                 >
