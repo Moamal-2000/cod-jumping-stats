@@ -2,11 +2,15 @@
 
 import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./RecentActivity.module.scss";
 
 const RecentActivity = () => {
   const performanceStats = useSelector((s) => s.playerProfile.performanceStats);
+
+  const searchParams = useSearchParams();
+  const sourceParam = searchParams.get("source") || "jh";
 
   const recentTops = performanceStats?.RecentTops || [];
   const topRunsCount = recentTops?.length;
@@ -25,7 +29,7 @@ const RecentActivity = () => {
       <div className={s.recentActivityList}>
         {recentTops.map((run, index) => (
           <TransitionLink
-            href={`/map/${run.Cpid}`}
+            href={`/map/${run.Cpid}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
             className={s.recentActivityItem}
             key={index}
           >
