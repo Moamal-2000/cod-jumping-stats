@@ -313,6 +313,11 @@
   &:hover {
     color: #bfdbfe;
   }
+
+  &::after {
+    content: '↗';
+    margin-left: 0.25em;
+  }
 }
 
 .mapButtonWrapper:hover .mapTooltip,
