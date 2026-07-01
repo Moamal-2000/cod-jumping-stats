@@ -25,6 +25,7 @@ const MapList = ({
 
   const mapName = searchParams.get("mapname") || "";
   const mapType = searchParams.get("maptype") || "all";
+  const sourceParam = searchParams.get("source") || "jh";
 
   const title = isCollapsed ? "Show map list" : "Hide map list";
 
@@ -122,7 +123,7 @@ const MapList = ({
               ) : (
                 filteredMaps.map((map) => {
                   const isActive = selectedMapId === map.CpID;
-                  const mapDetailsHref = `/map/${map.CpID}`;
+                  const mapDetailsHref = `/map/${map.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`;
 
                   return (
                     <div
