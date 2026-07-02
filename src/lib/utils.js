@@ -41,7 +41,7 @@ export function getCleanMapName(mapName) {
   if (!mapName) {
     return "unknown";
   }
-  return mapName?.toLowerCase().replace(/[^a-z0-9_]/g, "");
+  return mapName?.toLowerCase().replace(/[^a-z0-9_\-]/g, "");
 }
 
 export function getFormattedCountryName(code) {
