@@ -22,6 +22,20 @@
   }
 }
 
+.playerRow .j4lRank .rankImgWrapper {
+  position: relative;
+}
+
+.playerRow .j4lRank .rankImgWrapper:hover [data-tooltip] {
+  opacity: 1;
+}
+
+.playerRow .j4lRank .rankImgWrapper img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
 .playerRow .rating {
   font-weight: 700;
   font-size: 1.1rem;
@@ -29,7 +43,7 @@
   user-select: text;
 }
 
-.playerRow :where(.rating, .maps, .score) {
+.playerRow :where(.rating, .level, .maps, .score, .j4lRank) {
   justify-content: center;
 }
 
@@ -39,13 +53,88 @@
 }
 
 @include m.media(large) {
-  .playerRow .score[data-header=Points] {
+
+  .playerRow .score[data-header=Points],
+  .playerRow .j4lRank[data-header="J4L Rank"] {
     display: none;
   }
 }
 
 @include m.media(medium) {
-  .playerRow .score[data-header=Points] {
+
+  .playerRow .score[data-header=Points],
+  .playerRow .j4lRank[data-header="J4L Rank"] {
     display: flex;
   }
+}
+
+.playerRow .totalXp>sup {
+  color: #ffe100;
+  font-size: .8rem;
+  scale: .9;
+  position: relative;
+  bottom: 4px;
+  left: 2px;
+}
+
+.xpContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 180px;
+}
+
+.progressBarWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 4px;
+}
+
+.xpProgressBar {
+  width: 100%;
+  height: 8px;
+  appearance: none;
+  /* Resets default browser styles */
+  -webkit-appearance: none;
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+  background-color: #1d1d1d;
+  scale: 1 1.5;
+  padding: 1.5px;
+}
+
+/* Styling the actual filled bar for WebKit browsers (Chrome, Safari, Edge) */
+.xpProgressBar::-webkit-progress-bar {
+  background-color: #1d1d1d;
+  border-radius: 4px;
+}
+
+.xpProgressBar::-webkit-progress-value {
+  // background: #6fd3ec;
+  background: linear-gradient(90deg, #9aebff 35%, #6fd3ec 100%);
+  border-radius: 4px;
+}
+
+/* Styling the actual filled bar for Firefox */
+.xpProgressBar::-moz-progress-bar {
+  background: linear-gradient(90deg, #9aebff 35%, #6fd3ec 100%);
+  border-radius: 4px;
+}
+
+.xpText {
+  font-size: .8rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.xpText>span:nth-child(1) {
+  color: #e4e4e4;
+}
+
+.xpText>span:nth-child(2) {
+  color: #a3a3a3;
 }

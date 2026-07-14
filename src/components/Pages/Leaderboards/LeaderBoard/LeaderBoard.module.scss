@@ -79,23 +79,13 @@
 
 .leaderBoard tr {
   display: grid;
-  grid-template-columns: .7fr 3fr 1fr 1fr 4fr;
+  grid-template-columns: .7fr 2.4fr 1fr 1fr 4fr;
   font-weight: 600;
 }
 
 @include m.media(large) {
   .leaderBoard tr {
-    grid-template-columns: .7fr 3fr 1fr 4fr;
-  }
-}
-
-.leaderBoard.routesCompleted tr {
-  grid-template-columns: 1.65fr 9fr 1fr 3fr;
-}
-
-@include m.media(large) {
-  .leaderBoard.routesCompleted tr {
-    grid-template-columns: 1.65fr 9fr 1fr 4fr;
+    grid-template-columns: .6fr 3fr 1fr 4fr;
   }
 }
 
@@ -111,6 +101,46 @@
     &:first-child {
       margin-top: 30px;
     }
+  }
+}
+
+.leaderBoard.j4lServer tr {
+  grid-template-columns: .7fr 1fr 2.4fr .8fr .8fr 4fr;
+}
+
+@include m.media(large) {
+  .leaderBoard.j4lServer tr {
+    grid-template-columns: .6fr 2.4fr .8fr 4fr;
+  }
+}
+
+.leaderBoard.routesCompleted tr {
+  grid-template-columns: 1.65fr 9fr 1fr 3fr;
+}
+
+@include m.media(large) {
+  .leaderBoard.routesCompleted tr {
+    grid-template-columns: 1.65fr 9fr 1fr 4fr;
+  }
+}
+
+.leaderBoard.routesCompleted.j4lServer tr {
+  grid-template-columns: 1.1fr 2fr 9fr 1fr 4fr;
+}
+
+@include m.media(large) {
+  .leaderBoard.routesCompleted.j4lServer tr {
+    grid-template-columns: 1.65fr 9fr 1fr 4fr;
+  }
+}
+
+.leaderBoard.j4lServer.xpRank tr {
+  grid-template-columns: .3fr .6fr 1.5fr .8fr 1.2fr .8fr;
+}
+
+@include m.media(large) {
+  .leaderBoard.j4lServer.xpRank tr {
+    grid-template-columns: .3fr 1.5fr .8fr 1.2fr .8fr;
   }
 }
 
@@ -152,10 +182,16 @@
 }
 
 @include m.media(medium) {
-  .leaderBoard tr td:last-child:not([data-header="Completed routes"])::before {
+  .leaderBoard tr td:last-child:not([data-header="Completed routes"]):last-child:not([data-header="Total XP"])::before {
     top: -10px;
     left: 50%;
     translate: -50% 0;
+  }
+}
+
+@include m.media(small) {
+  .leaderBoard tr td[data-header="Next Level Progress"]::before {
+    display: none;
   }
 }
 

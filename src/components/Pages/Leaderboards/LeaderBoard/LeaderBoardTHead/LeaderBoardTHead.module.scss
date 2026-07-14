@@ -25,7 +25,7 @@
   width: inherit;
   color: #fff;
 
-  & :where(.rank, .player, .tops) {
+  & :where(.rank, .player, [data-header="Next Level Progress"], .totalXp, .tops) {
     text-align: left;
   }
 }
@@ -39,6 +39,7 @@
   font-size: .9rem;
   letter-spacing: .5px;
   position: relative;
+  text-wrap: nowrap;
 }
 
 .thead tr th[data-sortable] {
@@ -67,7 +68,9 @@
 }
 
 @include m.media(large) {
-  .thead tr .score[data-header=Points] {
+
+  .thead tr .score[data-header=Points],
+  .thead tr .j4lRank {
     display: none;
   }
 }
