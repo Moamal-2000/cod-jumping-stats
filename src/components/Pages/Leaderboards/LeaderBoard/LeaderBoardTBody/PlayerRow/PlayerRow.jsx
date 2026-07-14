@@ -118,16 +118,22 @@ function getRankImage({ Prestige, Level }) {
     return getPrestigeImage(Prestige);
   }
 
+  const numLevel = Number(Level);
+
   return rankImages.find((rank) =>
     rank.level
-      ? rank.level === Level
-      : Level >= rank.minLevel && Level <= rank.maxLevel,
+      ? rank.level === numLevel
+      : numLevel >= rank.minLevel && numLevel <= rank.maxLevel,
   )?.image;
 }
 
 function getRankSrc({ Prestige, Level }) {
   if (isSafeNumber(Prestige) && isSafeNumber(Level)) {
-    return `/assets/j4lRanks/${getRankImage({ Prestige, Level })}`;
+    const imagePath = getRankImage({ Prestige, Level });
+
+    if (imagePath) {
+      return `/assets/j4lRanks/${imagePath}`;
+    }
   }
 
   return RANK_PLACEHOLDER_PATH;
