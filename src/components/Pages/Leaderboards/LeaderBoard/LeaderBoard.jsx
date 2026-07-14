@@ -27,14 +27,14 @@ const LeaderBoard = () => {
   const searchParams = useSearchParams();
   const paramsObject = Object.fromEntries(searchParams.entries());
   const searchQuery = searchParams.get("query") || "";
+  const sourceParam = searchParams.get("source") || "jh";
+  const isJ4lServer = sourceParam === "j4l";
 
   const collapseClass = isLeaderboardExpanded ? "" : s.collapse;
-
-  const leaderboardType = searchParams.get("leaderboard");
-  const isRoutesCompleted = leaderboardType === "routescompleted";
-  const leaderboardClasses = `${s.leaderBoard} ${
-    isRoutesCompleted ? s.routesCompleted : ""
-  }`;
+  const leaderboardClasses = getLeaderboardClasses({
+    cssModule: s,
+    searchParams,
+  });
 
   const [lastPlayerRef, paginationNumber, setPaginationNumber] =
     useInfiniteScroll(leaderboardData, isLeaderboardReversed);
@@ -72,10 +72,11 @@ const LeaderBoard = () => {
       />
 
       <table className={leaderboardClasses}>
-        <LeaderBoardTHead />
+        <LeaderBoardTHead isJ4lServer={isJ4lServer} />
         <LeaderBoardTBody
           leaderboardData={leaderboardScroll}
           lastPlayerRef={lastPlayerRef}
+          isJ4lServer={isJ4lServer}
         />
       </table>
     </div>
@@ -147,4 +148,20 @@ function addDataOnScroll({
   const value = leaderboardScroll.concat(paginationLeaderboardData);
 
   dispatch(updateLeaderboardState({ key: "leaderboardScroll", value }));
+}
+
+function getLeaderboardClasses({ cssModule, searchParams }) {
+  const leaderboardType = searchParams.get("leaderboard");
+  const isXpRank = leaderboardType === "rankxp";
+  const isRoutesCompleted = leaderboardType === "routescompleted";
+  const isJ4lServer = searchParams.get("source") === "j4l";
+
+  return [
+    cssModule.leaderBoard,
+    isRoutesCompleted ? cssModule.routesCompleted : "",
+    isJ4lServer ? cssModule.j4lServer : "",
+    isXpRank ? cssModule.xpRank : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 }

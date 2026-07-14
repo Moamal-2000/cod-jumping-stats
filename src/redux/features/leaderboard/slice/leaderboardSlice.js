@@ -34,7 +34,22 @@ export const leaderboardSlice = createSlice({
       state.error = false;
     })
       .addCase(fetchLeaderboard.fulfilled, (state, { payload }) => {
-        const { leaderboardData, paramsObject } = payload;
+        const { paramsObject } = payload;
+        let leaderboardData = payload.leaderboardData;
+
+        // Temporarily (Remove when the back-end fixes the issue)
+        if (leaderboardData?.[0]?.PlayerRankInfo) {
+          const leaderboardCopy = [...leaderboardData];
+          for (let i = 0; i < leaderboardCopy.length; i++) {
+            leaderboardCopy[i] = {
+              ...leaderboardCopy[i].PlayerRankInfo,
+              Rank: leaderboardCopy[i].Rank,
+            };
+          }
+
+          leaderboardData = leaderboardCopy;
+        }
+
         const filteredLeaderboard = getFilteredLeaderboard(
           leaderboardData,
           paramsObject,

@@ -11,11 +11,15 @@ export function FilterButton({
   toolTip,
   urlQuery,
   defaultUrlQuery,
+  server,
 }) {
   const isRegionFilter = queryName === "region";
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+
+  const sourceParam = searchParams.get("source") || "jh";
+  const leaderboardType = searchParams.get("leaderboard") || "speedrun";
 
   const textValue = text?.toLowerCase();
   const regionValue = queryValue?.toLowerCase();
@@ -29,10 +33,15 @@ export function FilterButton({
     ? `The leaderboard currently filtered by ${text}`
     : `Filter the leaderboard by ${text}`;
 
+  const isServerMismatch = server !== undefined && server !== sourceParam;
+  const isJhDisabledForRankXp =
+    queryValue === "jh" && leaderboardType === "rankxp";
+
   const handleClick = () => {
     const value = isRegionFilter
       ? regionValue
       : queryValue?.toLowerCase() || textValue;
+
     if (!value) {
       return;
     }
@@ -53,6 +62,7 @@ export function FilterButton({
       onClick={handleClick}
       aria-label={ariaLabel}
       aria-pressed={isActive}
+      disabled={isServerMismatch || isJhDisabledForRankXp}
     >
       {toolTip && <p className={s.toolTip}>{toolTip}</p>}
       <span>{text}</span>

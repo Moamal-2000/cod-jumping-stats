@@ -18,16 +18,16 @@ export const fetchLeaderboard = createAsyncThunk(
   },
 );
 
-function getLeaderboardUrl(paramsObject) {
-  const leaderboardType = paramsObject?.["leaderboard"] || "speedrun";
-  const leaderboardUrls = {
-    speedrun: jhApis(paramsObject).leaderboard.speedRunLeaderboard,
-    skilled: jhApis(paramsObject).leaderboard.skilledLeaderboard,
-    defrag: jhApis(paramsObject).leaderboard.defragLeaderboard,
-    surf: jhApis(paramsObject).leaderboard.surfLeaderboard,
-    routescompleted:
-      jhApis(paramsObject).leaderboard.routesCompletedLeaderboard,
-  };
+const leaderboardUrls = (paramsObject) => ({
+  speedrun: jhApis(paramsObject).leaderboard.speedRunLeaderboard,
+  skilled: jhApis(paramsObject).leaderboard.skilledLeaderboard,
+  defrag: jhApis(paramsObject).leaderboard.defragLeaderboard,
+  surf: jhApis(paramsObject).leaderboard.surfLeaderboard,
+  routescompleted: jhApis(paramsObject).leaderboard.routesCompletedLeaderboard,
+  rankxp: jhApis(paramsObject).leaderboard.rankXpLeaderboard,
+});
 
-  return leaderboardUrls[leaderboardType];
+function getLeaderboardUrl(paramsObject) {
+  const leaderboardType = paramsObject?.leaderboard || "speedrun";
+  return leaderboardUrls(paramsObject)[leaderboardType];
 }

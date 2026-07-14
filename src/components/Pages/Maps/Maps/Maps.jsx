@@ -81,5 +81,7 @@ function getMapsSectionClasses(isMapsExpanded, viewType) {
     s.mapsSection,
     isMapsExpanded ? "" : s.collapse,
     viewType === "list" ? s.list : "",
-  ].join(" ");
+  ]
+    .filter(Boolean)
+    .join(" ");
 }

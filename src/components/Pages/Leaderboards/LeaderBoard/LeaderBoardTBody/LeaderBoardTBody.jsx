@@ -9,7 +9,7 @@ import LeaderBoardError from "./LeaderBoardError/LeaderBoardError";
 import s from "./LeaderBoardTBody.module.scss";
 import PlayerRow from "./PlayerRow/PlayerRow";
 
-const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
+const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef, isJ4lServer }) => {
   const { loading, error } = useSelector((s) => s.leaderboard);
   const isLeaderboardReversed = useSelector(
     (s) => s.global.isLeaderboardReversed,
@@ -18,8 +18,10 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
-  const isRoutesCompleted =
-    searchParams.get("leaderboard") === "routescompleted";
+  const leaderboardType = searchParams.get("leaderboard");
+
+  const isRoutesCompleted = leaderboardType === "routescompleted";
+  const isXpRank = leaderboardType === "rankxp";
 
   const reverseClass = isLeaderboardReversed ? s.reverse : "";
 
@@ -51,6 +53,8 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef }) => {
                 leaderboardData={leaderboardData}
                 lastPlayerRef={lastPlayerRef}
                 isRoutesCompleted={isRoutesCompleted}
+                isJ4lServer={isJ4lServer}
+                isXpRank={isXpRank}
                 index={index}
               />
             </Suspense>

@@ -30,7 +30,7 @@ const FiltersSection = () => {
               />
             </FilterCard>
           );
-        }
+        },
       )}
     </section>
   );
