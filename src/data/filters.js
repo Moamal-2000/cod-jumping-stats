@@ -19,6 +19,13 @@ export const LEADERBOARDS_FILTERS_DATA = [
       { text: "Defrag", id: 3 },
       { text: "Surf", id: 4 },
       { text: "Route Completion", queryValue: "routescompleted", id: 5 },
+      {
+        text: "Rank XP",
+        queryValue: "rankxp",
+        server: "j4l",
+        toolTip: "Only for J4L",
+        id: 6,
+      },
     ],
     id: 1,
   },

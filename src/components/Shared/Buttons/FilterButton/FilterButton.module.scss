@@ -5,14 +5,13 @@
   border-radius: 10px;
   min-width: 50px;
   padding: 8px 12px;
-  cursor: pointer;
   font-size: .9rem;
   font-weight: 500;
   position: relative;
   outline: solid 2px transparent;
   transition: background-color .2s, color .2s, outline-color .1s;
 
-  &:hover {
+  &:not(:disabled):not(.active):hover {
     background-color: #2C344A;
     color: #FFF;
   }
@@ -25,6 +24,11 @@
 
   &:focus-visible {
     outline-color: #fff;
+  }
+
+  &:disabled {
+    filter: grayscale(1);
+    cursor: default;
   }
 }
 

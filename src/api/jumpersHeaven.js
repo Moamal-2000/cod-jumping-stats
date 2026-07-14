@@ -39,6 +39,7 @@ export const jhApis = ({
       defragLeaderboard: generateUrl("/leaderboard/defrag-skill", { fps, source }),
       surfLeaderboard: generateUrl("/leaderboard/surf-skill", { fps, source }),
       routesCompletedLeaderboard: generateUrl("/leaderboard/howmany", { source }),
+      rankXpLeaderboard: generateUrl("/leaderboard/rank-xp", { source }),
     },
   };
 };
