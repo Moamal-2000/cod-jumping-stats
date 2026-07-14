@@ -158,8 +158,10 @@ function getLeaderboardClasses({ cssModule, searchParams }) {
 
   return [
     cssModule.leaderBoard,
-    isRoutesCompleted ? s.routesCompleted : "",
-    isJ4lServer ? s.j4lServer : "",
-    isXpRank ? s.xpRank : "",
-  ].join(" ");
+    isRoutesCompleted ? cssModule.routesCompleted : "",
+    isJ4lServer ? cssModule.j4lServer : "",
+    isXpRank ? cssModule.xpRank : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
 }
