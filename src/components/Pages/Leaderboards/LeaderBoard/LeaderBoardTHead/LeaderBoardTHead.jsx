@@ -53,7 +53,14 @@ const LeaderBoardTHead = ({ isJ4lServer }) => {
           </th>
         )}
 
-        {isXpRank && <th className={s.totalXp}>Total XP</th>}
+        {isXpRank && (
+          <th
+            className={`${s.totalXp} ${!isLeaderboardHeaderVisible ? s.afterHideHeader : ""}`}
+          >
+            Total XP
+            {!isLeaderboardHeaderVisible && <HideLeaderboardHeaderBtn />}
+          </th>
+        )}
       </tr>
     </thead>
   );
