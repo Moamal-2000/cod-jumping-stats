@@ -1,5 +1,6 @@
 "use client";
 
+import { getLeaderboardConfig } from "@/data/leaderboardsConfig";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
 import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
@@ -18,10 +19,9 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef, isJ4lServer }) => {
   const dispatch = useDispatch();
   const searchParams = useSearchParams();
 
-  const leaderboardType = searchParams.get("leaderboard");
-
-  const isRoutesCompleted = leaderboardType === "routescompleted";
-  const isXpRank = leaderboardType === "rankxp";
+  const leaderboardType = searchParams.get("leaderboard") || "speedrun";
+  const { isRoutesCompleted, isXpRank, showJ4lRank, showTops, showTotalXp } =
+    getLeaderboardConfig(leaderboardType, isJ4lServer);
 
   const reverseClass = isLeaderboardReversed ? s.reverse : "";
 
@@ -55,6 +55,9 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef, isJ4lServer }) => {
                 isRoutesCompleted={isRoutesCompleted}
                 isJ4lServer={isJ4lServer}
                 isXpRank={isXpRank}
+                showJ4lRank={showJ4lRank}
+                showTops={showTops}
+                showTotalXp={showTotalXp}
                 index={index}
               />
             </Suspense>

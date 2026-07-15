@@ -18,6 +18,9 @@ const PlayerRow = ({
   isRoutesCompleted,
   isJ4lServer,
   isXpRank,
+  showJ4lRank,
+  showTops,
+  showTotalXp,
   index,
 }) => {
   const {
@@ -42,7 +45,7 @@ const PlayerRow = ({
         {getModifiedRank(Rank)}
       </td>
 
-      {isJ4lServer && (
+      {showJ4lRank && isJ4lServer && (
         <td className={s.j4lRank} data-header="J4L Rank">
           <div className={s.rankImgWrapper}>
             <Image
@@ -97,11 +100,11 @@ const PlayerRow = ({
         )}
       </td>
 
-      {!isRoutesCompleted && !isXpRank && (
+      {showTops && (
         <TopsCell topList={TopList} leaderboardData={leaderboardData} />
       )}
 
-      {isXpRank && (
+      {showTotalXp && (
         <td className={s.totalXp} data-header="Total XP">
           {TotalXP?.toLocaleString()}
           <sup>XP</sup>

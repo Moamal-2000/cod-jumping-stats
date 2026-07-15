@@ -1,5 +1,6 @@
 "use client";
 
+import { getLeaderboardConfig } from "@/data/leaderboardsConfig";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import HideLeaderboardHeaderBtn from "../LeaderboardHeader/LeaderboardHeaderBtns/HideLeaderboardHeaderBtn/HideLeaderboardHeaderBtn";
@@ -13,15 +14,8 @@ const LeaderBoardTHead = ({ isJ4lServer }) => {
 
   const searchParams = useSearchParams();
 
-  const leaderboardType = searchParams.get("leaderboard");
-  const isSkilledLeaderboard = leaderboardType === "skilled";
-  const isRoutesCompleted = leaderboardType === "routescompleted";
-  const isXpRank = leaderboardType === "rankxp";
-  const scoreText = isRoutesCompleted
-    ? "Completed routes"
-    : isXpRank
-      ? "Next Level Progress"
-      : "Points";
+  const leaderboardType = searchParams.get("leaderboard") || "speedrun";
+  const leaderboardConfig = getLeaderboardConfig(leaderboardType, isJ4lServer);
 
   return (
     <thead
@@ -30,29 +24,39 @@ const LeaderBoardTHead = ({ isJ4lServer }) => {
       }`}
     >
       <tr>
-        <RankTableHeader text="Rank" />
-        {isJ4lServer && <th className={s.j4lRank}>J4L Rank</th>}
-        <th className={s.player}>Player</th>
-        <th className={s[isXpRank ? "level" : "rating"]}>
-          {isXpRank ? "Level" : "Rating"}
-        </th>
-        <th className={s.score} data-header={scoreText}>
-          {scoreText}
-        </th>
+        {leaderboardConfig.columns.map(({ key, label, dataHeader }) => {
+          if (key === "rank") {
+            return <RankTableHeader key={key} text={label} />;
+          }
 
-        {!isRoutesCompleted && !isXpRank && (
-          <th className={s.tops}>
-            {isSkilledLeaderboard ? "Points per difficulty" : "Tops 1-10"}
-          </th>
-        )}
+          if (key === "j4lRank") {
+            return (
+              <th key={key} className={s.j4lRank}>
+                {label}
+              </th>
+            );
+          }
 
-        {isXpRank && (
-          <th
-            className={`${s.totalXp} ${!isLeaderboardHeaderVisible ? s.afterHideHeader : ""}`}
-          >
-            Total XP
-          </th>
-        )}
+          if (key === "totalXp") {
+            return (
+              <th
+                key={key}
+                className={`${s.totalXp} ${!isLeaderboardHeaderVisible ? s.afterHideHeader : ""}`}
+              >
+                {label}
+              </th>
+            );
+          }
+
+          const cellClassName =
+            key === "level" ? s.level : key === "rating" ? s.rating : s[key];
+
+          return (
+            <th key={key} className={cellClassName} data-header={dataHeader}>
+              {label}
+            </th>
+          );
+        })}
       </tr>
 
       {!isLeaderboardHeaderVisible && <HideLeaderboardHeaderBtn />}
