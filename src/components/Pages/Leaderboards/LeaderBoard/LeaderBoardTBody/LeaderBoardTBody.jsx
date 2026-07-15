@@ -20,8 +20,7 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef, isJ4lServer }) => {
   const searchParams = useSearchParams();
 
   const leaderboardType = searchParams.get("leaderboard") || "speedrun";
-  const { isRoutesCompleted, isXpRank, showJ4lRank, showTops, showTotalXp } =
-    getLeaderboardConfig(leaderboardType, isJ4lServer);
+  const leaderboardConfig = getLeaderboardConfig(leaderboardType, isJ4lServer);
 
   const reverseClass = isLeaderboardReversed ? s.reverse : "";
 
@@ -52,12 +51,8 @@ const LeaderBoardTBody = ({ leaderboardData, lastPlayerRef, isJ4lServer }) => {
                 playerData={playerData}
                 leaderboardData={leaderboardData}
                 lastPlayerRef={lastPlayerRef}
-                isRoutesCompleted={isRoutesCompleted}
+                leaderboardConfig={leaderboardConfig}
                 isJ4lServer={isJ4lServer}
-                isXpRank={isXpRank}
-                showJ4lRank={showJ4lRank}
-                showTops={showTops}
-                showTotalXp={showTotalXp}
                 index={index}
               />
             </Suspense>

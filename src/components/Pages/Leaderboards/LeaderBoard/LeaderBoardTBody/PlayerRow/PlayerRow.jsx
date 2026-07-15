@@ -15,12 +15,8 @@ const PlayerRow = ({
   playerData,
   leaderboardData,
   lastPlayerRef,
-  isRoutesCompleted,
+  leaderboardConfig,
   isJ4lServer,
-  isXpRank,
-  showJ4lRank,
-  showTops,
-  showTotalXp,
   index,
 }) => {
   const {
@@ -35,6 +31,8 @@ const PlayerRow = ({
     XPForLevel,
     XPIntoLevel,
   } = playerData;
+  const { isXpRank, showJ4lRank, showTops, showTotalXp, scoreText } =
+    leaderboardConfig;
 
   const lastRowRef =
     leaderboardData.length === index + 1 ? lastPlayerRef : null;
@@ -73,13 +71,7 @@ const PlayerRow = ({
 
       <td
         className={s[isXpRank ? "levelProgress" : "score"]}
-        data-header={
-          isRoutesCompleted
-            ? "Completed routes"
-            : isXpRank
-              ? "Next Level Progress"
-              : "Points"
-        }
+        data-header={scoreText}
       >
         {isXpRank ? (
           <div className={s.xpContainer}>
