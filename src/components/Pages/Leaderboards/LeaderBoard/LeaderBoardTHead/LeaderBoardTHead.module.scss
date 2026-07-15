@@ -80,15 +80,3 @@
     display: block;
   }
 }
-
-.thead tr th.tops {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 8px 20px;
-  min-width: 456px;
-
-  &.afterHideHeader {
-    justify-content: flex-end;
-  }
-}

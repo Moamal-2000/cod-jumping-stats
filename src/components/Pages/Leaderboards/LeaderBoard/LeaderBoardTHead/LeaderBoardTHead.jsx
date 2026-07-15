@@ -40,16 +40,9 @@ const LeaderBoardTHead = ({ isJ4lServer }) => {
           {scoreText}
         </th>
 
-        {isRoutesCompleted && !isLeaderboardHeaderVisible && (
-          <th className={`${s.tops} ${s.afterHideHeader}`}>
-            <HideLeaderboardHeaderBtn />
-          </th>
-        )}
-
         {!isRoutesCompleted && !isXpRank && (
           <th className={s.tops}>
             {isSkilledLeaderboard ? "Points per difficulty" : "Tops 1-10"}
-            {!isLeaderboardHeaderVisible && <HideLeaderboardHeaderBtn />}
           </th>
         )}
 
@@ -58,10 +51,11 @@ const LeaderBoardTHead = ({ isJ4lServer }) => {
             className={`${s.totalXp} ${!isLeaderboardHeaderVisible ? s.afterHideHeader : ""}`}
           >
             Total XP
-            {!isLeaderboardHeaderVisible && <HideLeaderboardHeaderBtn />}
           </th>
         )}
       </tr>
+
+      {!isLeaderboardHeaderVisible && <HideLeaderboardHeaderBtn />}
     </thead>
   );
 };

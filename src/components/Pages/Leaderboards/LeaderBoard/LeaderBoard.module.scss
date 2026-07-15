@@ -115,22 +115,16 @@
 }
 
 .leaderBoard.routesCompleted tr {
-  grid-template-columns: 1.65fr 9fr 1fr 3fr;
-}
-
-@include m.media(large) {
-  .leaderBoard.routesCompleted tr {
-    grid-template-columns: 1.65fr 9fr 1fr 4fr;
-  }
+  grid-template-columns: 1.65fr 11fr 1fr 7fr;
 }
 
 .leaderBoard.routesCompleted.j4lServer tr {
-  grid-template-columns: 1.1fr 2fr 9fr 1fr 4fr;
+  grid-template-columns: 1.1fr 2fr 8fr 1fr 7fr;
 }
 
 @include m.media(large) {
   .leaderBoard.routesCompleted.j4lServer tr {
-    grid-template-columns: 1.65fr 9fr 1fr 4fr;
+    grid-template-columns: 1.65fr 9fr 1fr 7fr;
   }
 }
 
