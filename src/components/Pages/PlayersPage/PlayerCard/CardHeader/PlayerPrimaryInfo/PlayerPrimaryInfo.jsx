@@ -2,9 +2,9 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import AdminLevel from "@/components/Shared/AdminLevel/AdminLevel";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { stripColorCodes } from "@/lib/utils";
 import { updateGlobalState } from "@/redux/features/global/slice/globalSlice";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useDispatch } from "react-redux";
 import ToolTip from "../../ToolTip";
@@ -29,14 +29,14 @@ const PlayerPrimaryInfo = ({ PlayerName, PrefName, Admin, PlayerID }) => {
 
   return (
     <div className={s.primaryInfo}>
-      <TransitionLink
+      <Link
         href={`/player/${PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
         className={s.playerNameWrapper}
         onMouseEnter={handleMouseEnter}
       >
         <span className={s.playerName}>{getColoredName(PlayerName)}</span>
         <ToolTip centerPosition>{coloredPrefName}</ToolTip>
-      </TransitionLink>
+      </Link>
 
       <div className={s.wrapper}>
         <button

@@ -1,7 +1,7 @@
 import MapImage from "@/components/Shared/Images/MapImage/MapImage";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formateReleaseDate } from "@/lib/dateTime";
 import { getMapCompletionRate } from "@/lib/filters";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { memo } from "react";
 import CompletionRate from "../MapCard/CompletionRate/CompletionRate";
@@ -40,18 +40,18 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
   return (
     <div className={s.mapCard} ref={ref}>
       {!hideMapImage && (
-        <TransitionLink
+        <Link
           href={href}
           className={s.imgHolder}
           ari-label={mapDetailsLabel}
           title={mapDetailsLabel}
         >
           <MapImage mapName={Name} />
-        </TransitionLink>
+        </Link>
       )}
 
       <div className={s.leftSide}>
-        <TransitionLink href={href}>
+        <Link href={href}>
           <span className={s.name}>
             {Name}
             {Ender && <span className={s.ender}>({Ender})</span>}
@@ -63,7 +63,7 @@ const MapCard2 = ({ mapData, mapsScroll, allMaps, lastMapRef, index }) => {
               </svg>
             </span>
           )}
-        </TransitionLink>
+        </Link>
 
         {!hideDifficulties && (
           <MapDifficulties Difficulty={Difficulty} hideLabel />

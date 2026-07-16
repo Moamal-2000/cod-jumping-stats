@@ -2,7 +2,7 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import CountryImage from "@/components/Shared/Images/CountryImage/CountryImage";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import PlayerBadges from "../../PlayerCard/PlayerBadges/PlayerBadges";
 import { formatLastSeen } from "../../PlayerCard/PlayerStats/PlayerStats";
@@ -31,7 +31,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
             <tr key={player.PlayerID} ref={ref}>
               <td className={s.playerNameCell}>
                 <div className={s.playerInfoWrapper}>
-                  <TransitionLink
+                  <Link
                     href={`/player/${player.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
                     className={s.playerLink}
                   >
@@ -54,7 +54,7 @@ const PlayersTable = ({ playersScroll, lastPlayerRef }) => {
                         </span>
                       )}
                     </div>
-                  </TransitionLink>
+                  </Link>
                 </div>
               </td>
 

@@ -1,5 +1,5 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import s from "./TopRunsTBody.module.scss";
 
@@ -17,11 +17,11 @@ const TopRunsTBody = ({ topRuns }) => {
             </td>
 
             <td className={s.mapNameCell} data-header="Map">
-              <TransitionLink
+              <Link
                 href={`/map/${run.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
               >
                 {run.MapName}
-              </TransitionLink>
+              </Link>
             </td>
 
             <td className={s.fpsCell} data-header="FPS">

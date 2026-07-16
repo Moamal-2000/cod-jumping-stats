@@ -1,4 +1,4 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import s from "./NotFoundPage.module.scss";
 import NotFoundPageList from "./NotFoundPageList/NotFoundPageList";
@@ -18,9 +18,9 @@ const NotFoundPage = () => {
       <NotFoundPageList />
 
       <div className={s.buttons}>
-        <TransitionLink href="/" className={s.returnHomeBtn}>
+        <Link href="/" className={s.returnHomeBtn}>
           Return to Home page
-        </TransitionLink>
+        </Link>
 
         <button
           type="button"

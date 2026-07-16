@@ -1,7 +1,7 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { NAV_LINKS_DATA } from "@/data/staticData";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import s from "./MainNav.module.scss";
 
@@ -11,7 +11,7 @@ const MainNav = () => {
   return (
     <nav className={s.mainNav}>
       {NAV_LINKS_DATA.map(({ name, href, iconName, id }) => (
-        <TransitionLink
+        <Link
           key={id}
           href={href}
           className={currentPage === href ? s.active : ""}
@@ -20,7 +20,7 @@ const MainNav = () => {
             <use href={`/icons-sprite.svg#${iconName}`} />
           </svg>
           <span>{name}</span>
-        </TransitionLink>
+        </Link>
       ))}
     </nav>
   );

@@ -1,6 +1,6 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { NAV_LINKS_DATA } from "@/data/staticData";
 import { toggleMobileNav } from "@/redux/features/global/slice/globalSlice";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import s from "./MobileNavLinks.module.scss";
@@ -27,7 +27,7 @@ const MobileNavLinks = () => {
 
         return (
           <li key={id}>
-            <TransitionLink
+            <Link
               href={href}
               className={isCurrentPage ? s.active : ""}
               onClick={handleLinkClick}
@@ -36,7 +36,7 @@ const MobileNavLinks = () => {
                 <use href={`/icons-sprite.svg#${iconName}`} />
               </svg>
               <span>{name}</span>
-            </TransitionLink>
+            </Link>
           </li>
         );
       })}

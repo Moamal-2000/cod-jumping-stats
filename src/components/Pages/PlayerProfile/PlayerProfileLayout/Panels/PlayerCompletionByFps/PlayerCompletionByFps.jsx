@@ -1,7 +1,7 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { usePlayerRouteCompletion } from "@/hooks/app/usePlayerRouteCompletion";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { useSelector } from "react-redux";
@@ -192,12 +192,12 @@ const PlayerCompletionByFps = ({ playerId }) => {
                   className={s.tableRow}
                 >
                   <td className={s.mapNameCell}>
-                    <TransitionLink
+                    <Link
                       href={`/map/${map.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
                       className={s.mapLink}
                     >
                       {map.MapName}
-                    </TransitionLink>
+                    </Link>
                   </td>
                   <td className={s.authorCell}>{map.Author || "Unknown"}</td>
                   <td className={s.releasedCell}>

@@ -1,10 +1,10 @@
 "use client";
 
 import { updatePlayerProfileState } from "@/redux/features/playerProfile/slice/playerProfileSlice";
+import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import TransitionLink from "../../Links/TransitionLink/TransitionLink";
 import s from "./PlayerProfileButton.module.scss";
 
 const PlayerProfileButton = () => {
@@ -37,10 +37,7 @@ const PlayerProfileButton = () => {
   }
 
   return (
-    <TransitionLink
-      href={`/player/${playerProfileId}`}
-      className={s.profileButton}
-    >
+    <Link href={`/player/${playerProfileId}`} className={s.profileButton}>
       <svg aria-hidden="true">
         <use href="/icons-sprite.svg#address-card" />
       </svg>
@@ -48,7 +45,7 @@ const PlayerProfileButton = () => {
       <p className={s.tooltip} role="tooltip">
         Visit your profile
       </p>
-    </TransitionLink>
+    </Link>
   );
 };
 export default PlayerProfileButton;

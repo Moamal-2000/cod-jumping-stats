@@ -1,5 +1,5 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import SpinnerLoader from "@/components/Shared/Loaders/SpinnerLoader/SpinnerLoader";
+import Link from "next/link";
 import s from "./PageLoadingError.module.scss";
 
 const PageLoadingError = ({ loading, error, mapData }) => {
@@ -23,9 +23,9 @@ const PageLoadingError = ({ loading, error, mapData }) => {
           <div className={s.errorContainer}>
             <h2>Map Not Found</h2>
             <p>The requested map could not be found.</p>
-            <TransitionLink href="/maps" className={s.backButton}>
+            <Link href="/maps" className={s.backButton}>
               Go Maps Page
-            </TransitionLink>
+            </Link>
           </div>
         </div>
       </main>

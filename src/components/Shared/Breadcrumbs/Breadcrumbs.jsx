@@ -1,5 +1,5 @@
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import TransitionLink from "../Links/TransitionLink/TransitionLink";
 import s from "./Breadcrumbs.module.scss";
 
 const Breadcrumbs = ({ labels, paths }) => {
@@ -17,7 +17,7 @@ const Breadcrumbs = ({ labels, paths }) => {
 
         return (
           <div className={s.page} key={index}>
-            <TransitionLink href={href}>{page}</TransitionLink>
+            <Link href={href}>{page}</Link>
             <span>/</span>
           </div>
         );

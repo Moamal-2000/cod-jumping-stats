@@ -1,6 +1,6 @@
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useSelector } from "react-redux";
@@ -150,7 +150,7 @@ const MapDetailPlayers = ({ selectedFps }) => {
           const modifiedRank = getModifiedRank(index + 1);
 
           return (
-            <TransitionLink
+            <Link
               href={`/player/${player.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
               key={`${player.PlayerID}-${index}`}
               className={s.playerItem}
@@ -180,7 +180,7 @@ const MapDetailPlayers = ({ selectedFps }) => {
                 </div>
                 <div className={s.playtimeLabel}>Playtime</div>
               </div>
-            </TransitionLink>
+            </Link>
           );
         })}
       </div>

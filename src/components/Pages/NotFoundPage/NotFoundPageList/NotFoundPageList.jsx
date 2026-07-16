@@ -1,4 +1,4 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import s from "./NotFoundPageList.module.scss";
 
 const NotFoundPageList = () => {
@@ -8,9 +8,9 @@ const NotFoundPageList = () => {
       <li>Use the navigation menu to find what you need.</li>
       <li>
         Return to the{" "}
-        <TransitionLink href="/" className={s.link}>
+        <Link href="/" className={s.link}>
           homepage
-        </TransitionLink>{" "}
+        </Link>{" "}
         and start fresh.
       </li>
     </ul>

@@ -1,7 +1,7 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./RecentActivity.module.scss";
@@ -28,7 +28,7 @@ const RecentActivity = () => {
 
       <div className={s.recentActivityList}>
         {recentTops.map((run, index) => (
-          <TransitionLink
+          <Link
             href={`/map/${run.Cpid}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
             className={s.recentActivityItem}
             key={index}
@@ -53,7 +53,7 @@ const RecentActivity = () => {
                 </span>
               </div>
             </div>
-          </TransitionLink>
+          </Link>
         ))}
       </div>
     </section>

@@ -1,4 +1,4 @@
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./RouteCompletionTable.module.scss";
@@ -26,12 +26,12 @@ const RouteCompletionTable = ({
         className={`${s.tableRow} ${s[rarityLevel] || ""}`}
       >
         <td className={s.mapNameCell}>
-          <TransitionLink
+          <Link
             href={`/map/${map.CpID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
             className={s.mapLink}
           >
             {map.DisplayName}
-          </TransitionLink>
+          </Link>
         </td>
         <td className={s.authorCell}>{map.Author || "Unknown"}</td>
         <td className={s.releasedCell}>{map.Released || "Unknown"}</td>

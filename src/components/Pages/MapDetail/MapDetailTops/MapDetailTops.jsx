@@ -2,7 +2,7 @@
 
 import { getColoredName } from "@/components/Helper/playerNameColor";
 import { getModifiedRank } from "@/components/Helper/rankBadge";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import s from "./MapDetailTops.module.scss";
@@ -74,7 +74,7 @@ const MapDetailTops = ({ selectedFps }) => {
           const modifiedRank = getModifiedRank(run.Rank);
 
           return (
-            <TransitionLink
+            <Link
               href={`/player/${run.PlayerID}${sourceParam === "jh" ? "" : `?source=${sourceParam}`}`}
               key={`${run.RunID}-${index}`}
               className={s.topRun}
@@ -111,7 +111,7 @@ const MapDetailTops = ({ selectedFps }) => {
                   <span className={s.statValue}>{run.Nadejumps || 0}</span>
                 </div>
               </div>
-            </TransitionLink>
+            </Link>
           );
         })}
       </div>

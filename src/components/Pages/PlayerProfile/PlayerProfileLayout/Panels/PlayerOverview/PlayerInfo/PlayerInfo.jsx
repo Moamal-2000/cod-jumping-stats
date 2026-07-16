@@ -1,7 +1,7 @@
 "use client";
 
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { formatDate } from "@/lib/dateTime";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useSelector } from "react-redux";
 import LimitedDataCard from "./LimitedDataCard/LimitedDataCard";
@@ -52,13 +52,13 @@ const PlayerInfo = () => {
                   Oldest Top Run
                 </div>
 
-                <TransitionLink
+                <Link
                   href={oldestRunMapHref}
                   className={s.mapName}
                   title={oldestTop.MapName}
                 >
                   {oldestTop.MapName}
-                </TransitionLink>
+                </Link>
 
                 <div className={s.metaInfo}>
                   <span>

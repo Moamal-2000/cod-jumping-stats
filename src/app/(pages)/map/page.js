@@ -1,7 +1,7 @@
 import s from "@/components/Pages/MapDetail/MapPage.module.scss";
-import TransitionLink from "@/components/Shared/Links/TransitionLink/TransitionLink";
 import { METADATA, SITE_URL } from "@/data/metadata";
 import { getOpenGraphMetadata } from "@/lib/metadata";
+import Link from "next/link";
 
 const title = "Map | JumpersHeaven";
 const description = "View JumpersHeaven map details and statistics.";
@@ -25,9 +25,8 @@ function MapPage() {
         <section className={s.heroSection}>
           <h1>Maps Overview</h1>
           <p>
-            Explore all jumpers heaven{" "}
-            <TransitionLink href="/maps">maps</TransitionLink>. Click on a map
-            to see detailed statistics and information.
+            Explore all jumpers heaven <Link href="/maps">maps</Link>. Click on
+            a map to see detailed statistics and information.
           </p>
         </section>
       </div>
