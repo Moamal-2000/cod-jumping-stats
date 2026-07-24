@@ -18,7 +18,7 @@
     "@vercel/speed-insights": "^2.0.0",
     "lz-string": "^1.5.0",
     "msgpackr": "^2.0.4",
-    "next": "^16.2.9",
+    "next": "^16.2.11",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
     "react-redux": "^9.3.0"
